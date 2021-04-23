@@ -1,0 +1,205 @@
+<!-- Headers -->
+<!-- <mat-toolbar class="toolbar"> -->
+    <!-- <mat-toolbar-row> -->
+      <!-- <button mat-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button> -->
+  
+      <!-- <span class="example-spacer"></span> -->
+      <!-- <a [routerLink]="['/search',{name:id}]"  > -->
+        
+      <!-- <mat-icon style="color: white;" class="example-icon" (click) = "navigation()"> search</mat-icon>
+      <mat-icon style="color: white;" class="example-icon" (click) = "pathy()">add_shopping_cart</mat-icon> -->
+      <!-- <mat-icon style="color: black;" class="example-icon" >notification_important</mat-icon> -->
+      <!-- <span class="iconify" data-icon="mdi-logout" data-inline="false"></span>
+    </mat-toolbar-row>
+  </mat-toolbar> -->
+  
+  <!-- SideNav -->
+  <!-- <mat-sidenav-container>
+    <mat-sidenav>Start</mat-sidenav>
+    <mat-sidenav-content >Dashboard</mat-sidenav-content><br>
+    <mat-sidenav-content (click) = "navigation()">Manager User Role & Permission</mat-sidenav-content>
+    <mat-sidenav-content>Assign Targets</mat-sidenav-content>
+    <mat-sidenav-content>Customer Management</mat-sidenav-content>
+    <mat-sidenav-content>Task Management</mat-sidenav-content>
+    <mat-sidenav-content>Cost Management</mat-sidenav-content>
+    <mat-sidenav-content>Report</mat-sidenav-content>
+    <mat-sidenav-content>Analytics</mat-sidenav-content>
+  </mat-sidenav-container><br><br> -->
+  
+  <!-- search -->
+  <!-- <input type="text" class="form-control" placeholder="Search" ngModel="query" id="listSearch" #LockFilter>
+  
+        <div class="panel panel-default col-xs-12 col-sm-11" *ngFor="let lock of locked | LockFilter: query">
+          <input type="checkbox" ngModel="lock.checked" (change)="openModal($event, lock)" class="check" id="{{lock.ID}}">
+          <label for="{{lock.ID}}" class="check-label"></label>
+          <h3 class="card-text name" ngModel="lock.name">{{lock.User}}</h3>
+          <h3 class="card-text auth" ngModel="lock.auth">{{lock.AuthID}}</h3>
+          <h3 class="card-text form" ngModel="lock.form">{{lock.FormName}}</h3>
+          <h3 class="card-text win" ngModel="lock.win">{{lock.WinHandle}}</h3>
+        </div> -->
+  
+  
+  
+  
+  <!-- Search form -->
+  <form class="form-inline md-form form-sm active-cyan-2">
+    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search"
+      mdbInput>
+    <!-- <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon> -->
+  </form><br><br>
+  
+  <form class="form-inline md-form form-sm active-cyan-2">
+    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="ADVANCE SEARCH" aria-label="ADVANCA SEARCH"
+      mdbInput>
+    <!-- <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon> -->
+  </form><br><br>
+  
+  
+  
+  <button class="btn default">Customer List (6,773)</button>
+  <button class="btn default">New Enquiry (224)</button><br><br>
+  <button class="btn default">New Customer Enrolement (6,773)</button><br><br>
+  
+  <button class="btns">Today</button>
+  <div class="dropdown">
+    <button class="btn" style="border-left:1px solid #0d8bf2">
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br>
+  
+        <!--EMI  -->
+        <div class="container">
+          <div class="spacer">
+            <div class="row">
+              <div class="col-lg-8  col-lg-offset-1">
+                <div class="well">
+        
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <span class="left-title">
+                        EMI Calculator
+                      </span>
+                      <!-- <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
+                        [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" /> -->
+                        <input type="number" id="fname" name="fname">
+                    </div>
+                    <!-- <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()"> -->
+                    <!-- </ng5-slider> -->
+                  </div><br>
+        
+        
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <span class="left-title">
+                        Interest %
+                      </span>
+                      <!-- <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
+                        [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" /> -->
+                        <input type="number" id="fname" name="fname"><br>
+                    </div>
+                    <!-- <ng5-slider [(value)]="remi.value" [options]="roptions" (userChangeEnd)="update()"> -->
+                    <!-- </ng5-slider> -->
+                  </div>
+        
+                  <hr />
+        
+                  <div class="form-group">
+                    <div class="col-md-10">
+                      <span class="left-title">Loan Term</span>
+                      <!-- <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
+                        placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;"> -->
+                      <!-- <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
+                        placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo" style="width:30%;float:right;"> -->
+                        <input type="number" id="fname" name="fname"><br>
+                    </div><br>
+                    <!-- Date picker-->
+                   <div>
+                    <span class="left-title">Loan Date</span><br>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Choose a date</mat-label>
+                      <input matInput [matDatepicker]="picker">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field><br>
+                </div>
+            <div>
+                    <span class="left-title">Due Date</span><br>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Choose a date</mat-label>
+                      <input matInput [matDatepicker]="picker">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+            </div>
+                    <div class="col-md-2">
+                      <div class="input-group-append">
+                        <!-- <button class="btn btn-outline-secondary" [ngClass]="{'active':yrToggel}"
+                          (click)="yrToggel=true;update()" type="button">Yr</button>
+                        <button class="btn btn-outline-secondary" [ngClass]="{'active':!yrToggel}"
+                          (click)="yrToggel=false;update()" type="button">Mo</button> -->
+                      </div>
+                    </div>
+                    <!-- <ng5-slider *ngIf="yrToggel" [(value)]="temi.value" [options]="toptions" (userChangeEnd)="update()"> -->
+                    <!-- </ng5-slider> -->
+                    <!-- <ng5-slider *ngIf="!yrToggel" [(value)]="memi.value" [options]="moptions" (userChangeEnd)="update()"> -->
+                    <!-- </ng5-slider> -->
+                  </div>
+        
+        
+                </div>
+        
+              </div>
+              <div class="col-lg-3">
+                <div class="well">
+        
+                  <div class="jusify-center">
+                    <h5>
+                      Due Amount
+                    </h5>
+                    <span class="result">
+                      <!-- {{result.emi || "--"}} -->
+                    </span>
+                    <input type="number" id="fname" name="fname"><br><br>
+                  </div>
+        
+                  <hr />
+        
+                  <div>
+                    <h5>
+                      Difference Amount
+                    </h5>
+                    <span class="result">
+                      <!-- {{result.interest || "--"}} -->
+                      
+                    </span>
+                    <input type="number" id="fname" name="fname"><br><br>
+                  </div>
+        
+                  <hr />
+                  <div>
+                    <!-- <h5>
+                      Total Payment
+                    </h5> -->
+                    <!-- <h6>
+                      (Principal + Interest)
+                    </h6> -->
+                    <span class="result">
+                      <!-- {{result.total || "--"}} -->
+                    </span>
+                  </div>
+        
+        
+        
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+  

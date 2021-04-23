@@ -1,0 +1,28 @@
+// Table
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+  }
+  th {
+    text-align: left;
+  }
+
+  // two form field
+.form-address-1 {
+    width: 100%;
+}
+
+.form-first-name, .form-last-name {
+    width: 46%;
+}
+
+.form-last-name {
+    float: right;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+}

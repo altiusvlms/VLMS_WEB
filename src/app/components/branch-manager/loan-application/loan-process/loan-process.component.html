@@ -1,1 +1,490 @@
-<p>loan-process works!</p>
+<mat-tab-group mat-align-tabs="start">
+    <!-- Tab 1 -->
+    <mat-tab label="Applicant">
+        <mat-card class="example-card">
+        <mat-card-content>
+          <form class="example-form">
+            <table class="example-full-width" cellspacing="0">
+                
+              <tr>
+                <td>  Applicant name:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput type='text'  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+              <td> Mobile Number:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput type='number' >
+              </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>  Father name:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput  type='text'  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+              <td> Ref By:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput  >
+              </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>  Applicant Type:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+              <td> Marital status:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput >
+              </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>  Company Name:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput  type='text'  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+              <td> Spouse Name:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput  >
+              </mat-form-field></td>
+            </tr>
+            <tr>
+                <td> Net Monthly Income:
+                    <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput  >
+                </mat-form-field></td>
+              </tr>
+              <tr>
+                <td> Salary Date:
+                    <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput  >
+                </mat-form-field></td>
+              </tr>
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">Monthly</mat-radio-button>
+                <mat-radio-button value="2">Weakly</mat-radio-button>
+                <mat-radio-button value="2">Daily</mat-radio-button>
+              </mat-radio-group>
+        </table>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
+        </mat-card-actions>
+       
+      </mat-card>
+      </mat-tab>
+
+
+  <!-- Tab 2 -->
+
+
+  <mat-tab label="Co-Applicant">
+    <mat-card class="example-card">
+    <mat-card-content>
+      <form class="example-form">
+        <table class="example-full-width" cellspacing="0">
+            
+          <tr>
+            <td>   Name:
+              <mat-form-field  appearance="outline" class="example-full-width">
+              <input matInput type='text'  >
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+          <td> Mobile Number:
+              <mat-form-field appearance="outline" class="example-full-width">
+            <input matInput type='number' >
+          </mat-form-field></td>
+        </tr>
+        <tr>
+            <td>  Father name:
+              <mat-form-field  appearance="outline" class="example-full-width">
+              <input matInput  type='text'  >
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+          <td> Ref By:
+              <mat-form-field appearance="outline" class="example-full-width">
+            <input matInput  >
+          </mat-form-field></td>
+        </tr>
+        <tr>
+            <td>  Co-Applicant Type:
+              <mat-form-field  appearance="outline" class="example-full-width">
+              <input matInput  >
+              </mat-form-field>
+            </td>
+          </tr>
+          
+        <tr>
+            <td>  Company Name:
+              <mat-form-field  appearance="outline" class="example-full-width">
+              <input matInput  type='text'  >
+              </mat-form-field>
+            </td>
+          </tr>
+          
+          <tr>
+            <td> Salary Date:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput  >
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <td> Net Monthly Income:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput  >
+            </mat-form-field></td>
+          </tr>
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Monthly</mat-radio-button>
+            <mat-radio-button value="2">Weakly</mat-radio-button>
+            <mat-radio-button value="2">Daily</mat-radio-button>
+          </mat-radio-group>
+    </table>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
+    </mat-card-actions>
+   
+  </mat-card>
+  </mat-tab>
+    <!-- Tab 3 -->
+
+    <mat-tab label="Vehicle details">
+        <mat-card class="example-card">
+        <mat-card-content>
+          <form class="example-form">
+            <table class="example-full-width" cellspacing="0">
+                
+              <tr>
+                <td>   vehicle Number:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput type='text'  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+              <td> Make:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput type='number' >
+              </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>  Model:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput  type='text'  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+              <td> Colour:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput  >
+              </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>  MFG Year:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              
+            <tr>
+                <td>  Engine Number:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput  type='text'  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              
+              <tr>
+                <td>  chassis Number:
+                    <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput  >
+                </mat-form-field></td>
+              </tr>
+              <tr>
+                <td> Insurence Company:
+                    <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput  >
+                </mat-form-field></td>
+              </tr>
+              <tr>
+                <td>  Insurence Policy:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput  type='text'  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              
+              <tr>
+                <td>  Insurence Expire on:
+                    <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput  >
+                </mat-form-field></td>
+              </tr>
+              <tr>
+                <td> Live KM Reading:
+                    <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput  >
+                </mat-form-field></td>
+              </tr>
+             
+        </table>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
+        </mat-card-actions>
+       
+      </mat-card>
+      </mat-tab>
+        <!-- Tab 4 -->
+    
+        <mat-tab label="Loan Transfer">
+            <mat-card class="example-card">
+            <mat-card-content>
+              <form class="example-form">
+                <table class="example-full-width" cellspacing="0">
+                    
+                  <tr>
+                    <td>   Loan Amount:
+                      <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput type='text'  >
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                  <td> Loan Term:
+                      <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type='number' >
+                  </mat-form-field></td>
+                </tr>
+                <tr>
+                    <td>  Intrest:
+                      <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput  type='text'  >
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                  <td> Emi Amount:
+                      <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput  >
+                  </mat-form-field></td>
+                </tr>
+                <tr>
+                    <td>  Interest Amount :
+                      <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput  >
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  
+                <tr>
+                    <td>  Due Date:
+                      <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput  type='text'  >
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>  Doc Charge:
+                        <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput  >
+                    </mat-form-field></td>
+                  </tr>
+                  <tr>
+                    <td> Processing Charge:
+                        <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput  >
+                    </mat-form-field></td>
+                  </tr>
+                  <tr>
+                    <td>  Pending Doc:
+                      <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput  type='text'  >
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>  Hold Amount:
+                        <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput  >
+                    </mat-form-field></td>
+                  </tr>
+                  <tr>
+                    <td> Other Charge:
+                        <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput  >
+                    </mat-form-field></td>
+                  </tr>
+                  <tr>
+                    <td> Closing A/C:
+                        <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput  >
+                    </mat-form-field></td>
+                  </tr>
+                  <tr>
+                    <td>  Closing Discount:
+                      <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput  type='text'  >
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>  BALANCE:
+                        <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput  >
+                    </mat-form-field></td>
+                  </tr>
+                  <tr>
+                    <td> Re-payment Mode:
+                        <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput  >
+                    </mat-form-field></td>
+                  </tr>
+                 
+            </table>
+              </form>
+            </mat-card-content>
+            <mat-card-actions>
+              <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
+            </mat-card-actions>
+           
+          </mat-card>
+          </mat-tab>
+    
+    <!-- Tab 5  -->
+    <mat-tab label="Bank details">
+        <mat-card class="example-card">
+        <mat-card-content>
+          <form class="example-form">
+              <p>Transfer Amount 1</p>
+            &nbsp;
+            <input type="submit" id="fname" name="fname" value="0,000" >&nbsp;
+            <input type="submit" id="fname" name="fname" value="Applicant" >&nbsp;
+                        <input type="submit" id="fname" name="IMPS" value="Branch">
+                        <table class="example-full-width" cellspacing="0">
+                          <tr>
+                            <td>   
+                              <mat-form-field  appearance="outline" class="example-full-width">
+                              <input matInput type='text' placeholder="Account Number" >
+                              </mat-form-field>
+                            </td>
+                          </tr>
+                          <tr>
+                          <td> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                            <input matInput type='number' placeholder="Name">
+                          </mat-form-field></td>
+                        </tr>
+                        <tr>
+                            <td>  
+                              <mat-form-field  appearance="outline" class="example-full-width">
+                              <input matInput  type='text' placeholder="IFSC" >
+                              </mat-form-field>
+                            </td>
+                          </tr>
+                          <tr>
+                          <td> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                            <input matInput placeholder="chooseBank"  >
+                          </mat-form-field></td>
+                        </tr>
+                        <p>Form Group Company</p>
+                        <tr>
+                            <td>  
+                              <mat-form-field  appearance="outline" class="example-full-width">
+                              <input matInput  placeholder="choose Branch">
+                              </mat-form-field>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td> 
+                                <mat-form-field appearance="outline" class="example-full-width">
+                              <input matInput placeholder="KC"  >
+                            </mat-form-field></td>
+                          </tr>
+                          <tr>
+                              <td>  
+                                <mat-form-field  appearance="outline" class="example-full-width">
+                                <input matInput  placeholder="Approve Loan">
+                                </mat-form-field>
+                              </td>
+                            </tr>
+                        
+                          
+                         
+                    </table>
+                      
+            
+            <table class="example-full-width" cellspacing="0">
+                <p>Loan Summary</p>
+              <tr>
+                <td>   Loan Amount:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput type='text'  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+              <td> Intrest%:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput type='number' >
+              </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>  Loan Term:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput  type='text'  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+              <td> Due Date:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput  >
+              </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>  To Pay :
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                  <input matInput  >
+                  </mat-form-field>
+                </td>
+              </tr>
+              
+            
+              
+             
+        </table>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
+        </mat-card-actions>
+       
+      </mat-card>
+      </mat-tab>
+
+  </mat-tab-group>

@@ -1,1 +1,53 @@
-<p>loan-management works!</p>
+<!-- Loan-Disbursal Limit-Branch / Loan Approval Limit / Cash Limit- Field Executive-->
+<input type="submit" id="fname" name="fname" value="Loan-Disbursal Limit-Branch" data-toggle="modal" data-target="#exampleModal">&nbsp;
+<input type="submit" id="fname" name="fname" value="Loan Approval Limit" data-toggle="modal" data-target="#exampleModal">&nbsp;
+<input type="submit" id="fname" name="fname" value="Cash Limit- Field Executive" data-toggle="modal" data-target="#exampleModal">
+
+<input type="submit" id="fname" name="fname" value="New Req" data-toggle="modal" data-target="#exampleModal" >
+
+<!-- Table -->
+<h2>Loan-Disbursal cash Limit</h2>
+<table style="width:100%" >
+    <tr>
+      <th>sr.no</th>
+      <th>Branch</th> 
+      <th>New customer</th>
+      <th>Loan Amount</th>
+      <th>Creadit Date</th>
+      <th>Target Date</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Thudialore</td>
+      <td>60</td>
+      <td>10000</td>
+      <td>01.Mar.2021</td>
+      <td>21.Mar.2021</td>
+    </tr>
+    </table>
+
+    <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Request</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <label >Request Amount :</label>
+            <input type="number" id="fname" name="fname"><br>
+            <label >Notes :</label>
+            <input type="text" id="fname" name="fname"><br><br>
+            <!-- <label >MOBILE NUMBER :</label><br>
+            <label >ACCOUNT STATUS :</label><br> -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Send Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
