@@ -9,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnalyticsComponent implements OnInit {
 
+  isfield:Boolean = true;
+  isbranch:Boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
+  field(){
+    this.isfield = true;
+  }
 
+  branch(){
+    this.isbranch = true;
+  }
 }

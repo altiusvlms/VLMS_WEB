@@ -1,1 +1,46 @@
-<p>analytics works!</p>
+<h2>Analytics</h2>
+
+            <input type="submit" id="fname" name="fname" value="Field Executive" (click)="field()">&nbsp;
+            <input type="submit" id="fname" name="fname" value="Branch" (click) = "branch()">
+
+            <!-- Field Executive -->
+            <div class="row d-flex justify-content-center mt-100">
+                <div class="col-md-6">
+                    <!-- <div class="progress blue"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
+                        <div class="progress-value">90%</div>
+                    </div> -->
+                    <div class="progress yellow" *ngIf="isfield"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
+                        <div class="progress-value">37.5%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Branch -->
+            
+            <table style="width:100%" *ngIf="isbranch" >
+                <h2>My Target - Assigned by Head Office</h2>
+                <tr>
+                  <th>sr.no</th>
+                  <th>Branch</th> 
+                  <th>New customer</th>
+                  <th>Loan Amount</th>
+                  <th>Creadit Date</th>
+                  <th>Target Date</th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Thudialore</td>
+                  <td>60</td>
+                  <td>10000</td>
+                  <td>01.Mar.2021</td>
+                  <td>21.Mar.2021</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Koundampalayam</td>
+                    <td>52</td>
+                    <td>50000</td>
+                    <td>01.Mar.2021</td>
+                    <td>21.Mar.2021</td>
+                </tr>            
+              </table>        
