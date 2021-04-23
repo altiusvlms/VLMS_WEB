@@ -1,9 +1,11 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 /** Custom Module */
 import { SidebarRoutingModule } from './sidebar-routing.module';
+
 
 /** Custom Components */
 import { SidebarComponent } from './sidebar.component';
@@ -21,7 +23,9 @@ import { LoanManagementComponent } from './loan-management/loan-management.compo
   declarations: [SidebarComponent, DashboardComponent,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, AnalyticsComponent, LoanManagementComponent],
   imports: [
     CommonModule,
-    SidebarRoutingModule
+    SidebarRoutingModule,
+    ReactiveFormsModule, 
+    FormsModule
   ]
 })
 export class SidebarModule { }

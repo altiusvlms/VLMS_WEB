@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /** Custom Component */
-import { HeaderComponent } from "./header.component";
+import { SharedComponent } from "./shared.component";
 
 /** Shared Routes */
-const routes: Routes = [{ path: '/header', component: HeaderComponent }];
+const routes: Routes = [{ path: '', component: SharedComponent }];
 
 
 /**

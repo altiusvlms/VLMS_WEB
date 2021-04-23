@@ -13,8 +13,8 @@ const routes: Routes = [
   {
     path: "branch-manager",
     loadChildren: () =>
-      import("./components/branch-manager/dashboard/dashboard.module").then(
-        d => d.DashboardModule
+      import("./components/branch-manager/customer-enrollment/customer-enrollment.module").then(
+        c => c.CustomerEnrollmentModule
       )
   },
   {
@@ -22,6 +22,13 @@ const routes: Routes = [
     loadChildren: () =>
       import("./components/branch-manager/enquiry/enquiry-list/enquiry.module").then(
         e => e.EnquiryModule
+      )
+  },
+  {
+    path: "branch-manager",
+    loadChildren: () =>
+      import("./components/branch-manager/loan-application/loan-application.module").then(
+        l => l.LoanApplicationModule
       )
   },
   {

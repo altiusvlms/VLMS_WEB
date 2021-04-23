@@ -1,11 +1,14 @@
-<p>Task Management </p>
 
 <!-- /** Create Task Button */ -->
-<button type="button"  data-toggle="modal" data-target="#createtaskModal">
+<div class="container">
+  <p>Task Management </p>
+<button type="button"  data-toggle="modal" data-target="#createtaskModal" (click)="createTask()">
     Create Task
   </button>
+</div>
 
 <!-- /** Task Management List Table */ -->
+<div class="container">
 <table class="table">
     <thead>
       <tr>
@@ -28,7 +31,7 @@
         <td>Grace Hopper</td>
         <td>Completed</td>
         <td>Thudialore</td>
-        <td>View</td>
+        <td data-toggle="modal" data-target="#createtaskModal" (click)="viewModel()">View</td>
       </tr>
       <tr>
         <td>2</td>
@@ -38,10 +41,11 @@
         <td>Ada Lovelance</td>
         <td>Open</td>
         <td>Gandhipuram</td>
-        <td>View</td>
+        <td  data-toggle="modal" data-target="#createtaskModal"(click)="viewModel()">View</td>
       </tr>
     </tbody>
-  </table>
+</table>
+</div>
 
   <!-- /** Create Task Model */ -->
 
@@ -49,17 +53,59 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="createtaskModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="createtaskModalLabel">Task</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
+        <div *ngIf="showAction">
+            <span class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span>
+            <span class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
+        </div>
+            <form [formGroup]="createTaskForms">
+            <div>
+                <label>Task Type</label>
+                <select formControlName="taskType" class="form-control">
+                  <option value="">Select Task Type</option>
+                  <option value="address_verification">Address Verification</option>
+                  <option value="office_verification">Office Verification</option>
+                  <option value="other">Others</option>
+                </select>
+            </div>
+            <div>
+                <label>Customer Reg No</label>
+                <input type="text"  formControlName="customerRegNo"  class="form-control">
+            </div>
+            <div>    
+                <label >Vehicle Number</label>
+                <select  formControlName="vehicleNo"  class="form-control">
+                  <option value="">Select Vehicle Number</option>
+                  <option value="TN37DA2424">TN 37 DA 2424</option>
+                  <option value="TN37AT2554">TN 37 AT 2554</option>
+                </select>
+            </div>
+            <div>
+                <label>Due Date</label>
+                <input type="date" formControlName="dueDate"  class="form-control">
+            </div>
+            <div>
+                <label>Assign To</label>
+                <select formControlName="assignTo"  class="form-control">
+                    <option value="robin">Robin</option>
+                    <option value="thangamani">Thangamani</option>
+                </select>
+            </div>
+            <div>
+                <label>Description</label>
+                <textarea  rows="4" cols="50"  formControlName="description"  class="form-control">
+                </textarea>
+            </div>
+              </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" (click)="saveTask()" data-dismiss="modal">Save</button>
         </div>
       </div>
     </div>

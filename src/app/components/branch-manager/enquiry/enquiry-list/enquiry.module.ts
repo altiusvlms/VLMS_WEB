@@ -1,6 +1,7 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 /** Custom Module */
 import { EnquiryRoutingModule } from './enquiry-routing.module';
@@ -14,7 +15,9 @@ import { EnquiryListComponent } from './enquiry-list.component';
   declarations: [EnquiryListComponent],
   imports: [
     CommonModule,
-    EnquiryRoutingModule
+    EnquiryRoutingModule,
+    ReactiveFormsModule, 
+    FormsModule
   ]
 })
 export class EnquiryModule { }

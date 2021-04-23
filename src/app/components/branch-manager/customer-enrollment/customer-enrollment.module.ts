@@ -1,6 +1,7 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 /** Custom Module */
 import { CustomerEnrollmentRoutingModule } from './customer-enrollment-routing.module';
@@ -14,7 +15,9 @@ import { CustomerEnrollListComponent } from './customer-enroll-list/customer-enr
   declarations: [CustomerEnrollListComponent],
   imports: [
     CommonModule,
-    CustomerEnrollmentRoutingModule
+    CustomerEnrollmentRoutingModule,
+    ReactiveFormsModule, 
+    FormsModule
   ]
 })
 export class CustomerEnrollmentModule { }

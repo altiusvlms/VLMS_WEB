@@ -1,1 +1,155 @@
-<p>customer-enroll-list works!</p>
+<div class="container">
+<p>Customer Enroll List</p>
+    <div class="row">
+        <div class="col-sm-2">
+            <div>
+                <input type="search" class="form-control" placeholder="Search" aria-label="Search"
+            aria-describedby="search-addon" />
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div>
+                <button type="button"  data-toggle="modal" data-target="#createEntrolmentModal">
+                    Create New Enrolment
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div>
+                <label>New Customer Enrolment</label>
+                <input type="date" class="form-control">
+            </div>
+        </div>
+    </div>
+
+<!-- /** Customer Enrolment List Table */ -->
+<table class="table">
+    <thead>
+      <tr>
+        <th>Customer ID</th>
+        <th>Applicant Name</th>
+        <th>Applicant Mobile No.1</th>
+        <th>Applicant Mobile No.2</th>
+        <th>D.O.B</th>
+        <th>Father’s Name</th>
+        <th>Aadhaar Image</th>
+        <th>PAN Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>KF-0042</td>
+        <td>Robin</td>
+        <td>9999888877</td>
+        <td>8888776655</td>
+        <td>14.Dec.1990</td>
+        <td>Durai</td>
+        <td></td>
+        <td></td>
+        <td><button type="button">View More</button></td>
+      </tr>
+      <tr>
+        <td>KF-0043</td>
+        <td>Thangamani</td>
+        <td>9988776655</td>
+        <td>9966557766</td>
+        <td>17.May.1991</td>
+        <td>Myilsamy</td>
+        <td></td>
+        <td></td>
+        <td><button type="button">View More</button></td>
+      </tr>
+    </tbody>
+</table>
+</div>
+
+<!-- /** Create Customer Enrolment Model*/ -->
+
+<div class="modal fade" id="createEntrolmentModal" tabindex="-1" role="dialog" aria-labelledby="createEntrolmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createEntrolmentModalLabel">Entrol Customer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+    <form [formGroup]="createCustomerEnrolForms">
+            <div>
+                <label>Customer Name</label>
+                <input type="text"  formControlName="customerName"  class="form-control">
+            </div>
+            <div>    
+                <label>Mobile Number</label>
+                <input type="text"  formControlName="mobileNo"  class="form-control">
+            </div>
+            <div>    
+                <label>Alternative Mobile Number</label>
+                <input type="text"  formControlName="AltermobileNo"  class="form-control">
+            </div>
+            <div>    
+                <label>D.O.B</label>
+                <input type="date"  formControlName="dob"  class="form-control">
+            </div>
+            <div>    
+                <label>Father's Name</label>
+                <input type="text"  formControlName="fatherName"  class="form-control">
+            </div>
+            <div>    
+                <label>ID Proof1</label>
+                <select class="form-control">
+                    <option value="">Select ID Proof1</option>
+                    <option value="aadhar">Aadhaar</option>
+                    <option value="pan">PAN</option>
+                    <option value="rationCard">Ration Card</option>
+                    <option value="drivingLicence">Driving Licence</option>
+                    <option value="passport">Passport</option>
+                    <option value="jobCard">NREGA Job Card</option>
+                </select>
+                <input type="text"  formControlName="proof1"  class="form-control">
+                <input type="file"  class="form-control">
+            </div>
+            <div>    
+                <label>ID Proof2</label>
+                <select class="form-control">
+                    <option value="">Select ID Proof2</option>
+                    <option value="aadhar">Aadhaar</option>
+                    <option value="pan">PAN</option>
+                    <option value="rationCard">Ration Card</option>
+                    <option value="drivingLicence">Driving Licence</option>
+                    <option value="passport">Passport</option>
+                    <option value="jobCard">NREGA Job Card</option>
+                  </select>
+                <input type="text"  formControlName="proof2"  class="form-control">
+                <input type="file"  class="form-control">
+            </div>
+    </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnrolModal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- /** Generate Entrol Model*/ -->
+
+  <div  class="modal fade" id="generateEnrolModal" tabindex="-1" role="dialog" aria-labelledby="generateEnrolModalLabel"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+          <p>Entrolled Successfully</p>
+          <p>Customer ID :KF-0042</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>

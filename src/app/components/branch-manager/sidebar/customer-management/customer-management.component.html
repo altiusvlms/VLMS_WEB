@@ -1,1 +1,84 @@
-<p>customer-management works!</p>
+
+<!-- /** Customer Based Search Fields */ -->
+<div class="container">
+    <p>Customer Management</p>
+<div class="row">
+    <div class="col-sm-2">
+        <div>
+            <select class="form-control">
+              <option value="">Select Application State </option>
+              <option value="new">New Application</option>
+              <option value="old">Old Application</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div>
+            <select class="form-control">
+              <option value="">Select Status</option>
+              <option value="approved">Approved</option>
+              <option value="notapproved">Not Approved</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="col-sm-2">
+        <div>
+            <select class="form-control">
+              <option value="">Select Area</option>
+              <option value="thudialore">Thudialore</option>
+              <option value="gandhipuram">Gandhipuram</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <input type="search" class="form-control" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+      </div>
+</div>
+
+
+<!-- /** Customer Based Table */ -->
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th>Customer ID</th>
+        <th>Customer Name</th>
+        <th>Contact no</th>
+        <th>Alternative contact number</th>
+        <th>D.O.B</th>
+        <th>Father's Name</th>
+        <th>ID proof Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <input class="form-check-input" type="checkbox" value="">
+        </td>
+        <td>KF-12</td>
+        <td>Robin</td>
+        <td>9999888877</td>
+        <td>Thudialore</td>
+        <td>14.Dec.1992</td>
+        <td></td>
+        <td>Aadhar|PAN</td>
+        <td>View More</td>
+      </tr>
+      <tr>
+        <td> <input class="form-check-input" type="checkbox" value="">
+        </td>
+        <td>KF-13</td>
+        <td>Thangamani</td>
+        <td>9988776655</td>
+        <td>Gandhipuram</td>
+        <td>14.May.1990</td>
+        <td></td>
+        <td>Aadhar|Voter Id</td>
+        <td>View More</td>
+      </tr>
+    </tbody>
+</table>
+</div>

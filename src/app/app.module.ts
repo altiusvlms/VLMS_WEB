@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 /** Translation Imports */
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,7 +15,6 @@ import { WebAppComponent } from './web-app.component';
 
 /** Main Routing Module */
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderComponent } from './components/shared/header/header.component';
 
 
 /**
@@ -30,8 +30,9 @@ import { HeaderComponent } from './components/shared/header/header.component';
     HttpClientModule,
     TranslateModule.forRoot(),
     AppRoutingModule,
-  ],
-  declarations: [WebAppComponent, HeaderComponent],
+    FormsModule
+    ],
+  declarations: [WebAppComponent],
   providers: [],
   bootstrap: [WebAppComponent]
 })
