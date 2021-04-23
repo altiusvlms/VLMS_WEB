@@ -87,13 +87,12 @@
                       </span>
                       <!-- <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
                         [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" /> -->
-                        <!-- <input type="number" id="fname" name="fname"><br><br> -->
+                        <input type="number" id="fname" name="fname">
                     </div>
                     <!-- <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()"> -->
                     <!-- </ng5-slider> -->
-                  </div>
+                  </div><br>
         
-                  <hr />
         
                   <div class="form-group">
                     <div class="col-md-12">
@@ -102,6 +101,7 @@
                       </span>
                       <!-- <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
                         [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" /> -->
+                        <input type="number" id="fname" name="fname"><br>
                     </div>
                     <!-- <ng5-slider [(value)]="remi.value" [options]="roptions" (userChangeEnd)="update()"> -->
                     <!-- </ng5-slider> -->
@@ -116,8 +116,10 @@
                         placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;"> -->
                       <!-- <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
                         placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo" style="width:30%;float:right;"> -->
-                    </div>
+                        <input type="number" id="fname" name="fname"><br>
+                    </div><br>
                     <!-- Date picker-->
+                   <div>
                     <span class="left-title">Loan Date</span><br>
                     <mat-form-field appearance="fill">
                       <mat-label>Choose a date</mat-label>
@@ -125,7 +127,8 @@
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field><br>
-  
+                </div>
+            <div>
                     <span class="left-title">Due Date</span><br>
                     <mat-form-field appearance="fill">
                       <mat-label>Choose a date</mat-label>
@@ -133,7 +136,7 @@
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
-  
+            </div>
                     <div class="col-md-2">
                       <div class="input-group-append">
                         <!-- <button class="btn btn-outline-secondary" [ngClass]="{'active':yrToggel}"
@@ -162,6 +165,7 @@
                     <span class="result">
                       <!-- {{result.emi || "--"}} -->
                     </span>
+                    <input type="number" id="fname" name="fname"><br><br>
                   </div>
         
                   <hr />
@@ -172,7 +176,9 @@
                     </h5>
                     <span class="result">
                       <!-- {{result.interest || "--"}} -->
+                      
                     </span>
+                    <input type="number" id="fname" name="fname"><br><br>
                   </div>
         
                   <hr />

@@ -1,1 +1,104 @@
-<p>assign-targets works!</p>
+<!--  -->
+<!-- <button class="btn"></button>
+<div class="dropdown">
+  <button class="btn" style="border-left:1px solid #f3f5f7">
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div> -->
+
+<input type="submit" id="fname" name="fname" value="Area" >&nbsp;
+<input type="submit" id="fname" name="fname" value="Loan Amount" >&nbsp;
+<input type="submit" id="fname" name="fname" value="Due Range" >
+<input type="submit" id="fname" name="fname" value="Loan Status" >
+<input type="submit" id="fname" name="fname" value="Assign" data-toggle="modal" data-target="#exampleModal">
+
+
+<!-- <label>Choose a browser from this list:
+    <input list="browsers" name="myBrowser" /></label>
+    <datalist id="browsers">
+      <option value="Chrome">
+      <option value="Firefox">
+      <option value="Internet Explorer">
+      <option value="Opera">
+      <option value="Safari">
+      <option value="Microsoft Edge">
+    </datalist> -->
+
+    <!-- table -->
+    <h2>Loan-Disbursal cash Limit</h2>
+<table style="width:100%" >
+    <tr>
+      <th>sr.no</th>
+      <th>Branch</th> 
+      <th>New customer</th>
+      <th>Loan Amount</th>
+      <th>Creadit Date</th>
+      <th>Target Date</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Thudialore</td>
+      <td>60</td>
+      <td>10000</td>
+      <td>01.Mar.2021</td>
+      <td>21.Mar.2021</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Ganapathy</td>
+        <td>80</td>
+        <td>20000</td>
+        <td>01.Mar.2021</td>
+        <td>21.Mar.2021</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Gandhipuram</td>
+        <td>70</td>
+        <td>30000</td>
+        <td>01.Mar.2021</td>
+        <td>21.Mar.2021</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Saibaba colony</td>
+        <td>50</td>
+        <td>40000</td>
+        <td>01.Mar.2021</td>
+        <td>21.Mar.2021</td>
+      </tr>
+    </table>
+
+    <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Assign Customer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <!-- <h4>Assign Customer</h4> -->
+            <label > Choose Branch</label>
+            <!-- <input type="text" id="fname" name="fname" value="Choose Branch"> -->
+            <input type="text" id="fname" name="fname" ><br>
+            <label > Choose Field Executive</label>
+            <!-- <input type="text" id="fname" name="fname" value="Choose Field Executive"> -->
+            <input type="text" id="fname" name="fname" ><br>
+            <!-- <label >MOBILE NUMBER :</label><br>
+            <label >ACCOUNT STATUS :</label><br> -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Send Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
