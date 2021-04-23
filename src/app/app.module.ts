@@ -14,6 +14,8 @@ import { WebAppComponent } from './web-app.component';
 
 /** Main Routing Module */
 import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './components/shared/header/header.component';
+
 
 /**
  * App Module
@@ -29,7 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
     TranslateModule.forRoot(),
     AppRoutingModule,
   ],
-  declarations: [WebAppComponent],
+  declarations: [WebAppComponent, HeaderComponent],
   providers: [],
   bootstrap: [WebAppComponent]
 })

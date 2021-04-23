@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /** Custom Component */
-import { DashboardComponent } from './dashboard.component';
+import { HeaderComponent } from "./header.component";
 
-/** Dashboard Routes */
-const routes: Routes = [{ path: 'dashboard', component: DashboardComponent }];
+/** Shared Routes */
+const routes: Routes = [{ path: '/header', component: HeaderComponent }];
 
 
 /**
- * Dashboard Routing Module */
+ * Shared Routing Module */
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class SharedRoutingModule { }

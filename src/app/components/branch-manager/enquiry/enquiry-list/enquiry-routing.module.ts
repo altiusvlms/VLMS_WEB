@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /** Custom Component */
-import { DashboardComponent } from './dashboard.component';
+import { EnquiryListComponent } from './enquiry-list.component';
 
-/** Dashboard Routes */
-const routes: Routes = [{ path: 'dashboard', component: DashboardComponent }];
+/** Enquiry Routes */
+const routes: Routes = [{ path: 'enquiry-list', component: EnquiryListComponent }];
 
 
 /**
- * Dashboard Routing Module */
+ * Enquiry Routing Module */
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class EnquiryRoutingModule { }

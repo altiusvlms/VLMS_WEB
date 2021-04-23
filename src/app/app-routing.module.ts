@@ -3,19 +3,43 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-import { DashboardComponent } from './components/branch-manager/dashboard/dashboard.component';
 
 /** Fallback to this route when no prior route is matched.*/
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
+
+/** Branch Manager Routes */
   {
-    path: "dashboard",
+    path: "branch-manager",
     loadChildren: () =>
       import("./components/branch-manager/dashboard/dashboard.module").then(
         d => d.DashboardModule
       )
   },
+  {
+    path: "branch-manager",
+    loadChildren: () =>
+      import("./components/branch-manager/enquiry/enquiry-list/enquiry.module").then(
+        e => e.EnquiryModule
+      )
+  },
+  {
+    path: "branch-manager",
+    loadChildren: () =>
+      import("./components/branch-manager/login/login.module").then(
+        l => l.LoginModule
+      )
+  },
+  {
+    path: "branch-manager",
+    loadChildren: () =>
+      import("./components/branch-manager/sidebar/sidebar.module").then(
+        s => s.SidebarModule
+      )
+  },
+
+
   {
     path: "**",
     loadChildren: () =>
