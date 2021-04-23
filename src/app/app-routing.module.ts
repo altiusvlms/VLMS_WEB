@@ -25,6 +25,13 @@ const routes: Routes = [
       )
   },
   {
+    path: "branch-manager",
+    loadChildren: () =>
+      import("./components/branch-manager/loan-application/loan-application.module").then(
+        l => l.LoanApplicationModule
+      )
+  },
+  {
     path: "",
     loadChildren: () =>
       import("./components/branch-manager/login/login.module").then(
