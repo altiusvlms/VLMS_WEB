@@ -25,7 +25,7 @@ const routes: Routes = [
       )
   },
   {
-    path: "branch-manager",
+    path: "",
     loadChildren: () =>
       import("./components/branch-manager/login/login.module").then(
         l => l.LoginModule
