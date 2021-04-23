@@ -1,6 +1,8 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 
@@ -54,7 +56,7 @@ const routes: Routes = [
  *
  * Configures the fallback route.*/
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), MatSidenavModule, MatToolbarModule],
   exports: [RouterModule],
   providers: []
 })
