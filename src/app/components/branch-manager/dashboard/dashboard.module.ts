@@ -10,7 +10,7 @@ import {MatInputModule} from '@angular/material/input';
 
 
 /** Custom Module */
-import { DashboardRoutingModule } from './dashboard-routing.module';
+// import { DashboardRoutingModule } from './dashboard-routing.module';
 
 /** Custom Components */
 import { DashboardComponent } from './dashboard.component';
@@ -21,7 +21,7 @@ import { DashboardComponent } from './dashboard.component';
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
+    // DashboardRoutingModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule

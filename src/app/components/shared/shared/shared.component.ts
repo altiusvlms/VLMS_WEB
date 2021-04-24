@@ -1,5 +1,6 @@
 /** Angular Imports */
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 /** Shared Component*/
 @Component({
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SharedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }

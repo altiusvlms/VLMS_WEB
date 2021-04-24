@@ -6,6 +6,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 /** Custom Module */
 import { SidebarRoutingModule } from './sidebar-routing.module';
 
+/** Angular Material */
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 /** Custom Components */
 import { SidebarComponent } from './sidebar.component';
@@ -25,7 +29,10 @@ import { LoanManagementComponent } from './loan-management/loan-management.compo
     CommonModule,
     SidebarRoutingModule,
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class SidebarModule { }

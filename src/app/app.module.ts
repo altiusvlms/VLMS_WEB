@@ -16,6 +16,10 @@ import { WebAppComponent } from './web-app.component';
 
 /** Main Routing Module */
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './components/shared/shared/shared.module';
+import {SidebarModule} from './components/branch-manager/sidebar/sidebar.module';
+
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -113,7 +117,9 @@ import { MatTreeModule } from '@angular/material/tree';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    MatBadgeModule
+    MatBadgeModule,
+    SharedModule,
+    SidebarModule
   ],
   declarations: [WebAppComponent],
   providers: [],
