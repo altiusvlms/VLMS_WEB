@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 /** Custom Forms */
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 
 /** Dashboard Component */
 @Component({
@@ -14,7 +15,7 @@ export class DashboardComponent implements OnInit {
 
   showTable:Boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private router: Router) { }
 
   /** Create Advanced Search Form */
   createAdvanceSearchForms = new FormGroup({
@@ -36,5 +37,16 @@ export class DashboardComponent implements OnInit {
   advancedSearch(){
   this.showTable = true;
   }
-
+  customer(){
+    this.router.navigate(['branch-manager/customer-management']);
+  }
+  enquiry(){
+    this.router.navigate(['branch-manager/enquiry-list']);
+  }
+  customerEntrol(){
+    this.router.navigate(['branch-manager/customer-enroll-list']);
+  }
+  newLoan(){
+    this.router.navigate(['branch-manager/loan-process']);
+  }
 }
