@@ -19,6 +19,8 @@ import { SharedModule } from './components/shared/shared/shared.module';
 import { SidebarModule } from './components/branch-manager/sidebar/sidebar.module';
 import { ToastrModule } from 'ngx-toastr';
 
+import { DatePipe } from '@angular/common';
+
 
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -130,7 +132,8 @@ import { MatTreeModule } from '@angular/material/tree';
   ],
   declarations: [WebAppComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    DatePipe],
   bootstrap: [WebAppComponent]
 })
 export class AppModule { }
