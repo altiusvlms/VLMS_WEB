@@ -11,6 +11,8 @@ import { appModels } from '../../../../services/utils/enum.util';
 })
 export class LoanVerificationComponent implements OnInit {
 
+  loanverifiData:any;
+
   constructor(private router: Router,private crudService: CrudService) { }
 
   ngOnInit(): void {
@@ -26,6 +28,7 @@ export class LoanVerificationComponent implements OnInit {
       }
     }).pipe().subscribe(data => {
       console.log(data);
+      this.loanverifiData = data;
     })
   }
 }

@@ -111,6 +111,7 @@
             </div>
             <div>    
                 <label>Vehicle Number</label>
+                <span class="required-field">*</span>
                 <input type="text"  formControlName="vehicleNumber"  class="form-control" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }" >
                 <div *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors" class="invalid-feedback">
                   <div class="required-field" *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors.required">Vehicle Number is required</div>
@@ -143,7 +144,7 @@
         </div>
         <div class="modal-body">
           <p>Enquiry Generated Successfully</p>
-          <p>Enquiry ID: KF-0042</p>
+          <p>Enquiry ID: {{data.resourceId}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>

@@ -13,6 +13,7 @@ import { appModels } from '../../../../services/utils/enum.util';
 export class UserRolePermissionComponent implements OnInit {
   showUserTable :Boolean = true;
   showPermissionTable :Boolean  = false;
+  userListData:any ;
   constructor(private crudService: CrudService) { }
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class UserRolePermissionComponent implements OnInit {
       }
     }).pipe().subscribe(data => {
       console.log(data);
+      this.userListData = data;
     })
   }
 
