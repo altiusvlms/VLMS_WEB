@@ -10,7 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
 
 
@@ -41,6 +41,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MatIconModule,
     MatFormFieldModule,
     FormsModule,
+    ReactiveFormsModule,
     MatTabsModule
   ]
 })
