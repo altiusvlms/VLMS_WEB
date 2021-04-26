@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/core/auth.interceptor';
 import { ErrorInterceptor } from './services/core/error.interceptor';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -85,6 +85,7 @@ import { MatTreeModule } from '@angular/material/tree';
       tapToDismiss: true
     }), // ToastrModule added
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MatDatepickerModule,
     MatToolbarModule,
