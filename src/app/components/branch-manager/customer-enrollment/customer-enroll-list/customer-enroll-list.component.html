@@ -105,18 +105,18 @@
           </button>
         </div>
         <div class="modal-body">
-    <form [formGroup]="createCustomerEnrolForms">
+    <form [formGroup]="createCustomerEnrolForms" style="overflow: scroll;">
             <div>
                 <label>Customer Name</label>
                 <input type="text"  formControlName="customerName"  class="form-control">
             </div>
             <div>    
                 <label>Mobile Number</label>
-                <input type="text"  formControlName="mobileNo"  class="form-control">
+                <input type="text"  formControlName="mobileNumber"  class="form-control">
             </div>
             <div>    
                 <label>Alternative Mobile Number</label>
-                <input type="text"  formControlName="AltermobileNo"  class="form-control">
+                <input type="text"  formControlName="alternateMobileNumber"  class="form-control">
             </div>
             <div>    
                 <label>D.O.B</label>
@@ -126,6 +126,14 @@
                 <label>Father's Name</label>
                 <input type="text"  formControlName="fatherName"  class="form-control">
             </div>
+            <div>    
+              <label>Gender</label>
+              <input type="text"  formControlName="gender"  class="form-control">
+          </div>
+          <div>    
+            <label>Applicant Type</label>
+            <input type="text"  formControlName="applicantType"  class="form-control">
+        </div>
             <div>    
                 <label>ID Proof1</label>
                 <select class="form-control">
@@ -158,7 +166,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnrolModal">Save</button>
+          <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnrolModal"(click)=saveCustomerEnrolment()>Save</button>
         </div>
       </div>
     </div>

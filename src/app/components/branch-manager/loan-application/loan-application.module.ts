@@ -22,11 +22,12 @@ import { LoanApplicationRoutingModule } from './loan-application-routing.module'
 
 /** Custom Components */
 import { LoanProcessComponent } from './loan-process/loan-process.component';
+import { LoanVerificationComponent } from './loan-verification/loan-verification.component';
 
 /** Loan Application Module */
 
 @NgModule({
-  declarations: [LoanProcessComponent],
+  declarations: [LoanProcessComponent, LoanVerificationComponent],
   imports: [
     CommonModule,
     LoanApplicationRoutingModule,

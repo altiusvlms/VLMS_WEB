@@ -101,17 +101,29 @@
                 <input type="text"  formControlName="customerName"  class="form-control">
             </div>
             <div>    
-                <label>Mobile Number</label>
-                <input type="text"  formControlName="mobileNo"  class="form-control">
+                <label>Mobile Number
+                  <span class="required-field">*</span>
+                </label>
+                <input type="text"  formControlName="mobileNumber"  class="form-control" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.mobileNumber.errors  }" >
+                  <div *ngIf="submitted && createEnquiryForms.controls.mobileNumber.errors" class="invalid-feedback">
+                    <div class="required-field" *ngIf="submitted && createEnquiryForms.controls.mobileNumber.errors.required">Mobile Number is required</div>
+                  </div>  
             </div>
             <div>    
                 <label>Vehicle Number</label>
-                <input type="text"  formControlName="vehicleName"  class="form-control">
+                <input type="text"  formControlName="vehicleNumber"  class="form-control" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }" >
+                <div *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors" class="invalid-feedback">
+                  <div class="required-field" *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors.required">Vehicle Number is required</div>
+                </div>  
             </div>
             <div>    
                 <label>Email</label>
                 <input type="email"  formControlName="email"  class="form-control">
             </div>
+            <div>    
+              <label>Enquiry Id</label>
+              <input type="text"  formControlName="enquiryId"  class="form-control">
+          </div>
     </form>
         </div>
         <div class="modal-footer">
@@ -124,14 +136,14 @@
 
   <!-- /** Generate Enquiry Model*/ -->
 
-  <div  class="modal fade" id="generateEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="generateEnquiryModalLabel"  aria-hidden="true">
+  <div *ngIf="showGenerateModel && submitted" class="modal fade" id="generateEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="generateEnquiryModalLabel"  aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
         </div>
         <div class="modal-body">
           <p>Enquiry Generated Successfully</p>
-          <p>Customer ID :KF-0042</p>
+          <p>Enquiry ID: KF-0042</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>

@@ -1,0 +1,75 @@
+<div class="header">
+    <div class="header-right">
+        <a class="material-icons" matTooltip="Notifications">
+            notifications
+        </a>
+          <a href="login" class="material-icons" matTooltip="Notifications">
+            logout
+          </a>
+    </div>
+  </div>
+
+
+<div class="sidenav">
+    <a href="branch-manager/dashboard">Dashboard</a>
+    <a href="branch-manager/user-role-permission">Manager User Role & Permission</a>
+    <a href="branch-manager/assign-targets">Assign Targets</a>
+    <a href="branch-manager/customer-management">Customer Management</a>
+    <a href="branch-manager/task-management">Task Management</a>
+    <a href="branch-manager/dashboard">Cost Management</a>
+    <a href="branch-manager/dashboard">Report</a>
+    <a href="branch-manager/analytics">Analytics</a>
+  </div>
+
+  <div class="container">
+      <p>Loan Application</p>
+    <div class="row">
+    <div class="col-sm-2">
+        <input type="search" class="form-control" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+      </div>
+    <div class="col-sm-2">
+      <button type="button" >
+        Advanced Search
+       </button> 
+    </div>
+    </div>
+
+<!-- Loan Application Table -->
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>Customer ID </th>
+        <th>Applicant Photo</th>
+        <th>Applicant Name</th>
+        <th>Applicant Mobile No.</th>
+        <th>Loan Amount</th>
+        <th>Loan Term (Tenure)</th>
+        <th>Interest %</th>
+        <th>EMI Amount</th>
+        <th>Approver</th>
+        <th>Loan Type</th>
+        <th>Vehicle Type</th>
+        <th>Ref By</th>
+        <th>Customer Type</th>
+        <th><button (click)="loanProcess()">Proceed</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td>KF-12</td>
+        <td>Robin</td>
+        <td>9999888877</td>
+        <td>Thudialore</td>
+        <td>14.Dec.1992</td>
+        <td></td>
+        <td>Aadhar|PAN</td>
+        <td>View More</td>
+      </tr>
+    </tbody>
+</table>
+
+
+  </div>

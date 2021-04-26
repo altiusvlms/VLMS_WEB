@@ -1,10 +1,10 @@
 /** Angular Imports */
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-/** Translation Imports */
-import { TranslateService } from '@ngx-translate/core';
+
+import { ToastContainerDirective,ToastrService } from 'ngx-toastr';
 
 
 /**
@@ -16,6 +16,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./web-app.component.scss']
 })
 export class WebAppComponent implements OnInit {
+  @ViewChild(ToastContainerDirective, { static: true })
+  toastContainer: ToastContainerDirective;
 
   /**
    * @param {Router} router Router for navigation.
@@ -26,7 +28,7 @@ export class WebAppComponent implements OnInit {
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
-              private translateService: TranslateService,
+              private toast: ToastrService
           ) { }
 
   ngOnInit() {

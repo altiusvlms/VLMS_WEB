@@ -2,12 +2,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/core/auth.interceptor';
+import { ErrorInterceptor } from './services/core/error.interceptor';
 import { FormsModule } from '@angular/forms';
 
-
-/** Translation Imports */
-import { TranslateModule } from '@ngx-translate/core';
 
 
 /** Main Component */
@@ -17,7 +16,9 @@ import { WebAppComponent } from './web-app.component';
 /** Main Routing Module */
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './components/shared/shared/shared.module';
-import {SidebarModule} from './components/branch-manager/sidebar/sidebar.module';
+import { SidebarModule } from './components/branch-manager/sidebar/sidebar.module';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -75,7 +76,13 @@ import { MatTreeModule } from '@angular/material/tree';
     BrowserAnimationsModule,
     HammerModule,
     HttpClientModule,
-    TranslateModule.forRoot(),
+    // TranslateModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-top-right',
+      tapToDismiss: true
+    }), // ToastrModule added
+    FormsModule,
     AppRoutingModule,
     MatDatepickerModule,
     MatToolbarModule,
@@ -122,7 +129,8 @@ import { MatTreeModule } from '@angular/material/tree';
     SidebarModule
   ],
   declarations: [WebAppComponent],
-  providers: [],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
   bootstrap: [WebAppComponent]
 })
 export class AppModule { }

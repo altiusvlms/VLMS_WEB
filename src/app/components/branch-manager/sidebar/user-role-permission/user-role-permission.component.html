@@ -24,54 +24,50 @@
 
 <div class="container">
 <!-- User/Permission -->
-<input type="submit" id="fname" name="fname" value="User">&nbsp;
-<input type="submit" id="fname" name="fname" value="Permission" >
 
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" (click)="user()">User</a></li>
+  <li><a data-toggle="tab" (click)="permission()">Permission</a></li>
+</ul>
 
 <!-- /** Create Task Button */ -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Create User
   </button>
 
-<!-- /** Task Management List Table */ -->
-<!-- <table style="width:100%">
-    <thead>
-      <tr>
-        <th>Sr.No</th>
-        <th>Created</th>
-        <th>Task</th>
-        <th>Due date</th>
-        <th>Assign To</th>
-        <th>Status</th>
-        <th>Branch</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>26.Mar.2021</td>
-        <td>Office Verification</td>
-        <td>01.04.2021</td>
-        <td>Grace Hopper</td>
-        <td>Completed</td>
-        <td>Thudialore</td>
-        <td>View</td>
-      </tr>
-      <tr>
+  <table style="width:100%" *ngIf="showUserTable" >
+    <tr>
+      <th>Sr.no</th>
+      <th>Name</th> 
+      <th>Designation</th>
+      <th>Contact Number</th>
+      <th>Account Status</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Robin</td>
+      <td>Field Executive</td>
+      <td>8767676566</td>
+      <td>01.Mar.2021</td>
+      <td class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked></td>
+      <td data-toggle="modal" data-target="#exampleModal">Edit</td>
+    </tr>
+    <tr>
         <td>2</td>
-        <td>26.Mar.2021</td>
-        <td>Address Verification</td>
-        <td>01.04.2021</td>
-        <td>Ada Lovelance</td>
-        <td>Open</td>
-        <td>Gandhipuram</td>
-        <td>View</td>
-      </tr>
-    </tbody>
-  </table> -->
+        <td>Thangamani</td>
+        <td>Staff</td>
+        <td>876567767</td>
+        <td>01.Mar.2021</td>
+        <td class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked></td>
+        <td data-toggle="modal" data-target="#exampleModal">Edit</td>
+    </tr>            
+  </table>  
+ 
 
-  <table style="width:100%" >
+
+  <table style="width:100%" *ngIf="showPermissionTable" >
     <!-- <h2>My Target - Assigned by Head Office</h2> -->
     <tr>
       <th>sr.no</th>
@@ -153,65 +149,3 @@
   </div>
   </div>
 
-<!-- Modal -->
-  <!-- <div class="modal fade" id="createtaskModal" tabindex="-1" role="dialog" aria-labelledby="createtaskModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="createtaskModalLabel">Task</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        <div *ngIf="showAction"> -->
-            <!-- <span class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span> -->
-            <!-- <span class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span> -->
-        <!-- </div> -->
-            <!-- <form [formGroup]="createTaskForms"> -->
-            <!-- <div> -->
-                <!-- <label>Task Type</label>
-                <select formControlName="taskType" class="form-control">
-                  <option value="">Select Task Type</option>
-                  <option value="address_verification">Address Verification</option>
-                  <option value="office_verification">Office Verification</option>
-                  <option value="other">Others</option>
-                </select>
-            </div>
-            <div>
-                <label>Customer Reg No</label>
-                <input type="text"  formControlName="customerRegNo"  class="form-control">
-            </div>
-            <div>    
-                <label >Vehicle Number</label>
-                <select  formControlName="vehicleNo"  class="form-control">
-                  <option value="">Select Vehicle Number</option>
-                  <option value="TN37DA2424">TN 37 DA 2424</option>
-                  <option value="TN37AT2554">TN 37 AT 2554</option>
-                </select>
-            </div>
-            <div>
-                <label>Due Date</label>
-                <input type="date" formControlName="dueDate"  class="form-control">
-            </div>
-            <div>
-                <label>Assign To</label>
-                <select formControlName="assignTo"  class="form-control">
-                    <option value="robin">Robin</option>
-                    <option value="thangamani">Thangamani</option>
-                </select>
-            </div>
-            <div>
-                <label>Description</label>
-                <textarea  rows="4" cols="50"  formControlName="description"  class="form-control">
-                </textarea>
-            </div>
-              </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-          <!-- <button type="button" class="btn btn-primary" (click)="saveTask()" data-dismiss="modal">Save</button> -->
-        <!-- </div>
-      </div>
-    </div>
-  </div> -->

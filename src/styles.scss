@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+// @import '~bootstrap/scss/functions';
+// @import '~bootstrap/scss/variables';
+// @import '~bootstrap/scss/mixins';
+// @import '~ngx-toastr/toastr-bs4-alert';
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -7,21 +14,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* sidebar **/ 
 .sidenav {
     height: 100%;
-    width: 160px;
+    width: 175px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #3d3bac;;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 90px;
   }
   
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+    font-size: 20px;
+    color: rgb(0 0 0 / 87%);
     display: block;
   }
   

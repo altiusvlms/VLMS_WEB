@@ -1,0 +1,31 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+
+import {  CrudService } from '../../../../services/crud.service';
+import { appModels } from '../../../../services/utils/enum.util';
+
+@Component({
+  selector: 'mifosx-loan-verification',
+  templateUrl: './loan-verification.component.html',
+  styleUrls: ['./loan-verification.component.scss']
+})
+export class LoanVerificationComponent implements OnInit {
+
+  constructor(private router: Router,private crudService: CrudService) { }
+
+  ngOnInit(): void {
+    this.getLoanVerification();
+  }
+  loanProcess(){
+    this.router.navigate(['branch-manager/loan-process']);
+  }
+  getLoanVerification(){
+    this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe().subscribe(data => {
+      console.log(data);
+    })
+  }
+}

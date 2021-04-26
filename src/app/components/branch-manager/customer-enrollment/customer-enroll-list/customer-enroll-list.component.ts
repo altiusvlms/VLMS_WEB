@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 /** Custom Forms */
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
+import {  CrudService } from '../../../../services/crud.service';
+import { appModels } from '../../../../services/utils/enum.util';
+
 /** Customer Enroll List Component */
 @Component({
   selector: 'vlms-customer-enroll-list',
@@ -12,18 +15,32 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class CustomerEnrollListComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private crudService: CrudService) { }
     /** Create Customer Enrolment Form */
     createCustomerEnrolForms = new FormGroup({
       customerName: new FormControl('', Validators.required),
-      mobileNo: new FormControl('', Validators.required),
-      AltermobileNo: new FormControl('', Validators.required),
+      mobileNumber: new FormControl('', Validators.required),
+      alternateMobileNumber: new FormControl('', Validators.required),
       dob: new FormControl('', Validators.required),
       fatherName: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      applicantType: new FormControl('', Validators.required),
       proof1: new FormControl('', Validators.required),
       proof2: new FormControl('', Validators.required),
     })
   ngOnInit(): void {
+  }
+
+   /** Save Customer Enrolment */
+   saveCustomerEnrolment(){
+    console.log(this.createCustomerEnrolForms.value)
+    this.crudService.post(`${appModels.ENROLL}`, this.createCustomerEnrolForms.value,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+    ).pipe().subscribe( data => {
+      console.log(data)
+    })
   }
 
 }

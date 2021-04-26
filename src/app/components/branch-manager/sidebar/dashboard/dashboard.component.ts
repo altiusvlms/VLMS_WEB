@@ -49,4 +49,7 @@ export class DashboardComponent implements OnInit {
   newLoan(){
     this.router.navigate(['branch-manager/loan-process']);
   }
+  loanVerification(){
+    this.router.navigate(['branch-manager/loan-verification']);
+  }
 }
