@@ -40,8 +40,8 @@
 <table class="table">
     <thead>
       <tr>
-        <th>Customer ID </th>
-        <th>Applicant Photo</th>
+        <!-- <th>Customer ID </th> -->
+        <!-- <th>Applicant Photo</th> -->
         <th>Applicant Name</th>
         <th>Applicant Mobile No.</th>
         <th>Loan Amount</th>
@@ -53,20 +53,24 @@
         <th>Vehicle Type</th>
         <th>Ref By</th>
         <th>Customer Type</th>
-        <th><button (click)="loanProcess()">Proceed</button></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr  *ngFor="let loan of loanverifiData">
+        <!-- <td></td> -->
+        <!-- <td>KF-12</td> -->
+        <td>{{loan.customerName}}</td>
+        <td>{{loan.customerGuarantor.mobileNumber}}</td>
         <td></td>
-        <td>KF-12</td>
-        <td>Robin</td>
-        <td>9999888877</td>
-        <td>Thudialore</td>
-        <td>14.Dec.1992</td>
         <td></td>
-        <td>Aadhar|PAN</td>
-        <td>View More</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{loan.vehicleType}}</td>
+        <td></td>
+        <td></td>
+        <th><button (click)="loanProcess()">Proceed</button></th>
       </tr>
     </tbody>
 </table>

@@ -47,9 +47,9 @@ export class EnquiryListComponent implements OnInit {
   }
  /** Save Enquiry */
   saveEnquiry(){
-    this.toast.success("Created Successfully");
+    // this.toast.success("Created Successfully");
 
-    console.log(this.createEnquiryForms.value)
+    // console.log(this.createEnquiryForms.value)
     this.submitted = true;
     this.crudService.post(`${appModels.FIELDEXECUTIVE}/enquiry`, this.createEnquiryForms.value,
       { params:{
