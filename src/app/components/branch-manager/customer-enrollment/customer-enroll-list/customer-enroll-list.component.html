@@ -107,6 +107,10 @@
         <div class="modal-body">
     <form [formGroup]="createCustomerEnrolForms" style="overflow: scroll;">
             <div>
+                <label>Applicant Id</label>
+                <input type="text"  formControlName="applicantId"  class="form-control">
+            </div>
+            <div>
                 <label>Customer Name</label>
                 <input type="text"  formControlName="customerName"  class="form-control">
             </div>
@@ -181,7 +185,7 @@
         </div>
         <div class="modal-body">
           <p>Entrolled Successfully</p>
-          <p>Customer ID :KF-0042</p>
+          <p>Customer ID :{{enrollid}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
