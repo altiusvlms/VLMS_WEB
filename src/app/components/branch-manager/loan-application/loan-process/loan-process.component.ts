@@ -39,6 +39,7 @@ export class LoanProcessComponent implements OnInit {
         tenantIdentifier: 'default'
       }
     }).pipe().subscribe(data => {
+      console.log(data.vehicleDetails)
       this.vehicleDetailsForm
       .patchValue({
         vehicleNumber: data.vehicleDetails.vehicleNumber,
