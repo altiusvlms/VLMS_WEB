@@ -197,13 +197,13 @@
     <mat-tab label="Vehicle details">
         <mat-card class="example-card">
         <mat-card-content>
-          <form class="example-form">
+          <form class="example-form" [formGroup]="vehicleDetailsForm">
             <table class="example-full-width" cellspacing="0">
                 
               <tr>
                 <td>   vehicle Number:
                   <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput type='text'  >
+                  <input matInput type='text'  formControlName="vehicleNumber" >
                   </mat-form-field>
                 </td>
               </tr>
