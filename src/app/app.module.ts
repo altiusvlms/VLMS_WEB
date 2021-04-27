@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/core/auth.interceptor';
 import { ErrorInterceptor } from './services/core/error.interceptor';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,7 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './components/shared/shared/shared.module';
 import { SidebarModule } from './components/branch-manager/sidebar/sidebar.module';
 import { ToastrModule } from 'ngx-toastr';
-import { ReactiveFormsModule } from '@angular/forms';
+
+
+import { DatePipe } from '@angular/common';
 
 
 
@@ -84,6 +86,7 @@ import { MatTreeModule } from '@angular/material/tree';
       tapToDismiss: true
     }), // ToastrModule added
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MatDatepickerModule,
     MatToolbarModule,
@@ -128,12 +131,13 @@ import { MatTreeModule } from '@angular/material/tree';
     MatBadgeModule,
     SharedModule,
     SidebarModule,
-    ReactiveFormsModule 
+     
 
   ],
   declarations: [WebAppComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    DatePipe],
   bootstrap: [WebAppComponent]
 })
 export class AppModule { }

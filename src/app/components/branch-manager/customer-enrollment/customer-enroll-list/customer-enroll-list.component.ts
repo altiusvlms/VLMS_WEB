@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
+import { DatePipe } from '@angular/common';
+
 
 /** Customer Enroll List Component */
 @Component({
@@ -15,7 +17,7 @@ import { appModels } from '../../../../services/utils/enum.util';
 })
 export class CustomerEnrollListComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private crudService: CrudService) { }
+  constructor(private formBuilder: FormBuilder,private crudService: CrudService,public datepipe: DatePipe) { }
     /** Create Customer Enrolment Form */
     createCustomerEnrolForms = new FormGroup({
       customerName: new FormControl('', Validators.required),
@@ -30,17 +32,21 @@ export class CustomerEnrollListComponent implements OnInit {
     })
   ngOnInit(): void {
   }
+  
 
    /** Save Customer Enrolment */
    saveCustomerEnrolment(){
     console.log(this.createCustomerEnrolForms.value)
-    this.crudService.post(`${appModels.ENROLL}`, this.createCustomerEnrolForms.value,
-      { params:{
-        tenantIdentifier: "default"   
-      }}
-    ).pipe().subscribe( data => {
-      console.log(data)
-    })
+    let dobDate =this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd-MMMM-yyyy');
+    console.log(dobDate)
+
+    // this.crudService.post(`${appModels.ENROLL}`, this.createCustomerEnrolForms.value,
+    //   { params:{
+    //     tenantIdentifier: "default"   
+    //   }}
+    // ).pipe().subscribe( data => {
+    //   console.log(data)
+    // })
   }
 
 }

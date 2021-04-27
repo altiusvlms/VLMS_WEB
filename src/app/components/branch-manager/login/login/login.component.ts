@@ -1,8 +1,10 @@
 /** Angular Imports */
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {AuthenticationService} from '../../../../services/authentication/authentication.service';
+import { appModels } from '../../../../services/utils/enum.util';
+import { ToastrService } from 'ngx-toastr';
 
 /** Login Component */
 @Component({
@@ -13,13 +15,45 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class LoginComponent implements OnInit {
   
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private _auth:AuthenticationService,private toast: ToastrService) { }
+
+  createLoginForms = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  })
+
+
+  loginUserdata = {};
 
   username: string;
 password: string;
 
   ngOnInit(): void {
   }
+     
+    loginusers(){
+    // this.toast.success("Created Successfully");
+
+    console.log(this.createLoginForms.value)
+    this._auth.post(`${appModels.COMMON}/authentication`, this.createLoginForms.value,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+    ).pipe().subscribe( data => {
+      console.log(data)
+      this.toast.success("Created Successfully");
+    })
+  }
+    
+    loginUser(){
+             this._auth.loginUser(this.loginUserdata)
+             .subscribe(
+               res => console.log(res),
+               err => console.log(err)
+             )
+
+    } 
+
 
   login() : void {
     if(this.username == 'admin' && this.password == 'admin'){

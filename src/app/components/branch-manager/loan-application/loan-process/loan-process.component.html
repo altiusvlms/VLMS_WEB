@@ -30,33 +30,33 @@
     <mat-tab label="Applicant">
         <mat-card class="example-card">
         <mat-card-content>
-          <form [formGroup]="createLoanForms">
+          <form>
           <!-- <form [formGroup]="createEnquiryForms"> -->
             <table class="example-full-width" cellspacing="0">
                 
               <tr>
                 <td>  Applicant name:
-                  <mat-form-field  appearance="outline" formControlName="customerName" class="form-control example-full-width">
+                  <mat-form-field  appearance="outline"  class="example-full-width">
                   <input matInput type='text'  >
                   </mat-form-field>
                 </td>
               </tr>
               <tr>
               <td> Mobile Number:
-                  <mat-form-field appearance="outline"  formControlName="vehicleType" class="form-control example-full-width">
+                  <mat-form-field appearance="outline"   class="example-full-width">
                 <input matInput type='number' >
               </mat-form-field></td>
             </tr>
             <tr>
                 <td>  Father name:
-                  <mat-form-field  appearance="outline" formControlName= "dealer" class="form-control example-full-width">
+                  <mat-form-field  appearance="outline"  class="example-full-width">
                   <input matInput  type='text'  >
                   </mat-form-field>
                 </td>
               </tr>
               <tr>
               <td> Ref By:
-                  <mat-form-field appearance="outline" formControlName= "invoiceNumber" class="form-control example-full-width">
+                  <mat-form-field appearance="outline"  class="example-full-width">
                 <input matInput  >
               </mat-form-field></td>
             </tr>
@@ -103,7 +103,7 @@
                 <mat-radio-button value="2">Weakly</mat-radio-button>
                 <mat-radio-button value="2">Daily</mat-radio-button>
               </mat-radio-group> -->
-              <button type="button" class="btn btn-primary" (click)="saveEnquirys()" data-toggle="modal" data-target="#generateEnquiryModal">Save</button>
+      
         </table>
           </form>
         </mat-card-content>
@@ -510,7 +510,7 @@
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
+          
         </mat-card-actions>
        
       </mat-card>

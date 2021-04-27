@@ -23,16 +23,17 @@ export class EnquiryListComponent implements OnInit {
   
   submitted: Boolean = false;
   showGenerateModel:Boolean = false;
+  responseEnquiryId:any;
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService) { }
 
     /** Create Enquiry Form */
     createEnquiryForms = new FormGroup({
-      customerName: new FormControl('', Validators.required),
+      customerName: new FormControl(''),
       mobileNumber: new FormControl('', Validators.required),
       vehicleNumber: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      enquiryId: new FormControl('', Validators.required),
+      enquiryId: new FormControl(''),
     })
 
   ngOnInit(): void {
@@ -47,9 +48,6 @@ export class EnquiryListComponent implements OnInit {
   }
  /** Save Enquiry */
   saveEnquiry(){
-    // this.toast.success("Created Successfully");
-
-    // console.log(this.createEnquiryForms.value)
     this.submitted = true;
     this.crudService.post(`${appModels.FIELDEXECUTIVE}/enquiry`, this.createEnquiryForms.value,
       { params:{
@@ -57,6 +55,7 @@ export class EnquiryListComponent implements OnInit {
       }}
     ).pipe().subscribe( data => {
       this.showGenerateModel = true;
+      this.responseEnquiryId = data.resourceId;
       console.log(data)
       this.toast.success("Created Successfully");
     })
