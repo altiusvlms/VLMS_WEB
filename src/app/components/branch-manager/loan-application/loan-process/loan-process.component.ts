@@ -19,27 +19,12 @@ export class LoanProcessComponent implements OnInit {
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService) { }
         
-  createLoanForms = new FormGroup({
-    customerName: new FormControl('', Validators.required),
-    vehicleType: new FormControl('', Validators.required),
-    dealer: new FormControl('', Validators.required),
-    invoiceNumber: new FormControl('', Validators.required),
-    
-    })
+  // existinguser : any;
+  // loan : any;
   
   ngOnInit(): void {
   }
 
-  saveEnquirys(){
-    this.crudService.post(`${appModels.LOANPROCESS}`, this.createLoanForms.value, 
-    { params:{
-      tenantIdentifier: "default"   
-    }}
-    ).pipe().subscribe( data => {
-      // this.showGenerateModel = true;
-      console.log(data)
-      this.toast.success("Created Successfully");
-    })
-  }
+  
 
 }
