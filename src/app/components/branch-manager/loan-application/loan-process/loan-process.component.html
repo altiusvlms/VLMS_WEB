@@ -30,37 +30,37 @@
     <mat-tab label="Applicant">
         <mat-card class="example-card">
         <mat-card-content>
-          <form>
+          <form [formGroup]="createLoanForms">
           <!-- <form [formGroup]="createEnquiryForms"> -->
             <table class="example-full-width" cellspacing="0">
                 
               <tr>
                 <td>  Applicant name:
-                  <mat-form-field  appearance="outline"  class="example-full-width">
+                  <mat-form-field  appearance="outline" formControlName="customerName" class="form-control">
                   <input matInput type='text'  >
                   </mat-form-field>
                 </td>
               </tr>
               <tr>
               <td> Mobile Number:
-                  <mat-form-field appearance="outline"   class="example-full-width">
+                  <mat-form-field appearance="outline" formControlName="vehicleType" class="form-control">
                 <input matInput type='number' >
               </mat-form-field></td>
             </tr>
             <tr>
                 <td>  Father name:
-                  <mat-form-field  appearance="outline"  class="example-full-width">
+                  <mat-form-field  appearance="outline"  formControlName="profession" class="form-control">
                   <input matInput  type='text'  >
                   </mat-form-field>
                 </td>
               </tr>
               <tr>
               <td> Ref By:
-                  <mat-form-field appearance="outline"  class="example-full-width">
+                  <mat-form-field appearance="outline" formControlName="maritalStatus"  class="form-control">
                 <input matInput  >
               </mat-form-field></td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>  Applicant Type:
                   <mat-form-field  appearance="outline" class="example-full-width">
                   <input matInput  >
@@ -102,7 +102,7 @@
                 <mat-radio-button value="1">Monthly</mat-radio-button>
                 <mat-radio-button value="2">Weakly</mat-radio-button>
                 <mat-radio-button value="2">Daily</mat-radio-button>
-              </mat-radio-group>
+              </mat-radio-group> -->
       
         </table>
           </form>

@@ -1,6 +1,6 @@
 /** Angular Imports */
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute ,Params} from '@angular/router';
 
 // Custom Forms
 import {  CrudService } from '../../../../services/crud.service';
@@ -15,14 +15,35 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./loan-process.component.scss']
 })
 export class LoanProcessComponent implements OnInit {
+       
+  id:any;
 
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService) { }
-        
-  // existinguser : any;
-  // loan : any;
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
+
+  createLoanForms = new FormGroup({
+    customerName: new FormControl('', Validators.required),
+    vehicleType: new FormControl('', Validators.required),
+    profession: new FormControl('', Validators.required),
+    maritalStatus: new FormControl('', Validators.required),
+    
+    })
   
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.id = params.id;
+    });
+    this.getCustomerDetails();
+  }
+
+  getCustomerDetails(){
+    this.crudService.get(`${appModels.COMMON}/customers/loanByLoanId/${this.id}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe().subscribe(data => {
+      console.log(data);
+    })
   }
 
   

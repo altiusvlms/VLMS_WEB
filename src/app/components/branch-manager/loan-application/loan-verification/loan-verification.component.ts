@@ -12,14 +12,16 @@ import { appModels } from '../../../../services/utils/enum.util';
 export class LoanVerificationComponent implements OnInit {
 
   loanverifiData:any;
+  // id:any;
 
   constructor(private router: Router,private crudService: CrudService) { }
 
   ngOnInit(): void {
     this.getLoanVerification();
   }
-  loanProcess(){
-    this.router.navigate(['branch-manager/loan-process']);
+
+  loanProcess(id : any) {
+    this.router.navigate(['branch-manager/loan-process/'  + id]);
   }
   getLoanVerification(){
     this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
