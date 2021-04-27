@@ -21,7 +21,6 @@ export class LoanProcessComponent implements OnInit {
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
 
-<<<<<<< HEAD
   createLoanForms = new FormGroup({
     customerName: new FormControl('', Validators.required),
     vehicleType: new FormControl('', Validators.required),
@@ -29,37 +28,26 @@ export class LoanProcessComponent implements OnInit {
     maritalStatus: new FormControl('', Validators.required),
     
     })
-=======
 
-    vehicleDetailsForm = new FormGroup({
-      vehicleNumber: new FormControl('', Validators.required)
-      })
->>>>>>> c8b69a89fef27846e4f4cf9490c5417e8ce43250
+
   
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
     });
-    this.getCustomerDetails();
+    this.getCustomerDetails(); 
   }
-  
+
   getCustomerDetails(){
     this.crudService.get(`${appModels.COMMON}/customers/loanByLoanId/${this.id}`, {
       params: {
-        tenantIdentifier: 'default'
+        tenantIdentifier: 'default'  
       }
     }).pipe().subscribe(data => {
-      this.vehicleDetailsForm
-      .patchValue({
-        vehicleNumber: data.vehicleDetails.vehicleNumber,
-      });
+      console.log(data);
     })
   }
 
-<<<<<<< HEAD
   
-=======
-
->>>>>>> c8b69a89fef27846e4f4cf9490c5417e8ce43250
 
 }
