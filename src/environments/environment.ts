@@ -14,6 +14,13 @@ export const environment = {
   production: false,       
   version: ".0.0",               
   BASE_URL: 'https://apikarpagam.altiussolution.com:8443/',  
+  firebase: {
+    apiKey: "AIzaSyBUI7KRKXKmYri5VT2JprouvANEgm3iJAs",
+    authDomain: "vlms-2021.firebaseapp.com",
+    projectId: "vlms-2021",
+    storageBucket: "vlms-2021.appspot.com",
+    messagingSenderId: "346922336972",
+  }
 };
 
 /*

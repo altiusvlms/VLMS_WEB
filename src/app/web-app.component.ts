@@ -2,6 +2,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 import { ToastContainerDirective,ToastrService } from 'ngx-toastr';
@@ -28,8 +29,12 @@ export class WebAppComponent implements OnInit {
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
-              private toast: ToastrService
-          ) { }
+              private toast: ToastrService,
+              private db: AngularFirestore,
+          ) { 
+            const things = db.collection('things').valueChanges();
+      things.subscribe(console.log);
+          }
 
   ngOnInit() {
 

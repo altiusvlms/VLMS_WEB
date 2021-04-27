@@ -25,6 +25,7 @@ export class CrudService {
     }
 
     update(model: string, body: any, id: any) {
+        console.log(model,id)
         return this.http.put(`${model}/${id}`, body);
     }
 }

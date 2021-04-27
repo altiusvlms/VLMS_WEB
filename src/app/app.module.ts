@@ -58,8 +58,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-
-
+import { AngularFireModule } from '@angular/fire'
+import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { AngularFireStorageModule } from '@angular/fire/storage'
+import { AngularFireAuthModule } from '@angular/fire/auth'
+import { environment } from '../environments/environment'
 
 
 
@@ -127,7 +130,11 @@ import { MatTreeModule } from '@angular/material/tree';
     MatTreeModule,
     MatBadgeModule,
     SharedModule,
-    SidebarModule
+    SidebarModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
   ],
   declarations: [WebAppComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
