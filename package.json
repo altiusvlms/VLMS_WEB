@@ -53,6 +53,7 @@
     "ngx-toastr": "^13.2.1",
     "router-module": "0.0.1",
     "rxjs": "6.6.2",
+    "toastr": "^2.1.4",
     "tslib": "1.10.0",
     "zone.js": "0.10.2"
   },

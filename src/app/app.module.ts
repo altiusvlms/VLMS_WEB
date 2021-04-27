@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './components/shared/shared/shared.module';
 import { SidebarModule } from './components/branch-manager/sidebar/sidebar.module';
 import { ToastrModule } from 'ngx-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -126,7 +127,9 @@ import { MatTreeModule } from '@angular/material/tree';
     MatTreeModule,
     MatBadgeModule,
     SharedModule,
-    SidebarModule
+    SidebarModule,
+    ReactiveFormsModule 
+
   ],
   declarations: [WebAppComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
