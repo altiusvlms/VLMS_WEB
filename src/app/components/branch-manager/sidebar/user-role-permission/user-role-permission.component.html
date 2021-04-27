@@ -37,25 +37,22 @@
 
   <table style="width:100%" *ngIf="showUserTable" >
     <tr>
-      <!-- <th>Sr.no</th> -->
+      <th>S.No</th>
       <th>Name</th> 
-      <!-- <th>Designation</th> -->
+      <th>Designation</th>
       <th>Branch Name</th>
       <th>Contact Number</th>
-      <!-- <th>Account Status</th> -->
-      <!-- <th>Status</th> -->
-      <!-- <th>Actions</th> -->
+      <th>Status</th>
+      <th>Actions</th>
     </tr>
-    <tr  *ngFor="let user of userListData">
-      <!-- <td>{{user.id}}</td> -->
+    <tr  *ngFor="let user of userListData;let i = index;">
+      <td>{{i+1}}</td>
       <td>{{user.name}}</td>
-      <!-- <td></td> -->
+      <td></td>
       <td>{{user.officeName}}</td>
       <td>{{user.username}}</td>
-      <!-- <td>{{user.id}}</td> -->
-      <!-- <td>{{user.isSelfServiceUser}}</td> -->
-      <!-- <td class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked></td> -->
-      <!-- <td data-toggle="modal" data-target="#exampleModal">Edit</td> -->
+      <td></td>
+      <td data-toggle="modal" data-target="#exampleModal">Edit</td>
     </tr>
       
   </table>  

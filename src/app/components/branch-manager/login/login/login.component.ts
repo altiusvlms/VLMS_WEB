@@ -42,6 +42,7 @@ password: string;
     ).pipe().subscribe( data => {
       console.log(data)
       this.toast.success("Created Successfully");
+      this.router.navigate(["/branch-manager/dashboard"]);
     })
   }
     
