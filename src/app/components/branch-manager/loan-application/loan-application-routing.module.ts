@@ -9,7 +9,8 @@ import { LoanVerificationComponent } from './loan-verification/loan-verification
 /** Loan Application Routes */
 const routes: Routes = [
   { path: 'loan-process', component: LoanProcessComponent },
-  { path: 'loan-verification', component: LoanVerificationComponent }
+  { path: 'loan-verification', component: LoanVerificationComponent },
+  { path: 'loan-process/:id', component: LoanProcessComponent }
 ];
 
 
