@@ -10,7 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -41,6 +41,7 @@ import { LoanVerificationComponent } from './loan-verification/loan-verification
     MatIconModule,
     MatFormFieldModule,
     FormsModule,
+    ReactiveFormsModule,
     MatTabsModule,
     MatDatepickerModule,
     MatCheckboxModule,
