@@ -13,13 +13,19 @@
 
 <div class="sidenav">
   <a href="branch-manager/dashboard">Dashboard</a>
-  <a href="branch-manager/user-role-permission">Manager User Role & Permission</a>
-  <a href="branch-manager/assign-targets">Assign Targets</a>
+  <a href="branch-manager/dashboard">Manage Employee</a>
+  <a href="branch-manager/user-role-permission">Manager Roles & Permission</a>
   <a href="branch-manager/customer-management">Customer Management</a>
+  <a href="branch-manager/loan-verification">Loan Approval/Collection Cash Management</a>
   <a href="branch-manager/task-management">Task Management</a>
-  <a href="branch-manager/dashboard">Cost Management</a>
+  <a href="branch-manager/assign-targets">Assign Targets</a>
+  <a href="branch-manager/dashboard">Topup Loan</a>
   <a href="branch-manager/dashboard">Report</a>
   <a href="branch-manager/analytics">Analytics</a>
+  <a href="branch-manager/dashboard">Create Receipt</a>
+  <a href="branch-manager/enquiry-list">Create Enquiry</a>
+  <a href="branch-manager/customer-enroll-list">Enroll Customer</a>
+  <a href="branch-manager/loan-process">Create Loan</a>
 </div>
 
 <!-- /** Loan Process */ -->
@@ -30,14 +36,13 @@
     <mat-tab label="Applicant">
         <mat-card class="example-card">
         <mat-card-content>
-          <form>
-          <!-- <form [formGroup]="createEnquiryForms"> -->
+          <form [formGroup]="applicantDetailsForm">
             <table class="example-full-width" cellspacing="0">
                 
               <tr>
                 <td>  Applicant name:
                   <mat-form-field  appearance="outline"  class="example-full-width">
-                  <input matInput type='text'  >
+                  <input matInput type='text' formControlName="customerName" >
                   </mat-form-field>
                 </td>
               </tr>
@@ -69,8 +74,8 @@
               </tr>
               <tr>
               <td> Marital status:
-                  <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput >
+                  <mat-form-field appearance="outline"  class="example-full-width">
+                <input matInput formControlName="maritalStatus">
               </mat-form-field></td>
             </tr>
             <tr>
@@ -82,7 +87,7 @@
               </tr>
               <tr>
               <td> Spouse Name:
-                  <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-form-field appearance="outline"  class=" example-full-width">
                 <input matInput  >
               </mat-form-field></td>
             </tr>
@@ -102,8 +107,11 @@
                 <mat-radio-button value="1">Monthly</mat-radio-button>
                 <mat-radio-button value="2">Weakly</mat-radio-button>
                 <mat-radio-button value="2">Daily</mat-radio-button>
-              </mat-radio-group>
-      
+              </mat-radio-group><br>
+              <!-- <a href="#" class="previous">&laquo; Previous</a> -->
+              <a href="" class="next">Next &raquo;</a>
+              <!-- <button class="tablinks" (click)="setTab('tab2')">Tab 1</button> -->
+              <!-- <button class="tablinks" routerLink="/Co-Applicant">Tab 3</button> -->
         </table>
           </form>
         </mat-card-content>
@@ -121,20 +129,20 @@
   <mat-tab label="Co-Applicant">
     <mat-card class="example-card">
     <mat-card-content>
-      <form class="example-form">
+      <form class="example-form" [formGroup] = "coapplicantDetailsForm">
         <table class="example-full-width" cellspacing="0">
             
           <tr>
             <td>   Name:
               <mat-form-field  appearance="outline" class="example-full-width">
-              <input matInput type='text'  >
+              <input matInput type='text' formControlName="spouseName" >
               </mat-form-field>
             </td>
           </tr>
           <tr>
           <td> Mobile Number:
               <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput type='number' >
+            <input matInput type='number' formControlName="mobileNumber" >
           </mat-form-field></td>
         </tr>
         <tr>
@@ -184,6 +192,8 @@
             <mat-radio-button value="2">Daily</mat-radio-button>
           </mat-radio-group>
     </table>
+    <a href="#" class="previous">&laquo; Previous</a>
+    <a href="" class="next">Next &raquo;</a>
       </form>
     </mat-card-content>
     <mat-card-actions>
@@ -274,8 +284,11 @@
                   <input matInput  type='text' formControlName="kmReading" >
                 </mat-form-field></td>
               </tr>
-             
+                   
         </table>
+
+        <a href="#" class="previous">&laquo; Previous</a>
+        <a href="" class="next">Next &raquo;</a>
           </form>
         </mat-card-content>
         <mat-card-actions>
@@ -394,6 +407,10 @@
                   </tr>
                  
             </table>
+
+            <a href="#" class="previous">&laquo; Previous</a>
+            <a href="" class="next">Next &raquo;</a>
+
               </form>
             </mat-card-content>
             <mat-card-actions>
@@ -507,6 +524,10 @@
               
              
         </table>
+
+        <a href="#" class="previous">&laquo; Previous</a>
+        <button (click) = "submit()" form="" value="Submit">Submit</button>
+
           </form>
         </mat-card-content>
         <mat-card-actions>

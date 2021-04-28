@@ -17,9 +17,25 @@ import { ToastrService } from 'ngx-toastr';
 export class LoanProcessComponent implements OnInit {
        
   id:any;
+  
 
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
+
+  // setTab(tabname: string) {
+  //   this.router.navigate([`/${tabname}`]);
+  // }
+
+  applicantDetailsForm = new FormGroup({
+    customerName: new FormControl('', Validators.required),
+    maritalStatus: new FormControl('', Validators.required),
+    
+    })
+
+    coapplicantDetailsForm = new FormGroup({
+      spouseName: new FormControl('', Validators.required),
+      mobileNumber: new FormControl('', Validators.required),
+      })
 
 
     vehicleDetailsForm = new FormGroup({
@@ -62,20 +78,35 @@ export class LoanProcessComponent implements OnInit {
       balance: new FormControl('0', Validators.required),
       rePaymentMode: new FormControl('0', Validators.required),
      })
+     
   
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
     });
-    this.getCustomerDetails();
+    this.getCustomerDetails(); 
+    // this.toast.success("Loan Approved");
   }
-  
+
   getCustomerDetails(){
     this.crudService.get(`${appModels.COMMON}/customers/loanByLoanId/${this.id}`, {
       params: {
-        tenantIdentifier: 'default'
+        tenantIdentifier: 'default'  
       }
     }).pipe().subscribe(data => {
+
+      this.applicantDetailsForm
+      .patchValue({
+        customerName: data.customerName,
+        maritalStatus: data.customerDetails.maritalStatus,
+      })
+
+      this.coapplicantDetailsForm
+      .patchValue({
+        spouseName: data.customerGuarantor.spouseName,
+        mobileNumber: data.customerGuarantor.mobileNumber,
+      })
+
       this.vehicleDetailsForm
       .patchValue({
         vehicleNumber: data.vehicleDetails.vehicleNumber,
@@ -100,10 +131,15 @@ export class LoanProcessComponent implements OnInit {
       branchName: data.bankDetails.branchName,
       loanEligibleAmount:data.bankDetails.loanEligibleAmount,
       });
+   
+
 
     })
   }
 
-
+  submit(){
+  this.toast.success("Loan Approved")    
+  }
+  
 
 }
