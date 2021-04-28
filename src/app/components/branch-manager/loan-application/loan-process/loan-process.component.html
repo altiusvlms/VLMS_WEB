@@ -210,68 +210,68 @@
               <tr>
               <td> Make:
                   <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput type='number' >
+                <input matInput type='text' formControlName="maker" >
               </mat-form-field></td>
             </tr>
             <tr>
                 <td>  Model:
                   <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  type='text'  >
+                  <input matInput  type='text'  formControlName="model" >
                   </mat-form-field>
                 </td>
               </tr>
               <tr>
               <td> Colour:
-                  <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput  >
+                  <mat-form-field appearance="outline" class="example-full-width" >
+                <input matInput  type='text' formControlName="color">
               </mat-form-field></td>
             </tr>
             <tr>
                 <td>  MFG Year:
-                  <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  >
+                  <mat-form-field  appearance="outline" class="example-full-width" >
+                  <input matInput  type='text' formControlName="mfgYear">
                   </mat-form-field>
                 </td>
               </tr>
               
             <tr>
                 <td>  Engine Number:
-                  <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  type='text'  >
+                  <mat-form-field  appearance="outline" class="example-full-width"  >
+                  <input matInput  type='text'  formControlName="engineNumber">
                   </mat-form-field>
                 </td>
               </tr>
               
               <tr>
                 <td>  chassis Number:
-                    <mat-form-field appearance="outline" class="example-full-width">
-                  <input matInput  >
+                    <mat-form-field appearance="outline" class="example-full-width"  >
+                  <input matInput  type='text' formControlName="chassisNumber">
                 </mat-form-field></td>
               </tr>
               <tr>
                 <td> Insurence Company:
-                    <mat-form-field appearance="outline" class="example-full-width">
-                  <input matInput  >
+                    <mat-form-field appearance="outline" class="example-full-width" >
+                  <input matInput type='text'  formControlName="insuranceCompany">
                 </mat-form-field></td>
               </tr>
               <tr>
                 <td>  Insurence Policy:
                   <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  type='text'  >
+                  <input matInput  type='text' formControlName="insurancePolicy">
                   </mat-form-field>
                 </td>
               </tr>
               
               <tr>
                 <td>  Insurence Expire on:
-                    <mat-form-field appearance="outline" class="example-full-width">
-                  <input matInput  >
+                    <mat-form-field appearance="outline" class="example-full-width" >
+                  <input matInput  type='text' formControlName="insuranceExpiry" >
                 </mat-form-field></td>
               </tr>
               <tr>
                 <td> Live KM Reading:
-                    <mat-form-field appearance="outline" class="example-full-width">
-                  <input matInput  >
+                    <mat-form-field appearance="outline" class="example-full-width" >
+                  <input matInput  type='text' formControlName="kmReading" >
                 </mat-form-field></td>
               </tr>
              
@@ -289,39 +289,39 @@
         <mat-tab label="Loan Transfer">
             <mat-card class="example-card">
             <mat-card-content>
-              <form class="example-form">
+              <form class="example-form" [formGroup]="loanTransferForm">
                 <table class="example-full-width" cellspacing="0">
                     
                   <tr>
                     <td>   Loan Amount:
                       <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput type='text'  >
+                      <input matInput type='text'   formControlName="loanAmount">
                       </mat-form-field>
                     </td>
                   </tr>
                   <tr>
                   <td> Loan Term:
                       <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput type='number' >
+                    <input matInput type='number' formControlName="loanTerm" >
                   </mat-form-field></td>
                 </tr>
                 <tr>
                     <td>  Intrest:
                       <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'  >
+                      <input matInput  type='text'   formControlName="intrest">
                       </mat-form-field>
                     </td>
                   </tr>
                   <tr>
                   <td> Emi Amount:
                       <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput  >
+                    <input matInput  formControlName="emiAmount" >
                   </mat-form-field></td>
                 </tr>
                 <tr>
                     <td>  Interest Amount :
                       <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput  formControlName="intrestEmiAmount" >
                       </mat-form-field>
                     </td>
                   </tr>
@@ -329,7 +329,7 @@
                 <tr>
                     <td>  Due Date:
                       <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'  >
+                      <input matInput  type='text'  formControlName="dueDate" >
                       </mat-form-field>
                     </td>
                   </tr>
@@ -337,19 +337,19 @@
                   <tr>
                     <td>  Doc Charge:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput   formControlName="docCharge">
                     </mat-form-field></td>
                   </tr>
                   <tr>
                     <td> Processing Charge:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput   formControlName="processingCharge">
                     </mat-form-field></td>
                   </tr>
                   <tr>
                     <td>  Pending Doc:
                       <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'  >
+                      <input matInput  type='text'  formControlName="pendingDoc" >
                       </mat-form-field>
                     </td>
                   </tr>
@@ -357,25 +357,25 @@
                   <tr>
                     <td>  Hold Amount:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput  formControlName="holdAmount" >
                     </mat-form-field></td>
                   </tr>
                   <tr>
                     <td> Other Charge:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput  formControlName="otherCharge" >
                     </mat-form-field></td>
                   </tr>
                   <tr>
                     <td> Closing A/C:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput  formControlName="closingAC" >
                     </mat-form-field></td>
                   </tr>
                   <tr>
                     <td>  Closing Discount:
                       <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'  >
+                      <input matInput  type='text'  formControlName="closingDiscount" >
                       </mat-form-field>
                     </td>
                   </tr>
@@ -383,13 +383,13 @@
                   <tr>
                     <td>  BALANCE:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput   formControlName="balance">
                     </mat-form-field></td>
                   </tr>
                   <tr>
                     <td> Re-payment Mode:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput   formControlName="rePaymentMode">
                     </mat-form-field></td>
                   </tr>
                  
@@ -407,7 +407,7 @@
     <mat-tab label="Bank details">
         <mat-card class="example-card">
         <mat-card-content>
-          <form class="example-form">
+          <form class="example-form" [formGroup]="bankDetailsForm">
               <p>Transfer Amount 1</p>
             &nbsp;
             <input type="submit" id="fname" name="fname" value="0,000" >&nbsp;
@@ -417,47 +417,47 @@
                           <tr>
                             <td>   
                               <mat-form-field  appearance="outline" class="example-full-width">
-                              <input matInput type='text' placeholder="Account Number" >
+                              <input matInput type='text' placeholder="Account Number"  formControlName="accountNumber">
                               </mat-form-field>
                             </td>
                           </tr>
                           <tr>
                           <td> 
                               <mat-form-field appearance="outline" class="example-full-width">
-                            <input matInput type='number' placeholder="Name">
+                            <input matInput type='text' placeholder="Name" formControlName="accountHolderName">
                           </mat-form-field></td>
                         </tr>
                         <tr>
                             <td>  
                               <mat-form-field  appearance="outline" class="example-full-width">
-                              <input matInput  type='text' placeholder="IFSC" >
+                              <input matInput  type='text' placeholder="IFSC" formControlName="IFSC" >
                               </mat-form-field>
                             </td>
                           </tr>
                           <tr>
                           <td> 
                               <mat-form-field appearance="outline" class="example-full-width">
-                            <input matInput placeholder="chooseBank"  >
+                            <input matInput placeholder="chooseBank"  formControlName="bankName">
                           </mat-form-field></td>
                         </tr>
                         <p>Form Group Company</p>
                         <tr>
                             <td>  
                               <mat-form-field  appearance="outline" class="example-full-width">
-                              <input matInput  placeholder="choose Branch">
+                              <input matInput  placeholder="choose Branch" formControlName="branchName">
                               </mat-form-field>
                             </td>
                           </tr>
                           <tr>
                             <td> 
-                                <mat-form-field appearance="outline" class="example-full-width">
-                              <input matInput placeholder="KC"  >
+                                <mat-form-field appearance="outline" class="example-full-width" >
+                              <input matInput placeholder="KC" >
                             </mat-form-field></td>
                           </tr>
                           <tr>
                               <td>  
                                 <mat-form-field  appearance="outline" class="example-full-width">
-                                <input matInput  placeholder="Approve Loan">
+                                <input matInput  placeholder="Approve Loan" >
                                 </mat-form-field>
                               </td>
                             </tr>
@@ -472,7 +472,7 @@
               <tr>
                 <td>   Loan Amount:
                   <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput type='text'  >
+                  <input matInput type='text' formControlName="loanEligibleAmount" >
                   </mat-form-field>
                 </td>
               </tr>
@@ -485,20 +485,20 @@
             <tr>
                 <td>  Loan Term:
                   <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  type='text'  >
+                  <input matInput  type='text'>
                   </mat-form-field>
                 </td>
               </tr>
               <tr>
               <td> Due Date:
                   <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput  >
+                <input matInput >
               </mat-form-field></td>
             </tr>
             <tr>
                 <td>  To Pay :
                   <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  >
+                  <input matInput >
                   </mat-form-field>
                 </td>
               </tr>
