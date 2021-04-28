@@ -21,15 +21,7 @@ export class LoanProcessComponent implements OnInit {
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
 
-  createLoanForms = new FormGroup({
-    customerName: new FormControl('', Validators.required),
-    vehicleType: new FormControl('', Validators.required),
-    profession: new FormControl('', Validators.required),
-    maritalStatus: new FormControl('', Validators.required),
-    
-    })
-
-
+  
   
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -44,7 +36,11 @@ export class LoanProcessComponent implements OnInit {
         tenantIdentifier: 'default'  
       }
     }).pipe().subscribe(data => {
-      console.log(data);
+      console.log(data.vehicleDetails)
+      this.vehicleDetailsForm
+      .patchValue({
+        vehicleNumber: data.vehicleDetails.vehicleNumber,
+      });
     })
   }
 

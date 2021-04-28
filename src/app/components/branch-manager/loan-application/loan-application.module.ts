@@ -10,11 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
-<<<<<<< HEAD
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-=======
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
->>>>>>> c8b69a89fef27846e4f4cf9490c5417e8ce43250
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCheckboxModule} from '@angular/material/checkbox';
