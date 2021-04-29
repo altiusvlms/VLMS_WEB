@@ -11,14 +11,20 @@
 
 
 <div class="sidenav">
-    <a href="branch-manager/dashboard">Dashboard</a>
-    <a href="branch-manager/user-role-permission">Manager User Role & Permission</a>
-    <a href="branch-manager/assign-targets">Assign Targets</a>
-    <a href="branch-manager/customer-management">Customer Management</a>
-    <a href="branch-manager/task-management">Task Management</a>
-    <a href="branch-manager/dashboard">Cost Management</a>
-    <a href="branch-manager/dashboard">Report</a>
-    <a href="branch-manager/analytics">Analytics</a>
+  <a href="branch-manager/dashboard">Dashboard</a>
+  <a href="branch-manager/dashboard">Manage Employee</a>
+  <a href="branch-manager/user-role-permission">Manager Roles & Permission</a>
+  <a href="branch-manager/customer-management">Customer Management</a>
+  <a href="branch-manager/loan-verification">Loan Approval/Collection Cash Management</a>
+  <a href="branch-manager/task-management">Task Management</a>
+  <a href="branch-manager/assign-targets">Assign Targets</a>
+  <a href="branch-manager/dashboard">Topup Loan</a>
+  <a href="branch-manager/dashboard">Report</a>
+  <a href="branch-manager/analytics">Analytics</a>
+  <a href="branch-manager/dashboard">Create Receipt</a>
+  <a href="branch-manager/enquiry-list">Create Enquiry</a>
+  <a href="branch-manager/customer-enroll-list">Enroll Customer</a>
+  <a href="branch-manager/loan-process">Create Loan</a>
   </div>
 
   <div class="container">
@@ -40,8 +46,8 @@
 <table class="table">
     <thead>
       <tr>
-        <!-- <th>Customer ID </th> -->
-        <!-- <th>Applicant Photo</th> -->
+        <th>Customer ID </th>
+        <th>Applicant Photo</th>
         <th>Applicant Name</th>
         <th>Applicant Mobile No.</th>
         <th>Loan Amount</th>
@@ -57,8 +63,8 @@
     </thead>
     <tbody>
       <tr  *ngFor="let loan of loanverifiData">
-        <!-- <td></td> -->
-        <!-- <td>KF-12</td> -->
+        <td></td>
+        <td></td>
         <td>{{loan.customerName}}</td>
         <td>{{loan.customerGuarantor.mobileNumber}}</td>
         <td></td>
@@ -68,9 +74,9 @@
         <td></td>
         <td></td>
         <td>{{loan.vehicleType}}</td>
+        <td>{{loan.customerGuarantor.spouseName}}</td>
         <td></td>
-        <td></td>
-        <th><button (click)="loanProcess()">Proceed</button></th>
+        <th><button (click)="loanProcess(loan.id)">Proceed</button></th>
       </tr>
     </tbody>
 </table>

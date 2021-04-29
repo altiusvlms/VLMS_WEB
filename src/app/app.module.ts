@@ -19,6 +19,7 @@ import { SharedModule } from './components/shared/shared/shared.module';
 import { SidebarModule } from './components/branch-manager/sidebar/sidebar.module';
 import { ToastrModule } from 'ngx-toastr';
 
+
 import { DatePipe } from '@angular/common';
 
 

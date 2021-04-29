@@ -8,6 +8,8 @@ import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 import { DatePipe } from '@angular/common';
 
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 
 /** Customer Enroll List Component */
 @Component({
@@ -20,33 +22,38 @@ export class CustomerEnrollListComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private crudService: CrudService,public datepipe: DatePipe) { }
     /** Create Customer Enrolment Form */
     createCustomerEnrolForms = new FormGroup({
+      applicantId: new FormControl('', Validators.required),
       customerName: new FormControl('', Validators.required),
       mobileNumber: new FormControl('', Validators.required),
       alternateMobileNumber: new FormControl('', Validators.required),
       dob: new FormControl('', Validators.required),
+      dateFormat: new FormControl("dd MMMM yyyy", Validators.required),
+      locale: new FormControl("en", Validators.required),
       fatherName: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
       applicantType: new FormControl('', Validators.required),
       proof1: new FormControl('', Validators.required),
       proof2: new FormControl('', Validators.required),
     })
+
   ngOnInit(): void {
   }
   
+  ngOnDestroy() { }
 
+  
+enrollid:any;
    /** Save Customer Enrolment */
    saveCustomerEnrolment(){
-    console.log(this.createCustomerEnrolForms.value)
-    let dobDate =this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd-MMMM-yyyy');
-    console.log(dobDate)
-
-    // this.crudService.post(`${appModels.ENROLL}`, this.createCustomerEnrolForms.value,
-    //   { params:{
-    //     tenantIdentifier: "default"   
-    //   }}
-    // ).pipe().subscribe( data => {
-    //   console.log(data)
-    // })
+    this.createCustomerEnrolForms.value.dob =this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd MMMM yyyy');
+    this.crudService.post(`${appModels.ENROLL}`, this.createCustomerEnrolForms.value,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+    ).pipe(untilDestroyed(this)).subscribe( data => {
+      console.log(data)
+      this.enrollid = data.resourceId;
+    })
   }
 
 }

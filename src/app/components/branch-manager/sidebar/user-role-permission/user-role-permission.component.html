@@ -13,13 +13,19 @@
 
 <div class="sidenav">
   <a href="branch-manager/dashboard">Dashboard</a>
-  <a href="branch-manager/user-role-permission">Manager User Role & Permission</a>
-  <a href="branch-manager/assign-targets">Assign Targets</a>
+  <a href="branch-manager/dashboard">Manage Employee</a>
+  <a href="branch-manager/user-role-permission">Manager Roles & Permission</a>
   <a href="branch-manager/customer-management">Customer Management</a>
+  <a href="branch-manager/loan-verification">Loan Approval/Collection Cash Management</a>
   <a href="branch-manager/task-management">Task Management</a>
-  <a href="branch-manager/dashboard">Cost Management</a>
+  <a href="branch-manager/assign-targets">Assign Targets</a>
+  <a href="branch-manager/dashboard">Topup Loan</a>
   <a href="branch-manager/dashboard">Report</a>
   <a href="branch-manager/analytics">Analytics</a>
+  <a href="branch-manager/dashboard">Create Receipt</a>
+  <a href="branch-manager/enquiry-list">Create Enquiry</a>
+  <a href="branch-manager/customer-enroll-list">Enroll Customer</a>
+  <a href="branch-manager/loan-process">Create Loan</a>
 </div>
 
 <div class="container">
@@ -37,25 +43,22 @@
 
   <table style="width:100%" *ngIf="showUserTable" >
     <tr>
-      <!-- <th>Sr.no</th> -->
+      <th>S.No</th>
       <th>Name</th> 
-      <!-- <th>Designation</th> -->
+      <th>Designation</th>
       <th>Branch Name</th>
       <th>Contact Number</th>
-      <!-- <th>Account Status</th> -->
-      <!-- <th>Status</th> -->
-      <!-- <th>Actions</th> -->
+      <th>Status</th>
+      <th>Actions</th>
     </tr>
-    <tr  *ngFor="let user of userListData">
-      <!-- <td>{{user.id}}</td> -->
+    <tr  *ngFor="let user of userListData;let i = index;">
+      <td>{{i+1}}</td>
       <td>{{user.name}}</td>
-      <!-- <td></td> -->
+      <td></td>
       <td>{{user.officeName}}</td>
       <td>{{user.username}}</td>
-      <!-- <td>{{user.id}}</td> -->
-      <!-- <td>{{user.isSelfServiceUser}}</td> -->
-      <!-- <td class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked></td> -->
-      <!-- <td data-toggle="modal" data-target="#exampleModal">Edit</td> -->
+      <td></td>
+      <td data-toggle="modal" data-target="#exampleModal">Edit</td>
     </tr>
       
   </table>  

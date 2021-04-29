@@ -14,14 +14,21 @@
 
 <div class="sidenav">
   <a href="branch-manager/dashboard">Dashboard</a>
-  <a href="branch-manager/user-role-permission">Manager User Role & Permission</a>
-  <a href="branch-manager/assign-targets">Assign Targets</a>
+  <a href="branch-manager/dashboard">Manage Employee</a>
+  <a href="branch-manager/user-role-permission">Manager Roles & Permission</a>
   <a href="branch-manager/customer-management">Customer Management</a>
+  <a href="branch-manager/loan-verification">Loan Approval/Collection Cash Management</a>
   <a href="branch-manager/task-management">Task Management</a>
-  <a href="branch-manager/dashboard">Cost Management</a>
+  <a href="branch-manager/assign-targets">Assign Targets</a>
+  <a href="branch-manager/dashboard">Topup Loan</a>
   <a href="branch-manager/dashboard">Report</a>
   <a href="branch-manager/analytics">Analytics</a>
+  <a href="branch-manager/dashboard">Create Receipt</a>
+  <a href="branch-manager/enquiry-list">Create Enquiry</a>
+  <a href="branch-manager/customer-enroll-list">Enroll Customer</a>
+  <a href="branch-manager/loan-process">Create Loan</a>
 </div>
+
 
 <!-- /** Create Task Button */ -->
 <div class="container">
@@ -42,30 +49,18 @@
         <th>Due date</th>
         <th>Assign To</th>
         <th>Status</th>
-        <th>Branch</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>26.Mar.2021</td>
-        <td>Office Verification</td>
-        <td>01.04.2021</td>
-        <td>Grace Hopper</td>
-        <td>Completed</td>
-        <td>Thudialore</td>
-        <td data-toggle="modal" data-target="#createtaskModal" (click)="viewModel()">View</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>26.Mar.2021</td>
-        <td>Address Verification</td>
-        <td>01.04.2021</td>
-        <td>Ada Lovelance</td>
-        <td>Open</td>
-        <td>Gandhipuram</td>
-        <td  data-toggle="modal" data-target="#createtaskModal"(click)="viewModel()">View</td>
+      <tr *ngFor="let task of taskListData;let i = index;">
+        <td>{{i+1}}</td>
+        <td></td>
+        <td>{{task.taskType}}</td>
+        <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>
+        <td>{{task.assignTo}}</td>
+        <td></td>
+        <td data-toggle="modal" data-target="#createtaskModal" (click)="viewModel(task)">View</td>
       </tr>
     </tbody>
 </table>
@@ -77,7 +72,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="createtaskModalLabel">Task</h5>
+          <h5 class="modal-title" id="createtaskModalLabel">Task Management</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -90,12 +85,13 @@
             <form [formGroup]="createTaskForms">
             <div>
                 <label>Task Type</label>
-                <select formControlName="taskType" class="form-control">
+                <input type="text"  formControlName="taskType"  class="form-control">
+                <!-- <select formControlName="taskType" class="form-control">
                   <option value="">Select Task Type</option>
                   <option value="address_verification">Address Verification</option>
                   <option value="office_verification">Office Verification</option>
                   <option value="other">Others</option>
-                </select>
+                </select> -->
             </div>
             <div>
                 <label>Customer Reg No</label>
@@ -103,11 +99,7 @@
             </div>
             <div>    
                 <label >Vehicle Number</label>
-                <select  formControlName="vehicleNo"  class="form-control">
-                  <option value="">Select Vehicle Number</option>
-                  <option value="TN37DA2424">TN 37 DA 2424</option>
-                  <option value="TN37AT2554">TN 37 AT 2554</option>
-                </select>
+                <input type="text"  formControlName="vehicleNumber"  class="form-control">                            
             </div>
             <div>
                 <label>Due Date</label>
@@ -115,10 +107,11 @@
             </div>
             <div>
                 <label>Assign To</label>
-                <select formControlName="assignTo"  class="form-control">
+                <input type="text"  formControlName="assignTo"  class="form-control">
+                <!-- <select formControlName="assignTo"  class="form-control">
                     <option value="robin">Robin</option>
                     <option value="thangamani">Thangamani</option>
-                </select>
+                </select> -->
             </div>
             <div>
                 <label>Description</label>
@@ -129,7 +122,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="saveTask()" data-dismiss="modal">Save</button>
+          <button *ngIf="!showAction" type="button" class="btn btn-primary" (click)="saveTask()" data-dismiss="modal">Save</button>
+          <button  *ngIf="showAction" type="button" class="btn btn-primary"  disabled data-dismiss="modal">Update</button>
         </div>
       </div>
     </div>
