@@ -4,6 +4,10 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
+
+
 @Component({
   selector: 'mifosx-loan-verification',
   templateUrl: './loan-verification.component.html',
@@ -20,6 +24,9 @@ export class LoanVerificationComponent implements OnInit {
     this.getLoanVerification();
   }
 
+  ngOnDestroy() { }
+
+
   loanProcess(id : any) {
     this.router.navigate(['branch-manager/loan-process/'  + id]);
   }
@@ -28,7 +35,7 @@ export class LoanVerificationComponent implements OnInit {
       params: {
         tenantIdentifier: 'default'
       }
-    }).pipe().subscribe(data => {
+    }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
       this.loanverifiData = data;
     })

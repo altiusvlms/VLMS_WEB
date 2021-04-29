@@ -8,6 +8,10 @@ import { appModels } from '../../../../services/utils/enum.util';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
+
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
+
 /** Loan Process Component */ 
 @Component({
   selector: 'vlms-loan-process',
@@ -52,32 +56,33 @@ export class LoanProcessComponent implements OnInit {
       kmReading: new FormControl('', Validators.required)
       })
 
+     loanTransferForm = new FormGroup({
+      loanAmount: new FormControl('', Validators.required),
+      loanTerm: new FormControl('', Validators.required),
+      intrest: new FormControl('', Validators.required),
+      emiAmount: new FormControl('', Validators.required),
+      intrestEmiAmount: new FormControl('', Validators.required),
+      dueDate: new FormControl('', Validators.required),
+      docCharge: new FormControl('', Validators.required),
+      processingCharge: new FormControl('', Validators.required),
+      pendingDoc: new FormControl('', Validators.required),
+      holdAmount: new FormControl('', Validators.required),
+      otherCharge: new FormControl('', Validators.required),
+      closingAC: new FormControl('', Validators.required),
+      closingDiscount: new FormControl('', Validators.required),
+      balance: new FormControl('', Validators.required),
+      rePaymentMode: new FormControl('', Validators.required)
+     })
+
     bankDetailsForm = new FormGroup({
       accountNumber: new FormControl('', Validators.required),
       accountHolderName: new FormControl('', Validators.required),
       IFSC: new FormControl('', Validators.required),
       bankName: new FormControl('', Validators.required),
       branchName: new FormControl('', Validators.required),
-      loanEligibleAmount: new FormControl('', Validators.required),
+      loanEligibleAmount: new FormControl('', Validators.required)
      })
 
-     loanTransferForm = new FormGroup({
-      loanAmount: new FormControl('0', Validators.required),
-      loanTerm: new FormControl('0', Validators.required),
-      intrest: new FormControl('0', Validators.required),
-      emiAmount: new FormControl('0', Validators.required),
-      intrestEmiAmount: new FormControl('0', Validators.required),
-      dueDate: new FormControl('', Validators.required),
-      docCharge: new FormControl('0', Validators.required),
-      processingCharge: new FormControl('0', Validators.required),
-      pendingDoc: new FormControl('0', Validators.required),
-      holdAmount: new FormControl('0', Validators.required),
-      otherCharge: new FormControl('0', Validators.required),
-      closingAC: new FormControl('0', Validators.required),
-      closingDiscount: new FormControl('0', Validators.required),
-      balance: new FormControl('0', Validators.required),
-      rePaymentMode: new FormControl('0', Validators.required),
-     })
      
   
   ngOnInit(): void {
@@ -88,12 +93,14 @@ export class LoanProcessComponent implements OnInit {
     // this.toast.success("Loan Approved");
   }
 
+  ngOnDestroy() { }
+
   getCustomerDetails(){
     this.crudService.get(`${appModels.COMMON}/customers/loanByLoanId/${this.id}`, {
       params: {
         tenantIdentifier: 'default'  
       }
-    }).pipe().subscribe(data => {
+    }).pipe(untilDestroyed(this)).subscribe(data => {
 
       this.applicantDetailsForm
       .patchValue({
@@ -121,6 +128,24 @@ export class LoanProcessComponent implements OnInit {
         insuranceExpiry: data.vehicleDetails['insuranceExpiry'],
         kmReading: data.vehicleDetails.kmReading
       });
+      this.loanTransferForm 
+      .patchValue({
+        loanAmount: 0,
+        loanTerm: 0,
+        intrest: 0,
+        emiAmount: 0,
+        intrestEmiAmount: 0,
+        dueDate: 0,
+        docCharge: 0,
+        processingCharge: 0,
+        pendingDoc: 0,
+        holdAmount: 0,
+        otherCharge: 0,
+        closingAC: 0,
+        closingDiscount: 0,
+        balance: 0,
+        rePaymentMode:0
+       });
 
       this.bankDetailsForm
       .patchValue({

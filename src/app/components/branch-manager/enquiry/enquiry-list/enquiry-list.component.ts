@@ -10,7 +10,8 @@ import { appModels } from '../../../../services/utils/enum.util';
 import { ToastrService } from 'ngx-toastr';
 
 
-// import { untilDestroyed } from '@ngneat/until-destroy';
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 
 
 /** Enquiry List Component */
@@ -53,7 +54,7 @@ export class EnquiryListComponent implements OnInit {
       { params:{
         tenantIdentifier: "default"   
       }}
-    ).pipe().subscribe( data => {
+    ).pipe(untilDestroyed(this)).subscribe( data => {
       this.showGenerateModel = true;
       this.responseEnquiryId = data.resourceId;
       console.log(data)

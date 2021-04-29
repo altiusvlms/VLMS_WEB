@@ -9,6 +9,8 @@ import { appModels } from '../../../../services/utils/enum.util';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 
 /** Task Management Component */
 @Component({
@@ -38,6 +40,7 @@ export class TaskManagementComponent implements OnInit {
   ngOnInit(): void {
     this.getTaskList();
   }
+  ngOnDestroy() { }
 
   /** click button to create the task in open model. */
   createTask(){
@@ -50,14 +53,13 @@ export class TaskManagementComponent implements OnInit {
     { params:{
       tenantIdentifier: "default"   
     }}
-  ).pipe().subscribe( data => {
+  ).pipe(untilDestroyed(this)).subscribe( data => {
     this.toast.success("Created Successfully");
     this.getTaskList();
   })
   }
   /** Action(Edit & Delete) with create task model */
   viewModel(task : any){
-    console.log(task['dueDate'])
     this.showAction = true;
     task['dueDate']=this.datepipe.transform(task['dueDate'], 'dd MMMM yyyy');
     this.createTaskForms
@@ -84,7 +86,7 @@ export class TaskManagementComponent implements OnInit {
       params: {
         tenantIdentifier: 'default'
       }
-    }).pipe().subscribe(data => {
+    }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
       this.taskListData= data;
     })

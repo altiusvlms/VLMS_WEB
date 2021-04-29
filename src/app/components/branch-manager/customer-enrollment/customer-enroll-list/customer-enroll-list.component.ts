@@ -8,6 +8,8 @@ import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 import { DatePipe } from '@angular/common';
 
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 
 /** Customer Enroll List Component */
 @Component({
@@ -37,6 +39,9 @@ export class CustomerEnrollListComponent implements OnInit {
   ngOnInit(): void {
   }
   
+  ngOnDestroy() { }
+
+  
 enrollid:any;
    /** Save Customer Enrolment */
    saveCustomerEnrolment(){
@@ -45,7 +50,7 @@ enrollid:any;
       { params:{
         tenantIdentifier: "default"   
       }}
-    ).pipe().subscribe( data => {
+    ).pipe(untilDestroyed(this)).subscribe( data => {
       console.log(data)
       this.enrollid = data.resourceId;
     })
