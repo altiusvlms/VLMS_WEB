@@ -33,8 +33,15 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   submit(){
+    let data = {
+        "mobileNo":"1234567",
+        "password":this.ResetPaswrdform.value.password,
+        "email":"abcd@gmail.com",
+        "newMobileNo":"567"
+        
+  }
     console.log(this.ResetPaswrdform.value)
-    this.crudService.update(`${appModels.USERS}`, this.ResetPaswrdform.value,
+    this.crudService.update(`${appModels.USERS}`,this.ResetPaswrdform.value.password,
       { params:{
         tenantIdentifier: "default"   
       }}

@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
   
 
-  constructor(private router: Router, private _auth:AuthenticationService,private toast: ToastrService) { }
+  constructor(private router: Router, private _auth:AuthenticationService,private toast: ToastrService,) { }
 
   createLoginForms = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
 
   loginUserdata = {};
+  UsermobData:any;
 
   username: string;
 password: string;
@@ -42,6 +43,8 @@ password: string;
     ).pipe().subscribe( data => {
       console.log(data)
       this.toast.success("Created Successfully");
+      this.router.navigate(["/branch-manager/dashboard"]);
+
     })
   }
     
@@ -62,9 +65,12 @@ password: string;
       alert("Invalid credentials");
     }
   }
+   
   forgotPassword(){
-    this.router.navigate(["/forget-password"]);
-  }
+  
+  this.router.navigate(["/forget-password"]);
+
+}
   // moveToSelectedTab(tabName: string) {
   //   for (let i =0; i< document.querySelectorAll('.mat-tab-label-content').length; i++) {
   //   if ((<HTMLElement>document.querySelectorAll('.mat-tab-label-content')[i]).innerText == tabName) 
