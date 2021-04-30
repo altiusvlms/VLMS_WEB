@@ -28,4 +28,8 @@ export class CrudService {
         console.log(model,id)
         return this.http.put(`${model}/${id}`, body);
     }
+
+    get_Image(model: string, params?: Object): Observable<any> {
+        return this.http.get(model, { responseType: 'text'});
+    }
 }
