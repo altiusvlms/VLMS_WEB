@@ -21,8 +21,11 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 export class LoanProcessComponent implements OnInit {
        
   id:any;
-  
-
+  loan_Id:any;
+  resource_Id:any;  
+  customer_Id:any;
+  guarantor_Id:any;
+  bankDetails_Id:any;
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
 
@@ -31,6 +34,8 @@ export class LoanProcessComponent implements OnInit {
   // }
 
   applicantDetailsForm = new FormGroup({
+    userId: new FormControl('1', Validators.required),
+    spouseName: new FormControl('', Validators.required),
     customerName: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     
@@ -90,7 +95,7 @@ export class LoanProcessComponent implements OnInit {
       this.id = params.id;
     });
     this.getCustomerDetails(); 
-    // this.toast.success("Loan Approved");
+    // this.newLoanCustomerDetails()
   }
 
   ngOnDestroy() { }
@@ -159,6 +164,21 @@ export class LoanProcessComponent implements OnInit {
    
 
 
+    })
+  }
+
+  newLoanCustomerDetails(){
+    this.crudService.post(`${appModels.NEWLOAN}`, this.applicantDetailsForm.value,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+    ).pipe(untilDestroyed(this)).subscribe( data => {
+      console.log(data)
+      this.loan_Id = data.loanId;
+      this.resource_Id = data.resourceId;
+      this.customer_Id = data.customerId;
+      this.guarantor_Id = data.guarantorId;
+      this.bankDetails_Id = data.bankDetailsId;
     })
   }
 

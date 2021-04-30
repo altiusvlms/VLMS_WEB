@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
   })
 
-
+  data:any;
   loginUserdata = {};
 
   username: string;
@@ -41,7 +41,11 @@ password: string;
       }}
     ).pipe().subscribe( data => {
       console.log(data)
-      this.toast.success("Login Successfully");
+      
+          // localStorage.setItem('userId', data['userName']);
+
+          this.toast.success("Login Successfully");
+
       this.router.navigate(["/branch-manager/dashboard"]);
     })
   }
