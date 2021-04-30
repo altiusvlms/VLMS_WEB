@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
   })
 
+  user_name = this.createLoginForms.value.username;
+  
+  
   data:any;
   loginUserdata = {};
   UsermobData:any;
@@ -36,6 +39,7 @@ password: string;
     // this.toast.success("Created Successfully");
 
     console.log(this.createLoginForms.value)
+    console.log(this.user_name)
     this._auth.post(`${appModels.COMMON}/authentication`, this.createLoginForms.value,
       { params:{
         tenantIdentifier: "default"   
@@ -43,7 +47,9 @@ password: string;
     ).pipe().subscribe( data => {
       console.log(data)
       
-          // localStorage.setItem('userId', data['userName']);
+          localStorage.setItem('mobile_number', data.username);
+          console.log("mobile_number")
+          console.log(data.username)
 
           this.toast.success("Login Successfully");
 
