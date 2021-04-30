@@ -5,7 +5,9 @@ enum appModels {
     CUSTOMERS = 'fineract-provider/api/v1/customers',
     ENROLL = 'fineract-provider/api/v1/fieldExecutive/enroll',
     LOANPROCESS = 'fineract-provider/api/v1/fieldExecutive/applyLoan',
+    NEWLOAN = 'fineract-provider/api/v1/fieldExecutive/newApplicantLoan',
     COMMON = 'fineract-provider/api/v1',
+    
 
 }
 
