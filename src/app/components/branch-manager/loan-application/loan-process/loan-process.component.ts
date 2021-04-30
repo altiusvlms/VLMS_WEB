@@ -19,6 +19,9 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
   styleUrls: ['./loan-process.component.scss']
 })
 export class LoanProcessComponent implements OnInit {
+  
+  
+  
        
   id:any;
   loan_Id:any;
@@ -26,12 +29,16 @@ export class LoanProcessComponent implements OnInit {
   customer_Id:any;
   guarantor_Id:any;
   bankDetails_Id:any;
+  userId:any;
+
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
 
   // setTab(tabname: string) {
   //   this.router.navigate([`/${tabname}`]);
   // }
+  mobile_num = localStorage.getItem("mobile_number");
+
 
   applicantDetailsForm = new FormGroup({
     userId: new FormControl('1', Validators.required),
@@ -96,6 +103,7 @@ export class LoanProcessComponent implements OnInit {
     });
     this.getCustomerDetails(); 
     // this.newLoanCustomerDetails()
+    
   }
 
   ngOnDestroy() { }
@@ -162,7 +170,7 @@ export class LoanProcessComponent implements OnInit {
       loanEligibleAmount:data.bankDetails.loanEligibleAmount,
       });
    
-
+console.log(this.mobile_num)
 
     })
   }
@@ -174,6 +182,7 @@ export class LoanProcessComponent implements OnInit {
       }}
     ).pipe(untilDestroyed(this)).subscribe( data => {
       console.log(data)
+      // console.log(this.mobile_num)
       this.loan_Id = data.loanId;
       this.resource_Id = data.resourceId;
       this.customer_Id = data.customerId;
@@ -183,8 +192,24 @@ export class LoanProcessComponent implements OnInit {
   }
 
   submit(){
+    // this.getMobileNumber();
+    console.log(this.mobile_num)
   this.toast.success("Loan Approved")    
   }
+
+  getMobileNumber(){
+    console.log(this.mobile_num);
+    this.crudService.get(`${appModels.USERS}/${this.mobile_num}`, {
+      params: {
+        tenantIdentifier: 'default'  
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.userId = data.id;
+      console.log(this.userId)
+    })
+
+      }
   
 
 }
