@@ -61,11 +61,20 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { AngularFireModule } from '@angular/fire'
+import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { AngularFireStorageModule } from '@angular/fire/storage'
+import { AngularFireAuthModule } from '@angular/fire/auth'
 
-
-
-
-
+const firebaseConfig = {
+  apiKey: "AIzaSyA-oOVkeahih3FnlMhC7BcwU9sYv7vAGMY",
+  authDomain: "angularfinanceapp.firebaseapp.com",
+  projectId: "angularfinanceapp",
+  storageBucket: "angularfinanceapp.appspot.com",
+  messagingSenderId: "1032938783466",
+  appId: "1:1032938783466:web:db274506677f3dbdc34d93",
+  measurementId: "G-DT6DFHCKFC"
+}
 
 
 /**
@@ -131,8 +140,10 @@ import { MatTreeModule } from '@angular/material/tree';
     MatBadgeModule,
     SharedModule,
     SidebarModule,
-     
-
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
   ],
   declarations: [WebAppComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

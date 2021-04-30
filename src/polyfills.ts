@@ -3,7 +3,8 @@
  */
 import '@angular/localize/init';
 
-
+// aws-sdk requires global to exist
+(window as any).global = window;
 
 /**
  * Web Animations `@angular/platform-browser/animations`

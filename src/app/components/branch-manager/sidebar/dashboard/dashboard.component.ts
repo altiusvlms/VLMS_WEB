@@ -19,16 +19,19 @@ export class DashboardComponent implements OnInit {
 
   /** Create Advanced Search Form */
   createAdvanceSearchForms = new FormGroup({
-    branch: new FormControl('', Validators.required),
     loanNo: new FormControl('', Validators.required),
     customerName: new FormControl('', Validators.required),
+    vehiclemodel: new FormControl('', Validators.required),
     vehicleNo: new FormControl('', Validators.required),
     customerMobileNo: new FormControl('', Validators.required),
     area: new FormControl('', Validators.required),
-    coApplicantMobileName: new FormControl('', Validators.required),
-    coApplicantMobileNo: new FormControl('', Validators.required),
-    GovtId: new FormControl('', Validators.required),
     dealer: new FormControl('', Validators.required),
+    idProof: new FormControl('', Validators.required),
+    loanAmount: new FormControl('', Validators.required),
+    GovtId: new FormControl('', Validators.required),
+    ChassisNo: new FormControl('', Validators.required),
+    loanstatus: new FormControl('', Validators.required),
+    dues: new FormControl('', Validators.required)
   })
 
   ngOnInit(): void {

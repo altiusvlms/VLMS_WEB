@@ -18,6 +18,10 @@ export class AuthenticationService {
     console.log(relativeUrlPath,body,params)
     return this.http.post(relativeUrlPath, body, params);
 }
+
+get windowRef() {
+  return window
+}
   
 }
 

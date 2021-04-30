@@ -14,6 +14,7 @@ export const environment = {
   production: false,       
   version: ".0.0",               
   BASE_URL: 'https://apikarpagam.altiussolution.com:8443/',  
+ 
 };
 
 /*
