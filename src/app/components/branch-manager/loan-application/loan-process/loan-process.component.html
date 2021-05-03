@@ -1,32 +1,4 @@
-<!-- /** Header & Sidebar */ -->
-<div class="header">
-  <div class="header-right">
-      <a class="material-icons" matTooltip="Notifications">
-          notifications
-      </a>
-        <a href="login" class="material-icons" matTooltip="Notifications">
-          logout
-        </a>
-  </div>
-</div>
 
-
-<div class="sidenav">
-  <a href="branch-manager/dashboard">Dashboard</a>
-  <a href="branch-manager/dashboard">Manage Employee</a>
-  <a href="branch-manager/user-role-permission">Manager Roles & Permission</a>
-  <a href="branch-manager/customer-management">Customer Management</a>
-  <a href="branch-manager/loan-verification">Loan Approval/Collection Cash Management</a>
-  <a href="branch-manager/task-management">Task Management</a>
-  <a href="branch-manager/assign-targets">Assign Targets</a>
-  <a href="branch-manager/dashboard">Topup Loan</a>
-  <a href="branch-manager/dashboard">Report</a>
-  <a href="branch-manager/analytics">Analytics</a>
-  <a href="branch-manager/dashboard">Create Receipt</a>
-  <a href="branch-manager/enquiry-list">Create Enquiry</a>
-  <a href="branch-manager/customer-enroll-list">Enroll Customer</a>
-  <a href="branch-manager/loan-process">Create Loan</a>
-</div>
 
 <!-- /** Loan Process */ -->
 
@@ -77,18 +49,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <mat-tab-group mat-align-tabs="start">
     <!-- Tab 1 -->
     <mat-tab label="Applicant">
@@ -98,6 +58,11 @@
             <table class="example-full-width" cellspacing="0">
                 
               <tr>
+                <td>  UserID:
+                  <mat-form-field  appearance="outline"  class="example-full-width">
+                  <input matInput type='text' formControlName="userId" >
+                  </mat-form-field>
+                </td><br>
                 <td>  Applicant name:
                   <mat-form-field  appearance="outline"  class="example-full-width">
                   <input matInput type='text' formControlName="customerName" >
@@ -166,6 +131,7 @@
                 <mat-radio-button value="2">Weakly</mat-radio-button>
                 <mat-radio-button value="2">Daily</mat-radio-button>
               </mat-radio-group><br>
+              <button mat-raised-button (click)="newLoanCustomerDetails()" color="primary">submit</button>
               <!-- <a href="#" class="previous">&laquo; Previous</a> -->
               <a  class="next">Next &raquo;</a>
               <!-- <button class="tablinks" (click)="setTab('tab2')">Tab 1</button> -->
@@ -266,84 +232,155 @@
         <mat-card class="example-card">
         <mat-card-content>
           <form class="example-form" [formGroup]="vehicleDetailsForm">
-            <table class="example-full-width" cellspacing="0">
-                
-              <tr>
-                <td>   vehicle Number:
+            
+          <div class="row">
+            <div class="col-sm-2">
+              <div> 
+                <label>Vehicle Number:
                   <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput type='text'  formControlName="vehicleNumber" >
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td> Make:
-                  <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput type='text' formControlName="maker" >
-              </mat-form-field></td>
-            </tr>
-            <tr>
-                <td>  Model:
-                  <mat-form-field  appearance="outline" class="example-full-width">
+                    <input matInput type='text'  formControlName="vehicleNumber" >
+                    </mat-form-field>
+                </label>
+              </div>
+              <div>
+               <label>Model:
+                <mat-form-field  appearance="outline" class="example-full-width">
                   <input matInput  type='text'  formControlName="model" >
                   </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td> Colour:
-                  <mat-form-field appearance="outline" class="example-full-width" >
-                <input matInput  type='text' formControlName="color">
-              </mat-form-field></td>
-            </tr>
-            <tr>
-                <td>  MFG Year:
+                  </label>
+              </div>
+              <div>
+                <label>MFG Year:
                   <mat-form-field  appearance="outline" class="example-full-width" >
-                  <input matInput  type='text' formControlName="mfgYear">
+                    <input matInput  type='text' formControlName="mfgYear">
                   </mat-form-field>
-                </td>
-              </tr>
-              
-            <tr>
-                <td>  Engine Number:
+                   </label>
+               </div>
+               <div>
+                <label>Engine Number:
                   <mat-form-field  appearance="outline" class="example-full-width"  >
-                  <input matInput  type='text'  formControlName="engineNumber">
+                    <input matInput  type='text'  formControlName="engineNumber">
                   </mat-form-field>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>  chassis Number:
-                    <mat-form-field appearance="outline" class="example-full-width"  >
-                  <input matInput  type='text' formControlName="chassisNumber">
-                </mat-form-field></td>
-              </tr>
-              <tr>
-                <td> Insurence Company:
-                    <mat-form-field appearance="outline" class="example-full-width" >
-                  <input matInput type='text'  formControlName="insuranceCompany">
-                </mat-form-field></td>
-              </tr>
-              <tr>
-                <td>  Insurence Policy:
+                   </label>
+               </div>
+               <div>
+                <label>Chassis Number:
+                  <mat-form-field appearance="outline" class="example-full-width"  >
+                    <input matInput  type='text' formControlName="chassisNumber">
+                  </mat-form-field>
+                   </label>
+               </div>
+               <div>
+                <label>Insurence Company:
+                  <mat-form-field appearance="outline" class="example-full-width" >
+                    <input matInput type='text'  formControlName="insuranceCompany">
+                  </mat-form-field>
+                   </label>
+               </div>
+               <div>
+                <label>Insurence Policy:
                   <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  type='text' formControlName="insurancePolicy">
+                    <input matInput  type='text' formControlName="insurancePolicy">
+                    </mat-form-field>
+                   </label>
+               </div>
+               <div>
+                <label>Insurence Expire on:
+                  <mat-form-field appearance="outline" class="example-full-width" >
+                    <input matInput  type='text' formControlName="insuranceExpiry" >
                   </mat-form-field>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>  Insurence Expire on:
-                    <mat-form-field appearance="outline" class="example-full-width" >
-                  <input matInput  type='text' formControlName="insuranceExpiry" >
-                </mat-form-field></td>
-              </tr>
-              <tr>
-                <td> Live KM Reading:
-                    <mat-form-field appearance="outline" class="example-full-width" >
-                  <input matInput  type='text' formControlName="kmReading" >
-                </mat-form-field></td>
-              </tr>
-                   
-        </table>
+                   </label>
+               </div>
+               <div>
+                <label>Live KM Reading:
+                  <mat-form-field appearance="outline" class="example-full-width" >
+                    <input matInput  type='text' formControlName="kmReading" >
+                  </mat-form-field>
+                   </label>
+               </div>
+           </div>
+
+           <div class="col-sm-2" style="padding-left: 10%;">
+            <div> 
+              <label>Make:</label>
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput type='text' formControlName="maker" >
+                </mat-form-field>
+            </div>
+            <div> 
+              <label>Colour:</label>
+                <mat-form-field appearance="outline" class="example-full-width" >
+                  <input matInput  type='text' formControlName="color">
+                </mat-form-field>
+            </div>
+            <div> 
+              <label>No of Owner:
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput type='text' formControlName="noOfOwner" >
+                </mat-form-field>
+                 </label>
+            </div>
+            <div> 
+              <label>Engine Image:
+              <button>Delete</button>
+              <button>Add Image</button>
+              <img  src="assets/images/empty_image.png">
+              </label>
+            </div>
+            <div> 
+              <label>Chassis Image:
+              <button>Delete</button>
+              <button>Add Image</button>
+              <img  src="assets/images/empty_image.png">
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-2" style="padding-left: 20%;">
+            <div> 
+              <label>Insurence Policy Image:
+              <button>Delete</button>
+              <button>Add Image</button>
+              <img  src="assets/images/empty_image.png">
+              </label>
+            </div>
+            <div> 
+              <label>Live KM Reading:
+                <button>Delete</button>
+                <button>Add Image</button>
+                <img  src="assets/images/empty_image.png">
+              </label>
+            </div>
+            <div> 
+              <label>RC Book:
+                <div class="row"></div>
+                <button>Delete</button>
+                <button>Add Image</button>
+                <img  src="assets/images/empty_image.png">
+              </label>
+            </div>
+         </div>
+         <div class="col-sm-2" style="padding-left: 20%;">
+          <button>Create Task</button>
+          <button>Vehicle Transaction History</button>
+          <button>Vehicle Challan report</button>
+        </div>
+          
+        </div>
+           
+        <div class="row">
+          <div class="col-sm-6">
+          <div> 
+            <label>Vehicle Image:
+              <img  src="assets/images/empty_image.png">
+              <!-- <img  src="assets/images/empty_image.png"> -->
+              <!-- <img  src="assets/images/empty_image.png"> -->
+              <!-- <img  src="assets/images/empty_image.png"> -->
+            </label>
+          </div>
+          </div>
+        </div>
+           
+         
 
         <a class="previous">&laquo; Previous</a>
         <a class="next">Next &raquo;</a>
@@ -361,6 +398,8 @@
             <mat-card class="example-card">
             <mat-card-content>
               <form class="example-form" [formGroup]="loanTransferForm">
+                <div class="row">
+                  <div class="col-3">
                 <table class="example-full-width" cellspacing="0">
                     
                   <tr>
@@ -377,65 +416,83 @@
                   </mat-form-field></td>
                 </tr>
                 <tr>
-                    <td>  Intrest:
-                      <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'   formControlName="intrest">
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                  <tr>
                   <td> Emi Amount:
                       <mat-form-field appearance="outline" class="example-full-width">
                     <input matInput  formControlName="emiAmount" >
                   </mat-form-field></td>
                 </tr>
                 <tr>
-                    <td>  Interest Amount :
+                  <td>  Due Date:
+                    <mat-form-field  appearance="outline" class="example-full-width">
+                    <input matInput  type='text'  formControlName="dueDate" >
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>  Doc Charge:
+                      <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput   formControlName="docCharge">
+                  </mat-form-field></td>
+                </tr>
+                <tr>
+                  <td> Processing Charge:
+                      <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput   formControlName="processingCharge">
+                  </mat-form-field></td>
+                </tr>
+                <tr>
+                  <td>  Pending Doc:
+                    <section class="example-section">
+                      <mat-checkbox class="example-margin">NOC</mat-checkbox>
+                      <mat-checkbox class="example-margin">Insurence</mat-checkbox>
+                      <mat-checkbox class="example-margin">Co-Applicant</mat-checkbox>
+                      <mat-checkbox class="example-margin">Vehicle Details</mat-checkbox>
+                    </section>
+                  </td>
+                </tr>
+                Hold Amount:
+
+                <tr>
+                  <td>NOC:
+                      <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput  formControlName="holdAmount" >
+                  </mat-form-field></td>
+                </tr>
+                <tr>
+                  <td>Intrest:
+                    <mat-form-field  appearance="outline" class="example-full-width">
+                    <input matInput  type='text'   formControlName="intrest">
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Intrest Amount:
+                    <mat-form-field  appearance="outline" class="example-full-width">
+                    <input matInput  type='text'   formControlName="intrest">
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                    <td>Insurence:
+                      <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput  type='text'   formControlName="intrest">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                <tr>
+                    <td>Co-Applicant :
                       <mat-form-field  appearance="outline" class="example-full-width">
                       <input matInput  formControlName="intrestEmiAmount" >
                       </mat-form-field>
                     </td>
                   </tr>
-                  
-                <tr>
-                    <td>  Due Date:
-                      <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'  formControlName="dueDate" >
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>  Doc Charge:
-                        <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput   formControlName="docCharge">
-                    </mat-form-field></td>
-                  </tr>
-                  <tr>
-                    <td> Processing Charge:
-                        <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput   formControlName="processingCharge">
-                    </mat-form-field></td>
-                  </tr>
-                  <tr>
-                    <td>  Pending Doc:
-                      <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'  formControlName="pendingDoc" >
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>  Hold Amount:
-                        <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  formControlName="holdAmount" >
-                    </mat-form-field></td>
-                  </tr>
                   <tr>
                     <td> Other Charge:
-                        <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  formControlName="otherCharge" >
-                    </mat-form-field></td>
+                      <section class="example-section">
+                        <mat-checkbox class="example-margin">RTO Expense</mat-checkbox>
+                        <mat-checkbox class="example-margin">Insurence</mat-checkbox>
+                      </section>
+                    </td>
                   </tr>
                   <tr>
                     <td> Closing A/C:
@@ -452,7 +509,7 @@
                   </tr>
                   
                   <tr>
-                    <td>  BALANCE:
+                    <td> Pay Out:
                         <mat-form-field appearance="outline" class="example-full-width">
                       <input matInput   formControlName="balance">
                     </mat-form-field></td>
@@ -464,7 +521,31 @@
                     </mat-form-field></td>
                   </tr>
                  
-            </table>
+                </table>
+                </div>
+
+              <div class="col-3">
+                APPLICANT EXPECTATION
+                <div>
+                  <label>Loan Amount </label>
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput   formControlName="rePaymentMode">
+                  </mat-form-field>
+                  <label>Interest %</label>
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput   formControlName="rePaymentMode">
+                  </mat-form-field>
+                  <label>Loan Term </label>
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput   formControlName="rePaymentMode">
+                  </mat-form-field>
+                  <label>Due Date </label>
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput   formControlName="rePaymentMode">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
 
             <a  class="previous">&laquo; Previous</a>
             <a  class="next">Next &raquo;</a>

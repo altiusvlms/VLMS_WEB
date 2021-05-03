@@ -39,34 +39,10 @@
         </div> -->
 
 
-        <div class="header">
-            <div class="header-right">
-                <a class="material-icons" matTooltip="Notifications">
-                    notifications
-                </a>
-                  <a href="login" class="material-icons" matTooltip="Notifications">
-                    logout
-                  </a>
-            </div>
-          </div>
+       
 
         
-        <div class="sidenav">
-          <a href="branch-manager/dashboard">Dashboard</a>
-          <a href="branch-manager/dashboard">Manage Employee</a>
-          <a href="branch-manager/user-role-permission">Manager Roles & Permission</a>
-          <a href="branch-manager/customer-management">Customer Management</a>
-          <a href="branch-manager/loan-verification">Loan Approval/Collection Cash Management</a>
-          <a href="branch-manager/task-management">Task Management</a>
-          <a href="branch-manager/assign-targets">Assign Targets</a>
-          <a href="branch-manager/dashboard">Topup Loan</a>
-          <a href="branch-manager/dashboard">Report</a>
-          <a href="branch-manager/analytics">Analytics</a>
-          <a href="branch-manager/dashboard">Create Receipt</a>
-          <a href="branch-manager/enquiry-list">Create Enquiry</a>
-          <a href="branch-manager/customer-enroll-list">Enroll Customer</a>
-          <a href="branch-manager/loan-process">Create Loan</a>
-          </div>
+        
 
   <div class="container">
   
@@ -86,6 +62,31 @@
      Advanced Search
     </button> 
    </form><br><br>
+
+   <div class="row">
+    <div class="col-sm-2">
+      <div> New Loans</div>
+      <div>24 Nos</div>
+      <div>$1,00,000</div>
+    </div>  
+    <div class="col-sm-2">
+      <div> Closed Loans</div>
+      <div>24 Nos</div>
+      <div>$1,00,000</div>
+    </div>  
+    <div class="col-sm-2">
+      <div>Repossessed</div>
+      <div>24 Nos</div>
+    </div>
+    <div class="col-sm-2">
+      <div>Insurance</div>
+      <div>10 Nos</div>
+    </div>
+    <div class="col-sm-2">
+      <div>COLLECTION AMOUNT</div>
+      <div>10,000</div>      
+    </div>
+  </div>
   
   
   
@@ -95,7 +96,7 @@
   <button class="btn default" (click)="newLoan()">New Loan</button><br><br>
   <button class="btn default" (click)="loanVerification()">Loan Verification and Approval</button><br><br>
   
-  <button class="btns">Today</button>
+  <!-- <button class="btns">Today</button>
   <div class="dropdown">
     <button class="btn" style="border-left:1px solid #0d8bf2">
       <i class="fa fa-caret-down"></i>
@@ -106,8 +107,24 @@
       <a href="#">Tomorrow</a>
     </div>
   </div>
-  <br><br><br><br><br><br><br><br><br><br>
-  
+  <br><br><br><br><br><br><br><br><br><br> -->
+
+  <!-- Task details status -->
+  <div>
+    <div>Task Details Branch manager</div>
+    <button class="btn default" >Total(10)</button>
+    <button class="btn default" >Open(10)</button><br><br>
+    <button class="btn default" >Completed(10)</button>
+    <button class="btn default" >Inprogress(10)</button>
+  </div>
+  <div>
+    <div>Task Details Head Office</div>
+    <button class="btn default" >Total(10)</button>
+    <button class="btn default" >Open(10)</button><br><br>
+    <button class="btn default" >Completed(10)</button>
+    <button class="btn default" >Inprogress(10)</button>
+  </div>
+
         <!--EMI  -->
         <div class="container">
           <div class="spacer">

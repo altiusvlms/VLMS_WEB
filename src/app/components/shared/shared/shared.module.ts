@@ -3,23 +3,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /** Custom Module */
-// import { SharedRoutingModule } from './shared-routing-module';
 import { RouterModule } from '@angular/router';
 
 /** Custom Components */
 import { SharedComponent } from './shared.component';
 import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 /** Shared Module */
 
 @NgModule({
-  declarations: [SharedComponent,HeaderComponent],
+  declarations: [SharedComponent,HeaderComponent, SidebarComponent],
   imports: [
     CommonModule,
-    // SharedRoutingModule,
     RouterModule
   ],
-  exports: [SharedComponent,HeaderComponent],
+  exports: [SharedComponent,HeaderComponent,SidebarComponent],
 })
 export class SharedModule { }

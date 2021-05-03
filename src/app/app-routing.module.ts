@@ -1,6 +1,6 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule ,NoPreloading} from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
@@ -43,8 +43,8 @@ const routes: Routes = [
   {
     path: "branch-manager",
     loadChildren: () =>
-      import("./components/branch-manager/sidebar/sidebar.module").then(
-        s => s.SidebarModule
+      import("./components/branch-manager/dashboard-menu/dashboard-menu.module").then(
+        d => d.DashboardMenuModule
       )
   },
 
@@ -63,7 +63,7 @@ const routes: Routes = [
  *
  * Configures the fallback route.*/
 @NgModule({
-  imports: [RouterModule.forRoot(routes), MatSidenavModule, MatToolbarModule],
+  imports: [RouterModule.forRoot(routes,{ preloadingStrategy: NoPreloading, onSameUrlNavigation: 'reload' }), MatSidenavModule, MatToolbarModule],
   exports: [RouterModule],
   providers: []
 })

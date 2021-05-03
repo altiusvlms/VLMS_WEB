@@ -16,7 +16,7 @@ import { WebAppComponent } from './web-app.component';
 /** Main Routing Module */
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './components/shared/shared/shared.module';
-import { SidebarModule } from './components/branch-manager/sidebar/sidebar.module';
+import { DashboardMenuModule} from './components/branch-manager/dashboard-menu/dashboard-menu.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ValidateEqualModule } from 'ng-validate-equal';
 
@@ -142,7 +142,7 @@ const firebaseConfig = {
     MatTreeModule,
     MatBadgeModule,
     SharedModule,
-    SidebarModule,
+    DashboardMenuModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireStorageModule,

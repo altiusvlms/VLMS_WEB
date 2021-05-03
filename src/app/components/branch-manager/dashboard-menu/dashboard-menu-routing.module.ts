@@ -1,9 +1,9 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { Shell } from "../../../services/shell.service";
 
 /** Custom Component */
-import { SidebarComponent } from './sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserRolePermissionComponent } from './user-role-permission/user-role-permission.component';
 import { AssignTargetsComponent } from './assign-targets/assign-targets.component';
@@ -14,7 +14,7 @@ import { LoanManagementComponent } from './loan-management/loan-management.compo
 
 /** Sidebar Routes */
 const routes: Routes = [
-    { path: 'sidebar', component: SidebarComponent },
+  Shell.childRoutes([
     { path: 'dashboard', component: DashboardComponent },
     { path: 'user-role-permission', component: UserRolePermissionComponent },
     { path: 'assign-targets', component: AssignTargetsComponent },
@@ -22,6 +22,7 @@ const routes: Routes = [
     { path: 'task-management', component: TaskManagementComponent },
     { path: 'analytics', component: AnalyticsComponent },
     { path: 'loan-management', component: LoanManagementComponent },
+  ])
 ];
 
 
@@ -31,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SidebarRoutingModule { }
+export class DashboardMenuRoutingModule { }

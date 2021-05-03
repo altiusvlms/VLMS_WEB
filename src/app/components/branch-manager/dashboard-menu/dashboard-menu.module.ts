@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 /** Custom Module */
-import { SidebarRoutingModule } from './sidebar-routing.module';
+import { DashboardMenuRoutingModule } from './dashboard-menu-routing.module';
 
 /** Angular Material */
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -12,7 +12,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
 /** Custom Components */
-import { SidebarComponent } from './sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserRolePermissionComponent } from './user-role-permission/user-role-permission.component';
 import { AssignTargetsComponent } from './assign-targets/assign-targets.component';
@@ -24,10 +23,10 @@ import { LoanManagementComponent } from './loan-management/loan-management.compo
 /** Sidebar Module */
 
 @NgModule({
-  declarations: [SidebarComponent, DashboardComponent,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, AnalyticsComponent, LoanManagementComponent],
+  declarations: [DashboardComponent,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, AnalyticsComponent, LoanManagementComponent],
   imports: [
     CommonModule,
-    SidebarRoutingModule,
+    DashboardMenuRoutingModule,
     ReactiveFormsModule, 
     FormsModule,
     MatDatepickerModule,
@@ -35,4 +34,4 @@ import { LoanManagementComponent } from './loan-management/loan-management.compo
     MatInputModule
   ]
 })
-export class SidebarModule { }
+export class DashboardMenuModule { }

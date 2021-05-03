@@ -19,9 +19,17 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
   styleUrls: ['./loan-process.component.scss']
 })
 export class LoanProcessComponent implements OnInit {
+  
+  
+  
        
   id:any;
-  
+  loan_Id:any;
+  resource_Id:any;  
+  customer_Id:any;
+  guarantor_Id:any;
+  bankDetails_Id:any;
+  userId:any;
 
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
@@ -29,8 +37,12 @@ export class LoanProcessComponent implements OnInit {
   // setTab(tabname: string) {
   //   this.router.navigate([`/${tabname}`]);
   // }
+  mobile_num = localStorage.getItem("mobile_number");
+
 
   applicantDetailsForm = new FormGroup({
+    userId: new FormControl('1', Validators.required),
+    spouseName: new FormControl('', Validators.required),
     customerName: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     
@@ -90,7 +102,8 @@ export class LoanProcessComponent implements OnInit {
       this.id = params.id;
     });
     this.getCustomerDetails(); 
-    // this.toast.success("Loan Approved");
+    // this.newLoanCustomerDetails()
+    
   }
 
   ngOnDestroy() { }
@@ -157,14 +170,46 @@ export class LoanProcessComponent implements OnInit {
       loanEligibleAmount:data.bankDetails.loanEligibleAmount,
       });
    
-
+console.log(this.mobile_num)
 
     })
   }
 
+  newLoanCustomerDetails(){
+    this.crudService.post(`${appModels.NEWLOAN}`, this.applicantDetailsForm.value,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+    ).pipe(untilDestroyed(this)).subscribe( data => {
+      console.log(data)
+      // console.log(this.mobile_num)
+      this.loan_Id = data.loanId;
+      this.resource_Id = data.resourceId;
+      this.customer_Id = data.customerId;
+      this.guarantor_Id = data.guarantorId;
+      this.bankDetails_Id = data.bankDetailsId;
+    })
+  }
+
   submit(){
+    // this.getMobileNumber();
+    console.log(this.mobile_num)
   this.toast.success("Loan Approved")    
   }
+
+  getMobileNumber(){
+    console.log(this.mobile_num);
+    this.crudService.get(`${appModels.USERS}/${this.mobile_num}`, {
+      params: {
+        tenantIdentifier: 'default'  
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.userId = data.id;
+      console.log(this.userId)
+    })
+
+      }
   
 
 }
