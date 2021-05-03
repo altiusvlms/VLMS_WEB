@@ -4,9 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 /** Custom Component */
 import { PageNotFoundComponent } from "./page-not-found.component";
+import { Shell } from "../../services/shell.service";
+
 
 /** Page Not Found Routes */
-const routes: Routes = [{ path: '', component: PageNotFoundComponent }];
+const routes: Routes = [
+  Shell.childRoutes([
+  { path: '', component: PageNotFoundComponent }
+  ])
+];
 
 
 /**
