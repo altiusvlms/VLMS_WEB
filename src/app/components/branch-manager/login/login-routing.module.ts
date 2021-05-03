@@ -1,7 +1,6 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Shell } from "../../../services/shell.service";
 
 /** Custom Component */
 import { LoginComponent } from './login/login.component';
@@ -10,12 +9,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
 /** Login Routes */
 const routes: Routes = [
-  Shell.childRoutes([
     { path: 'login', component: LoginComponent },
     { path: 'forget-password', component: ForgetPasswordComponent },
-    { path: 'reset-password', component: ResetPasswordComponent },
-  ])
-
+    { path: 'reset-password', component: ResetPasswordComponent }
 ];
 
 
