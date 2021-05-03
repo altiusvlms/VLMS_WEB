@@ -20,7 +20,41 @@ export class NewloanProcessComponent implements OnInit {
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
 
+  mobile_num = localStorage.getItem("mobile_number");
+
+  vehicleDetailsForm = new FormGroup({
+    vehicleNumber: new FormControl('', Validators.required),
+    maker: new FormControl('', Validators.required),
+    model: new FormControl('', Validators.required),
+    color: new FormControl('', Validators.required),
+    mfgyear: new FormControl('', Validators.required),
+    engineNumber: new FormControl('', Validators.required),
+    chassis_number: new FormControl('', Validators.required),
+    insuranceCompany: new FormControl('', Validators.required),
+    insurancePolicy: new FormControl('', Validators.required),
+    insuranceExpiry: new FormControl('', Validators.required),
+    kmReading: new FormControl('', Validators.required),
+    noofOwner: new FormControl('', Validators.required)
+    })
+
+
   ngOnInit(): void {
+    // this.getUserId();
+    // this.saveNewLoan();
+  }
+
+  getUserId(){
+    this.crudService.get(`${appModels.USERS}/${this.mobile_num}`, {
+      params: {
+        tenantIdentifier: 'default'  
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  saveNewLoan(){
+    console.log(this.vehicleDetailsForm.value)
   }
 
 }

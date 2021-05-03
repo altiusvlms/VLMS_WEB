@@ -253,70 +253,70 @@
 
             <mat-card class="example-card">
                 <mat-card-content>
-                  <form class="example-form" >
+                  <form class="example-form" [formGroup]="vehicleDetailsForm">
                     
                   <div class="row">
                     <div class="col-sm-2">
                       <div> 
                         <label>Vehicle Number:
                           <mat-form-field  appearance="outline" class="example-full-width">
-                            <input matInput type='text'  >
+                            <input matInput type='text'  formControlName="vehicleNumber" >
                             </mat-form-field>
                         </label>
                       </div>
                       <div>
                        <label>Model:
                         <mat-form-field  appearance="outline" class="example-full-width">
-                          <input matInput  type='text'   >
+                          <input matInput  type='text' formControlName="model"   >
                           </mat-form-field>
                           </label>
                       </div>
                       <div>
                         <label>MFG Year:
                           <mat-form-field  appearance="outline" class="example-full-width" >
-                            <input matInput  type='text' >
+                            <input matInput  type='text' formControlName="mfgyear" >
                           </mat-form-field>
                            </label>
                        </div>
                        <div>
                         <label>Engine Number:
                           <mat-form-field  appearance="outline" class="example-full-width"  >
-                            <input matInput  type='text'  >
+                            <input matInput  type='text' formControlName="engineNumber"  >
                           </mat-form-field>
                            </label>
                        </div>
                        <div>
                         <label>Chassis Number:
                           <mat-form-field appearance="outline" class="example-full-width"  >
-                            <input matInput  type='text' >
+                            <input matInput  type='text' formControlName="chassis_number"  >
                           </mat-form-field>
                            </label>
                        </div>
                        <div>
                         <label>Insurence Company:
                           <mat-form-field appearance="outline" class="example-full-width" >
-                            <input matInput type='text' >
+                            <input matInput type='text' formControlName="insuranceCompany"  >
                           </mat-form-field>
                            </label>
                        </div>
                        <div>
                         <label>Insurence Policy:
                           <mat-form-field  appearance="outline" class="example-full-width">
-                            <input matInput  type='text' >
+                            <input matInput  type='text' formControlName="insurancePolicy" >
                             </mat-form-field>
                            </label>
                        </div>
                        <div>
                         <label>Insurence Expire on:
                           <mat-form-field appearance="outline" class="example-full-width" >
-                            <input matInput  type='text' >
+                            <input matInput  type='text' formControlName="insuranceExpiry"  >
                           </mat-form-field>
                            </label>
                        </div>
                        <div>
                         <label>Live KM Reading:
                           <mat-form-field appearance="outline" class="example-full-width" >
-                            <input matInput  type='text' >
+                            <input matInput  type='text' formControlName="kmReading" >
                           </mat-form-field>
                            </label>
                        </div>
@@ -326,19 +326,19 @@
                     <div> 
                       <label>Make:</label>
                         <mat-form-field appearance="outline" class="example-full-width">
-                          <input matInput type='text'  >
+                          <input matInput type='text' formControlName="maker"  >
                         </mat-form-field>
                     </div>
                     <div> 
                       <label>Colour:</label>
                         <mat-form-field appearance="outline" class="example-full-width" >
-                          <input matInput  type='text' >
+                          <input matInput  type='text' formControlName="color"  >
                         </mat-form-field>
                     </div>
                     <div> 
                       <label>No of Owner:
                         <mat-form-field appearance="outline" class="example-full-width">
-                          <input matInput type='text' >
+                          <input matInput type='text' formControlName="vehicleNumber" >
                         </mat-form-field>
                          </label>
                     </div>
@@ -405,7 +405,7 @@
                  
         
                 <a class="previous">&laquo; Previous</a>
-                <a class="next">Next &raquo;</a>
+                <a class="next" (click)="saveNewLoan()">Next &raquo;</a>
                   </form>
                 </mat-card-content>
                 <mat-card-actions>
