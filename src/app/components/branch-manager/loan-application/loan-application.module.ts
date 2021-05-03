@@ -51,3 +51,4 @@ import { NewloanProcessComponent } from './newloan-process/newloan-process.compo
     ]
 })
 export class LoanApplicationModule { }
+
