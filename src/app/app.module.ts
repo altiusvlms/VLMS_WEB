@@ -18,6 +18,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './components/shared/shared/shared.module';
 import { SidebarModule } from './components/branch-manager/sidebar/sidebar.module';
 import { ToastrModule } from 'ngx-toastr';
+import { ValidateEqualModule } from 'ng-validate-equal';
+
 
 
 import { DatePipe } from '@angular/common';
@@ -103,6 +105,7 @@ const firebaseConfig = {
     MatIconModule,
     MatFormFieldModule,
     DragDropModule,
+    ValidateEqualModule,
     FlexLayoutModule,
     LayoutModule,
     MatAutocompleteModule,

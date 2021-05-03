@@ -89,7 +89,7 @@ export class ForgetPasswordComponent implements OnInit {
   // }
 }
 
-  verifyLoginCode() {
+  verifyLoginCode()  {
     this.windowRef.confirmationResult
                   .confirm(this.verificationCode)
                   .then( (result: { user: any; }) => {

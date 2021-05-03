@@ -23,9 +23,9 @@ export class ResetPasswordComponent implements OnInit {
       confirm_password: new FormControl('', Validators.required),
     })
    
-  // submit(){
-  //   console.log(this.form.value);
-  // }
+  submitdata(){
+    this.toast.success("Updated Successfully");
+  }
   
   
 
