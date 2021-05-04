@@ -7,7 +7,7 @@ enum appModels {
     LOANPROCESS = 'fineract-provider/api/v1/fieldExecutive/applyLoan',
     NEWLOAN = 'fineract-provider/api/v1/fieldExecutive/newApplicantLoan',
     COMMON = 'fineract-provider/api/v1',
-    
+    CREATEEMPLOYEE = 'fineract-provider/api/v1/Employee/createEmployee'
 
 }
 

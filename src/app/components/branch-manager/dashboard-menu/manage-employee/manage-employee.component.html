@@ -1,0 +1,335 @@
+<div class="container">
+
+
+        <!-- <mat-tab>  -->
+        
+            <mat-card class="example-card">
+                <mat-card-content>
+                  <form [formGroup] = "manageEmployeeForm">
+                    <table class="example-full-width" cellspacing="0">
+                        
+                      
+                        <!-- <td>  UserID:
+                          <mat-form-field  appearance="outline"  class="example-full-width">
+                          <input matInput type='text' formControlName="userId" >
+                          </mat-form-field>
+                        </td><br> -->
+                        <div>
+                        <td>  Name:
+                          <mat-form-field  appearance="outline"  class="example-full-width" >
+                          <input matInput type='text' formControlName="name" >
+                          </mat-form-field>
+                        </td>
+                    </div>
+                <div>
+                        <td>CalledName:
+                            <mat-form-field  appearance="outline"  class="example-full-width">
+                            <input matInput  type='text' formControlName="calledName" >
+                            </mat-form-field>
+                          </td>
+                      
+                        </div>
+                      <!-- <div class="col-sm-2" style="padding-left: 10%;"> -->
+                    <div>
+                        <td>  SurName:
+                          <mat-form-field  appearance="outline"  class="example-full-width">
+                          <input matInput  type='text' formControlName="surName" >
+                          </mat-form-field>
+                        </td>
+                    </div>
+                <div>
+                      <td> Mobile Number:
+                          <mat-form-field appearance="outline"  class="example-full-width">
+                        <input matInput formControlName="mobileNumber" >
+                      </mat-form-field></td>
+                    </div>
+                <div>   
+                        <td>  Gender:
+                          <mat-form-field  appearance="outline" class="example-full-width">
+                          <input matInput formControlName="gender" >
+                          </mat-form-field>
+                        </td>
+                    </div>
+                <div>    
+                      <td> Alt Number:
+                          <mat-form-field appearance="outline"  class="example-full-width" >
+
+                        <input matInput formControlName="altNumber" >
+                      </mat-form-field></td>
+                    </div>
+                <div>
+                        <td>  D.O.B:
+                          <mat-form-field  appearance="outline" class="example-full-width">
+                          <input matInput  type='text' formControlName="dob" >
+                          </mat-form-field>
+                        </td>
+                    </div>
+                <div>
+                      <td> Official Number:
+                          <mat-form-field appearance="outline"  class=" example-full-width">
+                        <input matInput formControlName="officialNumber" >
+                      </mat-form-field></td>
+                    </div>
+                      <div>
+                        <td> Age:
+                            <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput formControlName="age" >
+                        </mat-form-field></td>
+                    </div> 
+                        <!-- <td> Email:
+                            <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput formControlName="email" >
+                        </mat-form-field></td> -->
+                    <div>
+                        <td> Marital Status:
+                            <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput formControlName="maritalStatus" >
+                        </mat-form-field></td>
+                    </div>
+                <div>
+                        <td> Designation:
+                            <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput formControlName="designation" >
+                        </mat-form-field></td>
+                    </div>
+                <div>
+                        <td> Spouse Name:
+                            <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput formControlName="spousename" >
+                        </mat-form-field></td>
+                    </div>
+                <div>
+                        <td> Blood Group:
+                            <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput formControlName="bloodGroup" >
+                        </mat-form-field></td>
+                    </div>
+                <div>
+                        <td> Father's Name:
+                            <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput formControlName="fatherName" >
+                        </mat-form-field></td>
+                    </div>
+                <div>
+                        <td> Vehicle Number:
+                            <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput formControlName="vehicleNumber" >
+                        </mat-form-field></td>
+                    </div>
+                <div>
+                        <td> D.O.J:
+                            <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput formControlName="doj" >
+                        </mat-form-field></td>
+                    </div>
+                      <!-- <button mat-raised-button  color="primary">submit</button> -->
+                      <!-- <a href="#" class="previous">&laquo; Previous</a> -->
+                      <!-- <a  class="next"  >Next &raquo;</a> -->
+                      <button class="tablinks" (click)="submit()">submit</button>
+                      <!-- <button class="tablinks" routerLink="/Co-Applicant">Tab 3</button> -->
+                </table>
+                  </form>
+                  
+                </mat-card-content>
+                <mat-card-actions>
+                  <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
+                </mat-card-actions>
+               
+              </mat-card>
+
+        
+        <!-- </mat-tab> -->
+
+        <form [formGroup] = "employeePermanentAddressForm">
+        <h2>ADD ADDRESS</h2>
+
+        <div>
+            <td> Address Line 1:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="addressLine1" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td> Address Line 2:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="addressLine2" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Landmark:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="landmark" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Enter pincode:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="pincode" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Area:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="area" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>City:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="city" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Country:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="country" >
+            </mat-form-field></td>
+        </div>
+    </form>
+
+<form [formGroup] = "manageEmployeeForm">
+        <h3>Add Bank detail</h3>
+        <div>
+            <td>Acc Number:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="accountNumber" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Name:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="accountHolderName" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>IFSC:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="IFSC" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Bank:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="bankName" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Branch:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="branchName" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Acc type:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="accountType" >
+            </mat-form-field></td>
+        </div>
+
+    </form>
+
+<form [formGroup] = "generalInsuranceForm">
+        <h3>Insurance Details</h3>
+        <div>
+            <td>Policy no:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="policyNumber" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Company Coverage:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="companyCoverage" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Policy Coverage:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="policyCoverage" >
+            </mat-form-field></td>
+        </div>
+    </form>
+
+<form [formGroup] = "accidentalinsuranceForm">
+        <h3>Accident Insurance Details</h3>
+        <div>
+            <td>Policy no:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="policyNumber" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Company Coverage:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="companyCoverage" >
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>Policy Coverage:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput formControlName="policyCoverage" >
+            </mat-form-field></td>
+        </div>
+    </form>
+
+<form>
+        <h3>Loan Details</h3>
+        <div>
+            
+            <td>AGT Number:
+                <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput  >
+            </mat-form-field></td>
+        </div>
+    </form>
+
+<form>
+        <h2>ID Proofs</h2>
+                  <div> 
+                    <label>Aadhar:
+                    <button>Delete</button>
+                    <button>Add Image</button>
+                    <img  src="assets/images/empty_image.png">
+                    </label>
+                  </div>
+                </form>
+
+            <form [formGroup] = "schoolqualificationForm">
+        <h3>Education Qualification</h3>
+        <table class="table">
+    <thead>
+      <tr>
+        <th>School/Qualification</th>
+        <th>Qualification</th>
+        <th>%Obtained</th>
+        <th>Year of passing</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody >
+        <!-- *ngFor="let loan of schoolqualificationFormControls.controls; let i = index" [formGroupName]="i" -->
+      <tr>
+        <!-- <td>{{loan.university}}</td>
+        <td>{{{{loan.qualification}}}}</td>
+        <td>{{loan.percentage}}</td> -->
+        <td>December 10, 1815</td>
+        
+        <td>
+        <button type="button"> <span>Edit</span></button>
+        </td>
+      </tr>
+      <tr>
+        <td>XYZ School</td>
+        <td>HSC</td>
+        <td>60</td>
+        <td>December 10, 1906</td>
+        
+        <td>
+        <button type="button"> <span>Edit</span></button>
+        </td>
+      </tr>
+      </tbody>
+      </table>
+
+    </form>
+</div>
