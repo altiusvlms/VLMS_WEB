@@ -258,37 +258,49 @@
                   <div class="row">
                     <div class="col-sm-2">
                       <div> 
-                        <label>Vehicle Number:
+                        <label>Vehicle Number:                  
+                          <span class="required-field">*</span>
                           <mat-form-field  appearance="outline" class="example-full-width">
-                            <input matInput type='text'  formControlName="vehicleNumber" >
+                            <input matInput type='text'  formControlName="vehicleNumber" [ngClass]="{ 'is-invalid': submitted && vehicleDetailsForm.controls.vehicleNumber.errors  }">
                             </mat-form-field>
+                            <div *ngIf="submitted && vehicleDetailsForm.controls.vehicleNumber.errors" class="invalid-feedback">
+                              <div class="required-field" *ngIf="submitted && vehicleDetailsForm.controls.vehicleNumber.errors.required">Vehicle Number is required</div>
+                            </div>  
                         </label>
                       </div>
                       <div>
                        <label>Model:
+                        <span class="required-field">*</span>
                         <mat-form-field  appearance="outline" class="example-full-width">
-                          <input matInput  type='text' formControlName="model"   >
+                          <input matInput  type='text' formControlName="model"  [ngClass]="{ 'is-invalid': submitted && vehicleDetailsForm.controls.model.errors  }" >
                           </mat-form-field>
+                          <div *ngIf="submitted && vehicleDetailsForm.controls.model.errors" class="invalid-feedback">
+                            <div class="required-field" *ngIf="submitted && vehicleDetailsForm.controls.model.errors.required">Model is required</div>
+                          </div>  
                           </label>
                       </div>
                       <div>
                         <label>MFG Year:
+                          <span class="required-field">*</span>
                           <mat-form-field  appearance="outline" class="example-full-width" >
-                            <input matInput  type='text' formControlName="mfgyear" >
+                            <input matInput  type='text' formControlName="mfgyear" [ngClass]="{ 'is-invalid': submitted && vehicleDetailsForm.controls.mfgyear.errors  }">  
                           </mat-form-field>
+                          <div *ngIf="submitted && vehicleDetailsForm.controls.mfgyear.errors" class="invalid-feedback">
+                            <div class="required-field" *ngIf="submitted && vehicleDetailsForm.controls.mfgyear.errors.required">MFG Year is required</div>
+                          </div>
                            </label>
                        </div>
                        <div>
                         <label>Engine Number:
                           <mat-form-field  appearance="outline" class="example-full-width"  >
-                            <input matInput  type='text' formControlName="engineNumber"  >
+                            <input matInput  type='text' formControlName="engineNumber" > 
                           </mat-form-field>
                            </label>
                        </div>
                        <div>
                         <label>Chassis Number:
                           <mat-form-field appearance="outline" class="example-full-width"  >
-                            <input matInput  type='text' formControlName="chassis_number"  >
+                            <input matInput  type='text' formControlName="chassis_number" >  
                           </mat-form-field>
                            </label>
                        </div>
@@ -344,68 +356,80 @@
                     </div>
                     <div> 
                       <label>Engine Image:
-                      <button>Delete</button>
-                      <button>Add Image</button>
-                      <img  src="assets/images/empty_image.png">
+                        <span class="required-field">*</span>
+                        <input #file type="file" accept='image/*' (change)="uploadEngineImages($event)"   />
+                        <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" >
                       </label>
                     </div>
                     <div> 
                       <label>Chassis Image:
-                      <button>Delete</button>
-                      <button>Add Image</button>
-                      <img  src="assets/images/empty_image.png">
+                        <span class="required-field">*</span>
+                        <input #file type="file" accept='image/*' (change)="uploadChassisImages($event)" />
+                        <img [src] ="chassisimgURL ? chassisimgURL : 'assets/images/empty_image.png'" >
                       </label>
                     </div>
                   </div>
                   <div class="col-sm-2" style="padding-left: 20%;">
                     <div> 
                       <label>Insurence Policy Image:
-                      <button>Delete</button>
-                      <button>Add Image</button>
-                      <img  src="assets/images/empty_image.png">
+                        <input #file type="file" accept='image/*' (change)="uploadPolicyImages($event)" />
+                        <img [src] ="policyimgURL ? policyimgURL : 'assets/images/empty_image.png'" >
                       </label>
                     </div>
                     <div> 
                       <label>Live KM Reading:
-                        <button>Delete</button>
-                        <button>Add Image</button>
-                        <img  src="assets/images/empty_image.png">
+                        <input #file type="file" accept='image/*' (change)="uploadLiveKMImages($event)"  />
+                        <img [src] ="liveKMimgURL ? liveKMimgURL : 'assets/images/empty_image.png'" >
                       </label>
                     </div>
                     <div> 
                       <label>RC Book:
-                        <div class="row"></div>
-                        <button>Delete</button>
-                        <button>Add Image</button>
-                        <img  src="assets/images/empty_image.png">
+                        <input #file type="file" accept='image/*' (change)="uploadRcBookImages($event)"  />
+                        <img [src] ="rcBookimgURL ? rcBookimgURL : 'assets/images/empty_image.png'" >
                       </label>
                     </div>
                  </div>
-                 <div class="col-sm-2" style="padding-left: 20%;">
-                  <button>Create Task</button>
-                  <button>Vehicle Transaction History</button>
-                  <button>Vehicle Challan report</button>
+                 <div class="col-sm-2" style="padding-left: 25%;">
+                  <button type="button" class="btn btn-primary">Create Task</button>
+                  <button type="button" class="btn btn-primary">Vehicle Transaction History</button>
+                  <button type="button" class="btn btn-primary">Vehicle Challan report</button>
                 </div>
                   
                 </div>
                    
                 <div class="row">
-                  <div class="col-sm-6">
-                  <div> 
-                    <label>Vehicle Image:
-                      <img  src="assets/images/empty_image.png">
-                      <!-- <img  src="assets/images/empty_image.png"> -->
-                      <!-- <img  src="assets/images/empty_image.png"> -->
-                      <!-- <img  src="assets/images/empty_image.png"> -->
+                  <div class="col-sm-3">
+                    <label>Vehicle Image:</label> 
+                      <label>Front View
+                        <input #file type="file" accept='image/*' (change)="uploadFrontImages($event)" />
+                        <img [src] ="frontimgURL ? frontimgURL : 'assets/images/empty_image.png'" >
                     </label>
                   </div>
+                  <div class="col-sm-3">
+                    <label>Back View
+                        <input #file type="file" accept='image/*' (change)="uploadBackImages($event)" />
+                        <img [src] ="backimgURL ? backimgURL : 'assets/images/empty_image.png'" >
+                    </label>
                   </div>
+                  <div class="col-sm-3">
+                    <label>Side View 1
+                      <input #file type="file" accept='image/*' (change)="uploadSide1Images($event)" />
+                        <img [src] ="side1imgURL ? side1imgURL : 'assets/images/empty_image.png'" >
+                    </label>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Side View 2
+                      <input #file type="file" accept='image/*' (change)="uploadSide2Images($event)" />
+                      <img [src] ="side2imgURL ? side2imgURL : 'assets/images/empty_image.png'" >
+                    </label>
+                  </div>
+                  
                 </div>
                    
                  
         
                 <a class="previous">&laquo; Previous</a>
-                <a class="next" (click)="saveNewLoan()">Next &raquo;</a>
+                <a class="next">Next &raquo;</a>
                   </form>
                 </mat-card-content>
                 <mat-card-actions>
@@ -421,7 +445,7 @@
         <mat-tab label="Loan Transfer">
             <mat-card class="example-card">
             <mat-card-content>
-              <form class="example-form">
+              <form class="example-form"  [formGroup]="loanTransferForm">
                 <div class="row">
                   <div class="col-3">
                 <table class="example-full-width" cellspacing="0">
@@ -429,39 +453,39 @@
                   <tr>
                     <td>   Loan Amount:
                       <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput type='text' >
+                      <input matInput type='text' formControlName="loanAmount">
                       </mat-form-field>
                     </td>
                   </tr>
                   <tr>
                   <td> Loan Term:
                       <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput type='number' >
+                    <input matInput type='text' formControlName="loanTerm" >
                   </mat-form-field></td>
                 </tr>
                 <tr>
                   <td> Emi Amount:
                       <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput >
+                    <input matInput type='text'  formControlName="emi">
                   </mat-form-field></td>
                 </tr>
                 <tr>
                   <td>  Due Date:
                     <mat-form-field  appearance="outline" class="example-full-width">
-                    <input matInput  type='text' >
+                    <input matInput  type='text'  formControlName="dueDate">
                     </mat-form-field>
                   </td>
                 </tr>
                 <tr>
                   <td>  Doc Charge:
                       <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput  >
+                    <input matInput  type='text' >
                   </mat-form-field></td>
                 </tr>
                 <tr>
                   <td> Processing Charge:
                       <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput >
+                    <input matInput type='text'    >
                   </mat-form-field></td>
                 </tr>
                 <tr>
@@ -479,20 +503,20 @@
                 <tr>
                   <td>NOC:
                       <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput  >
+                    <input matInput type='text'  >
                   </mat-form-field></td>
                 </tr>
                 <tr>
                   <td>Intrest:
                     <mat-form-field  appearance="outline" class="example-full-width">
-                    <input matInput  type='text'  >
+                    <input matInput  type='text'  formControlName="loanInterest" >
                     </mat-form-field>
                   </td>
                 </tr>
                 <tr>
                   <td>Intrest Amount:
                     <mat-form-field  appearance="outline" class="example-full-width">
-                    <input matInput  type='text'   >
+                    <input matInput  type='text'  formControlName="interestINR"  >
                     </mat-form-field>
                   </td>
                 </tr>
@@ -506,7 +530,7 @@
                 <tr>
                     <td>Co-Applicant :
                       <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput  type='text'  >
                       </mat-form-field>
                     </td>
                   </tr>
@@ -521,13 +545,13 @@
                   <tr>
                     <td> Closing A/C:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  >
+                      <input matInput  type='text'  >
                     </mat-form-field></td>
                   </tr>
                   <tr>
                     <td>  Closing Discount:
                       <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'  >
+                      <input matInput  type='text' >
                       </mat-form-field>
                     </td>
                   </tr>
@@ -535,13 +559,13 @@
                   <tr>
                     <td> Pay Out:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput   >
+                      <input matInput  type='text' >
                     </mat-form-field></td>
                   </tr>
                   <tr>
                     <td> Re-payment Mode:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput   >
+                      <input matInput   type='text'  >
                     </mat-form-field></td>
                   </tr>
                  
@@ -553,19 +577,19 @@
                 <div>
                   <label>Loan Amount </label>
                   <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput   >
+                    <input matInput  type='text' >
                   </mat-form-field>
                   <label>Interest %</label>
                   <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput  >
+                    <input matInput  type='text' >
                   </mat-form-field>
                   <label>Loan Term </label>
                   <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput  >
+                    <input matInput type='text' >
                   </mat-form-field>
                   <label>Due Date </label>
                   <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput >
+                    <input matInput type='text' >
                   </mat-form-field>
                 </div>
               </div>
@@ -588,7 +612,7 @@
           <mat-tab label="Bank details">
             <mat-card class="example-card">
             <mat-card-content>
-              <form class="example-form" >
+              <form class="example-form" [formGroup]="bankDetailsForm">
                   <p>Transfer Amount 1</p>
                 &nbsp;
                 <input type="submit" id="fname" name="fname" value="0,000" >&nbsp;
@@ -598,34 +622,34 @@
                               <tr>
                                 <td>   
                                   <mat-form-field  appearance="outline" class="example-full-width">
-                                  <input matInput type='text' placeholder="Account Number" >
+                                  <input matInput type='text' placeholder="Account Number" formControlName="accountNumber" >
                                   </mat-form-field>
                                 </td>
                               </tr>
                               <tr>
                               <td> 
                                   <mat-form-field appearance="outline" class="example-full-width">
-                                <input matInput type='text' placeholder="Name" >
+                                <input matInput type='text' placeholder="Name" formControlName="accountHolderName">
                               </mat-form-field></td>
                             </tr>
                             <tr>
                                 <td>  
                                   <mat-form-field  appearance="outline" class="example-full-width">
-                                  <input matInput  type='text' placeholder="IFSC">
+                                  <input matInput  type='text' placeholder="IFSC" formControlName="IFSC">
                                   </mat-form-field>
                                 </td>
                               </tr>
                               <tr>
                               <td> 
                                   <mat-form-field appearance="outline" class="example-full-width">
-                                <input matInput placeholder="chooseBank" >
+                                <input matInput placeholder="chooseBank" formControlName="bankName">
                               </mat-form-field></td>
                             </tr>
                             <p>Form Group Company</p>
                             <tr>
                                 <td>  
                                   <mat-form-field  appearance="outline" class="example-full-width">
-                                  <input matInput  placeholder="choose Branch" >
+                                  <input matInput  placeholder="choose Branch" formControlName="branchName">
                                   </mat-form-field>
                                 </td>
                               </tr>
@@ -638,7 +662,7 @@
                               <tr>
                                   <td>  
                                     <mat-form-field  appearance="outline" class="example-full-width">
-                                    <input matInput  placeholder="Approve Loan" >
+                                    <input matInput  placeholder="Approve Loan">
                                     </mat-form-field>
                                   </td>
                                 </tr>
@@ -690,7 +714,7 @@
             </table>
     
             <a class="previous">&laquo; Previous</a>
-            <button  form="" value="Submit">Submit</button>
+            <button  form="" value="Submit"  (click)="saveNewLoan()">Submit</button>
     
               </form>
             </mat-card-content>

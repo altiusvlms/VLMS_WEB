@@ -13,14 +13,13 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
   
         let headers: HttpHeaders = new HttpHeaders({
-            'Content-Type':  'application/json',
+            "Accept": "application/json" ,
             'Authorization': 'Basic ' + btoa('mifos:password')
         });
             request = request.clone({
                 url: environment.BASE_URL + request.url,
                 headers
             });
-            console.log(request)
         
         return next.handle(request);
     }
