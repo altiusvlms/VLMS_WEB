@@ -6,7 +6,7 @@
         
             <mat-card class="example-card">
                 <mat-card-content>
-                  <form >
+                  <form [formGroup]="applicantDetailsForm">
                     <table class="example-full-width" cellspacing="0">
                         
                       <tr>
@@ -16,8 +16,8 @@
                           </mat-form-field>
                         </td><br> -->
                         <td>  Applicant name:
-                          <mat-form-field  appearance="outline"  class="example-full-width">
-                          <input matInput type='text' formControlName="customerName" >
+                          <mat-form-field  appearance="outline"  class="example-full-width" >
+                          <input matInput type='text' formControlName="customerName" required = "true" autocomplete="off" >
                           </mat-form-field>
                         </td>
                       </tr>
@@ -49,8 +49,9 @@
                       </tr>
                       <tr>
                       <td> Marital status:
-                          <mat-form-field appearance="outline"  class="example-full-width">
-                        <input matInput formControlName="maritalStatus">
+                          <mat-form-field appearance="outline"  class="example-full-width" >
+
+                        <input matInput formControlName="maritalStatus" required name='maritalStatus' value='married' value="unmarried"  autocomplete="off" >
                       </mat-form-field></td>
                     </tr>
                     <tr>
@@ -90,7 +91,7 @@
                       
                       <!-- <button mat-raised-button  color="primary">submit</button> -->
                       <!-- <a href="#" class="previous">&laquo; Previous</a> -->
-                      <a  class="next">Next &raquo;</a>
+                      <a  class="next" (click)="saveNewLoan()" >Next &raquo;</a>
                       <!-- <button class="tablinks" (click)="setTab('tab2')">Tab 1</button> -->
                       <!-- <button class="tablinks" routerLink="/Co-Applicant">Tab 3</button> -->
                 </table>
@@ -141,7 +142,7 @@
         <mat-tab label="Co-Applicant">
     <mat-card class="example-card">
     <mat-card-content>
-      <form class="example-form" >
+      <form class="example-form" [formGroup]="coapplicantDetailsForm" >
         <table class="example-full-width" cellspacing="0">
             
           <tr>
@@ -154,7 +155,8 @@
           <tr>
           <td> Mobile Number:
               <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput type='number' >
+            <input matInput type='text' formControlName="mobileNumber" minlength=10 maxlength=10 >
+            <div *ngIf = "coapplicantDetailsForm.controls.mobileNumber.invalid" >Error</div>
           </mat-form-field></td>
         </tr>
         <tr>
@@ -205,7 +207,7 @@
           </mat-radio-group>
     </table>
     <a  class="previous">&laquo; Previous</a>
-    <a  class="next">Next &raquo;</a>
+    <a  class="next" (click)="saveNewLoan()">Next &raquo;</a>
       </form>
       <h2>ID Proofs</h2>
       <div> 

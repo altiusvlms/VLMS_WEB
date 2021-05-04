@@ -18,10 +18,19 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class NewloanProcessComponent implements OnInit {
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
+  loan_Id:any;
+  resource_Id:any;  
+  customer_Id:any;
+  guarantor_Id:any;
+  bankDetails_Id:any;
+
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) {
+    this.getUserId();    
+   }
 
   mobile_num = localStorage.getItem("mobile_number");
   submitted: Boolean = false;
+  userId : any;
   engineImgURL: any;
   enginefileform : any;
   chassisimgURL: any;
@@ -40,6 +49,19 @@ export class NewloanProcessComponent implements OnInit {
   side1fileform : any;
   side2imgURL: any;
   side2fileform : any;
+
+  applicantDetailsForm = new FormGroup({
+    userId: new FormControl('', Validators.required),
+    spouseName: new FormControl('', Validators.required),
+    customerName: new FormControl('', Validators.required),
+    maritalStatus: new FormControl('', Validators.required),
+    dateFormat: new FormControl("dd MMMM yyyy", Validators.required),
+
+    })
+
+    coapplicantDetailsForm = new FormGroup({
+      mobileNumber: new FormControl('', Validators.required),
+      })
 
   vehicleDetailsForm = new FormGroup({
     vehicleNumber: new FormControl('', Validators.required),
@@ -63,15 +85,15 @@ export class NewloanProcessComponent implements OnInit {
       emi: new FormControl('', Validators.required),
       interestINR: new FormControl('', Validators.required),
       dueDate: new FormControl('', Validators.required),
-      docCharge: new FormControl('', Validators.required),
-      processingCharge: new FormControl('', Validators.required),
-      pendingDoc: new FormControl('', Validators.required),
-      holdAmount: new FormControl('', Validators.required),
-      otherCharge: new FormControl('', Validators.required),
-      closingAC: new FormControl('', Validators.required),
-      closingDiscount: new FormControl('', Validators.required),
-      balance: new FormControl('', Validators.required),
-      rePaymentMode: new FormControl('', Validators.required)
+      // docCharge: new FormControl('', Validators.required),
+      // processingCharge: new FormControl('', Validators.required),
+      // pendingDoc: new FormControl('', Validators.required),
+      // holdAmount: new FormControl('', Validators.required),
+      // otherCharge: new FormControl('', Validators.required),
+      // closingAC: new FormControl('', Validators.required),
+      // closingDiscount: new FormControl('', Validators.required),
+      // balance: new FormControl('', Validators.required),
+      // rePaymentMode: new FormControl('', Validators.required)
      })
 
      bankDetailsForm = new FormGroup({
@@ -80,13 +102,11 @@ export class NewloanProcessComponent implements OnInit {
       IFSC: new FormControl('', Validators.required),
       bankName: new FormControl('', Validators.required),
       branchName: new FormControl('', Validators.required),
-      loanEligibleAmount: new FormControl('', Validators.required)
+      // loanEligibleAmount: new FormControl('', Validators.required)
      })
 
 
   ngOnInit(): void {
-    // this.getUserId();
-    // this.saveNewLoan();
   }
 
   getUserId(){
@@ -96,6 +116,7 @@ export class NewloanProcessComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
+      this.userId = data.id;
     })
   }
  
@@ -207,24 +228,38 @@ export class NewloanProcessComponent implements OnInit {
 
   saveNewLoan(){
     this.submitted = true;
-    const obj =  this.vehicleDetailsForm.value;
-    const obj1 =  this.loanTransferForm.value;
-    const obj2 =  this.bankDetailsForm.value;
-    const copy = Object.assign({}, obj,obj1,obj2);
-    console.log(copy);
+    const applicantObj =  this.applicantDetailsForm.value;
+    const coApplicantObj =  this.coapplicantDetailsForm.value;
+    const vehicleObj =  this.vehicleDetailsForm.value;
+    const loanObj =  this.loanTransferForm.value;
+    const bankObj =  this.bankDetailsForm.value;
+    const allFormValues = Object.assign({}, applicantObj,coApplicantObj,vehicleObj,loanObj,bankObj);
+    allFormValues.userId = this.userId;
+    console.log(allFormValues);
 
-      this.submitted = true;
+      this.crudService.post(`${appModels.NEWLOAN}`, allFormValues,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+    ).pipe(untilDestroyed(this)).subscribe( async data => {
+      console.log(data)
+      // this.loan_Id = data.loanId;
+      // this.resource_Id = data.resourceId;
+      // this.customer_Id = data.customerId;
+      // this.guarantor_Id = data.guarantorId;
+      // this.bankDetails_Id = data.bankDetailsId;
+    })
      
-// const formData = new FormData();      
-// formData.append("file",this.fileform);
-//     this.crudService.upload_Image(`${appModels.COMMON}/images/engine/2`, formData,
-//     { params:{
-//           tenantIdentifier: "default"   
-//         }}
-//     ).pipe(untilDestroyed(this))
-//       .subscribe(data => {
-//         console.log(data)
-//       })
+    // const formData = new FormData();      
+    // formData.append("file",this.fileform);
+    //     this.crudService.upload_Image(`${appModels.COMMON}/images/engine/2`, formData,
+    //     { params:{
+    //           tenantIdentifier: "default"   
+    //         }}
+    //     ).pipe(untilDestroyed(this))
+    //       .subscribe(data => {
+    //         console.log(data)
+    //       })
     
   }
 
