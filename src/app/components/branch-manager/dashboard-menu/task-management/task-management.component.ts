@@ -23,6 +23,7 @@ export class TaskManagementComponent implements OnInit {
   /** showAction(Edit & Delete)*/
   showAction = false;
   taskListData: any;
+  taskID: any;
   constructor(private formBuilder: FormBuilder,private crudService: CrudService,private toast: ToastrService,public datepipe: DatePipe) { }
 
   /** Create Task Form */
@@ -59,7 +60,9 @@ export class TaskManagementComponent implements OnInit {
   })
   }
   /** Action(Edit & Delete) with create task model */
-  viewModel(task : any){
+  viewModel(task : any,id : any){
+    console.log(id);
+    this.taskID = id;
     this.showAction = true;
     task['dueDate']=this.datepipe.transform(task['dueDate'], 'dd MMMM yyyy');
     this.createTaskForms
@@ -71,11 +74,30 @@ export class TaskManagementComponent implements OnInit {
       assignTo: task.assignTo,
       description: task.description
     });
+    this.createTaskForms.disable();
   }
   /** Edit the Task */
   EditTask(){
+    console.log(this.createTaskForms.value)
+    this.createTaskForms.enable();
     this.showAction = true;
     alert("Are you sure, you want to Edit?");
+  
+    
+  }
+
+  updateTask(){
+    console.log(this.taskID)
+    console.log(this.createTaskForms.value)
+    this.crudService.update(`${appModels.FIELDEXECUTIVE}/editTask/${this.taskID}`,this.createTaskForms.value,
+     {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.getTaskList();
+    })
   }
   /** Delete the Task */
   deleteTask(){

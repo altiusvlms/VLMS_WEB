@@ -20,7 +20,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 url: environment.BASE_URL + request.url,
                 headers
             });
-            console.log(request)
         
         return next.handle(request);
     }

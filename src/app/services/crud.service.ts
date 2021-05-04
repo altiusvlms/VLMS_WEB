@@ -32,4 +32,8 @@ export class CrudService {
     get_Image(model: string, params?: Object): Observable<any> {
         return this.http.get(model, { responseType: 'text'});
     }
+
+    upload_Image(relativeUrlPath: any, form: FormData, params?: object) {
+        return this.http.post(relativeUrlPath, form, params)
+      }
 }
