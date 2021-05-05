@@ -73,3 +73,6 @@
     background-color: #0b7dda;
   }
   
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }

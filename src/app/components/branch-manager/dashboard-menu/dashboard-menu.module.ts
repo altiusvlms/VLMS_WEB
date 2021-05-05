@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
 
 /** Custom Components */
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -34,7 +35,8 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
   ]
 })
 export class DashboardMenuModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute ,Params} from '@angular/router';
 
 
+
 // Custom Forms
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
@@ -50,18 +51,59 @@ export class NewloanProcessComponent implements OnInit {
   side1fileform : any;
   side2imgURL: any;
   side2fileform : any;
+  appidproofform : any;
+  applicantProofImgURL : any
+  coidproofform : any;
+  coApplicantProofImgURL : any;
 
   applicantDetailsForm = new FormGroup({
     userId: new FormControl('', Validators.required),
-    spouseName: new FormControl('', Validators.required),
     customerName: new FormControl('', Validators.required),
-    maritalStatus: new FormControl('', Validators.required),
-    dateFormat: new FormControl("dd MMMM yyyy", Validators.required),
+    mobileNo: new FormControl('', Validators.required),
+    fatherName: new FormControl('', Validators.required),
+    refBy: new FormControl('', Validators.required),
+    companyName:new FormControl('', Validators.required),
+    monthlyIncome:new FormControl('', Validators.required),
+    salaryDate:new FormControl('', Validators.required),
+    dob:new FormControl("dd MMMM yyyy", Validators.required),
+    maritalStatus:new FormControl('', Validators.required),
+    spouseName: new FormControl('', Validators.required),
+    // dateFormat: new FormControl("dd MMMM yyyy", Validators.required),
+
+    // Address
+    // customer_officeAddress:new FormControl('', Validators.required),
+    addressLine1:new FormControl('', Validators.required),
+    addressLine2:new FormControl('', Validators.required),
+    area:new FormControl('', Validators.required),
+    city:new FormControl('', Validators.required),
+    country:new FormControl('', Validators.required),
+    landmark:new FormControl('', Validators.required),
+    pincode:new FormControl('', Validators.required),
+    state:new FormControl('', Validators.required),
 
     })
 
     coapplicantDetailsForm = new FormGroup({
-      mobileNumber: new FormControl('', Validators.required),
+      Guarantor_mobile_number: new FormControl('', Validators.required),
+      guarantor_name: new FormControl('', Validators.required),
+      guarantor_applicantType: new FormControl('', Validators.required),
+      guarantor_companyName: new FormControl('', Validators.required),
+      guarantor_netIncome: new FormControl('', Validators.required),
+      guarantor_salaryDate:new FormControl('', Validators.required),
+      guarantor_dob:new FormControl("dd MMMM yyyy", Validators.required),
+      guarantor_maritalStatus:new FormControl('', Validators.required),
+      guarantor_spouseName:new FormControl('', Validators.required),
+
+      // Address
+      addressLine1:new FormControl('', Validators.required),
+      addressLine2:new FormControl('', Validators.required),
+      area:new FormControl('', Validators.required),
+      city:new FormControl('', Validators.required),
+      country:new FormControl('', Validators.required),
+      landmark:new FormControl('', Validators.required),
+      pincode:new FormControl('', Validators.required),
+      state:new FormControl('', Validators.required),
+
       })
 
   vehicleDetailsForm = new FormGroup({
@@ -130,6 +172,8 @@ export class NewloanProcessComponent implements OnInit {
       this.userId = data.id;
     })
   }
+
+
  
   uploadEngineImages(evt1 : any){
     if(evt1.target.files[0].type == "image/png" || evt1.target.files[0].type == "image/jpeg" || evt1.target.files[0].type == "image/gif"){
@@ -236,6 +280,37 @@ export class NewloanProcessComponent implements OnInit {
     }
   }
 
+  uploadAppIdProofImages(evt9: any){
+    if(evt9.target.files[0].type == "image/png" || evt9.target.files[0].type == "image/jpeg" || evt9.target.files[0].type == "image/gif"){
+    this.appidproofform = evt9.target.files[0];
+    if (evt9.target.files && evt9.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt9.target.files[0]);
+      reader.onload = (event) => {
+        this.applicantProofImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+
+  uploadCoAppIdProofImages(evt10: any){
+    if(evt10.target.files[0].type == "image/png" || evt10.target.files[0].type == "image/jpeg" || evt10.target.files[0].type == "image/gif"){
+    this.coidproofform = evt10.target.files[0];
+    if (evt10.target.files && evt10.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt10.target.files[0]);
+      reader.onload = (event) => {
+        this.coApplicantProofImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
 
   saveNewLoan(){
     this.submitted = true;
