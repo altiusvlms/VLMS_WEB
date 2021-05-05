@@ -27,6 +27,7 @@ export class ManageEmployeeComponent implements OnInit {
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
 
+  submitted: Boolean = false;
   // this.forvalue = form1.value;
   // this.formvalue.school_qualification = form2.value;
   // this.formvalue.college_qualification = form3.value;
@@ -101,11 +102,21 @@ export class ManageEmployeeComponent implements OnInit {
 
 
   submit(){
-    this.manageEmployee()    
   }
 /** Save Enquiry */
 manageEmployee(){
-  this.crudService.post(`${appModels.CREATEEMPLOYEE}`, this.manageEmployeeForm.value,
+
+  this.submitted = true;
+    const managuserformeObj =  this.manageEmployeeForm.value;
+    const permanentAddressObj =  this.employeePermanentAddressForm.value;
+    const generalInsuranceObj =  this.generalInsuranceForm.value;
+    const accidentalinsuranceObj =  this.accidentalinsuranceForm.value;
+    const schoolqualificationObj =  this.schoolqualificationForm.value;
+    const allFormValues1 = Object.assign({}, managuserformeObj,permanentAddressObj,generalInsuranceObj,accidentalinsuranceObj,schoolqualificationObj);
+    console.log(allFormValues1); 
+
+
+  this.crudService.post(`${appModels.CREATEEMPLOYEE}`, allFormValues1 ,
     { params:{
       tenantIdentifier: "default"   
     }}
@@ -116,5 +127,7 @@ manageEmployee(){
     this.toast.success("posted successfully")
   })
 }
+
+
   
 }

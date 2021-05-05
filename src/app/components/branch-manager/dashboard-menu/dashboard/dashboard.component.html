@@ -45,7 +45,96 @@
         
 
   <div class="container">
-  
+
+    <!-- popup -->
+
+<!-- <div class="col-sm-2">
+  <div>
+      <button type="button"  data-toggle="modal" data-target="#createEnquiryModal" (click) = "vehicledetailss=true">
+          New Loan
+      </button>
+  </div>
+</div> -->
+
+
+<div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="vehicledetailss">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createEnquiryModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button value="">Vehicle Loan</mat-radio-button>
+          <mat-radio-button value="">Personal loan</mat-radio-button>
+        </mat-radio-group>
+
+            
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Previous</button>
+        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnquiryModal" (click) = "vehicledetailss=false;usedvehicle=true;self=false">Next</button>
+      </div>
+    </div>
+
+    <div class="modal-content" *ngIf="usedvehicle">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createEnquiryModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <mat-radio-group aria-label="Select an option" >
+          <mat-radio-button value="">For New Vehicle</mat-radio-button>
+          <mat-radio-button value="">For Used Vehicle</mat-radio-button>
+        </mat-radio-group>
+
+     
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Previous</button>
+        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnquiryModal" (click) = "vehicledetailss=false;usedvehicle=false;self=true">Next</button>
+      </div>
+    </div>
+
+    <div class="modal-content" *ngIf="self">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createEnquiryModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        
+        <mat-radio-group aria-label="Select an option" >
+          <mat-radio-button value="">TakeOver</mat-radio-button>
+          <mat-radio-button value="">Self</mat-radio-button>
+          <mat-radio-button value="">Buyer Seller</mat-radio-button>
+        </mat-radio-group>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Previous</button>
+        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnquiryModal" (click) = "vehicledetailss=false;usedvehicle=false;self=false; vehicledetail()">Next</button>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
   <!-- Search form -->
   <form class="form-inline md-form form-sm active-cyan-2">
     <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search"
@@ -93,7 +182,14 @@
   <button class="btn default" (click)="customer()">Customer List (6,773)</button>
   <button class="btn default"(click)="enquiry()">New Enquiry (224)</button><br><br>
   <button class="btn default" (click)="customerEntrol()">New Customer Enrolement (6,773)</button><br><br>
-  <button class="btn default" (click)="newLoan()">New Loan</button><br><br>
+  <!-- <button class="btn default" (click)="newLoan()">New Loan</button><br><br> -->
+  <div class="col-sm-2">
+    <div>
+        <button type="button"  data-toggle="modal" data-target="#createEnquiryModal" (click) = "vehicledetailss=true">
+            New Loan
+        </button>
+    </div>
+  </div>
   <button class="btn default" (click)="loanVerification()">Loan Verification and Approval</button><br><br>
   
   <!-- <button class="btns">Today</button>
@@ -331,6 +427,68 @@
   </div>
 </div>
 
+<!-- popup -->
+
+<div class="col-sm-2">
+  <div>
+      <button type="button"  data-toggle="modal" data-target="#createEnquiryModal">
+          xyz
+      </button>
+  </div>
+</div>
+
+
+<div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createEnquiryModalLabel">Create Enquiry</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+  <form>
+          <div>
+              <label>Customer Name</label>
+              <input type="text"   class="form-control">
+          </div>
+          <div>    
+              <label>Mobile Number
+                <span class="required-field">*</span>
+              </label>
+              <input type="text"    class="form-control" >
+                <!-- <div *ngIf="submitted && createEnquiryForms.controls.mobileNumber.errors" class="invalid-feedback"> -->
+                  <div class="required-field">Mobile Number is required</div>
+                <!-- </div>   -->
+          </div>
+          <div>    
+              <label>Vehicle Number</label>
+              <span class="required-field">*</span>
+              <input type="text"    class="form-control" >
+              <!-- <div *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors" class="invalid-feedback"> -->
+                <div class="required-field">Vehicle Number is required</div>
+              <!-- </div>   -->
+          </div>
+          <div>    
+              <label>Email</label>
+              <input type="email"   class="form-control">
+          </div>
+          <div>    
+            <label>Enquiry Id</label>
+            <input type="text"    class="form-control">
+        </div>
+  </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnquiryModal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- /** Advanced Search  Table*/ -->
 
 <div class="container" *ngIf="showTable">
@@ -383,3 +541,5 @@
       </tbody>
   </table>
   </div>
+
+  

@@ -36,6 +36,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  vehicledetailss:Boolean = false; 
+  usedvehicle:Boolean = false;
+  self:Boolean = false;
 
   advancedSearch(){
   this.showTable = true;
@@ -54,5 +57,9 @@ export class DashboardComponent implements OnInit {
   }
   loanVerification(){
     this.router.navigate(['branch-manager/loan-verification']);
+  }
+  vehicledetail(){
+
+    this.router.navigate(['branch-manager/newloan-process']);
   }
 }
