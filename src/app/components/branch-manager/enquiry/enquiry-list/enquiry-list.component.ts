@@ -25,6 +25,7 @@ export class EnquiryListComponent implements OnInit {
   submitted: Boolean = false;
   showGenerateModel:Boolean = false;
   responseEnquiryId:any;
+  EnquiryVerfication_Data:any;
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService) { }
 
@@ -38,6 +39,7 @@ export class EnquiryListComponent implements OnInit {
     })
 
   ngOnInit(): void {
+    this.getEnrollData();
   }
 
   ngOnDestroy() { }
@@ -46,6 +48,17 @@ export class EnquiryListComponent implements OnInit {
   createLoan(){
     this.router.navigate(['branch-manager/loan-process']);
 
+  }
+  // Get Enquiry
+  getEnrollData() {
+    this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnquiry`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).subscribe(data => {
+      console.log(data);
+      this.EnquiryVerfication_Data = data;
+    })
   }
  /** Save Enquiry */
   saveEnquiry(){
