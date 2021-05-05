@@ -1,0 +1,57 @@
+<div class="container">
+    <form [formGroup]="createTaskForms" >
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    <div >
+        <span  class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span>
+        <span class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
+    </div>
+
+        <div>
+            <label>Task Type</label>
+            <input type="text"  formControlName="taskType"  class="form-control"  >
+            <!-- <select formControlName="taskType" class="form-control">
+              <option value="">Select Task Type</option>
+              <option value="address_verification">Address Verification</option>
+              <option value="office_verification">Office Verification</option>
+              <option value="other">Others</option>
+            </select> -->
+        </div>
+        <div>
+            <label>Customer Name/ID</label>
+            <input type="text"  formControlName="customerRegNo"  class="form-control">
+        </div>
+        <div>
+          <label>Customer Mobile No</label>
+          <input type="text"  formControlName="customermobileNo"  class="form-control">
+      </div>
+        <div>    
+            <label >Vehicle Number</label>
+            <input type="text"  formControlName="vehicleNumber"  class="form-control">                            
+        </div>
+        <div>
+            <label>Due Date</label>
+            <input type="date" formControlName="dueDate"  class="form-control">
+        </div>
+        <div>
+            <label>Assign To</label>
+            <input type="text"  formControlName="assignTo"  class="form-control">
+            <!-- <select formControlName="assignTo"  class="form-control">
+                <option value="robin">Robin</option>
+                <option value="thangamani">Thangamani</option>
+            </select> -->
+        </div>
+        <div>
+            <label>Description</label>
+            <textarea  rows="4" cols="50"  formControlName="description"  class="form-control">
+            </textarea>
+        </div>
+    <div>
+    <button type="button" class="btn btn-secondary"  (click)="close()">Close</button>
+    <button type="button" class="btn btn-primary"  (click)="saveUpdateTask()" > {{editDataTask ? 'Update' : 'Save'}}
+    </button>
+    </div>
+  </form>
+</div>
