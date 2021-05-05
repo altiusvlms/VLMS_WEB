@@ -97,13 +97,35 @@
         <div class="modal-body">
     <form [formGroup]="createCustomerEnrolForms" style="overflow: scroll;">
             <div>
-                <label>Applicant Id</label>
-                <input type="text"  formControlName="applicantId"  class="form-control">
+                <label>Customer Photo</label>
+                <input type="file"  formControlName="Customerphoto"  class="form-control">
             </div>
             <div>
                 <label>Customer Name</label>
                 <input type="text"  formControlName="customerName"  class="form-control">
             </div>
+            
+   <div>
+    <label>Mobile Numbers</label>   
+   </div>
+   <div>
+            <input type="text" class="input_field" placeholder="+91"  maxlength="3" disabled>
+ <input type="text" formControlName="phoneNumber"  class="form-control" placeholder="9865465476"  maxlength="10">
+
+  <div id="recaptcha-container"></div>
+  
+
+  <button (click)="sendLoginCode()" >SMS Text Login Code</button>
+
+  <div *ngIf="windowRef.confirmationResult">
+    <hr>
+    <label for="code">Enter your Verification Code Here</label><br>
+    <input type="text" name="code" formControlName="verificationCode">
+
+    <button (click)="verifyLoginCode()">Verify</button>
+  </div>
+
+</div>
             <div>    
                 <label>Mobile Number</label>
                 <input type="text"  formControlName="mobileNumber"  class="form-control">
@@ -120,41 +142,35 @@
                 <label>Father's Name</label>
                 <input type="text"  formControlName="fatherName"  class="form-control">
             </div>
-            <div>    
+            <div>
               <label>Gender</label>
-              <input type="text"  formControlName="gender"  class="form-control">
-          </div>
-          <div>    
-            <label>Applicant Type</label>
-            <input type="text"  formControlName="applicantType"  class="form-control">
-        </div>
-            <div>    
-                <label>ID Proof1</label>
-                <select class="form-control">
-                    <option value="">Select ID Proof1</option>
-                    <option value="aadhar">Aadhaar</option>
-                    <option value="pan">PAN</option>
-                    <option value="rationCard">Ration Card</option>
-                    <option value="drivingLicence">Driving Licence</option>
-                    <option value="passport">Passport</option>
-                    <option value="jobCard">NREGA Job Card</option>
-                </select>
-                <input type="text"  formControlName="proof1"  class="form-control">
-                <input type="file"  class="form-control">
+            <select formControlName="gender" class="form-control">
+              <option>Choose options</option>
+              <option *ngFor="let Gender of Genders">{{Gender}}</option>
+            </select>
             </div>
-            <div>    
-                <label>ID Proof2</label>
-                <select class="form-control">
-                    <option value="">Select ID Proof2</option>
-                    <option value="aadhar">Aadhaar</option>
-                    <option value="pan">PAN</option>
-                    <option value="rationCard">Ration Card</option>
-                    <option value="drivingLicence">Driving Licence</option>
-                    <option value="passport">Passport</option>
-                    <option value="jobCard">NREGA Job Card</option>
-                  </select>
-                <input type="text"  formControlName="proof2"  class="form-control">
-                <input type="file"  class="form-control">
+            <div>
+              <label>Applicant Type</label>
+            <select formControlName="applicantType" class="form-control">
+              <option>Choose options</option>
+              <option *ngFor="let Applicant of Applicants">{{Applicant}}</option>
+            </select>
+            </div>
+            <div>
+              <label>ID Proof1</label>
+            <select formControlName="proof1" class="form-control">
+              <option >choose Options</option>
+              <option *ngFor="let ID1 of ID1s">{{ID1}}</option>
+            </select>
+            <input type="file"  class="form-control" formControlName="image1">
+            </div>
+            <div>
+              <label>ID Proof2</label>
+            <select formControlName="proof2" class="form-control">
+              <option >choose Options</option>
+              <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
+            </select>
+            <input type="file"  class="form-control" formControlName="image2">
             </div>
     </form>
         </div>
