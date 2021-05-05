@@ -16,17 +16,15 @@ export class CrudService {
     }
 
     post(relativeUrlPath: string, body: any, params?: object): Observable<any> {
-        console.log(relativeUrlPath,body,params)
         return this.http.post(relativeUrlPath, body, params);
     }
 
     delete(model: string, id:any): Observable<any> {
-        return this.http.delete(`${model}/${id}`);
+        return this.http.delete(`${model}/${id}/?tenantIdentifier=default`);
     }
 
     update(model: string, body: any, id: any) {
-        console.log(model,id)
-        return this.http.put(`${model}/${id}`, body);
+        return this.http.put(`${model}/${id}/?tenantIdentifier=default`, body);
     }
 
     get_Image(model: string, params?: Object): Observable<any> {
@@ -35,4 +33,8 @@ export class CrudService {
     forgetPassword(data:any){
         return this.http.put("fineract-provider/api/v1/users/?tenantIdentifier=default",data);
     }
+
+    upload_Image(relativeUrlPath: any, form: FormData, params?: object) {
+        return this.http.post(relativeUrlPath, form, params)
+      }
 }

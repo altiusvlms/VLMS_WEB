@@ -10,6 +10,7 @@ import { DashboardMenuRoutingModule } from './dashboard-menu-routing.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 /** Custom Components */
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -19,11 +20,12 @@ import { CustomerManagementComponent } from './customer-management/customer-mana
 import { TaskManagementComponent } from './task-management/task-management.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { LoanManagementComponent } from './loan-management/loan-management.component';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 
 /** Sidebar Module */
 
 @NgModule({
-  declarations: [DashboardComponent,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, AnalyticsComponent, LoanManagementComponent],
+  declarations: [DashboardComponent,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent],
   imports: [
     CommonModule,
     DashboardMenuRoutingModule,
@@ -31,7 +33,8 @@ import { LoanManagementComponent } from './loan-management/loan-management.compo
     FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule
   ]
 })
 export class DashboardMenuModule { }

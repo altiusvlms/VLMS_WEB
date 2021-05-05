@@ -31,7 +31,7 @@
         <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>
         <td>{{task.assignTo}}</td>
         <td></td>
-        <td data-toggle="modal" data-target="#createtaskModal" (click)="viewModel(task)">View</td>
+        <td data-toggle="modal" data-target="#createtaskModal" (click)="viewModel(task,task.id)">View</td>
       </tr>
     </tbody>
 </table>
@@ -53,10 +53,10 @@
             <span class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span>
             <span class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
         </div>
-            <form [formGroup]="createTaskForms">
+            <form [formGroup]="createTaskForms" >
             <div>
                 <label>Task Type</label>
-                <input type="text"  formControlName="taskType"  class="form-control">
+                <input type="text"  formControlName="taskType"  class="form-control"  >
                 <!-- <select formControlName="taskType" class="form-control">
                   <option value="">Select Task Type</option>
                   <option value="address_verification">Address Verification</option>
@@ -98,7 +98,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button *ngIf="!showAction" type="button" class="btn btn-primary" (click)="saveTask()" data-dismiss="modal">Save</button>
-          <button  *ngIf="showAction" type="button" class="btn btn-primary"  disabled data-dismiss="modal">Update</button>
+          <button  *ngIf="!showAction" type="button" class="btn btn-primary"  (click)="updateTask()" data-dismiss="modal">Update</button>
         </div>
       </div>
     </div>

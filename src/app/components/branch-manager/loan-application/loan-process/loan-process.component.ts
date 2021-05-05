@@ -24,6 +24,7 @@ export class LoanProcessComponent implements OnInit {
   
        
   id:any;
+  selectedIndex: any = 0;
   loan_Id:any;
   resource_Id:any;  
   customer_Id:any;
@@ -38,10 +39,10 @@ export class LoanProcessComponent implements OnInit {
   //   this.router.navigate([`/${tabname}`]);
   // }
   mobile_num = localStorage.getItem("mobile_number");
-
+  // customerUserId = this.userId 
 
   applicantDetailsForm = new FormGroup({
-    userId: new FormControl('1', Validators.required),
+    userId: new FormControl('', Validators.required),
     spouseName: new FormControl('', Validators.required),
     customerName: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
@@ -103,7 +104,18 @@ export class LoanProcessComponent implements OnInit {
     });
     this.getCustomerDetails(); 
     // this.newLoanCustomerDetails()
+    this.getMobileNumber();
     
+  }
+
+  tabClick(tabChangeEvent : any){
+    this.selectedIndex = tabChangeEvent.index;
+  }
+  nextStep(){
+    this.selectedIndex += 1;
+  }
+  previousStep() {
+    this.selectedIndex -= 1;
   }
 
   ngOnDestroy() { }
@@ -170,6 +182,7 @@ export class LoanProcessComponent implements OnInit {
       loanEligibleAmount:data.bankDetails.loanEligibleAmount,
       });
    
+      console.log("mobile_numb")      
 console.log(this.mobile_num)
 
     })
@@ -198,7 +211,7 @@ console.log(this.mobile_num)
   }
 
   getMobileNumber(){
-    console.log(this.mobile_num);
+    // console.log(this.mobile_num);
     this.crudService.get(`${appModels.USERS}/${this.mobile_num}`, {
       params: {
         tenantIdentifier: 'default'  
@@ -206,6 +219,7 @@ console.log(this.mobile_num)
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
       this.userId = data.id;
+      console.log("thisuserId")
       console.log(this.userId)
     })
 

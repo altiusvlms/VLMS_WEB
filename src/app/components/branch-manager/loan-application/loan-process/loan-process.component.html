@@ -49,7 +49,7 @@
 
 
 
-<mat-tab-group mat-align-tabs="start">
+<mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabClick($event)">
     <!-- Tab 1 -->
     <mat-tab label="Applicant">
         <mat-card class="example-card">
@@ -58,11 +58,11 @@
             <table class="example-full-width" cellspacing="0">
                 
               <tr>
-                <td>  UserID:
+                <!-- <td>  UserID:
                   <mat-form-field  appearance="outline"  class="example-full-width">
                   <input matInput type='text' formControlName="userId" >
                   </mat-form-field>
-                </td><br>
+                </td><br> -->
                 <td>  Applicant name:
                   <mat-form-field  appearance="outline"  class="example-full-width">
                   <input matInput type='text' formControlName="customerName" >
@@ -133,7 +133,7 @@
               </mat-radio-group><br>
               <button mat-raised-button (click)="newLoanCustomerDetails()" color="primary">submit</button>
               <!-- <a href="#" class="previous">&laquo; Previous</a> -->
-              <a  class="next">Next &raquo;</a>
+              <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
               <!-- <button class="tablinks" (click)="setTab('tab2')">Tab 1</button> -->
               <!-- <button class="tablinks" routerLink="/Co-Applicant">Tab 3</button> -->
         </table>
@@ -216,8 +216,8 @@
             <mat-radio-button value="2">Daily</mat-radio-button>
           </mat-radio-group>
     </table>
-    <a  class="previous">&laquo; Previous</a>
-    <a  class="next">Next &raquo;</a>
+    <button  class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
+    <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
       </form>
     </mat-card-content>
     <mat-card-actions>
@@ -360,9 +360,9 @@
             </div>
          </div>
          <div class="col-sm-2" style="padding-left: 20%;">
-          <button>Create Task</button>
-          <button>Vehicle Transaction History</button>
-          <button>Vehicle Challan report</button>
+          <button type="button" class="btn btn-primary">Create Task</button>
+          <button type="button" class="btn btn-primary">Vehicle Transaction History</button>
+          <button type="button" class="btn btn-primary">Vehicle Challan report</button>
         </div>
           
         </div>
@@ -381,9 +381,8 @@
         </div>
            
          
-
-        <a class="previous">&laquo; Previous</a>
-        <a class="next">Next &raquo;</a>
+        <button class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
+        <button class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
           </form>
         </mat-card-content>
         <mat-card-actions>
@@ -547,8 +546,9 @@
               </div>
             </div>
 
-            <a  class="previous">&laquo; Previous</a>
-            <a  class="next">Next &raquo;</a>
+            <button  class="btn btn-secondary"  (click)="previousStep()">&laquo; Previous</button>
+            <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
+
 
               </form>
             </mat-card-content>
@@ -664,8 +664,9 @@
              
         </table>
 
-        <a class="previous">&laquo; Previous</a>
-        <button (click) = "submit()" form="" value="Submit">Submit</button>
+        <button class="btn btn-secondary"  (click)="previousStep()">&laquo; Previous</button>
+        <button class="btn btn-primary" (click) = "submit()" >Submit</button>
+
 
           </form>
         </mat-card-content>

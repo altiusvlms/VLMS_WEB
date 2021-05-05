@@ -6,13 +6,16 @@ import { Shell } from "../../../services/shell.service";
 /** Custom Component */
 import { LoanProcessComponent } from './loan-process/loan-process.component';
 import { LoanVerificationComponent } from './loan-verification/loan-verification.component';
+import { NewloanProcessComponent } from './newloan-process/newloan-process.component';
+
 
 /** Loan Application Routes */
 const routes: Routes = [
   Shell.childRoutes([
   { path: 'loan-process', component: LoanProcessComponent },
   { path: 'loan-verification', component: LoanVerificationComponent },
-  { path: 'loan-process/:id', component: LoanProcessComponent }
+  { path: 'loan-process/:id', component: LoanProcessComponent },
+  { path: 'newloan-process' , component: NewloanProcessComponent}
   ])
 ];
 
