@@ -1,7 +1,7 @@
 
 <div class="container">
 
-    <mat-tab-group>
+    <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabClick($event)">
         <mat-tab label="Applicant"> 
         
             <mat-card class="example-card">
@@ -91,7 +91,7 @@
                       
                       <!-- <button mat-raised-button  color="primary">submit</button> -->
                       <!-- <a href="#" class="previous">&laquo; Previous</a> -->
-                      <a  class="next" (click)="saveNewLoan()" >Next &raquo;</a>
+                      <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
                       <!-- <button class="tablinks" (click)="setTab('tab2')">Tab 1</button> -->
                       <!-- <button class="tablinks" routerLink="/Co-Applicant">Tab 3</button> -->
                 </table>
@@ -206,8 +206,8 @@
             <mat-radio-button value="2">Daily</mat-radio-button>
           </mat-radio-group>
     </table>
-    <a  class="previous">&laquo; Previous</a>
-    <a  class="next" (click)="saveNewLoan()">Next &raquo;</a>
+    <button  class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
+    <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
       </form>
       <h2>ID Proofs</h2>
       <div> 
@@ -430,8 +430,8 @@
                    
                  
         
-                <a class="previous">&laquo; Previous</a>
-                <a class="next">Next &raquo;</a>
+                <button class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
+                <button class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
                   </form>
                 </mat-card-content>
                 <mat-card-actions>
@@ -597,8 +597,8 @@
               </div>
             </div>
 
-            <a  class="previous">&laquo; Previous</a>
-            <a  class="next">Next &raquo;</a>
+            <button  class="btn btn-secondary"  (click)="previousStep()">&laquo; Previous</button>
+            <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
 
               </form>
             </mat-card-content>
@@ -715,8 +715,8 @@
                  
             </table>
     
-            <a class="previous">&laquo; Previous</a>
-            <button  form="" value="Submit"  (click)="saveNewLoan()">Submit</button>
+            <button class="btn btn-secondary"  (click)="previousStep()">&laquo; Previous</button>
+            <button class="btn btn-primary"  (click)="saveNewLoan()">Submit</button>
     
               </form>
             </mat-card-content>
