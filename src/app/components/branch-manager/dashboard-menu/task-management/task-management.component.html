@@ -1,10 +1,9 @@
 
 
-
 <!-- /** Create Task Button */ -->
 <div class="container">
   <p>Task Management </p>
-<button type="button"  data-toggle="modal" data-target="#createtaskModal" (click)="createTask()">
+<button type="button"  (click)="createViewTask(null)">
     Create Task
   </button>
 </div>
@@ -23,83 +22,24 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let task of taskListData;let i = index;">
+    <tbody *ngFor="let task of taskListData;let i = index;">
+      <tr>
         <td>{{i+1}}</td>
         <td></td>
         <td>{{task.taskType}}</td>
         <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>
         <td>{{task.assignTo}}</td>
         <td></td>
-        <td data-toggle="modal" data-target="#createtaskModal" (click)="viewModel(task,task.id)">View</td>
+        <td  (click)="createViewTask(task)">View</td>
       </tr>
     </tbody>
 </table>
+<ng-container>
+  <div *ngIf="taskListData.length === 0">
+    No Data Found.
+  </div>
+</ng-container>
+ 
 </div>
 
-  <!-- /** Create Task Model */ -->
 
-<div class="modal fade" id="createtaskModal" tabindex="-1" role="dialog" aria-labelledby="createtaskModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="createtaskModalLabel">Task Management</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        <div *ngIf="showAction">
-            <span class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span>
-            <span class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
-        </div>
-            <form [formGroup]="createTaskForms" >
-            <div>
-                <label>Task Type</label>
-                <input type="text"  formControlName="taskType"  class="form-control"  >
-                <!-- <select formControlName="taskType" class="form-control">
-                  <option value="">Select Task Type</option>
-                  <option value="address_verification">Address Verification</option>
-                  <option value="office_verification">Office Verification</option>
-                  <option value="other">Others</option>
-                </select> -->
-            </div>
-            <div>
-                <label>Customer Name/ID</label>
-                <input type="text"  formControlName="customerRegNo"  class="form-control">
-            </div>
-            <div>
-              <label>Customer Mobile No</label>
-              <input type="text"  formControlName="customermobileNo"  class="form-control">
-          </div>
-            <div>    
-                <label >Vehicle Number</label>
-                <input type="text"  formControlName="vehicleNumber"  class="form-control">                            
-            </div>
-            <div>
-                <label>Due Date</label>
-                <input type="date" formControlName="dueDate"  class="form-control">
-            </div>
-            <div>
-                <label>Assign To</label>
-                <input type="text"  formControlName="assignTo"  class="form-control">
-                <!-- <select formControlName="assignTo"  class="form-control">
-                    <option value="robin">Robin</option>
-                    <option value="thangamani">Thangamani</option>
-                </select> -->
-            </div>
-            <div>
-                <label>Description</label>
-                <textarea  rows="4" cols="50"  formControlName="description"  class="form-control">
-                </textarea>
-            </div>
-              </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button *ngIf="!showAction" type="button" class="btn btn-primary" (click)="saveTask()" data-dismiss="modal">Save</button>
-          <button  *ngIf="!showAction" type="button" class="btn btn-primary"  (click)="updateTask()" data-dismiss="modal">Update</button>
-        </div>
-      </div>
-    </div>
-  </div>
