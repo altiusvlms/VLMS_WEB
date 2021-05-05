@@ -31,6 +31,7 @@ export class NewloanProcessComponent implements OnInit {
   mobile_num = localStorage.getItem("mobile_number");
   submitted: Boolean = false;
   userId : any;
+  selectedIndex: any = 0;
   engineImgURL: any;
   enginefileform : any;
   chassisimgURL: any;
@@ -108,7 +109,17 @@ export class NewloanProcessComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  ngOnDestroy() { }
 
+  tabClick(tabChangeEvent : any){
+    this.selectedIndex = tabChangeEvent.index;
+  }
+  nextStep(){
+    this.selectedIndex += 1;
+  }
+  previousStep() {
+    this.selectedIndex -= 1;
+  }
   getUserId(){
     this.crudService.get(`${appModels.USERS}/${this.mobile_num}`, {
       params: {

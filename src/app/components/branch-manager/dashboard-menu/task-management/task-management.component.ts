@@ -64,13 +64,12 @@ export class TaskManagementComponent implements OnInit {
     console.log(id);
     this.taskID = id;
     this.showAction = true;
-    task['dueDate']=this.datepipe.transform(task['dueDate'], 'dd MMMM yyyy');
     this.createTaskForms
     .patchValue({
       taskType: task.taskType,
       customerRegNo: task.customerRegNo,
       vehicleNumber: task.vehicleNumber,
-      dueDate: task['dueDate'],
+      dueDate: this.datepipe.transform(task['dueDate'], 'dd MMMM yyyy'),
       assignTo: task.assignTo,
       description: task.description
     });
@@ -80,7 +79,7 @@ export class TaskManagementComponent implements OnInit {
   EditTask(){
     console.log(this.createTaskForms.value)
     this.createTaskForms.enable();
-    this.showAction = true;
+    this.showAction = false;
     alert("Are you sure, you want to Edit?");
   
     
@@ -89,19 +88,22 @@ export class TaskManagementComponent implements OnInit {
   updateTask(){
     console.log(this.taskID)
     console.log(this.createTaskForms.value)
-    this.crudService.update(`${appModels.FIELDEXECUTIVE}/editTask/${this.taskID}`,this.createTaskForms.value,
-     {
-      params: {
-        tenantIdentifier: 'default'
-      }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      console.log(data);
-      this.getTaskList();
+    this.crudService.update(`${appModels.FIELDEXECUTIVE}/editTask`, this.createTaskForms.value, this.taskID)
+    .pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);  
+      this.getTaskList();  
     })
+    
   }
   /** Delete the Task */
   deleteTask(){
     alert("Are you sure, you want to delete?");
+         this.crudService.delete(`${appModels.FIELDEXECUTIVE}/deleteTask`, this.taskID)
+         .pipe(untilDestroyed(this)).subscribe(data => {
+           console.log(data)
+          this.getTaskList();  
+
+      })
   }
   getTaskList(){
     this.crudService.get(`${appModels.FIELDEXECUTIVE}/getTask`, {

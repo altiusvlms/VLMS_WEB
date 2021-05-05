@@ -24,6 +24,7 @@ export class LoanProcessComponent implements OnInit {
   
        
   id:any;
+  selectedIndex: any = 0;
   loan_Id:any;
   resource_Id:any;  
   customer_Id:any;
@@ -105,6 +106,16 @@ export class LoanProcessComponent implements OnInit {
     // this.newLoanCustomerDetails()
     this.getMobileNumber();
     
+  }
+
+  tabClick(tabChangeEvent : any){
+    this.selectedIndex = tabChangeEvent.index;
+  }
+  nextStep(){
+    this.selectedIndex += 1;
+  }
+  previousStep() {
+    this.selectedIndex -= 1;
   }
 
   ngOnDestroy() { }
