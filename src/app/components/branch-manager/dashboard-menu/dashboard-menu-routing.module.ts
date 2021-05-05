@@ -11,6 +11,7 @@ import { CustomerManagementComponent } from './customer-management/customer-mana
 import { TaskManagementComponent } from './task-management/task-management.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { LoanManagementComponent } from './loan-management/loan-management.component';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 
 /** Sidebar Routes */
 const routes: Routes = [
@@ -22,6 +23,8 @@ const routes: Routes = [
     { path: 'task-management', component: TaskManagementComponent },
     { path: 'analytics', component: AnalyticsComponent },
     { path: 'loan-management', component: LoanManagementComponent },
+    { path: 'manage-employee', component: ManageEmployeeComponent}
+    
   ])
 ];
 
