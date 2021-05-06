@@ -30,6 +30,9 @@ export class CrudService {
     get_Image(model: string, params?: Object): Observable<any> {
         return this.http.get(model, { responseType: 'text'});
     }
+    forgetPassword(data:any){
+        return this.http.put("fineract-provider/api/v1/users/?tenantIdentifier=default",data);
+    }
 
     upload_Image(relativeUrlPath: any, form: FormData, params?: object) {
         return this.http.post(relativeUrlPath, form, params)

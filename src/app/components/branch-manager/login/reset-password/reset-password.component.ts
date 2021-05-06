@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
-// import { ConfirmedValidator } from './confirmed.validator';
+import { FormBuilder,FormGroup, FormControl, Validators} from '@angular/forms';
+import { ConfirmedValidator } from './confirmed.validator';
 import {  CrudService } from '../../../../services/crud.service';
 import { ToastrService } from 'ngx-toastr';
 import { appModels } from 'app/services/utils/enum.util';
@@ -14,34 +14,61 @@ import { appModels } from 'app/services/utils/enum.util';
 })
 export class ResetPasswordComponent implements OnInit {
 
+  form: FormGroup = new FormGroup({});
 
 
-  constructor(private router: Router, private crudService: CrudService, private toast: ToastrService) { }
+  constructor(private router: Router, private crudService: CrudService, private toast: ToastrService,private fb: FormBuilder) {
+    this.form = fb.group({
+      password: ['', [Validators.required]],
+      confirm_password: ['', Validators.required],
+    },{
+      validator: ConfirmedValidator('password', 'confirm_password')
+    }
+    )
+   }
 
     ResetPaswrdform = new FormGroup({
       password: new FormControl('', Validators.required),
       confirm_password: new FormControl('', Validators.required),
     })
    
-  // submit(){
-  //   console.log(this.form.value);
-  // }
+  submitdata(){
+    this.toast.success("Updated Successfully");
+  }
   
   
 
   ngOnInit() {
   }
-
+  
+   matchPassword() {  
+    var pw1 = document.getElementById("pswd1");  
+    var pw2 = document.getElementById("pswd2");  
+    if(pw1 != pw2)  
+    {   
+      alert("Passwords did not match");  
+    } else {  
+      alert("Password created successfully");  
+    }  
+  } 
+  get f(){
+    return this.form.controls;
+  }
+   
   submit(){
+    console.log(this.form.value);
+  }
+
+  submits(){
     let data = {
         "mobileNo":"1234567",
-        "password":this.ResetPaswrdform.value.password,
+        "password":this.form.value.password,
         "email":"abcd@gmail.com",
         "newMobileNo":"567"
         
   }
-    console.log(this.ResetPaswrdform.value)
-    this.crudService.update(`${appModels.USERS}`,this.ResetPaswrdform.value.password,
+    console.log(this.form.value)
+    this.crudService.update(`${appModels.USERS}`,this.form.value.password,
       { params:{
         tenantIdentifier: "default"   
       }}

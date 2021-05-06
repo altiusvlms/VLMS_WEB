@@ -15,6 +15,7 @@ import { WebAppComponent } from './web-app.component';
 /** Main Routing Module */
 import { AppRoutingModule } from './app-routing.module';
 
+
 /** Custom Module */
 import { SharedModule } from './components/shared/shared/shared.module';
 
@@ -59,7 +60,7 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule,
+    AngularFireAuthModule
   ],
   declarations: [WebAppComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

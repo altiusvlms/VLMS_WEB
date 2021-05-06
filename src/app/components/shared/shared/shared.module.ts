@@ -15,6 +15,9 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
 
+/** Custom Validation Module */
+import { ValidateEqualModule } from 'ng-validate-equal';
+
 
 /** Custom Material Module */
 import {MatButtonModule} from '@angular/material/button';
@@ -64,6 +67,7 @@ import { MatTreeModule } from '@angular/material/tree';
     LayoutModule,
     DragDropModule,
     FlexLayoutModule,
+    ValidateEqualModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -106,6 +110,7 @@ import { MatTreeModule } from '@angular/material/tree';
     LayoutModule,
     DragDropModule,
     FlexLayoutModule,
+    ValidateEqualModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
