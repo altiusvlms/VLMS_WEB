@@ -1,6 +1,8 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+/** Custom Services */
 import { Shell } from "../../../services/shell.service";
 
 /** Custom Component */
@@ -15,7 +17,7 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
 import {TopupLoanComponent } from './topup-loan/topup-loan.component';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 
-/** Sidebar Routes */
+/** Dashboard Menu Routes */
 const routes: Routes = [
   Shell.childRoutes([
     { path: 'dashboard', component: DashboardComponent },
@@ -33,7 +35,7 @@ const routes: Routes = [
 
 
 /**
- * Sidebar Routing Module */
+ *Dashboard Menu Routing Module */
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

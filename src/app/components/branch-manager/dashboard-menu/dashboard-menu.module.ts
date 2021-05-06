@@ -1,20 +1,15 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 /** Custom Module */
 import DashboardMenuRoutingModule from './dashboard-menu-routing.module';
 
-/** Angular Material */
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import {MatRadioModule} from '@angular/material/radio';
+/** Custom Material and Form Module */
+import { SharedModule } from '../../shared/shared/shared.module';
 
 /** Custom Components */
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent,AdvancedSearch } from './dashboard/dashboard.component';
 import { UserRolePermissionComponent } from './user-role-permission/user-role-permission.component';
 import { AssignTargetsComponent } from './assign-targets/assign-targets.component';
 import { CustomerManagementComponent } from './customer-management/customer-management.component';
@@ -26,20 +21,14 @@ import { TopupLoanComponent } from './topup-loan/topup-loan.component';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 
 
-/** Sidebar Module */
+/** Dashboard Menu Module */
 
 @NgModule({
-  declarations: [DashboardComponent,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent],
+  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent],
   imports: [
     CommonModule,
     DashboardMenuRoutingModule,
-    ReactiveFormsModule, 
-    FormsModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatRadioModule
+    SharedModule
   ]
 })
 export class DashboardMenuModule { }

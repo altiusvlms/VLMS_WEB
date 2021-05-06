@@ -1,12 +1,7 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule ,NoPreloading} from '@angular/router';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
 
-
-
-/** Fallback to this route when no prior route is matched.*/
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -59,11 +54,9 @@ const routes: Routes = [
 ];
 
 /**
- * App Routing Module.
- *
- * Configures the fallback route.*/
+ * App Routing Module */
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{ preloadingStrategy: NoPreloading, onSameUrlNavigation: 'reload' }), MatSidenavModule, MatToolbarModule],
+  imports: [RouterModule.forRoot(routes,{ preloadingStrategy: NoPreloading, onSameUrlNavigation: 'reload' })],
   exports: [RouterModule],
   providers: []
 })
