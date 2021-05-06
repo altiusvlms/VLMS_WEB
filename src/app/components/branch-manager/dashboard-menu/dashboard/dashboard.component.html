@@ -370,19 +370,33 @@
       </div>
       <div class="modal-body">
           <form [formGroup]="createAdvanceSearchForms">
-  
+            <div class="row">
+              <div class="col-sm-4">
+                <div>
+                  <input type="text" placeholder="Loan Number"  formControlName="loanNo"  class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div>
+                <input type="text" placeholder="Customer Name" formControlName="customerName"  class="form-control">
+              </div>
+          </div>
+          <div class="col-sm-4">
+            <div>
+              <input type="text" placeholder="Vehicle Model" formControlName="vehiclemodel"  class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-4">
           <div>
-              <input type="text" placeholder="Loan Number"  formControlName="loanNo"  class="form-control">
+            <input type="text" placeholder="Vehicle Number"  formControlName="vehicleNo"  class="form-control">
           </div>
-          <div>
-            <input type="text" placeholder="Customer Name" formControlName="customerName"  class="form-control">
-          </div>
-          <div>
-            <input type="text" placeholder="Vehicle Model" formControlName="vehiclemodel"  class="form-control">
-          </div>
-          <div>    
-              <input type="text" placeholder="Vehicle Number"  formControlName="vehicleNo"  class="form-control">
-          </div>
+      </div>
+
+    </div>
+          
+        
+        
+        
           <div>
               <input type="text" placeholder="Customer Mobile No" formControlName="customerMobileNo"  class="form-control">
           </div>
