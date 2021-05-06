@@ -4,9 +4,9 @@
         <span aria-hidden="true">&times;</span>
       </button>
 
-    <div >
+    <div *ngIf="data">
         <span  class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span>
-        <span class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
+        <span *ngIf="!editIcon" class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
     </div>
 
         <div>
@@ -33,7 +33,7 @@
         </div>
         <div>
             <label>Due Date</label>
-            <input type="date" formControlName="dueDate"  class="form-control">
+            <input type="date" formControlName="dueDate"  class="form-control" >
         </div>
         <div>
             <label>Assign To</label>

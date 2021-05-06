@@ -76,6 +76,7 @@ export class TaskManagementComponent implements OnInit {
 export class CreateTask {
 
   editDataTask : any;
+  editIcon : Boolean = false;
   
   constructor(public dialogRef: MatDialogRef<CreateTask>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private formBuilder: FormBuilder,
     private crudService: CrudService,
@@ -136,10 +137,12 @@ export class CreateTask {
   }
 
     EditTask(){
+      this.editIcon = true;
       this.createTaskForms.enable();
     } 
 
     deleteTask(){
+      this.editIcon = false;
       if (confirm(`Are you sure, you want to delete?`)) {
       this.crudService.delete(`${appModels.FIELDEXECUTIVE}/deleteTask`, this.editDataTask['id'])
       .pipe(untilDestroyed(this)).subscribe(deleted => {

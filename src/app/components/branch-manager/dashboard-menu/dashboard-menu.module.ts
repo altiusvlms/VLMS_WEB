@@ -1,17 +1,12 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
-/** Custom Module */
+/** Custom Routing Module */
 import { DashboardMenuRoutingModule } from './dashboard-menu-routing.module';
 
-/** Angular Material */
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import {MatRadioModule} from '@angular/material/radio';
+/** Custom Material and Form Module */
+import { SharedModule } from '../../shared/shared/shared.module';
 
 /** Custom Components */
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -23,20 +18,14 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { LoanManagementComponent } from './loan-management/loan-management.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 
-/** Sidebar Module */
+/** Dashboard Menu Module */
 
 @NgModule({
   declarations: [DashboardComponent,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent],
   imports: [
     CommonModule,
     DashboardMenuRoutingModule,
-    ReactiveFormsModule, 
-    FormsModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatRadioModule
+    SharedModule
   ]
 })
 export class DashboardMenuModule { }

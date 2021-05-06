@@ -1,9 +1,11 @@
 /** Angular Imports */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-/** Custom Module */
+/** Custom Material and Form Module */
+import { SharedModule } from '../../../shared/shared/shared.module';
+
+/** Custom Routing Module */
 import { EnquiryRoutingModule } from './enquiry-routing.module';
 
 /** Custom Components */
@@ -16,8 +18,7 @@ import { EnquiryListComponent } from './enquiry-list.component';
   imports: [
     CommonModule,
     EnquiryRoutingModule,
-    ReactiveFormsModule, 
-    FormsModule
+    SharedModule
   ]
 })
 export class EnquiryModule { }

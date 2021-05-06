@@ -313,6 +313,7 @@ export class NewloanProcessComponent implements OnInit {
   }
 
   saveNewLoan(){
+    this.getUserId();    
     this.submitted = true;
     const applicantObj =  this.applicantDetailsForm.value;
     const coApplicantObj =  this.coapplicantDetailsForm.value;
@@ -322,7 +323,7 @@ export class NewloanProcessComponent implements OnInit {
     const allFormValues = Object.assign({}, applicantObj,coApplicantObj,vehicleObj,loanObj,bankObj);
     allFormValues.userId = this.userId;
     console.log(allFormValues);
-
+if(this.userId !== undefined || null){
       this.crudService.post(`${appModels.NEWLOAN}`, allFormValues,
       { params:{
         tenantIdentifier: "default"   
@@ -335,6 +336,7 @@ export class NewloanProcessComponent implements OnInit {
       // this.guarantor_Id = data.guarantorId;
       // this.bankDetails_Id = data.bankDetailsId;
     })
+  }
      
     // const formData = new FormData();      
     // formData.append("file",this.fileform);

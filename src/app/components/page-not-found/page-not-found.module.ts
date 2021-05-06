@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 /** Custom Module */
 import { PageNotFoundRoutingModule } from './page-not-found-routing.module';
 
+/** Custom Material and Form Module */
+import { SharedModule } from '../shared/shared/shared.module';
+
 /** Custom Components */
 import { PageNotFoundComponent } from './page-not-found.component';
 
@@ -14,7 +17,8 @@ import { PageNotFoundComponent } from './page-not-found.component';
   declarations: [PageNotFoundComponent],
   imports: [
     CommonModule,
-    PageNotFoundRoutingModule
+    PageNotFoundRoutingModule,
+    SharedModule
   ]
 })
 export class PageNotFoundModule { }
