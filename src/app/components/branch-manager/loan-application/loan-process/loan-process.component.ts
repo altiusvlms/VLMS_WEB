@@ -46,12 +46,25 @@ export class LoanProcessComponent implements OnInit {
     spouseName: new FormControl('', Validators.required),
     customerName: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
-    
+    addressLine1: new FormControl('', Validators.required),
+    addressLine2: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    postalCode: new FormControl('', Validators.required),
+    landmark: new FormControl('', Validators.required),
+    area: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
     })
 
     coapplicantDetailsForm = new FormGroup({
       spouseName: new FormControl('', Validators.required),
       mobileNumber: new FormControl('', Validators.required),
+      addressLine1: new FormControl('', Validators.required),
+    addressLine2: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    postalCode: new FormControl('', Validators.required),
+    landmark: new FormControl('', Validators.required),
+    area: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
       })
 
 
@@ -131,12 +144,18 @@ export class LoanProcessComponent implements OnInit {
       .patchValue({
         customerName: data.customerName,
         maritalStatus: data.customerDetails.maritalStatus,
+        addressLine1: data.customerDetails.communicationAdd.addressLine1,
+        city: data.customerDetails.communicationAdd.city,
+        postalCode: data.customerDetails.communicationAdd.postalCode,
       })
 
       this.coapplicantDetailsForm
       .patchValue({
         spouseName: data.customerGuarantor.spouseName,
         mobileNumber: data.customerGuarantor.mobileNumber,
+        addressLine1: data.customerGuarantor.communicationAdd.addressLine1,
+        city: data.customerGuarantor.communicationAdd.city,
+        postalCode: data.customerGuarantor.communicationAdd.postalCode,
       })
 
       this.vehicleDetailsForm
@@ -188,21 +207,21 @@ console.log(this.mobile_num)
     })
   }
 
-  newLoanCustomerDetails(){
-    this.crudService.post(`${appModels.NEWLOAN}`, this.applicantDetailsForm.value,
-      { params:{
-        tenantIdentifier: "default"   
-      }}
-    ).pipe(untilDestroyed(this)).subscribe( data => {
-      console.log(data)
-      // console.log(this.mobile_num)
-      this.loan_Id = data.loanId;
-      this.resource_Id = data.resourceId;
-      this.customer_Id = data.customerId;
-      this.guarantor_Id = data.guarantorId;
-      this.bankDetails_Id = data.bankDetailsId;
-    })
-  }
+  // newLoanCustomerDetails(){
+  //   this.crudService.post(`${appModels.NEWLOAN}`, this.applicantDetailsForm.value,
+  //     { params:{
+  //       tenantIdentifier: "default"   
+  //     }}
+  //   ).pipe(untilDestroyed(this)).subscribe( data => {
+  //     console.log(data)
+  //     // console.log(this.mobile_num)
+  //     this.loan_Id = data.loanId;
+  //     this.resource_Id = data.resourceId;
+  //     this.customer_Id = data.customerId;
+  //     this.guarantor_Id = data.guarantorId;
+  //     this.bankDetails_Id = data.bankDetailsId;
+  //   })
+  // }
 
   submit(){
     // this.getMobileNumber();

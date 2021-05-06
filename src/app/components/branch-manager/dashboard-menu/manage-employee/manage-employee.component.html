@@ -125,7 +125,7 @@
                       <!-- <button mat-raised-button  color="primary">submit</button> -->
                       <!-- <a href="#" class="previous">&laquo; Previous</a> -->
                       <!-- <a  class="next"  >Next &raquo;</a> -->
-                      <button class="tablinks" (click)="submit()">submit</button>
+                      <!-- <button class="tablinks" (click)="submit()">submit</button> -->
                       <!-- <button class="tablinks" routerLink="/Co-Applicant">Tab 3</button> -->
                 </table>
                   </form>
@@ -140,8 +140,56 @@
         
         <!-- </mat-tab> -->
 
+        <form [formGroup] = "employeeCommunicationAddressForm">
+          <h2>ADD Communication address</h2>
+  
+          <div>
+              <td> Address Line 1:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="addressLine1" >
+              </mat-form-field></td>
+          </div>
+          <div>
+              <td> Address Line 2:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="addressLine2" >
+              </mat-form-field></td>
+          </div>
+          <div>
+              <td>Landmark:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="landmark" >
+              </mat-form-field></td>
+          </div>
+          <div>
+              <td>Enter pincode:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="pincode" >
+              </mat-form-field></td>
+          </div>
+          <div>
+              <td>Area:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="area" >
+              </mat-form-field></td>
+          </div>
+          <div>
+              <td>City:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="city" >
+              </mat-form-field></td>
+          </div>
+          <div>
+              <td>Country:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="country" >
+              </mat-form-field></td>
+          </div>
+      </form>
+
+
         <form [formGroup] = "employeePermanentAddressForm">
-        <h2>ADD ADDRESS</h2>
+        <h2>ADD permanent address</h2>
 
         <div>
             <td> Address Line 1:
@@ -296,7 +344,7 @@
 
             <form [formGroup] = "schoolqualificationForm">
         <h3>Education Qualification</h3>
-        <table class="table">
+        <table class="table" [formGroup] = "schoolqualificationForm">
     <thead>
       <tr>
         <th>School/Qualification</th>
@@ -332,5 +380,5 @@
       </table>
 
     </form>
-    <button type="submit" (click)="manageEmployee">Submit</button>
+    <button type="submit" (click)="manageEmployee()">Submit</button>
 </div>

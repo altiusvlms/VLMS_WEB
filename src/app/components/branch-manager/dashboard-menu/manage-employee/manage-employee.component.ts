@@ -61,6 +61,16 @@ export class ManageEmployeeComponent implements OnInit {
     accountType:new FormControl('', Validators.required),
     })
 
+    employeeCommunicationAddressForm = new FormGroup({
+      addressLine1:new FormControl('', Validators.required),
+      addressLine2:new FormControl('', Validators.required),
+      landmark:new FormControl('', Validators.required),
+      pincode:new FormControl('', Validators.required),
+      area:new FormControl('', Validators.required),
+      city:new FormControl('', Validators.required),
+      country:new FormControl('', Validators.required),
+    })
+
     employeePermanentAddressForm = new FormGroup({
       addressLine1:new FormControl('', Validators.required),
       addressLine2:new FormControl('', Validators.required),
@@ -89,10 +99,23 @@ export class ManageEmployeeComponent implements OnInit {
       percentage : new FormControl('', Validators.required)
     })
     
+    collegeQualificationForm = new FormControl ({
+      university:new FormControl('', Validators.required),
+      qualification: new FormControl('', Validators.required),
+      percentage : new FormControl('', Validators.required)
+    })
+  
+    graduateQualificationForm = new FormControl ({
+      university:new FormControl('', Validators.required),
+      qualification: new FormControl('', Validators.required),
+      percentage : new FormControl('', Validators.required)
+    })
 
-
-
-    
+    postgraduateQualificationForm = new FormControl ({
+      university:new FormControl('', Validators.required),
+      qualification: new FormControl('', Validators.required),
+      percentage : new FormControl('', Validators.required)
+    })
 
   ngOnInit(): void {
     // this.manageEmployee()    
@@ -108,11 +131,15 @@ manageEmployee(){
 
   this.submitted = true;
     const managuserformeObj =  this.manageEmployeeForm.value;
+    const communicationAddressObj = this.employeeCommunicationAddressForm.value;
     const permanentAddressObj =  this.employeePermanentAddressForm.value;
     const generalInsuranceObj =  this.generalInsuranceForm.value;
     const accidentalinsuranceObj =  this.accidentalinsuranceForm.value;
     const schoolqualificationObj =  this.schoolqualificationForm.value;
-    const allFormValues1 = Object.assign({}, managuserformeObj,permanentAddressObj,generalInsuranceObj,accidentalinsuranceObj,schoolqualificationObj);
+    const collegequalificationObj = this.collegeQualificationForm.value;
+    const graduatequalificationObj = this.graduateQualificationForm.value;
+    const postqualificationObj = this.postgraduateQualificationForm.value;
+    const allFormValues1 = Object.assign({}, managuserformeObj,communicationAddressObj,permanentAddressObj,generalInsuranceObj,accidentalinsuranceObj,schoolqualificationObj,collegequalificationObj,graduatequalificationObj,postqualificationObj);
     console.log(allFormValues1); 
 
 

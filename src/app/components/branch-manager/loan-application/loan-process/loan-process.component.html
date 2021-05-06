@@ -131,7 +131,37 @@
                 <mat-radio-button value="2">Weakly</mat-radio-button>
                 <mat-radio-button value="2">Daily</mat-radio-button>
               </mat-radio-group><br>
-              <button mat-raised-button (click)="newLoanCustomerDetails()" color="primary">submit</button>
+
+              <h2>ADD ADDRESS</h2>
+
+              <div>
+                  <td> Enter adress Here:
+                      <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput formControlName="addressLine1"  >
+                  </mat-form-field></td>
+              </div>
+              <div>
+                  <td> City:
+                      <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput formControlName="city" >
+                  </mat-form-field></td>
+              </div>
+              <div>
+                  <td>Enter pincode:
+                      <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput formControlName="postalCode" >
+                  </mat-form-field></td>
+              </div>
+              <div>
+                <select  class="form-control">
+                  <option value="koundampalayam">koundampalayam</option>
+                  <option value="ganapathy">ganapathy</option>
+                  <option value="gandhipuram">gandhipuram</option>
+                  <option value="hopes">hopes</option>
+                </select>
+            </div>
+
+              <button mat-raised-button (click)="getCustomerDetails()" color="primary">submit</button>
               <!-- <a href="#" class="previous">&laquo; Previous</a> -->
               <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
               <!-- <button class="tablinks" (click)="setTab('tab2')">Tab 1</button> -->
@@ -215,6 +245,28 @@
             <mat-radio-button value="2">Weakly</mat-radio-button>
             <mat-radio-button value="2">Daily</mat-radio-button>
           </mat-radio-group>
+
+          <h2>ADD ADDRESS</h2>
+
+          <div>
+              <td> Enter adress Here:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="addressLine1">
+              </mat-form-field></td>
+          </div>
+          <div>
+              <td> City:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="city">
+              </mat-form-field></td>
+          </div>
+          <div>
+              <td>Enter pincode:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput formControlName="postalCode">
+              </mat-form-field></td>
+          </div>
+
     </table>
     <button  class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
     <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
