@@ -9,7 +9,7 @@ import { DashboardMenuRoutingModule } from './dashboard-menu-routing.module';
 import { SharedModule } from '../../shared/shared/shared.module';
 
 /** Custom Components */
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent,AdvancedSearch } from './dashboard/dashboard.component';
 import { UserRolePermissionComponent } from './user-role-permission/user-role-permission.component';
 import { AssignTargetsComponent } from './assign-targets/assign-targets.component';
 import { CustomerManagementComponent } from './customer-management/customer-management.component';
@@ -21,7 +21,7 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
 /** Dashboard Menu Module */
 
 @NgModule({
-  declarations: [DashboardComponent,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent],
+  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent],
   imports: [
     CommonModule,
     DashboardMenuRoutingModule,

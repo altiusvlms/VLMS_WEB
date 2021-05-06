@@ -5,7 +5,7 @@
         
             <mat-card class="example-card">
                 <mat-card-content>
-                  <form [formGroup]="applicantDetailsForm">
+                  <form [formGroup]="newLoanForm">
                     <table class="example-full-width" cellspacing="0">
                         
                       <tr>
@@ -35,13 +35,13 @@
                         <input matInput formControlName="refBy" >
                       </mat-form-field></td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>  Applicant Type:
                           <mat-form-field  appearance="outline" class="example-full-width">
                           <input matInput  >
                           </mat-form-field>
                         </td>
-                      </tr>
+                      </tr> -->
                       
                     <tr>
                         <td>  Company Name:
@@ -60,25 +60,25 @@
                       <tr>
                         <td> Salary Date:
                             <mat-form-field appearance="outline" class="example-full-width">
-                          <input matInput formControlName="salaryDate" >
+                          <input matInput type="date" formControlName="salaryDate" >
                         </mat-form-field></td>
                       </tr>
-                      <mat-radio-group aria-label="Select an option">
-                        <mat-radio-button value="1">Monthly</mat-radio-button>
-                        <mat-radio-button value="2">Weakly</mat-radio-button>
-                        <mat-radio-button value="2">Daily</mat-radio-button>
+                      <mat-radio-group aria-label="Select an option" formControlName="salaryPeriod">
+                        <mat-radio-button value="monthly">Monthly</mat-radio-button>
+                        <mat-radio-button value="weakly">Weakly</mat-radio-button>
+                        <mat-radio-button value="daily">Daily</mat-radio-button>
                       </mat-radio-group><br>
 
                 </table>
                   </form>
                   <h2>Choose Govt ID</h2>
                   <div> 
-                    <select  class="form-control">
+                    <!-- <select  class="form-control">
                       <option value="Aadhar">Aadhar</option>
                       <option value="pancard">pancard</option>
                       <option value="voter id">voter id</option>
                       
-                    </select>
+                    </select> -->
 
                     <div> 
                       <label>Upload photo:
@@ -93,21 +93,20 @@
                   <tr>
                     <td> DOB:
                         <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput formControlName="dob" >
+                      <input matInput type="date" formControlName="dob" >
                     </mat-form-field></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td>Age:
                         <mat-form-field appearance="outline" class="example-full-width">
                       <input matInput  >
                     </mat-form-field></td>
-                  </tr>
+                  </tr> -->
                   
-                    <select  class="form-control">
+                    <select  class="form-control" formcontrolName="maritalStatus">
                       <option value="maritalStatus">Marital status</option>
                       <option value="yes">yes</option>
                       <option value="no">no</option>
-                      
                     </select>
                 
                   <tr>
@@ -121,7 +120,7 @@
                   <div>
                       <td> Company Name:
                           <mat-form-field appearance="outline" class="example-full-width">
-                        <input matInput  >
+                        <input matInput  formcontrolName="companyName">
                       </mat-form-field></td>
                   </div>
                   <div>
@@ -133,29 +132,17 @@
                   <div>
                       <td>Enter pincode:
                           <mat-form-field appearance="outline" class="example-full-width">
-                        <input matInput formControlName="landmark" >
+                        <input matInput formControlName="pincode" >
                       </mat-form-field></td>
                   </div>
-                  <div>
+                  <!-- <div>
                     <select  class="form-control">
                       <option value="koundampalayam">koundampalayam</option>
                       <option value="ganapathy">ganapathy</option>
                       <option value="gandhipuram">gandhipuram</option>
                       <option value="hopes">hopes</option>
                     </select>
-                </div>
-                  <!-- <div>
-                      <td>
-                          <mat-form-field appearance="outline" class="example-full-width">
-                        <input matInput formControlName="" >
-                      </mat-form-field></td>
-                  </div>
-                  <div>
-                      <td>:
-                          <mat-form-field appearance="outline" class="example-full-width">
-                        <input matInput formControlName="" >
-                      </mat-form-field></td>
-                  </div> -->    
+                </div> -->
                   <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>          
                 </mat-card-content>
                 <mat-card-actions>
@@ -171,7 +158,7 @@
         <mat-tab label="Co-Applicant">
     <mat-card class="example-card">
     <mat-card-content>
-      <form class="example-form" [formGroup]="coapplicantDetailsForm" >
+      <form class="example-form" [formGroup]="newLoanForm" >
         <table class="example-full-width" cellspacing="0">
             
           <tr>
@@ -184,18 +171,19 @@
           <tr>
           <td> Mobile Number:
               <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput type='text' formControlName="Guarantor_mobile_number" minlength=10 maxlength=10 >
-            <!-- <div *ngIf = "coapplicantDetailsForm.controls.mobileNumber.invalid" >Error</div> -->
+            <input matInput type='text' formControlName="guarantor_mobile_number" minlength=10 maxlength=10 >
           </mat-form-field></td>
         </tr>
-        <div>
-          <select  class="form-control">
-            <option value="guarantor_applicantType">Co-Applicant Type</option>
-            <option value="ganapathy">Individual</option>
-            <option value="gandhipuram">self Employed proof</option>
-            <option value="hopes">Advocate</option>
+        <tr>
+        <td>
+          <select  class="form-control"  formControlName="guarantor_applicantType">
+            <option value="co-applicant">Co-Applicant Type</option>
+            <option value="individual">Individual</option>
+            <option value="selfemployee">Self Employed proof</option>
+            <option value="advocate">Advocate</option>
           </select>
-      </div>
+      </td>
+        </tr>
 
       <tr>
         <td>  Company Name:
@@ -213,16 +201,16 @@
         </td>
       </tr>
      
-          <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Monthly</mat-radio-button>
-            <mat-radio-button value="2">Weakly</mat-radio-button>
-            <mat-radio-button value="2">Daily</mat-radio-button>
+          <mat-radio-group aria-label="Select an option" formControlName="guarantor_salaryType" >
+            <mat-radio-button value="monthly">Monthly</mat-radio-button>
+            <mat-radio-button value="weakly">Weakly</mat-radio-button>
+            <mat-radio-button value="daily">Daily</mat-radio-button>
           </mat-radio-group>
 
           <tr>
             <td> Salary Date:
                 <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput formControlName="guarantor_salaryDate" >
+              <input matInput type="date" formControlName="guarantor_salaryDate" >
             </mat-form-field></td>
           </tr>
 
@@ -237,7 +225,7 @@
         <tr>
           <td> DOB:
               <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput formControlName="guarantor_dob" >
+            <input matInput type="date" formControlName="guarantor_dob" >
           </mat-form-field></td>
         </tr>
 
@@ -256,10 +244,10 @@
           </mat-form-field></td>
         </tr>
         <div>
-          <select  class="form-control">
-            <option value="">Marrital status</option>
-            <option value="">Yes</option>
-            <option value="">No</option>
+          <select  class="form-control" formcontrolName="maritalStatus">
+            <option value="maritalStatus">Marital status</option>
+            <option value="yes">yes</option>
+            <option value="no">no</option>
           </select>
       </div>
 
@@ -274,7 +262,7 @@
       <div>
           <td> Company Name:
               <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput >
+            <input matInput formControlName="guarantor_companyName">
           </mat-form-field></td>
       </div>
       <div>
@@ -286,7 +274,7 @@
       <div>
           <td>Enter pincode:
               <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput >
+            <input matInput formControlName="pincode">
           </mat-form-field></td>
       </div>
           
@@ -309,7 +297,7 @@
 
             <mat-card class="example-card">
                 <mat-card-content>
-                  <form class="example-form" [formGroup]="vehicleDetailsForm">
+                  <form class="example-form" [formGroup]="newLoanForm">
                     
                   <div class="row">
                     <div class="col-sm-2">
@@ -317,10 +305,10 @@
                         <label>Vehicle Number:                  
                           <span class="required-field">*</span>
                           <mat-form-field  appearance="outline" class="example-full-width">
-                            <input matInput type='text'  formControlName="vehicleNumber" [ngClass]="{ 'is-invalid': submitted && vehicleDetailsForm.controls.vehicleNumber.errors  }">
+                            <input matInput type='text'  formControlName="vehicleNumber" [ngClass]="{ 'is-invalid': submitted && newLoanForm.controls.vehicleNumber.errors  }">
                             </mat-form-field>
-                            <div *ngIf="submitted && vehicleDetailsForm.controls.vehicleNumber.errors" class="invalid-feedback">
-                              <div class="required-field" *ngIf="submitted && vehicleDetailsForm.controls.vehicleNumber.errors.required">Vehicle Number is required</div>
+                            <div *ngIf="submitted && newLoanForm.controls.vehicleNumber.errors" class="invalid-feedback">
+                              <div class="required-field" *ngIf="submitted && newLoanForm.controls.vehicleNumber.errors.required">Vehicle Number is required</div>
                             </div>  
                         </label>
                       </div>
@@ -328,10 +316,10 @@
                        <label>Model:
                         <span class="required-field">*</span>
                         <mat-form-field  appearance="outline" class="example-full-width">
-                          <input matInput  type='text' formControlName="model"  [ngClass]="{ 'is-invalid': submitted && vehicleDetailsForm.controls.model.errors  }" >
+                          <input matInput  type='text' formControlName="model"  [ngClass]="{ 'is-invalid': submitted && newLoanForm.controls.model.errors  }" >
                           </mat-form-field>
-                          <div *ngIf="submitted && vehicleDetailsForm.controls.model.errors" class="invalid-feedback">
-                            <div class="required-field" *ngIf="submitted && vehicleDetailsForm.controls.model.errors.required">Model is required</div>
+                          <div *ngIf="submitted && newLoanForm.controls.model.errors" class="invalid-feedback">
+                            <div class="required-field" *ngIf="submitted && newLoanForm.controls.model.errors.required">Model is required</div>
                           </div>  
                           </label>
                       </div>
@@ -339,10 +327,10 @@
                         <label>MFG Year:
                           <span class="required-field">*</span>
                           <mat-form-field  appearance="outline" class="example-full-width" >
-                            <input matInput  type='text' formControlName="mfgyear" [ngClass]="{ 'is-invalid': submitted && vehicleDetailsForm.controls.mfgyear.errors  }">  
+                            <input matInput  type='text' formControlName="mfgyear" [ngClass]="{ 'is-invalid': submitted && newLoanForm.controls.mfgyear.errors  }">  
                           </mat-form-field>
-                          <div *ngIf="submitted && vehicleDetailsForm.controls.mfgyear.errors" class="invalid-feedback">
-                            <div class="required-field" *ngIf="submitted && vehicleDetailsForm.controls.mfgyear.errors.required">MFG Year is required</div>
+                          <div *ngIf="submitted && newLoanForm.controls.mfgyear.errors" class="invalid-feedback">
+                            <div class="required-field" *ngIf="submitted && newLoanForm.controls.mfgyear.errors.required">MFG Year is required</div>
                           </div>
                            </label>
                        </div>
@@ -501,7 +489,7 @@
         <mat-tab label="Loan Transfer">
             <mat-card class="example-card">
             <mat-card-content>
-              <form class="example-form"  [formGroup]="loanTransferForm">
+              <form class="example-form"  [formGroup]="newLoanForm">
                 <div class="row">
                   <div class="col-3">
                 <table class="example-full-width" cellspacing="0">
@@ -528,7 +516,7 @@
                 <tr>
                   <td>  Due Date:
                     <mat-form-field  appearance="outline" class="example-full-width">
-                    <input matInput  type='text'  formControlName="dueDate">
+                    <input matInput  type='date'  formControlName="dueDate">
                     </mat-form-field>
                   </td>
                 </tr>
@@ -645,7 +633,7 @@
                   </mat-form-field>
                   <label>Due Date </label>
                   <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput type='text' >
+                    <input matInput type='date' >
                   </mat-form-field>
                 </div>
               </div>
@@ -668,7 +656,7 @@
           <mat-tab label="Bank details">
             <mat-card class="example-card">
             <mat-card-content>
-              <form class="example-form" [formGroup]="bankDetailsForm">
+              <form class="example-form" [formGroup]="newLoanForm">
                   <p>Transfer Amount 1</p>
                 &nbsp;
                 <input type="submit" id="fname" name="fname" value="0,000" >&nbsp;
@@ -753,7 +741,7 @@
                   <tr>
                   <td> Due Date:
                       <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput >
+                    <input matInput type="date" >
                   </mat-form-field></td>
                 </tr>
                 <tr>
