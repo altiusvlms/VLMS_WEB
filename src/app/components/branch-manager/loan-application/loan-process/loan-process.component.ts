@@ -7,6 +7,7 @@ import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../../../../services/shared.service';
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -31,9 +32,10 @@ export class LoanProcessComponent implements OnInit {
   guarantor_Id:any;
   bankDetails_Id:any;
   userId:any;
+  editAddress:any
 
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, private sharedService: SharedService) { }
 
   // setTab(tabname: string) {
   //   this.router.navigate([`/${tabname}`]);
@@ -109,6 +111,18 @@ export class LoanProcessComponent implements OnInit {
       loanEligibleAmount: new FormControl('', Validators.required)
      })
 
+     updateAddressForms = new FormGroup({
+      
+addressLine1: new FormControl(''),
+addressLine2: new FormControl(''),
+area: new FormControl(''),
+city: new FormControl(''),
+country: new FormControl(''),
+landmark: new FormControl(''),
+pincode: new FormControl(''),
+state: new FormControl(''),
+
+    })
      
   
   ngOnInit(): void {
@@ -243,6 +257,14 @@ console.log(this.mobile_num)
     })
 
       }
+      addressupdate(){   
+      this.crudService.update(`${appModels.CUSTOMERS}/address/27`,this.updateAddressForms.value,
+      this.editAddress['27'],
+  ).pipe(untilDestroyed(this)).subscribe(updated => {
+      // this.dialogRef.close(updated);
+      this.sharedService.setLoaderShownProperty(false);  
+    })
+  }
   
 
 }

@@ -17,15 +17,19 @@ import { TaskManagementComponent ,CreateTask} from './task-management/task-manag
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { LoanManagementComponent } from './loan-management/loan-management.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { MatTabsModule } from '@angular/material/tabs';
+// import { ExistingUserComponent } from './existing-user/existing-user.component';
+import { ExistingEmployeeComponent } from './existing-employee/existing-employee.component';
 
 /** Dashboard Menu Module */
 
 @NgModule({
-  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent],
+  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent, ExistingEmployeeComponent],
   imports: [
     CommonModule,
     DashboardMenuRoutingModule,
-    SharedModule
+    SharedModule,
+    MatTabsModule
   ]
 })
 export class DashboardMenuModule { }
