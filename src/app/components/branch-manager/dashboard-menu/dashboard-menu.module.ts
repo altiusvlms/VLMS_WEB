@@ -24,7 +24,7 @@ import { CreateReceiptComponent } from './create-receipt/create-receipt.componen
 /** Dashboard Menu Module */
 
 @NgModule({
-  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent],
+  declarations: [DashboardComponent,AdvancedSearch, UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent],
   imports: [
     CommonModule,
     DashboardMenuRoutingModule,

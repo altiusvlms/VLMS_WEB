@@ -22,7 +22,14 @@ import { CLASS_NAME } from '@angular/flex-layout';
 
 export class ManageEmployeeComponent implements OnInit {
 
-  responseId:any;
+  EmployeeId:any;
+  Imagefileform: any;
+  Imagefileform2:any;
+  engineImgURLS:any;
+  engineImgURL:any;
+  uploadImages_1:any;
+  uploadImages_2:any;
+  
   // forvalue : CLASS_NAME;
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
@@ -90,6 +97,11 @@ export class ManageEmployeeComponent implements OnInit {
     })
     
 
+    ImageEmployeeForm = new FormGroup({
+      Pan_photo:new FormControl('', Validators.required),
+      Aadhar_photo: new FormControl('', Validators.required),
+    })
+
 
 
     
@@ -121,13 +133,76 @@ manageEmployee(){
       tenantIdentifier: "default"   
     }}
   ).pipe(untilDestroyed(this)).subscribe( data => {
-    this.responseId = data.resourceId;
-    console.log("data")
-    console.log(data)
-    this.toast.success("posted successfully")
+    this.EmployeeId = data.resourceId;
+    console.log(this.EmployeeId);
+    this.toast.success("posted successfully");
+
+    const formData = new FormData();      
+    formData.append("file",this.Imagefileform);
+        this.crudService.upload_Image(`${appModels.COMMON}/images/employee_pancard/1`, formData,
+        { params:{
+              tenantIdentifier: "default"   
+            }}
+        ).pipe(untilDestroyed(this))
+          .subscribe( async data => {
+            console.log(data)
+
+            const formData = new FormData();      
+    formData.append("file",this.Imagefileform2);
+        this.crudService.upload_Image(`${appModels.COMMON}/images/employee_adhar/1`, formData,
+        { params:{
+              tenantIdentifier: "default"   
+            }}
+        ).pipe(untilDestroyed(this))
+          .subscribe( async data => {
+            console.log(data)
+          })
+          })
+
   })
 }
+// uploadImages1(evt1 : any){
+//   {
+//   this.Imagefileform = evt1.target.files[0];
+//   console.log(this.Imagefileform);
+//   }
+// }
+uploadImages1(evt1: any){
+  if(evt1.target.files[0].type == "image/png" || evt1.target.files[0].type == "image/jpeg" || evt1.target.files[0].type == "image/gif"){
+  this.Imagefileform = evt1.target.files[0];
+  if (evt1.target.files && evt1.target.files[0]) {
+    var reader = new FileReader();
+    reader.readAsDataURL(evt1.target.files[0]);
+    reader.onload = (event) => {
+      this.engineImgURL = event.target['result'];
+      }
+    }
+  }
+  else {
+    alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+  }
+}
 
+uploadImages2(evt2: any){
+  if(evt2.target.files[0].type == "image/png" || evt2.target.files[0].type == "image/jpeg" || evt2.target.files[0].type == "image/gif"){
+  this.Imagefileform2 = evt2.target.files[0];
+  if (evt2.target.files && evt2.target.files[0]) {
+    var reader = new FileReader();
+    reader.readAsDataURL(evt2.target.files[0]);
+    reader.onload = (event) => {
+      this.engineImgURLS = event.target['result'];
+      }
+    }
+  }
+  else {
+    alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+  }
+}
 
-  
+// uploadImages2(evt2 : any){
+//   {
+//   this.Imagefileform2 = evt2.target.files[0];
+//   console.log(this.Imagefileform2);
+//   }
+// }
 }
