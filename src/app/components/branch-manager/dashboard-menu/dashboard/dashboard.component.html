@@ -1,20 +1,20 @@
 <!-- Headers -->
 <!-- <mat-toolbar class="toolbar"> -->
-    <!-- <mat-toolbar-row> -->
-      <!-- <button mat-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button> -->
-  
-      <!-- <span class="example-spacer"></span> -->
-      <!-- <a [routerLink]="['/search',{name:id}]"  > -->
-        
-      <!-- <mat-icon style="color: white;" class="example-icon" (click) = "navigation()"> search</mat-icon>
+<!-- <mat-toolbar-row> -->
+<!-- <button mat-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button> -->
+
+<!-- <span class="example-spacer"></span> -->
+<!-- <a [routerLink]="['/search',{name:id}]"  > -->
+
+<!-- <mat-icon style="color: white;" class="example-icon" (click) = "navigation()"> search</mat-icon>
       <mat-icon style="color: white;" class="example-icon" (click) = "pathy()">add_shopping_cart</mat-icon> -->
-      <!-- <mat-icon style="color: black;" class="example-icon" >notification_important</mat-icon> -->
-      <!-- <span class="iconify" data-icon="mdi-logout" data-inline="false"></span>
+<!-- <mat-icon style="color: black;" class="example-icon" >notification_important</mat-icon> -->
+<!-- <span class="iconify" data-icon="mdi-logout" data-inline="false"></span>
     </mat-toolbar-row>
   </mat-toolbar> -->
-  
-  <!-- SideNav -->
-  <!-- <mat-sidenav-container>
+
+<!-- SideNav -->
+<!-- <mat-sidenav-container>
     <mat-sidenav>Start</mat-sidenav>
     <mat-sidenav-content >Dashboard</mat-sidenav-content><br>
     <mat-sidenav-content (click) = "navigation()">Manager User Role & Permission</mat-sidenav-content>
@@ -25,9 +25,9 @@
     <mat-sidenav-content>Report</mat-sidenav-content>
     <mat-sidenav-content>Analytics</mat-sidenav-content>
   </mat-sidenav-container><br><br> -->
-  
-  <!-- search -->
-  <!-- <input type="text" class="form-control" placeholder="Search" ngModel="query" id="listSearch" #LockFilter>
+
+<!-- search -->
+<!-- <input type="text" class="form-control" placeholder="Search" ngModel="query" id="listSearch" #LockFilter>
   
         <div class="panel panel-default col-xs-12 col-sm-11" *ngFor="let lock of locked | LockFilter: query">
           <input type="checkbox" ngModel="lock.checked" (change)="openModal($event, lock)" class="check" id="{{lock.ID}}">
@@ -39,16 +39,16 @@
         </div> -->
 
 
-       
 
-        
-        
 
-  <div class="container">
 
-    <!-- popup -->
 
-<!-- <div class="col-sm-2">
+
+<div class="container">
+
+  <!-- popup -->
+
+  <!-- <div class="col-sm-2">
   <div>
       <button type="button"  data-toggle="modal" data-target="#createEnquiryModal" (click) = "vehicledetailss=true">
           New Loan
@@ -57,112 +57,122 @@
 </div> -->
 
 
-<div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" *ngIf="vehicledetailss">
-      <div class="modal-header">
-        <h5 class="modal-title" id="createEnquiryModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" >
+  <div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" *ngIf="vehicledetailss">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createEnquiryModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
 
-        <mat-radio-group aria-label="Select an option">
-          <mat-radio-button value="">Vehicle Loan</mat-radio-button>
-          <mat-radio-button value="">Personal loan</mat-radio-button>
-        </mat-radio-group>
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="">Vehicle Loan</mat-radio-button>
+            <mat-radio-button value="">Personal loan</mat-radio-button>
+          </mat-radio-group>
 
-            
-        
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Previous</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generateEnquiryModal"
+            (click)="vehicledetailss=false;usedvehicle=true;self=false">Next</button>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Previous</button>
-        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnquiryModal" (click) = "vehicledetailss=false;usedvehicle=true;self=false">Next</button>
+
+      <div class="modal-content" *ngIf="usedvehicle">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createEnquiryModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="">For New Vehicle</mat-radio-button>
+            <mat-radio-button value="">For Used Vehicle</mat-radio-button>
+          </mat-radio-group>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Previous</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generateEnquiryModal"
+            (click)="vehicledetailss=false;usedvehicle=false;self=true">Next</button>
+        </div>
       </div>
+
+      <div class="modal-content" *ngIf="self">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createEnquiryModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="">TakeOver</mat-radio-button>
+            <mat-radio-button value="">Self</mat-radio-button>
+            <mat-radio-button value="">Buyer Seller</mat-radio-button>
+          </mat-radio-group>
+          <!-- <div>
+          <span class="left-title">
+            Applicant:
+          </span>
+          <input type="text" id="fname" placeholder="" name="fname">
+        </div> -->
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Previous</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generateEnquiryModal"
+            (click)="vehicledetailss=false;usedvehicle=false;self=false; vehicledetail()">Next</button>
+        </div>
+      </div>
+
+
     </div>
-
-    <div class="modal-content" *ngIf="usedvehicle">
-      <div class="modal-header">
-        <h5 class="modal-title" id="createEnquiryModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <mat-radio-group aria-label="Select an option" >
-          <mat-radio-button value="">For New Vehicle</mat-radio-button>
-          <mat-radio-button value="">For Used Vehicle</mat-radio-button>
-        </mat-radio-group>
-
-     
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Previous</button>
-        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnquiryModal" (click) = "vehicledetailss=false;usedvehicle=false;self=true">Next</button>
-      </div>
-    </div>
-
-    <div class="modal-content" *ngIf="self">
-      <div class="modal-header">
-        <h5 class="modal-title" id="createEnquiryModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        
-        <mat-radio-group aria-label="Select an option" >
-          <mat-radio-button value="">TakeOver</mat-radio-button>
-          <mat-radio-button value="">Self</mat-radio-button>
-          <mat-radio-button value="">Buyer Seller</mat-radio-button>
-        </mat-radio-group>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Previous</button>
-        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnquiryModal" (click) = "vehicledetailss=false;usedvehicle=false;self=false; vehicledetail()">Next</button>
-      </div>
-    </div>
-
-
   </div>
-</div>
 
 
 
 
   <!-- Search form -->
   <form class="form-inline md-form form-sm active-cyan-2">
-    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search"
-      mdbInput>
+    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" mdbInput>
     <!-- <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon> -->
   </form><br><br>
-  
+
   <form class="form-inline md-form form-sm active-cyan-2">
     <!-- <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="ADVANCE SEARCH" aria-label="ADVANCA SEARCH"
       mdbInput> -->
     <!-- <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon> -->
 
-    <button type="button"  data-toggle="modal" data-target="#createAdvanceSearchModal">
-     Advanced Search
-    </button> 
-   </form><br><br>
+    <button type="button" data-toggle="modal" data-target="#createAdvanceSearchModal">
+      Advanced Search
+    </button>
+  </form><br><br>
 
-   <div class="row">
+  <div class="row">
     <div class="col-sm-2">
       <div> New Loans</div>
       <div>24 Nos</div>
       <div>$1,00,000</div>
-    </div>  
+    </div>
     <div class="col-sm-2">
       <div> Closed Loans</div>
       <div>24 Nos</div>
       <div>$1,00,000</div>
-    </div>  
+    </div>
     <div class="col-sm-2">
       <div>Repossessed</div>
       <div>24 Nos</div>
@@ -173,25 +183,25 @@
     </div>
     <div class="col-sm-2">
       <div>COLLECTION AMOUNT</div>
-      <div>10,000</div>      
+      <div>10,000</div>
     </div>
   </div>
-  
-  
-  
+
+
+
   <button class="btn default" (click)="customer()">Customer List (6,773)</button>
-  <button class="btn default"(click)="enquiry()">New Enquiry (224)</button><br><br>
+  <button class="btn default" (click)="enquiry()">New Enquiry (224)</button><br><br>
   <button class="btn default" (click)="customerEntrol()">New Customer Enrolement (6,773)</button><br><br>
   <!-- <button class="btn default" (click)="newLoan()">New Loan</button><br><br> -->
   <div class="col-sm-2">
     <div>
-        <button type="button"  data-toggle="modal" data-target="#createEnquiryModal" (click) = "vehicledetailss=true">
-            New Loan
-        </button>
+      <button type="button" data-toggle="modal" data-target="#createEnquiryModal" (click)="vehicledetailss=true">
+        New Loan
+      </button>
     </div>
   </div>
   <button class="btn default" (click)="loanVerification()">Loan Verification and Approval</button><br><br>
-  
+
   <!-- <button class="btns">Today</button>
   <div class="dropdown">
     <button class="btn" style="border-left:1px solid #0d8bf2">
@@ -208,149 +218,149 @@
   <!-- Task details status -->
   <div>
     <div>Task Details Branch manager</div>
-    <button class="btn default" >Total(10)</button>
-    <button class="btn default" >Open(10)</button><br><br>
-    <button class="btn default" >Completed(10)</button>
-    <button class="btn default" >Inprogress(10)</button>
+    <button class="btn default">Total(10)</button>
+    <button class="btn default">Open(10)</button><br><br>
+    <button class="btn default">Completed(10)</button>
+    <button class="btn default">Inprogress(10)</button>
   </div>
   <div>
     <div>Task Details Head Office</div>
-    <button class="btn default" >Total(10)</button>
-    <button class="btn default" >Open(10)</button><br><br>
-    <button class="btn default" >Completed(10)</button>
-    <button class="btn default" >Inprogress(10)</button>
+    <button class="btn default">Total(10)</button>
+    <button class="btn default">Open(10)</button><br><br>
+    <button class="btn default">Completed(10)</button>
+    <button class="btn default">Inprogress(10)</button>
   </div>
 
-        <!--EMI  -->
-        <div class="container">
-          <div class="spacer">
-            <div class="row">
-              <div class="col-lg-8  col-lg-offset-1">
-                <div class="well">
-        
-                  <div class="form-group">
-                    <div class="col-md-12">
-                      <span class="left-title">
-                        EMI Calculator
-                      </span>
-                      <!-- <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
+  <!--EMI  -->
+  <div class="container">
+    <div class="spacer">
+      <div class="row">
+        <div class="col-lg-8  col-lg-offset-1">
+          <div class="well">
+
+            <div class="form-group">
+              <div class="col-md-12">
+                <span class="left-title">
+                  EMI Calculator
+                </span>
+                <!-- <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
                         [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" /> -->
-                        <input type="number" id="fname" name="fname">
-                    </div>
-                    <!-- <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()"> -->
-                    <!-- </ng5-slider> -->
-                  </div><br>
-        
-        
-                  <div class="form-group">
-                    <div class="col-md-12">
-                      <span class="left-title">
-                        Interest %
-                      </span>
-                      <!-- <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
+                <input type="number" id="fname" name="fname">
+              </div>
+              <!-- <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()"> -->
+              <!-- </ng5-slider> -->
+            </div><br>
+
+
+            <div class="form-group">
+              <div class="col-md-12">
+                <span class="left-title">
+                  Interest %
+                </span>
+                <!-- <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
                         [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" /> -->
-                        <input type="number" id="fname" name="fname"><br>
-                    </div>
-                    <!-- <ng5-slider [(value)]="remi.value" [options]="roptions" (userChangeEnd)="update()"> -->
-                    <!-- </ng5-slider> -->
-                  </div>
-        
-                  <hr />
-        
-                  <div class="form-group">
-                    <div class="col-md-10">
-                      <span class="left-title">Loan Term</span>
-                      <!-- <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
-                        placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;"> -->
-                      <!-- <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
-                        placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo" style="width:30%;float:right;"> -->
-                        <input type="number" id="fname" name="fname"><br>
-                    </div><br>
-                    <!-- Date picker-->
-                   <div>
-                    <span class="left-title">Loan Date</span><br>
-                    <mat-form-field appearance="fill">
-                      <mat-label>Choose a date</mat-label>
-                      <input matInput [matDatepicker]="picker">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field><br>
-                </div>
-            <div>
-                    <span class="left-title">Due Date</span><br>
-                    <mat-form-field appearance="fill">
-                      <mat-label>Choose a date</mat-label>
-                      <input matInput [matDatepicker]="picker">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
+                <input type="number" id="fname" name="fname"><br>
+              </div>
+              <!-- <ng5-slider [(value)]="remi.value" [options]="roptions" (userChangeEnd)="update()"> -->
+              <!-- </ng5-slider> -->
             </div>
-                    <div class="col-md-2">
-                      <div class="input-group-append">
-                        <!-- <button class="btn btn-outline-secondary" [ngClass]="{'active':yrToggel}"
+
+            <hr />
+
+            <div class="form-group">
+              <div class="col-md-10">
+                <span class="left-title">Loan Term</span>
+                <!-- <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
+                        placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;"> -->
+                <!-- <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
+                        placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo" style="width:30%;float:right;"> -->
+                <input type="number" id="fname" name="fname"><br>
+              </div><br>
+              <!-- Date picker-->
+              <div>
+                <span class="left-title">Loan Date</span><br>
+                <mat-form-field appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field><br>
+              </div>
+              <div>
+                <span class="left-title">Due Date</span><br>
+                <mat-form-field appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <div class="input-group-append">
+                  <!-- <button class="btn btn-outline-secondary" [ngClass]="{'active':yrToggel}"
                           (click)="yrToggel=true;update()" type="button">Yr</button>
                         <button class="btn btn-outline-secondary" [ngClass]="{'active':!yrToggel}"
                           (click)="yrToggel=false;update()" type="button">Mo</button> -->
-                      </div>
-                    </div>
-                    <!-- <ng5-slider *ngIf="yrToggel" [(value)]="temi.value" [options]="toptions" (userChangeEnd)="update()"> -->
-                    <!-- </ng5-slider> -->
-                    <!-- <ng5-slider *ngIf="!yrToggel" [(value)]="memi.value" [options]="moptions" (userChangeEnd)="update()"> -->
-                    <!-- </ng5-slider> -->
-                  </div>
-        
-        
                 </div>
-        
               </div>
-              <div class="col-lg-3">
-                <div class="well">
-        
-                  <div class="jusify-center">
-                    <h5>
-                      Due Amount
-                    </h5>
-                    <span class="result">
-                      <!-- {{result.emi || "--"}} -->
-                    </span>
-                    <input type="number" id="fname" name="fname"><br><br>
-                  </div>
-        
-                  <hr />
-        
-                  <div>
-                    <h5>
-                      Difference Amount
-                    </h5>
-                    <span class="result">
-                      <!-- {{result.interest || "--"}} -->
-                      
-                    </span>
-                    <input type="number" id="fname" name="fname"><br><br>
-                  </div>
-        
-                  <hr />
-                  <div>
-                    <!-- <h5>
+              <!-- <ng5-slider *ngIf="yrToggel" [(value)]="temi.value" [options]="toptions" (userChangeEnd)="update()"> -->
+              <!-- </ng5-slider> -->
+              <!-- <ng5-slider *ngIf="!yrToggel" [(value)]="memi.value" [options]="moptions" (userChangeEnd)="update()"> -->
+              <!-- </ng5-slider> -->
+            </div>
+
+
+          </div>
+
+        </div>
+        <div class="col-lg-3">
+          <div class="well">
+
+            <div class="jusify-center">
+              <h5>
+                Due Amount
+              </h5>
+              <span class="result">
+                <!-- {{result.emi || "--"}} -->
+              </span>
+              <input type="number" id="fname" name="fname"><br><br>
+            </div>
+
+            <hr />
+
+            <div>
+              <h5>
+                Difference Amount
+              </h5>
+              <span class="result">
+                <!-- {{result.interest || "--"}} -->
+
+              </span>
+              <input type="number" id="fname" name="fname"><br><br>
+            </div>
+
+            <hr />
+            <div>
+              <!-- <h5>
                       Total Payment
                     </h5> -->
-                    <!-- <h6>
+              <!-- <h6>
                       (Principal + Interest)
                     </h6> -->
-                    <span class="result">
-                      <!-- {{result.total || "--"}} -->
-                    </span>
-                  </div>
-        
-        
-        
-                </div>
-              </div>
+              <span class="result">
+                <!-- {{result.total || "--"}} -->
+              </span>
             </div>
+
+
+
           </div>
         </div>
-  
+      </div>
     </div>
+  </div>
+
+</div>
 
 
 
@@ -359,7 +369,8 @@
 <!-- /** Advanced Search Form */ -->
 
 
-<div class="modal fade" id="createAdvanceSearchModal" tabindex="-1" role="dialog" aria-labelledby="createAdvanceSearchModalLabel" aria-hidden="true">
+<div class="modal fade" id="createAdvanceSearchModal" tabindex="-1" role="dialog"
+  aria-labelledby="createAdvanceSearchModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -369,51 +380,51 @@
         </button>
       </div>
       <div class="modal-body">
-          <form [formGroup]="createAdvanceSearchForms">
-            <div class="row">
-              <div class="col-sm-4">
-                <div>
-                  <input type="text" placeholder="Loan Number"  formControlName="loanNo"  class="form-control">
+        <form [formGroup]="createAdvanceSearchForms">
+          <div class="row">
+            <div class="col-sm-4">
+              <div>
+                <input type="text" placeholder="Loan Number" formControlName="loanNo" class="form-control">
               </div>
             </div>
             <div class="col-sm-4">
               <div>
-                <input type="text" placeholder="Customer Name" formControlName="customerName"  class="form-control">
+                <input type="text" placeholder="Customer Name" formControlName="customerName" class="form-control">
               </div>
-          </div>
-          <div class="col-sm-4">
-            <div>
-              <input type="text" placeholder="Vehicle Model" formControlName="vehiclemodel"  class="form-control">
             </div>
-        </div>
-        <div class="col-sm-4">
-          <div>
-            <input type="text" placeholder="Vehicle Number"  formControlName="vehicleNo"  class="form-control">
-          </div>
-      </div>
+            <div class="col-sm-4">
+              <div>
+                <input type="text" placeholder="Vehicle Model" formControlName="vehiclemodel" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div>
+                <input type="text" placeholder="Vehicle Number" formControlName="vehicleNo" class="form-control">
+              </div>
+            </div>
 
-    </div>
-          
-        
-        
-        
+          </div>
+
+
+
+
           <div>
-              <input type="text" placeholder="Customer Mobile No" formControlName="customerMobileNo"  class="form-control">
+            <input type="text" placeholder="Customer Mobile No" formControlName="customerMobileNo" class="form-control">
           </div>
           <div>
-            <input type="text" placeholder="Area" formControlName="area"  class="form-control">
+            <input type="text" placeholder="Area" formControlName="area" class="form-control">
           </div>
           <div>
-            <input type="text" placeholder="Dealer" formControlName="dealer"  class="form-control">
+            <input type="text" placeholder="Dealer" formControlName="dealer" class="form-control">
           </div>
           <div>
-            <input type="text" placeholder="ID Proof" formControlName="idProof"  class="form-control">
+            <input type="text" placeholder="ID Proof" formControlName="idProof" class="form-control">
           </div>
           <div>
-            <input type="text" placeholder="loan Amount" formControlName="loanAmount"  class="form-control">
+            <input type="text" placeholder="loan Amount" formControlName="loanAmount" class="form-control">
           </div>
           <div>
-            <input type="text" placeholder="Chassis No" formControlName="ChassisNo"  class="form-control">
+            <input type="text" placeholder="Chassis No" formControlName="ChassisNo" class="form-control">
           </div>
           <div>
             <select formControlName="loanstatus" class="form-control">
@@ -422,20 +433,20 @@
               <option value="Terminated">Terminated</option>
               <option value="Closed">Closed</option>
             </select>
-        </div>
-        <div>
-          <select formControlName="dues" class="form-control">
-            <option value="">Select No of Due</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
-      </div>
-  
-    </form>
+          </div>
+          <div>
+            <select formControlName="dues" class="form-control">
+              <option value="">Select No of Due</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)="advancedSearch()">Search</button>
-        <button type="button" class="btn btn-primary"  data-dismiss="modal">Clear Search</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="advancedSearch()">Search</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Clear Search</button>
       </div>
     </div>
   </div>
@@ -445,14 +456,15 @@
 
 <div class="col-sm-2">
   <div>
-      <button type="button"  data-toggle="modal" data-target="#createEnquiryModal">
-          xyz
-      </button>
+    <button type="button" data-toggle="modal" data-target="#createEnquiryModal">
+      xyz
+    </button>
   </div>
 </div>
 
 
-<div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
+<div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -462,41 +474,42 @@
         </button>
       </div>
       <div class="modal-body">
-  <form>
+        <form>
           <div>
-              <label>Customer Name</label>
-              <input type="text"   class="form-control">
+            <label>Customer Name</label>
+            <input type="text" class="form-control">
           </div>
-          <div>    
-              <label>Mobile Number
-                <span class="required-field">*</span>
-              </label>
-              <input type="text"    class="form-control" >
-                <!-- <div *ngIf="submitted && createEnquiryForms.controls.mobileNumber.errors" class="invalid-feedback"> -->
-                  <div class="required-field">Mobile Number is required</div>
-                <!-- </div>   -->
-          </div>
-          <div>    
-              <label>Vehicle Number</label>
+          <div>
+            <label>Mobile Number
               <span class="required-field">*</span>
-              <input type="text"    class="form-control" >
-              <!-- <div *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors" class="invalid-feedback"> -->
-                <div class="required-field">Vehicle Number is required</div>
-              <!-- </div>   -->
+            </label>
+            <input type="text" class="form-control">
+            <!-- <div *ngIf="submitted && createEnquiryForms.controls.mobileNumber.errors" class="invalid-feedback"> -->
+            <div class="required-field">Mobile Number is required</div>
+            <!-- </div>   -->
           </div>
-          <div>    
-              <label>Email</label>
-              <input type="email"   class="form-control">
+          <div>
+            <label>Vehicle Number</label>
+            <span class="required-field">*</span>
+            <input type="text" class="form-control">
+            <!-- <div *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors" class="invalid-feedback"> -->
+            <div class="required-field">Vehicle Number is required</div>
+            <!-- </div>   -->
           </div>
-          <div>    
+          <div>
+            <label>Email</label>
+            <input type="email" class="form-control">
+          </div>
+          <div>
             <label>Enquiry Id</label>
-            <input type="text"    class="form-control">
-        </div>
-  </form>
+            <input type="text" class="form-control">
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnquiryModal">Save</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal"
+          data-target="#generateEnquiryModal">Save</button>
       </div>
     </div>
   </div>
@@ -507,53 +520,51 @@
 
 <div class="container" *ngIf="showTable">
   <table class="table">
-      <thead>
-        <tr>
-          <th>Ac.No</th>
-          <th>Name</th>
-          <th>Contact No</th>
-          <th>Branch</th>
-          <th>Vehicle No</th>
-          <th>Customer Image</th>
-          <th>Due Pending</th>
-          <th>Loan Amount</th>
-          <th>Due Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>K-0012</td>
-          <td>Ada Lovelance</td>
-          <td>9998877766</td>
-          <td>Thudialore</td>
-          <td>TN 32 DA 3232</td>
-          <td></td>
-          <td>Nil</td>
-          <td>1,00,000</td>
-          <td>05.Mar.2021</td>
-          <td><span>Receipt</span>
-            <span>ReLoan</span>
-            <span>CloseLoan</span>
-          </td>
-        </tr>
-        <tr>
-          <td>K-0013</td>
-          <td>Ada Lovelance</td>
-          <td>9998877766</td>
-          <td>Sulur</td>
-          <td>TN 32 DA 3434</td>
-          <td></td>
-          <td>Nil</td>
-          <td>1,00,000</td>
-          <td>05.Dec.2021</td>
-          <td><span>Receipt</span>
-            <span>ReLoan</span>
-            <span>CloseLoan</span>
-          </td>
-        </tr>
-      </tbody>
+    <thead>
+      <tr>
+        <th>Ac.No</th>
+        <th>Name</th>
+        <th>Contact No</th>
+        <th>Branch</th>
+        <th>Vehicle No</th>
+        <th>Customer Image</th>
+        <th>Due Pending</th>
+        <th>Loan Amount</th>
+        <th>Due Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>K-0012</td>
+        <td>Ada Lovelance</td>
+        <td>9998877766</td>
+        <td>Thudialore</td>
+        <td>TN 32 DA 3232</td>
+        <td></td>
+        <td>Nil</td>
+        <td>1,00,000</td>
+        <td>05.Mar.2021</td>
+        <td><span>Receipt</span>
+          <span>ReLoan</span>
+          <span>CloseLoan</span>
+        </td>
+      </tr>
+      <tr>
+        <td>K-0013</td>
+        <td>Ada Lovelance</td>
+        <td>9998877766</td>
+        <td>Sulur</td>
+        <td>TN 32 DA 3434</td>
+        <td></td>
+        <td>Nil</td>
+        <td>1,00,000</td>
+        <td>05.Dec.2021</td>
+        <td><span>Receipt</span>
+          <span>ReLoan</span>
+          <span>CloseLoan</span>
+        </td>
+      </tr>
+    </tbody>
   </table>
-  </div>
-
-  
+</div>

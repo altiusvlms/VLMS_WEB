@@ -7,6 +7,7 @@ import DashboardMenuRoutingModule from './dashboard-menu-routing.module';
 
 /** Custom Material and Form Module */
 import { SharedModule } from '../../shared/shared/shared.module';
+// import {EMIModule} from './emi/emi.module'
 
 /** Custom Components */
 import { DashboardComponent,AdvancedSearch } from './dashboard/dashboard.component';
@@ -17,18 +18,25 @@ import { TaskManagementComponent ,CreateTask} from './task-management/task-manag
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { LoanManagementComponent } from './loan-management/loan-management.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { MatTabsModule } from '@angular/material/tabs';
+// import { ExistingUserComponent } from './existing-user/existing-user.component';
+import { ExistingEmployeeComponent } from './existing-employee/existing-employee.component';
 import { TopupLoanComponent } from './topup-loan/topup-loan.component';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 /** Dashboard Menu Module */
 
 @NgModule({
-  declarations: [DashboardComponent,AdvancedSearch, UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent],
+  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent, ExistingEmployeeComponent],
   imports: [
     CommonModule,
     DashboardMenuRoutingModule,
-    SharedModule
+    SharedModule,
+    MatTabsModule,
+    Ng5SliderModule
+    // EMIModule
   ]
 })
 export class DashboardMenuModule { }
