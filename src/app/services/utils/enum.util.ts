@@ -9,7 +9,8 @@ enum appModels {
     IMAGES = 'fineract-provider/api/v1/images',
     COMMON = 'fineract-provider/api/v1',
     CREATEEMPLOYEE = 'fineract-provider/api/v1/Employee/createEmployee',
-    GETEMPLOYEE = 'fineract-provider/api/v1/Employee/getEmployees'
+    GETEMPLOYEE = 'fineract-provider/api/v1/Employee/getEmployees',
+    ANALYTICS = 'fineract-provider/api/v1/customers/branchAnalytic?command=loanApplications'
 
 }
 
