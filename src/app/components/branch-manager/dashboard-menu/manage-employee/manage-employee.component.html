@@ -337,15 +337,26 @@
         </div> -->
     <!-- </form> -->
 
-<!-- <form> -->
+<form [formGroup]="ImageEmployeeForm">
+  
         <h2>ID Proofs</h2>
                   <div> 
-                    <label>Aadhar:
-                    <button>Delete</button>
-                    <button>Add Image</button>
-                    <img  src="assets/images/empty_image.png">
+                    <label>Pan Card:
+                    <span class="required-field">*</span>
+                    <input #file type="file" accept='image/*' formControlName="Pan_photo" (change)="uploadImages1($event)"   />
+                   <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" >
                     </label>
                   </div>
+
+                <div> 
+                  <label>Aadhar Card:
+                    <span class="required-field">*</span>
+                    <input #file type="file" accept='image/*' formControlName="Aadhar_photo" (change)="uploadImages2($event)"   />
+                    <img [src] ="engineImgURLS ? engineImgURLS : 'assets/images/empty_image.png'" >
+                  </label>
+                </div>
+    </form>
+            <!-- <form [formGroup] = "schoolqualificationForm"> -->
                 <!-- </form> -->
 
             <!-- <form [formGroup] = "manageEmployeeForm"> -->

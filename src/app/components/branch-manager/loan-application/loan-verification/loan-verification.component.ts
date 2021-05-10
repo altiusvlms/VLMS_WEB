@@ -3,6 +3,8 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
+import { DatePipe } from '@angular/common';
+
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
@@ -16,12 +18,16 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 export class LoanVerificationComponent implements OnInit {
 
   loanverifiData:any;
+  loanDisburalData:any;
+  loanApprovalData:any;
   // id:any;
 
-  constructor(private router: Router,private crudService: CrudService) { }
+  constructor(private router: Router,private crudService: CrudService,public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.getLoanVerification();
+    this.Loan_Disbural_Limit();
+    this.Loan_Approval_Limit();
   }
 
   ngOnDestroy() { }
@@ -38,6 +44,28 @@ export class LoanVerificationComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
       this.loanverifiData = data;
+    })
+  }
+
+  Loan_Disbural_Limit(){
+    this.crudService.get(`${appModels.Employee}/getLoanDisbursal`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.loanDisburalData = data;
+    })
+  }
+
+  Loan_Approval_Limit(){
+    this.crudService.get(`${appModels.Employee}/getLoanApproval`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.loanApprovalData = data;
     })
   }
 }

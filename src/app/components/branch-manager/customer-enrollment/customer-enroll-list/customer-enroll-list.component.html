@@ -51,7 +51,7 @@
         <td>{{Enroll.customerName}}</td>
         <td>{{Enroll.mobileNumber}}</td>
         <td>{{Enroll.alternateMobileNumber}}</td>
-        <td>14.Dec.1990</td>
+        <td>{{Enroll.dob | date:"dd MMMM yyyy"}}</td>
         <td>{{Enroll.fatherName}}</td>
         <td>{{Enroll.applicantType}}</td>
         <td>{{Enroll.gender}}</td>
@@ -101,7 +101,7 @@
    </div>
    <div>
             <input type="text" class="input_field" placeholder="+91"  maxlength="3" disabled>
- <input type="text" formControlName="phoneNumber"  class="form-control" placeholder="9865465476"  maxlength="10">
+ <input type="text" formControlName="mobileNumber"  class="form-control" placeholder="9865465476"  maxlength="10">
 
   <div id="recaptcha-container"></div>
   
@@ -149,7 +149,7 @@
             </select>
             </div>
             <div> 
-              <label>D Proof1:
+              <label>ID Proof1:
                 <select formControlName="proof1" class="form-control">
                   <option >choose Options</option>
                   <option *ngFor="let ID1 of ID1s">{{ID1}}</option>
@@ -160,7 +160,7 @@
               </label>
             </div>
             <div> 
-              <label>D Proof1:
+              <label>ID Proof2:
                 <select formControlName="proof2" class="form-control">
                   <option >choose Options</option>
                   <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
