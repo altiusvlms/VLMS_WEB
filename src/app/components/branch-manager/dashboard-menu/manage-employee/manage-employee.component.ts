@@ -172,17 +172,17 @@ manageEmployee(){
   //   const postqualificationObj = this.postgraduateQualificationForm.value;
   //   const allFormValues1 = Object.assign({}, managuserformeObj,communicationAddressObj,permanentAddressObj,generalInsuranceObj,accidentalinsuranceObj,schoolqualificationObj,collegequalificationObj,graduatequalificationObj,postqualificationObj);
   //   console.log(allFormValues1); 
-  console.log("datass")
-  console.log(this.manageEmployeeForm.value)
+  // console.log("datass")
+  // console.log(this.manageEmployeeForm.value)
 
-  this.crudService.post(`${appModels.CREATEEMPLOYEE}`, this.manageEmployeeForm.value ,
-    { params:{
-      tenantIdentifier: "default"   
-    }}
-  ).pipe(untilDestroyed(this)).subscribe( data => {
-    this.EmployeeId = data.resourceId;
-    console.log(this.EmployeeId);
-    this.toast.success("posted successfully");
+  // this.crudService.post(`${appModels.CREATEEMPLOYEE}`, this.manageEmployeeForm.value ,
+  //   { params:{
+  //     tenantIdentifier: "default"   
+  //   }}
+  // ).pipe(untilDestroyed(this)).subscribe( data => {
+  //   this.EmployeeId = data.resourceId;
+  //   console.log(this.EmployeeId);
+  //   this.toast.success("posted successfully");
 
     const formData = new FormData();      
     formData.append("file",this.Imagefileform);
@@ -206,7 +206,7 @@ manageEmployee(){
           })
           })
 
-  })
+  
 }
 // uploadImages1(evt1 : any){
 //   {
