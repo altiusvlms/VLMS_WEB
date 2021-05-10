@@ -6,6 +6,11 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {  CrudService } from '../../../../services/crud.service';
+import { appModels } from '../../../../services/utils/enum.util';
+
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 
 
 /** Dashboard Component */
@@ -15,10 +20,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  mobileNum:any;
   showTable:Boolean = false;
+  
 
-  constructor(private formBuilder: FormBuilder,private router: Router,private dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { }
 
   /** Create Advanced Search Form */
   createAdvanceSearchForms = new FormGroup({
@@ -38,10 +44,12 @@ export class DashboardComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    // this.mobileNumFetch()
   }
   vehicledetailss:Boolean = false; 
   usedvehicle:Boolean = false;
   self:Boolean = false;
+  
 
   customer(){
     this.router.navigate(['branch-manager/customer-management']);
@@ -76,6 +84,38 @@ export class DashboardComponent implements OnInit {
       // }
     });
   }
+  
+  mobileNumFetch(mobile : any){
+    console.log(mobile)
+    // if (this.mobileNum) {
+    this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      for(let mobileNo of data){
+        this.mobileNum = mobileNo.customerGuarantor.mobileNumber;
+        var id = mobileNo.customerGuarantor.id;
+        
+      }
+      
+      console.log("mobilenum")
+      console.log(this.mobileNum)
+      
+      if (this.mobileNum) {
+        this.router.navigate(['branch-manager/loan-process/'  + id]);
+      }
+      else {
+    this.router.navigate(['branch-manager/newloan-process']);
+  }
+    })
+  // }
+  // else {
+    // this.router.navigate(['branch-manager/newloan-process']);
+  // }
+  }
+
 }
 
 
@@ -111,16 +151,17 @@ export class AdvancedSearch {
   })
  
   
-  constructor(public dialogRef: MatDialogRef<AdvancedSearch>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, 
+  constructor(public dialogRef: MatDialogRef<AdvancedSearch>, private router: Router , private crudService: CrudService, @Inject(MAT_DIALOG_DATA) public data:any, 
    ) {
 
   }
 
 
 
- 
+  mobileNum :any;
 
   ngOnInit() {
+    // this.mobileNumFetch();
   }
   ngOnDestroy() {}
 
@@ -128,5 +169,23 @@ export class AdvancedSearch {
       this.dialogRef.close();
     }
 
+    // mobileNumFetch(){
+    //   if (this.mobileNum) {
+    //   this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+    //     params: {
+    //       tenantIdentifier: 'default'
+    //     }
+    //   }).pipe(untilDestroyed(this)).subscribe(data => {
+    //     console.log(data);
+    //     this.mobileNum = data.customerGuarantor.mobileNumber;
+    //     console.log("mobilenum")
+    //     console.log(this.mobileNum)
+    //     this.router.navigate(['branch-manager/loan-process']);
+    //   })
+    // }
+    // else {
+    //   this.router.navigate(['branch-manager/newloan-process']);
+    // }
+    // }
 
 }
