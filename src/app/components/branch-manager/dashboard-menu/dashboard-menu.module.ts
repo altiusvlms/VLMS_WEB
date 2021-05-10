@@ -24,6 +24,8 @@ import { ExistingEmployeeComponent } from './existing-employee/existing-employee
 import { TopupLoanComponent } from './topup-loan/topup-loan.component';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 import { Ng5SliderModule } from 'ng5-slider';
+// import { ChartsModule } from 'ng2-charts';
+// import { PieChartComponent } from './piechart/piechart';
 
 
 /** Dashboard Menu Module */
@@ -35,8 +37,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     DashboardMenuRoutingModule,
     SharedModule,
     MatTabsModule,
-    Ng5SliderModule
-    // EMIModule
+    Ng5SliderModule,
+    // ChartsModule
   ]
 })
 export class DashboardMenuModule { }
