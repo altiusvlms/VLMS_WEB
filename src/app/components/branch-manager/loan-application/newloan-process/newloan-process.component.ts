@@ -21,11 +21,6 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class NewloanProcessComponent implements OnInit {
 
-  vehicle_Id:any;
-  resource_Id:any;  
-  customer_Id:any;
-  guarantor_Id:any;
-  bankDetails_Id:any;
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute,public datepipe: DatePipe) {
     this.getUserId();    
@@ -35,6 +30,40 @@ export class NewloanProcessComponent implements OnInit {
   submitted: Boolean = false;
   userId : any;
   selectedIndex: any = 0;
+  vehicle_Id: any;
+  resource_Id: any;  
+  customer_Id: any;
+  guarantor_Id: any;
+  bankDetails_Id: any;
+  createnewLoan_id: any = [];
+
+  showCommunication:Boolean = true;
+  showPermanent:Boolean = false;
+  showOffice:Boolean = false;
+
+  applicantfileform : any;
+  applicantImgURL: any;
+  applicantAadharfileform : any;
+  applicantAadharImgURL: any;
+  applicantPanfileform : any;
+  applicantPanImgURL: any;
+  applicantDrivingfileform : any;
+  applicantDrivingImgURL: any;
+  applicantVoterfileform : any;
+  applicantVoterImgURL: any;
+
+
+  co_applicantfileform : any;
+  co_applicantImgURL: any;
+  co_applicantAadharfileform : any;
+  co_applicantAadharImgURL: any;
+  co_applicantPanfileform : any;
+  co_applicantPanImgURL: any;
+  co_applicantDrivingfileform : any;
+  co_applicantDrivingImgURL: any;
+  co_applicantVoterfileform : any;
+  co_applicantVoterImgURL: any;
+
   engineImgURL: any;
   enginefileform : any;
   chassisimgURL: any;
@@ -53,16 +82,17 @@ export class NewloanProcessComponent implements OnInit {
   side1fileform : any;
   side2imgURL: any;
   side2fileform : any;
-  appidproofform : any;
-  applicantProofImgURL : any
-  coidproofform : any;
-  coApplicantProofImgURL : any;
+ 
+  passBookfileform: any;
+  passBookimgURL: any;
 
   newLoanForm = new FormGroup({
     //applicant
     userId: new FormControl('', Validators.required),
     customerName: new FormControl('', Validators.required),
+    applicantType: new FormControl(''),
     mobileNo: new FormControl('', Validators.required),
+    altNumber: new FormControl(''),
     spouseName: new FormControl(''),
     gender: new FormControl(''),
     dob:new FormControl('', Validators.required),
@@ -81,14 +111,14 @@ export class NewloanProcessComponent implements OnInit {
     guarantor_name: new FormControl('', Validators.required),
     guarantor_fatherName: new FormControl(''),
     guarantor_applicantType: new FormControl('', Validators.required),
-    guarantor_companyName: new FormControl('', Validators.required),
-    guarantor_netIncome: new FormControl('', Validators.required),
+    guarantor_companyName: new FormControl(''),
+    guarantor_netIncome: new FormControl(''),
     guarantor_salaryType: new FormControl('', Validators.required),
     guarantor_salaryDate:new FormControl('', Validators.required),
-    guarantor_dob:new FormControl("dd MMMM yyyy", Validators.required),
-    guarantor_gender:new FormControl("dd MMMM yyyy", Validators.required),
+    guarantor_dob:new FormControl('', Validators.required),
+    guarantor_gender:new FormControl('', Validators.required),
     guarantor_maritalStatus:new FormControl('', Validators.required),
-    guarantor_spouseName:new FormControl('', Validators.required),
+    guarantor_spouseName:new FormControl(''),
    
 //vechicle 
     vehicleNumber: new FormControl('', Validators.required),
@@ -107,16 +137,19 @@ export class NewloanProcessComponent implements OnInit {
     loanAmount: new FormControl('', Validators.required),
     loanTerm: new FormControl('', Validators.required),
     loanInterest: new FormControl('', Validators.required),
-    emi: new FormControl('', Validators.required),
-    interestINR: new FormControl('', Validators.required),
+    emi: new FormControl(''),
+    interestINR: new FormControl(''),
     dueDate: new FormControl('', Validators.required),
 
   //bank 
     accountNumber: new FormControl('', Validators.required),
     accountHolderName: new FormControl('', Validators.required),
+    loanEligibleAmount: new FormControl('', Validators.required),
     IFSC: new FormControl('', Validators.required),
     bankName: new FormControl('', Validators.required),
     branchName: new FormControl('', Validators.required),
+    disbursalType: new FormControl('', Validators.required),
+    accountType: new FormControl('', Validators.required),
 
   //addresss
   
@@ -139,8 +172,8 @@ export class NewloanProcessComponent implements OnInit {
       landmark:new FormControl(''),
       pincode:new FormControl(''),
       state:new FormControl(''),
-      }),
-      customer_communicationAddress : new FormGroup({
+    }),
+    customer_communicationAddress : new FormGroup({
         addressLine1:new FormControl(''),
         addressLine2:new FormControl(''),
         area:new FormControl(''),
@@ -149,8 +182,8 @@ export class NewloanProcessComponent implements OnInit {
         landmark:new FormControl(''),
         pincode:new FormControl(''),
         state:new FormControl(''),
-        }),
-        guarantor_officeAddress : new FormGroup({
+    }),
+    guarantor_officeAddress : new FormGroup({
           addressLine1:new FormControl(''),
           addressLine2:new FormControl(''),
           area:new FormControl(''),
@@ -159,8 +192,8 @@ export class NewloanProcessComponent implements OnInit {
           landmark:new FormControl(''),
           pincode:new FormControl(''),
           state:new FormControl(''),
-          }),
-          guarantor_permanentAddress : new FormGroup({
+    }),
+    guarantor_permanentAddress : new FormGroup({
             addressLine1:new FormControl(''),
             addressLine2:new FormControl(''),
             area:new FormControl(''),
@@ -169,8 +202,8 @@ export class NewloanProcessComponent implements OnInit {
             landmark:new FormControl(''),
             pincode:new FormControl(''),
             state:new FormControl(''),
-            }),
-            guarantor_communicationAddress : new FormGroup({
+    }),
+    guarantor_communicationAddress : new FormGroup({
               addressLine1:new FormControl(''),
               addressLine2:new FormControl(''),
               area:new FormControl(''),
@@ -179,9 +212,9 @@ export class NewloanProcessComponent implements OnInit {
               landmark:new FormControl(''),
               pincode:new FormControl(''),
               state:new FormControl(''),
-              })
-
     })
+
+  })
 
 
 
@@ -209,7 +242,176 @@ export class NewloanProcessComponent implements OnInit {
       this.userId = data.id;
     })
   }
+  communicationAddress(){
+    this.showCommunication = true;
+    this.showPermanent = false;
+    this.showOffice = false;
+  }
+  permanentAddress(){
+    this.showPermanent = true;
+    this.showCommunication = false;
+    this.showOffice = false;
+  }
+  officeAddress(){
+    this.showOffice = true;
+    this.showPermanent = false;
+    this.showCommunication = false;
+  }
 
+  
+  uploadApplicantImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.applicantfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.applicantImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+  uploadApplicantAadharImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.applicantAadharfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.applicantAadharImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+  uploadApplicantPanImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.applicantPanfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.applicantPanImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+  uploadApplicantDrivingImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.applicantDrivingfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.applicantDrivingImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+  uploadApplicantVoterImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.applicantVoterfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.applicantVoterImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+
+
+  uploadCo_ApplicantImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.co_applicantfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.co_applicantImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+  uploadCo_ApplicantAadharImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.co_applicantAadharfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.co_applicantAadharImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+  uploadCo_ApplicantPanImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.co_applicantPanfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.co_applicantPanImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+  uploadCo_ApplicantDrivingImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.co_applicantDrivingfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.co_applicantDrivingImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+  uploadCo_ApplicantVoterImages(evt : any){
+    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
+    this.co_applicantVoterfileform = evt.target.files[0];
+    if (evt.target.files && evt.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (event) => {
+        this.co_applicantVoterImgURL = event.target['result'];
+        }
+      }
+    }
+    else {
+      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+    }
+  }
+  
 
  
   uploadEngineImages(evt : any){
@@ -227,7 +429,6 @@ export class NewloanProcessComponent implements OnInit {
       alert("Only GIF, PNG and JPEG Data URL's are allowed.")
     }
   }
-
   uploadChassisImages(evt : any){
     if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
     this.chassisfileform = evt.target.files[0];
@@ -243,7 +444,6 @@ export class NewloanProcessComponent implements OnInit {
       alert("Only GIF, PNG and JPEG Data URL's are allowed.")
     }
   }
-
   uploadPolicyImages(evt : any){
     if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
     this.policyfileform = evt.target.files[0];
@@ -259,7 +459,6 @@ export class NewloanProcessComponent implements OnInit {
       alert("Only GIF, PNG and JPEG Data URL's are allowed.")
     }
   }
-
   uploadLiveKMImages(evt : any){
     if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
     this.liveKMfileform = evt.target.files[0];
@@ -275,7 +474,6 @@ export class NewloanProcessComponent implements OnInit {
       alert("Only GIF, PNG and JPEG Data URL's are allowed.")
     }
   }
-
   uploadRcBookImages(evt : any){
     if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
     this.rcBookfileform = evt.target.files[0];
@@ -351,38 +549,23 @@ export class NewloanProcessComponent implements OnInit {
     alert("Only GIF, PNG and JPEG Data URL's are allowed.")
   }
   }
-
-  uploadAppIdProofImages(evt: any){
+ 
+  uploadPassBookImages(evt : any){
     if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
-    this.appidproofform = evt.target.files[0];
-    if (evt.target.files && evt.target.files[0]) {
+    this.passBookfileform = evt.target.files[0];
+      if (evt.target.files && evt.target.files[0]) {
       var reader = new FileReader();
       reader.readAsDataURL(evt.target.files[0]);
       reader.onload = (event) => {
-        this.applicantProofImgURL = event.target['result'];
-        }
+        this.passBookimgURL = event.target['result'];
       }
     }
-    else {
-      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
-    }
+  }
+  else {
+    alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+  }
   }
 
-  uploadCoAppIdProofImages(evt: any){
-    if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
-    this.coidproofform = evt.target.files[0];
-    if (evt.target.files && evt.target.files[0]) {
-      var reader = new FileReader();
-      reader.readAsDataURL(evt.target.files[0]);
-      reader.onload = (event) => {
-        this.coApplicantProofImgURL = event.target['result'];
-        }
-      }
-    }
-    else {
-      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
-    }
-  }
 
   saveNewLoan(){
     this.getUserId();    
@@ -394,49 +577,290 @@ export class NewloanProcessComponent implements OnInit {
     this.newLoanForm.value.guarantor_salaryDate = this.datepipe.transform(this.newLoanForm.value.guarantor_salaryDate, 'dd MMMM yyyy');
     this.newLoanForm.value.guarantor_dob = this.datepipe.transform(this.newLoanForm.value.guarantor_dob, 'dd MMMM yyyy');
     this.newLoanForm.value.dueDate = this.datepipe.transform(this.newLoanForm.value.dueDate, 'dd MMMM yyyy');
+    this.newLoanForm.value.insuranceExpiry = this.datepipe.transform(this.newLoanForm.value.insuranceExpiry, 'dd MMMM yyyy');
     this.newLoanForm.value.userId = this.userId;
-if(this.userId !== undefined || null){
-      this.crudService.post(`${appModels.NEWLOAN}`, this.newLoanForm.value,
+    
+    if(this.userId !== undefined || null){
+          this.crudService.post(`${appModels.NEWLOAN}`, this.newLoanForm.value,
+          { params:{
+            tenantIdentifier: "default"   
+          }}
+        ).pipe(untilDestroyed(this)).subscribe( async data => {
+          console.log(data)
+          this.vehicle_Id = data.vehicleId;
+          this.resource_Id = data.resourceId;
+          this.customer_Id = data.customerId;
+          this.guarantor_Id = data.guarantorId;
+          this.bankDetails_Id = data.bankDetailsId;
+
+    //Applicant   
+      if (this.customer_Id !== undefined || null){
+
+        if(this.applicantfileform !== undefined || null){
+        const formData = new FormData();      
+          formData.append("file",this.applicantfileform);
+          await this.crudService.upload_Image(`${appModels.IMAGES}/customerimage/${this.customer_Id}`, formData,
+          { params:{
+            tenantIdentifier: "default"   
+          }}
+          ).pipe(untilDestroyed(this)).subscribe( async data => {
+            this.createnewLoan_id.push(data);
+          })
+        }
+        else if(this.applicantAadharfileform !== undefined || null){
+          const formData = new FormData();      
+          formData.append("file",this.applicantAadharfileform);       
+          await this.crudService.upload_Image(`${appModels.IMAGES}/adharphoto/${this.customer_Id}`, formData,
+          { params:{
+          tenantIdentifier: "default"   
+          }}
+          ).pipe(untilDestroyed(this)).subscribe( async data => {
+            this.createnewLoan_id.push(data);
+          })
+        }
+        else if(this.applicantPanfileform !== undefined || null){
+          const formData = new FormData();      
+          formData.append("file",this.applicantPanfileform);       
+          await this.crudService.upload_Image(`${appModels.IMAGES}/pancard/${this.customer_Id}`, formData,
+          { params:{
+            tenantIdentifier: "default"   
+          }}
+          ).pipe(untilDestroyed(this)).subscribe( async data => {
+            this.createnewLoan_id.push(data);
+          })          
+        }
+        else if(this.applicantDrivingfileform !== undefined || null){
+          const formData = new FormData();      
+          formData.append("file",this.applicantDrivingfileform);       
+          await this.crudService.upload_Image(`${appModels.IMAGES}/vehicle_licence/${this.customer_Id}`, formData,
+          { params:{
+            tenantIdentifier: "default"   
+          }}
+          ).pipe(untilDestroyed(this)).subscribe(async data => {
+              this.createnewLoan_id.push(data);
+          }) 
+        }
+      }
+
+    //Co-Applicant 
+      else if(this.guarantor_Id !== undefined || null){
+
+        if(this.co_applicantfileform !== undefined || null){
+          const formData = new FormData();      
+          formData.append("file",this.co_applicantfileform);
+          await this.crudService.upload_Image(`${appModels.IMAGES}/guarantorImage/${this.guarantor_Id}`, formData,
+          { params:{
+            tenantIdentifier: "default"   
+          }}
+          ).pipe(untilDestroyed(this)).subscribe( async data => {
+            this.createnewLoan_id.push(data);
+          })
+        }
+       else if(this.co_applicantAadharfileform !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.co_applicantAadharfileform);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/g_adharphoto/${this.guarantor_Id}`, formData,
+        { params:{
+          tenantIdentifier: "default"   
+        }}
+        ).pipe(untilDestroyed(this)).subscribe( async data => {
+          this.createnewLoan_id.push(data);
+        })   
+       }
+       else if(this.co_applicantPanfileform !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.co_applicantPanfileform);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/g_pancard/${this.guarantor_Id}`, formData,
+        { params:{
+          tenantIdentifier: "default"   
+        }}
+        ).pipe(untilDestroyed(this)).subscribe( async data => { 
+          this.createnewLoan_id.push(data);
+        })   
+       }
+       else if(this.co_applicantDrivingfileform !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.co_applicantDrivingfileform);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/g_vehicle_licence/${this.guarantor_Id}`, formData,
+        { params:{
+          tenantIdentifier: "default"   
+        }}
+        ).pipe(untilDestroyed(this)).subscribe( async data => { 
+          this.createnewLoan_id.push(data);
+        })   
+       }
+
+      }
+
+    //Vehicle
+      else if (this.vehicle_Id !== undefined || null){
+        if(this.enginefileform !== undefined || null){
+          const formData = new FormData();      
+          formData.append("file",this.enginefileform);
+          await this.crudService.upload_Image(`${appModels.IMAGES}/engine/${this.vehicle_Id}`, formData,
+          { params:{
+            tenantIdentifier: "default"   
+          }}
+          ).pipe(untilDestroyed(this)).subscribe( async data => {
+            this.createnewLoan_id.push(data);
+          })    
+        }
+       else if(this.chassisfileform !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.chassisfileform);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/chassis/${this.vehicle_Id}`, formData,
+        { params:{
+          tenantIdentifier: "default"   
+        }}
+        ).pipe(untilDestroyed(this)).subscribe(async data => {
+          this.createnewLoan_id.push(data);
+        })   
+       }
+       else if(this.policyfileform !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.policyfileform);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/vehicleinsurance/${this.vehicle_Id}`, formData,
+        { params:{
+          tenantIdentifier: "default"   
+        }}
+        ).pipe(untilDestroyed(this)).subscribe(data => {
+          this.createnewLoan_id.push(data);
+        }) 
+       }
+
+      }
+
+    //Bank     
+      else if(this.bankDetails_Id ! == undefined || null){
+
+        if(this.passBookfileform !== undefined || null){
+          const formData = new FormData();      
+          formData.append("file",this.passBookfileform);
+          await this.crudService.upload_Image(`${appModels.IMAGES}/bank/${this.bankDetails_Id}`, formData,
+          { params:{
+            tenantIdentifier: "default"   
+          }}
+          ).pipe(untilDestroyed(this)).subscribe( async data => {
+            this.createnewLoan_id.push(data);
+          })   
+        }
+
+      }
+
+    //Resource Based Image 
+      else if(this.resource_Id ! == undefined || null){
+      //Applicant voter image
+      if(this.applicantVoterfileform !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.applicantVoterfileform);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/invoiceimage/${this.resource_Id}`, formData,
+        { params:{
+          tenantIdentifier: "default"   
+        }}
+        ).pipe(untilDestroyed(this)).subscribe( async data => {
+          this.createnewLoan_id.push(data);
+        })    
+      }
+
+      //Co-Applicant voter image
+     else if(this.co_applicantVoterfileform !== undefined || null){
+      const formData = new FormData();      
+      formData.append("file",this.co_applicantVoterfileform);
+      await this.crudService.upload_Image(`${appModels.IMAGES}/invoiceimage/${this.resource_Id}`, formData,
       { params:{
         tenantIdentifier: "default"   
       }}
-    ).pipe(untilDestroyed(this)).subscribe( async data => {
-      console.log(data)
-      this.vehicle_Id = data.vehicleId;
-      this.resource_Id = data.resourceId;
-      this.customer_Id = data.customerId;
-      this.guarantor_Id = data.guarantorId;
-      this.bankDetails_Id = data.bankDetailsId;
+      ).pipe(untilDestroyed(this)).subscribe( async data => {
+        this.createnewLoan_id.push(data);
+      })   
+     }
 
-    if (this.vehicle_Id !== undefined || null){
+      //Vehicle Live KM image
+    else if(this.liveKMfileform !== undefined || null){
       const formData = new FormData();      
-      formData.append("file",this.enginefileform);
-         await this.crudService.upload_Image(`${appModels.COMMON}/images/engine/${this.vehicle_Id}`, formData,
-          { params:{
-                tenantIdentifier: "default"   
-              }}
-          ).pipe(untilDestroyed(this))
-            .subscribe( async data => {
-              console.log(data)
+      formData.append("file",this.liveKMfileform);
+      await this.crudService.upload_Image(`${appModels.IMAGES}/invoiceimage/${this.resource_Id}`, formData,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+      ).pipe(untilDestroyed(this)).subscribe( async data => {
+        this.createnewLoan_id.push(data);
+      })    
+    }
 
-              const formData = new FormData();      
-              formData.append("file",this.chassisfileform);
-                 await this.crudService.upload_Image(`${appModels.COMMON}/images/chassis/${this.vehicle_Id}`, formData,
-                  { params:{
-                        tenantIdentifier: "default"   
-                      }}
-                  ).pipe(untilDestroyed(this))
-                    .subscribe(data => {
-                      console.log(data)
-                    })
+      //Vehicle RC Book image
+    else if(this.rcBookfileform !== undefined || null){
+      const formData = new FormData();      
+      formData.append("file",this.rcBookfileform);
+      await this.crudService.upload_Image(`${appModels.IMAGES}/invoiceimage/${this.resource_Id}`, formData,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+      ).pipe(untilDestroyed(this)).subscribe( async data => {
+        this.createnewLoan_id.push(data);
+      })    
+    }
+  
+      //Vehicle Front image
+    else if(this.frontfileform !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.frontfileform);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/invoiceimage/${this.resource_Id}`, formData,
+        { params:{
+          tenantIdentifier: "default"   
+        }}
+        ).pipe(untilDestroyed(this)).subscribe( async data => {
+          this.createnewLoan_id.push(data);
+        })   
+    }  
+       
+      //Vehicle Back image
+    else if(this.backfileform !== undefined || null){
+      const formData = new FormData();      
+      formData.append("file",this.backfileform);
+      await this.crudService.upload_Image(`${appModels.IMAGES}/invoiceimage/${this.resource_Id}`, formData,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+      ).pipe(untilDestroyed(this)).subscribe( async data => {
+        this.createnewLoan_id.push(data);
+      })
+    }
+
+      //Vehicle Side1 image
+      else if(this.side1fileform !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.side1fileform);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/invoiceimage/${this.resource_Id}`, formData,
+            { params:{
+              tenantIdentifier: "default"   
+            }}
+            ).pipe(untilDestroyed(this)).subscribe( async data => {
+              this.createnewLoan_id.push(data);
+            })  
+      }  
+
+      //Vehicle Side2 image
+      else if(this.side2fileform !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.side2fileform);
+          await this.crudService.upload_Image(`${appModels.IMAGES}/invoiceimage/${this.resource_Id}`, formData,
+            { params:{
+              tenantIdentifier: "default"   
+            }}
+            ).pipe(untilDestroyed(this)).subscribe( async data => {
+              this.createnewLoan_id.push(data);
             })
-          }
+      }
+      
+      }
     })
-    
-  }
-     
- 
-    
+    this.toast.success("Images Upload Successfully");
+    }
+    console.log(this.createnewLoan_id)
+    this.toast.success("Loan Submitted Successfully");
+    this.router.navigate(['branch-manager/loan-verification'])
+
   }
 
 }

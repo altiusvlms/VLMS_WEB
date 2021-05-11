@@ -76,7 +76,7 @@ export class EnquiryListComponent implements OnInit {
 
  /** Page Navigation for Loan Application */
   createLoan(){
-    this.router.navigate(['branch-manager/loan-process']);
+    this.router.navigate(['branch-manager/newloan-process']);
 
   }
   // Get Enquiry
@@ -102,6 +102,7 @@ export class EnquiryListComponent implements OnInit {
       this.responseEnquiryId = data.resourceId;
       console.log(data)
       this.toast.success("Created Successfully");
+      this.getEnrollData();
     })
   }
 

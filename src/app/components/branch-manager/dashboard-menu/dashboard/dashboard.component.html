@@ -148,20 +148,13 @@
 
 
   <!-- Search form -->
-  <form class="form-inline md-form form-sm active-cyan-2">
-    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" mdbInput>
-    <!-- <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon> -->
-  </form><br><br>
 
   <form class="form-inline md-form form-sm active-cyan-2">
-    <!-- <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="ADVANCE SEARCH" aria-label="ADVANCA SEARCH"
-      mdbInput> -->
-    <!-- <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon> -->
-
-    <button type="button" data-toggle="modal" data-target="#createAdvanceSearchModal">
-      Advanced Search
-    </button>
-  </form><br><br>
+  
+    <button type="button"  (click)="advancedSearch()">
+     Advanced Search
+    </button> 
+   </form><br><br>
 
   <div class="row">
     <div class="col-sm-2">
@@ -202,20 +195,8 @@
     </div>
   </div> -->
   <button class="btn default" (click)="loanVerification()">Loan Verification and Approval</button><br><br>
-
-  <!-- <button class="btns">Today</button>
-  <div class="dropdown">
-    <button class="btn" style="border-left:1px solid #0d8bf2">
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">Yesterday</a>
-      <a href="#">Today</a>
-      <a href="#">Tomorrow</a>
-    </div>
-  </div>
-  <br><br><br><br><br><br><br><br><br><br> -->
-
+  
+ 
   <!-- Task details status -->
   <div>
     <div>Task Details Branch manager</div>
@@ -367,10 +348,9 @@
 
 
 
-<!-- /** Advanced Search Form */ -->
 
 
-<div class="modal fade" id="createAdvanceSearchModal" tabindex="-1" role="dialog"
+<!-- <div class="modal fade" id="createAdvanceSearchModal" tabindex="-1" role="dialog"
   aria-labelledby="createAdvanceSearchModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -451,7 +431,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- popup -->
 

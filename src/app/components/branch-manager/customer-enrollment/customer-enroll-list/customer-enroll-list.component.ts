@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import firebase from 'firebase/app'; 
 import 'firebase/auth';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 
@@ -37,7 +38,7 @@ export class CustomerEnrollListComponent implements OnInit {
   user:any;
 
   constructor(private formBuilder: FormBuilder,private crudService: CrudService,public datepipe: DatePipe,
-    private toast: ToastrService, private authentication: AuthenticationService,) { }
+    private toast: ToastrService, private authentication: AuthenticationService,private router: Router) { }
     /** Create Customer Enrolment Form */
     createCustomerEnrolForms = new FormGroup({
       Customerphoto: new FormControl('', Validators.required),
@@ -129,10 +130,15 @@ enrollid:any;
             console.log(data);
           })
         })
+        this.getEnrollData();
     })
     
   }
   
+  createLoan(){
+    this.router.navigate(['branch-manager/newloan-process']);
+
+  }
 
   getEnrollData() {
     this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnroll`, {
