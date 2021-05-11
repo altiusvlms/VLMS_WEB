@@ -4,732 +4,1222 @@
 
 <div class="container">
 
-  <form class="form-inline md-form form-sm active-cyan-2">
-    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search"
-      mdbInput>
-  </form><br><br>
-  
-  <form class="form-inline md-form form-sm active-cyan-2">
-    <button type="button"  data-toggle="modal" data-target="#createAdvanceSearchModal">
-     Advanced Search
-    </button> 
-   </form><br><br>
-
-<div class="row">
+<div class="row" *ngFor="let customer of customerList">
   <div class="col-sm-2">
-    <div> Customer Image</div>
-    <div>Customer ID: KF-0012</div>
+    <div> Customer Image
+      <img [src]="customerImage ? customerImage : 'assets/images/empty_image.png'" style="width: 50%;object-fit: contain;
+      object-position: center;">
+    </div>
+    <div>Customer ID:{{customer.id}}</div>
   </div>  
   <div class="col-sm-2">
-    <div>Robin</div>
-    <div>8765765465</div>
-    <div>Male</div>
+    <div>Name:{{customer.customerName}}</div>
+    <div>Mobile No:{{customer.customerDetails.mobileNo}}</div>
+    <div>Gender:{{customer.customerDetails.gender}}</div>
   </div>  
   <div class="col-sm-2">
-    <div>Loan Amount:50,000</div>
-    <div>Loan Term: 8 Month</div>
-    <div>Interest: 24%</div>
-    <div>EMI: 5200</div>
+    <div>Loan Amount:{{customer.loanDetailsData.loanAmount}}</div>
+    <div>Loan Term:{{customer.loanDetailsData.loanTerm}}</div>
+    <div>Interest:{{customer.loanDetailsData.loanInterest}}</div>
+    <div>EMI:{{customer.loanDetailsData.emi}}</div>
   </div>
   <div class="col-sm-2">
-    <div>Ref By: 8787654545</div>
-    <div>Vehicle: Make/Model</div>
-    <div>For: Used vehicle</div>
-    <div>EMI: 5200</div>
+    <div>Ref By: {{customer.customerDetails.refBy}}</div>
+    <div>Make: {{customer.vehicleDetails.maker}}</div>
+    <div>Model: {{customer.vehicleDetails.model}}</div>
   </div>
   <div class="col-sm-2">
-    <div>New Customer</div>
-    <div>Loan Type: New Loan</div>
-    <div>Approver: Super Admin</div>
+    <!-- <div>Customer Type:</div> -->
+    <!-- <div>Loan Type:</div> -->
+    <div>Approver:</div>
   </div>
 </div>
 
 
+<mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabClick($event)">
 
+  <!-- Tab 1 -->
 
-
-
-<mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabClick($event)">
-    <!-- Tab 1 -->
-    <mat-tab label="Applicant">
-        <mat-card class="example-card">
+  <mat-tab label="Applicant"> 
+    <mat-card class="example-card">
         <mat-card-content>
-          <form [formGroup]="applicantDetailsForm">
-            <table class="example-full-width" cellspacing="0">
-                
-              <tr>
-                <!-- <td>  UserID:
-                  <mat-form-field  appearance="outline"  class="example-full-width">
-                  <input matInput type='text' formControlName="userId" >
-                  </mat-form-field>
-                </td><br> -->
-                <td>  Applicant name:
-                  <mat-form-field  appearance="outline"  class="example-full-width">
-                  <input matInput type='text' formControlName="customerName" >
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td> Mobile Number:
-                  <mat-form-field appearance="outline"   class="example-full-width">
-                <input matInput type='number' >
-              </mat-form-field></td>
-            </tr>
-            <tr>
-                <td>  Father name:
-                  <mat-form-field  appearance="outline"  class="example-full-width">
-                  <input matInput  type='text'  >
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td> Ref By:
-                  <mat-form-field appearance="outline"  class="example-full-width">
-                <input matInput  >
-              </mat-form-field></td>
-            </tr>
-            <tr>
-                <td>  Applicant Type:
-                  <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  >
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td> Marital status:
-                  <mat-form-field appearance="outline"  class="example-full-width">
-                <input matInput formControlName="maritalStatus">
-              </mat-form-field></td>
-            </tr>
-            <tr>
-                <td>  Company Name:
-                  <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  type='text'  >
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td> Spouse Name:
-                  <mat-form-field appearance="outline"  class=" example-full-width">
-                <input matInput  >
-              </mat-form-field></td>
-            </tr>
-            <tr>
-                <td> Net Monthly Income:
+          <form [formGroup]="applicantForm" >
+            <div formGroupName="customerDetails">
+            <div class="row">
+              <span *ngIf="!showUpdatebtn" class="material-icons" matTooltip="Edit" style="float: right;" (click)="editCustomerDetails()">edit</span>
+
+              <div class="col-sm-2">
+                <div> 
+                  <label>Applicant Image:
+                     <img [src]="customerImage ? customerImage : 'assets/images/empty_image.png'" style="width: 50%;object-fit: contain;
+                      object-position: center;">
+                   </label>
+                </div>
+                <div> 
+                  <label>Applicant Name:                 
+                    <mat-form-field  appearance="outline"  class="example-full-width" >
+                      <input matInput type='text' formControlName="customerName" >
+                      </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Mobile Number:                 
+                    <mat-form-field appearance="outline"   class="example-full-width">
+                      <input matInput type='text' formControlName="mobileNo"  minlength=10 maxlength=10>
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Alter Mobile Number:                 
+                    <mat-form-field appearance="outline"   class="example-full-width">
+                      <input matInput type='text' formControlName="altNumber" minlength=10 maxlength=10>
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Father name:               
+                    <mat-form-field  appearance="outline"  class="example-full-width">
+                      <input matInput  type='text' formControlName="fatherName" >
+                      </mat-form-field>
+                  </label>
+                </div>
+
+                <div> 
+                  <label>Applicant Type:        
                     <mat-form-field appearance="outline" class="example-full-width">
-                  <input matInput  >
-                </mat-form-field></td>
-              </tr>
-              <tr>
-                <td> Salary Date:
+                      <mat-select formControlName="applicantType">
+                        <mat-option value="salaried">Salaried</mat-option>
+                        <mat-option value="bussiness">Bussiness</mat-option>
+                        <mat-option value="professional">Professional</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  </label>
+                </div>
+             
+                <div> 
+                  <label>Company Name:               
+                    <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput  type='text' formControlName="companyName" >
+                      </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label> Net Monthly Income:              
                     <mat-form-field appearance="outline" class="example-full-width">
-                  <input matInput  >
-                </mat-form-field></td>
-              </tr>
-              <mat-radio-group aria-label="Select an option">
-                <mat-radio-button value="1">Monthly</mat-radio-button>
-                <mat-radio-button value="2">Weakly</mat-radio-button>
-                <mat-radio-button value="2">Daily</mat-radio-button>
-              </mat-radio-group><br>
-
-              <h2>ADD ADDRESS</h2>
-
-              <div>
-                  <td> Enter adress Here:
-                      <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput formControlName="addressLine1"  >
-                  </mat-form-field></td>
+                      <input matInput formControlName="monthlyIncome" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Gender:  
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-select  formControlName="gender">
+                        <mat-option value="male">Male</mat-option>
+                        <mat-option value="female">Female</mat-option>
+                      </mat-select>
+                  </mat-form-field>            
+                  </label>
+                </div>
               </div>
-              <div>
-                  <td> City:
-                      <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput formControlName="city" >
-                  </mat-form-field></td>
-              </div>
-              <div>
-                  <td>Enter pincode:
-                      <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput formControlName="postalCode" >
-                  </mat-form-field></td>
-              </div>
-              <div>
-                <select  class="form-control">
-                  <option value="koundampalayam">koundampalayam</option>
-                  <option value="ganapathy">ganapathy</option>
-                  <option value="gandhipuram">gandhipuram</option>
-                  <option value="hopes">hopes</option>
-                </select>
-            </div>
+              <div class="col-sm-2" style="margin-left: 10%;">
+                <div> 
+                  <label>DOB:              
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="date" formControlName="dob" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Ref By:          
+                    <mat-form-field appearance="outline"  class="example-full-width">
+                      <input matInput formControlName="refBy" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Marital status:  
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-select  formControlName="maritalStatus">
+                        <mat-option value="yes">Yes</mat-option>
+                        <mat-option value="no">No</mat-option>
+                      </mat-select>
+                  </mat-form-field>         
+                  </label>
+                </div>
+                <div> 
+                  <label>Spouse Name:         
+                    <mat-form-field appearance="outline"  class=" example-full-width">
+                      <input matInput formControlName="spouseName" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Salary Date:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="date" formControlName="salaryDate" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Salary Period:         
+                    <mat-radio-group aria-label="Select an option" formControlName="salaryPeriod">
+                      <mat-radio-button value="monthly">Monthly</mat-radio-button>
+                      <mat-radio-button value="weakly">Weakly</mat-radio-button>
+                      <mat-radio-button value="daily">Daily</mat-radio-button>
+                    </mat-radio-group>
+                  </label>
+                </div>
+                </div>
+        <form [formGroup]="applicantAddressForm">
+              
+                <div class="col-sm-2" style="margin-left:5%">
+                  <button class="btn btn-primary" (click)="communicationAddress()">Communication Address</button>
+                  <button class="btn btn-primary" (click)="permanentAddress()">Permanent Address</button>
+                  <button class="btn btn-primary" (click)="officeAddress()">Office Address</button>
+                </div>
 
-              <button mat-raised-button (click)="getCustomerDetails()" color="primary">submit</button>
-              <!-- <a href="#" class="previous">&laquo; Previous</a> -->
-              <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
-              <!-- <button class="" (click) = "addressupdate()">Edit</button>  -->
-              <button class="" (click) = "addressupdate()">submit</button> 
-              <!-- <button class="tablinks" (click)="setTab('tab2')">Tab 1</button> -->
-              <!-- <button class="tablinks" routerLink="/Co-Applicant">Tab 3</button> -->
-        </table>
+                <div class="col-sm-2" formGroupName="communicationAdd" *ngIf="showCommunication">Communication Address:
+                  <div> 
+                    <label>Address Line1:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="addressLine1" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>Address Line2:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="addressLine2" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>Area:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="area" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>City:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="city" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>Landmark:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="landmark" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>Pincode:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="postalCode" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>State:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="state" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-2" formGroupName="permanentAdd" *ngIf="showPermanent">Permanent Address:
+                <div> 
+                  <label>Address Line1:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="addressLine1" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Address Line2:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="addressLine2" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Area:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="area" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>City:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="city" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Landmark:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="landmark" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Pincode:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="postalCode" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>State:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="state" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                </div>
+                <div class="col-sm-2" formGroupName="officeAdd" *ngIf="showOffice" >Office Address:
+                  <div> 
+                    <label>Address Line1:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="addressLine1" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>Address Line2:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="addressLine2" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>Area:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="area" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>City:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="city" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>Landmark:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="landmark" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>Pincode:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="postalCode" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                  <div> 
+                    <label>State:         
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="text" formControlName="state" >
+                      </mat-form-field>
+                    </label>
+                  </div>
+                </div>
           </form>
+                
+            </div>
+        <p>ID Proofs</p>
+            <table>
+              <thead>
+                <tr> 
+                  <th>Aadhar</th>
+                  <th>Pan Card</th>
+                  <th>Driving Licences</th>
+                  <th>Voter ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>  
+                    <input *ngIf="!customerAadharImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadApplicantAadharImages($event)" /> 
+                    <img [src]="customerAadharImage ? customerAadharImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                    object-position: center;">
+                  </td>
+                  <td>  
+                    <input *ngIf="!customerPancardImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadApplicantPanImages($event)"/> 
+                    <img [src]="customerPancardImage ? customerPancardImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                    object-position: center;">
+                  </td>
+                  <td>  
+                    <input *ngIf="!customerLicencesImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadApplicantDrivingImages($event)"/> 
+                    <img [src]="customerLicencesImage ? customerLicencesImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                    object-position: center;">
+                  </td>
+                  <td>  
+                    <input *ngIf="!customerVoterImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadApplicantVoterImages($event)"/> 
+                    <img [src]="customerVoterImage ? customerVoterImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                    object-position: center;">
+                  </td>
+                </tr>
+                </tbody>
+            </table>
+          </div>
+          </form>
+          <button *ngIf="showUpdatebtn" class="btn btn-primary"  (click)="updateCustomerDetails()">Update</button>          
+          <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>          
         </mat-card-content>
-        <mat-card-actions>
-          <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
-        </mat-card-actions>
-       
-      </mat-card>
-      </mat-tab>
+    </mat-card>
+  </mat-tab>
 
-
-  <!-- Tab 2 -->
-
-
+  <!-- Tab2 -->
   <mat-tab label="Co-Applicant">
     <mat-card class="example-card">
-    <mat-card-content>
-      <form class="example-form" [formGroup] = "coapplicantDetailsForm">
-        <table class="example-full-width" cellspacing="0">
+      <mat-card-content>
+        <form class="example-form"  [formGroup]="co_applicantForm">
+        <div formGroupName="customerGuarantor">
+          <div class="row">
+            <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editGuarantorDetails()">edit</span>
+            <div class="col-sm-2">
+              <div> 
+                <label>Co-Applicant Image:
+                  <img [src]="guarantorImage ? guarantorImage : 'assets/images/empty_image.png'" style="width: 50%;object-fit: contain;
+                  object-position: center;">
+                 </label>
+              </div>
+              <div> 
+                <label>Co-Applicant Name:                 
+                  <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <input matInput type='text' formControlName="guarantorName" >
+                    </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Mobile Number::                 
+                  <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <input matInput type='text' formControlName="mobileNumber" minlength=10 maxlength=10 >
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Alter Mobile Number:               
+                  <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <input matInput type='text'  minlength=10 maxlength=10 >
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Father Name:               
+                  <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <input matInput type='text' >
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                  <label>Gender:  
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-select  formControlName="gender">
+                        <mat-option value="male">Male</mat-option>
+                        <mat-option value="female">Female</mat-option>
+                      </mat-select>
+                  </mat-form-field>            
+                  </label>
+                </div>
+                <div> 
+                  <label>DOB:              
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="date" formControlName="dob" >
+                    </mat-form-field>
+                  </label>
+                </div>
+              </div>
+            <div class="col-sm-2" style="margin-left: 50px;">
+                <div> 
+                  <label>Spouse Name:         
+                    <mat-form-field appearance="outline"  class=" example-full-width">
+                      <input matInput formControlName="spouseName">
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Marital status:  
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-select formControlName="maritalStatus">
+                        <mat-option value="yes">Yes</mat-option>
+                        <mat-option value="no">No</mat-option>
+                      </mat-select>
+                  </mat-form-field>         
+                  </label>
+                </div>
+                <label>Co-Applicant Type:               
+                  <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <mat-select >
+                      <mat-option value="salaried">Salaried</mat-option>
+                      <mat-option value="bussiness">Bussiness</mat-option>
+                      <mat-option value="professional">Professional</mat-option>
+                    </mat-select>                      
+                 </mat-form-field>
+                </label>
+              <div> 
+                <label>Company Name:               
+                  <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <input matInput type='text'>
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Net Monthly Income:               
+                  <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <input matInput type='text' >
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Salary Date:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="date" >
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Salary Period:         
+                  <mat-radio-group aria-label="Select an option" >
+                    <mat-radio-button value="monthly">Monthly</mat-radio-button>
+                    <mat-radio-button value="weakly">Weakly</mat-radio-button>
+                    <mat-radio-button value="daily">Daily</mat-radio-button>
+                  </mat-radio-group>
+                </label>
+              </div>
+            </div>
+          
+
+        <form [formGroup]="co_applicantAddressForm">
+            <div class="col-sm-2" style="margin-left:5%">
+              <h2>ADD ADDRESS</h2>
+              <button class="btn btn-primary" (click)="communicationAddress()">Communication Address</button>
+              <button class="btn btn-primary" (click)="permanentAddress()">Permanent Address</button>
+              <button class="btn btn-primary" (click)="officeAddress()">Office Address</button>
+            </div>
+              <div class="col-sm-2" formGroupName="communicationAdd" *ngIf="showCommunication">Communication Address:
+              <div> 
+                <label>Address Line1:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="addressLine1">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Address Line2:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="addressLine2">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Area:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="area">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>City:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="city">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Country:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" >
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Landmark:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="landmark">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Pincode:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="postalCode">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>State:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="state">
+                  </mat-form-field>
+                </label>
+              </div>
+              </div>
+              <div class="col-sm-2" formGroupName="permanentAdd"  *ngIf="showPermanent" >Permanent Address:
+              <div> 
+                <label>Address Line1:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="addressLine1">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Address Line2:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="addressLine2" >
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Area:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="area" >
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>City:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="city">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Country:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" >
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Landmark:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text"  formControlName="landmark">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>Pincode:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="postalCode">
+                  </mat-form-field>
+                </label>
+              </div>
+              <div> 
+                <label>State:         
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type="text" formControlName="state">
+                  </mat-form-field>
+                </label>
+              </div>
+              </div>
+              <div class="col-sm-2" formGroupName="officeAdd" *ngIf="showOffice" >Office Address:
+                <div> 
+                  <label>Address Line1:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="addressLine1" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Address Line2:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="addressLine2">
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Area:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="area" >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>City:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="city">
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Country:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text"  >
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Landmark:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text"  formControlName="landmark">
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>Pincode:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="postalCode">
+                    </mat-form-field>
+                  </label>
+                </div>
+                <div> 
+                  <label>State:         
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type="text" formControlName="state" >
+                    </mat-form-field>
+                  </label>
+                </div>
+              </div>
+        </form>
+          </div>
+
+          <p>ID Proofs</p>
+          <table>
+            <thead>
+              <tr> 
+                <th>Aadhar</th>
+                <th>Pan Card</th>
+                <th>Driving Licences</th>
+                <th>Voter ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>    
+                  <input *ngIf="!guarantorAadharImage" #file type="file" accept='image/*' (change)="uploadCo_ApplicantAadharImages($event)" />
+                  <img *ngIf="!guarantorAadharImage" [src]="co_applicantAadharImgURL ? co_applicantAadharImgURL : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                  object-position: center;">
+                  <img *ngIf="guarantorAadharImage" [src]="guarantorAadharImage ? guarantorAadharImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                  object-position: center;">
+                </td>
+                <td>     
+                  <input *ngIf="!guarantorPancardImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadCo_ApplicantPanImages($event)" /> 
+                  <img [src]="guarantorPancardImage ? guarantorPancardImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                  object-position: center;">
+                </td>
+                <td>    
+                  <input *ngIf="!guarantorLicencesImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadCo_ApplicantDrivingImages($event)" /> 
+                  <img [src]="guarantorLicencesImage ? guarantorLicencesImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                  object-position: center;">
+                </td>
+                <td>     
+                  <input *ngIf="!guarantorVoterImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadCo_ApplicantVoterImages($event)" /> 
+                  <img [src]="guarantorVoterImage ? guarantorVoterImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                  object-position: center;">
+                </td>
+              </tr>
+              </tbody>
+          </table>
+    </div>
+        </form>
+        <button  class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
+        <button *ngIf="showUpdatebtn" class="btn btn-secondary" (click)="updateGuarantorDetails()">Update</button>
+        <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
+      </mat-card-content>
+  </mat-card>
+  </mat-tab>
+
+  <!-- Tab3 -->
+
+  <mat-tab label="Vehicle Details">
+
+    <mat-card class="example-card">
+        <mat-card-content>
+          <form class="example-form"  [formGroup]="vehicleForm">
+          <div formGroupName="vehicleDetails" >
+            <div class="row">
+            <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editVehicleDetails()">edit</span>
+
+              <div class="col-sm-2">
+                <div> 
+                  <label>Vehicle Number:                  
+                    <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput type='text'  formControlName="vehicleNumber" >
+                      </mat-form-field>
+              
+                  </label>
+                </div>
+                <div>
+                <label>Model:
+                  <mat-form-field  appearance="outline" class="example-full-width">
+                    <input matInput  type='text'formControlName="model"  >
+                    </mat-form-field>
+                   
+                    </label>
+                </div>
+                <div>
+                  <label>MFG Year:
+                    <mat-form-field  appearance="outline" class="example-full-width" >
+                      <input matInput  type='text' formControlName="mfgYear" >  
+                    </mat-form-field>
+                 
+                    </label>
+                </div>
+                <div>
+                  <label>Engine Number:
+                    <mat-form-field  appearance="outline" class="example-full-width"  >
+                      <input matInput  type='text' formControlName="engineNumber" > 
+                    </mat-form-field>
+                    </label>
+                </div>
+                <div>
+                  <label>Chassis Number:
+                    <mat-form-field appearance="outline" class="example-full-width"  >
+                      <input matInput  type='text'formControlName="chassisNumber" >  
+                    </mat-form-field>
+                    </label>
+                </div>
+                <div>
+                  <label>Insurence Company:
+                    <mat-form-field appearance="outline" class="example-full-width" >
+                      <input matInput type='text' formControlName="insuranceCompany"  >
+                    </mat-form-field>
+                    </label>
+                </div>
+                <div>
+                  <label>Insurence Policy:
+                    <mat-form-field  appearance="outline" class="example-full-width">
+                      <input matInput  type='text' formControlName="insurancePolicy"  >
+                      </mat-form-field>
+                    </label>
+                </div>
+                <div>
+                  <label>Insurence Expire on:
+                    <mat-form-field appearance="outline" class="example-full-width" >
+                      <input matInput  type='date'   >
+                    </mat-form-field>
+                    </label>
+                </div>
+                <div>
+                  <label>Live KM Reading:
+                    <mat-form-field appearance="outline" class="example-full-width" >
+                      <input matInput  type='text' formControlName="kmReading"  >
+                    </mat-form-field>
+                    </label>
+                </div>
+            </div>
+  
+            <div class="col-sm-2" style="padding-left: 10%;">
+              <div> 
+                <label>Make:</label>
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type='text' formControlName="maker" >
+                  </mat-form-field>
+              </div>
+              <div> 
+                <label>Colour:</label>
+                  <mat-form-field appearance="outline" class="example-full-width" >
+                    <input matInput  type='text'  formControlName="color" >
+                  </mat-form-field>
+              </div>
+              <div> 
+                <label>No of Owner:
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput type='text'  >
+                  </mat-form-field>
+                  </label>
+              </div>
+              <div> 
+                <label>Engine Image:
+                  <img class="image_size"  [src]="engineImage ? engineImage : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+              <div> 
+                <label>Chassis Image:
+                  <img class="image_size"  [src]="chassisImage ? chassisImage : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-2" style="padding-left: 20%;">
+              <div> 
+                <label>Insurence Policy Image:
+                  <img class="image_size"  [src]="vehicleInsurenceImage ? vehicleInsurenceImage : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+              <div> 
+                <label>Live KM Reading:
+                  <img class="image_size"  [src]="kmReadingImage ? kmReadingImage : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+              <div> 
+                <label>RC Book:
+                  <img class="image_size"  [src]="rcBookImage ? rcBookImage : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+          </div>
+          <!-- <div class="col-sm-2" style="padding-left: 25%;">
+            <button type="button" class="btn btn-primary">Create Task</button>
+            <button type="button" class="btn btn-primary">Vehicle Transaction History</button>
+            <button type="button" class="btn btn-primary">Vehicle Challan report</button>
+          </div> -->
             
-          <tr>
-            <td>   Name:
-              <mat-form-field  appearance="outline" class="example-full-width">
-              <input matInput type='text' formControlName="spouseName" >
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-          <td> Mobile Number:
+            </div>
+           
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="row"><label>Vehicle Image:</label></div>
+                  <label>Front View
+                  <img class="image_size"  [src]="vehicleFrontImage ? vehicleFrontImage : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+              <div class="col-sm-3">
+                <label>Back View
+                  <img class="image_size"  [src]="vehicleBackImage ? vehicleBackImage : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+              <div class="col-sm-3">
+                <label>Side View 1
+                  <img class="image_size"  [src]="vehicleSide1Image ? vehicleSide1Image : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+              <div class="col-sm-3">
+                <label>Side View 2
+                  <img class="image_size"  [src]="vehicleSide2Image ? vehicleSide2Image : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+              
+            </div>
+              
+            <button class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
+            <button *ngIf="showUpdatebtn" class="btn btn-secondary" (click)="updateVehicleDetails()">Update</button>
+            <button class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
+          </div>
+          </form>
+        </mat-card-content>
+    </mat-card>
+
+  </mat-tab>
+  
+  <!-- Tab4 -->
+  <mat-tab label="Loan Transfer">
+    <mat-card class="example-card">
+    <mat-card-content>
+      <form class="example-form"  [formGroup]="loanForm"  >
+        <div class="row" formGroupName = "loanDetailsData">
+          <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editLoanDetails()">edit</span>
+          <div class="col-sm-2">
+            <div> 
+              <label>Loan Amount:               
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput type='text' formControlName="loanAmount" >
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Loan Term:               
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput type='text' formControlName="loanTerm" >
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>EMI Amount:               
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput type='text'  formControlName="emi" >
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Intrest:               
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text'   formControlName="loanInterest" >
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Intrest Amount:               
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text'   formControlName="interestInr"  >
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Due Date:               
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='date'  formControlName="dueDate" >
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Doc Charge:              
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' formControlName="docCharge">
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Processing Charge:               
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput type='text'  formControlName="processingCharge">
+                </mat-form-field>
+              </label>
+            </div>
+            <!-- <div> 
+              <label>Pending Doc:               
+                  <section class="example-section">
+                  <mat-checkbox class="example-margin">NOC</mat-checkbox>
+                  <mat-checkbox class="example-margin">Insurence</mat-checkbox>
+                  <mat-checkbox class="example-margin">Co-Applicant</mat-checkbox>
+                  <mat-checkbox class="example-margin">Vehicle Details</mat-checkbox>  
+                  </section>     
+              </label>
+            </div> -->
+            <!-- <div> 
+              <label>Hold Amount:              
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' >
+                </mat-form-field>
+              </label>
+            </div> -->
+            <!-- <div> 
+              <label>NOC:              
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' >
+                </mat-form-field>
+              </label>
+            </div> -->
+            <!-- <div> 
+              <label>Insurence:              
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' >
+                </mat-form-field>
+              </label>
+            </div> -->
+            <!-- <div> 
+              <label>Co-Applicant:              
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' >
+                </mat-form-field>
+              </label>
+            </div> -->
+            <!-- <div> 
+              <label>Other Charge:              
+                  <section class="example-section">
+                  <mat-checkbox class="example-margin">RTO Expense</mat-checkbox>
+                  <mat-checkbox class="example-margin">Insurence</mat-checkbox> 
+                  </section>
+              </label>
+            </div> -->
+            <div> 
+              <label>Closing A/C:             
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' formControlName="closingAC">
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Closing Discount:              
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' formControlName="closingDiscount">
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Pay Out:              
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' formControlName="payout">
+                </mat-form-field>
+              </label>
+            </div>
+            <!-- <div> 
+              <label>Re-payment Mode:              
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' >
+                </mat-form-field>
+              </label>
+            </div> -->
+
+          </div>
+          <!-- <div class="col-sm-2" style="margin-left:50%">
+            APPLICANT EXPECTATION
+            <div>
+              <label>Loan Amount 
               <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput type='number' formControlName="mobileNumber" >
-          </mat-form-field></td>
-        </tr>
-        <tr>
-            <td>  Father name:
-              <mat-form-field  appearance="outline" class="example-full-width">
-              <input matInput  type='text'  >
+                <input matInput  type='text' >
               </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-          <td> Ref By:
+            </label>
+              <label>Interest %
               <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput  >
-          </mat-form-field></td>
-        </tr>
-        <tr>
-            <td>  Co-Applicant Type:
-              <mat-form-field  appearance="outline" class="example-full-width">
-              <input matInput  >
+                <input matInput  type='text' >
               </mat-form-field>
-            </td>
-          </tr>
-          
-        <tr>
-            <td>  Company Name:
-              <mat-form-field  appearance="outline" class="example-full-width">
-              <input matInput  type='text'  >
+            </label>
+              <label>Loan Term 
+              <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput type='text' >
               </mat-form-field>
-            </td>
-          </tr>
-          
-          <tr>
-            <td> Salary Date:
+            </label>
+              <label>Due Date 
+              <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput type='date' >
+              </mat-form-field>
+            </label>
+            </div>
+          </div> -->
+
+
+        </div>
+        <button  class="btn btn-secondary"  (click)="previousStep()">&laquo; Previous</button>
+        <button *ngIf="showUpdatebtn" class="btn btn-secondary" (click)="updateLoanDetails()">Update</button>
+        <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
+
+      </form>
+    </mat-card-content>
+    </mat-card>
+  </mat-tab>
+
+  <!-- Tab5 -->
+  <mat-tab label="Bank details">
+    <mat-card class="example-card">
+    <mat-card-content>
+      <form class="example-form"  [formGroup]="bankForm" >
+      <div formGroupName="bankDetails">
+          <p>Transfer Amount </p>
+        &nbsp;
+        <div class="row">
+          <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editBankDetails()">edit</span>
+          <div class="col-sm-2">
+            <div> 
+              <label>Pass Book Image:                 
+                <img class="image_size"  [src]=" passbookImage ?  passbookImage : 'assets/images/empty_image.png'" >
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <div> 
+              <label>Amount:                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput type='text' formControlName="loanEligibleAmount">
+                  </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Account Type:
                 <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput  >
-            </mat-form-field></td>
-          </tr>
-          <tr>
-            <td> Net Monthly Income:
+                    <input matInput type='text' formControlName="accountType" >
+              </mat-form-field>  
+              </label>
+            </div>
+            <div> 
+              <label>Disbursal Type:   
                 <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput  >
-            </mat-form-field></td>
-          </tr>
-          <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Monthly</mat-radio-button>
-            <mat-radio-button value="2">Weakly</mat-radio-button>
-            <mat-radio-button value="2">Daily</mat-radio-button>
-          </mat-radio-group>
+                  <mat-select formControlNam="disbursalType" >
+                    <mat-option value="cash">Cash</mat-option>
+                    <mat-option value="netbanking">IMPS</mat-option>
+                  </mat-select>
+              </mat-form-field>        
+              </label>
+            </div>
+            <div> 
+              <label>Account Number:                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput type='text'formControlName="accountNumber" >
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>Account Holder Name:                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput type='text' formControlName="accountHolderName">
+                </mat-form-field>
+              </label>
+            </div>
+            <div> 
+              <label>IFSC:                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' formControlName="IFSC">
+                </mat-form-field>
+                <span>Don't know IFSC choose bank & branch</span>
+              </label>
+            </div>
+            <div> 
+              <label>Bank Name:                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' formControlName="bankName">
+                </mat-form-field>
+              </label>
+            </div>
 
-          <h2>ADD ADDRESS</h2>
-
-          <div>
-              <td> Enter adress Here:
-                  <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput formControlName="addressLine1">
-              </mat-form-field></td>
+            <div> 
+              <label>Branch Name:                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <input matInput  type='text' formControlName="branchName">
+                </mat-form-field>
+              </label>
+            </div>
           </div>
-          <div>
-              <td> City:
-                  <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput formControlName="city">
-              </mat-form-field></td>
-          </div>
-          <div>
-              <td>Enter pincode:
-                  <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput formControlName="postalCode">
-              </mat-form-field></td>
-          </div>
-
-    </table>
-    <button  class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
-    <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
+          <!-- <div class="col-sm-2" style="margin-left: 50%;">
+            <p>Loan Summary </p>
+            <label> Loan Amount:
+              <mat-form-field  appearance="outline" class="example-full-width">
+                <input matInput type='text'  >
+                </mat-form-field>
+            </label>
+            <label> Intrest%:
+              <mat-form-field  appearance="outline" class="example-full-width">
+                <input matInput type='text'  >
+                </mat-form-field>
+            </label>
+            <label> Loan Term:
+              <mat-form-field  appearance="outline" class="example-full-width">
+                <input matInput type='text'  >
+                </mat-form-field>
+            </label>
+            <label> Due Date:
+              <mat-form-field  appearance="outline" class="example-full-width">
+                <input matInput type='date'  >
+                </mat-form-field>
+            </label>
+            <label> To Pay :
+              <mat-form-field  appearance="outline" class="example-full-width">
+                <input matInput type='text'  >
+                </mat-form-field>
+            </label>
+          </div> -->
+        </div>
+        
+        <button class="btn btn-secondary"  (click)="previousStep()">&laquo; Previous</button>
+        <button *ngIf="showUpdatebtn" class="btn btn-secondary" (click)="updateBankDetails()">Update</button>
+    </div>
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
+      
     </mat-card-actions>
    
   </mat-card>
   </mat-tab>
-    <!-- Tab 3 -->
 
-    <mat-tab label="Vehicle details">
-        <mat-card class="example-card">
-        <mat-card-content>
-          <form class="example-form" [formGroup]="vehicleDetailsForm">
-            
-          <div class="row">
-            <div class="col-sm-2">
-              <div> 
-                <label>Vehicle Number:
-                  <mat-form-field  appearance="outline" class="example-full-width">
-                    <input matInput type='text'  formControlName="vehicleNumber" >
-                    </mat-form-field>
-                </label>
-              </div>
-              <div>
-               <label>Model:
-                <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  type='text'  formControlName="model" >
-                  </mat-form-field>
-                  </label>
-              </div>
-              <div>
-                <label>MFG Year:
-                  <mat-form-field  appearance="outline" class="example-full-width" >
-                    <input matInput  type='text' formControlName="mfgYear">
-                  </mat-form-field>
-                   </label>
-               </div>
-               <div>
-                <label>Engine Number:
-                  <mat-form-field  appearance="outline" class="example-full-width"  >
-                    <input matInput  type='text'  formControlName="engineNumber">
-                  </mat-form-field>
-                   </label>
-               </div>
-               <div>
-                <label>Chassis Number:
-                  <mat-form-field appearance="outline" class="example-full-width"  >
-                    <input matInput  type='text' formControlName="chassisNumber">
-                  </mat-form-field>
-                   </label>
-               </div>
-               <div>
-                <label>Insurence Company:
-                  <mat-form-field appearance="outline" class="example-full-width" >
-                    <input matInput type='text'  formControlName="insuranceCompany">
-                  </mat-form-field>
-                   </label>
-               </div>
-               <div>
-                <label>Insurence Policy:
-                  <mat-form-field  appearance="outline" class="example-full-width">
-                    <input matInput  type='text' formControlName="insurancePolicy">
-                    </mat-form-field>
-                   </label>
-               </div>
-               <div>
-                <label>Insurence Expire on:
-                  <mat-form-field appearance="outline" class="example-full-width" >
-                    <input matInput  type='text' formControlName="insuranceExpiry" >
-                  </mat-form-field>
-                   </label>
-               </div>
-               <div>
-                <label>Live KM Reading:
-                  <mat-form-field appearance="outline" class="example-full-width" >
-                    <input matInput  type='text' formControlName="kmReading" >
-                  </mat-form-field>
-                   </label>
-               </div>
-           </div>
-
-           <div class="col-sm-2" style="padding-left: 10%;">
-            <div> 
-              <label>Make:</label>
-                <mat-form-field appearance="outline" class="example-full-width">
-                  <input matInput type='text' formControlName="maker" >
-                </mat-form-field>
-            </div>
-            <div> 
-              <label>Colour:</label>
-                <mat-form-field appearance="outline" class="example-full-width" >
-                  <input matInput  type='text' formControlName="color">
-                </mat-form-field>
-            </div>
-            <div> 
-              <label>No of Owner:
-                <mat-form-field appearance="outline" class="example-full-width">
-                  <input matInput type='text' formControlName="noOfOwner" >
-                </mat-form-field>
-                 </label>
-            </div>
-            <div> 
-              <label>Engine Image:
-              <button>Delete</button>
-              <button>Add Image</button>
-              <img  src="assets/images/empty_image.png">
-              </label>
-            </div>
-            <div> 
-              <label>Chassis Image:
-              <button>Delete</button>
-              <button>Add Image</button>
-              <img  src="assets/images/empty_image.png">
-              </label>
-            </div>
-          </div>
-          <div class="col-sm-2" style="padding-left: 20%;">
-            <div> 
-              <label>Insurence Policy Image:
-              <button>Delete</button>
-              <button>Add Image</button>
-              <img  src="assets/images/empty_image.png">
-              </label>
-            </div>
-            <div> 
-              <label>Live KM Reading:
-                <button>Delete</button>
-                <button>Add Image</button>
-                <img  src="assets/images/empty_image.png">
-              </label>
-            </div>
-            <div> 
-              <label>RC Book:
-                <div class="row"></div>
-                <button>Delete</button>
-                <button>Add Image</button>
-                <img  src="assets/images/empty_image.png">
-              </label>
-            </div>
-         </div>
-         <div class="col-sm-2" style="padding-left: 20%;">
-          <button type="button" class="btn btn-primary">Create Task</button>
-          <button type="button" class="btn btn-primary">Vehicle Transaction History</button>
-          <button type="button" class="btn btn-primary">Vehicle Challan report</button>
-        </div>
-          
-        </div>
-           
-        <div class="row">
-          <div class="col-sm-6">
-          <div> 
-            <label>Vehicle Image:
-              <img  src="assets/images/empty_image.png">
-              <!-- <img  src="assets/images/empty_image.png"> -->
-              <!-- <img  src="assets/images/empty_image.png"> -->
-              <!-- <img  src="assets/images/empty_image.png"> -->
-            </label>
-          </div>
-          </div>
-        </div>
-           
-         
-        <button class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
-        <button class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
-          </form>
-        </mat-card-content>
-        <mat-card-actions>
-          <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
-        </mat-card-actions>
-       
-      </mat-card>
-      </mat-tab>
-        <!-- Tab 4 -->
-    
-        <mat-tab label="Loan Transfer">
-            <mat-card class="example-card">
-            <mat-card-content>
-              <form class="example-form" [formGroup]="loanTransferForm">
-                <div class="row">
-                  <div class="col-3">
-                <table class="example-full-width" cellspacing="0">
-                    
-                  <tr>
-                    <td>   Loan Amount:
-                      <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput type='text'   formControlName="loanAmount">
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                  <tr>
-                  <td> Loan Term:
-                      <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput type='number' formControlName="loanTerm" >
-                  </mat-form-field></td>
-                </tr>
-                <tr>
-                  <td> Emi Amount:
-                      <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput  formControlName="emiAmount" >
-                  </mat-form-field></td>
-                </tr>
-                <tr>
-                  <td>  Due Date:
-                    <mat-form-field  appearance="outline" class="example-full-width">
-                    <input matInput  type='text'  formControlName="dueDate" >
-                    </mat-form-field>
-                  </td>
-                </tr>
-                <tr>
-                  <td>  Doc Charge:
-                      <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput   formControlName="docCharge">
-                  </mat-form-field></td>
-                </tr>
-                <tr>
-                  <td> Processing Charge:
-                      <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput   formControlName="processingCharge">
-                  </mat-form-field></td>
-                </tr>
-                <tr>
-                  <td>  Pending Doc:
-                    <section class="example-section">
-                      <mat-checkbox class="example-margin">NOC</mat-checkbox>
-                      <mat-checkbox class="example-margin">Insurence</mat-checkbox>
-                      <mat-checkbox class="example-margin">Co-Applicant</mat-checkbox>
-                      <mat-checkbox class="example-margin">Vehicle Details</mat-checkbox>
-                    </section>
-                  </td>
-                </tr>
-                Hold Amount:
-
-                <tr>
-                  <td>NOC:
-                      <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput  formControlName="holdAmount" >
-                  </mat-form-field></td>
-                </tr>
-                <tr>
-                  <td>Intrest:
-                    <mat-form-field  appearance="outline" class="example-full-width">
-                    <input matInput  type='text'   formControlName="intrest">
-                    </mat-form-field>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Intrest Amount:
-                    <mat-form-field  appearance="outline" class="example-full-width">
-                    <input matInput  type='text'   formControlName="intrest">
-                    </mat-form-field>
-                  </td>
-                </tr>
-                <tr>
-                    <td>Insurence:
-                      <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'   formControlName="intrest">
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                <tr>
-                    <td>Co-Applicant :
-                      <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  formControlName="intrestEmiAmount" >
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td> Other Charge:
-                      <section class="example-section">
-                        <mat-checkbox class="example-margin">RTO Expense</mat-checkbox>
-                        <mat-checkbox class="example-margin">Insurence</mat-checkbox>
-                      </section>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td> Closing A/C:
-                        <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput  formControlName="closingAC" >
-                    </mat-form-field></td>
-                  </tr>
-                  <tr>
-                    <td>  Closing Discount:
-                      <mat-form-field  appearance="outline" class="example-full-width">
-                      <input matInput  type='text'  formControlName="closingDiscount" >
-                      </mat-form-field>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td> Pay Out:
-                        <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput   formControlName="balance">
-                    </mat-form-field></td>
-                  </tr>
-                  <tr>
-                    <td> Re-payment Mode:
-                        <mat-form-field appearance="outline" class="example-full-width">
-                      <input matInput   formControlName="rePaymentMode">
-                    </mat-form-field></td>
-                  </tr>
-                 
-                </table>
-                </div>
-
-              <div class="col-3">
-                APPLICANT EXPECTATION
-                <div>
-                  <label>Loan Amount </label>
-                  <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput   formControlName="rePaymentMode">
-                  </mat-form-field>
-                  <label>Interest %</label>
-                  <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput   formControlName="rePaymentMode">
-                  </mat-form-field>
-                  <label>Loan Term </label>
-                  <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput   formControlName="rePaymentMode">
-                  </mat-form-field>
-                  <label>Due Date </label>
-                  <mat-form-field appearance="outline" class="example-full-width">
-                    <input matInput   formControlName="rePaymentMode">
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-
-            <button  class="btn btn-secondary"  (click)="previousStep()">&laquo; Previous</button>
-            <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
+</mat-tab-group>
 
 
-              </form>
-            </mat-card-content>
-            <mat-card-actions>
-              <!-- <button mat-raised-button (click)="submit()" color="primary">submit</button> -->
-            </mat-card-actions>
-           
-          </mat-card>
-          </mat-tab>
-    
-    <!-- Tab 5  -->
-    <mat-tab label="Bank details">
-        <mat-card class="example-card">
-        <mat-card-content>
-          <form class="example-form" [formGroup]="bankDetailsForm">
-              <p>Transfer Amount 1</p>
-            &nbsp;
-            <input type="submit" id="fname" name="fname" value="0,000" >&nbsp;
-            <input type="submit" id="fname" name="fname" value="Applicant" >&nbsp;
-                        <input type="submit" id="fname" name="IMPS" value="Branch">
-                        <table class="example-full-width" cellspacing="0">
-                          <tr>
-                            <td>   
-                              <mat-form-field  appearance="outline" class="example-full-width">
-                              <input matInput type='text' placeholder="Account Number"  formControlName="accountNumber">
-                              </mat-form-field>
-                            </td>
-                          </tr>
-                          <tr>
-                          <td> 
-                              <mat-form-field appearance="outline" class="example-full-width">
-                            <input matInput type='text' placeholder="Name" formControlName="accountHolderName">
-                          </mat-form-field></td>
-                        </tr>
-                        <tr>
-                            <td>  
-                              <mat-form-field  appearance="outline" class="example-full-width">
-                              <input matInput  type='text' placeholder="IFSC" formControlName="IFSC" >
-                              </mat-form-field>
-                            </td>
-                          </tr>
-                          <tr>
-                          <td> 
-                              <mat-form-field appearance="outline" class="example-full-width">
-                            <input matInput placeholder="chooseBank"  formControlName="bankName">
-                          </mat-form-field></td>
-                        </tr>
-                        <p>Form Group Company</p>
-                        <tr>
-                            <td>  
-                              <mat-form-field  appearance="outline" class="example-full-width">
-                              <input matInput  placeholder="choose Branch" formControlName="branchName">
-                              </mat-form-field>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 
-                                <mat-form-field appearance="outline" class="example-full-width" >
-                              <input matInput placeholder="KC" >
-                            </mat-form-field></td>
-                          </tr>
-                          <tr>
-                              <td>  
-                                <mat-form-field  appearance="outline" class="example-full-width">
-                                <input matInput  placeholder="Approve Loan" >
-                                </mat-form-field>
-                              </td>
-                            </tr>
-                        
-                          
-                         
-                    </table>
-                      
-            
-            <table class="example-full-width" cellspacing="0">
-                <p>Loan Summary</p>
-              <tr>
-                <td>   Loan Amount:
-                  <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput type='text' formControlName="loanEligibleAmount" >
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td> Intrest%:
-                  <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput type='number' >
-              </mat-form-field></td>
-            </tr>
-            <tr>
-                <td>  Loan Term:
-                  <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput  type='text'>
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td> Due Date:
-                  <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput >
-              </mat-form-field></td>
-            </tr>
-            <tr>
-                <td>  To Pay :
-                  <mat-form-field  appearance="outline" class="example-full-width">
-                  <input matInput >
-                  </mat-form-field>
-                </td>
-              </tr>
-              
-            
-              
-                  
-        </table>
 
-        <button class="btn btn-secondary"  (click)="previousStep()">&laquo; Previous</button>
-        <button class="btn btn-primary" (click) = "submit()" >Submit</button>
-        <!-- <button class="" (click) = "addressupdate()">Edit</button> -->
+<!-- <div>
+   <p>Add Images</p>
+   <label>Engine Number:
+    <input matInput type='text' >
+   </label>
+   <button>Cancel</button>
+   <button>Update</button>
+</div> -->
 
-          </form>
-        </mat-card-content>
-        <mat-card-actions>
-          
-        </mat-card-actions>
-       
-      </mat-card>
-      </mat-tab>
+<!-- <div>
+   <p>Are you sure,Do you want to remove the Engine Number image</p>
+   <label>Reason:
+    <input matInput type='text' >
+   </label>
+   <button>No</button>
+   <button>Yes</button>
+</div> -->
 
-  </mat-tab-group>
 </div>

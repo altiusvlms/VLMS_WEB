@@ -82,6 +82,7 @@ export class CreateTask {
     private crudService: CrudService,
     private sharedService: SharedService,public datepipe: DatePipe) {
     if (data) {
+      console.log(data)
       this.editDataTask = { ...data };
      this.createTaskForms
     .patchValue({
@@ -89,7 +90,7 @@ export class CreateTask {
       customerRegNo:data.customerRegNo,
       customerMobileNo:data.customerMobileNo,
       vehicleNumber:data.vehicleNumber,
-      dueDate:this.datepipe.transform(data['dueDate'], 'dd MMMM yyyy'),
+      dueDate:this.datepipe.transform(data.dueDate, 'dd MMMM yyyy'),
       assignTo:data.assignTo,
       description:data.description
     });
