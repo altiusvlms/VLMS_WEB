@@ -129,6 +129,7 @@ enrollid:any;
             console.log(data);
           })
         })
+        this.getEnrollData();
     })
     
   }
