@@ -14,6 +14,10 @@ import { TaskManagementComponent } from './task-management/task-management.compo
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { LoanManagementComponent } from './loan-management/loan-management.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+// import { ExistingUserComponent } from './existing-user/existing-user.component';
+import { ExistingEmployeeComponent } from './existing-employee/existing-employee.component';
+import { TopupLoanComponent } from './topup-loan/topup-loan.component';
+import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 
 /** Dashboard Menu Routes */
 const routes: Routes = [
@@ -25,8 +29,10 @@ const routes: Routes = [
     { path: 'task-management', component: TaskManagementComponent },
     { path: 'analytics', component: AnalyticsComponent },
     { path: 'loan-management', component: LoanManagementComponent },
-    { path: 'manage-employee', component: ManageEmployeeComponent}
-    
+    { path: 'manage-employee', component: ManageEmployeeComponent},
+    { path: 'existing-employee', component: ExistingEmployeeComponent},    
+    { path: 'topup-loan', component: TopupLoanComponent},
+    { path: 'create-recipt', component:CreateReceiptComponent},
   ])
 ];
 
@@ -37,4 +43,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardMenuRoutingModule { }
+export default class DashboardMenuRoutingModule { }

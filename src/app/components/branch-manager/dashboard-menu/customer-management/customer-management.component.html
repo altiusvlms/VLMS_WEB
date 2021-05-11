@@ -60,28 +60,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td> <input class="form-check-input" type="checkbox" value="">
+      <tr *ngFor="let customer of CustomerDetail_Data">
+        <td>
+           <input class="form-check-input" type="checkbox" value="">
         </td>
-        <td>KF-12</td>
-        <td>Robin</td>
-        <td>9999888877</td>
-        <td>Thudialore</td>
-        <td>14.Dec.1992</td>
-        <td></td>
+        <td>{{customer.id}}</td>
+        <td>{{customer.name}}</td>
+        <td>{{customer.mobileNo}}</td>
+        <td>{{customer.altNumber}}</td>
+        <td>{{customer.dob}}</td>
+        <td>{{customer.fatherName}}</td>
         <td>Aadhar|PAN</td>
-        <td>View More</td>
-      </tr>
-      <tr>
-        <td> <input class="form-check-input" type="checkbox" value="">
-        </td>
-        <td>KF-13</td>
-        <td>Thangamani</td>
-        <td>9988776655</td>
-        <td>Gandhipuram</td>
-        <td>14.May.1990</td>
-        <td></td>
-        <td>Aadhar|Voter Id</td>
         <td>View More</td>
       </tr>
     </tbody>

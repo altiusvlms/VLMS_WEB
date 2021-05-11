@@ -6,11 +6,10 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
-import { SharedService } from '../../../../services/shared.service';
 
+import { SharedService } from '../../../../services/shared.service';
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
@@ -21,17 +20,17 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  mobileNum:any;
   showTable:Boolean = false;
   vehicledetailss:Boolean = false; 
   usedvehicle:Boolean = false;
   self:Boolean = false;
 
-  constructor(private formBuilder: FormBuilder,private router: Router,private dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    // this.mobileNumFetch()
   }
-
 
   customer(){
     this.router.navigate(['branch-manager/customer-management']);
@@ -59,6 +58,38 @@ export class DashboardComponent implements OnInit {
       height: '90vh',
     });
   }
+  
+  mobileNumFetch(mobile : any){
+    console.log(mobile)
+    // if (this.mobileNum) {
+    this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      for(let mobileNo of data){
+        this.mobileNum = mobileNo.customerGuarantor.mobileNumber;
+        var id = mobileNo.customerGuarantor.id;
+        
+      }
+      
+      console.log("mobilenum")
+      console.log(this.mobileNum)
+      
+      if (this.mobileNum) {
+        this.router.navigate(['branch-manager/loan-process/'  + id]);
+      }
+      else {
+    this.router.navigate(['branch-manager/newloan-process']);
+  }
+    })
+  // }
+  // else {
+    // this.router.navigate(['branch-manager/newloan-process']);
+  // }
+  }
+
 }
 
 
@@ -161,5 +192,23 @@ export class AdvancedSearch {
     this.dialogRef.close();
   }
 
+    // mobileNumFetch(){
+    //   if (this.mobileNum) {
+    //   this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+    //     params: {
+    //       tenantIdentifier: 'default'
+    //     }
+    //   }).pipe(untilDestroyed(this)).subscribe(data => {
+    //     console.log(data);
+    //     this.mobileNum = data.customerGuarantor.mobileNumber;
+    //     console.log("mobilenum")
+    //     console.log(this.mobileNum)
+    //     this.router.navigate(['branch-manager/loan-process']);
+    //   })
+    // }
+    // else {
+    //   this.router.navigate(['branch-manager/newloan-process']);
+    // }
+    // }
 
 }

@@ -6,13 +6,15 @@ import { appModels } from '../../../../services/utils/enum.util';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import {DomSanitizer} from "@angular/platform-browser";
+import { DatePipe } from '@angular/common';
+
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
 
 @Component({
-  selector: 'mifosx-loan-verification',
+  selector: 'vlms-loan-verification',
   templateUrl: './loan-verification.component.html',
   styleUrls: ['./loan-verification.component.scss']
 })
@@ -46,10 +48,17 @@ export class LoanVerificationComponent implements OnInit {
     chassis_no : any;
     customerImage: any = [];
 
-  constructor(private router: Router,private crudService: CrudService,private sanitizer:DomSanitizer) { }
+  constructor(private router: Router,private crudService: CrudService,private sanitizer:DomSanitizer,public datepipe: DatePipe) { }
+  loanverifiData:any;
+  loanDisburalData:any;
+  loanApprovalData:any;
+  // id:any;
+
 
   ngOnInit(): void {
     this.getLoanVerification();
+    this.Loan_Disbural_Limit();
+    this.Loan_Approval_Limit();
   }
 
   ngOnDestroy() { }
@@ -115,4 +124,25 @@ export class LoanVerificationComponent implements OnInit {
     this.showAdvanceSearch = false;
   }
 
+  Loan_Disbural_Limit(){
+    this.crudService.get(`${appModels.Employee}/getLoanDisbursal`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.loanDisburalData = data;
+    })
+  }
+
+  Loan_Approval_Limit(){
+    this.crudService.get(`${appModels.Employee}/getLoanApproval`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.loanApprovalData = data;
+    })
+  }
 }

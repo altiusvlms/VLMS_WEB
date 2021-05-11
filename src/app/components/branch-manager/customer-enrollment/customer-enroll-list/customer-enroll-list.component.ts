@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 
+
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
@@ -41,7 +42,7 @@ export class CustomerEnrollListComponent implements OnInit {
     createCustomerEnrolForms = new FormGroup({
       Customerphoto: new FormControl('', Validators.required),
       customerName: new FormControl('', Validators.required),
-      phoneNumber: new FormControl('', Validators.required),
+      mobileNumber: new FormControl('', Validators.required),
       alternateMobileNumber: new FormControl('', Validators.required),
       dob: new FormControl('', Validators.required),
       dateFormat: new FormControl("dd MMMM yyyy", Validators.required),
@@ -146,7 +147,7 @@ enrollid:any;
 
   sendLoginCode() {
     const appVerifier = this.windowRef.recaptchaVerifier
-    const num = "+91" + this.createCustomerEnrolForms.value.phoneNumber;
+    const num = "+91" + this.createCustomerEnrolForms.value.mobileNumber;
     firebase.auth().signInWithPhoneNumber(num, appVerifier)
             .then((result: any) => {
                 this.windowRef.confirmationResult = result;

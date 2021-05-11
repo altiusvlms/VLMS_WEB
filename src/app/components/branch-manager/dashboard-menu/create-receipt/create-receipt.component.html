@@ -1,0 +1,409 @@
+<div class="container">
+  <h3>RECEIPT</h3>
+
+  <!-- Emi -->
+
+  <div class="spacer">
+    <div class="row">
+      <div class="col-lg-8  col-lg-offset-1">
+        <div class="well">
+
+          <div class="form-group">
+            <div class="col-md-12">
+              <span class="left-title">
+                Home Loan Amount
+              </span>
+              <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
+                [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" />
+            </div>
+            <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()">
+            </ng5-slider>
+          </div>
+
+          <hr />
+
+          <div class="form-group">
+            <div class="col-md-12">
+              <span class="left-title">
+                Interest Rate
+              </span>
+              <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
+                [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" />
+            </div>
+            <ng5-slider [(value)]="remi.value" [options]="roptions" (userChangeEnd)="update()">
+            </ng5-slider>
+          </div>
+
+          <hr />
+
+          <div class="form-group">
+            <div class="col-md-10">
+              <span class="left-title">Loan Tenure</span>
+              <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
+                placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;">
+              <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
+                placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo" style="width:30%;float:right;">
+            </div>
+            <div class="col-md-2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" [ngClass]="{'active':yrToggel}"
+                  (click)="yrToggel=true;update()" type="button">Yr</button>
+                <button class="btn btn-outline-secondary" [ngClass]="{'active':!yrToggel}"
+                  (click)="yrToggel=false;update()" type="button">Mo</button>
+              </div>
+            </div>
+            <ng5-slider *ngIf="yrToggel" [(value)]="temi.value" [options]="toptions" (userChangeEnd)="update()">
+            </ng5-slider>
+            <ng5-slider *ngIf="!yrToggel" [(value)]="memi.value" [options]="moptions" (userChangeEnd)="update()">
+            </ng5-slider>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-4">
+              <div>
+                <span class="left-title">From Date</span><br>
+                <mat-form-field appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [(ngModel)]="fromdate" [matDatepicker]="picker1">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field><br>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-4">
+              <div>
+                <span class="left-title">To Date</span><br>
+                <mat-form-field appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [(ngModel)]="todate" [matDatepicker]="picker2" (change)="DueCalc()" >
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="col-lg-3">
+        <div class="well">
+
+          <div class="jusify-center">
+            <h5>
+              Loan EMI
+            </h5>
+            <span class="result">
+              <!-- {{result.emi || "--"}} -->
+              {{MonthlyCorrectDue}}
+            </span>
+          </div>
+
+          <hr />
+
+          <div>
+            <h5>
+              Total Interest Payable
+            </h5>
+            <span class="result">
+              <!-- {{result.interest || "--"}} -->
+              {{TotalInterest}}
+            </span>
+          </div>
+
+          <hr />
+          <div>
+            <h5>
+              Principal + Interest
+            </h5>
+            <h6>
+              <!-- (Principal + Interest) -->
+            </h6>
+            <span class="result">
+              <!-- {{result.total || "--"}} -->
+              {{TotalPayable}}
+            </span>
+          </div>
+
+          <hr />
+          <div>
+            <h5>
+              Due Difference
+            </h5>
+            <!-- <h6>
+              (Principal + Interest)
+            </h6> -->
+            <span class="result">
+              <!-- {{result.total || "--"}} -->
+              {{delayDueAmount}}
+              <!-- {{totalAmt}} -->
+            </span>
+          </div>
+          <hr />
+
+          <div>
+            <h5>
+              Total Payment
+            </h5>
+            <!-- <h6>
+              (Principal + Interest)
+            </h6> -->
+            <span class="result">
+              <!-- {{result.total || "--"}} -->
+              <!-- {{delayDueAmount}} -->
+              {{totalAmt}}
+            </span>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- As Mock -->
+  <div class="row">
+    <div class="col-sm-2">
+      <div> Customer Image</div>
+      <div>Customer ID: KF-0012</div>
+    </div>
+    <div class="col-sm-2">
+      <div>Robin</div>
+      <div>8765765465</div>
+    </div>
+    <div class="col-sm-2">
+      <div>Loan Term: 8 Month</div>
+      <div>EMI: 5200</div>
+      <div>paid due:2/8</div>
+    </div>
+    <div class="col-sm-2">
+      <div>Loan Amount:50,000</div>
+      <div>intrest: 2.5</div>
+      <div>pending due: 1/8</div>
+    </div>
+    <div class="col-sm-2">
+      <div>TO PAY: 42,000</div>
+      <div></div>
+      <div>Current due:1/8</div>
+    </div>
+
+
+  </div>
+
+
+
+  <p>CREATE RECEIPT:</p>
+  <div class="form-group">
+    <div class="col-md-12">
+      <span class="left-title">
+        TOtal Payable:
+      </span>
+      <input type="text" id="fname" placeholder="9,000" name="fname">
+    </div>
+  </div><br><br>
+  <div class="form-group">
+    <div class="col-md-12">
+      <span class="left-title">
+        Enter Amount:
+      </span>
+      <input type="text" id="fname" placeholder="Enter Amount" name="fname"><br>
+    </div><br><br>
+    <div class="form-group">
+      <div class="col-md-12">
+        <span class="left-title">
+          Hand Loan:
+        </span>
+        <input type="text" id="fname" placeholder="Hand Loan" name="fname">
+      </div>
+    </div><br><br>
+    <div class="form-group">
+      <div class="col-md-12">
+        <span class="left-title">
+          Empty:
+        </span>
+        <input type="text" id="fname" placeholder="Enter Amount" name="fname">
+        <input type="text" id="fname" placeholder="1500" name="fname">
+      </div>
+    </div><br><br>
+    <div class="form-group">
+      <div class="col-md-12">
+        <span class="left-title">
+          Delay charges:
+        </span>
+        <input type="text" id="fname" placeholder="Enter Amount" name="fname">
+        <input type="text" id="fname" placeholder="0" name="fname">
+      </div>
+    </div><br><br>
+    <div class="form-group">
+      <div class="col-md-12">
+        <span class="left-title">
+          Due Amount:
+        </span>
+        <input type="text" id="fname" placeholder="Enter Amount" name="fname">
+        <input type="text" id="fname" placeholder="5,200" name="fname">
+      </div>
+    </div><br><br>
+    <div class="form-group">
+      <div class="col-md-12">
+        <span class="left-title">
+          Empty Space:
+        </span>
+        <span class="left-title">
+          Balance:
+        </span>
+        <input type="text" id="fname" placeholder="2,300" name="fname">
+      </div>
+    </div><br><br>
+    <div class="form-group">
+      <div class="col-md-12">
+        <span class="left-title">
+          Pay Mode:
+        </span>
+        <input type="text" id="fname" placeholder="Cash" name="fname">
+        <!-- <button type="button"  data-toggle="modal" data-target="#createEntrolmentModal">
+                            Create 
+                        </button> -->
+        <input type="submit" id="fname" name="fname" value="Assign" data-toggle="modal" data-target="#exampleModal">
+      </div>
+      <h3>HAND LOAN:</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>CREATED DATE</th>
+            <th>REC DATE</th>
+            <th>HAND LOAN</th>
+            <th>CREDIT</th>
+            <th>DEBIT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>23.03.2021</td>
+            <td></td>
+            <td>INSURANCE</td>
+            <td></td>
+            <td>1000</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>25.03.2021</td>
+            <td>INSURANCE</td>
+            <td>500</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Pending Amount</td>
+            <td>500</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Sr.No</th>
+              <th>Due Date</th>
+              <th>Due Amount</th>
+              <th>Receipted Date</th>
+              <th>Due Received</th>
+              <th>Due Balance</th>
+              <th>Delay Days</th>
+              <th>Default</th>
+              <th>Received</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>7.jan.2021</td>
+              <td>3,200</td>
+              <td>10.jan.2021</td>
+              <td>1000</td>
+              <td>2,500</td>
+              <td>3</td>
+              <td>200</td>
+              <td>200</td>
+              <td>
+                <button type="button"> <span>Edit</span></button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>7.jan.2021</td>
+              <td>3,200</td>
+              <td>07.jan.2021</td>
+              <td>3,200</td>
+              <td>0</td>
+              <td>0</td>
+              <td>-</td>
+              <td>-</td>
+              <td>
+                <button type="button"> <span>Edit</span></button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>7.jan.2021</td>
+              <td>3,200</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>0</td>
+              <td></td>
+              <td></td>
+              <td>
+                <button type="button"> <span>Edit</span></button>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>7.jan.2021</td>
+              <td>3,200</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>0</td>
+              <td></td>
+              <td></td>
+              <td>
+                <button type="button"> <span>Edit</span></button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- models -->
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="middle-title" id="exampleModalLabel">Confirmation</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <label> ARE You sure Do yoy want to Create Receipt for</label> <br>
+              <input type="text" id="fname" placeholder="9,000" name="fname">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -101,13 +101,13 @@
   </form>
     </div>
 
-<!-- Loan Application Table -->
+Loan Application Table
 
 <table class="table">
     <thead>
       <tr>
         <th>Customer ID </th>
-        <!-- <th>Applicant Photo</th> -->
+        <!-- <th>Applicant Photo</th>  -->
         <th>Applicant Name</th>
         <th>Applicant Mobile No.</th>
         <th>Loan Amount</th>
@@ -145,4 +145,70 @@
     No Data Found.
   </div>
 
-  </div>
+  </div> 
+
+ <!-- Loan  Disbursal -->
+ <div class="container">
+  
+  <!-- Loan Approval -->
+
+  <!-- tab 1 -->
+
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Loan Disbursal Limit-Branch"><table class="table">
+      <thead>
+        <tr>
+          <th>Sr no</th>
+          <th>Branch</th>
+          <th>Duration Days</th>
+          <th>Requested On</th>
+          <th>Requested Amount</th>
+          <th>Approved Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let disbursal of loanDisburalData">
+          <td>{{disbursal.id}}</td>
+          <td>{{disbursal.branchName}}</td>
+          <td>{{disbursal.duration}}</td>
+          <td>{{disbursal.requestOnDate | date:"dd MMMM yyyy"}}</td>
+          <td>{{disbursal.requestAmount}}</td>
+          <td>{{disbursal.approveAmount}}</td>
+          <td>{{disbursal.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  <!-- Tab 2 -->
+  
+  </mat-tab>
+    <mat-tab label="Loan Approval Limit"><table class="table">
+      <thead>
+        <tr>
+          <th>Sr no</th>
+          <th>Branch</th>
+          <th>Requested On</th>
+          <th>Requested Loan Amount</th>
+          <th>Approved Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let Approval of loanApprovalData">
+          <td>{{Approval.id}}</td>
+          <td>{{Approval.branchName}}</td>
+          <td>{{Approval.requestOnDate | date:"dd MMMM yyyy"}}</td>
+          <td>{{Approval.requestLoanAmount}}</td>
+          <td>{{Approval.approveAmount}}</td>
+          <td>{{Approval.status}}</td>
+        </tr>
+      </tbody>
+    </table></mat-tab>
+  </mat-tab-group>
+
+
+</div>
+
+
+
