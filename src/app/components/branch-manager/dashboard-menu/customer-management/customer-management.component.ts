@@ -5,6 +5,8 @@ import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 
 import {DomSanitizer} from "@angular/platform-browser";
+import {MatTableDataSource} from '@angular/material/table';
+import { Router } from '@angular/router';
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -20,11 +22,20 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class CustomerManagementComponent implements OnInit {
 
+  displayedColumns = ['Customer ID','Customer Name', 'Contact no', 'Alternative contact number','D.O.B',
+  'Father’s Name','ID proof Type','Action'];
+  dataSource = new MatTableDataSource();
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   testImage:any;
   CustomerDetail_Data:any;
 
 
-  constructor(private crudService: CrudService,private sanitizer:DomSanitizer) { }
+  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router) { }
 
   ngOnInit(): void {
     this.getCustomerData();
@@ -39,10 +50,15 @@ export class CustomerManagementComponent implements OnInit {
     }).subscribe(data => {
       console.log(data);
       this.CustomerDetail_Data = data;
+      this.dataSource = new MatTableDataSource(this.CustomerDetail_Data)
+
     })
   }
 
-  
+  Loanprocess(id : any){
+    this.router.navigate(['branch-manager/loan-process/'  + id]);
+
+  }
 
   getImage(){
     this.crudService.get_Image(`${appModels.COMMON}/images/CustomerImage/4?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {

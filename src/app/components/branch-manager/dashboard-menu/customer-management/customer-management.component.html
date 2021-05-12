@@ -6,7 +6,7 @@
   <!-- <img [src]="testImage" style="width: 100%;height: 500px;object-fit: contain;
   object-position: center;"> -->
   
-    <p>Customer Management</p>
+    <h1>Customer Management</h1>
 <div class="row">
     <div class="col-sm-2">
         <div>
@@ -36,16 +36,16 @@
             </select>
         </div>
     </div>
-    <div class="col-sm-2">
+    <!-- <div class="col-sm-2">
         <input type="search" class="form-control" placeholder="Search" aria-label="Search"
           aria-describedby="search-addon" />
-      </div>
+      </div> -->
 </div>
 
 
 <!-- /** Customer Based Table */ -->
 
-<table class="table">
+<!-- <table class="table">
     <thead>
       <tr>
         <th>Select</th>
@@ -74,5 +74,70 @@
         <td>View More</td>
       </tr>
     </tbody>
+</table> -->
+
+
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+</mat-form-field>
+
+<div class="allocation-table responsive_table">
+  <div class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Customer ID">
+    <th mat-header-cell *matHeaderCellDef> Customer ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Customer Name">
+    <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Contact no">
+    <th mat-header-cell *matHeaderCellDef> Contact no </th>
+    <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Alternative contact number">
+    <th mat-header-cell *matHeaderCellDef> Alternative contact number </th>
+    <td mat-cell *matCellDef="let element"> {{element.altNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="D.O.B">
+    <th mat-header-cell *matHeaderCellDef> D.O.B </th>
+    <td mat-cell *matCellDef="let element"> {{element.dob | date:"dd MMMM yyyy"}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Father’s Name">
+    <th mat-header-cell *matHeaderCellDef>Father’s Name</th>
+    <td mat-cell *matCellDef="let element"> {{element.fatherName}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="ID proof Type">
+    <th mat-header-cell *matHeaderCellDef>ID proof Type </th>
+    <td mat-cell *matCellDef="let element">Aadhar|PAN </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="Action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="Loanprocess(element.id)">View More</button>
+       </td>
+  </ng-container>
+
+  
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  
 </table>
+
+<ng-container *ngIf="dataSource?.filteredData.length == 0">
+  <div class="no_data_msg">No Data Avaliable</div>
+</ng-container>
+</div>
+
 </div>
