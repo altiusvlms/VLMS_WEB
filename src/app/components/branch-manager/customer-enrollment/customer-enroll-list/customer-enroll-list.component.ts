@@ -12,8 +12,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
-
+import {MatTableDataSource} from '@angular/material/table';
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -26,10 +25,19 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
   styleUrls: ['./customer-enroll-list.component.scss']
 })
 export class CustomerEnrollListComponent implements OnInit {
-  Genders: any = ['Male', 'Female', 'Others',]
-  Applicants:any = ['salaried','Business','Own Business']
-  ID1s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard']
-  ID2s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard']
+  Genders: any = ['Male', 'Female', 'Others',];
+  Applicants:any = ['salaried','Business','Own Business'];
+  ID1s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard'];
+  ID2s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard'];
+
+  displayedColumns = ['Customer ID','Customer Image', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
+  'D.O.B','Father’s Name','Applicant Type','Gender','AadhaarImage','PAN Image','Action'];
+  dataSource = new MatTableDataSource();
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   images: any;
   windowRef: any;
@@ -148,6 +156,8 @@ enrollid:any;
     }).subscribe(data => {
       console.log(data);
       this.EnrollVerfication_Data = data;
+      this.dataSource = new MatTableDataSource(this.EnrollVerfication_Data)
+
     })
   }
 

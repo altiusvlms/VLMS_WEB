@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 /** Custom Forms */
@@ -11,24 +12,7 @@ import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 import { ToastrService } from 'ngx-toastr';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
@@ -42,9 +26,11 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
   styleUrls: ['./enquiry-list.component.scss']
 })
 export class EnquiryListComponent implements OnInit {
+  [x: string]: any;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','Action'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumnsa: string[] = ['position', 'name', 'weight', 'symbol','Action'];
+  displayedColumns = ['Enquiry ID', 'customerName', 'mobileNumber','vehicleNumber','email','Action'];
+  dataSource = new MatTableDataSource();
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -56,20 +42,19 @@ export class EnquiryListComponent implements OnInit {
   responseEnquiryId:any;
   EnquiryVerfication_Data:any;
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService) { }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private dialog: MatDialog) { }
 
     /** Create Enquiry Form */
     createEnquiryForms = new FormGroup({
-      customerName: new FormControl(''),
+      customerName: new FormControl('', Validators.required),
       mobileNumber: new FormControl('', Validators.required),
       vehicleNumber: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
+      email: new FormControl(''),
       enquiryId: new FormControl(''),
     })
 
   ngOnInit(): void {
     this.getEnrollData();
-    this.saveEnquiry();
   }
 
   ngOnDestroy() { }
@@ -88,6 +73,7 @@ export class EnquiryListComponent implements OnInit {
     }).subscribe(data => {
       console.log(data);
       this.EnquiryVerfication_Data = data;
+      this.dataSource = new MatTableDataSource(this.EnquiryVerfication_Data)
     })
   }
  /** Save Enquiry */
@@ -103,6 +89,7 @@ export class EnquiryListComponent implements OnInit {
       console.log(data)
       this.toast.success("Created Successfully");
       this.getEnrollData();
+      this.dialogRef.close(data);
     })
   }
 

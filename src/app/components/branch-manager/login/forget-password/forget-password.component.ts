@@ -84,7 +84,11 @@ modelChanged(phoneNumber: number){
        }}
     ).subscribe( data => {
       this.forgetGetnumber = data;
-    })
+    }, error => {
+      this.toast.error('Something Went Wrong')
+    }
+    
+    )
 }
 
   
@@ -99,6 +103,17 @@ modelChanged(phoneNumber: number){
             .catch( (error: any) => console.log(error) );
 }
 
+ResendOTP() {
+  const appVerifier = this.windowRef.recaptchaVerifier
+  const num = "+91" + this.phoneNumber;
+  firebase.auth().signInWithPhoneNumber(num, appVerifier)
+          .then((result: any) => {
+              this.windowRef.confirmationResult = result;
+
+          })
+          .catch( (error: any) => console.log(error) );
+}
+
   verifyLoginCode()  {
     this.windowRef.confirmationResult
                   .confirm(this.verificationCode)
@@ -107,7 +122,11 @@ modelChanged(phoneNumber: number){
                     this.user = result.user;
                     this.router.navigate(["/forget-password"]);
 
-    })
+    }, (error: any) => {
+      this.toast.error('your Verification code is went Wrong')
+    }
+    
+    )
     .catch( (error: any) => console.log(error, "Incorrect code entered?"));
     // this.toast.warning("Please enter correct verification code");
 

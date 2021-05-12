@@ -2,14 +2,14 @@
 <!-- /** Customer Enrolment  */ -->
 
 <div class="container">
-<p>Customer Enroll List</p>
-    <div class="row">
-        <div class="col-sm-2">
-            <div>
-                <input type="search" class="form-control" placeholder="Search" aria-label="Search"
-            aria-describedby="search-addon" />
-            </div>
-        </div>
+<h1>Customer Enroll List</h1>
+<div class="row">
+  <div class="col-sm-2">
+      <div>
+          <label>New Customer Enrolment Filter</label>
+          <input type="date" class="form-control">
+      </div>
+  </div>
         <div class="col-sm-2">
             <div>
                 <button type="button"  data-toggle="modal" data-target="#createEntrolmentModal">
@@ -17,18 +17,11 @@
                 </button>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            <div>
-                <label>New Customer Enrolment Filter</label>
-                <input type="date" class="form-control">
-            </div>
-        </div>
+    
     </div>
 
 <!-- /** Customer Enrolment List Table */ -->
-<table class="table">
+<!-- <table class="table">
     <thead>
       <tr>
         <th>Customer ID</th>
@@ -40,7 +33,7 @@
         <th>Father’s Name</th>
         <th>Applicant Type</th>
         <th>Gender</th>
-        <th>Aadhaar Image</th>
+        <th> AadhaarImage</th>
         <th>PAN Image</th>
       </tr>
     </thead>
@@ -58,13 +51,92 @@
         <td></td>
         <td></td>
         <td>
-        <!-- <button type="button"> <span>View More</span></button> -->
+        <button type="button"> <span>View More</span></button>
         <button type="button" (click)="createLoan()"><span>Create Loan</span></button>
         </td>
       </tr>
       
     </tbody>
+</table> -->
+
+
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+</mat-form-field>
+
+<div class="allocation-table responsive_table">
+  <div class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Customer ID">
+    <th mat-header-cell *matHeaderCellDef> Customer ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Customer Image">
+    <th mat-header-cell *matHeaderCellDef> Customer Image </th>
+    <td mat-cell *matCellDef="let element">  </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Applicant Name">
+    <th mat-header-cell *matHeaderCellDef> Applicant Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Applicant Mobile No.1">
+    <th mat-header-cell *matHeaderCellDef> Applicant Mobile No.1 </th>
+    <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Applicant Mobile No.2">
+    <th mat-header-cell *matHeaderCellDef> Applicant Mobile No.2 </th>
+    <td mat-cell *matCellDef="let element"> {{element.alternateMobileNumber}} </td>
+  </ng-container>
+  <ng-container matColumnDef="D.O.B">
+    <th mat-header-cell *matHeaderCellDef> D.O.B </th>
+    <td mat-cell *matCellDef="let element"> {{element.dob | date:"dd MMMM yyyy"}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Father’s Name">
+    <th mat-header-cell *matHeaderCellDef> Father’s Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.fatherName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Applicant Type">
+    <th mat-header-cell *matHeaderCellDef>Applicant Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.applicantType}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Gender">
+    <th mat-header-cell *matHeaderCellDef>Gender </th>
+    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+  </ng-container>
+  <ng-container matColumnDef="AadhaarImage">
+    <th mat-header-cell *matHeaderCellDef>AadhaarImage </th>
+    <td mat-cell *matCellDef="let element">  </td>
+  </ng-container>
+  <ng-container matColumnDef="PAN Image">
+    <th mat-header-cell *matHeaderCellDef>PAN Image </th>
+    <td mat-cell *matCellDef="let element">  </td>
+  </ng-container>
+  <ng-container matColumnDef="Action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="createLoan()">Create Loan</button>
+       </td>
+  </ng-container>
+
+  
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  
 </table>
+
+<ng-container *ngIf="dataSource?.filteredData.length == 0">
+  <div class="no_data_msg">No Data Avaliable</div>
+</ng-container>
+</div>
+
 </div>
 
 <!-- /** Create Customer Enrolment Model*/ -->
