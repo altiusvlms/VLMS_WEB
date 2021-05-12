@@ -24,6 +24,9 @@ import { CLASS_NAME } from '@angular/flex-layout';
 
 export class ManageEmployeeComponent implements OnInit {
 
+  ID1s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard']
+  ID2s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard']
+
   EmployeeId:any;
   Imagefileform: any;
   Imagefileform2:any;
@@ -32,7 +35,9 @@ export class ManageEmployeeComponent implements OnInit {
   uploadImages_1:any;
   uploadImages_2:any;
   responseId:any;
-  
+  dob :string;
+  age:number;
+  // manageEmployeeForm:any  
   // forvalue : CLASS_NAME;
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
@@ -41,6 +46,7 @@ export class ManageEmployeeComponent implements OnInit {
   // this.forvalue = form1.value;
   // this.formvalue.school_qualification = form2.value;
   // this.formvalue.college_qualification = form3.value;
+  
 
   manageEmployeeForm = new FormGroup({
 
@@ -53,7 +59,7 @@ export class ManageEmployeeComponent implements OnInit {
     altNumber: new FormControl('', Validators.required),
     dob: new FormControl('', Validators.required),
     officialNumber: new FormControl('', Validators.required),
-    age: new FormControl('', Validators.required),
+    age: new FormControl(''),
     maritalStatus: new FormControl('', Validators.required),
     designation: new FormControl('', Validators.required),
     spousename: new FormControl('', Validators.required),
@@ -72,7 +78,7 @@ export class ManageEmployeeComponent implements OnInit {
     IFSC:new FormControl('', Validators.required),
     bankName:new FormControl('', Validators.required),
     branchName:new FormControl('', Validators.required),
-    locale:new FormControl('', Validators.required),
+    locale:new FormControl('en', Validators.required),
    
 
     employee_communicationAddress :  new FormGroup({
@@ -151,31 +157,20 @@ export class ManageEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     // this.manageEmployee()    
+    
   }
 
   ngOnDestroy() { }
 
-
+  
 
 /** Save Enquiry */
 manageEmployee(){
-  // console.log("data")
-  // console.log(data)
-  // this.submitted = true;
-  //   const managuserformeObj =  this.manageEmployeeForm.value;
-  //   const communicationAddressObj = this.employeeCommunicationAddressForm.value;
-  //   const permanentAddressObj =  this.employeePermanentAddressForm.value;
-  //   const generalInsuranceObj =  this.generalInsuranceForm.value;
-  //   const accidentalinsuranceObj =  this.accidentalinsuranceForm.value;
-  //   const schoolqualificationObj =  this.schoolqualificationForm.value;
-  //   const collegequalificationObj = this.collegeQualificationForm.value;
-  //   const graduatequalificationObj = this.graduateQualificationForm.value;
-  //   const postqualificationObj = this.postgraduateQualificationForm.value;
-  //   const allFormValues1 = Object.assign({}, managuserformeObj,communicationAddressObj,permanentAddressObj,generalInsuranceObj,accidentalinsuranceObj,schoolqualificationObj,collegequalificationObj,graduatequalificationObj,postqualificationObj);
-  //   console.log(allFormValues1); 
+  this.submitted = true;
+  // if (this.manageEmployeeForm.valid) {
   console.log("datass")
   console.log(this.manageEmployeeForm.value)
-
+  
   this.crudService.post(`${appModels.CREATEEMPLOYEE}`, this.manageEmployeeForm.value ,
     { params:{
       tenantIdentifier: "default"   
@@ -211,6 +206,10 @@ manageEmployee(){
           })
           })
         })
+      // }
+      // else {
+      //   alert("Please Enter Required Fields")
+      // }
   
 }
 // uploadImages1(evt1 : any){
@@ -257,4 +256,19 @@ uploadImages2(evt2: any){
 //   console.log(this.Imagefileform2);
 //   }
 // }
+
+CalculateAge(){
+  
+  console.log(this.manageEmployeeForm.value.dob)
+  if (this.manageEmployeeForm.value.dob) {
+    var timeDiff = Math.abs(Date.now() - new Date(this.manageEmployeeForm.value.dob).getTime());
+    this.age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
+    console.log("age")
+    console.log(this.age);
+    this.manageEmployeeForm.value.age = this.age;
+  }
+
+}
+
+
 }

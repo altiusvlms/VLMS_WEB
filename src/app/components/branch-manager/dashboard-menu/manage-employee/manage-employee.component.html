@@ -1,424 +1,583 @@
 <div class="container">
+<h2>Create Employee</h2>
 
-
-        <!-- <mat-tab>  -->
-        
-            <!-- <mat-card class="example-card"> -->
-                <!-- <mat-card-content> -->
                   <form [formGroup] = "manageEmployeeForm">
-                    <table class="example-full-width" cellspacing="0">
-                        
-              
+                    <!-- <table class="example-full-width" cellspacing="0"> -->
                         <div>
-                        <td>  Name:
+                        <td> 
+                           
                           <mat-form-field  appearance="outline"  class="example-full-width" >
-                          <input matInput type='text' formControlName="name" >
+                            <mat-label>Name</mat-label>
+                          <input matInput type='text' formControlName="name" [ngClass]="{ 'is-invalid': submitted && manageEmployeeForm.controls.vehicleNumber.errors  }">
                           </mat-form-field>
+                          <div *ngIf="manageEmployeeForm.controls['name'].invalid && (manageEmployeeForm.controls['name'].dirty || manageEmployeeForm.controls['name'].touched)"  class="alert alert-danger">
+                            <div *ngIf="manageEmployeeForm.controls['name'].errors.required">
+                            Please enter Username!
+                          </div>
+                        </div>
                         </td>
                     </div>
+
+                    <!-- <div> 
+                      <label>Name:                  
+                        <span class="required-field">*</span>
+                        <mat-form-field  appearance="outline" class="example-full-width">
+                          <input matInput type='text'  formControlName="name" [ngClass]="{ 'is-invalid': submitted && manageEmployeeForm.controls.name.errors  }">
+                          </mat-form-field>
+                          <div *ngIf="submitted && manageEmployeeForm.controls.name.errors" class="alert alert-danger">
+                            <div class="required-field" *ngIf="submitted && manageEmployeeForm.controls.name.errors.required">Vehicle Number is required</div>
+                          </div>  
+                      </label>
+                    </div> -->
+
+
+
+
+                    
                 <div>
-                        <td>CalledName:
+                        <td>
                             <mat-form-field  appearance="outline"  class="example-full-width">
+                              <mat-label>CalledName</mat-label>
                             <input matInput  type='text' formControlName="calledName" >
                             </mat-form-field>
+                            <div *ngIf="manageEmployeeForm.controls['calledName'].invalid && (manageEmployeeForm.controls['calledName'].dirty || manageEmployeeForm.controls['calledName'].touched)" class="alert alert-danger">
+                              <div *ngIf="manageEmployeeForm.controls['calledName'].errors.required">
+                              Please enter Calledname!
+                            </div>
+                          </div>
                           </td>
                       
                         </div>
                       
                     <div>
-                        <td>  SurName:
+                        <td>
                           <mat-form-field  appearance="outline"  class="example-full-width">
+                            <mat-label>SurName</mat-label>
                           <input matInput  type='text' formControlName="surName" >
                           </mat-form-field>
+                          <div *ngIf="manageEmployeeForm.controls['surName'].invalid && (manageEmployeeForm.controls['surName'].dirty || manageEmployeeForm.controls['surName'].touched)" class="alert alert-danger">
+                            <div *ngIf="manageEmployeeForm.controls['surName'].errors.required">
+                            Please enter Surname!
+                          </div>
+                        </div>
                         </td>
                     </div>
                 <div>
-                      <td> Mobile Number:
-                          <mat-form-field appearance="outline"  class="example-full-width">
-                        <input matInput formControlName="mobileNumber" >
-                      </mat-form-field></td>
+                      <td> 
+                      <mat-form-field appearance="outline"   class="example-full-width">
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput formControlName="mobileNumber"  minlength=10 maxlength=10>
+                      </mat-form-field>
+                      <div *ngIf="manageEmployeeForm.controls['mobileNumber'].invalid && (manageEmployeeForm.controls['mobileNumber'].dirty || manageEmployeeForm.controls['mobileNumber'].touched)" class="alert alert-danger">
+                        <div *ngIf="manageEmployeeForm.controls['mobileNumber'].errors.required">
+                        Please enter Mobile Number!
+                      </div>
+                    </div>
+                    </td>
                     </div>
                 <div>   
-                        <td>  Gender:
+                        <td>  
                           <mat-form-field  appearance="outline" class="example-full-width">
-                          <input matInput formControlName="gender" >
+                            <mat-label>Gender</mat-label>
+                          <mat-select formControlName="gender" >
+                          <mat-option value="male">Male</mat-option>
+                                <mat-option value="female">Female</mat-option>
+                                </mat-select>
                           </mat-form-field>
+                          <div *ngIf="manageEmployeeForm.controls['gender'].invalid && (manageEmployeeForm.controls['gender'].dirty || manageEmployeeForm.controls['gender'].touched)" class="alert alert-danger">
+                            <div *ngIf="manageEmployeeForm.controls['gender'].errors.required">
+                            Please select the Gender!
+                          </div>
+                        </div>
                         </td>
                     </div>
                 <div>    
-                      <td> Alt Number:
+                      <td> 
                           <mat-form-field appearance="outline"  class="example-full-width" >
-
-                        <input matInput formControlName="altNumber" >
-                      </mat-form-field></td>
+                            <mat-label>Alternative Number</mat-label>
+                        <input matInput formControlName="altNumber" minlength=10 maxlength=10>
+                      </mat-form-field>
+                      <div *ngIf="manageEmployeeForm.controls['altNumber'].invalid && (manageEmployeeForm.controls['altNumber'].dirty || manageEmployeeForm.controls['altNumber'].touched)" class="alert alert-danger">
+                        <div *ngIf="manageEmployeeForm.controls['altNumber'].errors.required">
+                        Please enter  Alt Number!
+                      </div>
+                    </div>                    
+                    </td>
                     </div>
-                <div>
-                        <td>  D.O.B:
+                <!-- <div>
+                        <td>  
                           <mat-form-field  appearance="outline" class="example-full-width">
-                          <input matInput  type='text' formControlName="dob" >
+                            <mat-label>D.O.B</mat-label>
+                          <input matInput  type='text' formControlName="dob"  >
                           </mat-form-field>
+                          <div *ngIf="manageEmployeeForm.controls['dob'].invalid && (manageEmployeeForm.controls['dob'].dirty || manageEmployeeForm.controls['dob'].touched)" class="alert alert-danger">
+                            <div *ngIf="manageEmployeeForm.controls['dob'].errors.required">
+                            Please enter Date of Birth!
+                          </div>
+                        </div>
                         </td>
+                    </div> -->
+
+                 <div>
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="dp" placeholder="Date of Birth" formControlName="dob">
+                      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                      <mat-datepicker #dp></mat-datepicker>
+                    </mat-form-field>
+                    <div *ngIf="manageEmployeeForm.controls['dob'].invalid && (manageEmployeeForm.controls['dob'].dirty || manageEmployeeForm.controls['dob'].touched)" class="alert alert-danger">
+                      <div *ngIf="manageEmployeeForm.controls['dob'].errors.required">
+                      Please enter Date of Birth!
                     </div>
+                  </div>
+                  </div>
+                  <button mat-button (click)="CalculateAge()">Calculate Age</button>
                 <div>
-                      <td> Official Number:
+                    <mat-form-field>
+                      <input matInput placeholder="Age" value="{{age}}" formControlName="age">
+                    </mat-form-field>
+                    
+                 
+                  </div>
+
+
+                <div>
+                      <td> 
                           <mat-form-field appearance="outline"  class=" example-full-width">
-                        <input matInput formControlName="officialNumber" >
-                      </mat-form-field></td>
+                            <mat-label>Official Number</mat-label>
+                        <input matInput formControlName="officialNumber" minlength=10 maxlength=10 >
+                      </mat-form-field>
+                      <div *ngIf="manageEmployeeForm.controls['officialNumber'].invalid && (manageEmployeeForm.controls['officialNumber'].dirty || manageEmployeeForm.controls['officialNumber'].touched)" class="alert alert-danger">
+                        <div *ngIf="manageEmployeeForm.controls['officialNumber'].errors.required">
+                        Please enter Official Number!
+                      </div>
                     </div>
-                      <div>
-                        <td> Age:
+                    
+                    
+                    </td>
+                    </div>
+                      <!-- <div>
+                        <td> 
                             <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Age</mat-label>
                           <input matInput formControlName="age" >
-                        </mat-form-field></td>
-                    </div> 
+                        </mat-form-field>
+                        <div *ngIf="manageEmployeeForm.controls['age'].invalid && (manageEmployeeForm.controls['age'].dirty || manageEmployeeForm.controls['age'].touched)" class="alert alert-danger">
+                          <div *ngIf="manageEmployeeForm.controls['age'].errors.required">
+                          Please enter Age!
+                        </div>
+                      </div>
+                      </td>
+                    </div>  -->
                       
                     <div>
-                        <td> Marital Status:
+                        <td> 
                             <mat-form-field appearance="outline" class="example-full-width">
-                          <input matInput formControlName="maritalStatus" >
-                        </mat-form-field></td>
+                              <mat-label>Marital Status</mat-label>
+                          <mat-select formControlName="maritalStatus" >
+                          <mat-option value="single">Single</mat-option>
+                                <mat-option value="married">Married</mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="manageEmployeeForm.controls['maritalStatus'].invalid && (manageEmployeeForm.controls['maritalStatus'].dirty || manageEmployeeForm.controls['maritalStatus'].touched)" class="alert alert-danger">
+                          <div *ngIf="manageEmployeeForm.controls['maritalStatus'].errors.required">
+                          Please select a value!
+                        </div>
+                      </div>                    
+                      
+                      </td>
                     </div>
                 <div>
-                        <td> Designation:
+                        <td> 
                             <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Designation</mat-label>
                           <input matInput formControlName="designation" >
-                        </mat-form-field></td>
+                        </mat-form-field>
+                        <div *ngIf="manageEmployeeForm.controls['designation'].invalid && (manageEmployeeForm.controls['designation'].dirty || manageEmployeeForm.controls['designation'].touched)" class="alert alert-danger">
+                          <div *ngIf="manageEmployeeForm.controls['designation'].errors.required">
+                          Please enter Designation!
+                        </div>
+                      </div>                      
+                      </td>
                     </div>
-                <div>
-                        <td> Spouse Name:
+                <div ng-if="maritalStatus==='single'">
+                        <!-- <td> -->
                             <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Spouse Name</mat-label>
                           <input matInput formControlName="spousename" >
-                        </mat-form-field></td>
+                        </mat-form-field>
+                        <div *ngIf="manageEmployeeForm.controls['spousename'].invalid && (manageEmployeeForm.controls['spousename'].dirty || manageEmployeeForm.controls['spousename'].touched)" class="alert alert-danger">
+                          <div *ngIf="manageEmployeeForm.controls['spousename'].errors.required">
+                          Please enter Spouse Name!
+                        </div>
+                      </div>                                            
+                      <!-- </td> -->
                     </div>
                 <div>
-                        <td> Blood Group:
+                        <td>
                             <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Blood Group</mat-label>
                           <input matInput formControlName="bloodGroup" >
-                        </mat-form-field></td>
+                        </mat-form-field>
+                        <div *ngIf="manageEmployeeForm.controls['bloodGroup'].invalid && (manageEmployeeForm.controls['bloodGroup'].dirty || manageEmployeeForm.controls['bloodGroup'].touched)" class="alert alert-danger">
+                          <div *ngIf="manageEmployeeForm.controls['bloodGroup'].errors.required">
+                          Please enter Blood Group!
+                        </div>
+                      </div>                      
+                      </td>
                     </div>
                 <div>
-                        <td> Father's Name:
+                        <td>
                             <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Father's Name</mat-label>
                           <input matInput formControlName="fatherName" >
-                        </mat-form-field></td>
+                        </mat-form-field>
+                        <div *ngIf="manageEmployeeForm.controls['fatherName'].invalid && (manageEmployeeForm.controls['fatherName'].dirty || manageEmployeeForm.controls['fatherName'].touched)" class="alert alert-danger">
+                          <div *ngIf="manageEmployeeForm.controls['fatherName'].errors.required">
+                          Please enter Father's Name!
+                        </div>
+                      </div>
+                      
+                      </td>
                     </div>
                 <div>
-                        <td> Vehicle Number:
+                        <td>
                             <mat-form-field appearance="outline" class="example-full-width">
-                          <input matInput formControlName="vehicleNumber" >
-                        </mat-form-field></td>
+                              <mat-label>Vehicle Number</mat-label>
+                          <input matInput formControlName="vehicleNumber" #input [value]="input.value.toUpperCase()">
+                        </mat-form-field>
+                        <div *ngIf="manageEmployeeForm.controls['vehicleNumber'].invalid && (manageEmployeeForm.controls['vehicleNumber'].dirty || manageEmployeeForm.controls['vehicleNumber'].touched)" class="alert alert-danger">
+                          <div *ngIf="manageEmployeeForm.controls['vehicleNumber'].errors.required">
+                          Please enter Vehicle Number!
+                        </div>
+                      </div>                      
+                      </td>
                     </div>
                 <div>
-                        <td> D.O.J:
+                        <!-- <td>
                             <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>D.O.J</mat-label>
                           <input matInput formControlName="doj" >
-                        </mat-form-field></td>
+                        </mat-form-field></td> -->
+                        <mat-form-field>
+                          <mat-label>Date of Joining</mat-label>
+                          <input matInput [matDatepicker]="picker" formControlName="doj">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
                     </div>
 
-                    <!-- <div>
-                      <td> Date Format:
-                          <mat-form-field appearance="outline" class="example-full-width">
-                        <input matInput formControlName="dateFormat" >
-                      </mat-form-field></td>
-                  </div> -->
-            
-                </table>
-                  <!-- </form> -->
-                  
-                <!-- </mat-card-content> -->
-              
-               
-              <!-- </mat-card> -->
-
-        
-        <!-- </mat-tab> -->
-
-        <!-- <form [formGroup] = "manageEmployeeForm"> -->
-          <h2>ADD Communication address</h2>
-  
+                    
+          <h2>Add Communication address</h2>
           <div formGroupName="employee_communicationAddress">
             <div>
-              <td> Address Line 1:
+              <td>
                   <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Address Line 1</mat-label>
                 <input matInput formControlName="addressLine1" >
               </mat-form-field></td>
           </div>
           <div>
-              <td> Address Line 2:
+              <td>
                   <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Address Line 2</mat-label>
                 <input matInput formControlName="addressLine2" >
               </mat-form-field></td>
           </div>
           <div>
-              <td>Landmark:
+              <td>
                   <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Landmark</mat-label>
                 <input matInput formControlName="landmark" >
               </mat-form-field></td>
           </div>
           <div>
-              <td>Enter pincode:
+              <td>
                   <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Enter pincode</mat-label>
                 <input matInput formControlName="pincode" >
               </mat-form-field></td>
           </div>
           <div>
-              <td>Area:
+              <td>
                   <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput formControlName="area" >
+                    <mat-label>Area</mat-label>
+                <mat-select formControlName="area" >
+                <mat-option value="Saibaba colony">Saibaba Colony</mat-option>
+                <mat-option value="gp">GP</mat-option>
+                <mat-option value="hopes">Hopes</mat-option>
+                </mat-select>
               </mat-form-field></td>
           </div>
           <div>
-              <td>City:
+              <td>
                   <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput formControlName="city" >
+                    <mat-label>City</mat-label>
+                <mat-select formControlName="city" >
+                <mat-option value="Coimbatore">Coimbatore</mat-option>
+                <mat-option value="chennai">Chennai</mat-option>
+                <mat-option value="bangalore">Bangalore</mat-option>
+                </mat-select>
               </mat-form-field></td>
           </div>
           <div>
-              <td>Country:
+              <td>
                   <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput formControlName="country" >
+                    <mat-label>State</mat-label>
+                <mat-select formControlName="country" >
+                <mat-option value="Tamilnadu">Tamilnadu</mat-option>
+                <mat-option value="Kerala">Kerala</mat-option>
+                <mat-option value="karnataka">karnataka</mat-option>
+                </mat-select>
               </mat-form-field></td>
           </div>
           </div>
-      <!-- </form> -->
-
-
-        <!-- <form [formGroup] = "manageEmployeeForm"> -->
-        <h2>ADD permanent address</h2>
+      
+        <h2>Add permanent address</h2>
 <div formGroupName="employee_permanentAddress">
         <div>
-            <td> Address Line 1:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Address Line 1</mat-label>
               <input matInput formControlName="addressLine1" >
             </mat-form-field></td>
         </div>
         <div>
-            <td> Address Line 2:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Address Line 2</mat-label>
               <input matInput formControlName="addressLine2" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>Landmark:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Landmark</mat-label>
               <input matInput formControlName="landmark" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>Enter pincode:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Enter pincode</mat-label>
               <input matInput formControlName="pincode" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>Area:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput formControlName="area" >
+                  <mat-label>Area</mat-label>
+              <mat-select formControlName="area" >
+                <mat-option value="Saibaba colony">Saibaba Colony</mat-option>
+                <mat-option value="gp">GP</mat-option>
+                <mat-option value="hopes">Hopes</mat-option>
+                </mat-select>
             </mat-form-field></td>
         </div>
         <div>
-            <td>City:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput formControlName="city" >
+                  <mat-label>City</mat-label>
+              <mat-select formControlName="city" >
+                <mat-option value="Coimbatore">Coimbatore</mat-option>
+                <mat-option value="chennai">Chennai</mat-option>
+                <mat-option value="bangalore">Bangalore</mat-option>
+                </mat-select>
             </mat-form-field></td>
         </div>
         <div>
-            <td>Country:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput formControlName="country" >
+                  <mat-label>State</mat-label>
+              <mat-select formControlName="country" >
+                <mat-option value="Tamilnadu">Tamilnadu</mat-option>
+                <mat-option value="Kerala">Kerala</mat-option>
+                <mat-option value="Karnataka">Karnataka</mat-option>
+                </mat-select>
             </mat-form-field></td>
         </div>
       </div>
-    <!-- </form> -->
-
-<!-- <form [formGroup] = "manageEmployeeForm"> -->
-        <h3>Add Bank detail</h3>
+    
+        <h2>Add Bank detail</h2>
         <div>
-            <td>Acc Number:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Acc Number</mat-label>
               <input matInput formControlName="accountNumber" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>Name:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Name</mat-label>
               <input matInput formControlName="accountHolderName" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>IFSC:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>IFSC</mat-label>
               <input matInput formControlName="IFSC" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>Bank:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput formControlName="bankName" >
-            </mat-form-field></td>
-        </div>
-        <div>
-            <td>Branch:
-                <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput formControlName="branchName" >
-            </mat-form-field></td>
-        </div>
-        <div>
-            <td>Acc type:
-                <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput formControlName="accountType" >
-            </mat-form-field></td>
-        </div>
-        <div>
-          <td>Locale:
-              <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput formControlName="locale" >
-          </mat-form-field></td>
-      </div>
+                  <mat-label>Bank</mat-label>
+              <mat-select formControlName="bankName" >
+              <mat-option value="sbi">SBI</mat-option>
+              <mat-option value="icici">ICICI</mat-option>
+              <mat-option value="iob">IOB</mat-option>
+              </mat-select>
 
-    <!-- </form> -->
 
-<!-- <form [formGroup] = "manageEmployeeForm"> -->
-        <h3>Insurance Details</h3>
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Branch</mat-label>
+                <mat-select formControlName="branchName" >
+              <mat-option value="saibaba colony">Saibaba colony</mat-option>
+              <mat-option value="gp">GP</mat-option>
+              <mat-option value="Hopes">Hopes</mat-option>
+            </mat-select>
+            </mat-form-field></td>
+        </div>
+        <div>
+            <td>
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Acc type</mat-label>
+              <mat-select formControlName="accountType" >
+              <mat-option value="savings">Savings</mat-option>
+              <mat-option value="salary">Salary</mat-option>
+              <mat-option value="current">current</mat-option>
+            </mat-select>
+            </mat-form-field></td>
+        </div>
+        
+        <h2>Insurance Details</h2>
         <div formGroupName = "general_insurance">
         <div>
-            <td>Policy no:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Policy no</mat-label>
               <input matInput formControlName="policyNumber" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>Company Coverage:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Company Coverage</mat-label>
               <input matInput formControlName="companyCoverage" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>Policy Coverage:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Policy Coverage</mat-label>
               <input matInput formControlName="policyCoverage" >
             </mat-form-field></td>
         </div>
       </div>
+      
+  
     <!-- </form> -->
 
 <!-- <form [formGroup] = "manageEmployeeForm"> -->
-        <h3>Accident Insurance Details</h3>
+        <h2>Accident Insurance Details</h2>
         <div formGroupName = "accidental_insurance">
         <div>
-            <td>Policy no:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Policy no</mat-label>
               <input matInput formControlName="policyNumber" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>Company Coverage:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Company Coverage</mat-label>
               <input matInput formControlName="companyCoverage" >
             </mat-form-field></td>
         </div>
         <div>
-            <td>Policy Coverage:
+            <td>
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Policy Coverage</mat-label>
               <input matInput formControlName="policyCoverage" >
             </mat-form-field></td>
         </div>
       </div>
-    <!-- </form> -->
 
-<!-- <form> -->
-        <!-- <h3>Loan Details</h3> -->
-        <!-- <div>
-            
-            <td>AGT Number:
-                <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput  >
-            </mat-form-field></td>
-        </div> -->
-    <!-- </form> -->
+      <h2>Loan Details</h2>
+      <div>
+        <td>
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>AGT Number</mat-label>
+          <input matInput >
+        </mat-form-field></td>
+    </div>
+    
 
 <form [formGroup]="ImageEmployeeForm">
   
         <h2>ID Proofs</h2>
                   <div> 
-                    <label>Pan Card:
+                    
+                      <label>ID Proof1:
+                        <select formControlName="proof2" class="form-control">
+                          <option >choose Options</option>
+                          <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
+                        </select>
                     <span class="required-field">*</span>
                     <input #file type="file" accept='image/*' formControlName="Pan_photo" (change)="uploadImages1($event)"   />
                    <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" >
                     </label>
                   </div>
 
-                <div> 
-                  <label>Aadhar Card:
+                  
+                  <div>
+                      <label>ID Proof:
+                        <select formControlName="proof2" class="form-control">
+                          <option >choose Options</option>
+                          <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
+                        </select>
                     <span class="required-field">*</span>
                     <input #file type="file" accept='image/*' formControlName="Aadhar_photo" (change)="uploadImages2($event)"   />
                     <img [src] ="engineImgURLS ? engineImgURLS : 'assets/images/empty_image.png'" >
                   </label>
                 </div>
     </form>
-            <!-- <form [formGroup] = "schoolqualificationForm"> -->
-                <!-- </form> -->
-
-            <!-- <form [formGroup] = "manageEmployeeForm"> -->
+            
         <h3>Education Qualification</h3>
-        <!-- <table class="table">
-    <thead>
-      <tr>
-        <th>School/Qualification</th>
-        <th>Qualification</th>
-        <th>%Obtained</th>
-        <th>Year of passing</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody >
-        *ngFor="let loan of schoolqualificationFormControls.controls; let i = index" [formGroupName]="i"
-      <tr>
-        <td>{{loan.university}}</td>
-        <td>{{{{loan.qualification}}}}</td>
-        <td>{{loan.percentage}}</td>
-        <td mat-cell *matCellDef="let element"> {{element.policyNumber}} </td>
-        <td>December 10, 1815</td>
         
-        <td>
-        <button type="button"> <span>Edit</span></button>
-        </td>
-      </tr>
-      <tr>
-        <td>XYZ School</td>
-        <td>HSC</td>
-        <td>60</td>
-        <td>December 10, 1906</td>
-        
-        <td>
-        <button type="button"> <span>Edit</span></button>
-        </td>
-      </tr>
-      </tbody>
-      </table> -->
       <div formGroupName = "school_qualification"> 
       <div>
-        <td>School/Qualification:
+        <td>
             <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>School/Qualification</mat-label>
           <input matInput formControlName="university" >
         </mat-form-field></td>
     </div>
     <div>
-      <td>Qualification:
+      <td>
           <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Qualification</mat-label>
         <input matInput formControlName="qualification" >
       </mat-form-field></td>
   </div>
   <div>
-    <td>%Obtained:
+    <td>
         <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>%Obtained</mat-label>
       <input matInput formControlName="percentage" >
     </mat-form-field></td>
 </div>
 
 <div>
-<td>Passing year:
+<td>
   <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Passing year</mat-label>
 <input matInput formControlName="passingyear" >
 </mat-form-field></td>
 </div>
@@ -426,26 +585,30 @@
 
 <div formGroupName = "college_qualification">
 <div>
-  <td>College Qualification:
+  <td>
       <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>College Qualification</mat-label>
     <input matInput formControlName="university" >
   </mat-form-field></td>
 </div>
 <div>
-<td>Qualification:
+<td>
     <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Qualification</mat-label>
   <input matInput formControlName="qualification" >
 </mat-form-field></td>
 </div>
 <div>
-<td>%Obtained:
+<td>
   <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>%Obtained</mat-label>
 <input matInput formControlName="percentage" >
 </mat-form-field></td>
 </div>
 <div>
-<td>Passing year:
+<td>
   <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Passing year</mat-label>
 <input matInput formControlName="passingyear" >
 </mat-form-field></td>
 </div>
@@ -453,26 +616,30 @@
 
 <div formGroupName = "graduate_qualification">
 <div>
-  <td>GraduateQualification:
+  <td>
       <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>GraduateQualification</mat-label>
     <input matInput formControlName="university" >
   </mat-form-field></td>
 </div>
 <div>
-<td>Qualification:
+<td>
     <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Qualification</mat-label>
   <input matInput formControlName="qualification" >
 </mat-form-field></td>
 </div>
 <div>
-<td>%Obtained:
+<td>
   <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>%Obtained</mat-label>
 <input matInput formControlName="percentage" >
 </mat-form-field></td>
 </div>
 <div>
-<td>Passing year:
+<td>
   <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Passing year</mat-label>
 <input matInput formControlName="passingyear" >
 </mat-form-field></td>
 </div>
@@ -480,27 +647,31 @@
 
 <div formGroupName = "postgraduate_qualification">
 <div>
-  <td>PostgraduateQualification:
+  <td>
       <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>PostgraduateQualification</mat-label>
     <input matInput formControlName="university" >
   </mat-form-field></td>
 </div>
 <div>
-<td>Qualification:
+<td>
     <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Qualification</mat-label>
   <input matInput formControlName="qualification" >
 </mat-form-field></td>
 </div>
 <div>
-<td>%Obtained:
+<td>
   <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>%Obtained</mat-label>
 <input matInput formControlName="percentage" >
 </mat-form-field></td>
 </div>
 <div>
   
-<td>Passing year:
+<td>
   <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Passing year</mat-label>
 <input matInput formControlName="passingyear" >
 </mat-form-field></td>
 </div>
@@ -508,7 +679,5 @@
 
 <button type="submit" (click)="manageEmployee()">Submit</button>
     </form>
-  <!-- </mat-card-content> -->
- 
-  <!-- </mat-card> -->
+    <!-- [disabled]="!manageEmployeeForm.valid" -->
 </div>
