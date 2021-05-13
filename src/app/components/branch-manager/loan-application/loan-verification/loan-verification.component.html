@@ -19,39 +19,39 @@
       <div class="row" style="margin-top: 10px;">
         <div class="col-sm-3">
           <div>
-             <input type="text" placeholder="Loan Number"  formControlName="loanNo"  class="form-control">
+             <input type="text" placeholder="Loan Number"  formControlName="loanNo"  (keyup)="applyFilter($event, 'loannumber')" class="form-control">
           </div>
         </div>
         <div class="col-sm-3">
           <div>
-            <input type="text" placeholder="Customer Name" formControlName="customerName"  class="form-control" >
+            <input type="text" placeholder="Customer Name" formControlName="customerName"  (keyup)="applyFilter($event , 'name')"  class="form-control" >
           </div>
         </div>
         <div class="col-sm-3">
             <div>
-            <input type="text" placeholder="Vehicle Model" formControlName="vehiclemodel"  class="form-control">
+            <input type="text" placeholder="Vehicle Model" formControlName="vehiclemodel" (keyup)="applyFilter($event, 'model')"  class="form-control">
             </div>
         </div>
         <div class="col-sm-3">
             <div>
-                <input type="text" placeholder="Vehicle Number"  formControlName="vehicleNo"  class="form-control">
+                <input type="text" placeholder="Vehicle Number"  formControlName="vehicleNo" (keyup)="applyFilter($event, 'vehicleno')" class="form-control">
             </div>
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
         <div class="col-sm-3">
             <div>
-                <input type="text" placeholder="Customer Mobile No" formControlName="customerMobileNo"  class="form-control">
+                <input type="text" placeholder="Customer Mobile No" formControlName="customerMobileNo" (keyup)="applyFilter($event, 'mobileno')"  class="form-control">
             </div>
         </div>
         <div class="col-sm-3">
             <div>
-                <input type="text" placeholder="Chassis No" formControlName="chassisNo"  class="form-control">
+                <input type="text" placeholder="Chassis No" formControlName="chassisNo"   (keyup)="applyFilter($event, 'chassisno')" class="form-control">
             </div>
         </div>
         <div class="col-sm-3">
           <div>
-              <input type="text" placeholder="loan Amount" formControlName="loanAmount"  class="form-control">
+              <input type="text" placeholder="loan Amount" formControlName="loanAmount" (keyup)="applyFilter($event, 'loanamount')" class="form-control">
           </div>
         </div>
         
@@ -95,6 +95,7 @@
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
+      <button  type="button"  class="btn btn-secondary" (click)="searchdata()">Search1</button>
       <button *ngIf="showSearchbtn" type="button"  class="btn btn-secondary" (click)="search(advanceSearchForms.value)">Search</button>
       <button type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
     </div>
@@ -144,6 +145,7 @@ Loan Application Table
   <div *ngIf="customerLoanDetails.length ==0">
     No Data Found.
   </div>
+  
 
   </div> 
 

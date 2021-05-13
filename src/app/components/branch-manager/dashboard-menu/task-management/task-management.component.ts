@@ -90,7 +90,7 @@ export class CreateTask {
       customerRegNo:data.customerRegNo,
       customerMobileNo:data.customerMobileNo,
       vehicleNumber:data.vehicleNumber,
-      dueDate:this.datepipe.transform(data.dueDate, 'dd MMMM yyyy'),
+      dueDate:this.datepipe.transform(data.dueDate, 'yyyy-MM-dd'),
       assignTo:data.assignTo,
       description:data.description
     });
@@ -118,6 +118,7 @@ export class CreateTask {
 
   saveUpdateTask(){
     if (this.editDataTask) {
+      this.createTaskForms.value.dueDate=this.datepipe.transform(this.createTaskForms.value.dueDate, 'dd MMMM yyyy');
       this.crudService.update(`${appModels.FIELDEXECUTIVE}/editTask`,this.createTaskForms.value,
         this.editDataTask['id'],
       ).pipe(untilDestroyed(this)).subscribe(updated => {

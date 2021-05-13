@@ -270,12 +270,12 @@ export class LoanProcessComponent implements OnInit {
           altNumber: response.customerDetails.altNumber,
           spouseName: response.customerDetails.spouseName,
           gender: response.customerDetails.gender,
-          dob:response.customerDetails.dob,
+          dob:this.datepipe.transform(response.customerDetails.dob, 'yyyy-MM-dd'),
           fatherName: response.customerDetails.fatherName,
           refBy: response.customerDetails.refBy,
           companyName:response.customerDetails.companyName,
           monthlyIncome:response.customerDetails.monthlyIncome,
-          salaryDate:response.customerDetails.salaryDate,
+          salaryDate:this.datepipe.transform(response.customerDetails.salaryDate, 'yyyy-MM-dd'),
           salaryPeriod:response.customerDetails.salaryPeriod,
           maritalStatus:response.customerDetails.maritalStatus,        
          
@@ -319,7 +319,7 @@ export class LoanProcessComponent implements OnInit {
           mobileNumber: response.customerGuarantor.mobileNumber,
           spouseName: response.customerGuarantor.spouseName,
           gender: response.customerGuarantor.gender,
-          dob:response.customerGuarantor.dob,
+          dob:this.datepipe.transform(response.customerGuarantor.dob, 'yyyy-MM-dd'),
           maritalStatus:response.customerGuarantor.maritalStatus,
                   
         }
@@ -366,7 +366,7 @@ export class LoanProcessComponent implements OnInit {
           closingAC: response.loanDetailsData.closingAC,
           closingDiscount: response.loanDetailsData.closingDiscount,
           payout: response.loanDetailsData.payout,
-          dueDate:response.loanDetailsData.dueDate
+          dueDate:this.datepipe.transform(response.loanDetailsData.dueDate, 'yyyy-MM-dd')
         }
       })
 
