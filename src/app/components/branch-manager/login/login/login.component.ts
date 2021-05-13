@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private _auth:AuthenticationService,private toast: ToastrService,) { }
 
   createLoginForms = new FormGroup({
-    username: new FormControl('', Validators.required),
+    username: new FormControl('+91', Validators.required),
     password: new FormControl('', Validators.required),
   })
 
@@ -54,7 +54,11 @@ password: string;
           this.toast.success("Login Successfully");
 
       this.router.navigate(["/branch-manager/dashboard"]);
-    })
+    }, error => {
+      this.toast.error('Something Went Wrong')
+    }
+    
+    )
     // this.toast.error("Please enter correct username");
   }
     

@@ -62,13 +62,16 @@
    <mat-tab label="Collection">   
        <div class="row d-flex justify-content-center mt-100">
       <div class="col-md-6">
-         <!-- <div label="Others"></div> -->
+         <div>Total Count</div>
           <div class="progress blue" > <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
               <div class="progress-value">{{analyticsData}}</div>
-          </div>
+          
+        </div>
+        <div>Enquiry</div>
           <div class="progress yellow" *ngIf="isfield"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
               <div class="progress-value">{{analyticsEnquiryData}}</div>
           </div>
+        <!-- </div> -->
       </div>
   </div>
 
