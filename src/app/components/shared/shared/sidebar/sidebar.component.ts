@@ -14,4 +14,13 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  test(){
+    this.router.navigate(['branch-manager/loan-application/cashlimit-process']);
+
+  }
+  test2(){
+    this.router.navigate(['branch-manager/loan-application/loanapproval-process']);
+
+  }
+
 }

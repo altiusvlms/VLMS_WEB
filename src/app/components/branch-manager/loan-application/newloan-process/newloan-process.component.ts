@@ -96,28 +96,28 @@ export class NewloanProcessComponent implements OnInit {
     spouseName: new FormControl(''),
     gender: new FormControl(''),
     dob:new FormControl('', Validators.required),
-    dateFormat:new FormControl('dd MMMM yyyy', Validators.required),
-    locale:new FormControl('en', Validators.required),
+    dateFormat:new FormControl('dd MMMM yyyy'),
+    locale:new FormControl('en'),
     fatherName: new FormControl(''),
     refBy: new FormControl(''),
-    companyName:new FormControl('', Validators.required),
-    monthlyIncome:new FormControl('', Validators.required),
-    salaryDate:new FormControl('', Validators.required),
-    salaryPeriod:new FormControl('', Validators.required),
-    maritalStatus:new FormControl('', Validators.required),
+    companyName:new FormControl(''),
+    monthlyIncome:new FormControl(''),
+    salaryDate:new FormControl(''),
+    salaryPeriod:new FormControl(''),
+    maritalStatus:new FormControl(''),
 
 //co-applicant
     guarantor_mobile_number: new FormControl('', Validators.required),
     guarantor_name: new FormControl('', Validators.required),
     guarantor_fatherName: new FormControl(''),
-    guarantor_applicantType: new FormControl('', Validators.required),
+    guarantor_applicantType: new FormControl(''),
     guarantor_companyName: new FormControl(''),
     guarantor_netIncome: new FormControl(''),
-    guarantor_salaryType: new FormControl('', Validators.required),
-    guarantor_salaryDate:new FormControl('', Validators.required),
-    guarantor_dob:new FormControl('', Validators.required),
-    guarantor_gender:new FormControl('', Validators.required),
-    guarantor_maritalStatus:new FormControl('', Validators.required),
+    guarantor_salaryType: new FormControl(''),
+    guarantor_salaryDate:new FormControl(''),
+    guarantor_dob:new FormControl(''),
+    guarantor_gender:new FormControl(''),
+    guarantor_maritalStatus:new FormControl(''),
     guarantor_spouseName:new FormControl(''),
    
 //vechicle 
@@ -134,22 +134,22 @@ export class NewloanProcessComponent implements OnInit {
     kmReading: new FormControl(''),
     noofOwner: new FormControl(''),
   //loan  
-    loanAmount: new FormControl('', Validators.required),
-    loanTerm: new FormControl('', Validators.required),
-    loanInterest: new FormControl('', Validators.required),
+    loanAmount: new FormControl(''),
+    loanTerm: new FormControl(''),
+    loanInterest: new FormControl(''),
     emi: new FormControl(''),
     interestINR: new FormControl(''),
-    dueDate: new FormControl('', Validators.required),
+    dueDate: new FormControl(''),
 
   //bank 
-    accountNumber: new FormControl('', Validators.required),
-    accountHolderName: new FormControl('', Validators.required),
-    loanEligibleAmount: new FormControl('', Validators.required),
-    IFSC: new FormControl('', Validators.required),
-    bankName: new FormControl('', Validators.required),
-    branchName: new FormControl('', Validators.required),
-    disbursalType: new FormControl('', Validators.required),
-    accountType: new FormControl('', Validators.required),
+    accountNumber: new FormControl(''),
+    accountHolderName: new FormControl(''),
+    loanEligibleAmount: new FormControl(''),
+    IFSC: new FormControl(''),
+    bankName: new FormControl(''),
+    branchName: new FormControl(''),
+    disbursalType: new FormControl(''),
+    accountType: new FormControl(''),
 
   //addresss
   
@@ -570,6 +570,7 @@ export class NewloanProcessComponent implements OnInit {
   saveNewLoan(){
     this.getUserId();    
     this.submitted = true;
+    if(this.newLoanForm.valid){
     console.log(this.userId)
     console.log(this.newLoanForm.value)
     this.newLoanForm.value.salaryDate = this.datepipe.transform(this.newLoanForm.value.salaryDate, 'dd MMMM yyyy');
@@ -862,5 +863,9 @@ export class NewloanProcessComponent implements OnInit {
     this.router.navigate(['branch-manager/loan-verification'])
 
   }
+  else{
+    alert("Please Enter Required Fields")
+  }
+}
 
 }

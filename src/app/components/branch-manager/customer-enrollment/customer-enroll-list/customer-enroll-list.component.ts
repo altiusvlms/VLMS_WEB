@@ -33,6 +33,8 @@ export class CustomerEnrollListComponent implements OnInit {
   displayedColumns = ['Customer ID','Customer Image', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
   'D.O.B','Father’s Name','Applicant Type','Gender','AadhaarImage','PAN Image','Action'];
   dataSource = new MatTableDataSource();
+  enrollId: any;
+  editDataEnroll: any;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -46,7 +48,25 @@ export class CustomerEnrollListComponent implements OnInit {
   user:any;
 
   constructor(private formBuilder: FormBuilder,private crudService: CrudService,public datepipe: DatePipe,
-    private toast: ToastrService, private authentication: AuthenticationService,private router: Router) { }
+    private toast: ToastrService, private authentication: AuthenticationService,private router: Router) { 
+
+      if (data) {
+        console.log(data)
+      //   this.editDataEnroll = { ...data };
+      //  this.createCustomerEnrolForms
+      // .patchValue({
+      //   customerName:data.customerName,
+      //   mobileNumber:data.mobileNumber,
+      //   alternateMobileNumber:data.alternateMobileNumber,
+      //   dob:this.datepipe.transform(data.dob, 'dd MMMM yyyy'),
+      //   fatherName:data.fatherName,
+      //   gender:data.gender,
+      //   applicantType:data.applicantType
+      // });
+      // this.createCustomerEnrolForms.disable();
+      }
+
+    }
     /** Create Customer Enrolment Form */
     createCustomerEnrolForms = new FormGroup({
       Customerphoto: new FormControl('', Validators.required),
@@ -63,6 +83,17 @@ export class CustomerEnrollListComponent implements OnInit {
       proof2: new FormControl('', Validators.required),
     })
 
+    EditCustomerEnrolForms = new FormGroup({
+      customerName: new FormControl('', Validators.required),
+      mobileNumber: new FormControl('', Validators.required),
+      alternateMobileNumber: new FormControl('', Validators.required),
+      dob: new FormControl('', Validators.required),
+      dateFormat: new FormControl("dd MMMM yyyy", Validators.required),
+      locale: new FormControl("en", Validators.required),
+      fatherName: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      applicantType: new FormControl('', Validators.required),
+    })
     
     enrollused:any;
     enrollImgUrl:any;
@@ -142,6 +173,17 @@ enrollid:any;
     })
     
   }
+
+  UpdateCustomerEnrolment(){
+    this.createCustomerEnrolForms.value.dob =this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd MMMM yyyy');
+    this.crudService.update(`${appModels.FIELDEXECUTIVE}/updateEnroll/`, this.createCustomerEnrolForms.value,
+    this.editDataEnroll['id'],     
+  ).pipe(untilDestroyed(this)).subscribe( data => {
+    console.log(data)
+    this.enrollid = data;
+  })
+
+}
   
   createLoan(){
     this.router.navigate(['branch-manager/newloan-process']);
@@ -198,3 +240,7 @@ enrollid:any;
   }
   
 }
+function data(data: any) {
+  throw new Error('Function not implemented.');
+}
+
