@@ -24,6 +24,7 @@ import { ExistingEmployeeComponent } from './existing-employee/existing-employee
 import { TopupLoanComponent } from './topup-loan/topup-loan.component';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import {MatFormFieldModule} from '@angular/material/form-field';
 // import { ChartsModule } from 'ng2-charts';
 // import { PieChartComponent } from './piechart/piechart';
 
@@ -38,6 +39,7 @@ import { Ng5SliderModule } from 'ng5-slider';
     SharedModule,
     MatTabsModule,
     Ng5SliderModule,
+    MatFormFieldModule
     // ChartsModule
   ]
 })
