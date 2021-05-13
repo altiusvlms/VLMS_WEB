@@ -114,7 +114,7 @@ export class LoanVerificationComponent implements OnInit {
   }
 
 
-  clearSearch(){
+   clearSearch(){
     this.advanceSearchForms.reset();
     this.showSearchbtn = true;
     this.getLoanVerification();
