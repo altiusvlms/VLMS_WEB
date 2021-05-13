@@ -2,7 +2,7 @@
 
     <mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="tabClick($event)">
 
-        <mat-tab label="Applicant"> 
+        <mat-tab label="Applicant" [disabled]='!selectedIndex.isActive' > 
             <mat-card class="example-card">
                 <mat-card-content>
                   <form [formGroup]="newLoanForm">
@@ -360,7 +360,7 @@
        </mat-tab>
 <!-- Tab 2 -->
 
-      <mat-tab label="Co-Applicant">
+      <mat-tab label="Co-Applicant" [disabled]='!selectedIndex.isActive'>
           <mat-card class="example-card">
             <mat-card-content>
               <form class="example-form" [formGroup]="newLoanForm" >
@@ -711,7 +711,7 @@
       </mat-tab>
 
   <!-- Tab 3 -->
-        <mat-tab label="Vehicle Details">
+        <mat-tab label="Vehicle Details" [disabled]='!selectedIndex.isActive'>
 
             <mat-card class="example-card">
                 <mat-card-content>
@@ -899,7 +899,7 @@
         </mat-tab>
 
         <!-- Tab 4 -->
-        <mat-tab label="Loan Transfer">
+        <mat-tab label="Loan Transfer" [disabled]='!selectedIndex.isActive'>
             <mat-card class="example-card">
             <mat-card-content>
               <form class="example-form"  [formGroup]="newLoanForm">
@@ -1075,7 +1075,7 @@
         
           <!-- Tab 5 -->
 
-          <mat-tab label="Bank details">
+          <mat-tab label="Bank details" [disabled]='!selectedIndex.isActive'>
             <mat-card class="example-card">
             <mat-card-content>
               <form class="example-form" [formGroup]="newLoanForm">

@@ -2,283 +2,397 @@
 <!-- /** Customer Enrolment  */ -->
 
 <div class="container">
-<h1>Customer Enroll List</h1>
-<div class="row">
-  <div class="col-sm-2">
-      <div>
-          <label>New Customer Enrolment Filter</label>
-          <input type="date" class="form-control">
-      </div>
-  </div>
-        <div class="col-sm-2">
-            <div>
-                <button type="button"  data-toggle="modal" data-target="#createEntrolmentModal">
-                    Create New Enrolment
-                </button>
-            </div>
+  <h1>Customer Enroll List</h1>
+  <div class="row">
+    <div class="col-sm-2">
+        <div>
+            <label>New Customer Enrolment Filter</label>
+            <input type="date" class="form-control">
         </div>
-    
     </div>
-
-<!-- /** Customer Enrolment List Table */ -->
-<!-- <table class="table">
-    <thead>
-      <tr>
-        <th>Customer ID</th>
-        <th>Customer Image</th>
-        <th>Applicant Name</th>
-        <th>Applicant Mobile No.1</th>
-        <th>Applicant Mobile No.2</th>
-        <th>D.O.B</th>
-        <th>Father’s Name</th>
-        <th>Applicant Type</th>
-        <th>Gender</th>
-        <th> AadhaarImage</th>
-        <th>PAN Image</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let Enroll of EnrollVerfication_Data">
-        <td>{{Enroll.id}}</td>
-        <td></td>
-        <td>{{Enroll.customerName}}</td>
-        <td>{{Enroll.mobileNumber}}</td>
-        <td>{{Enroll.alternateMobileNumber}}</td>
-        <td>{{Enroll.dob | date:"dd MMMM yyyy"}}</td>
-        <td>{{Enroll.fatherName}}</td>
-        <td>{{Enroll.applicantType}}</td>
-        <td>{{Enroll.gender}}</td>
-        <td></td>
-        <td></td>
-        <td>
-        <button type="button"> <span>View More</span></button>
-        <button type="button" (click)="createLoan()"><span>Create Loan</span></button>
-        </td>
-      </tr>
-      
-    </tbody>
-</table> -->
-
-
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
-</mat-form-field>
-
-<div class="allocation-table responsive_table">
-  <div class="mat-elevation-z8">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-  <ng-container matColumnDef="Customer ID">
-    <th mat-header-cell *matHeaderCellDef> Customer ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Customer Image">
-    <th mat-header-cell *matHeaderCellDef> Customer Image </th>
-    <td mat-cell *matCellDef="let element">  </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Applicant Name">
-    <th mat-header-cell *matHeaderCellDef> Applicant Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Applicant Mobile No.1">
-    <th mat-header-cell *matHeaderCellDef> Applicant Mobile No.1 </th>
-    <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Applicant Mobile No.2">
-    <th mat-header-cell *matHeaderCellDef> Applicant Mobile No.2 </th>
-    <td mat-cell *matCellDef="let element"> {{element.alternateMobileNumber}} </td>
-  </ng-container>
-  <ng-container matColumnDef="D.O.B">
-    <th mat-header-cell *matHeaderCellDef> D.O.B </th>
-    <td mat-cell *matCellDef="let element"> {{element.dob | date:"dd MMMM yyyy"}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Father’s Name">
-    <th mat-header-cell *matHeaderCellDef> Father’s Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.fatherName}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Applicant Type">
-    <th mat-header-cell *matHeaderCellDef>Applicant Type </th>
-    <td mat-cell *matCellDef="let element"> {{element.applicantType}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Gender">
-    <th mat-header-cell *matHeaderCellDef>Gender </th>
-    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
-  </ng-container>
-  <ng-container matColumnDef="AadhaarImage">
-    <th mat-header-cell *matHeaderCellDef>AadhaarImage </th>
-    <td mat-cell *matCellDef="let element">  </td>
-  </ng-container>
-  <ng-container matColumnDef="PAN Image">
-    <th mat-header-cell *matHeaderCellDef>PAN Image </th>
-    <td mat-cell *matCellDef="let element">  </td>
-  </ng-container>
-  <ng-container matColumnDef="Action">
-    <th mat-header-cell *matHeaderCellDef> Action </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-button (click)="createLoan()">Create Loan</button>
-       </td>
-  </ng-container>
-
-  
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-  
-</table>
-
-<ng-container *ngIf="dataSource?.filteredData.length == 0">
-  <div class="no_data_msg">No Data Avaliable</div>
-</ng-container>
-</div>
-
-</div>
-
-<!-- /** Create Customer Enrolment Model*/ -->
-
-<div class="modal fade" id="createEntrolmentModal" tabindex="-1" role="dialog" aria-labelledby="createEntrolmentModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="createEntrolmentModalLabel">Entrol Customer</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-    <form [formGroup]="createCustomerEnrolForms" style="overflow: scroll;">
-            <!-- <div>
-                <label>Customer Photo</label>
-                <input type="file"  formControlName="Customerphoto"  class="form-control">
-            </div> -->
-            <div> 
-              <label>Customer Images:
-                <span class="required-field">*</span>
-                <input #file type="file" accept='image/*' formControlName="Customerphoto" (change)="uploadCoAppIdProofImages($event)" />
-                <img [src] ="enrollImgUrl ? enrollImgUrl : 'assets/images/empty_image.png'" >
-              </label>
-            </div>
-            <div>
-                <label>Customer Name</label>
-                <input type="text"  formControlName="customerName"  class="form-control">
-            </div>
-            
-   <div>
-    <label>Mobile Numbers</label>   
-   </div>
-   <div>
-            <input type="text" class="input_field" placeholder="+91"  maxlength="3" disabled>
- <input type="text" formControlName="mobileNumber"  class="form-control" placeholder="9865465476"  maxlength="10">
-
-  <div id="recaptcha-container"></div>
-  
-
-  <button (click)="sendLoginCode()" >SMS Text Login Code</button>
-
-  <div *ngIf="windowRef.confirmationResult">
-    <hr>
-    <label for="code">Enter your Verification Code Here</label><br>
-    <input type="text" name="code" [(ngModel)]="verificationCode" [ngModelOptions]="{standalone: true}">
-               <button (click)="verifyLoginCode()">Verify</button>
-       </div>
-         <div *ngIf="user">
-                   <p>your phone verified sucessfully</p>
-        </div>
+          <div class="col-sm-2">
+              <div>
+                  <button type="button"  data-toggle="modal" data-target="#createEntrolmentModal">
+                      Create New Enrolment
+                  </button>
+              </div>
           </div>
-          <!-- <div>    
-            <label> Mobile Number</label>
-            <input type="text"  formControlName="phoneNumber"  class="form-control">
-        </div> -->
-            <div>    
-                <label>Alternative Mobile Number</label>
-                <input type="text"  formControlName="alternateMobileNumber"  class="form-control">
+      
+      </div>
+  
+  <!-- /** Customer Enrolment List Table */ -->
+  <!-- <table class="table">
+      <thead>
+        <tr>
+          <th>Customer ID</th>
+          <th>Customer Image</th>
+          <th>Applicant Name</th>
+          <th>Applicant Mobile No.1</th>
+          <th>Applicant Mobile No.2</th>
+          <th>D.O.B</th>
+          <th>Father’s Name</th>
+          <th>Applicant Type</th>
+          <th>Gender</th>
+          <th> AadhaarImage</th>
+          <th>PAN Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Enroll of EnrollVerfication_Data">
+          <td>{{Enroll.id}}</td>
+          <td></td>
+          <td>{{Enroll.customerName}}</td>
+          <td>{{Enroll.mobileNumber}}</td>
+          <td>{{Enroll.alternateMobileNumber}}</td>
+          <td>{{Enroll.dob | date:"dd MMMM yyyy"}}</td>
+          <td>{{Enroll.fatherName}}</td>
+          <td>{{Enroll.applicantType}}</td>
+          <td>{{Enroll.gender}}</td>
+          <td></td>
+          <td></td>
+          <td>
+          <button type="button"> <span>View More</span></button>
+          <button type="button" (click)="createLoan()"><span>Create Loan</span></button>
+          </td>
+        </tr>
+        
+      </tbody>
+  </table> -->
+  
+  
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+  </mat-form-field>
+  
+  <div class="allocation-table responsive_table">
+    <div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    <ng-container matColumnDef="Customer ID">
+      <th mat-header-cell *matHeaderCellDef> Customer ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Customer Image">
+      <th mat-header-cell *matHeaderCellDef> Customer Image </th>
+      <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Applicant Name">
+      <th mat-header-cell *matHeaderCellDef> Applicant Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Applicant Mobile No.1">
+      <th mat-header-cell *matHeaderCellDef> Applicant Mobile No.1 </th>
+      <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Applicant Mobile No.2">
+      <th mat-header-cell *matHeaderCellDef> Applicant Mobile No.2 </th>
+      <td mat-cell *matCellDef="let element"> {{element.alternateMobileNumber}} </td>
+    </ng-container>
+    <ng-container matColumnDef="D.O.B">
+      <th mat-header-cell *matHeaderCellDef> D.O.B </th>
+      <td mat-cell *matCellDef="let element"> {{element.dob | date:"dd MMMM yyyy"}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Father’s Name">
+      <th mat-header-cell *matHeaderCellDef> Father’s Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.fatherName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Applicant Type">
+      <th mat-header-cell *matHeaderCellDef>Applicant Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.applicantType}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Gender">
+      <th mat-header-cell *matHeaderCellDef>Gender </th>
+      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+    </ng-container>
+    <ng-container matColumnDef="AadhaarImage">
+      <th mat-header-cell *matHeaderCellDef>AadhaarImage </th>
+      <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+    <ng-container matColumnDef="PAN Image">
+      <th mat-header-cell *matHeaderCellDef>PAN Image </th>
+      <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+    <ng-container matColumnDef="Action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button (click)="createLoan()">Create Loan</button>
+        <button type="button"  data-toggle="modal" data-target="#EditEntrolmentModal">
+          Edit more
+      </button>
+         </td>
+    </ng-container>
+  
+    
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+    
+  </table>
+  
+  <ng-container *ngIf="dataSource?.filteredData.length == 0">
+    <div class="no_data_msg">No Data Avaliable</div>
+  </ng-container>
+  </div>
+  
+  </div>
+  
+  <!-- /** Create Customer Enrolment Model*/ -->
+  
+  <div class="modal fade" id="createEntrolmentModal" tabindex="-1" role="dialog" aria-labelledby="createEntrolmentModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createEntrolmentModalLabel">Entrol Customer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+      <form [formGroup]="createCustomerEnrolForms" style="overflow: scroll;">
+              <!-- <div>
+                  <label>Customer Photo</label>
+                  <input type="file"  formControlName="Customerphoto"  class="form-control">
+              </div> -->
+              <div> 
+                <label>Customer Images:
+                  <span class="required-field">*</span>
+                  <input #file type="file" accept='image/*' formControlName="Customerphoto" (change)="uploadCoAppIdProofImages($event)" />
+                  <img [src] ="enrollImgUrl ? enrollImgUrl : 'assets/images/empty_image.png'" >
+                </label>
+              </div>
+              <div>
+                  <label>Customer Name</label>
+                  <input type="text"  formControlName="customerName"  class="form-control">
+              </div>
+              
+     <div>
+      <label>Mobile Numbers</label>   
+     </div>
+     <div>
+              <input type="text" class="input_field" placeholder="+91"  maxlength="3" disabled>
+   <input type="text" formControlName="mobileNumber"  class="form-control" placeholder="9865465476"  maxlength="10">
+  
+    <div id="recaptcha-container"></div>
+    
+  
+    <button (click)="sendLoginCode()" >SMS Text Login Code</button>
+  
+    <div *ngIf="windowRef.confirmationResult">
+      <hr>
+      <label for="code">Enter your Verification Code Here</label><br>
+      <input type="text" name="code" [(ngModel)]="verificationCode" [ngModelOptions]="{standalone: true}">
+                 <button (click)="verifyLoginCode()">Verify</button>
+         </div>
+           <div *ngIf="user">
+                     <p>your phone verified sucessfully</p>
+          </div>
             </div>
-            <div>    
-                <label>D.O.B</label>
-                <input type="date"  formControlName="dob"  class="form-control">
-            </div>
-            <div>    
-                <label>Father's Name</label>
-                <input type="text"  formControlName="fatherName"  class="form-control">
-            </div>
-            <div>
-              <label>Gender</label>
-            <select formControlName="gender" class="form-control">
-              <option>Choose options</option>
-              <option *ngFor="let Gender of Genders">{{Gender}}</option>
-            </select>
-            </div>
-            <div>
-              <label>Applicant Type</label>
-            <select formControlName="applicantType" class="form-control">
-              <option>Choose options</option>
-              <option *ngFor="let Applicant of Applicants">{{Applicant}}</option>
-            </select>
-            </div>
-            <div> 
-              <label>ID Proof1:
-                <select formControlName="proof1" class="form-control">
-                  <option >choose Options</option>
-                  <option *ngFor="let ID1 of ID1s">{{ID1}}</option>
-                </select>
-                <span class="required-field">*</span>
-                <input #file type="file" accept='image/*' (change)="uploadImages($event)"   />
-                <!-- <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" > -->
-              </label>
-            </div>
-            <div> 
-              <label>ID Proof2:
-                <select formControlName="proof2" class="form-control">
-                  <option >choose Options</option>
-                  <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
-                </select>
-                <span class="required-field">*</span>
-                <input #file type="file" accept='image/*' (change)="uploadImages2($event)"   />
-                <!-- <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" > -->
-              </label>
-            </div>
-            <!-- <div>
-              <label>ID Proof1</label>
-            
-            <input type="file"  class="form-control" formControlName="image1">
-            </div> -->
-            <!-- <div>
-              <label>ID Proof2</label>
-            <select formControlName="proof2" class="form-control">
-              <option >choose Options</option>
-              <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
-            </select>
-            <input type="file"  class="form-control" formControlName="image2">
-            </div> -->
-    </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnrolModal"(click)=saveCustomerEnrolment()>Save</button>
+            <!-- <div>    
+              <label> Mobile Number</label>
+              <input type="text"  formControlName="phoneNumber"  class="form-control">
+          </div> -->
+              <div>    
+                  <label>Alternative Mobile Number</label>
+                  <input type="text"  formControlName="alternateMobileNumber"  class="form-control">
+              </div>
+              <div>    
+                  <label>D.O.B</label>
+                  <input type="date"  formControlName="dob"  class="form-control">
+              </div>
+              <div>    
+                  <label>Father's Name</label>
+                  <input type="text"  formControlName="fatherName"  class="form-control">
+              </div>
+              <div>
+                <label>Gender</label>
+              <select formControlName="gender" class="form-control">
+                <option>Choose options</option>
+                <option *ngFor="let Gender of Genders">{{Gender}}</option>
+              </select>
+              </div>
+              <div>
+                <label>Applicant Type</label>
+              <select formControlName="applicantType" class="form-control">
+                <option>Choose options</option>
+                <option *ngFor="let Applicant of Applicants">{{Applicant}}</option>
+              </select>
+              </div>
+              <div> 
+                <label>ID Proof1:
+                  <select formControlName="proof1" class="form-control">
+                    <option >choose Options</option>
+                    <option *ngFor="let ID1 of ID1s">{{ID1}}</option>
+                  </select>
+                  <span class="required-field">*</span>
+                  <input #file type="file" accept='image/*' (change)="uploadImages($event)"   />
+                  <!-- <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" > -->
+                </label>
+              </div>
+              <div> 
+                <label>ID Proof2:
+                  <select formControlName="proof2" class="form-control">
+                    <option >choose Options</option>
+                    <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
+                  </select>
+                  <span class="required-field">*</span>
+                  <input #file type="file" accept='image/*' (change)="uploadImages2($event)"   />
+                  <!-- <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" > -->
+                </label>
+              </div>
+              <!-- <div>
+                <label>ID Proof1</label>
+              
+              <input type="file"  class="form-control" formControlName="image1">
+              </div> -->
+              <!-- <div>
+                <label>ID Proof2</label>
+              <select formControlName="proof2" class="form-control">
+                <option >choose Options</option>
+                <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
+              </select>
+              <input type="file"  class="form-control" formControlName="image2">
+              </div> -->
+      </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#generateEnrolModal"(click)=saveCustomerEnrolment()>Save</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- /** Generate Entrol Model*/ -->
-
-  <div  class="modal fade" id="generateEnrolModal" tabindex="-1" role="dialog" aria-labelledby="generateEnrolModalLabel"  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-        </div>
-        <div class="modal-body">
-          <p>Entrolled Successfully</p>
-          <p>Customer ID :{{enrollid}}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+  
+    <!-- /** Generate Entrol Model*/ -->
+  
+    <div  class="modal fade" id="generateEnrolModal" tabindex="-1" role="dialog" aria-labelledby="generateEnrolModalLabel"  aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+          </div>
+          <div class="modal-body">
+            <p>Entrolled Successfully</p>
+            <p>Customer ID :{{enrollid}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+
+  <!-- /** Edit Customer Enrolment Model*/ -->
+
+    <div class="modal fade" id="EditEntrolmentModal" tabindex="-1" role="dialog" aria-labelledby="EditEntrolmentModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="EditEntrolmentModalLabel">Entrol Customer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+      <form [formGroup]="EditCustomerEnrolForms" style="overflow: scroll;">
+              <!-- <div>
+                  <label>Customer Photo</label>
+                  <input type="file"  formControlName="Customerphoto"  class="form-control">
+              </div> -->
+              <!-- <div> 
+                <label>Customer Images:
+                  <span class="required-field">*</span>
+                  <input #file type="file" accept='image/*' formControlName="Customerphoto" (change)="uploadCoAppIdProofImages($event)" />
+                  <img [src] ="enrollImgUrl ? enrollImgUrl : 'assets/images/empty_image.png'" >
+                </label>
+              </div> -->
+              <div>
+                  <label>Customer Name</label>
+                  <input type="text"  formControlName="customerName"  class="form-control">
+              </div>
+              
+     <div>
+      <label>Mobile Numbers</label>   
+     </div>
+     <div>
+              <input type="text" class="input_field" placeholder="+91"  maxlength="3" disabled>
+   <input type="text" formControlName="mobileNumber"  class="form-control" placeholder="9865465476"  maxlength="10">
+  
+    <div id="recaptcha-container"></div>
+    
+  
+    <button (click)="sendLoginCode()" >SMS Text Login Code</button>
+  
+    <div *ngIf="windowRef.confirmationResult">
+      <hr>
+      <label for="code">Enter your Verification Code Here</label><br>
+      <input type="text" name="code" [(ngModel)]="verificationCode" [ngModelOptions]="{standalone: true}">
+                 <button (click)="verifyLoginCode()">Verify</button>
+         </div>
+           <div *ngIf="user">
+                     <p>your phone verified sucessfully</p>
+          </div>
+            </div>
+            <!-- <div>    
+              <label> Mobile Number</label>
+              <input type="text"  formControlName="phoneNumber"  class="form-control">
+          </div> -->
+              <div>    
+                  <label>Alternative Mobile Number</label>
+                  <input type="text"  formControlName="alternateMobileNumber"  class="form-control">
+              </div>
+              <div>    
+                  <label>D.O.B</label>
+                  <input type="date"  formControlName="dob"  class="form-control">
+              </div>
+              <div>    
+                  <label>Father's Name</label>
+                  <input type="text"  formControlName="fatherName"  class="form-control">
+              </div>
+              <div>
+                <label>Gender</label>
+              <select formControlName="gender" class="form-control">
+                <option>Choose options</option>
+                <option *ngFor="let Gender of Genders">{{Gender}}</option>
+              </select>
+              </div>
+              <div>
+                <label>Applicant Type</label>
+              <select formControlName="applicantType" class="form-control">
+                <option>Choose options</option>
+                <option *ngFor="let Applicant of Applicants">{{Applicant}}</option>
+              </select>
+              </div>
+              
+      </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#EditEnrolModal"(click)=UpdateCustomerEnrolment()>Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- /** Generate Entrol Model*/ -->
+  
+    <div  class="modal fade" id="EditEnrolModal" tabindex="-1" role="dialog" aria-labelledby="EditEnrolModalLabel"  aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+          </div>
+          <div class="modal-body">
+            <p>Entrolled Edit Successfully</p>
+            <p>Customer ID :{{enrollid}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
