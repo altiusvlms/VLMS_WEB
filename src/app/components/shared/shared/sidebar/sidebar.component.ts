@@ -15,7 +15,11 @@ export class SidebarComponent implements OnInit {
   }
 
   test(){
-    this.router.navigate(['branch-manager/loan-process/']);
+    this.router.navigate(['branch-manager/loan-application/cashlimit-process']);
+
+  }
+  test2(){
+    this.router.navigate(['branch-manager/loan-application/loanapproval-process']);
 
   }
 
