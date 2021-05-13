@@ -1,0 +1,33 @@
+
+ <!-- Loan  Disbursal -->
+ <div class="container">
+  
+    <!-- Loan Approval -->
+  
+    <!-- tab 1 -->
+  
+          <table class="table">
+        <thead>
+          <tr>
+            <th>Sr no</th>
+            <th>Branch</th>
+            <th>Duration Days</th>
+            <th>Requested On</th>
+            <th>Requested Amount</th>
+            <th>Approved Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let disbursal of loanDisburalData">
+            <td>{{disbursal.id}}</td>
+            <td>{{disbursal.branchName}}</td>
+            <td>{{disbursal.duration}}</td>
+            <td>{{disbursal.requestOnDate | date:"dd MMMM yyyy"}}</td>
+            <td>{{disbursal.requestAmount}}</td>
+            <td>{{disbursal.approveAmount}}</td>
+            <td>{{disbursal.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>  
