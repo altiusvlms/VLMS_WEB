@@ -12,8 +12,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
-
+import {MatTableDataSource} from '@angular/material/table';
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -26,10 +25,21 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
   styleUrls: ['./customer-enroll-list.component.scss']
 })
 export class CustomerEnrollListComponent implements OnInit {
-  Genders: any = ['Male', 'Female', 'Others',]
-  Applicants:any = ['salaried','Business','Own Business']
-  ID1s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard']
-  ID2s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard']
+  Genders: any = ['Male', 'Female', 'Others',];
+  Applicants:any = ['salaried','Business','Own Business'];
+  ID1s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard'];
+  ID2s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard'];
+
+  displayedColumns = ['Customer ID','Customer Image', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
+  'D.O.B','Father’s Name','Applicant Type','Gender','AadhaarImage','PAN Image','Action'];
+  dataSource = new MatTableDataSource();
+  enrollId: any;
+  editDataEnroll: any;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   images: any;
   windowRef: any;
@@ -38,7 +48,25 @@ export class CustomerEnrollListComponent implements OnInit {
   user:any;
 
   constructor(private formBuilder: FormBuilder,private crudService: CrudService,public datepipe: DatePipe,
-    private toast: ToastrService, private authentication: AuthenticationService,private router: Router) { }
+    private toast: ToastrService, private authentication: AuthenticationService,private router: Router) { 
+
+      if (data) {
+        console.log(data)
+      //   this.editDataEnroll = { ...data };
+      //  this.createCustomerEnrolForms
+      // .patchValue({
+      //   customerName:data.customerName,
+      //   mobileNumber:data.mobileNumber,
+      //   alternateMobileNumber:data.alternateMobileNumber,
+      //   dob:this.datepipe.transform(data.dob, 'dd MMMM yyyy'),
+      //   fatherName:data.fatherName,
+      //   gender:data.gender,
+      //   applicantType:data.applicantType
+      // });
+      // this.createCustomerEnrolForms.disable();
+      }
+
+    }
     /** Create Customer Enrolment Form */
     createCustomerEnrolForms = new FormGroup({
       Customerphoto: new FormControl('', Validators.required),
@@ -55,6 +83,17 @@ export class CustomerEnrollListComponent implements OnInit {
       proof2: new FormControl('', Validators.required),
     })
 
+    EditCustomerEnrolForms = new FormGroup({
+      customerName: new FormControl('', Validators.required),
+      mobileNumber: new FormControl('', Validators.required),
+      alternateMobileNumber: new FormControl('', Validators.required),
+      dob: new FormControl('', Validators.required),
+      dateFormat: new FormControl("dd MMMM yyyy", Validators.required),
+      locale: new FormControl("en", Validators.required),
+      fatherName: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      applicantType: new FormControl('', Validators.required),
+    })
     
     enrollused:any;
     enrollImgUrl:any;
@@ -134,6 +173,17 @@ enrollid:any;
     })
     
   }
+
+  UpdateCustomerEnrolment(){
+    this.createCustomerEnrolForms.value.dob =this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd MMMM yyyy');
+    this.crudService.update(`${appModels.FIELDEXECUTIVE}/updateEnroll/`, this.createCustomerEnrolForms.value,
+    this.editDataEnroll['id'],     
+  ).pipe(untilDestroyed(this)).subscribe( data => {
+    console.log(data)
+    this.enrollid = data;
+  })
+
+}
   
   createLoan(){
     this.router.navigate(['branch-manager/newloan-process']);
@@ -148,6 +198,8 @@ enrollid:any;
     }).subscribe(data => {
       console.log(data);
       this.EnrollVerfication_Data = data;
+      this.dataSource = new MatTableDataSource(this.EnrollVerfication_Data)
+
     })
   }
 
@@ -188,3 +240,7 @@ enrollid:any;
   }
   
 }
+function data(data: any) {
+  throw new Error('Function not implemented.');
+}
+

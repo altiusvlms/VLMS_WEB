@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 /** Custom Services */
 import { Shell } from "../../../services/shell.service";
+import { CashLimitComponent } from './cash-limit/cash-limit.component';
+import { LoanApprovalComponent } from './loan-approval/loan-approval.component';
+import { LoanDisbursalComponent } from './loan-disbursal/loan-disbursal.component';
 
 /** Custom Component */
 import { LoanProcessComponent } from './loan-process/loan-process.component';
@@ -17,7 +20,11 @@ const routes: Routes = [
   { path: 'loan-process', component: LoanProcessComponent },
   { path: 'loan-verification', component: LoanVerificationComponent },
   { path: 'loan-process/:id', component: LoanProcessComponent },
-  { path: 'newloan-process' , component: NewloanProcessComponent}
+  { path: 'newloan-process' , component: NewloanProcessComponent},
+  { path: 'cashlimit-process' , component: CashLimitComponent},
+  { path: 'loanapproval-process' , component: LoanApprovalComponent},
+  { path: 'loandisbursal-process' , component: LoanDisbursalComponent},
+
   ])
 ];
 
