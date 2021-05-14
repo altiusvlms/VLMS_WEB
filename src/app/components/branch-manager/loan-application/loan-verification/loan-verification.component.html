@@ -16,13 +16,15 @@
        </button> 
     </div>
     </div>
-    <div class="row" *ngIf = "showAdvanceSearch">
+    <div class="card">
+      <div class="card-body" *ngIf = "showAdvanceSearch">
+    
   <form [formGroup]="advanceSearchForms">
-      <div class="row">
+     
       <button type="button" class="close" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
-      </div>
+      
       <div class="row" style="margin-top: 10px;">
         <div class="col-sm-3">
           <div>
@@ -106,11 +108,12 @@
       <button type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
     </div>
   </form>
-    </div>
+   </div></div>
 
-Loan Application Table
-
-<table class="table">
+<!-- Loan Application Table -->
+<div class="card">
+  <div class="card-body">
+<table class="table table-striped">
     <thead>
       <tr>
         <th>Customer ID </th>
@@ -161,13 +164,13 @@ Loan Application Table
   <div *ngIf="customerLoanDetails.length ==0">
     No Data Found.
   </div>
-  
-
+</div></div>
   </div> 
 
  <!-- Loan  Disbursal -->
  <div class="container">
-  
+  <div class="card">
+    <div class="card-body"> 
   <!-- Loan Approval -->
 
   <!-- tab 1 -->
@@ -224,7 +227,7 @@ Loan Application Table
       </tbody>
     </table></mat-tab>
   </mat-tab-group>
-
+</div></div>
 
 </div>
 

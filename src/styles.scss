@@ -3,18 +3,18 @@
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #e4e4e4; }
 
 
 /* sidebar **/ 
 .sidenav {
     height: 100%;
-    width: 175px;
+    width: 200px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #3d3bac;;
+    background-color: #355FD0;;
     // overflow-x: hidden;
     padding-top: 90px;
   }
@@ -22,13 +22,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 20px;
-    color: rgb(0 0 0 / 87%);
+    font-size: 15px;
+    color: #fff;
     display: block;
   }
   
   .sidenav a:hover {
-    color: #f1f1f1;
+    color: #ffe9aa;
+    background: #5e5cc2;
   }
   
   .main {
@@ -40,9 +41,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   /* Header **/ 
 
   .header {
-  overflow: hidden;
-  background-color: #f1f1f1;
-  padding: 20px 10px;
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 5px 10px;
+    -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  width: calc(100% - 200px);
+  position: fixed;
+  z-index: 999;
 }
 
 .header a {
@@ -81,4 +88,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .image_size{
   width: 100px;
   height: 100px;
+}
+
+.wrapper {
+  margin-left: 200px;
+}
+
+.wrapper_inner{
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.mat-form-field{
+  width: 100%;
+}
+.mat-tab-body{
+  padding-top: 20px;
 }

@@ -21,9 +21,9 @@ const routes: Routes = [
   { path: 'loan-verification', component: LoanVerificationComponent },
   { path: 'loan-process/:id', component: LoanProcessComponent },
   { path: 'newloan-process' , component: NewloanProcessComponent},
-  { path: 'cashlimit-process' , component: CashLimitComponent},
-  { path: 'loanapproval-process' , component: LoanApprovalComponent},
   { path: 'loandisbursal-process' , component: LoanDisbursalComponent},
+  { path: 'loanapproval-process' , component: LoanApprovalComponent},
+  { path: 'cashlimit-process' , component: CashLimitComponent}
 
   ])
 ];
