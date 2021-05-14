@@ -7,6 +7,9 @@ import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
+import { FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -39,13 +42,38 @@ export class ManageEmployeeComponent implements OnInit {
   age:number;
   // manageEmployeeForm:any  
   // forvalue : CLASS_NAME;
-
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute) { }
+  // userForm: FormGroup;
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder) { 
+    // this.userForm = this.fb.group({
+    //   name: [],
+    //   phones: this.fb.array([
+    //     this.fb.control(null)
+    //   ])
+    // })
+  }
 
   submitted: Boolean = false;
   // this.forvalue = form1.value;
   // this.formvalue.school_qualification = form2.value;
   // this.formvalue.college_qualification = form3.value;
+
+  // addPhone(): void {
+  //   (this.userForm.get('phones') as FormArray).push(
+  //     this.fb.control(null)
+  //   );
+  // }
+
+  // removePhone(index : any) {
+  //   (this.userForm.get('phones') as FormArray).removeAt(index);
+  // }
+
+  // getPhonesFormControls(): AbstractControl[] {
+  //   return (<FormArray> this.userForm.get('phones')).controls
+  // }
+
+  // send(values : any) {
+  //   console.log(values);
+  // }
   
 
   manageEmployeeForm = new FormGroup({
@@ -144,7 +172,7 @@ export class ManageEmployeeComponent implements OnInit {
     ImageEmployeeForm = new FormGroup({
       Pan_photo:new FormControl('', Validators.required),
       Aadhar_photo: new FormControl('', Validators.required),
-    })
+    }) 
 
 
   
@@ -171,6 +199,8 @@ manageEmployee(){
   console.log("datass")
   console.log(this.manageEmployeeForm.value)
   
+  this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
+  this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
   this.crudService.post(`${appModels.CREATEEMPLOYEE}`, this.manageEmployeeForm.value ,
     { params:{
       tenantIdentifier: "default"   
@@ -182,6 +212,7 @@ manageEmployee(){
     this.toast.success("Employee Created successfully")
     this.EmployeeId = data.resourceId;
     console.log(this.EmployeeId);
+    
     // this.toast.success("posted successfully");
 
     const formData = new FormData();      
