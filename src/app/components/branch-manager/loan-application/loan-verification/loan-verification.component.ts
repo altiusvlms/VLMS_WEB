@@ -21,22 +21,21 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 export class LoanVerificationComponent implements OnInit {
 
   showAdvanceSearch: any;
-  // id:any;
 
    /**  Advanced Search Form */
    advanceSearchForms = new FormGroup({
-    loanNo: new FormControl('', Validators.required),
-    customerName: new FormControl('', Validators.required),
-    vehiclemodel: new FormControl('', Validators.required),
-    vehicleNo: new FormControl('', Validators.required),
-    customerMobileNo: new FormControl('', Validators.required),
-    loanAmount: new FormControl('', Validators.required),
-    chassisNo: new FormControl('', Validators.required),
-    idProof: new FormControl('', Validators.required),
-    // area: new FormControl('', Validators.required),
-    // dealer: new FormControl('', Validators.required),
-    // loanstatus: new FormControl('', Validators.required),
-    // dues: new FormControl('', Validators.required)
+    accountNo: new FormControl(''),
+    customerName: new FormControl(''),
+    vehiclemodel: new FormControl(''),
+    vehicleNo: new FormControl(''),
+    customerMobileNo: new FormControl(''),
+    loanAmount: new FormControl(''),
+    chassisNo: new FormControl(''),
+    idProof: new FormControl(''),
+    // area: new FormControl(''),
+    // dealer: new FormControl(''),
+    // loanstatus: new FormControl(''),
+    // dues: new FormControl('')
   })
  
     showSearchbtn : Boolean = true;
@@ -47,12 +46,19 @@ export class LoanVerificationComponent implements OnInit {
     vehicle_modal : any;
     chassis_no : any;
     customerImage: any = [];
+    filterResponse:any = [];
+    searchAccountNo: String = '';
+    searchName: String = '';
+    searchModel: String = '';
+    searchVehicleNo: String = '';
+    searchMobileNo: String = '';
+    searchChassisNo: String = '';
+    searchLoanAmount: String = '';
 
   constructor(private router: Router,private crudService: CrudService,private sanitizer:DomSanitizer,public datepipe: DatePipe) { }
   loanverifiData:any;
   loanDisburalData:any;
   loanApprovalData:any;
-  // id:any;
 
 
   ngOnInit(): void {
@@ -67,6 +73,7 @@ export class LoanVerificationComponent implements OnInit {
   loanProcess(id : any) {
     this.router.navigate(['branch-manager/loan-process/'  + id]);
   }
+
   getLoanVerification(){
     this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
       params: {
@@ -75,109 +82,80 @@ export class LoanVerificationComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
       this.customerLoanDetails = data;
-      // this.customerDetailsfilter = data;
     })
   }
 
   advancedSearch() {
   this.showAdvanceSearch = true;
   }
-  // search(filters: any): void {
-  //   console.log(filters)
-  //   this.showSearchbtn = false;
-  //   this.customer_name = filters.customerName;
-  //   this.vehicle_no = filters.vehicleNo;
-  //   this.vehicle_modal = filters.vehiclemodel;
-  //   this.chassis_no = filters.chassisNo;
-  //   console.log(  this.chassis_no,this.vehicle_modal,this.vehicle_no,this.customer_name)
-  //  if(this.customer_name !== null || undefined && this.vehicle_modal !== null || undefined && this.vehicle_no !== null || undefined && this.chassis_no !== null || undefined){
 
-  //   for(let i=0; i< this.customerDetailsfilter.length; i++) {
-  //     if(
-  //         (this.customer_name == "" || this.customer_name == this.customerDetailsfilter[i].customerName) &&
-  //         (this.vehicle_no == "" || this.vehicle_no == this.customerDetailsfilter[i].vehicleDetails.vehicleNumber) &&
-  //         (this.vehicle_modal == "" || this.vehicle_modal == this.customerDetailsfilter[i].vehicleDetails.model) &&
-  //         (this.chassis_no == "" || this.chassis_no == this.customerDetailsfilter[i].vehicleDetails.chassisNumber) 
-  //       ) 
-  //       {
-  //       this.customerLoanDetails.push(this.customerDetailsfilter[i]);
-  //       console.log(this.customerLoanDetails)
-  //     }
-  //     else {
-  //       this.customerLoanDetails = [];
-  //     }
-  //   } 
-  // }
-  // else{
-  //   this.getLoanVerification();
-  // }
-  // }
-  searchLoanNo: any;
-  searchName: any;
-  searchModel: any;
-  searchVehicleNo: any;
-  searchMobileNo: any;
-  searchChassisNo: any;
-  searchLoanAmount: any;
 
-  applyFilter(value : any , val: any){
-    console.log(value);
-    console.log(val);
-     if(val == 'loannumber'){
+  applyFilter(value : any , string_val: any){
+     if(string_val == 'accountnumber'){
       const filterValue = (event.target as HTMLInputElement).value;
-      this.searchLoanNo = filterValue.trim().toLowerCase();
+      this.searchAccountNo = filterValue.trim().toLowerCase();
     }
-   else if(val == 'name'){
+   else if(string_val == 'name'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchName = filterValue.trim().toLowerCase();
     }
-   else if(val == 'model'){
+   else if(string_val == 'model'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchModel = filterValue.trim().toLowerCase();
     }
-    else if(val == 'vehicleno'){
+    else if(string_val == 'vehicleno'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchVehicleNo = filterValue.trim().toLowerCase();
     }
-    else if(val == 'mobileno'){
+    else if(string_val == 'mobileno'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchMobileNo = filterValue.trim().toLowerCase();
     }
-    else if(val == 'chassisno'){
+    else if(string_val == 'chassisno'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchChassisNo = filterValue.trim().toLowerCase();
     }
-    else if(val == 'loanamount'){
+    else if(string_val == 'loanamount'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchLoanAmount = filterValue.trim().toLowerCase();
     }
    
   }
-  // filteredUserList: any = [];
-  showTable:Boolean = false;
-  customerLoanDetailss: any;
-  res:any = [];
   searchdata(){
-    console.log( this.searchLoanNo,this.searchName,this.searchModel,this.searchVehicleNo,this.searchMobileNo,this.searchChassisNo,this.searchLoanAmount);
+    this.showSearchbtn = false;
     for (let selectedUser of this.customerLoanDetails) {
-      console.log(selectedUser)
-      if (selectedUser.loanDetailsData.loanAmount.toLowerCase().search(this.searchLoanNo.toLowerCase()) != -1 || selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1){
-        // selectedUser.lastName.toLowerCase().search(this.searchVal.toLowerCase()) != -1) {
-          this.res.push(selectedUser)
+      if (
+        selectedUser.bankDetails.accountNumber.toLowerCase().search(this.searchAccountNo.toLowerCase()) != -1  &&
+        selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1  &&
+        selectedUser.vehicleDetails.model.toLowerCase().search(this.searchModel.toLowerCase()) != -1  &&
+        selectedUser.vehicleDetails.vehicleNumber.toLowerCase().search(this.searchVehicleNo.toLowerCase()) != -1 &&
+        selectedUser.customerDetails.mobileNo.toLowerCase().search(this.searchMobileNo.toLowerCase()) != -1 &&
+        selectedUser.vehicleDetails.chassisNumber.toLowerCase().search(this.searchChassisNo.toLowerCase()) != -1 
+        // && selectedUser.loanDetailsData.loanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 
+      ){
+          this.filterResponse.push(selectedUser)
       }
     }
-    console.log(this.res)
-    if(this.res.length >0){
-      this.customerLoanDetails = this.res;
-      this.res = [];
+  
+    if(this.filterResponse.length >0){
+      this.customerLoanDetails = this.filterResponse;
+      this.filterResponse = [];
     }
-    else if(this.res.length == 0){
+    else if(this.filterResponse.length == 0){
       this.customerLoanDetails = [];
     }
+    
   }
 
   clearSearch(){
     this.advanceSearchForms.reset();
+    this.searchAccountNo = '';
+    this.searchName = '';
+    this.searchModel = '';
+    this.searchVehicleNo = '';
+    this.searchMobileNo = '';
+    this.searchChassisNo = '';
+    this.searchLoanAmount = '';
     this.showSearchbtn = true;
     this.getLoanVerification();
   }
