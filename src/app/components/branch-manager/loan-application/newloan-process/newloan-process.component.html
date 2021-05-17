@@ -248,14 +248,13 @@
                                 </div>
                                 </div>
                             </mat-expansion-panel>
-                            <mat-expansion-panel (opened)="panelOpenState = true"
-                                                 (closed)="panelOpenState = false">
+                            <mat-expansion-panel >
                               <mat-expansion-panel-header>
                                 <mat-panel-title>
                                   Permanent Address
                                 </mat-panel-title>
                                 <mat-panel-description>
-                                  Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                                  Currently I am 
                                 </mat-panel-description>
                               </mat-expansion-panel-header>
                               <div class="col-sm-2"  *ngIf="showPermanent" formGroupName="customer_permanentAddress">Permanent Address:
@@ -317,14 +316,13 @@
                                 </div>
                                 </div>
                             </mat-expansion-panel>
-                            <mat-expansion-panel (opened)="panelOpenState = true"
-                                                 (closed)="panelOpenState = false">
+                            <mat-expansion-panel>
                               <mat-expansion-panel-header>
                                 <mat-panel-title>
                                   Office Address
                                 </mat-panel-title>
                                 <mat-panel-description>
-                                  Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                                  Currently I am 
                                 </mat-panel-description>
                               </mat-expansion-panel-header>
                               <div class="col-sm-2" *ngIf="showOffice" formGroupName="customer_officeAddress">Office Address:
