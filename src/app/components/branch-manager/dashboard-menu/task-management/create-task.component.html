@@ -8,8 +8,9 @@
         <span  class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span>
         <span *ngIf="!editIcon" class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
     </div>
-
-        <div>
+    <div class="row">
+        
+        <div class="col-4 col-sm-4">
             <label>Task Type</label>
             <input type="text"  formControlName="taskType"  class="form-control"  >
             <!-- <select formControlName="taskType" class="form-control">
@@ -19,37 +20,39 @@
               <option value="other">Others</option>
             </select> -->
         </div>
-        <div>
+        <div class="col-4 col-sm-4">
             <label>Customer Name/ID</label>
             <input type="text"  formControlName="customerRegNo"  class="form-control">
         </div>
-        <div>
+        <div class="col-4 col-sm-4">
           <label>Customer Mobile No</label>
           <input type="text"  formControlName="customerMobileNo"  class="form-control">
       </div>
-        <div>    
+        <div class="col-4 col-sm-4">    
             <label >Vehicle Number</label>
             <input type="text"  formControlName="vehicleNumber"  class="form-control">                            
         </div>
-        <div>
+        <div class="col-4 col-sm-4">
             <label>Due Date</label>
             <input type="date" formControlName="dueDate"  class="form-control" >
         </div>
-        <div>
+        <div class="col-4 col-sm-4">
             <label>Assign To</label>
             <select formControlName="assignTo"  class="form-control" >
                 <option *ngFor="let name of assignToName"  value="{{name.fieldExecutiveName}}">{{name.fieldExecutiveName}}</option>
             </select>
         </div>
-        <div>
+        <div class="col-4 col-sm-4">
             <label>Description</label>
             <textarea  rows="4" cols="50"  formControlName="description"  class="form-control">
             </textarea>
         </div>
-    <div>
+    
+        <div class="col-12 col-sm-12">
     <button type="button" class="btn btn-secondary"  (click)="close()">Close</button>
     <button type="button" class="btn btn-primary"  (click)="saveUpdateTask()" > {{editDataTask ? 'Update' : 'Save'}}
     </button>
     </div>
+</div>
   </form>
 </div>

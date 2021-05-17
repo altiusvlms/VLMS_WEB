@@ -3,8 +3,15 @@
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #e4e4e4; }
-
+body { margin: 0; font-family: 'Poppins', sans-serif!important; background: #fafafa; }
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif!important;
+}
+h2{
+  font-size: 24px!important;
+  font-weight: 400!important;
+  margin-bottom: 0px!important;
+}
 
 /* sidebar **/ 
 .sidenav {
@@ -17,6 +24,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
     background-color: #355FD0;;
     // overflow-x: hidden;
     padding-top: 90px;
+    overflow-y: scroll;
   }
   
   .sidenav a {
@@ -103,4 +111,36 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background:
 }
 .mat-tab-body{
   padding-top: 20px;
+}
+.header_title{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn_blue {
+  padding: 10px 20px;
+  background-image: linear-gradient(to bottom right, #0575f5, #5454D0);
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  border-radius: 15px;
+  border: 1px solid #5473e8;
+  // box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+  
+}
+
+.btn_blue:hover {
+  border: 1px solid #19cb85;
+  background-image: linear-gradient(to bottom right,  #2ee59d,#19cb85);
+  color: #fff;
+}
+.card {
+  border-radius: 20px!important;
+  box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5);
+  border:0px!important;
+  margin-bottom: 30px;
 }

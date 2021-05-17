@@ -3,18 +3,25 @@
 <div class="container">
 <!-- User/Permission -->
 
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" (click)="user()">User</a></li>
-  <li><a data-toggle="tab" (click)="permission()">Permission</a></li>
-</ul>
-
-<!-- /** Create Task Button */ -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<div class="header_title">
+  <h2>User Role Permission</h2>
+  <button type="button" class="btn_blue" data-toggle="modal" data-target="#exampleModal">
     Create User
   </button>
-<div class="card">
-      <div class="card-body">
-  <table *ngIf="showUserTable" class="table table-striped">
+    </div>
+
+<!-- /** Create Task Button */ -->
+
+<!-- 
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" (click)="user()">User</a></li>
+    <li><a data-toggle="tab" (click)="permission()">Permission</a></li>
+  </ul> -->
+  <div class="card">
+    <div class="card-body">
+  <mat-tab-group>
+    <mat-tab label="User"> 
+  <table class="table table-striped">
     <thead>
     <tr>
       <th>S.No</th>
@@ -38,36 +45,46 @@
     </tr>
   </tbody>
   </table>  
- </div></div>
+</mat-tab>
+    <mat-tab label="Permission"> 
+      
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>sr.no</th>
+          <th>Branch</th> 
+          <th>New customer</th>
+          <th>Loan Amount</th>
+          <th>Creadit Date</th>
+          <th>Target Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Thudialore</td>
+          <td>60</td>
+          <td>10000</td>
+          <td>01.Mar.2021</td>
+          <td>21.Mar.2021</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Koundampalayam</td>
+            <td>52</td>
+            <td>50000</td>
+            <td>01.Mar.2021</td>
+            <td>21.Mar.2021</td>
+        </tr>      
+      </tbody>      
+      </table>
+
+    </mat-tab>
+  </mat-tab-group>
+</div></div>
 
 
-  <table style="width:100%" *ngIf="showPermissionTable" >
-    <!-- <h2>My Target - Assigned by Head Office</h2> -->
-    <tr>
-      <th>sr.no</th>
-      <th>Branch</th> 
-      <th>New customer</th>
-      <th>Loan Amount</th>
-      <th>Creadit Date</th>
-      <th>Target Date</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Thudialore</td>
-      <td>60</td>
-      <td>10000</td>
-      <td>01.Mar.2021</td>
-      <td>21.Mar.2021</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>Koundampalayam</td>
-        <td>52</td>
-        <td>50000</td>
-        <td>01.Mar.2021</td>
-        <td>21.Mar.2021</td>
-    </tr>            
-  </table>  
+    
 
   <!-- /** Create Task Model */ -->
 
