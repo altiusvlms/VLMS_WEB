@@ -5,12 +5,13 @@
     <a href="branch-manager/user-role-permission">Manager Roles & Permission</a>
     <a href="branch-manager/customer-management">Customer Management</a>
     <a href="branch-manager/loan-verification">Loan Approval/Collection Cash Management</a>
-    <button mat-button [matMenuTriggerFor]="belowMenu">Loan Approval/Collection Cash Management</button>
+    <button mat-button [matMenuTriggerFor]="belowMenu">Loan Approval/Collection<br> Cash Management</button>
      <mat-menu #belowMenu="matMenu" yPosition="below" XPosition="Right">
-    <button mat-menu-item (click)="test()">Item 1</button>
-     <button mat-menu-item (click)="test2()">Item 2</button>
+    <button mat-menu-item (click)="loan_disbusal()">loan Disbursal cash Limit</button>
+     <button mat-menu-item (click)="loan_approval()">Loan Approval Limit</button>
+     <button mat-menu-item (click)="cash_limit()">Cash Limit -Field Executive</button>
      </mat-menu>
-    <a href="branch-manager/task-management">Task Management</a>  
+    <a href="branch-manager/task-management">Task Management</a>
     <a href="branch-manager/assign-targets">Assign Targets</a>
     <a href="branch-manager/topup-loan">Topup Loan</a>
     <a href="branch-manager/dashboard">Report</a>

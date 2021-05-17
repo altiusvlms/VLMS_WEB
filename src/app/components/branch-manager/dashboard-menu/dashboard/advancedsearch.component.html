@@ -9,7 +9,7 @@
     <div class="row" style="margin-top: 10px;">
         <div class="col-sm-3">
           <div>
-             <input type="text" placeholder="Loan Number"  formControlName="loanNo" (keyup)="applyFilter($event, 'loannumber')"  class="form-control">
+             <input type="text" placeholder="Account Number"  formControlName="accountNo" (keyup)="applyFilter($event, 'accountNumber')"  class="form-control">
           </div>
         </div>
         <div class="col-sm-3">
@@ -85,8 +85,7 @@
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
-      <button  type="button"  class="btn btn-secondary" (click)="searchdata()">Search1</button>
-      <button *ngIf="showSearchbtn" type="button"  class="btn btn-secondary" (click)="search(advanceSearchForms.value)">Search</button>
+      <button *ngIf="showSearchbtn" type="button"  class="btn btn-secondary" (click)="searchdata()">Search</button>
       <button type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
     </div>
  </form>
@@ -96,32 +95,32 @@
 <table class="table" style="padding-bottom: 100%;margin-top: 20px;">
     <thead>
       <tr>
-        <th>Ac.No</th>
         <th>Name</th>
         <th>Contact No</th>
-        <th>Branch</th>
+        <!-- <th>Branch</th> -->
         <th>Vehicle No</th>
         <th>Vehicle Model</th>
         <th>Chassis No</th>
-        <th>Customer Image</th>
-        <th>Due Pending</th>
+        <th>Account No</th>
+        <!-- <th>Customer Image</th> -->
         <th>Loan Amount</th>
+        <th>Due Pending</th>
         <th>Due Date</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody *ngFor="let customerData of customerLoanDetails">
       <tr>
-        <td>{{customerData.bankDetails.accountNumber}}</td>
         <td>{{customerData.customerName}}</td>
-        <td></td>
-        <td></td>
+        <td>{{customerData.customerDetails.mobileNo}}</td>
+        <!-- <td></td> -->
         <td>{{customerData.vehicleDetails.vehicleNumber}}</td>
         <td>{{customerData.vehicleDetails.model}}</td>
         <td>{{customerData.vehicleDetails.chassisNumber}}</td>
+        <td>{{customerData.bankDetails.accountNumber}}</td>
+        <td>{{customerData.loanDetailsData.loanAmount}}</td>
+        <!-- <td></td> -->
         <td></td>
-        <td></td>
-        <td>{{customerData.bankDetails.loanEligibleAmount}}</td>
         <td></td>
         <td><span>Receipt</span>
           <span>ReLoan</span>
@@ -130,7 +129,7 @@
       </tr>
     </tbody>
 </table>
- <!-- <div *ngIf="customerLoanDetails.length == 0">
+ <div *ngIf="customerLoanDetails.length == 0">
    No Data Found.
- </div> -->
+ </div>
 </div>

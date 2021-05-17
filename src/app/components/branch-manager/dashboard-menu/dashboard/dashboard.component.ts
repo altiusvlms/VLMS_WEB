@@ -292,7 +292,7 @@ console.log(this.fromdate);
 export class AdvancedSearch {
   /**  Advanced Search Form */
   advanceSearchForms = new FormGroup({
-    loanNo: new FormControl('', Validators.required),
+    accountNo: new FormControl('', Validators.required),
     customerName: new FormControl('', Validators.required),
     vehiclemodel: new FormControl('', Validators.required),
     vehicleNo: new FormControl('', Validators.required),
@@ -313,6 +313,14 @@ export class AdvancedSearch {
   vehicle_no : any;
   vehicle_modal : any;
   chassis_no : any;
+  filterResponse:any = [];
+  searchAccountNo: String = '';
+  searchName: String = '';
+  searchModel: String = '';
+  searchVehicleNo: String = '';
+  searchMobileNo: String = '';
+  searchChassisNo: String = '';
+  searchLoanAmount: String = '';
 
   constructor(public dialogRef: MatDialogRef<AdvancedSearch>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private crudService: CrudService,private sharedService: SharedService) {
 
@@ -332,113 +340,84 @@ export class AdvancedSearch {
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
       this.customerLoanDetails = data;
-      // this.customerDetailsfilter =  this.customerLoanDetails;
+      console.log(this.customerLoanDetails)
     })
   }
-
-
-
-  // search(filters: any): void {
-  //   console.log(filters)
-  //   this.showSearchbtn = false;
-  //   this.customer_name = filters.customerName;
-  //   this.vehicle_no = filters.vehicleNo;
-  //   this.vehicle_modal = filters.vehiclemodel;
-  //   this.chassis_no = filters.chassisNo;
-  //   console.log(  this.chassis_no,this.vehicle_modal,this.vehicle_no,this.customer_name)
-  //  if(this.customer_name !== null || undefined && this.vehicle_modal !== null || undefined && this.vehicle_no !== null || undefined && this.chassis_no !== null || undefined){
-
-  //   for(let i=0; i< this.customerDetailsfilter.length; i++) {
-  //     if(
-  //         (this.customer_name == "" || this.customer_name == this.customerDetailsfilter[i].customerName) &&
-  //         (this.vehicle_no == "" || this.vehicle_no == this.customerDetailsfilter[i].vehicleDetails.vehicleNumber) &&
-  //         (this.vehicle_modal == "" || this.vehicle_modal == this.customerDetailsfilter[i].vehicleDetails.model) &&
-  //         (this.chassis_no == "" || this.chassis_no == this.customerDetailsfilter[i].vehicleDetails.chassisNumber) 
-  //       ) 
-  //       {
-  //       this.customerLoanDetails.push(this.customerDetailsfilter[i]);
-  //       console.log(this.customerLoanDetails)
-  //     }
-  //     else {
-  //       this.customerLoanDetails = [];
-  //     }
-  //   } 
-  // }
-  // else{
-  //   this.getLoanDetails();
-  // }
-  // }
 
 
   clearSearch(){
     this.advanceSearchForms.reset();
     this.showSearchbtn = true;
     this.getLoanDetails();
+    this.searchAccountNo = '';
+    this.searchName = '';
+    this.searchModel = '';
+    this.searchVehicleNo = '';
+    this.searchMobileNo = '';
+    this.searchChassisNo = '';
+    this.searchLoanAmount = '';
   }
 
   close() {
     this.dialogRef.close();
   }
-  searchLoanNo: any;
-  searchName: any;
-  searchModel: any;
-  searchVehicleNo: any;
-  searchMobileNo: any;
-  searchChassisNo: any;
-  searchLoanAmount: any;
 
-  applyFilter(value : any , val: any){
-    console.log(value);
-    console.log(val);
-     if(val == 'loannumber'){
+  applyFilter(value : any , string_val: any){
+     if(string_val == 'accountNumber'){
       const filterValue = (event.target as HTMLInputElement).value;
-      this.searchLoanNo = filterValue.trim().toLowerCase();
+      this.searchAccountNo = filterValue.trim().toLowerCase();
     }
-   else if(val == 'name'){
+   else if(string_val == 'name'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchName = filterValue.trim().toLowerCase();
     }
-   else if(val == 'model'){
+   else if(string_val == 'model'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchModel = filterValue.trim().toLowerCase();
     }
-    else if(val == 'vehicleno'){
+    else if(string_val == 'vehicleno'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchVehicleNo = filterValue.trim().toLowerCase();
     }
-    else if(val == 'mobileno'){
+    else if(string_val == 'mobileno'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchMobileNo = filterValue.trim().toLowerCase();
     }
-    else if(val == 'chassisno'){
+    else if(string_val == 'chassisno'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchChassisNo = filterValue.trim().toLowerCase();
     }
-    else if(val == 'loanamount'){
+    else if(string_val == 'loanamount'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchLoanAmount = filterValue.trim().toLowerCase();
     }
    
   }
-  filteredUserList: any = [];
-  showTable:Boolean = false;
-  customerLoanDetailss: any;
   searchdata(){
-    console.log( this.searchLoanNo,this.searchName,this.searchModel,this.searchVehicleNo,this.searchMobileNo,this.searchChassisNo,this.searchLoanAmount);
+    this.showSearchbtn = false;
     for (let selectedUser of this.customerLoanDetails) {
-      if (selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1 ){
-        // selectedUser.lastName.toLowerCase().search(this.searchVal.toLowerCase()) != -1) {
-          console.log(selectedUser)
-          this.showTable = true;
-          this.filteredUserList.push(selectedUser)
-          console.log( this.filteredUserList)
+      if (
+        selectedUser.bankDetails.accountNumber.toLowerCase().search(this.searchAccountNo.toLowerCase()) != -1  &&
+        selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1  &&
+        selectedUser.vehicleDetails.model.toLowerCase().search(this.searchModel.toLowerCase()) != -1  &&
+        selectedUser.vehicleDetails.vehicleNumber.toLowerCase().search(this.searchVehicleNo.toLowerCase()) != -1 &&
+        selectedUser.customerDetails.mobileNo.toLowerCase().search(this.searchMobileNo.toLowerCase()) != -1 &&
+        selectedUser.vehicleDetails.chassisNumber.toLowerCase().search(this.searchChassisNo.toLowerCase()) != -1 
+        // && selectedUser.loanDetailsData.loanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 
+      ){
+          this.filterResponse.push(selectedUser)
       }
-      else{
-        this.filteredUserList = [];
-      }
-    console.log( this.filteredUserList)
+    }
+  
+    if(this.filterResponse.length >0){
+      this.customerLoanDetails = this.filterResponse;
+      this.filterResponse = [];
+    }
+    else if(this.filterResponse.length == 0){
+      this.customerLoanDetails = [];
+    }
+    
+  }
 
-  }
-  }
 
 }

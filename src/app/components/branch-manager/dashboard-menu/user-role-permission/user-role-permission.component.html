@@ -12,8 +12,10 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Create User
   </button>
-
-  <table style="width:100%" *ngIf="showUserTable" >
+<div class="card">
+      <div class="card-body">
+  <table *ngIf="showUserTable" class="table table-striped">
+    <thead>
     <tr>
       <th>S.No</th>
       <th>Name</th> 
@@ -23,6 +25,8 @@
       <th>Status</th>
       <th>Actions</th>
     </tr>
+  </thead>
+  <tbody>
     <tr  *ngFor="let user of userListData;let i = index;">
       <td>{{i+1}}</td>
       <td>{{user.name}}</td>
@@ -32,9 +36,9 @@
       <td></td>
       <td data-toggle="modal" data-target="#exampleModal">Edit</td>
     </tr>
-      
+  </tbody>
   </table>  
- 
+ </div></div>
 
 
   <table style="width:100%" *ngIf="showPermissionTable" >
@@ -121,10 +125,12 @@
 
 <!-- Manage Employee -->
 
-
-<div>
+<div class="container">
+<div class="card">
+  <div class="card-body">
   <button class="btn default" >Total(10)</button>
-  <table style="width:100%"  >
+  <table class="table table-striped">
+    <thead>
     <tr>
       <th>S.No</th>
       <th>Name</th> 
@@ -134,6 +140,8 @@
       <th>Status</th>
       <th>Actions</th>
     </tr>
+  </thead>
+  <tbody>
     <tr >
       <td>01</td>
       <td>Ada Lovelce</td>
@@ -151,6 +159,6 @@
       <td>TN 37  DA 4562</td>
       <td>Approve</td>
       <td>Edit</td>
-      
+    </tbody>
   </table>  
-</div>
+</div></div></div>
