@@ -7,6 +7,8 @@ import { CustomerEnrollmentRoutingModule } from './customer-enrollment-routing.m
 
 /** Custom Material and Form Module */
 import { SharedModule } from '../../shared/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 /** Custom Components */
 import { CustomerEnrollListComponent } from './customer-enroll-list/customer-enroll-list.component';
@@ -18,7 +20,9 @@ import { CustomerEnrollListComponent } from './customer-enroll-list/customer-enr
   imports: [
     CommonModule,
     CustomerEnrollmentRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CustomerEnrollmentModule { }

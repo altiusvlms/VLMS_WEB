@@ -16,11 +16,11 @@ export class SidebarComponent implements OnInit {
   loan_disbusal(){
     this.router.navigate(['branch-manager/loandisbursal-process']);
 
-  }
+  };
   loan_approval(){
     this.router.navigate(['branch-manager/loanapproval-process']);
 
-  }
+  };
   cash_limit(){
     this.router.navigate(['branch-manager/cashlimit-process']);
 
@@ -63,7 +63,7 @@ export class SidebarComponent implements OnInit {
           this.router.navigate(['branch-manager/loan-verification']);
         } else if(check==6){
           this.activeClass = 'activeClass_cash'; 
-        } else if(check=7){
+        } else if(check==7){
           this.activeClass = 'activeClass_task'; 
           this.router.navigate(['branch-manager/task-management']);
         } else if(check==8){

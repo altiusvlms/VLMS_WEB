@@ -63,8 +63,6 @@ export class LoanVerificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLoanVerification();
-    this.Loan_Disbural_Limit();
-    this.Loan_Approval_Limit();
   }
 
   ngOnDestroy() { }
@@ -167,25 +165,5 @@ export class LoanVerificationComponent implements OnInit {
     this.showAdvanceSearch = false;
   }
 
-  Loan_Disbural_Limit(){
-    this.crudService.get(`${appModels.Employee}/getLoanDisbursal`, {
-      params: {
-        tenantIdentifier: 'default'
-      }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      console.log(data);
-      this.loanDisburalData = data;
-    })
-  }
 
-  Loan_Approval_Limit(){
-    this.crudService.get(`${appModels.Employee}/getLoanApproval`, {
-      params: {
-        tenantIdentifier: 'default'
-      }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      console.log(data);
-      this.loanApprovalData = data;
-    })
-  }
 }
