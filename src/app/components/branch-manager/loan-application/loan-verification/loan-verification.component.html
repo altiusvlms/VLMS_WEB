@@ -16,17 +16,19 @@
        </button> 
     </div>
     </div>
-    <div class="row" *ngIf = "showAdvanceSearch">
+    <div class="card">
+      <div class="card-body" *ngIf = "showAdvanceSearch">
+    
   <form [formGroup]="advanceSearchForms">
-      <div class="row">
+     
       <button type="button" class="close" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
-      </div>
+      
       <div class="row" style="margin-top: 10px;">
         <div class="col-sm-3">
           <div>
-             <input type="text" placeholder="Loan Number"  formControlName="loanNo"  (keyup)="applyFilter($event, 'loannumber')" class="form-control">
+             <input type="text" placeholder="Account Number"  formControlName="accountNo"  (keyup)="applyFilter($event, 'accountnumber')" class="form-control">
           </div>
         </div>
         <div class="col-sm-3">
@@ -53,12 +55,12 @@
         </div>
         <div class="col-sm-3">
             <div>
-                <input type="text" placeholder="Chassis No" formControlName="chassisNo"   (keyup)="applyFilter($event, 'chassisno')" class="form-control">
+                <input type="text" placeholder="Chassis No" formControlName="chassisNo" (keyup)="applyFilter($event, 'chassisno')" class="form-control">
             </div>
         </div>
         <div class="col-sm-3">
           <div>
-              <input type="text" placeholder="loan Amount" formControlName="loanAmount" (keyup)="applyFilter($event, 'loanamount')" class="form-control">
+              <input type="text" placeholder="loan Amount" formControlName="loanAmount" (keyup)="applyFilter($event,'loanamount')" class="form-control">
           </div>
         </div>
         
@@ -102,22 +104,27 @@
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
-      <button  type="button"  class="btn btn-secondary" (click)="searchdata()">Search1</button>
-      <button *ngIf="showSearchbtn" type="button"  class="btn btn-secondary" (click)="search(advanceSearchForms.value)">Search</button>
+      <button *ngIf="showSearchbtn" type="button"  class="btn btn-secondary" (click)="searchdata()">Search</button>
       <button type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
     </div>
   </form>
-    </div>
+   </div></div>
 
-Loan Application Table
-
-<table class="table">
+<!-- Loan Application Table -->
+<div class="card">
+  <div class="card-body">
+<table class="table table-striped">
     <thead>
       <tr>
         <th>Customer ID </th>
         <!-- <th>Applicant Photo</th>  -->
         <th>Applicant Name</th>
         <th>Applicant Mobile No.</th>
+        <th>Vehicle No</th>
+        <th>Vehicle Model</th>
+        <th>Chassis No</th>
+        <!-- <th>Loan No</th> -->
+        <th>Account No</th>
         <th>Loan Amount</th>
         <th>Loan Term</th>
         <th>Interest %</th>
@@ -134,7 +141,12 @@ Loan Application Table
         <td>{{loan.id}}</td>
         <!-- <td></td> -->
         <td>{{loan.customerName}}</td>
-        <td>{{loan.customerGuarantor.mobileNumber}}</td>
+        <td>{{loan.customerDetails.mobileNo}}</td>
+        <td>{{loan.vehicleDetails.vehicleNumber}}</td>
+        <td>{{loan.vehicleDetails.model}}</td>
+        <td>{{loan.vehicleDetails.chassisNumber}}</td>
+        <!-- <td>{{loan.vehicleDetails.chassisNumber}}</td> -->
+        <td>{{loan.bankDetails.accountNumber}}</td>
         <td>{{loan.loanDetailsData.loanAmount}}</td>
         <td>{{loan.loanDetailsData.loanTerm}}</td>
         <td>{{loan.loanDetailsData.loanInterest}}</td>
@@ -152,8 +164,7 @@ Loan Application Table
   <div *ngIf="customerLoanDetails.length ==0">
     No Data Found.
   </div>
-  
-
+</div></div>
   </div> 
 
 

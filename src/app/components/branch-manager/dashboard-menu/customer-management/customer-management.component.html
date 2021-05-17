@@ -5,10 +5,13 @@
 
   <!-- <img [src]="testImage" style="width: 100%;height: 500px;object-fit: contain;
   object-position: center;"> -->
-  
-    <h1>Customer Management</h1>
+  <div class="header_title">
+    <h2>Customer Management</h2>
+    </div>
+    <div class="card">
+      <div class="card-body">
 <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         <div>
             <select class="form-control">
               <option value="">Select Application State </option>
@@ -17,7 +20,7 @@
             </select>
         </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         <div>
             <select class="form-control">
               <option value="">Select Status</option>
@@ -36,12 +39,18 @@
             </select>
         </div>
     </div>
+    <div class="col-sm-3">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+      </mat-form-field>
+  </div>
     <!-- <div class="col-sm-2">
         <input type="search" class="form-control" placeholder="Search" aria-label="Search"
           aria-describedby="search-addon" />
       </div> -->
 </div>
-
+</div></div>
 
 <!-- /** Customer Based Table */ -->
 
@@ -77,14 +86,11 @@
 </table> -->
 
 
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
-</mat-form-field>
 
-<div class="allocation-table responsive_table">
-  <div class="mat-elevation-z8">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+<div class="card">
+  <div class="card-body">
+<table mat-table [dataSource]="dataSource" >
 
   <ng-container matColumnDef="Customer ID">
     <th mat-header-cell *matHeaderCellDef> Customer ID </th>

@@ -77,7 +77,8 @@ export class CreateTask {
 
   editDataTask : any;
   editIcon : Boolean = false;
-  
+  assignToName: any;
+
   constructor(public dialogRef: MatDialogRef<CreateTask>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private formBuilder: FormBuilder,
     private crudService: CrudService,
     private sharedService: SharedService,public datepipe: DatePipe) {
@@ -100,21 +101,31 @@ export class CreateTask {
     createTaskForms = new FormGroup({
       taskType: new FormControl(''),
       customerRegNo: new FormControl(''),
-      customermobileNo: new FormControl(''),
+      customerMobileNo: new FormControl(''),
       vehicleNumber: new FormControl(''),
       dueDate: new FormControl(''),
-      dateFormat: new FormControl('dd MMMM yyyy', Validators.required),
-      locale: new FormControl('en', Validators.required),
+      dateFormat: new FormControl('dd MMMM yyyy'),
+      locale: new FormControl('en'),
       assignTo: new FormControl(''),
       description: new FormControl(''),
     })
 
-
  
 
   ngOnInit() {
+    this.assignToDetails();
   }
   ngOnDestroy() {}
+
+  assignToDetails(){
+    this.crudService.get(`${appModels.FIELDEXECUTIVE}/feCashInHand`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(response => {
+     this.assignToName = response;
+    })
+  }
 
   saveUpdateTask(){
     if (this.editDataTask) {
