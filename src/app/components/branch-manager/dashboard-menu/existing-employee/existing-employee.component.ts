@@ -26,6 +26,9 @@ export class ExistingEmployeeComponent implements OnInit {
     this.router.navigate(['branch-manager/manage-employee/'])
   }
 
+  getSingleEmployeeList(id : any) {
+    this.router.navigate(['branch-manager/manage-employee/'  + id])
+  }
   getEmployeeList(){
     this.crudService.get(`${appModels.GETEMPLOYEE}`, {
       params: {
@@ -36,5 +39,8 @@ export class ExistingEmployeeComponent implements OnInit {
       this.employeeListData = data;
     })
   }
+
+  
+  
 
 }

@@ -91,6 +91,17 @@
                         </div>
                         </td>
                     </div>
+
+                    <!-- <mat-form-field  appearance="outline" class="example-full-width"> -->
+                    <div *ngFor="let altNumber of getPhonesFormControls(); let i = index">
+                      <!-- <label>Alternative Number {{i + 1}} </label>     -->
+                      <mat-label>Alternative Number {{i + 1}}</mat-label>
+                      <input [formControl]="altNumber" type="text" minlength=10 maxlength=10>
+                      <button (click)="addPhone()">+</button>
+                    <!-- <button (click)="removePhone(i)">Remove Phone</button>     -->
+                    </div>
+                    <!-- </mat-form-field> -->
+                    <br>  
                 <!-- <div>    
                       <td> 
                           <mat-form-field appearance="outline"  class="example-full-width" >
@@ -692,8 +703,9 @@
 </form>
   <br>   -->
 
-
+  <button type="submit" (click)="updateEmployeeDetails()">update</button>
 <button type="submit" (click)="manageEmployee()">Submit</button>
+
     </form>
     <!-- [disabled]="!manageEmployeeForm.valid" -->
 </div>

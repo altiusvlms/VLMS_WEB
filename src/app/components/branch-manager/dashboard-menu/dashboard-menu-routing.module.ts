@@ -30,6 +30,7 @@ const routes: Routes = [
     { path: 'analytics', component: AnalyticsComponent },
     { path: 'loan-management', component: LoanManagementComponent },
     { path: 'manage-employee', component: ManageEmployeeComponent},
+    { path: 'manage-employee/:id', component: ManageEmployeeComponent},
     { path: 'existing-employee', component: ExistingEmployeeComponent},    
     { path: 'topup-loan', component: TopupLoanComponent},
     { path: 'create-recipt', component:CreateReceiptComponent},

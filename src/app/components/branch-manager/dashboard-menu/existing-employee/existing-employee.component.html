@@ -21,7 +21,7 @@
           <td>{{employee.mobileNumber}}</td>
           <td>{{employee.vehicleNumber}}</td>
           <td></td>
-          <td data-toggle="modal" data-target="#exampleModal">Edit</td>
+          <td (click)="getSingleEmployeeList(employee.id)">Edit</td>
         </tr>
           
       </table>  

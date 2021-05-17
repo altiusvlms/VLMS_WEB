@@ -1,9 +1,9 @@
 <div class="container">
-  <h3>RECEIPT</h3>
+  <h2>RECEIPT</h2>
 
   <!-- Emi -->
 
-  <div class="spacer">
+  <!-- <div class="spacer">
     <div class="row">
       <div class="col-lg-8  col-lg-offset-1">
         <div class="well">
@@ -98,7 +98,7 @@
               Loan EMI
             </h5>
             <span class="result">
-              <!-- {{result.emi || "--"}} -->
+            
               {{MonthlyCorrectDue}}
             </span>
           </div>
@@ -110,7 +110,7 @@
               Total Interest Payable
             </h5>
             <span class="result">
-              <!-- {{result.interest || "--"}} -->
+            
               {{TotalInterest}}
             </span>
           </div>
@@ -121,10 +121,10 @@
               Principal + Interest
             </h5>
             <h6>
-              <!-- (Principal + Interest) -->
+            
             </h6>
             <span class="result">
-              <!-- {{result.total || "--"}} -->
+            
               {{TotalPayable}}
             </span>
           </div>
@@ -134,13 +134,11 @@
             <h5>
               Due Difference
             </h5>
-            <!-- <h6>
-              (Principal + Interest)
-            </h6> -->
+            
             <span class="result">
-              <!-- {{result.total || "--"}} -->
+            
               {{delayDueAmount}}
-              <!-- {{totalAmt}} -->
+            
             </span>
           </div>
           <hr />
@@ -149,12 +147,9 @@
             <h5>
               Total Payment
             </h5>
-            <!-- <h6>
-              (Principal + Interest)
-            </h6> -->
+            
             <span class="result">
-              <!-- {{result.total || "--"}} -->
-              <!-- {{delayDueAmount}} -->
+              
               {{totalAmt}}
             </span>
           </div>
@@ -164,7 +159,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- As Mock -->
   <div class="row">
@@ -198,78 +193,109 @@
 
 
   <p>CREATE RECEIPT:</p>
-  <div class="form-group">
-    <div class="col-md-12">
-      <span class="left-title">
-        TOtal Payable:
-      </span>
-      <input type="text" id="fname" placeholder="9,000" name="fname">
+  <div>   
+  
+      <mat-form-field  appearance="outline" class="example-full-width">
+        <mat-label>Create Receipt</mat-label>
+      <mat-select  >
+      <mat-option value="Parentloan">Parent Loan</mat-option>
+            <mat-option value="childloan">Child loan</mat-option>
+            <mat-option value="Topuploan">Topup loan</mat-option>
+            </mat-select>
+      </mat-form-field>
+</div>
+
+
+  <div>
+    
+      <mat-form-field  appearance="outline"  class="example-full-width">
+        <mat-label>Total Payable</mat-label>
+      <input matInput type="number" id="fname" placeholder="9,000" name="fname">
+      </mat-form-field>
+</div>
+
+<div>
+    
+  <mat-form-field  appearance="outline"  class="example-full-width">
+    <mat-label>Enter amount</mat-label>
+  <input matInput type="number" id="fname"  name="fname">
+  </mat-form-field>
+</div>
+
+<div>
+    
+  <mat-form-field  appearance="outline"  class="example-full-width">
+    <mat-label>Handloan</mat-label>
+  <input matInput type="number" id="fname"  name="fname">
+  </mat-form-field>
+</div>
+
+<div>   
+  
+  <mat-form-field  appearance="outline" class="example-full-width">
+    <mat-label>Insurance</mat-label>
+  <mat-select  >
+  <mat-option value="Insurance">Insurance</mat-option>
+        <!-- <mat-option value="childloan">Child loan</mat-option>
+        <mat-option value="Topuploan">Topup loan</mat-option> -->
+        </mat-select>
+  </mat-form-field>
+  <mat-form-field  appearance="outline"  class="example-full-width">
+    
+  <input matInput type="number" id="fname"  placeholder="1500" name="fname">
+  </mat-form-field>
+  
+</div>
+
+  <div>
+<mat-form-field  appearance="outline"  class="example-full-width">
+  <mat-label>Delay payment interest</mat-label>
+<input matInput type="number" id="fname"  name="fname">
+</mat-form-field>
+<mat-form-field  appearance="outline"  class="example-full-width">
+<input matInput type="number" id="fname" placeholder="0" name="fname">
+</mat-form-field>
+</div>
+
+<div>
+  <mat-form-field  appearance="outline"  class="example-full-width">
+    <mat-label>Due amount</mat-label>
+  <input matInput type="number" id="fname"  name="fname">
+  </mat-form-field>
+  <mat-form-field  appearance="outline"  class="example-full-width">
+  <input matInput type="number" id="fname" placeholder="0" name="fname">
+  </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field  appearance="outline"  class="example-full-width">
+      <mat-label>Balance</mat-label>
+    <input matInput type="number" id="fname" placeholder="2300" name="fname">
+    </mat-form-field>
     </div>
-  </div><br><br>
-  <div class="form-group">
-    <div class="col-md-12">
-      <span class="left-title">
-        Enter Amount:
-      </span>
-      <input type="text" id="fname" placeholder="Enter Amount" name="fname"><br>
-    </div><br><br>
-    <div class="form-group">
-      <div class="col-md-12">
-        <span class="left-title">
-          Hand Loan:
-        </span>
-        <input type="text" id="fname" placeholder="Hand Loan" name="fname">
-      </div>
-    </div><br><br>
-    <div class="form-group">
-      <div class="col-md-12">
-        <span class="left-title">
-          Empty:
-        </span>
-        <input type="text" id="fname" placeholder="Enter Amount" name="fname">
-        <input type="text" id="fname" placeholder="1500" name="fname">
-      </div>
-    </div><br><br>
-    <div class="form-group">
-      <div class="col-md-12">
-        <span class="left-title">
-          Delay charges:
-        </span>
-        <input type="text" id="fname" placeholder="Enter Amount" name="fname">
-        <input type="text" id="fname" placeholder="0" name="fname">
-      </div>
-    </div><br><br>
-    <div class="form-group">
-      <div class="col-md-12">
-        <span class="left-title">
-          Due Amount:
-        </span>
-        <input type="text" id="fname" placeholder="Enter Amount" name="fname">
-        <input type="text" id="fname" placeholder="5,200" name="fname">
-      </div>
-    </div><br><br>
-    <div class="form-group">
-      <div class="col-md-12">
-        <span class="left-title">
-          Empty Space:
-        </span>
-        <span class="left-title">
-          Balance:
-        </span>
-        <input type="text" id="fname" placeholder="2,300" name="fname">
-      </div>
-    </div><br><br>
-    <div class="form-group">
-      <div class="col-md-12">
-        <span class="left-title">
-          Pay Mode:
-        </span>
-        <input type="text" id="fname" placeholder="Cash" name="fname">
-        <!-- <button type="button"  data-toggle="modal" data-target="#createEntrolmentModal">
-                            Create 
-                        </button> -->
-        <input type="submit" id="fname" name="fname" value="Assign" data-toggle="modal" data-target="#exampleModal">
-      </div>
+
+    <div>   
+  
+      <mat-form-field  appearance="outline" class="example-full-width">
+        <mat-label>Pay mode</mat-label>
+      <mat-select  >
+      <mat-option value="cash">Cash</mat-option>
+            <mat-option value="online">Online</mat-option>
+            <!-- <mat-option value="Topuploan">Topup loan</mat-option> -->
+            </mat-select>
+      </mat-form-field>
+</div>
+<!-- <button type="submit">Create</button> -->
+<div class="col-sm-2">
+  <div>
+      <button type="button"  data-toggle="modal" data-target="#createEnquiryModal">
+          Create
+      </button>
+  </div>
+</div>
+
+
+  
       <h3>HAND LOAN:</h3>
       <table class="table">
         <thead>
@@ -385,7 +411,7 @@
 
       <!-- models -->
 
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -403,6 +429,35 @@
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
               <button type="button" class="btn btn-primary">Confirm</button>
             </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- <h5 class="modal-title" id="createEnquiryModalLabel">Create Enquiry</h5> -->
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+      
+              
+              <div>    
+                <h3>Confirmation</h3>
+                  <label>Receipt created Successfully for You</label>
+                  <input type="email" placeholder="9000" class="form-control">
+                  
+              </div>
+  
+      
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+            <button type="button" class="btn btn-primary"  data-dismiss="modal" data-toggle="modal"  data-target="#generateEnquiryModal">Print</button>
+            <!-- (click)="generatePdf()" -->
           </div>
         </div>
       </div>
