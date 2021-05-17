@@ -2,22 +2,43 @@
 <!-- /** Enquiry List Search Fields */ -->
 
 <div class="container">
-    <h1>Enquiry List</h1>
+  <div class="header_title">
+    <h2>Enquiry List</h2>
+    <div class="header_right">
+    
     <div class="row">
-      <div class="col-sm-2">
+      <div class="col-sm-3">
           <div>
-              <label>Enquiry List</label>
-              <input type="date" class="form-control">
+                <input type="date" class="form-control">
           </div>
       </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <div>
-                <button type="button"  data-toggle="modal" data-target="#createEnquiryModal">
+                <button type="button"  data-toggle="modal" data-target="#createEnquiryModal" class="btn_blue">
                     Create Enquiry
                 </button>
             </div>
         </div>
+        <div class="col-sm-3">
+          <div>
+            <button type="button" class="btn_blue" data-toggle="modal" data-target="#exampleModal">
+              Create User
+            </button>
+          </div>
+      </div>
+      <div class="col-sm-3">
+        <div>
+          <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+          </mat-form-field>
+        </div>
     </div>
+    </div>
+  </div>
+      </div>
+  
+    
 
    
     
@@ -46,14 +67,11 @@
     </table>
 </div> -->
 
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
-</mat-form-field>
 
-<div class="allocation-table responsive_table">
-  <div class="mat-elevation-z8">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+<div class="card">
+  <div class="card-body">
+<table mat-table [dataSource]="dataSource" >
 
   <!-- Position Column -->
   <ng-container matColumnDef="Enquiry ID">
