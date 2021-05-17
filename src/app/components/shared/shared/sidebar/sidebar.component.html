@@ -6,7 +6,7 @@
     <a href="branch-manager/customer-management">Customer Management</a>
     <a href="branch-manager/loan-verification">Loan Approval/Collection Cash Management</a>
     <button mat-button [matMenuTriggerFor]="belowMenu">Loan Approval/Collection<br> Cash Management</button>
-     <mat-menu #belowMenu="matMenu" yPosition="below" XPosition="Right">
+     <mat-menu #belowMenu="matMenu" yPosition="below" >
     <button mat-menu-item (click)="loan_disbusal()">loan Disbursal cash Limit</button>
      <button mat-menu-item (click)="loan_approval()">Loan Approval Limit</button>
      <button mat-menu-item (click)="cash_limit()">Cash Limit -Field Executive</button>
