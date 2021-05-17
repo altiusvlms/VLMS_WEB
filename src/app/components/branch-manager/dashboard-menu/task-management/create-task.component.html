@@ -26,7 +26,7 @@
         </div>
         <div class="col-4 col-sm-4">
           <label>Customer Mobile No</label>
-          <input type="text"  formControlName="customermobileNo"  class="form-control">
+          <input type="text"  formControlName="customerMobileNo"  class="form-control">
       </div>
         <div class="col-4 col-sm-4">    
             <label >Vehicle Number</label>
@@ -38,11 +38,9 @@
         </div>
         <div class="col-4 col-sm-4">
             <label>Assign To</label>
-            <input type="text"  formControlName="assignTo"  class="form-control">
-            <!-- <select formControlName="assignTo"  class="form-control">
-                <option value="robin">Robin</option>
-                <option value="thangamani">Thangamani</option>
-            </select> -->
+            <select formControlName="assignTo"  class="form-control" >
+                <option *ngFor="let name of assignToName"  value="{{name.fieldExecutiveName}}">{{name.fieldExecutiveName}}</option>
+            </select>
         </div>
         <div class="col-4 col-sm-4">
             <label>Description</label>

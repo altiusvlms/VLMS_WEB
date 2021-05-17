@@ -27,11 +27,11 @@
     <tbody>
       <tr *ngFor="let task of taskListData;let i = index;">
         <td>{{i+1}}</td>
-        <td></td>
+        <td>{{task.createdDate | date:"dd MMMM yyyy"}}</td>
         <td>{{task.taskType}}</td>
         <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>
         <td>{{task.assignTo}}</td>
-        <td></td>
+        <td>{{task.status ? task.status : "open"}}</td>
         <td  (click)="createViewTask(task)">View</td>
       </tr>
     </tbody>
