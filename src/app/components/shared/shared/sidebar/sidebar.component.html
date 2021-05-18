@@ -1,4 +1,59 @@
-<div class="sidenav">
+<div class="sidebar">
+<div class="navigation">
+   <div class="logo_sidebar"><img src="assets/images/logo.png"/></div>
+    <ul>
+        <li >
+            <a [routerLink]="" (click)="onClick(1)"   [ngClass]="{'active': activeClass==='activeClass_dashboard'} ">Dashboardasdas</a>
+        </li>
+        <li >
+            <a [routerLink]="" (click)="onClick(2)"   [ngClass]="{'active': activeClass==='activeClass_employee'}">Manage Employee</a>
+        </li>
+        <li >
+            <a [routerLink]="" (click)="onClick(3)"   [ngClass]="{'active': activeClass==='activeClass_roles'}">Roles & Permission</a>
+        </li>
+        <li >
+            <a [routerLink]="" (click)="onClick(4)"   [ngClass]="{'active': activeClass==='activeClass_customer'}">Customer Management</a>
+        </li>
+        
+      <li class="has-sub"> <a href="#">Loan Approval/Collection<br> Cash Management</a>
+        <ul>
+          <li><a [routerLink]="" mat-menu-item (click)="loan_disbusal()">loan Disbursal cash Limit</a></li>
+          <li><a [routerLink]="" mat-menu-item (click)="loan_approval()">Loan Approval Limit</a></li>
+          <li><a [routerLink]="" mat-menu-item (click)="cash_limit()">Cash Limit -Field Executive</a></li>
+        </ul>
+      </li>
+      <li>
+        <a [routerLink]="" (click)="onClick(7)"   [ngClass]="{'active': activeClass==='activeClass_task'}">Task Management</a>
+        </li>
+     <li >
+        <a [routerLink]="" (click)="onClick(8)"   [ngClass]="{'active': activeClass==='activeClass_target'}">Assign Targets</a>
+        </li>
+     <li >
+        <a [routerLink]="" (click)="onClick(9)"   [ngClass]="{'active': activeClass==='activeClass_topup'}">Topup Loan</a>
+        </li>
+     <li >
+        <a [routerLink]="" (click)="onClick(10)"  [ngClass]="{'active': activeClass==='activeClass_report'}">Report</a>
+        </li>
+     <li >
+        <a [routerLink]="" (click)="onClick(11)"  [ngClass]="{'active': activeClass==='activeClass_analytics'}"> Analytics</a>
+        </li>
+     <li >
+        <a [routerLink]="" (click)="onClick(12)"  [ngClass]="{'active': activeClass==='activeClass_receipt'}">Create Receipt</a> 
+        </li>
+     <li >
+        <a [routerLink]="" (click)="onClick(13)"  [ngClass]="{'active': activeClass==='activeClass_enquiry'}">Create Enquiry</a> 
+        </li>
+     <li >
+        <a [routerLink]="" (click)="onClick(14)"  [ngClass]="{'active': activeClass==='activeClass_enrollcustomer'}"> Enroll Customer</a>
+        </li>
+     <li >
+        <a [routerLink]="" (click)="onClick(15)"  [ngClass]="{'active': activeClass==='activeClass_createloan'}">Create Loan</a>
+        </li>
+    </ul>
+  </div>
+</div>
+
+<!-- <div class="sidenav">
    
     <ul>
         <li  (click)="onClick(1)"   [ngClass]="{'active': activeClass==='activeClass_dashboard'}">Dashboard </li>
@@ -25,7 +80,7 @@
      <li (click)="onClick(15)"  [ngClass]="{'active': activeClass==='activeClass_createloan'}">Create Loan</li>
 
     </ul>
-</div>
+</div> -->
 
 
  
