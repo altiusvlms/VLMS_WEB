@@ -63,8 +63,6 @@ export class LoanVerificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLoanVerification();
-    this.Loan_Disbural_Limit();
-    this.Loan_Approval_Limit();
   }
 
   ngOnDestroy() { }
@@ -123,7 +121,9 @@ export class LoanVerificationComponent implements OnInit {
   }
   searchdata(){
     this.showSearchbtn = false;
+    console.log(this.searchAccountNo,this.searchName,this.searchModel,this.searchVehicleNo,this.searchMobileNo,this.searchChassisNo)
     for (let selectedUser of this.customerLoanDetails) {
+      if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''){
       if (
         selectedUser.bankDetails.accountNumber.toLowerCase().search(this.searchAccountNo.toLowerCase()) != -1  &&
         selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1  &&
@@ -135,6 +135,7 @@ export class LoanVerificationComponent implements OnInit {
       ){
           this.filterResponse.push(selectedUser)
       }
+    }
     }
   
     if(this.filterResponse.length >0){
@@ -164,25 +165,4 @@ export class LoanVerificationComponent implements OnInit {
     this.showAdvanceSearch = false;
   }
 
-  Loan_Disbural_Limit(){
-    this.crudService.get(`${appModels.EMPLOYEE}/getLoanDisbursal`, {
-      params: {
-        tenantIdentifier: 'default'
-      }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      console.log(data);
-      this.loanDisburalData = data;
-    })
-  }
-
-  Loan_Approval_Limit(){
-    this.crudService.get(`${appModels.EMPLOYEE}/getLoanApproval`, {
-      params: {
-        tenantIdentifier: 'default'
-      }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      console.log(data);
-      this.loanApprovalData = data;
-    })
-  }
 }

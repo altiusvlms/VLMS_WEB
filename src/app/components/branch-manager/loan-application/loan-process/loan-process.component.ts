@@ -93,7 +93,6 @@ export class LoanProcessComponent implements OnInit {
         addressLine2:new FormControl(''),
         area:new FormControl(''),
         city:new FormControl(''),
-        country:new FormControl(''),
         landmark:new FormControl(''),
         postalCode:new FormControl(''),
         state:new FormControl('')
@@ -103,7 +102,6 @@ export class LoanProcessComponent implements OnInit {
         addressLine2:new FormControl(''),
         area:new FormControl(''),
         city:new FormControl(''),
-        country:new FormControl(''),
         landmark:new FormControl(''),
         postalCode:new FormControl(''),
         state:new FormControl('')
@@ -113,7 +111,6 @@ export class LoanProcessComponent implements OnInit {
           addressLine2:new FormControl(''),
           area:new FormControl(''),
           city:new FormControl(''),
-          country:new FormControl(''),
           landmark:new FormControl(''),
           postalCode:new FormControl(''),
           state:new FormControl('')
@@ -138,7 +135,6 @@ export class LoanProcessComponent implements OnInit {
       addressLine2:new FormControl(''),
       area:new FormControl(''),
       city:new FormControl(''),
-      country:new FormControl(''),
       landmark:new FormControl(''),
       postalCode:new FormControl(''),
       state:new FormControl('')
@@ -148,7 +144,6 @@ export class LoanProcessComponent implements OnInit {
       addressLine2:new FormControl(''),
       area:new FormControl(''),
       city:new FormControl(''),
-      country:new FormControl(''),
       landmark:new FormControl(''),
       postalCode:new FormControl(''),
       state:new FormControl('')
@@ -158,7 +153,6 @@ export class LoanProcessComponent implements OnInit {
         addressLine2:new FormControl(''),
         area:new FormControl(''),
         city:new FormControl(''),
-        country:new FormControl(''),
         landmark:new FormControl(''),
         postalCode:new FormControl(''),
         state:new FormControl('')

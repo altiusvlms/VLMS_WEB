@@ -113,3 +113,27 @@ h1{
   }
 }
 
+.ng5-slider .ng5-slider-bubble{
+  font-size: 12px!important;
+}
+.ngx-slider {
+  .ngx-slider-selection {
+    background: rgb(255, 255, 0) !important;
+  }
+}
+::ng-deep {
+  .ng5-slider {
+    .ng5-slider-pointer{
+      width: 20px!important;
+    height: 20px!important;
+    top: -8px!important;
+    }
+    .ng5-slider-pointer:after {
+      top: 6px!important;
+      left: 6px!important;
+  }
+  .ng5-slider-bubble {
+    font-size: 12px!important;
+}
+  }
+}

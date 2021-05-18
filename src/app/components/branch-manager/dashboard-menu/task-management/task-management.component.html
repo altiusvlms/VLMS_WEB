@@ -10,7 +10,9 @@
 
 <!-- /** Task Management List Table */ -->
 <div class="container">
-<table class="table">
+  <div class="card">
+    <div class="card-body">
+<table class="table table-striped">
     <thead>
       <tr>
         <th>Sr.No</th>
@@ -22,8 +24,8 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody *ngFor="let task of taskListData;let i = index;">
-      <tr>
+    <tbody>
+      <tr *ngFor="let task of taskListData;let i = index;">
         <td>{{i+1}}</td>
         <td>{{task.createdDate | date:"dd MMMM yyyy"}}</td>
         <td>{{task.taskType}}</td>
@@ -39,7 +41,7 @@
     No Data Found.
   </div>
 </ng-container>
- 
+ </div></div>
 </div>
 
 

@@ -148,39 +148,313 @@
 
 
   <!-- Search form -->
-
-  <form class="form-inline md-form form-sm active-cyan-2">
+<div class="continer">
   
-    <button type="button"  (click)="advancedSearch()">
-     Advanced Search
-    </button> 
+  <form class="form-inline md-form form-sm active-cyan-2">
+    <div class="header_title">
+      <h2>Dashboard</h2>
+      <div class="header_right">
+      <button type="button"  (click)="advancedSearch()" class="btn_blue">
+        Advanced Search
+       </button> 
+      </div>
+    </div>
+    
    </form><br><br>
 
   <div class="row">
-    <div class="col-sm-2">
-      <div> New Loans</div>
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+      <div> New Enrolement</div>
       <div>24 Nos</div>
-      <div>$1,00,000</div>
+
+      </div>
+      </div>
     </div>
-    <div class="col-sm-2">
-      <div> Closed Loans</div>
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+      <div>New Enquiry</div>
       <div>24 Nos</div>
-      <div>$1,00,000</div>
+
+      </div>
+      </div>
     </div>
-    <div class="col-sm-2">
-      <div>Repossessed</div>
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+      <div>Ins Exp.Live</div>
       <div>24 Nos</div>
+
+      </div>
+      </div>
     </div>
-    <div class="col-sm-2">
-      <div>Insurance</div>
-      <div>10 Nos</div>
-    </div>
-    <div class="col-sm-2">
-      <div>COLLECTION AMOUNT</div>
-      <div>10,000</div>
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+      <div>Ins Exp.Terminated</div>
+      <div>24 Nos</div>
+
+      </div>
+      </div>
     </div>
   </div>
+  <div class="row">
+    
+    <div class="col-sm-8">
+      
+      <div class="row">
+        <!-- loan details -->
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+        Loan Details
+        <img src="assets/images/loan-details.jpg" class="img-fluid">
+        </div>
+        </div>
+      </div>
+      <!-- Collection -->
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+        Collection
+        <img src="assets/images/collection.jpg" class="img-fluid">
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card">
+        <div class="card-body">
+      <div>Arrear 1%</div>
+      <div>6000</div>
 
+      </div>
+      </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+        <div class="card-body">
+      <div> Available Vehicle in Godown</div>
+      <div>30</div>
+
+      </div>
+      </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+        <div class="card-body">
+      <div>Reposessed</div>
+      <div>24</div>
+
+      </div>
+      </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+        <div class="card-body">
+      <div>Insurance</div>
+      <div>24</div>
+
+      </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Task Details Branch Manager -->
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+      Task Details Branch Manager
+      <img src="assets/images/task-details.jpg" class="img-fluid">
+      </div>
+      </div>
+    </div>
+    <!-- Task Details Head Office -->
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+      Task Details Head Office
+      <img src="assets/images/task-details.jpg" class="img-fluid">
+      </div>
+      </div>
+    </div>
+  </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+      EMI Collection
+      <!-- EMI  -->
+<div class="spacer">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="well">
+
+        <div class="form-group">
+          <div >
+            <span class="left-title">
+              Home Loan Amount
+            </span>
+            <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
+              [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" />
+          </div>
+          <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()">
+          </ng5-slider>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+          <div>
+            <span class="left-title">
+              Interest Rate
+            </span>
+            <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
+              [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" />
+          </div>
+          <ng5-slider [(value)]="remi.value" [options]="roptions" (userChangeEnd)="update()">
+          </ng5-slider>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+            <span class="left-title">Loan Tenure</span>
+          </div>
+          
+          <div class="col-md-6">
+              <div class="input-group">
+                <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
+              placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;">
+                <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
+              placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo">
+              <div class="input-group-append">
+                <button class="" [ngClass]="{'active':yrToggel}"
+                  (click)="yrToggel=true;update()" type="button">Yr</button>
+                <button class="" [ngClass]="{'active':!yrToggel}"
+                  (click)="yrToggel=false;update()" type="button">Mo</button>
+                </div>
+              </div>
+              </div>
+            </div>
+         
+          <ng5-slider *ngIf="yrToggel" [(value)]="temi.value" [options]="toptions" (userChangeEnd)="update()">
+          </ng5-slider>
+          <ng5-slider *ngIf="!yrToggel" [(value)]="memi.value" [options]="moptions" (userChangeEnd)="update()">
+          </ng5-slider>
+        </div>
+
+        <!-- <div class="form-group">
+          <div class="col-md-4">
+            <div>
+              <span class="left-title">From Date</span><br>
+              <mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [(ngModel)]="fromdate" [matDatepicker]="picker1">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field><br>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-4">
+            <div>
+              <span class="left-title">To Date</span><br>
+              <mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [(ngModel)]="todate" [matDatepicker]="picker2" (change)="DueCalc()" >
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div> -->
+
+
+      </div>
+
+    </div>
+    <div class="col-lg-12">
+      <div class="well">
+
+        <div class="jusify-center">
+          <h5>
+            Loan EMI
+          </h5>
+          <span class="result">
+            <!-- {{result.emi || "--"}} -->
+            {{MonthlyCorrectDue}}
+          </span>
+        </div>
+
+        <hr />
+
+        <div>
+          <h5>
+            Total Interest Payable
+          </h5>
+          <span class="result">
+            <!-- {{result.interest || "--"}} -->
+            {{TotalInterest}}
+          </span>
+        </div>
+
+        <hr />
+        <div>
+          <h5>
+            Principal + Interest
+          </h5>
+          <h6>
+            <!-- (Principal + Interest) -->
+          </h6>
+          <span class="result">
+            <!-- {{result.total || "--"}} -->
+            {{TotalPayable}}
+          </span>
+        </div>
+
+        <hr />
+        <!-- <div>
+          <h5>
+            Due Difference
+          </h5>
+          
+          <span class="result">
+          
+            {{delayDueAmount}}
+          
+          </span>
+        </div>
+        <hr /> -->
+
+        <!-- <div>
+          <h5>
+            Total Payment
+          </h5>
+          
+          <span class="result">
+          
+            {{totalAmt}}
+          </span>
+        </div> -->
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+      </div>
+    </div>
+  </div>
 
 
   <button class="btn default" (click)="customer()">Customer List (6,773)</button>
@@ -197,23 +471,9 @@
   <button class="btn default" (click)="loanVerification()">Loan Verification and Approval</button><br><br>
   
  
-  <!-- Task details status -->
-  <div>
-    <div>Task Details Branch manager</div>
-    <button class="btn default">Total(10)</button>
-    <button class="btn default">Open(10)</button><br><br>
-    <button class="btn default">Completed(10)</button>
-    <button class="btn default">Inprogress(10)</button>
-  </div>
-  <div>
-    <div>Task Details Head Office</div>
-    <button class="btn default">Total(10)</button>
-    <button class="btn default">Open(10)</button><br><br>
-    <button class="btn default">Completed(10)</button>
-    <button class="btn default">Inprogress(10)</button>
-  </div>
 
-  
+
+</div>
 
 
 
@@ -419,161 +679,3 @@
   </table>
 </div>
 
-<!-- EMI  -->
-<div class="spacer">
-  <div class="row">
-    <div class="col-lg-8  col-lg-offset-1">
-      <div class="well">
-
-        <div class="form-group">
-          <div class="col-md-12">
-            <span class="left-title">
-              Home Loan Amount
-            </span>
-            <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
-              [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" />
-          </div>
-          <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()">
-          </ng5-slider>
-        </div>
-
-        <hr />
-
-        <div class="form-group">
-          <div class="col-md-12">
-            <span class="left-title">
-              Interest Rate
-            </span>
-            <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
-              [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" />
-          </div>
-          <ng5-slider [(value)]="remi.value" [options]="roptions" (userChangeEnd)="update()">
-          </ng5-slider>
-        </div>
-
-        <hr />
-
-        <div class="form-group">
-          <div class="col-md-10">
-            <span class="left-title">Loan Tenure</span>
-            <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
-              placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;">
-            <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
-              placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo" style="width:30%;float:right;">
-          </div>
-          <div class="col-md-2">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" [ngClass]="{'active':yrToggel}"
-                (click)="yrToggel=true;update()" type="button">Yr</button>
-              <button class="btn btn-outline-secondary" [ngClass]="{'active':!yrToggel}"
-                (click)="yrToggel=false;update()" type="button">Mo</button>
-            </div>
-          </div>
-          <ng5-slider *ngIf="yrToggel" [(value)]="temi.value" [options]="toptions" (userChangeEnd)="update()">
-          </ng5-slider>
-          <ng5-slider *ngIf="!yrToggel" [(value)]="memi.value" [options]="moptions" (userChangeEnd)="update()">
-          </ng5-slider>
-        </div>
-
-        <!-- <div class="form-group">
-          <div class="col-md-4">
-            <div>
-              <span class="left-title">From Date</span><br>
-              <mat-form-field appearance="fill">
-                <mat-label>Choose a date</mat-label>
-                <input matInput [(ngModel)]="fromdate" [matDatepicker]="picker1">
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-              </mat-form-field><br>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-md-4">
-            <div>
-              <span class="left-title">To Date</span><br>
-              <mat-form-field appearance="fill">
-                <mat-label>Choose a date</mat-label>
-                <input matInput [(ngModel)]="todate" [matDatepicker]="picker2" (change)="DueCalc()" >
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-              </mat-form-field>
-            </div>
-          </div>
-        </div> -->
-
-
-      </div>
-
-    </div>
-    <div class="col-lg-3">
-      <div class="well">
-
-        <div class="jusify-center">
-          <h5>
-            Loan EMI
-          </h5>
-          <span class="result">
-            <!-- {{result.emi || "--"}} -->
-            {{MonthlyCorrectDue}}
-          </span>
-        </div>
-
-        <hr />
-
-        <div>
-          <h5>
-            Total Interest Payable
-          </h5>
-          <span class="result">
-            <!-- {{result.interest || "--"}} -->
-            {{TotalInterest}}
-          </span>
-        </div>
-
-        <hr />
-        <div>
-          <h5>
-            Principal + Interest
-          </h5>
-          <h6>
-            <!-- (Principal + Interest) -->
-          </h6>
-          <span class="result">
-            <!-- {{result.total || "--"}} -->
-            {{TotalPayable}}
-          </span>
-        </div>
-
-        <hr />
-        <!-- <div>
-          <h5>
-            Due Difference
-          </h5>
-          
-          <span class="result">
-          
-            {{delayDueAmount}}
-          
-          </span>
-        </div>
-        <hr /> -->
-
-        <!-- <div>
-          <h5>
-            Total Payment
-          </h5>
-          
-          <span class="result">
-          
-            {{totalAmt}}
-          </span>
-        </div> -->
-
-
-
-      </div>
-    </div>
-  </div>
-</div>
