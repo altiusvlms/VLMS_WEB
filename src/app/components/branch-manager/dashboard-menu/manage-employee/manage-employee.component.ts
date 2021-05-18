@@ -114,20 +114,20 @@ export class ManageEmployeeComponent implements OnInit {
       addressLine1:new FormControl('',),
       addressLine2:new FormControl('',),
       landmark:new FormControl('',),
-      pincode:new FormControl('',),
+      postalCode:new FormControl('',),
       area:new FormControl('',),
       city:new FormControl('',),
-      country:new FormControl('',)
+      state:new FormControl('',)
     }),
 
     employee_permanentAddress  : new FormGroup({
       addressLine1:new FormControl('',),
       addressLine2:new FormControl('',),
       landmark:new FormControl('',),
-      pincode:new FormControl('',),
+      postalCode:new FormControl('',),
       area:new FormControl('',),
       city:new FormControl('',),
-      country:new FormControl('',)
+      state:new FormControl('',)
     }),
 
     general_insurance :  new FormGroup({
@@ -183,6 +183,8 @@ export class ManageEmployeeComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
       this.getSingleEmployeeList();
+      // this.updateEmployeeEducationDetails();
+      // this.updateEmployeeInsuranceDetails()
     })
   }
   
@@ -288,7 +290,16 @@ this.manageEmployeeForm.patchValue({
     vehicleNumber: this.employeeArray[0].vehicleNumber,
     doj: this.datepipe.transform(this.employeeArray[0].dob, 'yyyy-MM-dd'),
     dateFormat: "dd MMMM yyyy",
-    locale: 'en'
+    locale: 'en',
+
+    loanEligibleAmount: this.employeeArray[0].bankDetails.loanEligibleAmount,
+    accountType: this.employeeArray[0].bankDetails.accountType,
+    accountNumber: this.employeeArray[0].bankDetails.accountNumber,
+    accountHolderName: this.employeeArray[0].bankDetails.accountHolderName,
+    IFSC: this.employeeArray[0].bankDetails.IFSC,
+    bankName: this.employeeArray[0].bankDetails.bankName,
+    branchName: this.employeeArray[0].bankDetails.branchName
+    
 })
 this.manageEmployeeForm.patchValue({
   employee_communicationAddress:{
@@ -314,45 +325,52 @@ this.manageEmployeeForm.patchValue({
 })
 this.manageEmployeeForm.patchValue({
   school_qualification:{
-    university:this.employeeArray[0].school_qualification.university,
-    qualification: this.employeeArray[0].school_qualification.qualification,
-    percentage : this.employeeArray[0].school_qualification.percentage,
-    passingyear : this.employeeArray[0].school_qualification.passingyear,
+    university:this.employeeArray[0].schoolQualification.university,
+    qualification: this.employeeArray[0].schoolQualification.qualification,
+    percentage : this.employeeArray[0].schoolQualification.percentage,
+    passingyear : this.employeeArray[0].schoolQualification.passingyear,
   }
 })
 
 this.manageEmployeeForm.patchValue({
   college_qualification:{
-  university:this.employeeArray[0].college_qualification.university,
-  qualification: this.employeeArray[0].college_qualification.qualification,
-  percentage : this.employeeArray[0].college_qualification.percentage,
-  passingyear : this.employeeArray[0].college_qualification.passingyear,
+  university:this.employeeArray[0].collegeQualification.university,
+  qualification: this.employeeArray[0].collegeQualification.qualification,
+  percentage : this.employeeArray[0].collegeQualification.percentage,
+  passingyear : this.employeeArray[0].collegeQualification.passingyear,
+  }
+})
+
+this.manageEmployeeForm.patchValue({
+  graduate_qualification:{
+  university:this.employeeArray[0].graduateQualification.university,
+  qualification: this.employeeArray[0].graduateQualification.qualification,
+  percentage : this.employeeArray[0].graduateQualification.percentage,
+  passingyear : this.employeeArray[0].graduateQualification.passingyear,
   }
 })
 
 this.manageEmployeeForm.patchValue({
   postgraduate_qualification:{
-  university:this.employeeArray[0].graduate_qualification.university,
-  qualification: this.employeeArray[0].graduate_qualification.qualification,
-  percentage : this.employeeArray[0].graduate_qualification.percentage,
-  passingyear : this.employeeArray[0].graduate_qualification.passingyear,
-  }
-})
-
-this.manageEmployeeForm.patchValue({
-  postgraduate_qualification:{
-  university:this.employeeArray[0].postgraduate_qualification.university,
-  qualification: this.employeeArray[0].postgraduate_qualification.qualification,
-  percentage : this.employeeArray[0].postgraduate_qualification.percentage,
-  passingyear : this.employeeArray[0].postgraduate_qualification.passingyear,
+  university:this.employeeArray[0].postgraduateQualification.university,
+  qualification: this.employeeArray[0].postgraduateQualification.qualification,
+  percentage : this.employeeArray[0].postgraduateQualification.percentage,
+  passingyear : this.employeeArray[0].postgraduateQualification.passingyear,
   }
 })
 
 this.manageEmployeeForm.patchValue({
   general_insurance:{
-  policyNumber:this.employeeArray[0].general_insurance.policyNumber,
-  companyCoverage: this.employeeArray[0].general_insurance.companyCoverage,
-  policyCoverage : this.employeeArray[0].general_insurance.policyCoverage,
+  policyNumber:this.employeeArray[0].insuranceDetails.policyNumber,
+  companyCoverage: this.employeeArray[0].insuranceDetails.companyCoverage,
+  policyCoverage : this.employeeArray[0].insuranceDetails.policyCoverage,
+  }
+})
+this.manageEmployeeForm.patchValue({
+  accidental_insurance:{
+  policyNumber:this.employeeArray[0].accidentalInsuranceDetails.policyNumber,
+  companyCoverage: this.employeeArray[0].accidentalInsuranceDetails.companyCoverage,
+  policyCoverage : this.employeeArray[0].accidentalInsuranceDetails.policyCoverage,
   }
 })
 })
@@ -425,7 +443,7 @@ updateEmployeeDetails(){
 })
 }
 
-updateEmployeeAddressDetails(){
+updateEmployeeEducationDetails(){
   console.log("this.manageEmployeeForm.value")
   console.log(this.manageEmployeeForm.value)
   // this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');

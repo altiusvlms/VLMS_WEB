@@ -25,6 +25,9 @@ import { TopupLoanComponent } from './topup-loan/topup-loan.component';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
+
+// import { ChartsModule } from 'ng2-charts';
+// import { chart } from 'chart.js'
 // import { ChartsModule } from 'ng2-charts';
 // import { PieChartComponent } from './piechart/piechart';
 
@@ -39,7 +42,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     SharedModule,
     MatTabsModule,
     Ng5SliderModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    // ChartsModule
+    // chart
     // ChartsModule
   ]
 })

@@ -237,7 +237,7 @@
 
         <h2>Add Communication Address</h2>
 
-        <div class="container" f>
+        <div class="container">
           <div class="row" formGroupName="employee_communicationAddress">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Address Line 1</mat-label>
@@ -273,7 +273,7 @@
           </mat-form-field></div>
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>State</mat-label>
-              <mat-select formControlName="state">
+              <mat-select formControlName="country">
                   <mat-option value="Tamilnadu">Tamilnadu</mat-option>
                   <mat-option value="Kerala">Kerala</mat-option>
                   <mat-option value="karnataka">karnataka</mat-option>
@@ -320,7 +320,7 @@
           </mat-form-field></div>
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>State</mat-label>
-              <mat-select formControlName="state">
+              <mat-select formControlName="country">
                   <mat-option value="Tamilnadu">Tamilnadu</mat-option>
                   <mat-option value="Kerala">Kerala</mat-option>
                   <mat-option value="Karnataka">Karnataka</mat-option>
@@ -328,7 +328,7 @@
           </mat-form-field></div>
           </div>
 
-          <!-- <button type="submit" (click)="updateEmployeeAddressDetails()">update</button> -->
+          
         </div>    
     
       
@@ -550,6 +550,7 @@
 
           </div>
         </div>    
+        <button type="submit" (click)="updateEmployeeInsuranceDetails()">updateInsurance</button>
         <button type="submit" (click)="updateEmployeeDetails()">update</button>
         <button type="submit" (click)="manageEmployee()">Submit</button>
 
