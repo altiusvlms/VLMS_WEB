@@ -45,7 +45,6 @@ export class SidebarComponent implements OnInit {
   
  // ** Active Class Function */
     onClick(check: any){
-      console.log(check)
         if(check==1){
           this.activeClass = 'activeClass_dashboard';
           this.router.navigate(['branch-manager/dashboard']);
