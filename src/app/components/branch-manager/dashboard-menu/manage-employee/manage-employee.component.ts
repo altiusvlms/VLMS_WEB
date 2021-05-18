@@ -82,10 +82,10 @@ export class ManageEmployeeComponent implements OnInit {
     surName: new FormControl('', Validators.required),
     mobileNumber: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
-    // altNumber: new FormControl('', Validators.required),
-    altNumber: this.fb.array([
-      this.fb.control(null)
-    ]),
+    altNumber: new FormControl('', Validators.required),
+    // altNumber: this.fb.array([
+    //   this.fb.control(null)
+    // ]),
     dob: new FormControl('', Validators.required),
     officialNumber: new FormControl('', Validators.required),
     age: new FormControl(''),
@@ -194,13 +194,6 @@ export class ManageEmployeeComponent implements OnInit {
 /** Save Enquiry */
 manageEmployee(){
   this.submitted = true;
-  // if (this.manageEmployeeForm.valid) {
-    
-    console.log("id")
-  console.log(this.id)
-  console.log("datass")
-  console.log(this.manageEmployeeForm.value)
-  
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
   this.crudService.post(`${appModels.CREATEEMPLOYEE}`, this.manageEmployeeForm.value ,
@@ -265,100 +258,103 @@ getSingleEmployeeList(){
     params: {
       tenantIdentifier: 'default'
     }
-  }).pipe(untilDestroyed(this)).subscribe(data1 => {
-    // debugger
-    console.log(data1)
-    // console.log(JSON.parse(JSON.stringify(data1)))
+  }).pipe(untilDestroyed(this)).subscribe(response => {
+    console.log(response)
 
-    for (var singleData of data1) {
-      // console.log(singleData.id)
-      // console.log(this.id)
+    for (var singleData of response) {
       if(singleData.id == this.id){
-        // console.log(singleData)
         this.employeeArray.push(singleData)
-        // singleData.replace(/\"/g, "")
-        
-        
-        // this.data = JSON.parse(this.employeeArray);
-        // debugger
-
-
-        console.log(this.employeeArray)
-        // this.finalData = this.employeeArray.replace(/\\/g, "");
       }
     }
-    
-      // debugger
-      let data = data1.find((i :any) => i.id === + this.id);
-      // console.log(data)
-  
+ 
+    console.log(this.employeeArray)
+
   
 this.manageEmployeeForm.patchValue({
-  // customerDetails:{
-    name: data.name,
-    calledName:data.calledName,
-    surName:data.surName,
-    mobileNumber: data.mobileNumber,
-    altNumber: data.altNumber,
-    officialNumber: data.officialNumber,
-    dob:this.datepipe.transform(data.dob, 'yyyy-MM-dd'),
-    gender: data.gender,
-    age: data.age,
-    maritalStatus: data.maritalStatus,
-    designation: data.designation,
-    spousename: data.spousename,
-    bloodGroup: data.bloodGroup,
-    fatherName: data.fatherName,
-    vehicleNumber: data.vehicleNumber,
-    doj: this.datepipe.transform(data.dob, 'yyyy-MM-dd'),
+    name: this.employeeArray[0].name,
+    calledName:this.employeeArray[0].calledName,
+    surName:this.employeeArray[0].surName,
+    mobileNumber: this.employeeArray[0].mobileNumber,
+    altNumber: this.employeeArray[0].altNumber,
+    officialNumber: this.employeeArray[0].officialNumber,
+    dob:this.datepipe.transform(this.employeeArray[0].dob, 'yyyy-MM-dd'),
+    gender: this.employeeArray[0].gender,
+    age: this.employeeArray[0].age,
+    maritalStatus: this.employeeArray[0].maritalStatus,
+    designation: this.employeeArray[0].designation,
+    spousename: this.employeeArray[0].spousename,
+    bloodGroup: this.employeeArray[0].bloodGroup,
+    fatherName: this.employeeArray[0].fatherName,
+    vehicleNumber: this.employeeArray[0].vehicleNumber,
+    doj: this.datepipe.transform(this.employeeArray[0].dob, 'yyyy-MM-dd'),
     dateFormat: "dd MMMM yyyy",
     locale: 'en'
-  // }
 })
 this.manageEmployeeForm.patchValue({
-  
-    university:data.school_qualification.university,
-    qualification: data.school_qualification.qualification,
-    percentage : data.school_qualification.percentage,
-    passingyear : data.school_qualification.passingyear,
-
+  employee_communicationAddress:{
+    addressLine1:this.employeeArray[0].communicationAdd.addressLine1,
+    addressLine2: this.employeeArray[0].communicationAdd.addressLine2,
+    area : this.employeeArray[0].communicationAdd.area,
+    city : this.employeeArray[0].communicationAdd.city,
+    landmark : this.employeeArray[0].communicationAdd.landmark,
+    postalCode : this.employeeArray[0].communicationAdd.postalCode,
+    state : this.employeeArray[0].communicationAdd.state
+}
 })
-
 this.manageEmployeeForm.patchValue({
-  
-  university:data.college_qualification.university,
-  qualification: data.college_qualification.qualification,
-  percentage : data.college_qualification.percentage,
-  passingyear : data.college_qualification.passingyear,
-
+  employee_permanentAddress:{
+    addressLine1:this.employeeArray[0].permanentAdd.addressLine1,
+    addressLine2: this.employeeArray[0].permanentAdd.addressLine2,
+    area : this.employeeArray[0].permanentAdd.area,
+    city : this.employeeArray[0].permanentAdd.city,
+    landmark : this.employeeArray[0].permanentAdd.landmark,
+    postalCode : this.employeeArray[0].permanentAdd.postalCode,
+    state : this.employeeArray[0].permanentAdd.state
+}
 })
-
 this.manageEmployeeForm.patchValue({
-  
-  university:data.graduate_qualification.university,
-  qualification: data.graduate_qualification.qualification,
-  percentage : data.graduate_qualification.percentage,
-  passingyear : data.graduate_qualification.passingyear,
-
-})
-
-this.manageEmployeeForm.patchValue({
-  
-  university:data.postgraduate_qualification.university,
-  qualification: data.postgraduate_qualification.qualification,
-  percentage : data.postgraduate_qualification.percentage,
-  passingyear : data.postgraduate_qualification.passingyear,
-
+  school_qualification:{
+    university:this.employeeArray[0].school_qualification.university,
+    qualification: this.employeeArray[0].school_qualification.qualification,
+    percentage : this.employeeArray[0].school_qualification.percentage,
+    passingyear : this.employeeArray[0].school_qualification.passingyear,
+  }
 })
 
 this.manageEmployeeForm.patchValue({
-  
-  policyNumber:data.general_insurance.policyNumber,
-  companyCoverage: data.general_insurance.companyCoverage,
-  policyCoverage : data.general_insurance.policyCoverage,
-
+  college_qualification:{
+  university:this.employeeArray[0].college_qualification.university,
+  qualification: this.employeeArray[0].college_qualification.qualification,
+  percentage : this.employeeArray[0].college_qualification.percentage,
+  passingyear : this.employeeArray[0].college_qualification.passingyear,
+  }
 })
-// }
+
+this.manageEmployeeForm.patchValue({
+  postgraduate_qualification:{
+  university:this.employeeArray[0].graduate_qualification.university,
+  qualification: this.employeeArray[0].graduate_qualification.qualification,
+  percentage : this.employeeArray[0].graduate_qualification.percentage,
+  passingyear : this.employeeArray[0].graduate_qualification.passingyear,
+  }
+})
+
+this.manageEmployeeForm.patchValue({
+  postgraduate_qualification:{
+  university:this.employeeArray[0].postgraduate_qualification.university,
+  qualification: this.employeeArray[0].postgraduate_qualification.qualification,
+  percentage : this.employeeArray[0].postgraduate_qualification.percentage,
+  passingyear : this.employeeArray[0].postgraduate_qualification.passingyear,
+  }
+})
+
+this.manageEmployeeForm.patchValue({
+  general_insurance:{
+  policyNumber:this.employeeArray[0].general_insurance.policyNumber,
+  companyCoverage: this.employeeArray[0].general_insurance.companyCoverage,
+  policyCoverage : this.employeeArray[0].general_insurance.policyCoverage,
+  }
+})
 })
 }
 
