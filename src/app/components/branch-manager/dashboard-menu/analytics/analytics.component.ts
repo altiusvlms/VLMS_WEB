@@ -6,6 +6,7 @@ import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+import * as Chart from 'chart.js';
 @UntilDestroy({ checkProperties: true })
 
 /** Analytics Component */
@@ -90,6 +91,60 @@ export class AnalyticsComponent implements OnInit {
       console.log(this.analyticsCusOnboardData)
     })
   }
+//   public chartType: string = 'pie';
 
+//   public chartDatasets: Array<any> = [
+//     { data: [300, 50, 100, 40, 120], label: 'My First dataset' }
+//   ];
+
+//   public chartLabels: Array<any> = ['Red', 'Green', 'Yellow', 'Grey', 'Dark Grey'];
+
+//   public chartColors: Array<any> = [
+//     {
+//       backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+//       hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870', '#A8B3C5', '#616774'],
+//       borderWidth: 2,
+//     }
+//   ];
+
+//   public chartOptions: any = {
+//     responsive: true
+//   };
+//   public chartClicked(e: any): void { }
+//   public chartHovered(e: any): void { }
+
+//   pieChartOptions = {
+//     responsive: true
+// }
+
+//   pieChartLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
+
+
+//   pieChartColor:any = [
+//     {
+//         backgroundColor: ['rgba(30, 169, 224, 0.8)',
+//         'rgba(255,165,0,0.9)',
+//         'rgba(139, 136, 136, 0.9)',
+//         'rgba(255, 161, 181, 0.9)',
+//         'rgba(255, 102, 0, 0.9)'
+//         ]
+//     }
+// ]
+
+//  ctxP = document.getElementById("pieChart").getContext('2d');
+//      myPieChart = new Chart(this.ctxP, {
+//       type: 'pie',
+//       data: {
+//         labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+//         datasets: [{
+//           data: [300, 50, 100, 40, 120],
+//           backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+//           hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+//         }]
+//       },
+//       options: {
+//         responsive: true
+//       }
+//     });
 
 }
