@@ -165,5 +165,4 @@ export class LoanVerificationComponent implements OnInit {
     this.showAdvanceSearch = false;
   }
 
-
 }

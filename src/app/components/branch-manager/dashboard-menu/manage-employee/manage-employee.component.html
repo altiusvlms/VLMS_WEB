@@ -55,7 +55,7 @@
 
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Gender</mat-label>
-              <mat-select formControlName="gender">
+              <mat-select  formControlName="gender">
                   <mat-option value="male">Male</mat-option>
                   <mat-option value="female">Female</mat-option>
               </mat-select>
@@ -126,7 +126,7 @@
               </div>
           </div></div>
 
-            <div class="col-4 col-sm-4"> <div ng-if="maritalStatus==='single'">
+            <div class="col-4 col-sm-4">
               <!-- <td> -->
               <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Spouse Name</mat-label>
@@ -138,7 +138,7 @@
                   </div>
               </div>
               <!-- </td> -->
-          </div></div>
+         </div>
 
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Blood Group</mat-label>
@@ -327,6 +327,8 @@
               </mat-select>
           </mat-form-field></div>
           </div>
+
+          <!-- <button type="submit" (click)="updateEmployeeAddressDetails()">update</button> -->
         </div>    
     
       
@@ -334,7 +336,7 @@
 
       <mat-tab label="Bank Details"> <!-- Add Bank detail -->
         <div class="container">
-          <div class="row" formGroupName="employee_permanentAddress">
+          <div class="row">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Acc Number</mat-label>
               <input matInput formControlName="accountNumber">
@@ -427,10 +429,10 @@
         
         <form [formGroup]="ImageEmployeeForm">
           <div class="container">
-            <div class="row" formGroupName="accidental_insurance">
+            <div class="row">
               <div class="col-4 col-sm-4"><label>ID Proof1:
-                <select formControlName="proof2" class="form-control">
-                  <option >choose Options</option>
+                <select  class="form-control">
+                  <option >Choose Options</option>
                   <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
                 </select>
             <span class="required-field">*</span>
@@ -438,8 +440,8 @@
            <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" >
             </label></div>
               <div class="col-4 col-sm-4"><label>ID Proof:
-                <select formControlName="proof2" class="form-control">
-                  <option >choose Options</option>
+                <select  class="form-control">
+                  <option >Choose Options</option>
                   <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
                 </select>
             <span class="required-field">*</span>
@@ -548,27 +550,17 @@
 
           </div>
         </div>    
+        <button type="submit" (click)="updateEmployeeDetails()">update</button>
+        <button type="submit" (click)="manageEmployee()">Submit</button>
 
          </mat-tab>
-        <button type="submit" (click)="manageEmployee()">Submit</button>
+         <!-- <button type="submit" (click)="updateEmployeeDetails()">update</button>
+        <button type="submit" (click)="manageEmployee()">Submit</button> -->
     </form>
     </mat-tab-group>
     </div>
     </div>
     
         
-        
-        
-        
-        
-
-
-       
-
-       
-        
-
-        
     
-    <!-- [disabled]="!manageEmployeeForm.valid" -->
 </div>
