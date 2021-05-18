@@ -31,6 +31,13 @@
         <!-- </div> -->
       </div>
   </div>
+<div>
+    <highcharts-chart
+    [Highcharts] = "highcharts" 
+    [options] = "chartOptions" 
+    style = "width: 100%; height: 400px; display: block;">
+ </highcharts-chart>
+</div>
 
 
 
@@ -46,23 +53,25 @@
     <dd class="percentage percentage-2"><span class="text">Android 4.4: 2%</span></dd> -->
   </dl>
 
-  <!-- <div>
-    <canvas
-        baseChart
-        [chartType]="'pie'"
-        [datasets]="pieChartData"
-        [labels]="pieChartLabels"
-        [options]="pieChartOptions"
-        [legend]="true"
-        [colors]="pieChartColor"
-        (chartClick)="onChartClick($event)">
-    </canvas>
-  </div> -->
-  <!-- <hr class="mb-5"/>
 
-    <div>
-      <canvas id="pieChart" style="max-width: 500px;"></canvas>
-    </div> -->
+  
+
+  <!-- <div class="container"> -->
+    <!-- <div class="col-sm-4 text-center" style="width:500px;height:600px;">
+      <h2 class="text-center">Bar chart using Chartjs and Angular 9</h2>
+    <canvas baseChart 
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [colors]="barChartColors"
+    [chartType]="barChartType">
+  </canvas>
+  </div> -->
+<!-- </div> -->
+
+
   
 
   

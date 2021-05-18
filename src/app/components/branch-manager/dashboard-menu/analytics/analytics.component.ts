@@ -6,7 +6,10 @@ import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
-import * as Chart from 'chart.js';
+// import { ChartsModule } from 'ng2-charts';
+// import * as Chart from 'chart.js';
+import * as Highcharts from 'highcharts'
+
 @UntilDestroy({ checkProperties: true })
 
 /** Analytics Component */
@@ -17,11 +20,15 @@ import * as Chart from 'chart.js';
 })
 export class AnalyticsComponent implements OnInit {
 
+  highcharts = Highcharts;
+   chartOptions = {   
+}
   isfield:Boolean = true;
   isbranch:Boolean = false;
   analyticsData:[];
   analyticsEnquiryData : any;
   analyticsCusOnboardData : any;
+  analyticsOverallData: any;
   // this.analyticsData = 
 
   constructor(private router: Router,private crudService: CrudService) { }
@@ -30,6 +37,70 @@ export class AnalyticsComponent implements OnInit {
     this.getAnalytics();
     this.getAnalyticsEnquiry();
     this.getAnalyticsCustomerOnboard()
+    this.getOverallData()
+    
+    this.chartOptions = { 
+    chart: {
+      type: 'column',
+      height: 150,
+      width: 400
+    },
+    title: {
+      text: ''
+    },
+    accessibility: {
+      announceNewData: {
+        enabled: true
+      }
+    },
+    xAxis: {
+      type: 'category'
+    },
+    yAxis: {
+      title: {
+        text: ''
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    plotOptions: {
+      series: {
+        borderWidth: 0,
+        dataLabels: {
+          enabled: true,
+          format: '{point.y:.0f}'
+        }
+      }
+    },
+
+    tooltip: {
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b> of total<br/>'
+    },
+
+    series: [
+      {
+        name: "Sheets",
+        colorByPoint: true,
+        type: undefined,
+        data: [
+          {
+            name:"test1",
+            y: "100",
+            color: '#283250'
+          },
+         
+          {
+            name: "test2",
+            y: "112",
+            color: '#b33535'
+          }
+
+        ]
+      }
+    ] 
+    };
   }
 
   // public pieChartLabels:string[] = ['Chrome', 'Safari', 'Firefox','Internet Explorer','Other'];
@@ -91,6 +162,19 @@ export class AnalyticsComponent implements OnInit {
       console.log(this.analyticsCusOnboardData)
     })
   }
+
+  getOverallData(){
+    this.crudService.get(`${appModels.ANALYTICS_OVERALL_DATA}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      // console.log(data);
+      this.analyticsOverallData = data;
+      console.log("analyticsOverallData")
+      console.log(this.analyticsOverallData)
+    })
+  }
 //   public chartType: string = 'pie';
 
 //   public chartDatasets: Array<any> = [
@@ -146,5 +230,6 @@ export class AnalyticsComponent implements OnInit {
 //         responsive: true
 //       }
 //     });
+
 
 }
