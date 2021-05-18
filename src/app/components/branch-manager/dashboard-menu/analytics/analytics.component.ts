@@ -20,9 +20,8 @@ import * as Highcharts from 'highcharts'
 })
 export class AnalyticsComponent implements OnInit {
 
-  highcharts = Highcharts;
-   chartOptions = {   
-}
+  Highcharts: typeof Highcharts = Highcharts;
+
   isfield:Boolean = true;
   isbranch:Boolean = false;
   analyticsData:[];
@@ -39,14 +38,15 @@ export class AnalyticsComponent implements OnInit {
     this.getAnalyticsCustomerOnboard()
     this.getOverallData()
     
-    this.chartOptions = { 
-    chart: {
+    setInterval(() => {
+    Highcharts.chart('graph1', {
+     chart: {
       type: 'column',
       height: 150,
       width: 400
     },
     title: {
-      text: ''
+      text: 'tests'
     },
     accessibility: {
       announceNewData: {
@@ -58,7 +58,7 @@ export class AnalyticsComponent implements OnInit {
     },
     yAxis: {
       title: {
-        text: ''
+        text: 'test'
       }
     },
     legend: {
@@ -87,20 +87,21 @@ export class AnalyticsComponent implements OnInit {
         data: [
           {
             name:"test1",
-            y: "100",
+            y: 100,
             color: '#283250'
           },
          
           {
             name: "test2",
-            y: "112",
+            y: 112,
             color: '#b33535'
           }
 
         ]
       }
     ] 
-    };
+    });
+  }, 10);
   }
 
   // public pieChartLabels:string[] = ['Chrome', 'Safari', 'Firefox','Internet Explorer','Other'];

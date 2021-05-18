@@ -20,6 +20,12 @@ import { ValidateEqualModule } from 'ng-validate-equal';
 
 /** Custom Charts  */
 import * as Highcharts from 'highcharts';
+import HC_more from 'highcharts/highcharts-more';
+HC_more(Highcharts);
+
+import HC_solidgauge from 'highcharts/modules/solid-gauge';
+HC_solidgauge(Highcharts);
+
 import { HighchartsChartModule } from 'highcharts-angular';
 
 
