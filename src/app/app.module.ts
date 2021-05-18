@@ -27,7 +27,7 @@ import { DatePipe } from '@angular/common';
 import { AngularFireModule } from '@angular/fire'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireStorageModule } from '@angular/fire/storage'
-import { AngularFireAuthModule } from '@angular/fire/auth'
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 /** Custom Fire Base Config */
 const firebaseConfig = {

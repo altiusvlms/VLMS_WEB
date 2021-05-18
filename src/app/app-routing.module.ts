@@ -44,6 +44,15 @@ const routes: Routes = [
       )
   },
 
+/** Cashier Routes */
+{
+  path: "cashier",
+  loadChildren: () =>
+    import("./components/cashier/dashboard/dashboard.module").then(
+      d => d.DashboardModule
+    )
+},
+
 
   {
     path: "**",
