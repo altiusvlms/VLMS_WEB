@@ -18,6 +18,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+import { ValidateEqualModule } from 'ng-validate-equal';
 @UntilDestroy({ checkProperties: true })
 
 /** Customer Enroll List Component */
@@ -94,6 +95,8 @@ export class CreateEnroll {
   editDataTask : any;
   editIcon : Boolean = false;
   assignToName: any;
+  submitted: Boolean = false;
+
 
   Genders: any = ['Male', 'Female', 'Others',];
   Applicants:any = ['salaried','Business','Own Business'];
@@ -136,8 +139,8 @@ export class CreateEnroll {
     /** Create Customer Enrolment Form */
     createCustomerEnrolForms = new FormGroup({
       Customerphoto: new FormControl(''),
-      customerName: new FormControl(''),
-      mobileNumber: new FormControl(''),
+      customerName: new FormControl('', Validators.required),
+      mobileNumber: new FormControl('', Validators.required),
       alternateMobileNumber: new FormControl(''),
       dob: new FormControl(''),
       dateFormat: new FormControl("dd MMMM yyyy"),
@@ -189,6 +192,7 @@ enrollid:any;
 
    /** Save Customer Enrolment */
    saveCustomerEnrolment(){
+    this.submitted = true;
     if (this.editDataTask) {
       this.createCustomerEnrolForms.value.dueDate=this.datepipe.transform(this.createCustomerEnrolForms.value.dueDate, 'dd MMMM yyyy');
       this.crudService.update(`${appModels.FIELDEXECUTIVE}/updateEnroll`,this.createCustomerEnrolForms.value,

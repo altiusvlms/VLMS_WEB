@@ -85,17 +85,18 @@
         <div class="modal-body">
     <form [formGroup]="AddExecutiveForms" >
             <div>
-                <label>Select field Executive</label>
                 <select formControlName="Field_Executive" class="form-control">
                     <option>Field Executive</option>
                     <option *ngFor="let Executive of Executives">{{Executive}}</option>
                   </select>
                </div>
             
-            <div>
-                <label>Cost Limit</label>
-                <input type="text"  formControlName="Cost_Limit"  class="form-control">
-            </div>
+            <div >
+              <mat-form-field  appearance="outline"   class="example-full-width" >
+                <mat-label>Cost Limit</mat-label>
+                <input matInput  type='text'  formControlName="Cost_Limit" >
+              </mat-form-field>
+          </div>
                </form>
         </div>
         <div class="modal-footer">
@@ -128,18 +129,26 @@
                 <label>Req On:</label>
                       20 jan 2021
                </div>
-            <div>
-                <label>Req Amount</label>
-                <input type="text"  formControlName="Req_Amount"  class="form-control">
-            </div>
-            <div>
-                <label>Approve Amount</label>
-                <input type="text"  formControlName="Approve_Amount"  class="form-control">
-            </div>
-            <div>
-                <label>Notes</label>
-                <input type="text"  formControlName="Notes"  class="form-control">
-            </div>
+            
+            <div >
+              <mat-form-field  appearance="outline"   class="example-full-width" >
+                <mat-label>Req Amount</mat-label>
+                <input matInput  type='text'  formControlName="Req_Amount" >
+              </mat-form-field>
+          </div>
+          <div >
+            <mat-form-field  appearance="outline"   class="example-full-width" >
+              <mat-label>Approve Amount</mat-label>
+              <input matInput  type='text'  formControlName="Approve_Amount" >
+            </mat-form-field>
+        </div>
+        <div >
+          <mat-form-field  appearance="outline"   class="example-full-width" >
+            <mat-label>Notes</mat-label>
+            <input matInput  type='text'  formControlName="Notes" >
+          </mat-form-field>
+      </div>
+
                </form>
         </div>
         <div class="modal-footer">
