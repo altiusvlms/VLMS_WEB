@@ -1,135 +1,152 @@
+
+<!-- /** Create Customer Enrolment Model*/ -->
 <div class="container">
-    <form [formGroup]="createenrollForms" >
-    <button type="button" class="close" aria-label="Close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
 
-    <div *ngIf="data">
-        <span  class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span>
-        <span *ngIf="!editIcon" class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
-    </div>
-        <!-- <div> 
-          <label>Customer Images:
-            <span class="required-field">*</span>
-            <input #file type="file" accept='image/*' formControlName="Customerphoto" (change)="uploadCoAppIdProofImages($event)" />
-            <img [src] ="enrollImgUrl ? enrollImgUrl : 'assets/images/empty_image.png'" >
-          </label>
-        </div> -->
-        <div>
-            <label>Customer Name</label>
-            <input type="text"  formControlName="customerName"  class="form-control">
-        </div>
-        
-<!-- <div>
-<label>Mobile Numbers</label>   
+  <form [formGroup]="createCustomerEnrolForms" >
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div *ngIf="data">
+    <span  class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span>
+    <span *ngIf="!editIcon" class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
 </div>
-<div>
-        <input type="text" class="input_field" placeholder="+91"  maxlength="3" disabled>
-<input type="text" formControlName="mobileNumber"  class="form-control" placeholder="9865465476"  maxlength="10">
+<div class="row" >
 
-<div id="recaptcha-container"></div>
+          <div class="col-4 col-sm-4" > 
+            <label>Customer Images:
+              <span class="required-field">*</span>
+              <input #file type="file" accept='image/*' formControlName="Customerphoto"   (change)="uploadApplicantImages($event)" />
+              <img [src] ="enrollImgUrl ? enrollImgUrl : 'assets/images/empty_image.png'" >
+            </label>
+          </div>
+          <div  class="col-4 col-sm-4">
+              <mat-form-field appearance="outline" class="example-full-width" >
+                <mat-label>customerName</mat-label>
+                <input matInput type='text' formControlName="customerName"   autocomplete="off" [ngClass]="{ 'is-invalid': submitted && createCustomerEnrolForms.controls.vehicleNumber.errors  }">
+            </mat-form-field>
+            <div *ngIf="createCustomerEnrolForms.controls['customerName'].invalid && (createCustomerEnrolForms.controls['customerName'].dirty || createCustomerEnrolForms.controls['customerName'].touched)" class="alert alert-danger">
+              <div *ngIf="createCustomerEnrolForms.controls['customerName'].errors.required">
+                  Please enter customerName!
+              </div>
+          </div>
+            </div>
+          <div class="col-4 col-sm-4">
+
+            <mat-form-field appearance="outline" class="example-full-width" >
+              <mat-label>mobileNumber</mat-label>
+              <input matInput type='text' formControlName="mobileNumber"  placeholder="9865465476"  maxlength="10" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && createCustomerEnrolForms.controls.vehicleNumber.errors  }">
+          </mat-form-field>
+          <div *ngIf="createCustomerEnrolForms.controls['mobileNumber'].invalid && (createCustomerEnrolForms.controls['mobileNumber'].dirty || createCustomerEnrolForms.controls['mobileNumber'].touched)" class="alert alert-danger">
+            <div *ngIf="createCustomerEnrolForms.controls['mobileNumber'].errors.required">
+                Please enter mobileNumber!
+            </div>
+        </div>
+                <!-- <label>Mobile Numbers</label>   
+           
+               <input type="text" formControlName="mobileNumber"  class="form-control" placeholder="9865465476"  maxlength="10"> -->
+
+           <div id="recaptcha-container"></div>
 
 
 <button (click)="sendLoginCode()" >SMS Text Login Code</button>
 
 <div *ngIf="windowRef.confirmationResult">
-<hr>
-<label for="code">Enter your Verification Code Here</label><br>
-<input type="text" name="code" [(ngModel)]="verificationCode" [ngModelOptions]="{standalone: true}">
-           <button (click)="verifyLoginCode()">Verify</button>
-   </div>
-     <div *ngIf="user">
-               <p>your phone verified sucessfully</p>
-    </div>
+  <hr>
+  <label  for="code">Enter your Verification Code Here</label><br>
+  <input class="col-4 col-sm-4" type="text" name="code" [(ngModel)]="verificationCode" [ngModelOptions]="{standalone: true}">
+             <button (click)="verifyLoginCode()">Verify</button>
+     </div>
+       <div *ngIf="user">
+                 <p>your phone verified sucessfully</p>
       </div>
-      
-        <div>    
-            <label>Alternative Mobile Number</label>
-            <input type="text"  formControlName="alternateMobileNumber"  class="form-control">
         </div>
-        <div>    
-            <label>D.O.B</label>
-            <input type="date"  formControlName="dob"  class="form-control">
-        </div> -->
-        <div>    
-            <label>Father's Name</label>
-            <input type="text"  formControlName="fatherName"  class="form-control">
-        </div>
-        <!-- <div>
-          <label>Gender</label>
-        <select formControlName="gender" class="form-control">
-          <option>Choose options</option>
-          <option *ngFor="let Gender of Genders">{{Gender}}</option>
-        </select>
-        </div>
-        <div>
-          <label>Applicant Type</label>
-        <select formControlName="applicantType" class="form-control">
-          <option>Choose options</option>
-          <option *ngFor="let Applicant of Applicants">{{Applicant}}</option>
-        </select>
-        </div>
-        <div> 
-          <label>ID Proof1:
-            <select formControlName="proof1" class="form-control">
-              <option >choose Options</option>
-              <option *ngFor="let ID1 of ID1s">{{ID1}}</option>
-            </select>
-            <span class="required-field">*</span>
-            <input #file type="file" accept='image/*' (change)="uploadImages($event)"   />
-          </label>
-        </div>
-        <div> 
-          <label>ID Proof2:
-            <select formControlName="proof2" class="form-control">
-              <option >choose Options</option>
-              <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
-            </select>
-            <span class="required-field">*</span>
-            <input #file type="file" accept='image/*' (change)="uploadImages2($event)"   />
-          </label>
-        </div> -->
-        <div>
-            <button type="button" class="btn btn-secondary"  (click)="close()">Close</button>
-            <button type="button" class="btn btn-primary"  (click)="saveUpdateTask()" > {{editDataTask ? 'Update' : 'Save'}}
-            </button>
+        
+          <!-- <div class="col-4 col-sm-4">    
+              <label>Alternative Mobile Number</label>
+              <input type="text"  formControlName="alternateMobileNumber"  class="form-control">
+          </div> -->
+          <div  class="col-4 col-sm-4">
+            <mat-form-field appearance="outline" class="example-full-width" >
+              <mat-label>alternateMobileNumber</mat-label>
+              <input matInput type='text' formControlName="alternateMobileNumber"   autocomplete="off" [ngClass]="{ 'is-invalid': submitted && createCustomerEnrolForms.controls.vehicleNumber.errors  }">
+          </mat-form-field>
+          </div>
+          <div  class="col-4 col-sm-4">
+            <mat-form-field appearance="outline" class="example-full-width" >
+              <mat-label>Date of Birth</mat-label>
+              <input matInput type='date' formControlName="dob"   autocomplete="off" [ngClass]="{ 'is-invalid': submitted && createCustomerEnrolForms.controls.vehicleNumber.errors  }">
+          </mat-form-field>
+          </div>
+          <div  class="col-4 col-sm-4">
+            <mat-form-field appearance="outline" class="example-full-width" >
+              <mat-label>Father's Name</mat-label>
+              <input matInput type='text' formControlName="fatherName"   autocomplete="off" [ngClass]="{ 'is-invalid': submitted && createCustomerEnrolForms.controls.vehicleNumber.errors  }">
+          </mat-form-field>
+          </div>
+          <!-- <div class="col-4 col-sm-4">    
+              <label>Father's Name</label>
+              <input type="text"  formControlName="fatherName"  class="form-control">
+          </div> -->
+          
+
+          <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Gender</mat-label>
+            <mat-select  formControlName="gender">
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div *ngIf="createCustomerEnrolForms.controls['gender'].invalid && (createCustomerEnrolForms.controls['gender'].dirty || createCustomerEnrolForms.controls['gender'].touched)" class="alert alert-danger">
+            <div *ngIf="createCustomerEnrolForms.controls['gender'].errors.required">
+                Please select the Gender!
             </div>
-</form>
+        </div></div>
+        <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>applicantType</mat-label>
+          <mat-select  formControlName="applicantType">
+              <mat-option value="salaried">salaried</mat-option>
+              <mat-option value="Business">Business</mat-option>
+          </mat-select>
+      </mat-form-field>
+      <div *ngIf="createCustomerEnrolForms.controls['applicantType'].invalid && (createCustomerEnrolForms.controls['applicantType'].dirty || createCustomerEnrolForms.controls['applicantType'].touched)" class="alert alert-danger">
+          <div *ngIf="createCustomerEnrolForms.controls['applicantType'].errors.required">
+              Please select the applicantType!
+          </div>
+      </div></div>
+          <!-- <div class="col-4 col-sm-4">
+            <label>Applicant Type</label>
+          <select formControlName="applicantType" class="form-control">
+            <option>Choose options</option>
+            <option *ngFor="let Applicant of Applicants">{{Applicant}}</option>
+          </select>
+          </div> -->
+          <div class="col-4 col-sm-4"> 
+            <label>
+              <span class="required-field">*</span>
+              <select formControlName="proof1" class="form-control">
+                <option >ID Proof</option>
+                <option *ngFor="let ID1 of ID1s">{{ID1}}</option>
+              </select>
+              <input #file type="file" accept='image/*' (change)="uploadImages($event)"   />
+              <!-- <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" > -->
+            </label>
+          </div>
+          <div class="col-4 col-sm-4"> 
+            <label>
+              <span class="required-field">*</span>
+              <select formControlName="proof2" class="form-control">
+                <option >ID Proof</option>
+                <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
+              </select>
+              <input #file type="file" accept='image/*' (change)="uploadImages2($event)"   />
+              <!-- <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" > -->
+            </label>
+          </div>
+             <div class="col-12 col-sm-12">
+                 <button type="button" class="btn btn-secondary"  (click)="close()">Close</button>
+                 <button type="button" class="btn btn-primary"  (click)="saveCustomerEnrolment()" > {{editDataTask ? 'Update' : 'Save'}}
+              </button>
+            </div>
+            </div>
+     </form>
 </div>
-        <!-- <div>
-            <label>customerName</label>
-            <input type="text"  formControlName="customerName"  class="form-control"  >
-            
-        </div>
-        <div>
-            <label>mobileNumber</label>
-            <input type="text"  formControlName="mobileNumber"  class="form-control">
-        </div>
-        <div>
-          <label>alternateMobileNumber</label>
-          <input type="text"  formControlName="alternateMobileNumber"  class="form-control">
-      </div>
-        <div>    
-            <label >dob</label>
-            <input type="date"  formControlName="dob"  class="form-control">                            
-        </div>
-        <div>
-            <label>fatherName</label>
-            <input type="text" formControlName="fatherName"  class="form-control" >
-        </div>
-        <div>
-            <label>gender</label>
-            <input type="text"  formControlName="gender"  class="form-control">
-            
-        </div>
-        <div>
-            <label>applicantType</label>
-            <textarea type="text"  formControlName="applicantType"  class="form-control">
-            </textarea>
-        </div>
-    <div>
-    <button type="button" class="btn btn-secondary"  (click)="close()">Close</button>
-    <button type="button" class="btn btn-primary"  (click)="saveUpdateTask()" > {{editDataTask ? 'Update' : 'Save'}}
-    </button>
-    </div>
-  </form> -->

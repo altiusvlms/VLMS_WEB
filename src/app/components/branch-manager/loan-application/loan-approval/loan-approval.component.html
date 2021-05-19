@@ -79,14 +79,20 @@
       </div>
       <div class="modal-body">
   <form [formGroup]="requestForms" >
-          <div>
-              <label>Cash Limit</label>
-              <input type="text"  formControlName="Cash_Limit"  class="form-control">
-          </div>
-          <div>
-              <label>Notes</label>
-              <input type="text"  formControlName="Notes"  class="form-control">
-          </div>
+          
+          <div >
+            <mat-form-field  appearance="outline"   class="example-full-width" >
+              <mat-label>Cash Limit</mat-label>
+              <input matInput  type='text'  formControlName="Cash_Limit" >
+            </mat-form-field>
+        </div>
+        <div >
+          <mat-form-field  appearance="outline"   class="example-full-width" >
+            <mat-label>Notes</mat-label>
+            <input matInput  type='Notes'  formControlName="Notes" >
+          </mat-form-field>
+      </div>
+          
              </form>
       </div>
       <div class="modal-footer">

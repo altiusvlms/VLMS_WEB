@@ -41,6 +41,7 @@ export class TaskManagementComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
       this.taskListData= data;
+      console.log(data);
       this.sharedService.setLoaderShownProperty(false);  
     })
   }
@@ -52,6 +53,7 @@ export class TaskManagementComponent implements OnInit {
       height: '90vh',
       data: task ? task : null
     });
+    console.log(task)
   
     dialogRef.afterClosed().subscribe((data : any) => {
       if (data) {
@@ -81,7 +83,7 @@ export class CreateTask {
 
   constructor(public dialogRef: MatDialogRef<CreateTask>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private formBuilder: FormBuilder,
     private crudService: CrudService,
-    private sharedService: SharedService,public datepipe: DatePipe) {
+    private sharedService: SharedService,public datepipe: DatePipe) { 
     if (data) {
       console.log(data)
       this.editDataTask = { ...data };
@@ -124,6 +126,8 @@ export class CreateTask {
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
      this.assignToName = response;
+     console.log(response);
+     
     })
   }
 

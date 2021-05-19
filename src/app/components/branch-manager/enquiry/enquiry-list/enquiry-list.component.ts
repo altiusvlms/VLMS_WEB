@@ -41,6 +41,7 @@ export class EnquiryListComponent implements OnInit {
   showGenerateModel:Boolean = false;
   responseEnquiryId:any;
   EnquiryVerfication_Data:any;
+  unamePattern = "^[A-Z]{2}[ \-][0-9]{2}[ ,][A-Z0-9]{2,3}[ \-][0-9]{4}$"
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private dialog: MatDialog) { }
 
@@ -48,11 +49,10 @@ export class EnquiryListComponent implements OnInit {
     createEnquiryForms = new FormGroup({
       customerName: new FormControl('', Validators.required),
       mobileNumber: new FormControl('', Validators.required),
-      vehicleNumber: new FormControl('', Validators.required),
+      vehicleNumber: new FormControl('',Validators.required),
       email: new FormControl(''),
       enquiryId: new FormControl(''),
     })
-
   ngOnInit(): void {
     this.getEnrollData();
   }

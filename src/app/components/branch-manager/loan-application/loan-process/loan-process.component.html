@@ -51,92 +51,106 @@
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                  <div class="col-4 col-sm-4"><label>Applicant Image:
+                  <div class="col-4 col-sm-4"><label>Applicant Image
                     <img [src]="customerImage ? customerImage : 'assets/images/empty_image.png'" style="width: 50%;object-fit: contain;
                      object-position: center;">
                   </label></div>
-                  <div class="col-4 col-sm-4"><label>Applicant Name:                 
+                  <div class="col-4 col-sm-4">                 
                     <mat-form-field  appearance="outline"  class="example-full-width" >
+                      <mat-label>Applicant Name</mat-label>
                       <input matInput type='text' formControlName="customerName" >
                       </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Mobile Number:                 
+                  </div>
+                  <div class="col-4 col-sm-4">               
                     <mat-form-field appearance="outline"   class="example-full-width">
+                      <mat-label>Applicant Name</mat-label>
                       <input matInput type='text' formControlName="mobileNo"  minlength=10 maxlength=10>
                     </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Alter Mobile Number:                 
+                  </div>
+                  <div class="col-4 col-sm-4">                
                     <mat-form-field appearance="outline"   class="example-full-width">
+                      <mat-label>Alter Mobile Number</mat-label>
                       <input matInput type='text' formControlName="altNumber" minlength=10 maxlength=10>
                     </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Father name:               
+                  </div>
+                  <div class="col-4 col-sm-4">              
                     <mat-form-field  appearance="outline"  class="example-full-width">
+                      <mat-label>Father name</mat-label>
                       <input matInput  type='text' formControlName="fatherName" >
                       </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Applicant Type:        
+                  </div>
+                  <div class="col-4 col-sm-4">       
                     <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Applicant Type</mat-label>
                       <mat-select formControlName="applicantType">
                         <mat-option value="salaried">Salaried</mat-option>
                         <mat-option value="bussiness">Bussiness</mat-option>
                         <mat-option value="professional">Professional</mat-option>
                       </mat-select>
                   </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Company Name:               
+                  </div>
+                  <div class="col-4 col-sm-4">              
                     <mat-form-field  appearance="outline" class="example-full-width">
+                      <mat-label>Company Name</mat-label>
                       <input matInput  type='text' formControlName="companyName" >
                       </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label> Net Monthly Income:              
+                  </div>
+                  <div class="col-4 col-sm-4">              
                     <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Net Monthly Income</mat-label>
                       <input matInput formControlName="monthlyIncome" >
                     </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Gender:  
+                  </div>
+                  <div class="col-4 col-sm-4">  
                     <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Gender</mat-label>
                       <mat-select  formControlName="gender">
                         <mat-option value="male">Male</mat-option>
                         <mat-option value="female">Female</mat-option>
                       </mat-select>
                   </mat-form-field>            
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>DOB:              
+                  </div>
+                  <div class="col-4 col-sm-4">              
                     <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>DOB</mat-label>
                       <input matInput type="date" formControlName="dob" >
                     </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Ref By:          
+                  </div>
+                  <div class="col-4 col-sm-4">         
                     <mat-form-field appearance="outline"  class="example-full-width">
+                      <mat-label>Ref By</mat-label>
                       <input matInput formControlName="refBy" >
                     </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Marital status:  
+                  </div>
+                  <div class="col-4 col-sm-4">  
                     <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Marital status</mat-label>
                       <mat-select  formControlName="maritalStatus">
                         <mat-option value="yes">Yes</mat-option>
                         <mat-option value="no">No</mat-option>
                       </mat-select>
                   </mat-form-field>         
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Spouse Name:         
+                 </div>
+                  <div class="col-4 col-sm-4">        
                     <mat-form-field appearance="outline"  class=" example-full-width">
+                      <mat-label>Spouse Name</mat-label>
                       <input matInput formControlName="spouseName" >
                     </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Salary Date:         
+                  </div>
+                  <div class="col-4 col-sm-4">         
                     <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Salary Date</mat-label>
                       <input matInput type="date" formControlName="salaryDate" >
                     </mat-form-field>
-                  </label></div>
-                  <div class="col-4 col-sm-4"><label>Salary Period:         
+                  </div>
+                  <div class="col-4 col-sm-4">        
                     <mat-radio-group aria-label="Select an option" formControlName="salaryPeriod">
+                      <mat-label>Salary Period</mat-label>
                       <mat-radio-button value="monthly">Monthly</mat-radio-button>
                       <mat-radio-button value="weakly">Weakly</mat-radio-button>
                       <mat-radio-button value="daily">Daily</mat-radio-button>
                     </mat-radio-group>
-                  </label></div>
+                  </div>
                   </div>
                 </div>
               </div>    
@@ -190,53 +204,46 @@
                   </mat-expansion-panel-header>
                   <div class="row">
                     <div class="col-6 col-sm-6">
-                    <label>Address Line1:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line1</mat-label>
                         <input matInput type="text" formControlName="addressLine1" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Address Line2:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line2</mat-label>
                         <input matInput type="text" formControlName="addressLine2" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Area:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Area</mat-label>
                         <input matInput type="text" formControlName="area" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>City:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>City</mat-label>
                         <input matInput type="text" formControlName="city" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Landmark:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Landmark</mat-label>
                         <input matInput type="text" formControlName="landmark" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Pincode:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Pincode</mat-label>
                         <input matInput type="text" formControlName="postalCode" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>State:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>State</mat-label>
                         <input matInput type="text" formControlName="state" >
                       </mat-form-field>
-                    </label>
                   </div>
                 </div>
                 </mat-expansion-panel>
@@ -250,53 +257,46 @@
                   <div class="row">
                               
                     <div class="col-6 col-sm-6">
-                    <label>Address Line1:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line1</mat-label>
                         <input matInput type="text" formControlName="addressLine1" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Address Line2:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line2</mat-label>
                         <input matInput type="text" formControlName="addressLine2" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Area:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Area</mat-label>
                         <input matInput type="text" formControlName="area" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>City:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>City</mat-label>
                         <input matInput type="text" formControlName="city" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Landmark:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Landmark</mat-label>
                         <input matInput type="text" formControlName="landmark" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Pincode:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Pincode</mat-label>
                         <input matInput type="text" formControlName="postalCode" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>State:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>State</mat-label>
                         <input matInput type="text" formControlName="state" >
                       </mat-form-field>
-                    </label>
                   </div>
                 </div>
                 </mat-expansion-panel>
@@ -310,53 +310,46 @@
                   <div class="row">
                               
                     <div class="col-6 col-sm-4">
-                    <label>Address Line1:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line1</mat-label>
                         <input matInput type="text" formControlName="addressLine1" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Address Line2:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line2</mat-label>
                         <input matInput type="text" formControlName="addressLine2" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Area:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Area</mat-label>
                         <input matInput type="text" formControlName="area" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>City:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>City</mat-label>
                         <input matInput type="text" formControlName="city" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Landmark:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Landmark</mat-label>
                         <input matInput type="text" formControlName="landmark" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>Pincode:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Pincode</mat-label>
                         <input matInput type="text" formControlName="postalCode" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div class="col-6 col-sm-6">
-                    <label>State:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>State</mat-label>
                         <input matInput type="text" formControlName="state" >
                       </mat-form-field>
-                    </label>
                   </div>
                 </div>
                 </mat-expansion-panel>
@@ -396,110 +389,97 @@
                   object-position: center;">
                  </label>
               </div>
-              <div class="col-4 col-sm-4"> 
-                <label>Co-Applicant Name:                 
+              <div class="col-4 col-sm-4">                
                   <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <mat-label>Co-Applicant Name</mat-label>
                     <input matInput type='text' formControlName="guarantorName" >
                     </mat-form-field>
-                </label>
               </div>
               <div class="col-4 col-sm-4"> 
-                <label>Mobile Number::                 
                   <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <mat-label>Mobile Number</mat-label>
                     <input matInput type='text' formControlName="mobileNumber" minlength=10 maxlength=10 >
                   </mat-form-field>
-                </label>
               </div>
               <div class="col-4 col-sm-4"> 
-                <label>Alter Mobile Number:               
                   <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <mat-label>Alter Mobile Number</mat-label>
                     <input matInput type='text'  minlength=10 maxlength=10 >
                   </mat-form-field>
-                </label>
               </div>
               <div class="col-4 col-sm-4">
-                <label>Father Name:               
                   <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <mat-label>Father Name</mat-label>
                     <input matInput type='text' >
                   </mat-form-field>
-                </label>
               </div>
               <div class="col-4 col-sm-4">
-                  <label>Gender:  
                     <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Gender</mat-label>
                       <mat-select  formControlName="gender">
                         <mat-option value="male">Male</mat-option>
                         <mat-option value="female">Female</mat-option>
                       </mat-select>
                   </mat-form-field>            
-                  </label>
                 </div>
                 <div class="col-4 col-sm-4">
-                  <label>DOB:              
                     <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>DOB</mat-label>
                       <input matInput type="date" formControlName="dob" >
                     </mat-form-field>
-                  </label>
                 </div>
   
    
                 <div class="col-4 col-sm-4">
-                  <label>Spouse Name:         
                     <mat-form-field appearance="outline"  class=" example-full-width">
+                      <mat-label>Spouse Name</mat-label>
                       <input matInput formControlName="spouseName">
                     </mat-form-field>
-                  </label>
                 </div>
                 <div class="col-4 col-sm-4"> 
-                  <label>Marital status:  
                     <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Marital status</mat-label>
                       <mat-select formControlName="maritalStatus">
                         <mat-option value="yes">Yes</mat-option>
                         <mat-option value="no">No</mat-option>
                       </mat-select>
                   </mat-form-field>         
-                  </label>
                 </div>
                 <div class="col-4 col-sm-4">
-                <label>Co-Applicant Type:               
                   <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <mat-label>Co-Applicant Type</mat-label>
                     <mat-select >
                       <mat-option value="salaried">Salaried</mat-option>
                       <mat-option value="bussiness">Bussiness</mat-option>
                       <mat-option value="professional">Professional</mat-option>
                     </mat-select>                      
                  </mat-form-field>
-                </label>
               </div>
               <div class="col-4 col-sm-4">
-                <label>Company Name:               
                   <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <mat-label>Company Name</mat-label>
                     <input matInput type='text'>
                   </mat-form-field>
-                </label>
               </div>
               <div class="col-4 col-sm-4">
-                <label>Net Monthly Income:               
                   <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <mat-label>Net Monthly Income</mat-label>
                     <input matInput type='text' >
                   </mat-form-field>
-                </label>
               </div>
               <div class="col-4 col-sm-4">
-                <label>Salary Date:         
                   <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Salary Date</mat-label>
                     <input matInput type="date" >
                   </mat-form-field>
-                </label>
               </div>
               <div class="col-4 col-sm-4">
-                <label>Salary Period:         
                   <mat-radio-group aria-label="Select an option" >
+                    <mat-label>Salary Period</mat-label>
                     <mat-radio-button value="monthly">Monthly</mat-radio-button>
                     <mat-radio-button value="weakly">Weakly</mat-radio-button>
                     <mat-radio-button value="daily">Daily</mat-radio-button>
                   </mat-radio-group>
-                </label>
               </div>
               </div></div></div>
           
@@ -551,159 +531,138 @@
                   <button class="btn btn-primary" (click)="officeAddress()">Office Address</button>
                 </div>
                   <div class="col-sm-2" formGroupName="communicationAdd" *ngIf="showCommunication">Communication Address:
-                  <div> 
-                    <label>Address Line1:         
+                  <div  > 
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line1</mat-label>
                         <input matInput type="text" formControlName="addressLine1">
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>Address Line2:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line2</mat-label>
                         <input matInput type="text" formControlName="addressLine2">
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>Area:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Area</mat-label>
                         <input matInput type="text" formControlName="area">
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>City:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>City</mat-label>
                         <input matInput type="text" formControlName="city">
                       </mat-form-field>
-                    </label>
                   </div>
               
                   <div> 
-                    <label>Landmark:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Landmark</mat-label>
                         <input matInput type="text" formControlName="landmark">
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>Pincode:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Pincode</mat-label>
                         <input matInput type="text" formControlName="postalCode">
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>State:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>State</mat-label>
                         <input matInput type="text" formControlName="state">
                       </mat-form-field>
-                    </label>
                   </div>
                   </div>
                   <div class="col-sm-2" formGroupName="permanentAdd"  *ngIf="showPermanent" >Permanent Address:
                   <div> 
-                    <label>Address Line1:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line1</mat-label>
                         <input matInput type="text" formControlName="addressLine1">
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>Address Line2:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line2</mat-label>
                         <input matInput type="text" formControlName="addressLine2" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>Area:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Area</mat-label>
                         <input matInput type="text" formControlName="area" >
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>City:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>City</mat-label>
                         <input matInput type="text" formControlName="city">
                       </mat-form-field>
-                    </label>
                   </div>
                  
                   <div> 
-                    <label>Landmark:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Landmark</mat-label>
                         <input matInput type="text"  formControlName="landmark">
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>Pincode:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Pincode</mat-label>
                         <input matInput type="text" formControlName="postalCode">
                       </mat-form-field>
-                    </label>
                   </div>
                   <div> 
-                    <label>State:         
                       <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>State</mat-label>
                         <input matInput type="text" formControlName="state">
                       </mat-form-field>
-                    </label>
                   </div>
                   </div>
                   <div class="col-sm-2" formGroupName="officeAdd" *ngIf="showOffice" >Office Address:
                     <div> 
-                      <label>Address Line1:         
                         <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Address Line1</mat-label>
                           <input matInput type="text" formControlName="addressLine1" >
                         </mat-form-field>
-                      </label>
                     </div>
                     <div> 
-                      <label>Address Line2:         
                         <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Address Line2</mat-label>
                           <input matInput type="text" formControlName="addressLine2">
                         </mat-form-field>
-                      </label>
                     </div>
                     <div> 
-                      <label>Area:         
                         <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Area</mat-label>
                           <input matInput type="text" formControlName="area" >
                         </mat-form-field>
-                      </label>
                     </div>
                     <div> 
-                      <label>City:         
                         <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>City</mat-label>
                           <input matInput type="text" formControlName="city">
                         </mat-form-field>
-                      </label>
                     </div>
                   
                     <div> 
-                      <label>Landmark:         
                         <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Landmark</mat-label>
                           <input matInput type="text"  formControlName="landmark">
                         </mat-form-field>
-                      </label>
                     </div>
                     <div> 
-                      <label>Pincode:         
                         <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Pincode</mat-label>
                           <input matInput type="text" formControlName="postalCode">
                         </mat-form-field>
-                      </label>
                     </div>
                     <div> 
-                      <label>State:         
                         <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>State</mat-label>
                           <input matInput type="text" formControlName="state" >
                         </mat-form-field>
-                      </label>
                     </div>
                   </div>
             </form>
@@ -738,92 +697,79 @@
 
 
             <div class="col-4 col-sm-4">
-                  <label>Vehicle Number:                  
                     <mat-form-field  appearance="outline" class="example-full-width">
+                      <mat-label>Vehicle Number</mat-label>
                       <input matInput type='text'  formControlName="vehicleNumber" >
                       </mat-form-field>
-              
-                  </label>
-                </div>
+                      </div>
                 <div class="col-4 col-sm-4">
-                <label>Model:
                   <mat-form-field  appearance="outline" class="example-full-width">
+                    <mat-label>Model</mat-label>
                     <input matInput  type='text'formControlName="model"  >
                     </mat-form-field>
-                   
-                    </label>
-                </div>
+                    </div>
                 <div class="col-4 col-sm-4">
-                  <label>MFG Year:
                     <mat-form-field  appearance="outline" class="example-full-width" >
+                      <mat-label>MFG Year</mat-label>
                       <input matInput  type='text' formControlName="mfgYear" >  
                     </mat-form-field>
-                 
-                    </label>
-                </div>
+                    </div>
                 <div class="col-4 col-sm-4">
-                  <label>Engine Number:
                     <mat-form-field  appearance="outline" class="example-full-width"  >
+                      <mat-label>Engine Number</mat-label>
                       <input matInput  type='text' formControlName="engineNumber" > 
                     </mat-form-field>
-                    </label>
                 </div>
                 <div class="col-4 col-sm-4">
-                  <label>Chassis Number:
                     <mat-form-field appearance="outline" class="example-full-width"  >
+                      <mat-label>Chassis Number</mat-label>
                       <input matInput  type='text'formControlName="chassisNumber" >  
                     </mat-form-field>
-                    </label>
                 </div>
                 <div class="col-4 col-sm-4">
-                  <label>Insurence Company:
                     <mat-form-field appearance="outline" class="example-full-width" >
+                      <mat-label>Insurence Company</mat-label>
                       <input matInput type='text' formControlName="insuranceCompany"  >
                     </mat-form-field>
-                    </label>
                 </div>
                 <div class="col-4 col-sm-4">
-                  <label>Insurence Policy:
                     <mat-form-field  appearance="outline" class="example-full-width">
+                      <mat-label>Insurence Policy</mat-label>
                       <input matInput  type='text' formControlName="insurancePolicy"  >
                       </mat-form-field>
-                    </label>
                 </div>
                 <div class="col-4 col-sm-4">
-                  <label>Insurence Expire on:
                     <mat-form-field appearance="outline" class="example-full-width" >
+                      <mat-label>Insurence Expire on</mat-label>
                       <input matInput  type='date'   >
                     </mat-form-field>
-                    </label>
                 </div>
                 <div class="col-4 col-sm-4">
-                  <label>Live KM Reading:
                     <mat-form-field appearance="outline" class="example-full-width" >
+                      <mat-label>Live KM Reading</mat-label>
                       <input matInput  type='text' formControlName="kmReading"  >
                     </mat-form-field>
-                    </label>
                 </div>
   
   
 
                 <div class="col-4 col-sm-4"> 
-                <label>Make:</label>
                   <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Make</mat-label>
                     <input matInput type='text' formControlName="maker" >
                   </mat-form-field>
               </div>
               <div class="col-4 col-sm-4">
-                <label>Colour:</label>
                   <mat-form-field appearance="outline" class="example-full-width" >
+                    <mat-label>Colour</mat-label>
                     <input matInput  type='text'  formControlName="color" >
                   </mat-form-field>
               </div>
               <div class="col-4 col-sm-4">
-                <label>No of Owner:
                   <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>No of Owner</mat-label>
                     <input matInput type='text'  >
                   </mat-form-field>
-                  </label>
               </div>
               <div class="col-4 col-sm-4">
                 <label>Engine Image:
@@ -905,60 +851,52 @@
           <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editLoanDetails()">edit</span>
           <div class="row">
             <div class="col-4 col-sm-4"> 
-              <label>Loan Amount:               
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Loan Amount</mat-label>
                   <input matInput type='text' formControlName="loanAmount" >
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Loan Term:               
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Loan Term</mat-label>
                   <input matInput type='text' formControlName="loanTerm" >
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>EMI Amount:               
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>EMI Amount</mat-label>
                   <input matInput type='text'  formControlName="emi" >
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Intrest:               
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Intrest</mat-label>
                   <input matInput  type='text'   formControlName="loanInterest" >
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Intrest Amount:               
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Intrest Amount</mat-label>
                   <input matInput  type='text'   formControlName="interestInr"  >
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Due Date:               
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Due Date</mat-label>
                   <input matInput  type='date'  formControlName="dueDate" >
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Doc Charge:              
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Doc Charge</mat-label>
                   <input matInput  type='text' formControlName="docCharge">
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Processing Charge:               
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Processing Charge</mat-label>
                   <input matInput type='text'  formControlName="processingCharge">
                 </mat-form-field>
-              </label>
             </div>
             <!-- <div> 
               <label>Pending Doc:               
@@ -1007,25 +945,22 @@
               </label>
             </div> -->
             <div class="col-4 col-sm-4">
-              <label>Closing A/C:             
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Closing A/C</mat-label>
                   <input matInput  type='text' formControlName="closingAC">
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Closing Discount:              
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Closing Discount</mat-label>
                   <input matInput  type='text' formControlName="closingDiscount">
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Pay Out:              
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Pay Out</mat-label>
                   <input matInput  type='text' formControlName="payout">
                 </mat-form-field>
-              </label>
             </div>
             <!-- <div> 
               <label>Re-payment Mode:              
@@ -1094,65 +1029,57 @@
         <div class="row">
 
           <div class="col-4 col-sm-4"> 
-              <label>Amount:                 
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Amount</mat-label>
                   <input matInput type='text' formControlName="loanEligibleAmount">
                   </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4"> 
-              <label>Account Type:
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Account Type</mat-label>
                     <input matInput type='text' formControlName="accountType" >
               </mat-form-field>  
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Disbursal Type:   
                 <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Disbursal Type</mat-label>
                   <mat-select formControlNam="disbursalType" >
                     <mat-option value="cash">Cash</mat-option>
                     <mat-option value="netbanking">IMPS</mat-option>
                   </mat-select>
               </mat-form-field>        
-              </label>
             </div>
             <div class="col-4 col-sm-4"> 
-              <label>Account Number:                 
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Account Number</mat-label>
                   <input matInput type='text'formControlName="accountNumber" >
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Account Holder Name:                 
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Account Holder Name</mat-label>
                   <input matInput type='text' formControlName="accountHolderName">
                 </mat-form-field>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>IFSC:                 
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>IFSC</mat-label>
                   <input matInput  type='text' formControlName="IFSC">
                 </mat-form-field>
                 <span>Don't know IFSC choose bank & branch</span>
-              </label>
             </div>
             <div class="col-4 col-sm-4">
-              <label>Bank Name:                 
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Bank Name</mat-label>
                   <input matInput  type='text' formControlName="bankName">
                 </mat-form-field>
-              </label>
             </div>
 
             <div class="col-4 col-sm-4">
-              <label>Branch Name:                 
                 <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Branch Name</mat-label>
                   <input matInput  type='text' formControlName="branchName">
                 </mat-form-field>
-              </label>
             </div>
 
           <!-- <div class="col-sm-2" style="margin-left: 50%;">
