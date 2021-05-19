@@ -1,17 +1,12 @@
 
 
   <div class="container">
-
-    <button mat-button [matMenuTriggerFor]="belowMenu">Below</button>
-<mat-menu #belowMenu="matMenu" yPosition="below">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
-
-      <p>Loan Application</p>
+    <div class="header_title">
+      <h2>Loan Application</h2>
+      </div>
     <div class="row">
-    <div class="col-sm-2">
-      <button type="button"  (click)="advancedSearch()">
+    <div class="col-sm-4">
+      <button  class="btn_blue" type="button"  (click)="advancedSearch()">
         Advanced Search
        </button> 
     </div>
@@ -27,85 +22,94 @@
       
       <div class="row" style="margin-top: 10px;">
         <div class="col-sm-3">
-          <div>
-             <input type="text" placeholder="Account Number"  formControlName="accountNo"  (keyup)="applyFilter($event, 'accountnumber')" class="form-control">
-          </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Account Number</mat-label>
+            <input matInput formControlName="accountNo"  (keyup)="applyFilter($event, 'accountnumber')" >
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-          <div>
-            <input type="text" placeholder="Customer Name" formControlName="customerName"  (keyup)="applyFilter($event , 'name')"  class="form-control" >
-          </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Customer Name</mat-label>
+            <input matInput formControlName="customerName"  (keyup)="applyFilter($event , 'name')" >
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-            <div>
-            <input type="text" placeholder="Vehicle Model" formControlName="vehiclemodel" (keyup)="applyFilter($event, 'model')"  class="form-control">
-            </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Vehicle Model</mat-label>
+            <input matInput formControlName="vehiclemodel"   (keyup)="applyFilter($event, 'model')" >
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-            <div>
-                <input type="text" placeholder="Vehicle Number"  formControlName="vehicleNo" (keyup)="applyFilter($event, 'vehicleno')" class="form-control">
-            </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Vehicle Number</mat-label>
+            <input matInput formControlName="vehicleNo"   (keyup)="applyFilter($event, 'vehicleno')" >
+          </mat-form-field>
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
         <div class="col-sm-3">
-            <div>
-                <input type="text" placeholder="Customer Mobile No" formControlName="customerMobileNo" (keyup)="applyFilter($event, 'mobileno')"  class="form-control">
-            </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Customer Mobile No</mat-label>
+            <input matInput formControlName="customerMobileNo"  (keyup)="applyFilter($event, 'mobileno')" >
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-            <div>
-                <input type="text" placeholder="Chassis No" formControlName="chassisNo" (keyup)="applyFilter($event, 'chassisno')" class="form-control">
-            </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Chassis No</mat-label>
+            <input matInput formControlName="chassisNo"  (keyup)="applyFilter($event, 'chassisno')" >
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-          <div>
-              <input type="text" placeholder="loan Amount" formControlName="loanAmount" (keyup)="applyFilter($event,'loanamount')" class="form-control">
-          </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>loan Amount</mat-label>
+            <input matInput formControlName="loanAmount" (keyup)="applyFilter($event,'loanamount')" >
+          </mat-form-field>
         </div>
         
         <div class="col-sm-3">
-            <div>
-                <input type="text" placeholder="ID Proof" formControlName="idProof"  class="form-control">
-            </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>ID Proof</mat-label>
+            <input matInput formControlName="idProof" >
+          </mat-form-field>
         </div>
-     
     </div>
     <div class="row" style="margin-top: 10px;">
 
         <div class="col-sm-3">
-            <div>
-                <input type="text" placeholder="Area"  class="form-control">
-            </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Area</mat-label>
+            <input matInput  >
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-            <div>
-                <input type="text" placeholder="Dealer"  class="form-control">
-            </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Dealer</mat-label>
+            <input matInput >
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-            <div>
-               <select class="form-control">
-                  <option value="">Select Loan Status</option>
-                  <option value="live">live</option>
-                  <option value="Terminated">Terminated</option>
-                  <option value="Closed">Closed</option>
-               </select>            
-            </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Select Loan Status</mat-label>
+            <mat-select>
+                <mat-option value="live">live</mat-option>
+                <mat-option value="terminated">Terminated</mat-option>
+                <mat-option value="closed">Closed</mat-option>
+            </mat-select>
+        </mat-form-field>
         </div>
         <div class="col-sm-3">
-            <div>
-              <select  class="form-control">
-                <option value="">Select No of Due</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>            
-            </div>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Select No of Due</mat-label>
+            <mat-select>
+                <mat-option value="1">1</mat-option>
+                <mat-option value="2">2</mat-option>
+            </mat-select>
+        </mat-form-field>
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
-      <button *ngIf="showSearchbtn" type="button"  class="btn btn-secondary" (click)="searchdata()">Search</button>
-      <button type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
+      <button  *ngIf="showSearchbtn" type="button"  class="btn btn-secondary" (click)="searchdata()">Search</button>
+      <button  type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
     </div>
   </form>
    </div></div>
