@@ -2,23 +2,29 @@
 <!-- /** Customer Enrolment  */ -->
 
 <div class="container">
-<h1>Customer Enroll List</h1>
-<div class="row">
-  <div class="col-sm-2">
-      <div>
-          <label>New Customer Enrolment Filter</label>
-          <input type="date" class="form-control">
-      </div>
-  </div>
-        <div class="col-sm-2">
+  <div class="header_title">
+    <h2>Customer Enroll List</h2>
+    <div class="header_right">
+      <div class="row">
+        <div class="col-sm-6">
             <div>
-                <button type="button"  data-toggle="modal" data-target="#createEntrolmentModal">
-                    Create New Enrolment
-                </button>
+                <!-- <label>New Customer Enrolment Filter</label> -->
+                <input type="date" class="form-control">
             </div>
         </div>
-    
+              <div class="col-sm-6">
+                  
+                      <button type="button"  data-toggle="modal" data-target="#createEntrolmentModal" class="btn_blue">
+                          Create New Enrolment
+                      </button>
+                  
+              </div>
+          
+          </div>
     </div>
+  </div>
+
+
 
 <!-- /** Customer Enrolment List Table */ -->
 <!-- <table class="table">
@@ -64,10 +70,12 @@
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
 </mat-form-field>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
 
-<div class="allocation-table responsive_table">
-  <div class="mat-elevation-z8">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="table">
 
   <ng-container matColumnDef="Customer ID">
     <th mat-header-cell *matHeaderCellDef> Customer ID </th>
@@ -135,9 +143,9 @@
 <ng-container *ngIf="dataSource?.filteredData.length == 0">
   <div class="no_data_msg">No Data Avaliable</div>
 </ng-container>
-</div>
 
-</div>
+
+</div></div></div>
 
 <!-- /** Create Customer Enrolment Model*/ -->
 

@@ -50,7 +50,7 @@ export class LoanApprovalComponent implements OnInit {
   };
  
   Loan_Approval_Limit(){
-    this.crudService.get(`${appModels.Employee}/getLoanApproval`, {
+    this.crudService.get(`${appModels.EMPLOYEE}/getLoanApproval`, {
       params: {
         tenantIdentifier: 'default'
       }
