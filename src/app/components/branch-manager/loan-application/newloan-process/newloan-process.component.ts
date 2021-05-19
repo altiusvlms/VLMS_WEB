@@ -37,9 +37,6 @@ export class NewloanProcessComponent implements OnInit {
   bankDetails_Id: any;
   createnewLoan_id: any = [];
 
-  showCommunication:Boolean = true;
-  showPermanent:Boolean = false;
-  showOffice:Boolean = false;
 
   applicantfileform : any;
   applicantImgURL: any;
@@ -236,21 +233,7 @@ export class NewloanProcessComponent implements OnInit {
       this.userId = data.id;
     })
   }
-  communicationAddress(){
-    this.showCommunication = true;
-    this.showPermanent = false;
-    this.showOffice = false;
-  }
-  permanentAddress(){
-    this.showPermanent = true;
-    this.showCommunication = false;
-    this.showOffice = false;
-  }
-  officeAddress(){
-    this.showOffice = true;
-    this.showPermanent = false;
-    this.showCommunication = false;
-  }
+
 
   
   uploadApplicantImages(evt : any){

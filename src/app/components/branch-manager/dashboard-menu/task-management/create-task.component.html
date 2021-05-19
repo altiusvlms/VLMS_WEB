@@ -11,41 +11,50 @@
     <div class="row">
         
         <div class="col-4 col-sm-4">
-            <label>Task Type</label>
-            <input type="text"  formControlName="taskType"  class="form-control"  >
-            <!-- <select formControlName="taskType" class="form-control">
-              <option value="">Select Task Type</option>
-              <option value="address_verification">Address Verification</option>
-              <option value="office_verification">Office Verification</option>
-              <option value="other">Others</option>
-            </select> -->
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Task Type</mat-label>
+                <input matInput type='text' formControlName="taskType" >
+            </mat-form-field>
         </div>
         <div class="col-4 col-sm-4">
-            <label>Customer Name/ID</label>
-            <input type="text"  formControlName="customerRegNo"  class="form-control">
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Customer Name/ID</mat-label>
+                <input matInput type='text' formControlName="customerRegNo" >
+            </mat-form-field>
         </div>
         <div class="col-4 col-sm-4">
-          <label>Customer Mobile No</label>
-          <input type="text"  formControlName="customerMobileNo"  class="form-control">
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Customer Mobile No</mat-label>
+                <input matInput type='text' formControlName="customerMobileNo" >
+            </mat-form-field>
       </div>
         <div class="col-4 col-sm-4">    
-            <label >Vehicle Number</label>
-            <input type="text"  formControlName="vehicleNumber"  class="form-control">                            
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Vehicle Number</mat-label>
+                <input matInput type='text' formControlName="vehicleNumber" >
+            </mat-form-field>                       
         </div>
         <div class="col-4 col-sm-4">
-            <label>Due Date</label>
-            <input type="date" formControlName="dueDate"  class="form-control" >
+            <mat-form-field>
+                <input matInput [matDatepicker]="dp" placeholder="Due Date" formControlName="dueDate">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+            </mat-form-field>
         </div>
         <div class="col-4 col-sm-4">
-            <label>Assign To</label>
-            <select formControlName="assignTo"  class="form-control" >
-                <option *ngFor="let name of assignToName"  value="{{name.fieldExecutiveName}}">{{name.fieldExecutiveName}}</option>
-            </select>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Assign To</mat-label>
+                <mat-select  formControlName="assignTo">
+                    <mat-option  *ngFor="let name of assignToName"  value="{{name.fieldExecutiveName}}">{{name.fieldExecutiveName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
         <div class="col-4 col-sm-4">
-            <label>Description</label>
-            <textarea  rows="4" cols="50"  formControlName="description"  class="form-control">
-            </textarea>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput type='text' rows="4" cols="50" formControlName="description" >
+                </textarea>
+            </mat-form-field>    
         </div>
     
         <div class="col-12 col-sm-12">
