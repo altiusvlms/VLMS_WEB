@@ -1,6 +1,10 @@
 <div class="container">
-  <h2>RECEIPT</h2>
-
+  <div class="header_title">
+    <h2>Receipt</h2>
+    <div class="header_right">
+      
+    </div>
+  </div>
   <!-- Emi -->
 
   <!-- <div class="spacer">
@@ -162,6 +166,8 @@
   </div> -->
 
   <!-- As Mock -->
+    <div class="card">
+      <div class="card-body">
   <div class="row">
     <div class="col-sm-2">
       <div> Customer Image</div>
@@ -188,151 +194,155 @@
     </div>
 
 
-  </div>
+  </div></div></div>
 
-
-
-  <p>CREATE RECEIPT:</p>
-  <div>   
-  
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+      <p>CREATE RECEIPT:</p>
+      <div class="row">
+      <div class="col-md-6">   
+      
+          <mat-form-field  appearance="outline" class="example-full-width">
+            <mat-label>Create Receipt</mat-label>
+          <mat-select  >
+          <mat-option value="Parentloan">Parent Loan</mat-option>
+                <mat-option value="childloan">Child loan</mat-option>
+                <mat-option value="Topuploan">Topup loan</mat-option>
+                </mat-select>
+          </mat-form-field>
+    </div>
+    
+    
+      <div class="col-md-6">
+        
+          <mat-form-field  appearance="outline"  class="example-full-width">
+            <mat-label>Total Payable</mat-label>
+          <input matInput type="number" id="fname" placeholder="9,000" name="fname">
+          </mat-form-field>
+    </div>
+    
+    <div class="col-md-6">
+        
+      <mat-form-field  appearance="outline"  class="example-full-width">
+        <mat-label>Enter amount</mat-label>
+      <input matInput type="number" id="fname"  name="fname">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+        
+      <mat-form-field  appearance="outline"  class="example-full-width">
+        <mat-label>Handloan</mat-label>
+      <input matInput type="number" id="fname"  name="fname">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">   
+      
       <mat-form-field  appearance="outline" class="example-full-width">
-        <mat-label>Create Receipt</mat-label>
+        <mat-label>Insurance</mat-label>
       <mat-select  >
-      <mat-option value="Parentloan">Parent Loan</mat-option>
-            <mat-option value="childloan">Child loan</mat-option>
-            <mat-option value="Topuploan">Topup loan</mat-option>
+      <mat-option value="Insurance">Insurance</mat-option>
+            <!-- <mat-option value="childloan">Child loan</mat-option>
+            <mat-option value="Topuploan">Topup loan</mat-option> -->
             </mat-select>
       </mat-form-field>
-</div>
+      
+    </div>
 
-
-  <div>
-    
-      <mat-form-field  appearance="outline"  class="example-full-width">
-        <mat-label>Total Payable</mat-label>
-      <input matInput type="number" id="fname" placeholder="9,000" name="fname">
-      </mat-form-field>
-</div>
-
-<div>
-    
-  <mat-form-field  appearance="outline"  class="example-full-width">
-    <mat-label>Enter amount</mat-label>
-  <input matInput type="number" id="fname"  name="fname">
-  </mat-form-field>
-</div>
-
-<div>
-    
-  <mat-form-field  appearance="outline"  class="example-full-width">
-    <mat-label>Handloan</mat-label>
-  <input matInput type="number" id="fname"  name="fname">
-  </mat-form-field>
-</div>
-
-<div>   
-  
-  <mat-form-field  appearance="outline" class="example-full-width">
-    <mat-label>Insurance</mat-label>
-  <mat-select  >
-  <mat-option value="Insurance">Insurance</mat-option>
-        <!-- <mat-option value="childloan">Child loan</mat-option>
-        <mat-option value="Topuploan">Topup loan</mat-option> -->
-        </mat-select>
-  </mat-form-field>
-  <mat-form-field  appearance="outline"  class="example-full-width">
-    
-  <input matInput type="number" id="fname"  placeholder="1500" name="fname">
-  </mat-form-field>
-  
-</div>
-
-  <div>
-<mat-form-field  appearance="outline"  class="example-full-width">
-  <mat-label>Delay payment interest</mat-label>
-<input matInput type="number" id="fname"  name="fname">
-</mat-form-field>
-<mat-form-field  appearance="outline"  class="example-full-width">
-<input matInput type="number" id="fname" placeholder="0" name="fname">
-</mat-form-field>
-</div>
-
-<div>
-  <mat-form-field  appearance="outline"  class="example-full-width">
-    <mat-label>Due amount</mat-label>
-  <input matInput type="number" id="fname"  name="fname">
-  </mat-form-field>
-  <mat-form-field  appearance="outline"  class="example-full-width">
-  <input matInput type="number" id="fname" placeholder="0" name="fname">
-  </mat-form-field>
-  </div>
-
-  <div>
+      <div class="col-md-6">
     <mat-form-field  appearance="outline"  class="example-full-width">
-      <mat-label>Balance</mat-label>
-    <input matInput type="number" id="fname" placeholder="2300" name="fname">
+      <mat-label>Delay payment interest</mat-label>
+    <input matInput type="number" id="fname"  name="fname">
     </mat-form-field>
     </div>
 
-    <div>   
-  
-      <mat-form-field  appearance="outline" class="example-full-width">
-        <mat-label>Pay mode</mat-label>
-      <mat-select  >
-      <mat-option value="cash">Cash</mat-option>
-            <mat-option value="online">Online</mat-option>
-            <!-- <mat-option value="Topuploan">Topup loan</mat-option> -->
-            </mat-select>
+    <div class="col-md-6">
+      <mat-form-field  appearance="outline"  class="example-full-width">
+        <mat-label>Due amount</mat-label>
+      <input matInput type="number" id="fname"  name="fname">
       </mat-form-field>
-</div>
-<!-- <button type="submit">Create</button> -->
-<div class="col-sm-2">
-  <div>
-      <button type="button"  data-toggle="modal" data-target="#createEnquiryModal">
-          Create
-      </button>
-  </div>
-</div>
+      </div>
 
+
+      <div class="col-md-6">
+        <mat-form-field  appearance="outline"  class="example-full-width">
+          <mat-label>Balance</mat-label>
+        <input matInput type="number" id="fname" placeholder="2300" name="fname">
+        </mat-form-field>
+        </div>
+    
+        <div class="col-md-6">   
+      
+          <mat-form-field  appearance="outline" class="example-full-width">
+            <mat-label>Pay mode</mat-label>
+          <mat-select  >
+          <mat-option value="cash">Cash</mat-option>
+                <mat-option value="online">Online</mat-option>
+                <!-- <mat-option value="Topuploan">Topup loan</mat-option> -->
+                </mat-select>
+          </mat-form-field>
+    </div>
+    <!-- <button type="submit">Create</button> -->
+    <div class="col-sm-2">
+      <div>
+          <button type="button"  data-toggle="modal" data-target="#createEnquiryModal" class="btn_blue">
+              Create
+          </button>
+      </div>
+    </div>
+    </div>
+    </div></div>
+
+    </div>
+    <div class="col-md-6"><div class="card">
+      <div class="card-body">
+          <h3>HAND LOAN:</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>CREATED DATE</th>
+                <th>REC DATE</th>
+                <th>HAND LOAN</th>
+                <th>CREDIT</th>
+                <th>DEBIT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>23.03.2021</td>
+                <td></td>
+                <td>INSURANCE</td>
+                <td></td>
+                <td>1000</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>25.03.2021</td>
+                <td>INSURANCE</td>
+                <td>500</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>Pending Amount</td>
+                <td>500</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+    </div></div></div>
+  </div>
 
   
-      <h3>HAND LOAN:</h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>CREATED DATE</th>
-            <th>REC DATE</th>
-            <th>HAND LOAN</th>
-            <th>CREDIT</th>
-            <th>DEBIT</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>23.03.2021</td>
-            <td></td>
-            <td>INSURANCE</td>
-            <td></td>
-            <td>1000</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>25.03.2021</td>
-            <td>INSURANCE</td>
-            <td>500</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>Pending Amount</td>
-            <td>500</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-      <div>
-        <table class="table">
+
+
+
+
+<div class="card">
+  <div class="card-body">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Sr.No</th>
@@ -407,7 +417,7 @@
 
           </tbody>
         </table>
-      </div>
+      </div></div>
 
       <!-- models -->
 

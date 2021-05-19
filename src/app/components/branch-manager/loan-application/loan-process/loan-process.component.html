@@ -194,183 +194,168 @@
                   <div class="col-6 col-sm-6"><div class="card">
                     <div class="card-body">
             <form [formGroup]="applicantAddressForm">
+              <mat-accordion>
+                <mat-expansion-panel >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Communication Address
+                    </mat-panel-title>
 
-                    <div class="accordion" id="accordionExample">
-                      <div class="card">
-                        <div class="card-header" id="headingOne">
-                          <h2 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Communication Address
-                            </button>
-                          </h2>
-                        </div>
+                  </mat-expansion-panel-header>
+                  <div class="row">
+                    <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line1</mat-label>
+                        <input matInput type="text" formControlName="addressLine1" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line2</mat-label>
+                        <input matInput type="text" formControlName="addressLine2" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Area</mat-label>
+                        <input matInput type="text" formControlName="area" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>City</mat-label>
+                        <input matInput type="text" formControlName="city" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Landmark</mat-label>
+                        <input matInput type="text" formControlName="landmark" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Pincode</mat-label>
+                        <input matInput type="text" formControlName="postalCode" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>State</mat-label>
+                        <input matInput type="text" formControlName="state" >
+                      </mat-form-field>
+                  </div>
+                </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Permanent Address
+                    </mat-panel-title>
+
+                  </mat-expansion-panel-header>
+                  <div class="row">
+                              
+                    <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line1</mat-label>
+                        <input matInput type="text" formControlName="addressLine1" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line2</mat-label>
+                        <input matInput type="text" formControlName="addressLine2" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Area</mat-label>
+                        <input matInput type="text" formControlName="area" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>City</mat-label>
+                        <input matInput type="text" formControlName="city" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Landmark</mat-label>
+                        <input matInput type="text" formControlName="landmark" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Pincode</mat-label>
+                        <input matInput type="text" formControlName="postalCode" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>State</mat-label>
+                        <input matInput type="text" formControlName="state" >
+                      </mat-form-field>
+                  </div>
+                </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Office Address
+                    </mat-panel-title>
+
+                  </mat-expansion-panel-header>
+                  <div class="row">
+                              
+                    <div class="col-6 col-sm-4">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line1</mat-label>
+                        <input matInput type="text" formControlName="addressLine1" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address Line2</mat-label>
+                        <input matInput type="text" formControlName="addressLine2" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Area</mat-label>
+                        <input matInput type="text" formControlName="area" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>City</mat-label>
+                        <input matInput type="text" formControlName="city" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Landmark</mat-label>
+                        <input matInput type="text" formControlName="landmark" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Pincode</mat-label>
+                        <input matInput type="text" formControlName="postalCode" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>State</mat-label>
+                        <input matInput type="text" formControlName="state" >
+                      </mat-form-field>
+                  </div>
+                </div>
+                </mat-expansion-panel>
+                
+              </mat-accordion>
                     
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col-6 col-sm-6">       
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Address Line1</mat-label>
-                                  <input matInput type="text" formControlName="addressLine1" >
-                                </mat-form-field>                    
-                            </div>
-                            <div class="col-6 col-sm-6">        
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Address Line2</mat-label>
-                                  <input matInput type="text" formControlName="addressLine2" >
-                                </mat-form-field>                          
-                            </div>
-                            <div class="col-6 col-sm-6">                                     
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Area</mat-label>
-                                  <input matInput type="text" formControlName="area" >
-                                </mat-form-field>                           
-                            </div>
-                            <div class="col-6 col-sm-6">        
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>City</mat-label>
-                                  <input matInput type="text" formControlName="city" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">         
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Landmark</mat-label>
-                                  <input matInput type="text" formControlName="landmark" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">        
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Pincode</mat-label>
-                                  <input matInput type="text" formControlName="postalCode" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">       
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>State</mat-label>
-                                  <input matInput type="text" formControlName="state" >
-                                </mat-form-field>
-                            </div>
-                          </div>
-                        </div>
-                        </div>
-                      </div>
-                      <div class="card">
-                        <div class="card-header" id="headingTwo">
-                          <h2 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                              Permanent Address
-                            </button>
-                          </h2>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                          <div class="card-body">
-                            <div class="row">
-                              
-                              <div class="col-6 col-sm-6">        
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Address Line1</mat-label>
-                                  <input matInput type="text" formControlName="addressLine1" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">       
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Address Line2</mat-label>
-                                  <input matInput type="text" formControlName="addressLine2" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">     
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Area</mat-label>
-                                  <input matInput type="text" formControlName="area" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">       
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>City</mat-label>
-                                  <input matInput type="text" formControlName="city" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">        
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Landmark</mat-label>
-                                  <input matInput type="text" formControlName="landmark" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">        
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Pincode</mat-label>
-                                  <input matInput type="text" formControlName="postalCode" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">        
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>State</mat-label>
-                                  <input matInput type="text" formControlName="state" >
-                                </mat-form-field>
-                            </div>
-                          </div>
-                        </div>
-                        </div>
-                      </div>
-                      <div class="card">
-                        <div class="card-header" id="headingThree">
-                          <h2 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              Office Address
-                            </button>
-                          </h2>
-                        </div>
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                          <div class="card-body">
-                            <div class="row">
-                              
-                              <div class="col-6 col-sm-6">       
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Address Line1</mat-label>
-                                  <input matInput type="text" formControlName="addressLine1" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">      
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Address Line2</mat-label>
-                                  <input matInput type="text" formControlName="addressLine2" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">       
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Area</mat-label>
-                                  <input matInput type="text" formControlName="area" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">      
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>City</mat-label>
-                                  <input matInput type="text" formControlName="city" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">      
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Landmark</mat-label>
-                                  <input matInput type="text" formControlName="landmark" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">        
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Pincode</mat-label>
-                                  <input matInput type="text" formControlName="postalCode" >
-                                </mat-form-field>
-                            </div>
-                            <div class="col-6 col-sm-6">       
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>State</mat-label>
-                                  <input matInput type="text" formControlName="state" >
-                                </mat-form-field>
-                            </div>
-                          </div>
-                        </div>
-                        </div>
-                      </div>
-                    </div>
 
 
 
@@ -394,8 +379,9 @@
         <div formGroupName="customerGuarantor">
           <div class="card">
             <div class="card-body">
+              <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editGuarantorDetails()">edit</span>
           <div class="row">
-            <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editGuarantorDetails()">edit</span>
+            
       
             <div class="col-4 col-sm-4">
                 <label>Co-Applicant Image:
@@ -499,6 +485,42 @@
           
               <div class="container">
                 <div class="row">
+                  <div class="col-6 col-sm-6"><div class="card">
+                    <div class="card-body">
+                      <div class="container">
+                        <p>ID Proofs</p>
+                        <div class="row">
+                          <div class="col-12 col-sm-12">
+                            Aadhar
+                            <input *ngIf="!guarantorAadharImage" #file type="file" accept='image/*' (change)="uploadCo_ApplicantAadharImages($event)" />
+                          <img *ngIf="!guarantorAadharImage" [src]="co_applicantAadharImgURL ? co_applicantAadharImgURL : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                          object-position: center;">
+                          <img *ngIf="guarantorAadharImage" [src]="guarantorAadharImage ? guarantorAadharImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                          object-position: center;">
+                          </div>
+                          <div class="col-12 col-sm-12">
+                            Pan Card
+                            <input *ngIf="!guarantorPancardImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadCo_ApplicantPanImages($event)" /> 
+                          <img [src]="guarantorPancardImage ? guarantorPancardImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                          object-position: center;">
+                          </div>
+                          <div class="col-12 col-sm-12">
+                            Driving Licences
+                            <input *ngIf="!guarantorLicencesImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadCo_ApplicantDrivingImages($event)" /> 
+                          <img [src]="guarantorLicencesImage ? guarantorLicencesImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                          object-position: center;">
+                          </div>
+                          <div class="col-12 col-sm-12">
+                            Voter ID
+                            <input *ngIf="!guarantorVoterImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadCo_ApplicantVoterImages($event)" /> 
+                          <img [src]="guarantorVoterImage ? guarantorVoterImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                          object-position: center;">
+                          </div>
+        
+                  
+                  
+                  </div></div></div></div></div>
+                  
                   <div class="col-6 col-sm-6"><div class="card">
                     <div class="card-body">
             <form [formGroup]="co_applicantAddressForm">
@@ -645,41 +667,8 @@
                   </div>
             </form>
             </div></div></div>
-                  <div class="col-6 col-sm-6"><div class="card">
-                    <div class="card-body">
-                      <div class="container">
-                        <p>ID Proofs</p>
-                        <div class="row">
-                          <div class="col-12 col-sm-12">
-                            Aadhar
-                            <input *ngIf="!guarantorAadharImage" #file type="file" accept='image/*' (change)="uploadCo_ApplicantAadharImages($event)" />
-                          <img *ngIf="!guarantorAadharImage" [src]="co_applicantAadharImgURL ? co_applicantAadharImgURL : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
-                          object-position: center;">
-                          <img *ngIf="guarantorAadharImage" [src]="guarantorAadharImage ? guarantorAadharImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
-                          object-position: center;">
-                          </div>
-                          <div class="col-12 col-sm-12">
-                            Pan Card
-                            <input *ngIf="!guarantorPancardImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadCo_ApplicantPanImages($event)" /> 
-                          <img [src]="guarantorPancardImage ? guarantorPancardImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
-                          object-position: center;">
-                          </div>
-                          <div class="col-12 col-sm-12">
-                            Driving Licences
-                            <input *ngIf="!guarantorLicencesImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadCo_ApplicantDrivingImages($event)" /> 
-                          <img [src]="guarantorLicencesImage ? guarantorLicencesImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
-                          object-position: center;">
-                          </div>
-                          <div class="col-12 col-sm-12">
-                            Voter ID
-                            <input *ngIf="!guarantorVoterImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadCo_ApplicantVoterImages($event)" /> 
-                          <img [src]="guarantorVoterImage ? guarantorVoterImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
-                          object-position: center;">
-                          </div>
-        
+
                   
-                  
-                  </div></div></div></div></div>
                 </div>
               </div>    
 
