@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { FormBuilder,FormGroup, FormControl, Validators} from '@angular/forms';
 import { ConfirmedValidator } from './confirmed.validator';
-import {  CrudService } from '../../../../services/crud.service';
+import {  CrudService } from '../../../services/crud.service';
 import { ToastrService } from 'ngx-toastr';
 import { appModels } from 'app/services/utils/enum.util';
 
@@ -72,7 +72,7 @@ export class ResetPasswordComponent implements OnInit {
       { params:{
         tenantIdentifier: "default"   
       }}
-    ).pipe().subscribe( data => {
+    ).pipe().subscribe(data => {
       console.log(data)
       this.toast.success("Updated Successfully");
     })

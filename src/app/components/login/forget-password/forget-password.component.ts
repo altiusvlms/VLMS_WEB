@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import {AuthenticationService} from '../../../../services/authentication/authentication.service';
-import {  CrudService } from '../../../../services/crud.service';
+import {AuthenticationService} from '../../../services/authentication/authentication.service';
+import {  CrudService } from '../../../services/crud.service';
 import firebase from 'firebase/app'; 
 import { FormBuilder,FormGroup, FormControl, Validators} from '@angular/forms';
 import 'firebase/auth';
@@ -138,7 +138,7 @@ ResendOTP() {
   // submit(){
   //   console.log(this.form.value);
   // }
-
+ 
   submit(){
     const num = "+91" + this.phoneNumber;
     let data = {

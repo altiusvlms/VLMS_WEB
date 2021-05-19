@@ -18,6 +18,16 @@ import { LoaderComponent } from './loader/loader.component';
 /** Custom Validation Module */
 import { ValidateEqualModule } from 'ng-validate-equal';
 
+/** Custom Charts  */
+import * as Highcharts from 'highcharts';
+import HC_more from 'highcharts/highcharts-more';
+HC_more(Highcharts);
+
+import HC_solidgauge from 'highcharts/modules/solid-gauge';
+HC_solidgauge(Highcharts);
+
+import { HighchartsChartModule } from 'highcharts-angular';
+
 
 /** Custom Material Module */
 import {MatButtonModule} from '@angular/material/button';
@@ -69,6 +79,7 @@ import { MatTreeModule } from '@angular/material/tree';
     DragDropModule,
     FlexLayoutModule,
     ValidateEqualModule,
+    HighchartsChartModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -112,6 +123,7 @@ import { MatTreeModule } from '@angular/material/tree';
     DragDropModule,
     FlexLayoutModule,
     ValidateEqualModule,
+    HighchartsChartModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,

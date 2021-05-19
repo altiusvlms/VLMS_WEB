@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: "",
     loadChildren: () =>
-      import("./components/branch-manager/login/login.module").then(
+      import("./components/login/login.module").then(
         l => l.LoginModule
       )
   },
@@ -43,6 +43,15 @@ const routes: Routes = [
         d => d.DashboardMenuModule
       )
   },
+
+/** Cashier Routes */
+{
+  path: "cashier",
+  loadChildren: () =>
+    import("./components/cashier/dashboard/dashboard.module").then(
+      d => d.DashboardModule
+    )
+},
 
 
   {

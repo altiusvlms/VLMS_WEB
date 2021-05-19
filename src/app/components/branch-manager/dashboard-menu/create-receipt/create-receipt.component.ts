@@ -2,6 +2,9 @@ import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Data } from '@angular/router';
 // import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { Options, LabelType } from 'ng5-slider';
+// import pdfMake from 'pdfmake/build/pdfmake';
+// import pdfFonts from 'pdfmake/build/vfs_fonts';
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'vlms-create-receipt',
   templateUrl: './create-receipt.component.html',
@@ -188,6 +191,11 @@ console.log(this.fromdate);
   }
   ngOnInit(): void {
   }
+
+  generatePdf(pdfmake : any){
+    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+    pdfmake.createPdf(documentDefinition).open();
+   }
   
 
 }

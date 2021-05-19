@@ -7,26 +7,19 @@
     <div class="header_right">
     
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-4">
           <div>
                 <input type="date" class="form-control">
           </div>
       </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div>
                 <button type="button"  data-toggle="modal" data-target="#createEnquiryModal" class="btn_blue">
                     Create Enquiry
                 </button>
             </div>
         </div>
-        <div class="col-sm-3">
-          <div>
-            <button type="button" class="btn_blue" data-toggle="modal" data-target="#exampleModal">
-              Create User
-            </button>
-          </div>
-      </div>
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <div>
           <mat-form-field>
             <mat-label>Filter</mat-label>
@@ -136,49 +129,42 @@
         <div class="modal-body">
     <form [formGroup]="createEnquiryForms" >
             <div>
-                <label>Customer Name</label>
-                <input type="text"  formControlName="customerName"  class="form-control">
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Customer Name</mat-label>
+                <input matInput type='text' formControlName="customerName" >
+            </mat-form-field>
             </div>
-            <!-- <mat-form-field class="example-full-width">
-              <mat-label>Name</mat-label>
-              <input #name_ matInput type="text" formControlName="customerName"
-                  (keyup)="project_name_validation($event.target.value)">
-              <mat-error *ngIf="createEnquiryForms.controls['customerName'].errors?.required">Project name is required.
-              </mat-error>
-          </mat-form-field> -->
             <div>    
-                <label>Mobile Number
-                  <span class="required-field">*</span>
-                </label>
-                <input type="text"  formControlName="mobileNumber"  class="form-control" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.mobileNumber.errors  }" maxlength="10" >
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label >Mobile Number<span class="required-field">*</span></mat-label>
+                <input matInput type='text' formControlName="mobileNumber" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.mobileNumber.errors  }" maxlength="10"  >
+            </mat-form-field>
                   <div *ngIf="submitted && createEnquiryForms.controls.mobileNumber.errors" class="invalid-feedback">
                     <div class="required-field" *ngIf="submitted && createEnquiryForms.controls.mobileNumber.errors.required">Mobile Number is required</div>
                   </div>  
                   
             </div>
-            <div>    
-                <label>Vehicle Number</label>
-                <span class="required-field">*</span>
-                <input type="text"  formControlName="vehicleNumber"  class="form-control" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }"  maxlength="13">
+            <div>  
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label >Vehicle Number<span class="required-field">*</span></mat-label>
+                <input matInput type='text' formControlName="vehicleNumber" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }"  maxlength="13"  >
+            </mat-form-field>  
                 <div *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors" class="invalid-feedback">
                   <div class="required-field" *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors.required">Vehicle Number is required</div>
                 </div>  
             </div>
             <div>    
-                <label>Email</label>
-                <input type="email"  formControlName="email"  class="form-control">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type='email' formControlName="email" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }"  maxlength="13"  >
+            </mat-form-field> 
                 <div *ngIf="createEnquiryForms.controls['email'].invalid && (createEnquiryForms.controls['email'].dirty || createEnquiryForms.controls['email'].touched)" class="alert alert-danger">
                   <div *ngIf="createEnquiryForms.controls['email'].errors.required">
-                  Please enter Spouse Name!
+                  Please Enter Email!
                 </div>
               </div>  
             </div>
 
-            
-            <!-- <div>    
-              <label>Enquiry Id</label>
-              <input type="text"  formControlName="enquiryId"  class="form-control">
-          </div> -->
     </form>
         </div>
         <div class="modal-footer">

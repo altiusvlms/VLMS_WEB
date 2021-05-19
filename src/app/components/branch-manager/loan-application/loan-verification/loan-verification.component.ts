@@ -121,7 +121,9 @@ export class LoanVerificationComponent implements OnInit {
   }
   searchdata(){
     this.showSearchbtn = false;
+    console.log(this.searchAccountNo,this.searchName,this.searchModel,this.searchVehicleNo,this.searchMobileNo,this.searchChassisNo)
     for (let selectedUser of this.customerLoanDetails) {
+      if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''){
       if (
         selectedUser.bankDetails.accountNumber.toLowerCase().search(this.searchAccountNo.toLowerCase()) != -1  &&
         selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1  &&
@@ -133,6 +135,7 @@ export class LoanVerificationComponent implements OnInit {
       ){
           this.filterResponse.push(selectedUser)
       }
+    }
     }
   
     if(this.filterResponse.length >0){
@@ -161,6 +164,5 @@ export class LoanVerificationComponent implements OnInit {
   close() {
     this.showAdvanceSearch = false;
   }
-
 
 }

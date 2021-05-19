@@ -14,6 +14,7 @@ import { FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 import { CLASS_NAME } from '@angular/flex-layout';
+import { single } from 'rxjs/operators';
 
 @UntilDestroy({ checkProperties: true })
 
@@ -40,40 +41,37 @@ export class ManageEmployeeComponent implements OnInit {
   responseId:any;
   dob :string;
   age:number;
+  employeeList :  any = [];
+  resourceID: any;
+  employee :any;
+  singleData:any;
   // manageEmployeeForm:any  
   // forvalue : CLASS_NAME;
   // userForm: FormGroup;
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder) { 
-    // this.userForm = this.fb.group({
-    //   name: [],
-    //   phones: this.fb.array([
-    //     this.fb.control(null)
-    //   ])
-    // })
-  }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder) { }
 
   submitted: Boolean = false;
   // this.forvalue = form1.value;
   // this.formvalue.school_qualification = form2.value;
   // this.formvalue.college_qualification = form3.value;
 
-  // addPhone(): void {
-  //   (this.userForm.get('phones') as FormArray).push(
-  //     this.fb.control(null)
-  //   );
-  // }
+  addPhone(): void {
+    (this.manageEmployeeForm.get('altNumber') as FormArray).push(
+      this.fb.control(null)
+    );
+  }
 
-  // removePhone(index : any) {
-  //   (this.userForm.get('phones') as FormArray).removeAt(index);
-  // }
+  removePhone(index : any) {
+    (this.manageEmployeeForm.get('altNumber') as FormArray).removeAt(index);
+  }
 
-  // getPhonesFormControls(): AbstractControl[] {
-  //   return (<FormArray> this.userForm.get('phones')).controls
-  // }
+  getPhonesFormControls(): AbstractControl[] {
+    return (<FormArray> this.manageEmployeeForm.get('altNumber')).controls
+  }
 
-  // send(values : any) {
-  //   console.log(values);
-  // }
+  send(values : any) {
+    console.log(values);
+  }
   
 
   manageEmployeeForm = new FormGroup({
@@ -85,6 +83,9 @@ export class ManageEmployeeComponent implements OnInit {
     mobileNumber: new FormControl('', Validators.required),
     gender: new FormControl('', Validators.required),
     altNumber: new FormControl('', Validators.required),
+    // altNumber: this.fb.array([
+    //   this.fb.control(null)
+    // ]),
     dob: new FormControl('', Validators.required),
     officialNumber: new FormControl('', Validators.required),
     age: new FormControl(''),
@@ -113,20 +114,20 @@ export class ManageEmployeeComponent implements OnInit {
       addressLine1:new FormControl('',),
       addressLine2:new FormControl('',),
       landmark:new FormControl('',),
-      pincode:new FormControl('',),
+      postalCode:new FormControl('',),
       area:new FormControl('',),
       city:new FormControl('',),
-      country:new FormControl('',)
+      state:new FormControl('',)
     }),
 
     employee_permanentAddress  : new FormGroup({
       addressLine1:new FormControl('',),
       addressLine2:new FormControl('',),
       landmark:new FormControl('',),
-      pincode:new FormControl('',),
+      postalCode:new FormControl('',),
       area:new FormControl('',),
       city:new FormControl('',),
-      country:new FormControl('',)
+      state:new FormControl('',)
     }),
 
     general_insurance :  new FormGroup({
@@ -172,33 +173,29 @@ export class ManageEmployeeComponent implements OnInit {
     ImageEmployeeForm = new FormGroup({
       Pan_photo:new FormControl('', Validators.required),
       Aadhar_photo: new FormControl('', Validators.required),
+      // proof1: new FormControl('', Validators.required),
+      // proof2: new FormControl('', Validators.required),
     }) 
 
 
-  
-
-  // const ELEMENT_DATA: UsersData[] = [
-  //   {id: 1560608769632, name: 'Artificial Intelligence'},
-  //   {id: 1560608796014, name: 'Machine Learning'},
-  //   {id: 1560608787815, name: 'Robotic Process Automation'},
-  //   {id: 1560608805101, name: 'Blockchain'}
 
   ngOnInit(): void {
-    // this.manageEmployee()    
-    
+    this.route.params.subscribe((params: Params) => {
+      this.id = params.id;
+      this.getSingleEmployeeList();
+      // this.updateEmployeeEducationDetails();
+      // this.updateEmployeeInsuranceDetails()
+    })
   }
+  
 
   ngOnDestroy() { }
 
   
-
+  id:any;
 /** Save Enquiry */
 manageEmployee(){
   this.submitted = true;
-  // if (this.manageEmployeeForm.valid) {
-  console.log("datass")
-  console.log(this.manageEmployeeForm.value)
-  
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
   this.crudService.post(`${appModels.CREATEEMPLOYEE}`, this.manageEmployeeForm.value ,
@@ -212,6 +209,9 @@ manageEmployee(){
     this.toast.success("Employee Created successfully")
     this.EmployeeId = data.resourceId;
     console.log(this.EmployeeId);
+
+      // this.resourceID = this.employeeList[0].id;
+
     
     // this.toast.success("posted successfully");
 
@@ -249,6 +249,134 @@ manageEmployee(){
 //   console.log(this.Imagefileform);
 //   }
 // }
+
+employeeArray: any = [];
+data : any;
+
+getSingleEmployeeList(){
+  console.log("id")
+  console.log(this.id)
+  this.crudService.get(`${appModels.GETEMPLOYEE}`, {
+    params: {
+      tenantIdentifier: 'default'
+    }
+  }).pipe(untilDestroyed(this)).subscribe(response => {
+    console.log(response)
+
+    for (var singleData of response) {
+      if(singleData.id == this.id){
+        this.employeeArray.push(singleData)
+      }
+    }
+ 
+    console.log(this.employeeArray)
+
+  
+this.manageEmployeeForm.patchValue({
+    name: this.employeeArray[0].name,
+    calledName:this.employeeArray[0].calledName,
+    surName:this.employeeArray[0].surName,
+    mobileNumber: this.employeeArray[0].mobileNumber,
+    altNumber: this.employeeArray[0].altNumber,
+    officialNumber: this.employeeArray[0].officialNumber,
+    dob:this.datepipe.transform(this.employeeArray[0].dob, 'yyyy-MM-dd'),
+    gender: this.employeeArray[0].gender,
+    age: this.employeeArray[0].age,
+    maritalStatus: this.employeeArray[0].maritalStatus,
+    designation: this.employeeArray[0].designation,
+    spousename: this.employeeArray[0].spousename,
+    bloodGroup: this.employeeArray[0].bloodGroup,
+    fatherName: this.employeeArray[0].fatherName,
+    vehicleNumber: this.employeeArray[0].vehicleNumber,
+    doj: this.datepipe.transform(this.employeeArray[0].dob, 'yyyy-MM-dd'),
+    dateFormat: "dd MMMM yyyy",
+    locale: 'en',
+
+    loanEligibleAmount: this.employeeArray[0].bankDetails.loanEligibleAmount,
+    accountType: this.employeeArray[0].bankDetails.accountType,
+    accountNumber: this.employeeArray[0].bankDetails.accountNumber,
+    accountHolderName: this.employeeArray[0].bankDetails.accountHolderName,
+    IFSC: this.employeeArray[0].bankDetails.IFSC,
+    bankName: this.employeeArray[0].bankDetails.bankName,
+    branchName: this.employeeArray[0].bankDetails.branchName
+    
+})
+this.manageEmployeeForm.patchValue({
+  employee_communicationAddress:{
+    addressLine1:this.employeeArray[0].communicationAdd.addressLine1,
+    addressLine2: this.employeeArray[0].communicationAdd.addressLine2,
+    area : this.employeeArray[0].communicationAdd.area,
+    city : this.employeeArray[0].communicationAdd.city,
+    landmark : this.employeeArray[0].communicationAdd.landmark,
+    postalCode : this.employeeArray[0].communicationAdd.postalCode,
+    state : this.employeeArray[0].communicationAdd.state
+}
+})
+this.manageEmployeeForm.patchValue({
+  employee_permanentAddress:{
+    addressLine1:this.employeeArray[0].permanentAdd.addressLine1,
+    addressLine2: this.employeeArray[0].permanentAdd.addressLine2,
+    area : this.employeeArray[0].permanentAdd.area,
+    city : this.employeeArray[0].permanentAdd.city,
+    landmark : this.employeeArray[0].permanentAdd.landmark,
+    postalCode : this.employeeArray[0].permanentAdd.postalCode,
+    state : this.employeeArray[0].permanentAdd.state
+}
+})
+this.manageEmployeeForm.patchValue({
+  school_qualification:{
+    university:this.employeeArray[0].schoolQualification.university,
+    qualification: this.employeeArray[0].schoolQualification.qualification,
+    percentage : this.employeeArray[0].schoolQualification.percentage,
+    passingyear : this.employeeArray[0].schoolQualification.passingyear,
+  }
+})
+
+this.manageEmployeeForm.patchValue({
+  college_qualification:{
+  university:this.employeeArray[0].collegeQualification.university,
+  qualification: this.employeeArray[0].collegeQualification.qualification,
+  percentage : this.employeeArray[0].collegeQualification.percentage,
+  passingyear : this.employeeArray[0].collegeQualification.passingyear,
+  }
+})
+
+this.manageEmployeeForm.patchValue({
+  graduate_qualification:{
+  university:this.employeeArray[0].graduateQualification.university,
+  qualification: this.employeeArray[0].graduateQualification.qualification,
+  percentage : this.employeeArray[0].graduateQualification.percentage,
+  passingyear : this.employeeArray[0].graduateQualification.passingyear,
+  }
+})
+
+this.manageEmployeeForm.patchValue({
+  postgraduate_qualification:{
+  university:this.employeeArray[0].postgraduateQualification.university,
+  qualification: this.employeeArray[0].postgraduateQualification.qualification,
+  percentage : this.employeeArray[0].postgraduateQualification.percentage,
+  passingyear : this.employeeArray[0].postgraduateQualification.passingyear,
+  }
+})
+
+this.manageEmployeeForm.patchValue({
+  general_insurance:{
+  policyNumber:this.employeeArray[0].insuranceDetails.policyNumber,
+  companyCoverage: this.employeeArray[0].insuranceDetails.companyCoverage,
+  policyCoverage : this.employeeArray[0].insuranceDetails.policyCoverage,
+  }
+})
+this.manageEmployeeForm.patchValue({
+  accidental_insurance:{
+  policyNumber:this.employeeArray[0].accidentalInsuranceDetails.policyNumber,
+  companyCoverage: this.employeeArray[0].accidentalInsuranceDetails.companyCoverage,
+  policyCoverage : this.employeeArray[0].accidentalInsuranceDetails.policyCoverage,
+  }
+})
+})
+}
+
+
 uploadImages1(evt1: any){
   if(evt1.target.files[0].type == "image/png" || evt1.target.files[0].type == "image/jpeg" || evt1.target.files[0].type == "image/gif"){
   this.Imagefileform = evt1.target.files[0];
@@ -301,5 +429,46 @@ CalculateAge(){
 
 }
 
+updateEmployeeDetails(){
+  console.log("this.manageEmployeeForm.value")
+  console.log(this.manageEmployeeForm.value)
+  this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
+  this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
+  this.crudService.update(`${appModels.EMPLOYEE}/updateEmployee`,this.manageEmployeeForm.value,
+  this.id,
+  ).pipe(untilDestroyed(this)).subscribe(response => {
+  this.toast.success("Updated Successfully");
+  // this.showUpdatebtn = false;
+  // this.manageEmployeeForm.disable();
+})
+}
+
+updateEmployeeEducationDetails(){
+  console.log("this.manageEmployeeForm.value")
+  console.log(this.manageEmployeeForm.value)
+  // this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
+  // this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
+  this.crudService.update(`${appModels.EMPLOYEE}/updateQualification`,this.manageEmployeeForm.value,
+  this.id,
+  ).pipe(untilDestroyed(this)).subscribe(response => {
+  this.toast.success("Address Updated Successfully");
+  // this.showUpdatebtn = false;
+  // this.manageEmployeeForm.disable();
+})
+}
+
+updateEmployeeInsuranceDetails(){
+  console.log("this.manageEmployeeForm.value")
+  console.log(this.manageEmployeeForm.value)
+  this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
+  this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
+  this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeForm.value,
+  this.id,
+  ).pipe(untilDestroyed(this)).subscribe(response => {
+  this.toast.success("Insurance Updated Successfully");
+  // this.showUpdatebtn = false;
+  // this.manageEmployeeForm.disable();
+})
+}
 
 }

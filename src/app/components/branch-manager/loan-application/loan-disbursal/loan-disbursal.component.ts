@@ -50,7 +50,7 @@ export class LoanDisbursalComponent implements OnInit {
   };
 
   Loan_Disbural_Limit(){
-    this.crudService.get(`${appModels.Employee}/getLoanDisbursal`, {
+    this.crudService.get(`${appModels.EMPLOYEE}/getLoanDisbursal`, {
       params: {
         tenantIdentifier: 'default'
       }

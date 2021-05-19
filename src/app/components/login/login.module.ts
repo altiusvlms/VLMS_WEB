@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 
 /** Custom Material Module */
-import { SharedModule } from '../../shared/shared/shared.module';
+import { SharedModule } from '../shared/shared/shared.module';
 
 /** Custom Components */
 import { LoginComponent } from './login/login.component';
