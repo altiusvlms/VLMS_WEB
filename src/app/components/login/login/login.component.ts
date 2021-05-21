@@ -3,8 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {AuthenticationService} from '../../../services/authentication/authentication.service';
-import { appModels } from '../../../services/utils/enum.util';
 import { ToastrService } from 'ngx-toastr';
+
+// Custom Forms
+import {  CrudService } from '../../../services/crud.service';
+import { appModels } from '../../../services/utils/enum.util';
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+
+
 
 /** Login Component */
 @Component({
@@ -14,8 +20,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   
+  
 
-  constructor(private router: Router, private _auth:AuthenticationService,private toast: ToastrService,) { }
+  constructor(private router: Router, private _auth:AuthenticationService,private toast: ToastrService, private crudService: CrudService) { }
 
   createLoginForms = new FormGroup({
     username: new FormControl('+91', Validators.required),
@@ -23,9 +30,10 @@ export class LoginComponent implements OnInit {
   })
 
   user_name = this.createLoginForms.value.username;
+  data :any = [];
   
-  
-  data:any;
+  // data:any;
+  rolebase: any;
   loginUserdata = {};
   UsermobData:any;
 
@@ -44,16 +52,27 @@ password: string;
       { params:{
         tenantIdentifier: "default"   
       }}
-    ).pipe().subscribe( data => {
-      console.log(data)
+    ).pipe().subscribe( response => {
+      console.log(response)
+      console.log(response.roles[0].name)
+      if (response.roles[0].name === "BranchManager") {
+        this.router.navigate(["/branch-manager/dashboard"]);
+     }else if (response.roles[0].name === "Cashier") {
       
-          localStorage.setItem('mobile_number', data.username);
+       this.router.navigate(["/cashier/dashboard"]);
+     }
+      
+          localStorage.setItem('mobile_number', response.username);
           console.log("mobile_number")
-          console.log(data.username)
+          console.log(response.username)
+
+          localStorage.setItem('roles', response.roles[0].name);
+          console.log("roles")
+          console.log(response.roles[0].name)
 
           this.toast.success("Login Successfully");
 
-      this.router.navigate(["/branch-manager/dashboard"]);
+      // this.router.navigate(["/branch-manager/dashboard"]);
     }, error => {
       this.toast.error('Something Went Wrong')
     }
@@ -93,5 +112,6 @@ password: string;
   //      }
   //    }
   // }
-}
 
+
+}
