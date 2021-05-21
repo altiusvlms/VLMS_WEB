@@ -35,7 +35,7 @@ export class AnalyticsComponent implements OnInit {
   ngOnInit(): void {
     this.getAnalytics();
     this.getAnalyticsEnquiry();
-    this.getAnalyticsCustomerOnboard()
+    this.getAnalyticsCustomerOnboard();
     this.getOverallData()
     
     setInterval(() => {
@@ -87,13 +87,13 @@ export class AnalyticsComponent implements OnInit {
         data: [
           {
             name:"test1",
-            y: 100,
+            y: 50,
             color: '#283250'
           },
          
           {
             name: "test2",
-            y: 112,
+            y: 62,
             color: '#b33535'
           }
 

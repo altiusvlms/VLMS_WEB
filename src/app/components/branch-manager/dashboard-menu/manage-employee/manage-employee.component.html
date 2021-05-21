@@ -238,7 +238,7 @@
         <h2>Add Communication Address</h2>
 
         <div class="container">
-          <div class="row" formGroupName="employee_communicationAddress">
+          <div class="row" formGroupName="communicationAdd">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Address Line 1</mat-label>
               <input matInput formControlName="addressLine1">
@@ -273,7 +273,7 @@
           </mat-form-field></div>
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>State</mat-label>
-              <mat-select formControlName="country">
+              <mat-select formControlName="state">
                   <mat-option value="Tamilnadu">Tamilnadu</mat-option>
                   <mat-option value="Kerala">Kerala</mat-option>
                   <mat-option value="karnataka">karnataka</mat-option>
@@ -285,7 +285,7 @@
         <h2>Add permanent address</h2>
 
         <div class="container">
-          <div class="row" formGroupName="employee_permanentAddress">
+          <div class="row" formGroupName="permanentAdd">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Address Line 1</mat-label>
               <input matInput formControlName="addressLine1">
@@ -320,7 +320,7 @@
           </mat-form-field></div>
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>State</mat-label>
-              <mat-select formControlName="country">
+              <mat-select formControlName="state">
                   <mat-option value="Tamilnadu">Tamilnadu</mat-option>
                   <mat-option value="Kerala">Kerala</mat-option>
                   <mat-option value="Karnataka">Karnataka</mat-option>
@@ -336,7 +336,7 @@
 
       <mat-tab label="Bank Details"> <!-- Add Bank detail -->
         <div class="container">
-          <div class="row">
+          <div class="row" >
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Acc Number</mat-label>
               <input matInput formControlName="accountNumber">
@@ -381,7 +381,7 @@
       <mat-tab label="Insurance Details"><!-- Insurance Details -->
 
         <div class="container">
-          <div class="row" formGroupName="general_insurance">
+          <div class="row" formGroupName="insuranceDetails">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Policy no</mat-label>
               <input matInput formControlName="policyNumber">
@@ -394,6 +394,7 @@
               <mat-label>Policy Coverage</mat-label>
               <input matInput formControlName="policyCoverage">
           </mat-form-field></div>
+          <!-- <button type="submit" (click)="updateEmployeeInsuranceDetails()">Update</button> -->
           </div>
         </div>    
       </mat-tab>
@@ -402,7 +403,7 @@
         <!-- <form [formGroup] = "manageEmployeeForm"> -->
 
         <div class="container">
-          <div class="row" formGroupName="accidental_insurance">
+          <div class="row" formGroupName="accidentalInsuranceDetails">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Policy no</mat-label>
               <input matInput formControlName="policyNumber">
@@ -465,7 +466,7 @@
        
 
         <div class="container">
-          <div class="row"  formGroupName="school_qualification">
+          <div class="row"  formGroupName="schoolQualification">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>School/Qualification</mat-label>
               <input matInput formControlName="university">
@@ -485,12 +486,12 @@
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>College Qualification</mat-label>
               <input matInput formControlName="university">
-          </mat-form-field></div>
+          </mat-form-field></div>          
           </div>
         </div>    
 
         <div class="container">
-          <div class="row"  formGroupName="college_qualification">
+          <div class="row"  formGroupName="collegeQualification">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Qualification</mat-label>
               <input matInput formControlName="qualification">
@@ -508,7 +509,7 @@
         </div>    
 
         <div class="container">
-          <div class="row"  formGroupName="graduate_qualification">
+          <div class="row"  formGroupName="graduateQualification">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>GraduateQualification</mat-label>
               <input matInput formControlName="university">
@@ -530,7 +531,7 @@
         </div>    
 
         <div class="container">
-          <div class="row" formGroupName="postgraduate_qualification">
+          <div class="row" formGroupName="postgraduateQualification">
             <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
               <mat-label>PostgraduateQualification</mat-label>
               <input matInput formControlName="university">
@@ -550,8 +551,9 @@
 
           </div>
         </div>    
-        <button type="submit" (click)="updateEmployeeInsuranceDetails()">updateInsurance</button>
-        <button type="submit" (click)="updateEmployeeDetails()">update</button>
+        <!-- <button type="submit" (click)="updateEmployeeEducationDetails()">Update Qualification</button> -->
+        <!-- <button type="submit" (click)="updateEmployeeInsuranceDetails()">updateInsurance</button> -->
+        <button type="submit" (click)="updateEmployeeDetails();updateEmployeeEducationDetails();updateEmployeeInsuranceDetails()">Update</button>
         <button type="submit" (click)="manageEmployee()">Submit</button>
 
          </mat-tab>
