@@ -128,31 +128,46 @@
         </div>
         <div class="modal-body">
     <form [formGroup]="createEnquiryForms" >
-            <div>
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Customer Name</mat-label>
-                <input matInput type='text' formControlName="customerName" >
+            
+
+            <div >
+              <mat-form-field appearance="outline" class="example-full-width" >
+                <mat-label>customerName</mat-label>
+                <input matInput type='text' formControlName="customerName" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }">
             </mat-form-field>
+            <div *ngIf="createEnquiryForms.controls['customerName'].invalid && (createEnquiryForms.controls['customerName'].dirty || createEnquiryForms.controls['customerName'].touched)" class="alert alert-danger">
+              <div *ngIf="createEnquiryForms.controls['customerName'].errors.required">
+                  Please enter customerName!
+              </div>
+          </div>
             </div>
-            <div>    
-              <mat-form-field appearance="outline" class="example-full-width">
+            <div >
+              <mat-form-field appearance="outline" class="example-full-width" >
                 <mat-label >Mobile Number<span class="required-field">*</span></mat-label>
-                <input matInput type='text' formControlName="mobileNumber" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.mobileNumber.errors  }" maxlength="10"  >
+                <input matInput type='number' maxlength="10" formControlName="mobileNumber" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.mobileNumber.errors}" >
             </mat-form-field>
-                  <div *ngIf="submitted && createEnquiryForms.controls.mobileNumber.errors" class="invalid-feedback">
-                    <div class="required-field" *ngIf="submitted && createEnquiryForms.controls.mobileNumber.errors.required">Mobile Number is required</div>
-                  </div>  
-                  
+            <div *ngIf="createEnquiryForms.controls['mobileNumber'].invalid && (createEnquiryForms.controls['mobileNumber'].dirty || createEnquiryForms.controls['mobileNumber'].touched)" class="alert alert-danger">
+              <div *ngIf="createEnquiryForms.controls['mobileNumber'].errors.required">
+                  Please enter mobileNumber!
+              </div>
+              <div *ngIf="createEnquiryForms.controls['mobileNumber'].errors.pattern">
+                Please, Enter 10 digit Mobile Number
             </div>
-            <div>  
-              <mat-form-field appearance="outline" class="example-full-width">
+          </div>
+            </div>
+
+            <div >
+              <mat-form-field appearance="outline" class="example-full-width" >
                 <mat-label >Vehicle Number<span class="required-field">*</span></mat-label>
-                <input matInput type='text' formControlName="vehicleNumber" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }"  maxlength="13"  >
-            </mat-form-field>  
-                <div *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors" class="invalid-feedback">
-                  <div class="required-field" *ngIf="submitted && createEnquiryForms.controls.vehicleNumber.errors.required">Vehicle Number is required</div>
-                </div>  
+                <input matInput type='text' formControlName="vehicleNumber" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }">
+            </mat-form-field>
+            <div *ngIf="createEnquiryForms.controls['vehicleNumber'].invalid && (createEnquiryForms.controls['vehicleNumber'].dirty || createEnquiryForms.controls['vehicleNumber'].touched)" class="alert alert-danger">
+              <div *ngIf="createEnquiryForms.controls['vehicleNumber'].errors.required">
+                  Please enter vehicleNumber!
+              </div>
+          </div>
             </div>
+            
             <div>    
               <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Email</mat-label>

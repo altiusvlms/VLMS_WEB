@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/core/auth.interceptor';
 import { ErrorInterceptor } from './services/core/error.interceptor';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** Main Component */
 import { WebAppComponent } from './web-app.component';
@@ -62,7 +62,10 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule, 
+    FormsModule,
+    ReactiveFormsModule,
+    
   ],
   declarations: [WebAppComponent, CreateReceiptComponent, YetToReceiptComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
