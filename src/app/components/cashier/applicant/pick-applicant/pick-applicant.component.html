@@ -1,0 +1,198 @@
+<div class="container">
+    <div class="header_title">
+        <h2>Picked!!</h2>
+      </div>
+    <div class="card">
+        <div class="card-body">
+        <div class="row" *ngFor="let applicant of applicantDetails">
+            <div class="col-sm-2">
+                <p>Applicant Image</p>
+            </div>
+            <div class="col-sm-2">
+                <p>{{applicant.customerName}}</p>
+                <p>{{applicant.customerDetails.mobileNo}}</p>
+                <p>{{applicant.id}}</p>
+            </div>
+            <div class="col-sm-2">
+                <p>Loan Amount: {{applicant.loanDetailsData.loanAmount}}</p>
+                <p>Loan Term: {{applicant.loanDetailsData.loanTerm}}</p>
+                <p>Interest: {{applicant.loanDetailsData.loanInterest}}%</p>
+                <p>EMI: {{applicant.loanDetailsData.emi}}</p>
+            </div>
+            <div class="col-sm-2">
+                <p>Ref By: {{applicant.customerDetails.refBy}}</p>
+                <p>Vehicle Make: {{applicant.vehicleDetails.maker}}</p>
+                <p>Vehicle Model: {{applicant.vehicleDetails.model}}</p>
+                <p>Vehicle Type: {{applicant.vehicleType}}</p>
+            </div>
+            <div class="col-sm-2">
+                <p>Loan Type: </p>
+                <p>Applicant Type: </p>
+                <p>Approver: </p>
+                <p>To Pay: {{applicant.loanDetailsData.payout}}</p>
+            </div>
+        </div>  
+        </div>
+    </div>
+
+    <div class="row">
+        <span>View More</span>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+      <form class="example-form"  [formGroup]="applicantDetailsForm" >
+          <div class="row" formGroupName="loanDetailsData">
+            <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Loan Amount</mat-label>
+                  <input matInput type='text' formControlName="loanAmount" >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Loan Term</mat-label>
+                  <input matInput type='text'  formControlName="loanTerm">
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Interest(%)</mat-label>
+                  <input matInput type='text' formControlName="loanInterest" >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Interest(INR)</mat-label>
+                  <input matInput type='text'  formControlName="interestInr">
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>EMI</mat-label>
+                  <input matInput type='text' formControlName="emi" >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Next Due Date</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Document Charges</mat-label>
+                  <input matInput type='text'  formControlName="docCharge">
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Processing Charges</mat-label>
+                  <input matInput type='text' formControlName="processingCharge" >
+                  </mat-form-field>
+              </div>
+              <!-- <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Pending Document</mat-label>
+                  <mat-checkbox class="example-margin">NOC</mat-checkbox>
+                  <mat-checkbox class="example-margin">Insurence</mat-checkbox>
+                </mat-form-field>
+              </div> -->
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Hold Amount</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Other Charges</mat-label>
+                  <input matInput type='text'  formControlName="otherCharges">
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Closing A/C</mat-label>
+                  <input matInput type='text' formControlName="closingAC" >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Enter Bank Account Details or Previous agt no</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Closing Discount</mat-label>
+                  <input matInput type='text' formControlName="closingDiscount" >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Balance</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Loan Due Term</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+
+            </div>
+            <div class="row"  formGroupName="bankDetails">
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Transfer Amount1</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <p>Bank Details</p>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Account Number</mat-label>
+                  <input matInput type='text'  formControlName="accountNumber"  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Name</mat-label>
+                  <input matInput type='text'  formControlName="accountHolderName"  >
+                  </mat-form-field>
+              </div>    
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Bank</mat-label>
+                  <input matInput type='text'  formControlName="bankName"  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Branch</mat-label>
+                  <input matInput type='text'  formControlName="branchName"  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>IFSC</mat-label>
+                  <input matInput type='text'  formControlName="IFSC"  >
+                  </mat-form-field>
+              </div>
+                 <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>PassBook Image</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+            </div> 
+          <div class="row">
+              <button class="btn_blue">Save</button>
+              <button class="btn_blue">Save & Process</button>
+          </div>
+      </form>
+        </div>
+    </div>
+
+</div>

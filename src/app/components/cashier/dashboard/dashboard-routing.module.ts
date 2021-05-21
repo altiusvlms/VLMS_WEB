@@ -17,8 +17,7 @@ const routes: Routes = [
 ];
 
 
-/**
- *Dashboard Routing Module */
+/** Dashboard Routing Module */
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

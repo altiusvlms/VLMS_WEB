@@ -9,14 +9,14 @@ import DashboardRoutingModule from './dashboard-routing.module';
 import { SharedModule } from '../../shared/shared/shared.module';
 
 /** Custom Components */
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { DashboardComponent,AdvancedSearch } from '../dashboard/dashboard.component';
 
 
 
 /** Dashboard Module */
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent,AdvancedSearch],
   imports: [
     CommonModule,
     DashboardRoutingModule,
