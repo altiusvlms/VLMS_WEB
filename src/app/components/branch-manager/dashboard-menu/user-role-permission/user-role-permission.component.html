@@ -122,14 +122,30 @@
         </div>
         <div class="modal-body">
           <!-- <h4>Assign Customer</h4> -->
-            <label >NAME :</label>
-            <input type="text" id="fname" name="fname" pattern="[A-Za-z]"><br>
-            <label >DESIGNATION :</label>
-            <input type="text" id="fname" name="fname"><br>
-            <label >MOBILE NUMBER :</label>
-            <input type="number" id="fname" name="fname"><br>
-            <label >ACCOUNT STATUS :</label>
-            <input type="text" id="fname" name="fname"><br>
+          <div >
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>NAME</mat-label>
+              <input matInput type="text" id="fname" name="fname" pattern="[A-Za-z]" >
+            </mat-form-field>
+        </div>
+        <div >
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>DESIGNATION</mat-label>
+            <input matInput type="text" id="fname" name="fname">
+          </mat-form-field>
+      </div>
+      <div >
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>number</mat-label>
+          <input matInput type="number" id="fname" name="fname">
+        </mat-form-field>
+    </div>
+    <div >
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>ACCOUNT STATUS</mat-label>
+        <input matInput type="text" id="fname" name="fname">
+      </mat-form-field>
+  </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
