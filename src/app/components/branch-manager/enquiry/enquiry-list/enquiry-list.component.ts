@@ -87,7 +87,6 @@ export class EnquiryListComponent implements OnInit {
       this.showGenerateModel = true;
       this.responseEnquiryId = data.resourceId;
       console.log(data)
-      this.toast.success("Created Successfully");
       this.getEnrollData();
       this.dialogRef.close(data);
     })

@@ -158,8 +158,8 @@
 
             <div >
               <mat-form-field appearance="outline" class="example-full-width" >
-                <mat-label >Vehicle Number<span class="required-field">*</span></mat-label>
-                <input matInput type='text' formControlName="vehicleNumber" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }">
+                <mat-label >Vehicle Number</mat-label>
+                <input matInput  formControlName="vehicleNumber" #input [value]="input.value.toUpperCase()" >
             </mat-form-field>
             <div *ngIf="createEnquiryForms.controls['vehicleNumber'].invalid && (createEnquiryForms.controls['vehicleNumber'].dirty || createEnquiryForms.controls['vehicleNumber'].touched)" class="alert alert-danger">
               <div *ngIf="createEnquiryForms.controls['vehicleNumber'].errors.required">
@@ -171,7 +171,7 @@
             <div>    
               <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Email</mat-label>
-                <input matInput type='email' formControlName="email" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }"  maxlength="13"  >
+                <input matInput type='email' formControlName="email" [ngClass]="{ 'is-invalid': submitted && createEnquiryForms.controls.vehicleNumber.errors  }"  >
             </mat-form-field> 
                 <div *ngIf="createEnquiryForms.controls['email'].invalid && (createEnquiryForms.controls['email'].dirty || createEnquiryForms.controls['email'].touched)" class="alert alert-danger">
                   <div *ngIf="createEnquiryForms.controls['email'].errors.required">
@@ -184,7 +184,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="saveEnquiry()" data-dismiss="modal" data-toggle="modal" data-target="#generateEnquiryModal">Save</button>
+          <button type="button" class="btn btn-primary" (click)="saveEnquiry()"  data-toggle="modal" data-target="#generateEnquiryModal">Save</button>
         </div>
       </div>
     </div>
@@ -192,7 +192,7 @@
 
   <!-- /** Generate Enquiry Model*/ -->
 
-  <div *ngIf="showGenerateModel && submitted" class="modal fade" id="generateEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="generateEnquiryModalLabel"  aria-hidden="true">
+  <div class="modal fade" id="generateEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="generateEnquiryModalLabel"  aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

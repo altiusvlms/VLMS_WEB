@@ -27,6 +27,7 @@ export class NewloanProcessComponent implements OnInit {
    }
 
   mobile_num = localStorage.getItem("mobile_number");
+  id:any;
   submitted: Boolean = false;
   userId : any;
   selectedIndex: any = 0;
@@ -207,11 +208,20 @@ export class NewloanProcessComponent implements OnInit {
 
   })
 
-
-
-
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.id = params.id;
+    });
+    this.getEnrollData(); 
+    
   }
+  getEnrollData() {
+    console.log(this.id)
+  }
+
+
+  // ngOnInit(): void {
+  // }
   ngOnDestroy() { }
 
   tabClick(tabChangeEvent : any){

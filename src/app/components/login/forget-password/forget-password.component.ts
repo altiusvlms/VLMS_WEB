@@ -35,8 +35,7 @@ export class ForgetPasswordComponent implements OnInit {
         confirm_password: ['', Validators.required],
       },{
         validator: ConfirmedValidator('password', 'confirm_password')
-      }
-      )
+      })
      }
 
   ResetPaswrdform = new FormGroup({

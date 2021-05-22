@@ -130,7 +130,7 @@
   <ng-container matColumnDef="Action">
     <th mat-header-cell *matHeaderCellDef> Action </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-button (click)="createLoan()">Create Loan</button>
+      <button mat-button (click)="createLoan(element.id)">Create Loan</button>
       <button mat-button (click)="createViewTask(element)">view</button> 
        </td>
   </ng-container>
