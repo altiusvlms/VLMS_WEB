@@ -1,0 +1,305 @@
+<div class="container">
+    <h2>RECEIPT</h2>
+  
+
+  
+    <!-- As Mock -->
+    <div class="row">
+      <div class="col-sm-2">
+        <div> Customer Image</div>
+        <div>Customer ID: KF-0012</div>
+      </div>
+      <div class="col-sm-2">
+        <div>Robin</div>
+        <div>8765765465</div>
+      </div>
+      <div class="col-sm-2">
+        <div>Loan Term: 8 Month</div>
+        <div>EMI: 5200</div>
+        <div>paid due:2/8</div>
+      </div>
+      <div class="col-sm-2">
+        <div>Loan Amount:50,000</div>
+        <div>intrest: 2.5</div>
+        <div>pending due: 1/8</div>
+      </div>
+      <div class="col-sm-2">
+        <div>TO PAY: 42,000</div>
+        <div></div>
+        <div>Current due:1/8</div>
+      </div>
+  
+  
+    </div>
+  
+  
+  
+    <p>CREATE RECEIPT:</p>
+    <div>   
+    
+        <mat-form-field  appearance="outline" class="example-full-width">
+          <mat-label>Create Receipt</mat-label>
+        <mat-select  >
+        <mat-option value="Parentloan">Parent Loan</mat-option>
+              <mat-option value="childloan">Child loan</mat-option>
+              <mat-option value="Topuploan">Topup loan</mat-option>
+              </mat-select>
+        </mat-form-field>
+  </div>
+  
+  
+    <div>
+      
+        <mat-form-field  appearance="outline"  class="example-full-width">
+          <mat-label>Total Payable</mat-label>
+        <input matInput type="number" id="fname" placeholder="9,000" name="fname">
+        </mat-form-field>
+  </div>
+  
+  <div>
+      
+    <mat-form-field  appearance="outline"  class="example-full-width">
+      <mat-label>Enter amount</mat-label>
+    <input matInput type="number" id="fname"  name="fname">
+    </mat-form-field>
+  </div>
+  
+  <div>
+      
+    <mat-form-field  appearance="outline"  class="example-full-width">
+      <mat-label>Handloan</mat-label>
+    <input matInput type="number" id="fname"  name="fname">
+    </mat-form-field>
+  </div>
+  
+  <div>   
+    
+    <mat-form-field  appearance="outline" class="example-full-width">
+      <mat-label>Insurance</mat-label>
+    <mat-select  >
+    <mat-option value="Insurance">Insurance</mat-option>
+          <!-- <mat-option value="childloan">Child loan</mat-option>
+          <mat-option value="Topuploan">Topup loan</mat-option> -->
+          </mat-select>
+    </mat-form-field>
+    <mat-form-field  appearance="outline"  class="example-full-width">
+      
+    <input matInput type="number" id="fname"  placeholder="1500" name="fname">
+    </mat-form-field>
+    
+  </div>
+  
+    <div>
+  <mat-form-field  appearance="outline"  class="example-full-width">
+    <mat-label>Delay payment interest</mat-label>
+  <input matInput type="number" id="fname"  name="fname">
+  </mat-form-field>
+  <mat-form-field  appearance="outline"  class="example-full-width">
+  <input matInput type="number" id="fname" placeholder="0" name="fname">
+  </mat-form-field>
+  </div>
+  
+  <div>
+    <mat-form-field  appearance="outline"  class="example-full-width">
+      <mat-label>Due amount</mat-label>
+    <input matInput type="number" id="fname"  name="fname">
+    </mat-form-field>
+    <mat-form-field  appearance="outline"  class="example-full-width">
+    <input matInput type="number" id="fname" placeholder="0" name="fname">
+    </mat-form-field>
+    </div>
+  
+    <div>
+      <mat-form-field  appearance="outline"  class="example-full-width">
+        <mat-label>Balance</mat-label>
+      <input matInput type="number" id="fname" placeholder="2300" name="fname">
+      </mat-form-field>
+      </div>
+  
+      <div>   
+    
+        <mat-form-field  appearance="outline" class="example-full-width">
+          <mat-label>Pay mode</mat-label>
+        <mat-select  >
+        <mat-option value="cash">Cash</mat-option>
+              <mat-option value="online">Online</mat-option>
+              </mat-select>
+        </mat-form-field>
+  </div>
+
+  <div class="col-sm-2">
+    <div>
+        <button type="button"  data-toggle="modal" data-target="#createEnquiryModal">
+            Create
+        </button>
+    </div>
+  </div>
+  
+  
+    
+        <h3>HAND LOAN:</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>CREATED DATE</th>
+              <th>REC DATE</th>
+              <th>HAND LOAN</th>
+              <th>CREDIT</th>
+              <th>DEBIT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>23.03.2021</td>
+              <td></td>
+              <td>INSURANCE</td>
+              <td></td>
+              <td>1000</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>25.03.2021</td>
+              <td>INSURANCE</td>
+              <td>500</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Pending Amount</td>
+              <td>500</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Sr.No</th>
+                <th>Due Date</th>
+                <th>Due Amount</th>
+                <th>Receipted Date</th>
+                <th>Due Received</th>
+                <th>Due Balance</th>
+                <th>Delay Days</th>
+                <th>Default</th>
+                <th>Received</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>7.jan.2021</td>
+                <td>3,200</td>
+                <td>10.jan.2021</td>
+                <td>1000</td>
+                <td>2,500</td>
+                <td>3</td>
+                <td>200</td>
+                <td>200</td>
+                <td>
+                  <button type="button"> <span>Edit</span></button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>7.jan.2021</td>
+                <td>3,200</td>
+                <td>07.jan.2021</td>
+                <td>3,200</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-</td>
+                <td>-</td>
+                <td>
+                  <button type="button"> <span>Edit</span></button>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>7.jan.2021</td>
+                <td>3,200</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>0</td>
+                <td></td>
+                <td></td>
+                <td>
+                  <button type="button"> <span>Edit</span></button>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>7.jan.2021</td>
+                <td>3,200</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>0</td>
+                <td></td>
+                <td></td>
+                <td>
+                  <button type="button"> <span>Edit</span></button>
+                </td>
+              </tr>
+  
+            </tbody>
+          </table>
+        </div>
+  
+        <!-- models -->
+  
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="middle-title" id="exampleModalLabel">Confirmation</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <label> ARE You sure Do yoy want to Create Receipt for</label> <br>
+                <input type="text" id="fname" placeholder="9,000" name="fname">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="modal-title" id="createEnquiryModalLabel">Create Enquiry</h5> -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+        
+                
+                <div>    
+                  <h3>Confirmation</h3>
+                    <label>Receipt created Successfully for You</label>
+                    <input type="email" placeholder="9000" class="form-control">
+                    
+                </div>
+    
+        
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="button" class="btn btn-primary"  data-dismiss="modal" data-toggle="modal"  data-target="#generateEnquiryModal">Print</button>
+              <!-- (click)="generatePdf()" -->
+            </div>
+          </div>
+        </div>
+      </div>

@@ -1,0 +1,60 @@
+<!-- Applicant Online Table List-->
+<div class="container">
+    <div class="header_title">
+      <h2>Applicant On Line</h2>
+    </div>
+<div class="card">
+  <div class="card-body">
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Applicant ID </th>
+              <th>Applicant Photo</th> 
+              <th>Applicant Name</th>
+              <th>Applicant Mobile No</th>
+              <th>Loan Amount</th>
+              <th>Loan Term</th>
+              <th>Interest %</th>
+              <th>EMI Amount</th>
+              <th>Ref By</th>
+              <th>Vehicle Model</th>
+              <th>Vehicle Make</th>
+              <th>Vehicle Type</th>
+              <th>Loan Type</th>
+              <th>Applicant Type</th>
+              <th>Approver</th>
+              <th>To Pay</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  *ngFor="let applicant of applicantLoanDetails">
+              <td>{{applicant.id}}</td>
+              <td></td>
+              <td>{{applicant.customerName}}</td>
+              <td>{{applicant.customerDetails.mobileNo}}</td>
+              <td>{{applicant.loanDetailsData.loanAmount}}</td>
+              <td>{{applicant.loanDetailsData.loanTerm}}</td>
+              <td>{{applicant.loanDetailsData.loanInterest}}</td>
+              <td>{{applicant.loanDetailsData.emi}}</td>
+              <td>{{applicant.customerDetails.refBy}}</td>
+              <td>{{applicant.vehicleDetails.model}}</td>
+              <td>{{applicant.vehicleDetails.maker}}</td>
+              <td>{{applicant.vehicleType}}</td>
+              <td></td>
+              <td>{{applicant.customerDetails.applicantType}}</td>
+              <td></td>
+              <td>{{applicant.loanDetailsData.payout}}</td>
+              <td><span>View More</span><br><span (click)="pickApplicant(applicant.id)">Pick</span></td>
+            </tr>
+          </tbody>
+      </table>
+      
+      <div *ngIf="applicantLoanDetails.length ==0">
+        No Data Found.
+      </div>
+  </div>
+</div>
+
+</div>
+    

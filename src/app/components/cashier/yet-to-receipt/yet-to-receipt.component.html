@@ -1,0 +1,75 @@
+
+
+  <div class="container">
+    
+    <div class="header_title">
+      <h2>YET TO RECEIPT </h2>
+      </div>
+    <div class="row">
+    <div class="col-sm-4">
+      <button  class="btn_blue" type="button" >
+        Create Receipt
+       </button> 
+    </div>
+    </div>
+
+<!-- Loan Application Table -->
+<div class="card">
+  <div class="card-body">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer ID </th>
+        <!-- <th>Applicant Photo</th>  -->
+        <th>Applicant Name</th>
+        <th>Applicant Mobile No.</th>
+        <th>Loan Amount</th>
+        <th>Loan Term</th>
+        <th>Interest %</th>
+        <th>EMI</th>
+        <th>Ref By</th>
+        <th>Vehicle</th>
+        <th>For</th>
+        <th>Loan Type</th>
+        <th>Approved By</th>
+        <th>Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  >
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th><button>Create Receipt</button></th>
+      </tr>
+    </tbody>
+</table>
+
+
+</div></div>
+
+<h2>Basic Table</h2>
+    <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>            
+    <table class="table border">
+  
+      <tbody>
+        <tr *ngFor="let row of groups">
+         <td> {{row.name}} </td>
+         <td> {{row.items}} </td>
+         <td> <button (click)="addItem(i)">Add</button> </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div> 

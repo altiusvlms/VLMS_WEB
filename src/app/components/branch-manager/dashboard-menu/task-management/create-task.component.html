@@ -1,10 +1,16 @@
+<!-- /** Create Task List */ -->
 <div class="container">
+    <div class="header_title">
+        <h2>Task Management</h2>
+    </div>
+    <div class="card">
+        <div class="card-body">
     <form [formGroup]="createTaskForms" >
     <button type="button" class="close" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
 
-    <div *ngIf="data">
+    <div *ngIf="response">
         <span  class="material-icons" matTooltip="Edit" (click)="EditTask()">edit</span>
         <span *ngIf="!editIcon" class="material-icons" matTooltip="Delete" (click)="deleteTask()">delete</span>
     </div>
@@ -35,10 +41,9 @@
             </mat-form-field>                       
         </div>
         <div class="col-4 col-sm-4">
-            <mat-form-field>
-                <input matInput [matDatepicker]="dp" placeholder="Due Date" formControlName="dueDate">
-                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-                <mat-datepicker #dp></mat-datepicker>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Due Date</mat-label>
+                <input matInput type='date' formControlName="dueDate">
             </mat-form-field>
         </div>
         <div class="col-4 col-sm-4">
@@ -57,11 +62,13 @@
             </mat-form-field>    
         </div>
     
-        <div class="col-12 col-sm-12">
-    <button type="button" class="btn btn-secondary"  (click)="close()">Close</button>
-    <button type="button" class="btn btn-primary"  (click)="saveUpdateTask()" > {{editDataTask ? 'Update' : 'Save'}}
-    </button>
+    <div class="col-12 col-sm-12">
+        <button type="button" class="btn btn-secondary"  (click)="close()">Close</button>
+        <button type="button" class="btn btn-primary"  (click)="saveUpdateTask()" > {{editDataTask ? 'Update' : 'Save'}}
+        </button>
     </div>
-</div>
+    </div>
   </form>
+  </div>
+  </div>
 </div>

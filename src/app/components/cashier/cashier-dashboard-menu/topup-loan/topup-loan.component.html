@@ -1,0 +1,195 @@
+<p>topup-loan works!</p>
+<div class="container">
+    <div class="header_title">
+        <h2>TopUp Loan</h2>
+        <div class="header_right">
+            <button type="button"  class="btn_blue" >
+                Advanced Search 
+            </button> 
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+        <div class="row" >
+            <div class="col-sm-2">
+                <p>Applicant Image</p>
+            </div>
+            <div class="col-sm-2">
+                <p>Applicant Name</p>
+                <p>Applicant MobileNumber</p>
+                <p>Applicant ID</p>
+            </div>
+            <div class="col-sm-2">
+                <p>Loan Amount:</p>
+                <p>Loan Term:</p>
+                <p>Interest:%</p>
+                <p>EMI:</p>
+            </div>
+            <div class="col-sm-2">
+                <p>To Pay: </p>
+            </div>
+        </div>  
+        </div>
+    </div>
+
+    <div class="row">
+        <button class="btn_blue">Loan Details</button>
+        <button class="btn_blue">Due Details</button>
+    </div>
+    <div class="card">
+        <div class="card-body">
+      <form class="example-form" >
+          <div class="row" >
+            <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Loan Amount</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Loan Term</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Interest(%)</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Interest(INR)</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>EMI</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Next Due Date</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Document Charges</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Processing Charges</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <!-- <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Pending Document</mat-label>
+                  <mat-checkbox class="example-margin">NOC</mat-checkbox>
+                  <mat-checkbox class="example-margin">Insurence</mat-checkbox>
+                </mat-form-field>
+              </div> -->
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Hold Amount</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Other Charges</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Closing A/C</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Enter Bank Account Details or Previous agt no</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Closing Discount</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Balance</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Loan Due Term</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+
+            </div>
+            <div class="row"  formGroupName="bankDetails">
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Transfer Amount1</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <p>Bank Details</p>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Account Number</mat-label>
+                  <input matInput type='text'   >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Name</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>    
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Bank</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Branch</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>IFSC</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+                 <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>PassBook Image</mat-label>
+                  <input matInput type='text'  >
+                  </mat-form-field>
+              </div>
+            </div> 
+          <div class="row">
+              <button class="btn_blue">Save</button>
+              <button class="btn_blue">Save & Process</button>
+          </div>
+      </form>
+        </div>
+    </div>
+
+</div>
