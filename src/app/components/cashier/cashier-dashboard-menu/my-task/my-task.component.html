@@ -1,0 +1,37 @@
+<!-- /** My Task List */ -->
+<div class="container">
+    <div class="header_title">
+        <h2>My Task</h2>
+        <div class="header_right">
+            <mat-form-field appearance="outline">
+                <mat-label>Search</mat-label>
+                <input matInput placeholder="Search" />
+                <mat-icon matPrefix>search</mat-icon>
+              </mat-form-field> 
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Assigned By</th>
+                  <th>Task</th>
+                  <th>Due Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><button class="btn_blue" (click)="editMyTask()">Edit</button></td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+    </div>
+</div>
