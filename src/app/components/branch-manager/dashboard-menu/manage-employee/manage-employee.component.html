@@ -4,7 +4,7 @@
     <div class="card-body">
   <mat-tab-group>
     <form [formGroup]="manageEmployeeForm">
-    <mat-tab label="Employee Details"><!-- <table class="example-full-width" cellspacing="0"> -->
+    <mat-tab label="Employee Details">
       <div class="container">
         <div class="row">
           <div class="col-4 col-sm-4">
@@ -52,6 +52,41 @@
               </div>
           </div>
           </div>
+          <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Alternative Number</mat-label>
+            <input matInput formControlName="altNumber" minlength=10 maxlength=10>
+        </mat-form-field>
+        <div *ngIf="manageEmployeeForm.controls['altNumber'].invalid && (manageEmployeeForm.controls['altNumber'].dirty || manageEmployeeForm.controls['altNumber'].touched)" class="alert alert-danger">
+            <div *ngIf="manageEmployeeForm.controls['altNumber'].errors.required">
+                Please enter Alt Number!
+            </div>
+        </div>
+        </div>
+        <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class=" example-full-width">
+          <mat-label>Official Number</mat-label>
+          <input matInput formControlName="officialNumber" minlength=10 maxlength=10>
+      </mat-form-field>
+      <div *ngIf="manageEmployeeForm.controls['officialNumber'].invalid && (manageEmployeeForm.controls['officialNumber'].dirty || manageEmployeeForm.controls['officialNumber'].touched)" class="alert alert-danger">
+          <div *ngIf="manageEmployeeForm.controls['officialNumber'].errors.required">
+              Please enter Official Number!
+          </div>
+      </div></div>
+          <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
+            <input matInput [matDatepicker]="dp" placeholder="Date of Birth" formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+        <div *ngIf="manageEmployeeForm.controls['dob'].invalid && (manageEmployeeForm.controls['dob'].dirty || manageEmployeeForm.controls['dob'].touched)" class="alert alert-danger">
+            <div *ngIf="manageEmployeeForm.controls['dob'].errors.required">
+                Please enter Date of Birth!
+            </div>
+        </div></div>
+
+          <div class="col-4 col-sm-4"><button mat-button (click)="CalculateAge()">Calculate Age</button>
+            <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput placeholder="Age" value="{{age}}" formControlName="age">
+          </mat-form-field>
+          </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Gender</mat-label>
@@ -67,45 +102,8 @@
         </div></div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Alternative Number</mat-label>
-            <input matInput formControlName="altNumber" minlength=10 maxlength=10>
-        </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['altNumber'].invalid && (manageEmployeeForm.controls['altNumber'].dirty || manageEmployeeForm.controls['altNumber'].touched)" class="alert alert-danger">
-            <div *ngIf="manageEmployeeForm.controls['altNumber'].errors.required">
-                Please enter Alt Number!
-            </div>
-        </div></div>
-
-          <div class="col-4 col-sm-4"><mat-form-field>
-            <input matInput [matDatepicker]="dp" placeholder="Date of Birth" formControlName="dob">
-            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker #dp></mat-datepicker>
-        </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['dob'].invalid && (manageEmployeeForm.controls['dob'].dirty || manageEmployeeForm.controls['dob'].touched)" class="alert alert-danger">
-            <div *ngIf="manageEmployeeForm.controls['dob'].errors.required">
-                Please enter Date of Birth!
-            </div>
-        </div></div>
-
-          <div class="col-4 col-sm-4"><button mat-button (click)="CalculateAge()">Calculate Age</button>
-            <mat-form-field>
-              <input matInput placeholder="Age" value="{{age}}" formControlName="age">
-          </mat-form-field>
-          </div>
-
-          <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class=" example-full-width">
-            <mat-label>Official Number</mat-label>
-            <input matInput formControlName="officialNumber" minlength=10 maxlength=10>
-        </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['officialNumber'].invalid && (manageEmployeeForm.controls['officialNumber'].dirty || manageEmployeeForm.controls['officialNumber'].touched)" class="alert alert-danger">
-            <div *ngIf="manageEmployeeForm.controls['officialNumber'].errors.required">
-                Please enter Official Number!
-            </div>
-        </div></div>
-
-          <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Marital Status</mat-label>
-            <mat-select formControlName="maritalStatus">
+            <mat-select formControlName="maritalStatus"  (selectionchange)="onFoodChange($event)">
                 <mat-option value="single">Single</mat-option>
                 <mat-option value="married">Married</mat-option>
             </mat-select>
@@ -115,6 +113,17 @@
                 Please select a value!
             </div>
         </div></div>
+        <div class="col-4 col-sm-4">
+          <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Spouse Name</mat-label>
+              <input matInput formControlName="spousename">
+          </mat-form-field>
+          <div *ngIf="manageEmployeeForm.controls['spousename'].invalid && (manageEmployeeForm.controls['spousename'].dirty || manageEmployeeForm.controls['spousename'].touched)" class="alert alert-danger">
+              <div *ngIf="manageEmployeeForm.controls['spousename'].errors.required">
+                  Please enter Spouse Name!
+              </div>
+          </div>
+     </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Designation</mat-label>
@@ -125,20 +134,6 @@
                 Please enter Designation!
             </div>
         </div></div>
-
-          <div class="col-4 col-sm-4">
-            <!-- <td> -->
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Spouse Name</mat-label>
-                <input matInput formControlName="spousename">
-            </mat-form-field>
-            <div *ngIf="manageEmployeeForm.controls['spousename'].invalid && (manageEmployeeForm.controls['spousename'].dirty || manageEmployeeForm.controls['spousename'].touched)" class="alert alert-danger">
-                <div *ngIf="manageEmployeeForm.controls['spousename'].errors.required">
-                    Please enter Spouse Name!
-                </div>
-            </div>
-            <!-- </td> -->
-       </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Blood Group</mat-label>
@@ -170,7 +165,7 @@
             </div>
         </div></div>
 
-          <div class="col-4 col-sm-4"><mat-form-field>
+          <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Date of Joining</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="doj">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -180,59 +175,8 @@
           
         </div>
       </div>  
+</mat-tab>
 
-
-      <!-- <div> 
-                    <label>Name:                  
-                      <span class="required-field">*</span>
-                      <mat-form-field  appearance="outline" class="example-full-width">
-                        <input matInput type='text'  formControlName="name" [ngClass]="{ 'is-invalid': submitted && manageEmployeeForm.controls.name.errors  }">
-                        </mat-form-field>
-                        <div *ngIf="submitted && manageEmployeeForm.controls.name.errors" class="alert alert-danger">
-                          <div class="required-field" *ngIf="submitted && manageEmployeeForm.controls.name.errors.required">Vehicle Number is required</div>
-                        </div>  
-                    </label>
-                  </div> -->
-
-
-      
-      <!-- <div>
-                      <td>  
-                        <mat-form-field  appearance="outline" class="example-full-width">
-                          <mat-label>D.O.B</mat-label>
-                        <input matInput  type='text' formControlName="dob"  >
-                        </mat-form-field>
-                        <div *ngIf="manageEmployeeForm.controls['dob'].invalid && (manageEmployeeForm.controls['dob'].dirty || manageEmployeeForm.controls['dob'].touched)" class="alert alert-danger">
-                          <div *ngIf="manageEmployeeForm.controls['dob'].errors.required">
-                          Please enter Date of Birth!
-                        </div>
-                      </div>
-                      </td>
-                  </div> -->
-
-      
-      <!-- <div>
-                      <td> 
-                          <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Age</mat-label>
-                        <input matInput formControlName="age" >
-                      </mat-form-field>
-                      <div *ngIf="manageEmployeeForm.controls['age'].invalid && (manageEmployeeForm.controls['age'].dirty || manageEmployeeForm.controls['age'].touched)" class="alert alert-danger">
-                        <div *ngIf="manageEmployeeForm.controls['age'].errors.required">
-                        Please enter Age!
-                      </div>
-                    </div>
-                    </td>
-                  </div>  -->
-
-     
-          <!-- <td>
-                          <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>D.O.J</mat-label>
-                        <input matInput formControlName="doj" >
-                      </mat-form-field></td> -->
-          
-      </mat-tab>
     <mat-tab label="Add Address"><!-- Add Communication address -->
 
       <h2>Add Communication Address</h2>
