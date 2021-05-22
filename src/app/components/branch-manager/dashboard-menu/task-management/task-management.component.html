@@ -1,5 +1,4 @@
 
-
 <!-- /** Create Task Button */ -->
 <div class="container">
   <div class="header_title">
@@ -38,7 +37,7 @@
         <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>
         <td>{{task.assignTo}}</td>
         <td>{{task.status ? task.status : "open"}}</td>
-        <td  (click)="createViewTask(task)">View</td>
+        <td><button class="btn_blue" (click)="createViewTask(task)">View</button></td>
       </tr>
     </tbody>
 </table>

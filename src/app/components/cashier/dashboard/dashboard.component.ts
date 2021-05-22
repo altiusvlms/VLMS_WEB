@@ -20,9 +20,14 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+/** Click the View All Navigate to the (Applicant or Customer) Online Page */
+  customersOnline(){
+    this.router.navigate(['cashier/applicant_online']);
   }
 
   /** Advance Search Open the Dialog Model */
