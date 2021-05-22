@@ -28,6 +28,8 @@ import { AngularFireModule } from '@angular/fire'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireStorageModule } from '@angular/fire/storage'
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { CreateReceiptComponent } from './components/cashier/create-receipt/create-receipt.component';
+import { YetToReceiptComponent } from './components/cashier/yet-to-receipt/yet-to-receipt.component';
 
 /** Custom Fire Base Config */
 const firebaseConfig = {
@@ -65,7 +67,7 @@ const firebaseConfig = {
     ReactiveFormsModule,
     
   ],
-  declarations: [WebAppComponent],
+  declarations: [WebAppComponent, CreateReceiptComponent, YetToReceiptComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     DatePipe],
