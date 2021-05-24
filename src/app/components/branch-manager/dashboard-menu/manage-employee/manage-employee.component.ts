@@ -185,14 +185,12 @@ export class ManageEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
-      this.getSingleEmployeeList();
-      this.employeeEducationDetails();
-      this.employeeInsuranceDetails();
-      // this.updateEmployeeEducationDetails();
-      // this.updateEmployeeInsuranceDetails()
-      // this.updateEmployeeDetails();
-      // this.updateEmployeeEducationDetails();
+      // this.employeeEducationDetails();
+      // this.employeeInsuranceDetails();
     })
+    if(this.id != undefined){
+      this.getSingleEmployeeList();
+      }
   }
   
 
@@ -200,6 +198,11 @@ export class ManageEmployeeComponent implements OnInit {
 
   
   id:any;
+  onFoodChange(value : any){
+    console.log(value)
+    console.log("test")
+  }
+
 /** Save Enquiry */
 manageEmployee(){
   this.submitted = true;

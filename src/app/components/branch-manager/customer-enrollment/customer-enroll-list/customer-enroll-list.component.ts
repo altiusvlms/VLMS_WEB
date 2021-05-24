@@ -72,7 +72,7 @@ export class CustomerEnrollListComponent implements OnInit {
   }
 
   createLoan(id : any){
-    this.router.navigate(['branch-manager/newloan-process/' + id]);
+    this.router.navigate(['branch-manager/newloan-process']);
   }
 
   createViewTask(element : any) {
