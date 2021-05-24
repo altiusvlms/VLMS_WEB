@@ -36,6 +36,9 @@ export class CustomerEnrollListComponent implements OnInit {
   showAction : Boolean = false;
   EnrollVerfication_Data:any;
 
+  fromdate:any;
+  todate:any;
+
   displayedColumns = ['Customer ID','Customer Image', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
   'D.O.B','Father’s Name','Applicant Type','Gender','AadhaarImage','PAN Image','Action'];
   dataSource = new MatTableDataSource();
@@ -85,6 +88,31 @@ export class CustomerEnrollListComponent implements OnInit {
       }
     });
   }
+  Filterdate(){
+    this.fromdate;
+    this.todate;
+    let fromdate1 =this.datepipe.transform(this.fromdate, 'yyyy-MM-dd');
+    let todate1 =this.datepipe.transform(this.todate, 'yyyy-MM-dd');
+    console.log(fromdate1);
+    console.log(todate1);
+    let params = {
+      fromdate:fromdate1,
+      todate:todate1,
+      tenantIdentifier: "default",
+    }
+        this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnrollByDate`,
+      { params }
+    ).pipe(untilDestroyed(this)).subscribe( data => {
+      console.log(data)
+      this.EnrollVerfication_Data = data;
+      this.dataSource = new MatTableDataSource(this.EnrollVerfication_Data)
+    })
+  }
+  
+  clear(){
+    this.getEnrollData();
+  }
+
 }
 
   @Component({
@@ -278,7 +306,7 @@ onClickOpenForm(){
    saveCustomerEnrolment(){
     this.submitted = true;
     if (this.editDataTask) {
-      this.createCustomerEnrolForms.value.dueDate=this.datepipe.transform(this.createCustomerEnrolForms.value.dueDate, 'dd MMMM yyyy');
+      this.createCustomerEnrolForms.value.dob=this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd MMMM yyyy');
       this.crudService.update(`${appModels.FIELDEXECUTIVE}/updateEnroll`,this.createCustomerEnrolForms.value,
         this.editDataTask['id'],
       ).pipe(untilDestroyed(this)).subscribe(updated => {
@@ -289,6 +317,7 @@ onClickOpenForm(){
         }
     else {
     this.createCustomerEnrolForms.value.dob =this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd MMMM yyyy');
+    console.log(this.createCustomerEnrolForms.value.dob);
     this.images = {
       images1:this.createCustomerEnrolForms.value.image1,
       images2:this.createCustomerEnrolForms.value.image2,
@@ -401,7 +430,18 @@ onClickOpenForm(){
     .catch( (error: any) => console.log(error, "Incorrect code entered?"));
     // alert("Incorrect code entered");    
   }
-  
+  deleteTask(){
+    this.editIcon = false;
+    if (confirm(`Are you sure, you want to delete?`)) {
+    this.crudService.delete(`${appModels.FIELDEXECUTIVE}/enroll`, this.editDataTask['id'])
+    .pipe(untilDestroyed(this)).subscribe(deleted => {
+      this.dialogRef.close(deleted);
+      this.sharedService.setLoaderShownProperty(false); 
+      this.toast.success("Task Deleted Succesfully"); 
+    })
+    }
+  }
+
   close() {
     this.dialogRef.close();
   }
