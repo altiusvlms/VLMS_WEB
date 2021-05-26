@@ -179,5 +179,36 @@ export class CreateTask {
       this.dialogRef.close();
     }
 
+/** Filter on CustomerName based Mobile Number */    
+    customername: any;
+    customerList: any = [];
+    applyFilter(value : any , string_val: any){
+      if(string_val == 'regNo'){
+       const filterValue = (event.target as HTMLInputElement).value;
+       this.customername = filterValue.trim().toLowerCase();
+     }
+     this.crudService.get(`${appModels.GETEMPLOYEE}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async response => {
+      await response.map((res: any) => {
+        if(res.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
+        this.customerList.push(res);
+        }
+      })
+      })
+    }
 
+    customer(val: any){
+      this.customerList.map((res: any) => {
+        if(res.name.toLowerCase().search(val.value.toLowerCase()) != -1 ){
+        this.createTaskForms
+        .patchValue({
+          customerMobileNo:res.mobileNumber
+        })
+        }
+      })
+    }
+    
 }

@@ -1,7 +1,18 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Data } from '@angular/router';
 // import { Options, LabelType } from '@angular-slider/ngx-slider';
-import { Options, LabelType } from 'ng5-slider';
+import {  LabelType } from 'ng5-slider';
+import * as Highcharts from 'highcharts'
+import { Options } from "highcharts";
+
+
+import {  CrudService } from '../../../../services/crud.service';
+import { appModels } from '../../../../services/utils/enum.util';
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+
+@UntilDestroy({ checkProperties: true })
+
+
 // import pdfMake from 'pdfmake/build/pdfmake';
 // import pdfFonts from 'pdfmake/build/vfs_fonts';
 // pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -11,191 +22,216 @@ import { Options, LabelType } from 'ng5-slider';
   styleUrls: ['./create-receipt.component.scss']
 })
 export class CreateReceiptComponent implements OnInit {
+
+  Highcharts: typeof Highcharts = Highcharts;
+  
   id : any;
   filters: any;
-  pemi = {
-    value: "25"
-  }
-  remi = {
-    value: "8.5"
-  }
-  temi = {
-    value: "20"
-  }
-  memi = {
-    value: "240"
-  }
-
-  query = {
-    amount: "",
-    interest: "",
-    tenureYr: "",
-    tenureMo: ""
-  }
-
-  result = {
-    emi: "",
-    interest: "",
-    total: ""
-  }
-  yrToggel: boolean;
-  poptions: Options = {
-    floor: 1,
-    ceil: 200,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + '<b>T</b>';
-        case LabelType.High:
-          return value + '<b>T</b>';
-        default:
-          return value + '<b>T</b>';
-      }
-    }
-  };
-  roptions: Options = {
-    floor: 5,
-    ceil: 30,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + '<b>%</b>';
-        case LabelType.High:
-          return value + '<b>%</b>';
-        default:
-          return value + '<b>%</b>';
-      }
-    }
-  };
-  toptions: Options = {
-    floor: 1,
-    ceil: 30,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + '<b>Yr</b>';
-        case LabelType.High:
-          return value + '<b>Yr</b>';
-        default:
-          return value + '<b>Yr</b>';
-      }
-    }
-  };
-  moptions: Options = {
-    floor: 1,
-    ceil: 360,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + '<b>Mo</b>';
-        case LabelType.High:
-          return value + '<b>Mo</b>';
-        default:
-          return value + '<b>Mo</b>';
-      }
-    }
-  };
+  
 
    TotalInterest : number;
    TotalPayable : number;
    MonthlyDue : number;
+  analyticsOverallData: any;
 
-  constructor() { this.yrToggel = true; }
-
-  ngAfterViewInit() {
-    // debugger
-    this.update();
+  constructor(private crudService: CrudService) { 
+    // this.yrToggel = true; 
   }
 
-  tbupdate(id : any) {
-    // debugger
-    if (id == 0) {
-      this.pemi.value = (Number(this.query.amount) / 100000 ).toString();
-    }
-    else if (id == 1) {
-      this.remi.value = this.query.interest;
-    }
-    else if (id == 2) {
-      this.temi.value = this.query.tenureYr;
-    }
-    else if (id == 3) {
-      this.memi.value = this.query.tenureMo;
-    }
-    this.update();
-  }
 
   fromdate: Date;
   todate: Date;
   MonthlyCorrectDue:any;
 
-  update() {
-    // debugger
-    var loanAmount = Number(this.query.amount);
-    var rateOfInterest = Number(this.query.interest);
-    var numberOfMonths = (this.yrToggel) ? (Number(this.query.tenureYr) * 12) : Number(this.query.tenureMo);
-    // var monthlyInterestRatio = (rateOfInterest / 100) / 12;
-console.log(this.fromdate);
-     this.TotalInterest = (loanAmount * rateOfInterest) / 100;
-
-     this.TotalPayable = loanAmount + this.TotalInterest;
-
-     var MonthlyDue = this.TotalPayable / numberOfMonths;
-     this.MonthlyCorrectDue = Number (Math.round(MonthlyDue))
-
-
-
-    // this.query.amount = loanAmount.toString();
-    // this.query.interest = rateOfInterest.toString();
-    // if (this.yrToggel) {
-    //   this.query.tenureYr = this.temi.value.toString();
-    // }
-    // else {
-    //   this.query.tenureMo = this.memi.value.toString();
-    // }
-
-    // var top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
-    // var bottom = top - 1;
-    // var sp = top / bottom;
-    // var emi = ((loanAmount * monthlyInterestRatio) * sp);
-    // var full = numberOfMonths * emi;
-    // var interest = full - loanAmount;
-    // var int_pge = (interest / full) * 100;
-
-    // this.result.emi = emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // this.result.total = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // this.result.interest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.DueCalc();
-  }
-  daydiff:any;
-  delayDueAmount:any;
-  totalAmt : any;
-  DueCalc(){
-    // debugger
-     var totaltimediff =  this.todate.getTime() - this.fromdate.getTime();
-      var daydiff = totaltimediff / ( 1000 * 3600 * 24);
-     var interestPerYear = Number (this.query.interest) * 100 / 365;
-     var dueInterest = Number (Math.round(interestPerYear))
-     console.log("dueInterest")
-     console.log(dueInterest)
-
-      var delayDueAmount = dueInterest * daydiff;
-      this.delayDueAmount = Number ((Math.ceil(delayDueAmount / 10) * 10))
-      console.log("delayDueAmount")
-      console.log(this.delayDueAmount)
-
-     this.totalAmt = this.delayDueAmount + this.MonthlyCorrectDue
-
-
-
-  }
-  ngOnInit(): void {
-  }
-
-  generatePdf(pdfmake : any){
-    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
-    pdfmake.createPdf(documentDefinition).open();
-   }
   
+
+  // }
+  ngOnInit(): void {
+    
+    // debugger
+  this.getOverallData();
+
+  
+
+  }
+
+  // generatePdf(pdfmake : any){
+  //   const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+  //   pdfmake.createPdf(documentDefinition).open();
+  //  }
+
+getOverallData(){
+  this.crudService.get(`${appModels.ANALYTICS_OVERALL_DATA}`, {
+    params: {
+      tenantIdentifier: 'default'
+    }
+  }).pipe(untilDestroyed(this)).subscribe(data => {
+    // console.log(data);
+    this.analyticsOverallData = data;
+    console.log("analyticsOverallData")
+    console.log(this.analyticsOverallData)
+    this.mapGraphData();
+    Highcharts.chart("piechart", this.mapPiechartData() );
+    
+  })
+}
+
+  mapGraphData() {
+    // chartOptions: Highcharts.Options = {
+      Highcharts.chart('graph2', {
+        chart: {
+          type: 'column'
+        },
+        title: {
+          text: 'Monthly Average Rainfall'
+        },
+        subtitle: {
+          text: 'Source: WorldClimate.com'
+        },
+        xAxis: {
+          categories: [
+            'Mon',
+            'Feb',
+            'Mar',
+            'Apr',
+            // 'May',
+            // 'Jun',
+            // 'Jul',
+            // 'Aug',
+            // 'Sep',
+            // 'Oct',
+            // 'Nov',
+            // 'Dec'
+          ],
+          crosshair: true
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: 'Rainfall (mm)'
+          }
+        },
+        tooltip: {
+          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+          footerFormat: '</table>',
+          shared: true,
+          useHTML: true
+        },
+        plotOptions: {
+          column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+          }
+        },
+        series: [{
+          type:undefined,
+          name: 'insuranceExpired',
+          data: [this.analyticsOverallData[0].insuranceExpired]
+      
+        }, 
+        // {
+        //   type:undefined,
+        //   name: 'New York',
+        //   data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+      
+        // }, {
+        //   type:undefined,
+        //   name: 'London',
+        //   data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+      
+        // }, {
+        //   type:undefined,
+        //   name: 'Berlin',
+        //   data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+      
+        // }
+      ]
+      }) 
+    // }
+  }
+    
+
+  // })
+
+
+  chartss :any
+  
+// Pie chart
+mapPiechartData():any{
+let values = this.analyticsOverallData[0].insuranceExpired  
+// chartss: Highcharts.Options = {
+// Highcharts.chart('container', {
+  this.chartss = {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie'
+  },
+  title: {
+    text: 'Browser market shares in January, 2018'
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  },
+  accessibility: {
+    point: {
+      valueSuffix: '%'
+    }
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+      }
+    }
+  },
+  series: [{
+    name: 'Brands',
+    colorByPoint: true,
+    data: [{
+      name: 'insuranceExpired',
+      y: values,
+      // sliced: true,
+      // selected: true
+      
+    }, {
+      name: 'Internet Explorer',
+      y: values,
+      
+
+    },
+     {
+      name: 'Firefox',
+      y: 10.85
+    }, {
+      name: 'Edge',
+      y: 4.67
+    }, {
+      name: 'Safari',
+      y: 4.18
+    }, {
+      name: 'Sogou Explorer',
+      y: 1.64
+    }, {
+      name: 'Opera',
+      y: 1.6
+    }, {
+      name: 'QQ',
+      y: 1.2
+    }, {
+      name: 'Other',
+      y: 2.61
+    }]
+  }]
+// }),
+}
+return this.chartss;
+}
 
 }
