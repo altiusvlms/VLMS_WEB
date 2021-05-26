@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
 
 
 /** Custom Forms */
@@ -15,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+import { values } from 'lodash';
 @UntilDestroy({ checkProperties: true })
 
 
@@ -36,14 +38,16 @@ export class EnquiryListComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
+  fromdate:any;
+  todate:any;
+  latest_date:any;
   submitted: Boolean = false;
   showGenerateModel:Boolean = false;
   responseEnquiryId:any;
   EnquiryVerfication_Data:any;
   unamePattern = "^[A-Z]{2}[ \-][0-9]{2}[ ,][A-Z0-9]{2,3}[ \-][0-9]{4}$"
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private dialog: MatDialog) { }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private dialog: MatDialog,public datepipe: DatePipe) { }
 
     /** Create Enquiry Form */
     createEnquiryForms = new FormGroup({
@@ -53,6 +57,7 @@ export class EnquiryListComponent implements OnInit {
       email: new FormControl(''),
       enquiryId: new FormControl(''),
     })
+    
   ngOnInit(): void {
     this.getEnrollData();
   }
@@ -87,13 +92,34 @@ export class EnquiryListComponent implements OnInit {
       this.showGenerateModel = true;
       this.responseEnquiryId = data.resourceId;
       console.log(data)
-      this.toast.success("Created Successfully");
       this.getEnrollData();
       this.dialogRef.close(data);
     })
   }
 
-
+  Filterdate(){
+    this.fromdate;
+    this.todate;
+    let fromdate1 =this.datepipe.transform(this.fromdate, 'yyyy-MM-dd');
+    let todate1 =this.datepipe.transform(this.todate, 'yyyy-MM-dd');
+    console.log(fromdate1);
+    console.log(todate1);
+    let params = {
+      fromdate:fromdate1,
+      todate:todate1,
+      tenantIdentifier: "default",
+    }
+        this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnquiryByDate`,
+      { params }
+    ).pipe(untilDestroyed(this)).subscribe( data => {
+      console.log(data)
+      this.EnquiryVerfication_Data = data;
+      this.dataSource = new MatTableDataSource(this.EnquiryVerfication_Data)
+    })
+  }
+  clear(){
+    this.getEnrollData();
+  }
 
 
 }

@@ -1,9 +1,8 @@
 /** Angular Imports */
 import { Component, OnInit,Inject } from '@angular/core';
 
-/** Custom Forms */
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-
+/** Custom Forms and Routing and Services */
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 import { ToastrService } from 'ngx-toastr';
@@ -11,11 +10,10 @@ import { DatePipe } from '@angular/common';
 import { SharedService } from '../../../../services/shared.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
-/** Task Management Component */
+/** Task Management List Component */
 @Component({
   selector: 'vlms-task-management',
   templateUrl: './task-management.component.html',
@@ -23,10 +21,11 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class TaskManagementComponent implements OnInit {
 
+/** Task Management Variables */
   taskListData: any = [];
   showAction : Boolean = false;
 
-  constructor(private formBuilder: FormBuilder,private crudService: CrudService,private toast: ToastrService,public datepipe: DatePipe, private sharedService: SharedService,private dialog: MatDialog) { }
+  constructor(private crudService: CrudService,public datepipe: DatePipe, private sharedService: SharedService,private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getTaskList();
@@ -34,29 +33,27 @@ export class TaskManagementComponent implements OnInit {
 
   ngOnDestroy() { }
 
-  getTaskList(){
+/** Task Management List */
+getTaskList(){
     this.crudService.get(`${appModels.FIELDEXECUTIVE}/getTask`, {
       params: {
         tenantIdentifier: 'default'
       }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      this.taskListData= data;
-      console.log(data);
+    }).pipe(untilDestroyed(this)).subscribe(response => {
+      this.taskListData= response;
       this.sharedService.setLoaderShownProperty(false);  
     })
   }
 
-
+/** Open the Dialog Model (Create and Edit) */
   createViewTask(task : any) {
     const dialogRef = this.dialog.open(CreateTask, {
       width: '100vw',
       height: '90vh',
       data: task ? task : null
-    });
-    console.log(task)
-  
-    dialogRef.afterClosed().subscribe((data : any) => {
-      if (data) {
+    });  
+    dialogRef.afterClosed().subscribe((response : any) => {
+      if (response) {
         this.getTaskList();
       }
     });
@@ -66,6 +63,7 @@ export class TaskManagementComponent implements OnInit {
 
 
 
+/** Create Task Management Component */
 
 @Component({
   selector: 'vlms-task-management',
@@ -77,29 +75,31 @@ export class TaskManagementComponent implements OnInit {
 
 export class CreateTask {
 
+/** Create Task Management Variables */
   editDataTask : any;
   editIcon : Boolean = false;
   assignToName: any;
 
-  constructor(public dialogRef: MatDialogRef<CreateTask>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private formBuilder: FormBuilder,
+  constructor(public dialogRef: MatDialogRef<CreateTask>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
     private crudService: CrudService,
     private sharedService: SharedService,public datepipe: DatePipe) { 
-    if (data) {
-      console.log(data)
-      this.editDataTask = { ...data };
+    if (response) {
+      this.editDataTask = { ...response };
      this.createTaskForms
     .patchValue({
-      taskType:data.taskType,
-      customerRegNo:data.customerRegNo,
-      customerMobileNo:data.customerMobileNo,
-      vehicleNumber:data.vehicleNumber,
-      dueDate:this.datepipe.transform(data.dueDate, 'yyyy-MM-dd'),
-      assignTo:data.assignTo,
-      description:data.description
+      taskType:response.taskType,
+      customerRegNo:response.customerRegNo,
+      customerMobileNo:response.customerMobileNo,
+      vehicleNumber:response.vehicleNumber,
+      dueDate:this.datepipe.transform(response.dueDate, 'yyyy-MM-dd'),
+      assignTo:response.assignTo,
+      description:response.description
     });
     this.createTaskForms.disable();
     }
   }
+
+/** Create Task Management Forms */
     createTaskForms = new FormGroup({
       taskType: new FormControl(''),
       customerRegNo: new FormControl(''),
@@ -119,18 +119,18 @@ export class CreateTask {
   }
   ngOnDestroy() {}
 
+/** Get the Field Executive Name(AssignTo --> DropDown Value) */
   assignToDetails(){
     this.crudService.get(`${appModels.FIELDEXECUTIVE}/feCashInHand`, {
       params: {
         tenantIdentifier: 'default'
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
-     this.assignToName = response;
-     console.log(response);
-     
+     this.assignToName = response;     
     })
   }
 
+/** Create and Update Task Management */
   saveUpdateTask(){
     if (this.editDataTask) {
       this.createTaskForms.value.dueDate=this.datepipe.transform(this.createTaskForms.value.dueDate, 'dd MMMM yyyy');
@@ -139,6 +139,7 @@ export class CreateTask {
       ).pipe(untilDestroyed(this)).subscribe(updated => {
         this.dialogRef.close(updated);
         this.sharedService.setLoaderShownProperty(false);  
+        this.toast.success("Task Updated Succesfully"); 
       })
     } else {
       this.createTaskForms.value.dueDate=this.datepipe.transform(this.createTaskForms.value.dueDate, 'dd MMMM yyyy');
@@ -148,27 +149,32 @@ export class CreateTask {
         }}
       ).pipe(untilDestroyed(this)).subscribe(saved => {
           this.dialogRef.close(saved);
-          this.sharedService.setLoaderShownProperty(false);  
+          this.sharedService.setLoaderShownProperty(false); 
+          this.toast.success("Task Saved Succesfully");  
         })
     }
   }
 
+/** Edit Task Management */
     EditTask(){
       this.editIcon = true;
       this.createTaskForms.enable();
     } 
 
+/** Delete Task Management */
     deleteTask(){
       this.editIcon = false;
       if (confirm(`Are you sure, you want to delete?`)) {
       this.crudService.delete(`${appModels.FIELDEXECUTIVE}/deleteTask`, this.editDataTask['id'])
       .pipe(untilDestroyed(this)).subscribe(deleted => {
         this.dialogRef.close(deleted);
-        this.sharedService.setLoaderShownProperty(false);  
+        this.sharedService.setLoaderShownProperty(false); 
+        this.toast.success("Task Deleted Succesfully"); 
       })
       }
     }
 
+/** Close the Dialog Model */
     close() {
       this.dialogRef.close();
     }

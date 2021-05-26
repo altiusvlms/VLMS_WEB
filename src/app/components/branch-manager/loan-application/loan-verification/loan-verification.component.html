@@ -120,7 +120,7 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Customer ID </th>
+        <th>Applicant ID </th>
         <!-- <th>Applicant Photo</th>  -->
         <th>Applicant Name</th>
         <th>Applicant Mobile No.</th>
@@ -141,26 +141,26 @@
       </tr>
     </thead>
     <tbody>
-      <tr  *ngFor="let loan of customerLoanDetails">
-        <td>{{loan.id}}</td>
+      <tr  *ngFor="let customer of customerLoanDetails">
+        <td>{{customer.id}}</td>
         <!-- <td></td> -->
-        <td>{{loan.customerName}}</td>
-        <td>{{loan.customerDetails.mobileNo}}</td>
-        <td>{{loan.vehicleDetails.vehicleNumber}}</td>
-        <td>{{loan.vehicleDetails.model}}</td>
-        <td>{{loan.vehicleDetails.chassisNumber}}</td>
-        <!-- <td>{{loan.vehicleDetails.chassisNumber}}</td> -->
-        <td>{{loan.bankDetails.accountNumber}}</td>
-        <td>{{loan.loanDetailsData.loanAmount}}</td>
-        <td>{{loan.loanDetailsData.loanTerm}}</td>
-        <td>{{loan.loanDetailsData.loanInterest}}</td>
-        <td>{{loan.loanDetailsData.emi}}</td>
+        <td>{{customer.customerName}}</td>
+        <td>{{customer.customerDetails.mobileNo}}</td>
+        <td>{{customer.vehicleDetails.vehicleNumber}}</td>
+        <td>{{customer.vehicleDetails.model}}</td>
+        <td>{{customer.vehicleDetails.chassisNumber}}</td>
+        <!-- <td>{{customer.vehicleDetails.chassisNumber}}</td> -->
+        <td>{{customer.bankDetails.accountNumber}}</td>
+        <td>{{customer.loanDetailsData.loanAmount}}</td>
+        <td>{{customer.loanDetailsData.loanTerm}}</td>
+        <td>{{customer.loanDetailsData.loanInterest}}</td>
+        <td>{{customer.loanDetailsData.emi}}</td>
         <td></td>
         <!-- <td></td> -->
-        <td>{{loan.vehicleType}}</td>
-        <td>{{loan.customerGuarantor.spouseName}}</td>
+        <td>{{customer.vehicleType}}</td>
+        <td>{{customer.customerGuarantor.spouseName}}</td>
         <!-- <td></td> -->
-        <th><button (click)="loanProcess(loan.id)">Proceed</button></th>
+        <th><button (click)="loanProcess(customer.id)">Proceed</button></th>
       </tr>
     </tbody>
 </table>

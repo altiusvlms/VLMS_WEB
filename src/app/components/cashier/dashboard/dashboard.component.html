@@ -1,11 +1,33 @@
+<!-- /** Cashier Dashboard */ -->
 <div class="container">
+  <div class="header_title">
+    <h2>Customers On Line</h2>
+    <div class="header_right">
+    <button type="button"  class="btn_blue" (click)="advancedSearch()" >
+      Advanced Search 
+     </button> 
+    </div>
+  </div>
 
-<h2>CUSTOMERS ON LINE</h2><br><br><br><br>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div>8 New Customers Are Waiting For Loan Amount Approval  <button class="btn_blue" (click)="customersOnline()">View All</button></div> 
+    </div>
+  </div>
+</div>
 
-<button class="btn default" >8 New customers are waiting for loan</button><br><br>
-  <button class="btn default" >Yet to Receipt</button><br><br>
-  <button class="btn default" >20 CUSTOMER'S DUE NEED TO BE RECEIPT</button><br><br>
+<div class="header_title">
+  <h2>Yet to Receipt</h2>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div>20 Customers Due Need to be Receipt  <button class="btn_blue">View All</button></div> 
+    </div>
+  </div>
+</div>
 
-  <button class="btn default">RECEIPTED CASH 1,50,000</button><br><br>
+<button class="btn default">RECEIPTED CASH 1,50,000</button><br><br>
 
 </div>

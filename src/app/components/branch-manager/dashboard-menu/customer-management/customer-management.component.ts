@@ -7,6 +7,8 @@ import { appModels } from '../../../../services/utils/enum.util';
 import {DomSanitizer} from "@angular/platform-browser";
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -35,7 +37,7 @@ export class CustomerManagementComponent implements OnInit {
   CustomerDetail_Data:any;
 
 
-  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router) { }
+  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.getCustomerData();
@@ -43,7 +45,7 @@ export class CustomerManagementComponent implements OnInit {
   ngOnDestroy() { } 
 
   getCustomerData() {
-    this.crudService.get(`${appModels.CUSTOMERS}/customerDetails`, {
+    this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
       params: {
         tenantIdentifier: 'default'
       }

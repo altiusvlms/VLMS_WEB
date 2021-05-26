@@ -27,6 +27,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 // For MDB Angular Pro
 import { ChartsModule, ChartSimpleModule, WavesModule } from 'ng-uikit-pro-standard'
+// import {MatFormFieldModule} from '@angular/material/form-field';
 
 // import { ChartsModule } from 'ng2-charts';
 import { chart } from 'chart.js'
@@ -48,6 +49,7 @@ import { chart } from 'chart.js'
     ChartsModule,
     ChartSimpleModule,
     WavesModule
+    // MatFormFieldModule,
     // ChartsModule
     // chart
     // ChartsModule

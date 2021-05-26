@@ -1,5 +1,7 @@
 /** Angular Imports */
 import { Component, OnInit,Inject } from '@angular/core';
+import {FileValidator} from './file-input.validator'
+
 
 /** Custom Forms */
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -15,6 +17,7 @@ import { Router } from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import { SharedService } from '../../../../services/shared.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -33,6 +36,9 @@ export class CustomerEnrollListComponent implements OnInit {
   showAction : Boolean = false;
   EnrollVerfication_Data:any;
 
+  fromdate:any;
+  todate:any;
+
   displayedColumns = ['Customer ID','Customer Image', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
   'D.O.B','Father’s Name','Applicant Type','Gender','AadhaarImage','PAN Image','Action'];
   dataSource = new MatTableDataSource();
@@ -42,7 +48,7 @@ export class CustomerEnrollListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   constructor(private formBuilder: FormBuilder,private crudService: CrudService,private toast: ToastrService
-    ,public datepipe: DatePipe, private sharedService: SharedService,private dialog: MatDialog,private router: Router) { }
+    ,public datepipe: DatePipe, private sharedService: SharedService,private dialog: MatDialog,private router: Router,private sanitizer:DomSanitizer,) { }
 
     
   ngOnInit(): void {
@@ -65,7 +71,9 @@ export class CustomerEnrollListComponent implements OnInit {
     })
   }
 
-
+  createLoan(id : any){
+    this.router.navigate(['branch-manager/newloan-process']);
+  }
 
   createViewTask(element : any) {
     const dialogRef = this.dialog.open(CreateEnroll, {
@@ -80,6 +88,31 @@ export class CustomerEnrollListComponent implements OnInit {
       }
     });
   }
+  Filterdate(){
+    this.fromdate;
+    this.todate;
+    let fromdate1 =this.datepipe.transform(this.fromdate, 'yyyy-MM-dd');
+    let todate1 =this.datepipe.transform(this.todate, 'yyyy-MM-dd');
+    console.log(fromdate1);
+    console.log(todate1);
+    let params = {
+      fromdate:fromdate1,
+      todate:todate1,
+      tenantIdentifier: "default",
+    }
+        this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnrollByDate`,
+      { params }
+    ).pipe(untilDestroyed(this)).subscribe( data => {
+      console.log(data)
+      this.EnrollVerfication_Data = data;
+      this.dataSource = new MatTableDataSource(this.EnrollVerfication_Data)
+    })
+  }
+  
+  clear(){
+    this.getEnrollData();
+  }
+
 }
 
   @Component({
@@ -96,12 +129,18 @@ export class CreateEnroll {
   editIcon : Boolean = false;
   assignToName: any;
   submitted: Boolean = false;
+  openform:Boolean = false;
+  openform2:Boolean = false;
+  checked:Boolean = false;
+
 
 
   Genders: any = ['Male', 'Female', 'Others',];
   Applicants:any = ['salaried','Business','Own Business'];
   ID1s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard'];
   ID2s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard'];
+  ID3s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard'];
+  ID4s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard'];
 
   
 
@@ -114,7 +153,7 @@ export class CreateEnroll {
 
 
   constructor(public dialogRef: MatDialogRef<CreateEnroll>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private formBuilder: FormBuilder,
-  private crudService: CrudService,
+  private crudService: CrudService,private toast: ToastrService,
   private sharedService: SharedService,public datepipe: DatePipe,public authentication: AuthenticationService) {
     if (data) {
       console.log(data)
@@ -138,7 +177,6 @@ export class CreateEnroll {
 
     /** Create Customer Enrolment Form */
     createCustomerEnrolForms = new FormGroup({
-      Customerphoto: new FormControl(''),
       customerName: new FormControl('', Validators.required),
       mobileNumber: new FormControl('', Validators.required),
       alternateMobileNumber: new FormControl(''),
@@ -146,10 +184,13 @@ export class CreateEnroll {
       dateFormat: new FormControl("dd MMMM yyyy"),
       locale: new FormControl("en"),
       fatherName: new FormControl(''),
+      SpouseName: new FormControl(''),
       gender: new FormControl(''),
       applicantType: new FormControl(''),
       proof1: new FormControl(''),
       proof2: new FormControl(''),
+      file: new FormControl("", [FileValidator.validate]),
+      file2: new FormControl("", [FileValidator.validate]),
     })
 
     
@@ -158,6 +199,8 @@ export class CreateEnroll {
     EnrollVerfication_Data:any;
     Imagefileform:any;
     Imagefileform2:any;
+    Imagefileform3:any;
+    Imagefileform4:any;
   
 
 
@@ -184,26 +227,97 @@ export class CreateEnroll {
       alert("Only GIF, PNG and JPEG Data URL's are allowed.")
     }
   }
-  
+  uploadImages(evt1 : any){
+    if(evt1.target.files[0].type == "image/png" || evt1.target.files[0].type == "image/jpeg" || evt1.target.files[0].type == "image/gif"){
+      this.enrollused = evt1.target.files[0];
+      if (evt1.target.files && evt1.target.files[0]) {
+        var reader = new FileReader();
+        reader.readAsDataURL(evt1.target.files[0]);
+        reader.onload = (event) => {
+          this.Imagefileform = event.target['result'];
+          }
+        }
+      }
+        else {
+          alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+        }
+    // {
+    // this.Imagefileform = evt1.target.files[0];
+    // console.log(this.Imagefileform);
+    // }
+  }
+  uploadImages2(evt2 : any){
+    if(evt2.target.files[0].type == "image/png" || evt2.target.files[0].type == "image/jpeg" || evt2.target.files[0].type == "image/gif"){
+      this.enrollused = evt2.target.files[0];
+      if (evt2.target.files && evt2.target.files[0]) {
+        var reader = new FileReader();
+        reader.readAsDataURL(evt2.target.files[0]);
+        reader.onload = (event) => {
+          this.Imagefileform2 = event.target['result'];
+          }
+        }
+      }
+        else {
+          alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+        }
+  }
+  uploadImages3(evt3 : any){
+    if(evt3.target.files[0].type == "image/png" || evt3.target.files[0].type == "image/jpeg" || evt3.target.files[0].type == "image/gif"){
+      this.enrollused = evt3.target.files[0];
+      if (evt3.target.files && evt3.target.files[0]) {
+        var reader = new FileReader();
+        reader.readAsDataURL(evt3.target.files[0]);
+        reader.onload = (event) => {
+          this.Imagefileform3 = event.target['result'];
+          }
+        }
+      }
+        else {
+          alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+        }
+  }
+  uploadImages4(evt4 : any){
+    if(evt4.target.files[0].type == "image/png" || evt4.target.files[0].type == "image/jpeg" || evt4.target.files[0].type == "image/gif"){
+      this.enrollused = evt4.target.files[0];
+      if (evt4.target.files && evt4.target.files[0]) {
+        var reader = new FileReader();
+        reader.readAsDataURL(evt4.target.files[0]);
+        reader.onload = (event) => {
+          this.Imagefileform4 = event.target['result'];
+          }
+        }
+      }
+        else {
+          alert("Only GIF, PNG and JPEG Data URL's are allowed.")
+        }
+  }
 
   
 enrollid:any;
-
+   
+onClickOpenForm(){
+  this.openform=true;  
+  }
+  onClickOpenForm2(){
+    this.openform2=true;  
+    }
 
    /** Save Customer Enrolment */
    saveCustomerEnrolment(){
     this.submitted = true;
     if (this.editDataTask) {
-      this.createCustomerEnrolForms.value.dueDate=this.datepipe.transform(this.createCustomerEnrolForms.value.dueDate, 'dd MMMM yyyy');
+      this.createCustomerEnrolForms.value.dob=this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd MMMM yyyy');
       this.crudService.update(`${appModels.FIELDEXECUTIVE}/updateEnroll`,this.createCustomerEnrolForms.value,
         this.editDataTask['id'],
       ).pipe(untilDestroyed(this)).subscribe(updated => {
+        this.toast.success("Customer updated successfully")
         this.dialogRef.close(updated);
         this.sharedService.setLoaderShownProperty(false);  
       })
         }
     else {
     this.createCustomerEnrolForms.value.dob =this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd MMMM yyyy');
+    console.log(this.createCustomerEnrolForms.value.dob);
     this.images = {
       images1:this.createCustomerEnrolForms.value.image1,
       images2:this.createCustomerEnrolForms.value.image2,
@@ -216,8 +330,9 @@ enrollid:any;
     ).pipe(untilDestroyed(this)).subscribe( data => {
       console.log(data)
       this.enrollid = data.resourceId;
+      this.toast.success("Customer Created successfully");
       this.dialogRef.close(data);
-          this.sharedService.setLoaderShownProperty(false); 
+      this.sharedService.setLoaderShownProperty(false); 
       const formData = new FormData();      
     formData.append("file",this.Imagefileform);
         this.crudService.upload_Image(`${appModels.IMAGES}/enroll_adharphoto/${this.enrollid}`, formData,
@@ -237,6 +352,24 @@ enrollid:any;
           .subscribe(data => {
             console.log(data);
             const formData = new FormData();      
+    formData.append("file",this.Imagefileform3);
+        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_pancard/${this.enrollid}`, formData,
+        { params:{
+              tenantIdentifier: "default"   
+            }}
+        ).pipe(untilDestroyed(this))
+          .subscribe(data => {
+            console.log(data);
+            const formData = new FormData();      
+    formData.append("file",this.Imagefileform4);
+        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_pancard/${this.enrollid}`, formData,
+        { params:{
+              tenantIdentifier: "default"   
+            }}
+        ).pipe(untilDestroyed(this))
+          .subscribe(data => {
+            console.log(data);
+            const formData = new FormData();      
             formData.append("file",this.enrollImgUrl);
                 this.crudService.upload_Image(`${appModels.IMAGES}/enroll_customerimage/${this.enrollid}`, formData,
                 { params:{
@@ -246,6 +379,8 @@ enrollid:any;
                   .subscribe(data => {
                     console.log(data);
                   })
+                })
+              })
           })
         })
         this.getEnrollData();
@@ -258,10 +393,7 @@ enrollid:any;
     this.createCustomerEnrolForms.enable();
   }
   
-  createLoan(){
-    this.router.navigate(['branch-manager/newloan-process']);
-
-  }
+  
 
   getEnrollData() {
     this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnroll`, {
@@ -292,23 +424,24 @@ enrollid:any;
 
                     this.user = result.user;
                     console.log(result)
+                    this.checked = true;
 
     })
     .catch( (error: any) => console.log(error, "Incorrect code entered?"));
     // alert("Incorrect code entered");    
   }
-  uploadImages(evt1 : any){
-    {
-    this.Imagefileform = evt1.target.files[0];
-    console.log(this.Imagefileform);
+  deleteTask(){
+    this.editIcon = false;
+    if (confirm(`Are you sure, you want to delete?`)) {
+    this.crudService.delete(`${appModels.FIELDEXECUTIVE}/enroll`, this.editDataTask['id'])
+    .pipe(untilDestroyed(this)).subscribe(deleted => {
+      this.dialogRef.close(deleted);
+      this.sharedService.setLoaderShownProperty(false); 
+      this.toast.success("Task Deleted Succesfully"); 
+    })
     }
   }
-  uploadImages2(evt2 : any){
-    {
-    this.Imagefileform2 = evt2.target.files[0];
-    console.log(this.Imagefileform2);
-    }
-  }
+
   close() {
     this.dialogRef.close();
   }

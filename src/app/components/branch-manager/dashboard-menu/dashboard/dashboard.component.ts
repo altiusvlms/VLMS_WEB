@@ -1,14 +1,12 @@
 /** Angular Imports */
 import { Component, OnInit,Inject } from '@angular/core';
 
-/** Custom Forms */
+/** Custom Forms and Services and Router and Material Dialog */
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
-
 import { SharedService } from '../../../../services/shared.service';
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 import { Options, LabelType } from 'ng5-slider';
@@ -17,7 +15,7 @@ import * as Highcharts from 'highcharts';
 // import * as CanvasJS from '../../../../../';
 @UntilDestroy({ checkProperties: true })
 
-/** Dashboard Component */
+/** BranchManager Dashboard Component */
 @Component({
   selector: 'vlms-dashboard',
   templateUrl: './dashboard.component.html',
@@ -242,7 +240,7 @@ console.log(this.fromdate);
     this.router.navigate(['branch-manager/newloan-process']);
   }
 
-
+  /** Advance Search Open the Dialog Model */
   advancedSearch() {
     const dialogRef = this.dialog.open(AdvancedSearch, {
       width: '100vw',
@@ -376,14 +374,10 @@ export class AdvancedSearch {
     // loanstatus: new FormControl('', Validators.required),
     // dues: new FormControl('', Validators.required)
   })
- 
+
+  /** Advance Search Variables */
   showSearchbtn : Boolean = true;
   customerLoanDetails : any = [];
-  customerDetailsfilter: any = [];
-  customer_name : any;
-  vehicle_no : any;
-  vehicle_modal : any;
-  chassis_no : any;
   filterResponse:any = [];
   searchAccountNo: String = '';
   searchName: String = '';
@@ -400,11 +394,12 @@ export class AdvancedSearch {
   }
 
   ngOnInit() {
-    this.getLoanDetails();
+    this.getCustomerDetails();
   }
   ngOnDestroy() {}
 
-  getLoanDetails(){
+  /** Get the Customer Details */
+  getCustomerDetails(){
     this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
       params: {
         tenantIdentifier: 'default'
@@ -415,11 +410,11 @@ export class AdvancedSearch {
     })
   }
 
-
+/** Clear the Search */
   clearSearch(){
     this.advanceSearchForms.reset();
     this.showSearchbtn = true;
-    this.getLoanDetails();
+    this.getCustomerDetails();
     this.searchAccountNo = '';
     this.searchName = '';
     this.searchModel = '';
@@ -429,10 +424,12 @@ export class AdvancedSearch {
     this.searchLoanAmount = '';
   }
 
+/** Close the Dialog Model */
   close() {
     this.dialogRef.close();
   }
 
+/** Filter for All Input Values */
   applyFilter(value : any , string_val: any){
      if(string_val == 'accountNumber'){
       const filterValue = (event.target as HTMLInputElement).value;
@@ -462,8 +459,9 @@ export class AdvancedSearch {
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchLoanAmount = filterValue.trim().toLowerCase();
     }
-   
   }
+
+  /** Search for Filtered data */
   searchdata(){
     this.showSearchbtn = false;
     for (let selectedUser of this.customerLoanDetails) {
@@ -489,7 +487,6 @@ export class AdvancedSearch {
     else if(this.filterResponse.length == 0){
       this.customerLoanDetails = [];
     }
-    
   }
 
 }
