@@ -10,6 +10,9 @@ import { appModels } from '../../../../services/utils/enum.util';
 import { SharedService } from '../../../../services/shared.service';
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 import { Options, LabelType } from 'ng5-slider';
+import * as Highcharts from 'highcharts';
+// import * as CanvasJS from '../../../../../../node_modules/canvasjs/dist/canva';
+// import * as CanvasJS from '../../../../../';
 @UntilDestroy({ checkProperties: true })
 
 /** BranchManager Dashboard Component */
@@ -23,6 +26,8 @@ export class DashboardComponent implements OnInit {
   vehicledetailss:Boolean = false; 
   usedvehicle:Boolean = false;
   self:Boolean = false;
+
+  Highcharts: typeof Highcharts = Highcharts;
 
   id : any;
   filters: any;
@@ -162,29 +167,6 @@ console.log(this.fromdate);
      var MonthlyDue = this.TotalPayable / numberOfMonths;
      this.MonthlyCorrectDue = Number (Math.round(MonthlyDue))
 
-
-
-    // this.query.amount = loanAmount.toString();
-    // this.query.interest = rateOfInterest.toString();
-    // if (this.yrToggel) {
-    //   this.query.tenureYr = this.temi.value.toString();
-    // }
-    // else {
-    //   this.query.tenureMo = this.memi.value.toString();
-    // }
-
-    // var top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
-    // var bottom = top - 1;
-    // var sp = top / bottom;
-    // var emi = ((loanAmount * monthlyInterestRatio) * sp);
-    // var full = numberOfMonths * emi;
-    // var interest = full - loanAmount;
-    // var int_pge = (interest / full) * 100;
-
-    // this.result.emi = emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // this.result.total = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // this.result.interest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     this.DueCalc();
   }
   daydiff:any;
@@ -213,6 +195,29 @@ console.log(this.fromdate);
 
   ngOnInit(): void {
     // this.mobileNumFetch()
+    
+    // window.onload = function () {
+    //   let chart = new CanvasJS.Chart("chartContainer",
+    //   {
+    //     title:{
+    //       text: "Top U.S Smartphone Operating Systems By Market Share, Q3 2012"
+    //     },
+    //     data: [
+    //     {
+    //      type: "doughnut",
+    //      dataPoints: [
+    //      {  y: 53.37, indexLabel: "Android" },
+    //      {  y: 35.0, indexLabel: "Apple iOS" },
+    //      {  y: 7, indexLabel: "Blackberry" },
+    //      {  y: 2, indexLabel: "Windows Phone" },
+    //      {  y: 5, indexLabel: "Others" }
+    //      ]
+    //    }
+    //    ]
+    //  });
+  
+    //   chart.render();
+    // }
   }
 
   customer(){
@@ -272,6 +277,72 @@ console.log(this.fromdate);
     // this.router.navigate(['branch-manager/newloan-process']);
   // }
   }
+  // doughnutchart(){
+  //   // chartOptions: Highcharts.Options = {
+  //   Highcharts.chart('donut', {
+  //     chart: {
+  //       type: 'pie'
+  //     },
+  //     title: {
+  //       text: 'Browser market share, January, 2018'
+  //     },
+  //     subtitle: {
+  //       text: 'Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+  //     },
+  //     plotOptions: {
+  //       pie: {
+  //         shadow: false,
+  //         center: ['50%', '50%']
+  //       }
+  //     },
+  //     tooltip: {
+  //       valueSuffix: '%'
+  //     },
+  //     series: [{
+  //       name: 'Browsers',
+  //       // data: browserData,
+  //       size: '60%',
+  //       dataLabels: {
+  //         formatter: function () {
+  //           return this.y > 5 ? this.point.name : null;
+  //         },
+  //         color: '#ffffff',
+  //         distance: -30
+  //       }
+  //     }, {
+  //       name: 'Versions',
+  //       // data: versionsData,
+  //       size: '80%',
+  //       innerSize: '60%',
+  //       dataLabels: {
+  //         formatter: function () {
+  //           // display only if larger than 1
+  //           return this.y > 1 ? '<b>' + this.point.name + ':</b> ' +
+  //             this.y + '%' : null;
+  //         }
+  //       },
+  //       id: 'versions'
+  //     }],
+  //     responsive: {
+  //       rules: [{
+  //         condition: {
+  //           maxWidth: 400
+  //         },
+  //         chartOptions: {
+  //           series: [{
+  //           }, {
+  //             id: 'versions',
+  //             dataLabels: {
+  //               enabled: false
+  //             }
+  //           }]
+  //         }
+  //       }]
+  //     }
+  //   })
+  //   }
+  
+    
 
 }
 
@@ -416,6 +487,5 @@ export class AdvancedSearch {
       this.customerLoanDetails = [];
     }
   }
-
 
 }
