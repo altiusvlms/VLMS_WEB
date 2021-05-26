@@ -70,8 +70,8 @@
         <div class="modal-body">
 
           <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="">Vehicle Loan</mat-radio-button>
-            <mat-radio-button value="">Personal loan</mat-radio-button>
+            <mat-radio-button value="1">Vehicle Loan</mat-radio-button>
+            <mat-radio-button value="2">Personal loan</mat-radio-button>
           </mat-radio-group>
 
 
@@ -455,8 +455,22 @@
       </div>
     </div>
   </div>
+  <!-- Doughnut chart -->
+  
+<!-- <figure class="highcharts-figure">
+  <div id="donut"></div>
+  <p class="highcharts-description">
+    In Highcharts, pies can also be hollow, in which case they are commonly
+    referred to as donut charts. This pie also has an inner chart, resulting
+    in a hierarchical type of visualization. 
+  </p>
+</figure> -->
 
+<h3>html</h3>
+    <div id="chartContainer" style="height: 300px; width: 100%;">
+    </div>
 
+<!-- Button -->
   <button class="btn default" (click)="customer()">Customer List (6,773)</button>
   <button class="btn default" (click)="enquiry()">New Enquiry (224)</button><br><br>
   <button class="btn default" (click)="customerEntrol()">New Customer Enrolement (6,773)</button><br><br>
@@ -564,13 +578,13 @@
 
 <!-- popup -->
 
-<div class="col-sm-2">
+<!-- <div class="col-sm-2">
   <div>
     <button type="button" data-toggle="modal" data-target="#createEnquiryModal">
       xyz
     </button>
   </div>
-</div>
+</div> -->
 
 
 <div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel"

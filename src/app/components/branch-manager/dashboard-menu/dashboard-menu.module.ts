@@ -25,9 +25,11 @@ import { TopupLoanComponent } from './topup-loan/topup-loan.component';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
+// For MDB Angular Pro
+import { ChartsModule, ChartSimpleModule, WavesModule } from 'ng-uikit-pro-standard'
 
 // import { ChartsModule } from 'ng2-charts';
-// import { chart } from 'chart.js'
+import { chart } from 'chart.js'
 // import { ChartsModule } from 'ng2-charts';
 // import { PieChartComponent } from './piechart/piechart';
 
@@ -43,6 +45,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatTabsModule,
     Ng5SliderModule,
     MatFormFieldModule,
+    ChartsModule,
+    ChartSimpleModule,
+    WavesModule
     // ChartsModule
     // chart
     // ChartsModule
