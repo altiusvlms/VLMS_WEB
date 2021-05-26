@@ -20,7 +20,6 @@ import { Options, LabelType } from 'ng5-slider';
 })
 export class DashboardComponent implements OnInit {
   mobileNum:any;
-  showTable:Boolean = false;
   vehicledetailss:Boolean = false; 
   usedvehicle:Boolean = false;
   self:Boolean = false;

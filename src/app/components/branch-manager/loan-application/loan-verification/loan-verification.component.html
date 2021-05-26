@@ -121,46 +121,41 @@
     <thead>
       <tr>
         <th>Applicant ID </th>
-        <!-- <th>Applicant Photo</th>  -->
+        <th>Applicant Photo</th> 
         <th>Applicant Name</th>
-        <th>Applicant Mobile No.</th>
-        <th>Vehicle No</th>
-        <th>Vehicle Model</th>
-        <th>Chassis No</th>
-        <!-- <th>Loan No</th> -->
-        <th>Account No</th>
+        <th>Applicant Mobile No</th>
         <th>Loan Amount</th>
         <th>Loan Term</th>
         <th>Interest %</th>
         <th>EMI Amount</th>
-        <th>Approver</th>
-        <!-- <th>Loan Type</th> -->
-        <th>Vehicle Type</th>
         <th>Ref By</th>
-        <!-- <th>Customer Type</th> -->
+        <th>Vehicle Make</th>
+        <th>Vehicle Model</th>
+        <th>Vehicle Type</th>
+        <th>Loan Type</th>
+        <th>Applicant Type</th>
+        <th>Approver</th>
       </tr>
     </thead>
-    <tbody>
-      <tr  *ngFor="let customer of customerLoanDetails">
-        <td>{{customer.id}}</td>
-        <!-- <td></td> -->
-        <td>{{customer.customerName}}</td>
-        <td>{{customer.customerDetails.mobileNo}}</td>
-        <td>{{customer.vehicleDetails.vehicleNumber}}</td>
-        <td>{{customer.vehicleDetails.model}}</td>
-        <td>{{customer.vehicleDetails.chassisNumber}}</td>
-        <!-- <td>{{customer.vehicleDetails.chassisNumber}}</td> -->
-        <td>{{customer.bankDetails.accountNumber}}</td>
-        <td>{{customer.loanDetailsData.loanAmount}}</td>
-        <td>{{customer.loanDetailsData.loanTerm}}</td>
-        <td>{{customer.loanDetailsData.loanInterest}}</td>
-        <td>{{customer.loanDetailsData.emi}}</td>
+    <tbody >
+      <tr  *ngFor="let customer of customerLoanDetails;let i=index" >
+        <td>{{customer?.id}}</td>
+        <td ><img [src]="allCustomerImage[i]?.image" style="width: 50%;object-fit: contain;
+          object-position: center;"></td>
+        <td>{{customer?.customerName}}</td>
+        <td>{{customer?.customerDetails.mobileNo}}</td>
+        <td>{{customer?.loanDetailsData.loanAmount}}</td>
+        <td>{{customer?.loanDetailsData.loanTerm}}</td>
+        <td>{{customer?.loanDetailsData.loanInterest}}%</td>
+        <td>{{customer?.loanDetailsData.emi}}</td>
+        <td>{{customer?.customerDetails.refBy}}</td>
+        <td>{{customer?.vehicleDetails.maker}}</td>
+        <td>{{customer?.vehicleDetails.model}}</td>
+        <td>{{customer?.vehicleType}}</td>
         <td></td>
-        <!-- <td></td> -->
-        <td>{{customer.vehicleType}}</td>
-        <td>{{customer.customerGuarantor.spouseName}}</td>
-        <!-- <td></td> -->
-        <th><button (click)="loanProcess(customer.id)">Proceed</button></th>
+        <td>{{customer?.customerDetails.applicantType}}</td>
+        <td></td>
+        <!-- <td><button class="btn_blue" (click)="loanProcess(customer.id)">Proceed</button></td> -->
       </tr>
     </tbody>
 </table>

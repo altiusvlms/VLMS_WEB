@@ -28,9 +28,7 @@ import { single } from 'rxjs/operators';
 
 export class ManageEmployeeComponent implements OnInit {
 
-  ID1s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard']
-  ID2s:any = ['aadhar','pan','rationCard','drivingLicence','passport','jobCard']
-
+  id:any;
   EmployeeId:any;
   Imagefileform: any;
   Imagefileform2:any;
@@ -47,12 +45,16 @@ export class ManageEmployeeComponent implements OnInit {
   singleData:any;
   employeeEducationDetails:any;
   employeeInsuranceDetails:any;
+  showSpouse : Boolean = false;
+  documentDetails : any;
+
   // manageEmployeeForm:any  
   // forvalue : CLASS_NAME;
   // userForm: FormGroup;
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder) { }
 
   submitted: Boolean = false;
+
   // this.forvalue = form1.value;
   // this.formvalue.school_qualification = form2.value;
   // this.formvalue.college_qualification = form3.value;
@@ -191,16 +193,31 @@ export class ManageEmployeeComponent implements OnInit {
     if(this.id != undefined){
       this.getSingleEmployeeList();
       }
+      this.getDocumentDetails();
   }
   
 
   ngOnDestroy() { }
 
   
-  id:any;
-  onFoodChange(value : any){
-    console.log(value)
-    console.log("test")
+  
+  onMaritalStatusChange(value : any){
+    if(value === 'married'){
+      this.showSpouse = true;
+    }
+    else{
+      this.showSpouse = false;
+    }
+  }
+
+  getDocumentDetails(){
+    this.crudService.get(`${appModels.GET_DOCUMENT_DETAILS}`,
+    { params:{
+      tenantIdentifier: "default"   
+    }}
+  ).pipe(untilDestroyed(this)).subscribe( response => {
+    this.documentDetails = response;
+  });
   }
 
 /** Save Enquiry */

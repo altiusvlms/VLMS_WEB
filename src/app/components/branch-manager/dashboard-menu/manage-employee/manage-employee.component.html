@@ -103,7 +103,7 @@
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Marital Status</mat-label>
-            <mat-select formControlName="maritalStatus"  (selectionchange)="onFoodChange($event)">
+            <mat-select formControlName="maritalStatus"  (selectionChange)="onMaritalStatusChange($event.value)" >
                 <mat-option value="single">Single</mat-option>
                 <mat-option value="married">Married</mat-option>
             </mat-select>
@@ -113,7 +113,7 @@
                 Please select a value!
             </div>
         </div></div>
-        <div class="col-4 col-sm-4">
+        <div class="col-4 col-sm-4" *ngIf="showSpouse">
           <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Spouse Name</mat-label>
               <input matInput formControlName="spousename">
@@ -196,7 +196,7 @@
             <input matInput formControlName="landmark">
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Enter pincode</mat-label>
+            <mat-label>Enter Pincode</mat-label>
             <input matInput formControlName="postalCode">
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -243,7 +243,7 @@
             <input matInput formControlName="landmark">
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Enter pincode</mat-label>
+            <mat-label>Enter Pincode</mat-label>
             <input matInput formControlName="postalCode">
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -316,7 +316,7 @@
             <mat-select formControlName="accountType">
                 <mat-option value="savings">Savings</mat-option>
                 <mat-option value="salary">Salary</mat-option>
-                <mat-option value="current">current</mat-option>
+                <mat-option value="current">Current</mat-option>
             </mat-select>
         </mat-form-field></div>
         </div>
@@ -327,7 +327,7 @@
       <div class="container">
         <div class="row" formGroupName="insuranceDetails">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Policy no</mat-label>
+            <mat-label>Policy No</mat-label>
             <input matInput formControlName="policyNumber">
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -349,7 +349,7 @@
       <div class="container">
         <div class="row" formGroupName="accidentalInsuranceDetails">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Policy no</mat-label>
+            <mat-label>Policy No</mat-label>
             <input matInput formControlName="policyNumber">
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -375,19 +375,21 @@
       <form [formGroup]="ImageEmployeeForm">
         <div class="container">
           <div class="row">
+          <h2>ID Proofs</h2>
             <div class="col-4 col-sm-4"><label>ID Proof1:
               <select  class="form-control">
                 <option >Choose Options</option>
-                <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
+                <option *ngFor="let document of documentDetails">{{document.documentName}}</option>
               </select>
           <span class="required-field">*</span>
           <input #file type="file" accept='image/*' formControlName="Pan_photo" (change)="uploadImages1($event)"   />
          <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" >
           </label></div>
+          
             <div class="col-4 col-sm-4"><label>ID Proof:
               <select  class="form-control">
                 <option >Choose Options</option>
-                <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
+                <option *ngFor="let document of documentDetails">{{document.documentName}}</option>
               </select>
           <span class="required-field">*</span>
           <input #file type="file" accept='image/*' formControlName="Aadhar_photo" (change)="uploadImages2($event)"   />
@@ -395,16 +397,7 @@
         </label></div>
           </div>
         </div>    
-          <h2>ID Proofs</h2>
-          <div>
-
-              
-          </div>
-
-
-          <div>
-              
-          </div>
+      
       </form></mat-tab>
     <mat-tab label="Education Qualification"><!-- Education Qualification -->
      

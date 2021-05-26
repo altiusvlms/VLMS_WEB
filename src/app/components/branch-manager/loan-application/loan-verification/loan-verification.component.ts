@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import {DomSanitizer} from "@angular/platform-browser";
 import { DatePipe } from '@angular/common';
 
+import { Observable, forkJoin } from 'rxjs';
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
@@ -20,7 +21,6 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class LoanVerificationComponent implements OnInit {
 
-  showAdvanceSearch: any;
 
    /**  Advanced Search Form */
    advanceSearchForms = new FormGroup({
@@ -37,15 +37,12 @@ export class LoanVerificationComponent implements OnInit {
     // loanstatus: new FormControl(''),
     // dues: new FormControl('')
   })
- 
+
+    showAdvanceSearch: any;
     showSearchbtn : Boolean = true;
     customerLoanDetails : any = [];
-    customerDetailsfilter: any = [];
-    customer_name : any;
-    vehicle_no : any;
-    vehicle_modal : any;
-    chassis_no : any;
-    customerImage: any = [];
+    customerImage: any;
+    allCustomerImage: any = [];
     filterResponse:any = [];
     searchAccountNo: String = '';
     searchName: String = '';
@@ -55,10 +52,8 @@ export class LoanVerificationComponent implements OnInit {
     searchChassisNo: String = '';
     searchLoanAmount: String = '';
 
+
   constructor(private router: Router,private crudService: CrudService,private sanitizer:DomSanitizer,public datepipe: DatePipe) { }
-  loanverifiData:any;
-  loanDisburalData:any;
-  loanApprovalData:any;
 
 
   ngOnInit(): void {
@@ -72,15 +67,26 @@ export class LoanVerificationComponent implements OnInit {
     this.router.navigate(['branch-manager/loan-process/'  + id]);
   }
 
-  getLoanVerification(){
+   getLoanVerification(){
     this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
       params: {
         tenantIdentifier: 'default'
       }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      console.log(data);
-      this.customerLoanDetails = data;
+    }).pipe(untilDestroyed(this)).subscribe(async respose => {
+      this.customerLoanDetails = respose;
+
+      await this.customerLoanDetails.map((res: any) => {
+        this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${res.customerDetails.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
+         this.customerImage =  this.sanitizer.bypassSecurityTrustUrl(data);
+            this.allCustomerImage.push({image:this.customerImage})
+        },error => {
+          console.error(error);
+          this.customerImage = 'assets/images/empty_image.png';
+          this.allCustomerImage.push({image:this.customerImage} )
+       });
     })
+    })
+    this.allCustomerImage = [];
   }
 
   advancedSearch() {
@@ -121,7 +127,6 @@ export class LoanVerificationComponent implements OnInit {
   }
   searchdata(){
     this.showSearchbtn = false;
-    console.log(this.searchAccountNo,this.searchName,this.searchModel,this.searchVehicleNo,this.searchMobileNo,this.searchChassisNo)
     for (let selectedUser of this.customerLoanDetails) {
       if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''){
       if (

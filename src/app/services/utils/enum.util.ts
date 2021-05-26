@@ -14,8 +14,8 @@ enum appModels {
     ANALYTICS_TOTAL_COUNT = 'fineract-provider/api/v1/customers/branchAnalytic?command=loanApplications',
     ANALYTICS_ENQUIRY = 'fineract-provider/api/v1/customers/branchAnalytic?command=enquiry',
     ANALYTICS_CUS_ONBOARD = 'fineract-provider/api/v1/customers/branchAnalytic?command=customerOnboard',
-    ANALYTICS_OVERALL_DATA = 'fineract-provider/api/v1/Branch/getBranchAnalyticsData'
-
+    ANALYTICS_OVERALL_DATA = 'fineract-provider/api/v1/Branch/getBranchAnalyticsData',
+    GET_DOCUMENT_DETAILS = 'fineract-provider/api/v1/fieldExecutive/getDocuments'
 }
 
 

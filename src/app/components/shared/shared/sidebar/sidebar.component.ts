@@ -11,9 +11,11 @@ export class SidebarComponent implements OnInit {
 
   constructor(private router: Router) { }
   role: any;
+  loandisbusal: any;
 
   ngOnInit(): void {
     this.role = localStorage.getItem("roles");
+    this.loandisbusal = 'branch-manager/loanapproval-process';
   }
   loan_disbusal(){
     this.router.navigate(['branch-manager/loandisbursal-process']);

@@ -24,8 +24,13 @@
         </div>
         <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Customer Name/ID</mat-label>
-                <input matInput type='text' formControlName="customerRegNo" >
+                <mat-label>Customer Name</mat-label>
+                <input matInput type='text' formControlName="customerRegNo" (keyup)="applyFilter($event, 'regNo')">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerList.length > 0">
+            <mat-select  formControlName="customerRegNo"  (selectionChange)="customer($event)">
+                <mat-option  *ngFor="let customerName of customerList"  value="{{customerName.name}}" >{{customerName.name}}</mat-option>
+            </mat-select>
             </mat-form-field>
         </div>
         <div class="col-4 col-sm-4">
