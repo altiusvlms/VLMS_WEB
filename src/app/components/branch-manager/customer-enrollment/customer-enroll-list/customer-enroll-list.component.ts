@@ -39,11 +39,13 @@ export class CustomerEnrollListComponent implements OnInit {
   fromdate:any;
   todate:any;
 
-  displayedColumns = ['index', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
+  displayedColumns = ['index','Customer Image', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
   'D.O.B','Father’s Name','Applicant Type','Gender','Action'];
   dataSource = new MatTableDataSource();
   enrollid: any;
   customerList :  any = [];
+  customerImage: any;
+  allCustomerImage: any = [];
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -59,30 +61,59 @@ export class CustomerEnrollListComponent implements OnInit {
 
   ngOnDestroy() { }
 
+  // getEnrollData() {
+  //   this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnroll`, {
+  //     params: {
+  //       tenantIdentifier: 'default'
+  //     }
+  //   }).subscribe(data => {
+  //     console.log(data);
+  //     this.customerList.push(data);
+  //     this.enrollid = this.customerList[0].id;
+
+  //     // this.enrollid = data.id;
+  //     console.log(this.enrollid)
+  //     this.EnrollVerfication_Data = data;
+  //     this.dataSource = new MatTableDataSource(this.EnrollVerfication_Data)
+  //     this.sharedService.setLoaderShownProperty(false);  
+  //     this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${this.enrollid}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+  //       this.EnrollVerfication_Data = this.sanitizer.bypassSecurityTrustUrl(data);
+  //       console.log(this.EnrollVerfication_Data)
+  //     })
+  //   })
+  // }
+
   getEnrollData() {
     this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnroll`, {
       params: {
         tenantIdentifier: 'default'
       }
-    }).subscribe(data => {
-      console.log(data);
-      this.customerList.push(data);
-      this.enrollid = this.customerList[0].id;
-
-      // this.enrollid = data.id;
-      console.log(this.enrollid)
-      this.EnrollVerfication_Data = data;
+    }).pipe(untilDestroyed(this)).subscribe(async respose => {
+      console.log(respose);
+      this.EnrollVerfication_Data = respose;
+      
       this.dataSource = new MatTableDataSource(this.EnrollVerfication_Data)
-      this.sharedService.setLoaderShownProperty(false);  
-      this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${this.enrollid}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
-        this.EnrollVerfication_Data = this.sanitizer.bypassSecurityTrustUrl(data);
-        console.log(this.EnrollVerfication_Data)
+      this.sharedService.setLoaderShownProperty(false); 
+
+      await this.EnrollVerfication_Data.map((res: any) => {
+      this.crudService.get_Image(`${appModels.IMAGES}/enroll_customerimage/${res.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+        this.customerImage = this.sanitizer.bypassSecurityTrustUrl(data);
+        this.allCustomerImage.push({image:this.customerImage})
+        console.log(this.allCustomerImage)
+
+      },error => {
+        console.error(error);
+        this.customerImage = 'assets/images/empty_image.png';
+        this.allCustomerImage.push({image:this.customerImage} )
+     });
       })
     })
+    this.allCustomerImage = [];
+
   }
 
   createLoan(id : any){
-    this.router.navigate(['branch-manager/newloan-process']);
+    this.router.navigate(['branch-manager/newloan-process/' + id]);
   }
 
   createViewTask(element : any) {
@@ -142,7 +173,7 @@ export class CreateEnroll {
   openform:Boolean = false;
   openform2:Boolean = false;
   checked:Boolean = false;
-
+  openformfield:Boolean = false;
 
 
   Genders: any = ['Male', 'Female', 'Others',];
@@ -210,6 +241,7 @@ export class CreateEnroll {
       customerName: new FormControl('', Validators.required),
       mobileNumber: new FormControl('', Validators.required),
       alternateMobileNumber: new FormControl(''),
+      alternateMobileNumber2: new FormControl(''),
       dob: new FormControl(''),
       dateFormat: new FormControl("dd MMMM yyyy"),
       locale: new FormControl("en"),
@@ -338,6 +370,9 @@ onClickOpenForm(){
   onClickOpenForm2(){
     this.openform2=true;  
     }
+    onClickAternativenum(){
+      this.openformfield=true;  
+      }
 
    /** Save Customer Enrolment */
    saveCustomerEnrolment(){

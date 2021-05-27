@@ -9,6 +9,7 @@ import { appModels } from '../../../../services/utils/enum.util';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -24,7 +25,7 @@ export class NewloanProcessComponent implements OnInit {
   vehiclechallanhistory: any;
 
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute,public datepipe: DatePipe) {
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private sanitizer:DomSanitizer, private route: ActivatedRoute,public datepipe: DatePipe) {
     this.getUserId();    
    }
 
@@ -85,6 +86,9 @@ export class NewloanProcessComponent implements OnInit {
  
   passBookfileform: any;
   passBookimgURL: any;
+
+  customerList :  any = [];
+  resourceID:any;
 
   newLoanForm = new FormGroup({
     //applicant
@@ -217,8 +221,44 @@ export class NewloanProcessComponent implements OnInit {
     this.getEnrollData(); 
     
   }
-  getEnrollData() {
+  async getEnrollData() {
     console.log(this.id)
+    this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnroll/${this.id}`, {
+      params: {
+        tenantIdentifier: 'default'  
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async response => {
+
+      console.log(response.id)
+      this.customerList.push(response);
+      this.newLoanForm.patchValue({
+          customerName: response.customerName,
+          mobileNo:response.mobileNumber,
+          altNumber: response.alternateMobileNumber,
+          applicantType:response.applicantType,
+          gender: response.gender,
+          dob:this.datepipe.transform(response.dob, 'yyyy-MM-dd'),
+          fatherName: response.fatherName,         
+        
+      })
+    
+    this.resourceID = this.customerList[0].id;
+    console.log(this.resourceID)
+    
+       this.crudService.get_Image(`${appModels.IMAGES}/enroll_customerimage/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+           this.applicantImgURL = this.sanitizer.bypassSecurityTrustUrl(data);
+           console.log(this.applicantImgURL)
+         })
+         this.crudService.get_Image(`${appModels.IMAGES}/enroll_adharphoto/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+          this.applicantAadharImgURL = this.sanitizer.bypassSecurityTrustUrl(data);
+          console.log(this.applicantAadharImgURL)
+        })
+        this.crudService.get_Image(`${appModels.IMAGES}/enroll_pancard/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+          this.applicantPanImgURL = this.sanitizer.bypassSecurityTrustUrl(data);
+          console.log(this.applicantPanImgURL)
+        })
+        
+        })
   }
 
 
