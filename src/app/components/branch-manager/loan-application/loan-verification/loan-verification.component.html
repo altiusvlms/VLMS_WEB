@@ -20,16 +20,16 @@
         <span aria-hidden="true">&times;</span>
       </button>
       
-      <div class="row" style="margin-top: 10px;">
+      <div class="row">
         <div class="col-sm-3">
           <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Account Number</mat-label>
+            <mat-label>AGT NO</mat-label>
             <input matInput formControlName="accountNo"  (keyup)="applyFilter($event, 'accountnumber')" >
           </mat-form-field>
         </div>
         <div class="col-sm-3">
           <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Customer Name</mat-label>
+            <mat-label>Applicant Name</mat-label>
             <input matInput formControlName="customerName"  (keyup)="applyFilter($event , 'name')" >
           </mat-form-field>
         </div>
@@ -45,11 +45,9 @@
             <input matInput formControlName="vehicleNo"   (keyup)="applyFilter($event, 'vehicleno')" >
           </mat-form-field>
         </div>
-    </div>
-    <div class="row" style="margin-top: 10px;">
         <div class="col-sm-3">
           <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Customer Mobile No</mat-label>
+            <mat-label>Applicant Mobile No</mat-label>
             <input matInput formControlName="customerMobileNo"  (keyup)="applyFilter($event, 'mobileno')" >
           </mat-form-field>
         </div>
@@ -72,8 +70,6 @@
             <input matInput formControlName="idProof" >
           </mat-form-field>
         </div>
-    </div>
-    <div class="row" style="margin-top: 10px;">
 
         <div class="col-sm-3">
           <mat-form-field appearance="outline" class="example-full-width">
@@ -106,11 +102,11 @@
             </mat-select>
         </mat-form-field>
         </div>
-    </div>
-    <div class="row" style="margin-top: 10px;">
-      <button  *ngIf="showSearchbtn" type="button"  class="btn btn-secondary" (click)="searchdata()">Search</button>
+        <div class="col-12 col-sm-12">
+      <button  type="button"  class="btn btn-secondary" (click)="searchdata()">Search</button>
       <button  type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
     </div>
+  </div>
   </form>
    </div></div>
 
@@ -155,7 +151,7 @@
         <td></td>
         <td>{{customer?.customerDetails.applicantType}}</td>
         <td></td>
-        <!-- <td><button class="btn_blue" (click)="loanProcess(customer.id)">Proceed</button></td> -->
+        <td><button class="btn_blue" (click)="loanProcess(customer.id)">Proceed</button></td>
       </tr>
     </tbody>
 </table>

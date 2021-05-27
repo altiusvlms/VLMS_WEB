@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute ,Params} from '@angular/router';
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
+import {DomSanitizer} from "@angular/platform-browser";
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
@@ -18,11 +19,12 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class PickApplicantComponent implements OnInit {
 
-  constructor(private router: Router,private crudService: CrudService,private route: ActivatedRoute) { }
+  constructor(private router: Router,private crudService: CrudService,private route: ActivatedRoute,private sanitizer:DomSanitizer) { }
 
   /** Pick Applicant Variables */
   id: any;
   applicantDetails: any = [];
+  applicantImage: any;
 
   applicantDetailsForm = new FormGroup({
     loanDetailsData:new FormGroup({
@@ -69,6 +71,13 @@ export class PickApplicantComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(async response => {
       this.applicantDetails.push(response);
       console.log(this.applicantDetails)
+      console.log(this.applicantDetails[0].customerDetails.id)
+       await this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${this.applicantDetails[0].customerDetails.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
+         this.applicantImage =  this.sanitizer.bypassSecurityTrustUrl(data);
+        },error => {
+          console.error(error);
+          this.applicantImage = 'assets/images/empty_image.png';
+       });
       this.applicantDetailsForm.patchValue({
         loanDetailsData:{
           loanAmount: response.loanDetailsData.loanAmount,

@@ -6,21 +6,19 @@
     <div class="card">
       <div class="card-body">
         <form [formGroup]="advanceSearchForms">
-        <div class="row">
             <button type="button" class="close" aria-label="Close" (click)="close()">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div> 
         <div class="row">
             <div class="col-sm-3">
                 <mat-form-field appearance="outline" class="example-full-width">
-                  <mat-label>Account Number</mat-label>
+                  <mat-label>AGT NO</mat-label>
                   <input matInput type='text' formControlName="accountNo" (keyup)="applyFilter($event, 'accountNumber')" >
               </mat-form-field>
             </div>
             <div class="col-sm-3">
                 <mat-form-field appearance="outline" class="example-full-width">
-                  <mat-label>Customer Name</mat-label>
+                  <mat-label>Name</mat-label>
                   <input matInput type='text' formControlName="customerName" (keyup)="applyFilter($event, 'name')" >
               </mat-form-field>
             </div>
@@ -38,7 +36,7 @@
             </div>
             <div class="col-sm-3">
                 <mat-form-field appearance="outline" class="example-full-width">
-                  <mat-label>Customer Mobile No</mat-label>
+                  <mat-label>Mobile No</mat-label>
                   <input matInput type='text' formControlName="customerMobileNo" (keyup)="applyFilter($event, 'mobileno')" >
               </mat-form-field>
             </div>
@@ -92,9 +90,9 @@
                 </mat-form-field>
                 </div>
         </div>
-        <div class="row">
-            <button *ngIf="showSearchbtn" type="button"  class="btn btn-secondary" (click)="searchdata()">Search</button>
-            <button type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
+        <div class="col-12 col-sm-12">
+          <button type="button"  class="btn btn-secondary" (click)="searchdata()">Search</button>
+          <button type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
         </div>
         </form>
       </div>
@@ -109,12 +107,12 @@
             <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Contact No</th>
+                  <th>Mobile No</th>
                   <!-- <th>Branch</th> -->
                   <th>Vehicle No</th>
                   <th>Vehicle Model</th>
                   <th>Chassis No</th>
-                  <th>Account No</th>
+                  <th>AGT NO</th>
                   <!-- <th>Customer Image</th> -->
                   <th>Loan Amount</th>
                   <th>Due Pending</th>

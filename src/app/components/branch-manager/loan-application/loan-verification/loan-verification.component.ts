@@ -39,7 +39,6 @@ export class LoanVerificationComponent implements OnInit {
   })
 
     showAdvanceSearch: any;
-    showSearchbtn : Boolean = true;
     customerLoanDetails : any = [];
     customerImage: any;
     allCustomerImage: any = [];
@@ -126,7 +125,6 @@ export class LoanVerificationComponent implements OnInit {
    
   }
   searchdata(){
-    this.showSearchbtn = false;
     for (let selectedUser of this.customerLoanDetails) {
       if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''){
       if (
@@ -162,7 +160,6 @@ export class LoanVerificationComponent implements OnInit {
     this.searchMobileNo = '';
     this.searchChassisNo = '';
     this.searchLoanAmount = '';
-    this.showSearchbtn = true;
     this.getLoanVerification();
   }
 
