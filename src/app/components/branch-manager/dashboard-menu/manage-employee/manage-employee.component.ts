@@ -224,10 +224,10 @@ export class ManageEmployeeComponent implements OnInit {
 
 /** Save Enquiry */
 manageEmployee(){
-// if(this.manageEmployeeForm.invalid) {
-//   alert("Please enter required fields")
-//   return;
-// }
+if(this.manageEmployeeForm.invalid) {
+  alert("Please Enter Required Fields")
+  return;
+}
   this.submitted = true;
   console.log(this.manageEmployeeForm.value)
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
