@@ -64,7 +64,10 @@ export class EnquiryListComponent implements OnInit {
       customerName: new FormControl('', Validators.required),
       mobileNumber: new FormControl('', Validators.required),
       vehicleNumber: new FormControl('',Validators.required),
-      email: new FormControl(''),
+      email: new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]),
       enquiryId: new FormControl(''),
     })
     
