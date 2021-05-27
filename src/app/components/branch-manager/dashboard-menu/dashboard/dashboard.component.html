@@ -292,5 +292,24 @@
   
 </div>
 
+<!-- <div class = "continer">
+<h3> Piechart</h3>
 
 
+      <igx-doughnut-chart height="100%" width="100%" >
+          <igx-ring-series [dataSource] = "data"
+              valueMemberPath="MarketShare"
+              labelMemberPath="Company">
+          </igx-ring-series>
+      </igx-doughnut-chart>
+
+</div> -->
+
+<div class="container"> 
+  <div class="chart">
+      <igx-doughnut-chart height="100%" width="100%" >
+          <igx-ring-series [dataSource] = "data" valueMemberPath="Value" labelMemberPath="Label">
+          </igx-ring-series>
+      </igx-doughnut-chart>
+  </div>
+</div>

@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 /** Custom Module */
 import { SharedModule } from './components/shared/shared/shared.module';
+import { IgxPieChartModule } from 'igniteui-angular-charts';
 
 /** Custom Toaster and Datepipe */
 import { ToastrModule } from 'ngx-toastr';
@@ -66,6 +67,7 @@ const firebaseConfig = {
     AngularFireAuthModule, 
     FormsModule,
     ReactiveFormsModule,
+    IgxPieChartModule
     
   ],
   declarations: [WebAppComponent, CreateReceiptComponent, YetToReceiptComponent, HlPaymentComponent],

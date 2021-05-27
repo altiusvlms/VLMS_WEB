@@ -112,6 +112,8 @@ export class DashboardComponent implements OnInit {
           return value + '<b>Mo</b>';
       }
     }
+
+    
   };
 
    TotalInterest : number;
@@ -119,11 +121,24 @@ export class DashboardComponent implements OnInit {
    MonthlyDue : number;
 
 
+   public data: any;
 
+  constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { 
+    this.yrToggel = true;
+    // debugger
+    this.data = [
+      { Label: "Administration", Value: 2 },
+      { Label: "Sales", Value: 8 },
+      { Label: "IT", Value: 3 },
+      { Label: "Marketing", Value: 8 },
+      { Label: "Development", Value: 4 },
+      { Label: "Customer Support", Value: 6 }
+  ];
+  console.log("data")
+  console.log(this.data)
+  }
 
-  constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { this.yrToggel = true; }
-
-  
+     
 
   
 
@@ -196,28 +211,7 @@ console.log(this.fromdate);
   ngOnInit(): void {
     // this.mobileNumFetch()
     
-    // window.onload = function () {
-    //   let chart = new CanvasJS.Chart("chartContainer",
-    //   {
-    //     title:{
-    //       text: "Top U.S Smartphone Operating Systems By Market Share, Q3 2012"
-    //     },
-    //     data: [
-    //     {
-    //      type: "doughnut",
-    //      dataPoints: [
-    //      {  y: 53.37, indexLabel: "Android" },
-    //      {  y: 35.0, indexLabel: "Apple iOS" },
-    //      {  y: 7, indexLabel: "Blackberry" },
-    //      {  y: 2, indexLabel: "Windows Phone" },
-    //      {  y: 5, indexLabel: "Others" }
-    //      ]
-    //    }
-    //    ]
-    //  });
-  
-    //   chart.render();
-    // }
+   
   }
 
   customer(){
@@ -277,71 +271,6 @@ console.log(this.fromdate);
     // this.router.navigate(['branch-manager/newloan-process']);
   // }
   }
-  // doughnutchart(){
-  //   // chartOptions: Highcharts.Options = {
-  //   Highcharts.chart('donut', {
-  //     chart: {
-  //       type: 'pie'
-  //     },
-  //     title: {
-  //       text: 'Browser market share, January, 2018'
-  //     },
-  //     subtitle: {
-  //       text: 'Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
-  //     },
-  //     plotOptions: {
-  //       pie: {
-  //         shadow: false,
-  //         center: ['50%', '50%']
-  //       }
-  //     },
-  //     tooltip: {
-  //       valueSuffix: '%'
-  //     },
-  //     series: [{
-  //       name: 'Browsers',
-  //       // data: browserData,
-  //       size: '60%',
-  //       dataLabels: {
-  //         formatter: function () {
-  //           return this.y > 5 ? this.point.name : null;
-  //         },
-  //         color: '#ffffff',
-  //         distance: -30
-  //       }
-  //     }, {
-  //       name: 'Versions',
-  //       // data: versionsData,
-  //       size: '80%',
-  //       innerSize: '60%',
-  //       dataLabels: {
-  //         formatter: function () {
-  //           // display only if larger than 1
-  //           return this.y > 1 ? '<b>' + this.point.name + ':</b> ' +
-  //             this.y + '%' : null;
-  //         }
-  //       },
-  //       id: 'versions'
-  //     }],
-  //     responsive: {
-  //       rules: [{
-  //         condition: {
-  //           maxWidth: 400
-  //         },
-  //         chartOptions: {
-  //           series: [{
-  //           }, {
-  //             id: 'versions',
-  //             dataLabels: {
-  //               enabled: false
-  //             }
-  //           }]
-  //         }
-  //       }]
-  //     }
-  //   })
-  //   }
-  
     
 
 }
@@ -484,5 +413,6 @@ export class AdvancedSearch {
       this.customerLoanDetails = [];
     }
   }
+  
 
 }

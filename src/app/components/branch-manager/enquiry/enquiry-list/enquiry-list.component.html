@@ -89,15 +89,19 @@
 
 
 
-<div class="card">
-  <div class="card-body">
+    <div class="mat-elevation-z8">
 <table mat-table [dataSource]="dataSource" >
 
+  <ng-container matColumnDef="index">
+    <th mat-header-cell *matHeaderCellDef> SI.No </th>
+    <td mat-cell *matCellDef="let element; let i = index;"> {{i}} </td>
+  </ng-container>
+
   <!-- Position Column -->
-  <ng-container matColumnDef="Enquiry ID">
+  <!-- <ng-container matColumnDef="Enquiry ID">
     <th mat-header-cell *matHeaderCellDef> Enquiry ID </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
+  </ng-container> -->
 
   <!-- Name Column -->
   <ng-container matColumnDef="customerName">
@@ -126,7 +130,7 @@
     <td mat-cell *matCellDef="let element">
       <button mat-button (click)="createLoan()">Create Loan</button>
        </td>
-  </ng-container>
+  </ng-container> 
 
   
 
@@ -136,10 +140,12 @@
   
 </table>
 
+<mat-paginator  [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  
+
 <ng-container *ngIf="dataSource?.filteredData.length == 0">
   <div class="no_data_msg">No Data Avaliable</div>
 </ng-container>
-</div>
 </div>
 
 <!-- /** Create Enquiry Model*/ -->
@@ -186,7 +192,7 @@
             <div >
               <mat-form-field appearance="outline" class="example-full-width" >
                 <mat-label >Vehicle Number</mat-label>
-                <input matInput  formControlName="vehicleNumber" #input [value]="input.value.toUpperCase()" >
+                <input matInput type='text' id="code" #code formControlName="vehicleNumber"  maxlength="13" (input)="code.value=$event.target.value.toUpperCase()">
             </mat-form-field>
             <div *ngIf="createEnquiryForms.controls['vehicleNumber'].invalid && (createEnquiryForms.controls['vehicleNumber'].dirty || createEnquiryForms.controls['vehicleNumber'].touched)" class="alert alert-danger">
               <div *ngIf="createEnquiryForms.controls['vehicleNumber'].errors.required">
@@ -194,7 +200,6 @@
               </div>
           </div>
             </div>
-            
             <div>    
               <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Email</mat-label>

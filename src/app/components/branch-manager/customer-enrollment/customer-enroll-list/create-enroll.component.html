@@ -16,9 +16,10 @@
             <label>Customer Images:
               <span class="required-field">*</span>
               <input #file type="file" accept='image/*'   (change)="uploadApplicantImages($event)" />
-              <img [src] ="enrollImgUrl ? enrollImgUrl : 'assets/images/empty_image.png'" >
+              <img [src] ="ApplicantImageURL ? ApplicantImageURL : 'assets/images/empty_image.png'" >
             </label>
           </div>
+          
           <div  class="col-4 col-sm-4">
               <mat-form-field appearance="outline" class="example-full-width" >
                 <mat-label>customerName</mat-label>
@@ -138,9 +139,9 @@
                 <option >ID Proof 1</option>
                 <option *ngFor="let ID1 of ID1s">{{ID1}}</option>
               </select>
-              <input #file type="file" accept='image/*' formControlName="file" (change)="uploadImages($event)"   />
-              <p *ngIf="createCustomerEnrolForms.controls.file.errors?.required" style="color: red">This field is required!</p>
-              <img [src] ="Imagefileform ? Imagefileform : 'assets/images/empty_image.png'" >
+              <input #file type="file" accept='image/*'  (change)="uploadAadharImages($event)"   />
+              <!-- <p *ngIf="createCustomerEnrolForms.controls.file.errors?.required" style="color: red">This field is required!</p> -->
+              <img [src] ="AadharimageForm ? AadharimageForm : 'assets/images/empty_image.png'" >
             </label>
           </div>
           <div class="col-4 col-sm-4"> 
@@ -150,9 +151,9 @@
                 <option >ID Proof 2</option>
                 <option *ngFor="let ID2 of ID2s">{{ID2}}</option>
               </select>
-              <input #file type="file" accept='image/*' formControlName="file2" (change)="uploadImages2($event)"   />
-              <p *ngIf="createCustomerEnrolForms.controls.file2.errors?.required" style="color: red">This field is required!</p>
-              <img [src] ="Imagefileform2 ? Imagefileform2 : 'assets/images/empty_image.png'" >
+              <input #file type="file" accept='image/*'  (change)="uploadPanImages($event)"   />
+              <!-- <p *ngIf="createCustomerEnrolForms.controls.file2.errors?.required" style="color: red">This field is required!</p> -->
+              <img [src] ="PanImageForm ? PanImageForm : 'assets/images/empty_image.png'" >
               <button (click)="onClickOpenForm()"> 
                 Next 
              </button> 
@@ -168,8 +169,8 @@
               <option >ID Proof 3</option>
               <option *ngFor="let ID3 of ID3s">{{ID3}}</option>
             </select>
-            <input #file type="file" accept='image/*' (change)="uploadImages3($event)"   />
-            <img [src] ="Imagefileform3 ? Imagefileform3 : 'assets/images/empty_image.png'" >
+            <input #file type="file" accept='image/*' (change)="uploadAadharAditional($event)"   />
+            <img [src] ="AditionalImage ? AditionalImage : 'assets/images/empty_image.png'" >
             <button (click)="onClickOpenForm2()"> 
               Next 
            </button> 
@@ -182,15 +183,15 @@
               <option >ID Proof 4</option>
               <option *ngFor="let ID4 of ID4s">{{ID4}}</option>
             </select>
-            <input #file type="file" accept='image/*' (change)="uploadImages4($event)"   />
-            <img [src] ="Imagefileform4 ? Imagefileform4 : 'assets/images/empty_image.png'" >
+            <input #file type="file" accept='image/*' (change)="uploadPanAditional($event)"   />
+            <img [src] ="PanImageAditional ? PanImageAditional : 'assets/images/empty_image.png'" >
           </label>
         </div>
 
         
              <div class="col-12 col-sm-12">
                  <button type="button" class="btn btn-secondary"  (click)="close()">Close</button>
-                 <button type="button" class="btn btn-primary"  [disabled]="!createCustomerEnrolForms.valid" (click)="saveCustomerEnrolment()" > {{editDataTask ? 'Update' : 'Save'}}
+                 <button type="button" class="btn btn-primary"   (click)="saveCustomerEnrolment()"  > {{editDataTask ? 'Update' : 'Save'}}
               </button>
             </div>
             </div>

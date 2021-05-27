@@ -24,7 +24,7 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class CustomerManagementComponent implements OnInit {
 
-  displayedColumns = ['Customer ID','Customer Name', 'Contact no', 'Alternative contact number','D.O.B',
+  displayedColumns = ['index','Customer Name', 'Contact no', 'Alternative contact number','D.O.B',
   'Father’s Name','ID proof Type','Action'];
   dataSource = new MatTableDataSource();
 

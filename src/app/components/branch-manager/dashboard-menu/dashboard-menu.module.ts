@@ -27,6 +27,8 @@ import { Ng5SliderModule } from 'ng5-slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 // For MDB Angular Pro
 import { ChartsModule, ChartSimpleModule, WavesModule } from 'ng-uikit-pro-standard'
+import { IgxDoughnutChartModule, IgxRingSeriesModule } from "igniteui-angular-charts";
+// import { IgxPieChartModule } from 'igniteui-angular-charts';
 // import {MatFormFieldModule} from '@angular/material/form-field';
 
 // import { ChartsModule } from 'ng2-charts';
@@ -48,7 +50,10 @@ import { chart } from 'chart.js'
     MatFormFieldModule,
     ChartsModule,
     ChartSimpleModule,
-    WavesModule
+    WavesModule,
+    IgxDoughnutChartModule,
+    IgxRingSeriesModule,
+    // IgxPieChartModule
     // MatFormFieldModule,
     // ChartsModule
     // chart

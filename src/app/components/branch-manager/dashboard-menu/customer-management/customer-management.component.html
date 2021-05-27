@@ -88,10 +88,15 @@
   <div class="card-body">
 <table mat-table [dataSource]="dataSource" >
 
-  <ng-container matColumnDef="Customer ID">
+  <ng-container matColumnDef="index">
+    <th mat-header-cell *matHeaderCellDef> SI.No </th>
+    <td mat-cell *matCellDef="let element; let i = index;"> {{i}} </td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="Customer ID">
     <th mat-header-cell *matHeaderCellDef> Customer ID </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
+  </ng-container> -->
 
   <ng-container matColumnDef="Customer Name">
     <th mat-header-cell *matHeaderCellDef> Customer Name </th>
