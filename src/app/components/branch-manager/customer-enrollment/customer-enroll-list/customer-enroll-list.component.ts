@@ -39,9 +39,11 @@ export class CustomerEnrollListComponent implements OnInit {
   fromdate:any;
   todate:any;
 
-  displayedColumns = ['Customer ID','Customer Image', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
-  'D.O.B','Father’s Name','Applicant Type','Gender','AadhaarImage','PAN Image','Action'];
+  displayedColumns = ['index', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
+  'D.O.B','Father’s Name','Applicant Type','Gender','Action'];
   dataSource = new MatTableDataSource();
+  enrollid: any;
+  customerList :  any = [];
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -64,10 +66,18 @@ export class CustomerEnrollListComponent implements OnInit {
       }
     }).subscribe(data => {
       console.log(data);
+      this.customerList.push(data);
+      this.enrollid = this.customerList[0].id;
+
+      // this.enrollid = data.id;
+      console.log(this.enrollid)
       this.EnrollVerfication_Data = data;
       this.dataSource = new MatTableDataSource(this.EnrollVerfication_Data)
       this.sharedService.setLoaderShownProperty(false);  
-
+      this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${this.enrollid}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+        this.EnrollVerfication_Data = this.sanitizer.bypassSecurityTrustUrl(data);
+        console.log(this.EnrollVerfication_Data)
+      })
     })
   }
 
@@ -149,15 +159,20 @@ export class CreateEnroll {
   phoneNumber: any;
   verificationCode: string;
   user:any;
+    customerList: any = [] ;
+    resourceID: any;
+    id: any;
+    customerImage: any;
 
 
 
   constructor(public dialogRef: MatDialogRef<CreateEnroll>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private formBuilder: FormBuilder,
   private crudService: CrudService,private toast: ToastrService,
-  private sharedService: SharedService,public datepipe: DatePipe,public authentication: AuthenticationService) {
+  private sharedService: SharedService,public datepipe: DatePipe,public authentication: AuthenticationService,private sanitizer:DomSanitizer) {
     if (data) {
       console.log(data)
       this.editDataTask = { ...data };
+      this.customerList.push(data);
       this.createCustomerEnrolForms
     .patchValue({
       customerName:data.customerName,
@@ -168,6 +183,21 @@ export class CreateEnroll {
       gender:data.gender,
       applicantType:data.applicantType
     });
+    this.resourceID = this.customerList[0].id;
+    console.log(this.resourceID);
+      this.crudService.get_Image(`${appModels.IMAGES}/enroll_customerimage/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
+        this.ApplicantImageURL = this.sanitizer.bypassSecurityTrustUrl(data);
+        console.log(this.ApplicantImageURL)
+      })
+      this.crudService.get_Image(`${appModels.IMAGES}/enroll_adharphoto/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
+        this.AadharimageForm = this.sanitizer.bypassSecurityTrustUrl(data);
+        console.log(this.AadharimageForm)
+      })
+      this.crudService.get_Image(`${appModels.IMAGES}/enroll_pancard/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
+        this.PanImageForm = this.sanitizer.bypassSecurityTrustUrl(data);
+        console.log(this.PanImageForm)
+      })
+        
     this.createCustomerEnrolForms.disable();
     }
 
@@ -189,8 +219,8 @@ export class CreateEnroll {
       applicantType: new FormControl(''),
       proof1: new FormControl(''),
       proof2: new FormControl(''),
-      file: new FormControl("", [FileValidator.validate]),
-      file2: new FormControl("", [FileValidator.validate]),
+      // file: new FormControl("", [FileValidator.validate]),
+      // file2: new FormControl("", [FileValidator.validate]),
     })
 
     
@@ -201,8 +231,16 @@ export class CreateEnroll {
     Imagefileform2:any;
     Imagefileform3:any;
     Imagefileform4:any;
-  
-
+    ApplicantImage:any;
+    ApplicantImageURL:any;
+    AadharImage:any;
+    AadharimageForm:any
+    PanImage:any
+    PanImageForm:any;
+    AadharAditional:any;
+    AditionalImage:any;
+    PanAditional:any;
+    PanImageAditional:any;
 
   ngOnInit(): void {
     this.windowRef = this.authentication.windowRef
@@ -214,12 +252,13 @@ export class CreateEnroll {
 
   uploadApplicantImages(evt10: any){
     if(evt10.target.files[0].type == "image/png" || evt10.target.files[0].type == "image/jpeg" || evt10.target.files[0].type == "image/gif"){
-    this.enrollused = evt10.target.files[0];
+    this.ApplicantImage = evt10.target.files[0];
     if (evt10.target.files && evt10.target.files[0]) {
       var reader = new FileReader();
       reader.readAsDataURL(evt10.target.files[0]);
       reader.onload = (event) => {
-        this.enrollImgUrl = event.target['result'];
+        this.ApplicantImageURL = event.target['result'];
+        // console.log(this.enrollImgUrl)
         }
       }
     }
@@ -227,33 +266,31 @@ export class CreateEnroll {
       alert("Only GIF, PNG and JPEG Data URL's are allowed.")
     }
   }
-  uploadImages(evt1 : any){
+  uploadAadharImages(evt1 : any){
     if(evt1.target.files[0].type == "image/png" || evt1.target.files[0].type == "image/jpeg" || evt1.target.files[0].type == "image/gif"){
-      this.enrollused = evt1.target.files[0];
+      this.AadharImage = evt1.target.files[0];
       if (evt1.target.files && evt1.target.files[0]) {
         var reader = new FileReader();
         reader.readAsDataURL(evt1.target.files[0]);
         reader.onload = (event) => {
-          this.Imagefileform = event.target['result'];
+          this.AadharimageForm = event.target['result'];
+          
           }
         }
       }
         else {
           alert("Only GIF, PNG and JPEG Data URL's are allowed.")
         }
-    // {
-    // this.Imagefileform = evt1.target.files[0];
-    // console.log(this.Imagefileform);
-    // }
+    
   }
-  uploadImages2(evt2 : any){
+  uploadPanImages(evt2 : any){
     if(evt2.target.files[0].type == "image/png" || evt2.target.files[0].type == "image/jpeg" || evt2.target.files[0].type == "image/gif"){
-      this.enrollused = evt2.target.files[0];
+      this.PanImage = evt2.target.files[0];
       if (evt2.target.files && evt2.target.files[0]) {
         var reader = new FileReader();
         reader.readAsDataURL(evt2.target.files[0]);
         reader.onload = (event) => {
-          this.Imagefileform2 = event.target['result'];
+          this.PanImageForm = event.target['result'];
           }
         }
       }
@@ -261,14 +298,14 @@ export class CreateEnroll {
           alert("Only GIF, PNG and JPEG Data URL's are allowed.")
         }
   }
-  uploadImages3(evt3 : any){
+  uploadAadharAditional(evt3 : any){
     if(evt3.target.files[0].type == "image/png" || evt3.target.files[0].type == "image/jpeg" || evt3.target.files[0].type == "image/gif"){
-      this.enrollused = evt3.target.files[0];
+      this.AadharAditional = evt3.target.files[0];
       if (evt3.target.files && evt3.target.files[0]) {
         var reader = new FileReader();
         reader.readAsDataURL(evt3.target.files[0]);
         reader.onload = (event) => {
-          this.Imagefileform3 = event.target['result'];
+          this.AditionalImage = event.target['result'];
           }
         }
       }
@@ -276,14 +313,14 @@ export class CreateEnroll {
           alert("Only GIF, PNG and JPEG Data URL's are allowed.")
         }
   }
-  uploadImages4(evt4 : any){
+  uploadPanAditional(evt4 : any){
     if(evt4.target.files[0].type == "image/png" || evt4.target.files[0].type == "image/jpeg" || evt4.target.files[0].type == "image/gif"){
-      this.enrollused = evt4.target.files[0];
+      this.PanAditional = evt4.target.files[0];
       if (evt4.target.files && evt4.target.files[0]) {
         var reader = new FileReader();
         reader.readAsDataURL(evt4.target.files[0]);
         reader.onload = (event) => {
-          this.Imagefileform4 = event.target['result'];
+          this.PanImageAditional = event.target['result'];
           }
         }
       }
@@ -310,14 +347,69 @@ onClickOpenForm(){
       this.crudService.update(`${appModels.FIELDEXECUTIVE}/updateEnroll`,this.createCustomerEnrolForms.value,
         this.editDataTask['id'],
       ).pipe(untilDestroyed(this)).subscribe(updated => {
-        this.toast.success("Customer updated successfully")
+        this.enrollid = updated;
+        console.log(this.enrollid)
+        alert("Customer updated successfully")
         this.dialogRef.close(updated);
         this.sharedService.setLoaderShownProperty(false);  
+
+        const formData = new FormData();      
+    formData.append("file",this.ApplicantImage);
+        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_customerimage/${this.enrollid}`, formData,
+        { params:{
+              tenantIdentifier: "default"   
+            }}
+        ).pipe(untilDestroyed(this))
+          .subscribe(data => {
+            console.log(data);
+            const formData = new FormData();      
+    formData.append("file",this.AadharImage);
+        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_adharphoto/${this.enrollid}`, formData,
+        { params:{
+              tenantIdentifier: "default"   
+            }}
+        ).pipe(untilDestroyed(this))
+          .subscribe(data => {
+            console.log(data);
+            const formData = new FormData();      
+    formData.append("file",this.PanImage);
+        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_pancard/${this.enrollid}`, formData,
+        { params:{
+              tenantIdentifier: "default"   
+            }}
+        ).pipe(untilDestroyed(this))
+          .subscribe(data => {
+            console.log(data);
+            const formData = new FormData();      
+    formData.append("file",this.AadharAditional);
+        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_adharphoto1/${this.enrollid}`, formData,
+        { params:{
+              tenantIdentifier: "default"   
+            }}
+        ).pipe(untilDestroyed(this))
+          .subscribe(data => {
+            console.log(data);
+            const formData = new FormData();      
+            formData.append("file",this.PanAditional);
+                this.crudService.upload_Image(`${appModels.IMAGES}/enroll_pancard1/${this.enrollid}`, formData,
+                { params:{
+                      tenantIdentifier: "default"   
+                    }}
+                ).pipe(untilDestroyed(this))
+                  .subscribe(data => {
+                    console.log(data);
+      // this.dialogRef.close(data);
+      // this.sharedService.setLoaderShownProperty(false); 
+                  })
+                })
+              })
+          })
+        })
+        this.getEnrollData();
       })
         }
     else {
     this.createCustomerEnrolForms.value.dob =this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd MMMM yyyy');
-    console.log(this.createCustomerEnrolForms.value.dob);
     this.images = {
       images1:this.createCustomerEnrolForms.value.image1,
       images2:this.createCustomerEnrolForms.value.image2,
@@ -330,11 +422,20 @@ onClickOpenForm(){
     ).pipe(untilDestroyed(this)).subscribe( data => {
       console.log(data)
       this.enrollid = data.resourceId;
-      this.toast.success("Customer Created successfully");
+      alert("Customer Created successfully")
       this.dialogRef.close(data);
       this.sharedService.setLoaderShownProperty(false); 
       const formData = new FormData();      
-    formData.append("file",this.Imagefileform);
+    formData.append("file",this.ApplicantImage);
+        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_customerimage/${this.enrollid}`, formData,
+        { params:{
+              tenantIdentifier: "default"   
+            }}
+        ).pipe(untilDestroyed(this))
+          .subscribe(data => {
+            console.log(data);
+            const formData = new FormData();      
+    formData.append("file",this.AadharImage);
         this.crudService.upload_Image(`${appModels.IMAGES}/enroll_adharphoto/${this.enrollid}`, formData,
         { params:{
               tenantIdentifier: "default"   
@@ -343,7 +444,7 @@ onClickOpenForm(){
           .subscribe(data => {
             console.log(data);
             const formData = new FormData();      
-    formData.append("file",this.Imagefileform2);
+    formData.append("file",this.PanImage);
         this.crudService.upload_Image(`${appModels.IMAGES}/enroll_pancard/${this.enrollid}`, formData,
         { params:{
               tenantIdentifier: "default"   
@@ -352,8 +453,8 @@ onClickOpenForm(){
           .subscribe(data => {
             console.log(data);
             const formData = new FormData();      
-    formData.append("file",this.Imagefileform3);
-        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_pancard/${this.enrollid}`, formData,
+    formData.append("file",this.AadharAditional);
+        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_adharphoto1/${this.enrollid}`, formData,
         { params:{
               tenantIdentifier: "default"   
             }}
@@ -361,23 +462,16 @@ onClickOpenForm(){
           .subscribe(data => {
             console.log(data);
             const formData = new FormData();      
-    formData.append("file",this.Imagefileform4);
-        this.crudService.upload_Image(`${appModels.IMAGES}/enroll_pancard/${this.enrollid}`, formData,
-        { params:{
-              tenantIdentifier: "default"   
-            }}
-        ).pipe(untilDestroyed(this))
-          .subscribe(data => {
-            console.log(data);
-            const formData = new FormData();      
-            formData.append("file",this.enrollImgUrl);
-                this.crudService.upload_Image(`${appModels.IMAGES}/enroll_customerimage/${this.enrollid}`, formData,
+            formData.append("file",this.PanAditional);
+                this.crudService.upload_Image(`${appModels.IMAGES}/enroll_pancard1/${this.enrollid}`, formData,
                 { params:{
                       tenantIdentifier: "default"   
                     }}
                 ).pipe(untilDestroyed(this))
                   .subscribe(data => {
                     console.log(data);
+      // this.dialogRef.close(data);
+      // this.sharedService.setLoaderShownProperty(false); 
                   })
                 })
               })

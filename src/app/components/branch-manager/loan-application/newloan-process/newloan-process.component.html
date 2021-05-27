@@ -713,7 +713,7 @@
                       <div  class="col-4 col-sm-4">                    
                           <mat-form-field  appearance="outline" class="example-full-width">
                             <mat-label>Vehicle Number<span class="required-field">*</span></mat-label>   
-                            <input matInput type='text'  formControlName="vehicleNumber" [ngClass]="{ 'is-invalid': submitted && newLoanForm.controls.vehicleNumber.errors  }">
+                            <input matInput type='text'  id="code" #code formControlName="vehicleNumber"  maxlength="13" (input)="code.value=$event.target.value.toUpperCase()" [ngClass]="{ 'is-invalid': submitted && newLoanForm.controls.vehicleNumber.errors  }">
                             </mat-form-field>
                             <div *ngIf="submitted && newLoanForm.controls.vehicleNumber.errors" class="invalid-feedback">
                               <div class="required-field" *ngIf="submitted && newLoanForm.controls.vehicleNumber.errors.required">Vehicle Number is required</div>
@@ -794,8 +794,21 @@
                 </div>
                 </div>
               </div>
+              <div class="col-sm-6 text-center">
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" name="myfile"
+                        (change)="Uploadvehicletransectionhistory($event)" #UploadFileInput #input accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Vehicle Transection History'}}</label>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile" name="myfile"
+                      (change)="Uploadvehiclechallanhistory($event)" #UploadFileInput #input accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                  <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Vehicle challan History'}}</label>
+              </div>
+    
+            </div>
               <div class="row">
-        
                   <div class="col-sm-2" style="padding-left: 10%;">
                 
                     <div> 

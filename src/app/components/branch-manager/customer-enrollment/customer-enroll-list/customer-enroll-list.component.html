@@ -111,15 +111,20 @@
 
 <table mat-table [dataSource]="dataSource" class="table">
 
-  <ng-container matColumnDef="Customer ID">
-    <th mat-header-cell *matHeaderCellDef> Customer ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  <ng-container matColumnDef="index">
+    <th mat-header-cell *matHeaderCellDef> SI.No </th>
+    <td mat-cell *matCellDef="let element; let i = index;"> {{i}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="Customer Image">
+  <!-- <ng-container matColumnDef="Customer ID">
+    <th mat-header-cell *matHeaderCellDef> Customer ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container> -->
+
+  <!-- <ng-container matColumnDef="Customer Image">
     <th mat-header-cell *matHeaderCellDef> Customer Image </th>
     <td mat-cell *matCellDef="let element">  </td>
-  </ng-container>
+  </ng-container> -->
 
   <ng-container matColumnDef="Applicant Name">
     <th mat-header-cell *matHeaderCellDef> Applicant Name </th>
@@ -127,12 +132,12 @@
   </ng-container>
 
   <ng-container matColumnDef="Applicant Mobile No.1">
-    <th mat-header-cell *matHeaderCellDef> Applicant Mobile No.1 </th>
+    <th mat-header-cell *matHeaderCellDef> MobileNumber </th>
     <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Applicant Mobile No.2">
-    <th mat-header-cell *matHeaderCellDef> Applicant Mobile No.2 </th>
+    <th mat-header-cell *matHeaderCellDef> Alternate Number </th>
     <td mat-cell *matCellDef="let element"> {{element.alternateMobileNumber}} </td>
   </ng-container>
   <ng-container matColumnDef="D.O.B">
@@ -151,14 +156,14 @@
     <th mat-header-cell *matHeaderCellDef>Gender </th>
     <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
   </ng-container>
-  <ng-container matColumnDef="AadhaarImage">
+  <!-- <ng-container matColumnDef="AadhaarImage">
     <th mat-header-cell *matHeaderCellDef>AadhaarImage </th>
     <td mat-cell *matCellDef="let element">  </td>
   </ng-container>
   <ng-container matColumnDef="PAN Image">
     <th mat-header-cell *matHeaderCellDef>PAN Image </th>
     <td mat-cell *matCellDef="let element">  </td>
-  </ng-container>
+  </ng-container> -->
   <ng-container matColumnDef="Action">
     <th mat-header-cell *matHeaderCellDef> Action </th>
     <td mat-cell *matCellDef="let element">

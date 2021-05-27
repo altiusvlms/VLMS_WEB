@@ -20,6 +20,8 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
   styleUrls: ['./newloan-process.component.scss']
 })
 export class NewloanProcessComponent implements OnInit {
+  vehicletransectionhistory: any;
+  vehiclechallanhistory: any;
 
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute,public datepipe: DatePipe) {
@@ -37,7 +39,7 @@ export class NewloanProcessComponent implements OnInit {
   guarantor_Id: any;
   bankDetails_Id: any;
   createnewLoan_id: any = [];
-
+  fileInputLabel:any;
 
   applicantfileform : any;
   applicantImgURL: any;
@@ -244,7 +246,12 @@ export class NewloanProcessComponent implements OnInit {
     })
   }
 
-
+  Uploadvehicletransectionhistory(evt : any){
+    this.vehicletransectionhistory = evt.target.files[0];
+  }
+  Uploadvehiclechallanhistory(evt : any){
+    this.vehiclechallanhistory = evt.target.files[0];
+  }
   
   uploadApplicantImages(evt : any){
     if(evt.target.files[0].type == "image/png" || evt.target.files[0].type == "image/jpeg" || evt.target.files[0].type == "image/gif"){
@@ -715,6 +722,29 @@ export class NewloanProcessComponent implements OnInit {
           this.createnewLoan_id.push(data);
         }) 
        }
+       else if(this.vehicletransectionhistory !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.vehicletransectionhistory);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/vehicle_transaction_history/${this.vehicle_Id}`, formData,
+        { params:{
+          tenantIdentifier: "default"   
+        }}
+        ).pipe(untilDestroyed(this)).subscribe(data => {
+          this.createnewLoan_id.push(data);
+        }) 
+       }
+       else if(this.vehiclechallanhistory !== undefined || null){
+        const formData = new FormData();      
+        formData.append("file",this.vehiclechallanhistory);
+        await this.crudService.upload_Image(`${appModels.IMAGES}/vehicle_chalan_report/${this.vehicle_Id}`, formData,
+        { params:{
+          tenantIdentifier: "default"   
+        }}
+        ).pipe(untilDestroyed(this)).subscribe(data => {
+          this.createnewLoan_id.push(data);
+        }) 
+       }
+
 
       }
 
