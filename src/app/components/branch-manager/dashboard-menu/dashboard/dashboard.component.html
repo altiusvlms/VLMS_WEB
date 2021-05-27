@@ -70,8 +70,11 @@
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body">
-        Loan Details
-        <img src="assets/images/loan-details.jpg" class="img-fluid">
+        
+        <!-- <img src="assets/images/loan-details.jpg" class="img-fluid"> -->
+        <figure class="highcharts-figure">
+          <div id="newLoanvsClosedLoan"></div>
+        </figure>
         </div>
         </div>
       </div>
@@ -79,8 +82,10 @@
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body">
-        Collection
-        <img src="assets/images/collection.jpg" class="img-fluid">
+        <!-- <img src="assets/images/collection.jpg" class="img-fluid"> -->
+        <figure class="highcharts-figure">
+          <div id="amountCollection"></div>
+        </figure>
         </div>
         </div>
       </div>
@@ -128,8 +133,48 @@
     <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
-      Task Details Branch Manager
-      <img src="assets/images/task-details.jpg" class="img-fluid">
+      <h3>Task Details Branch Manager</h3>
+      <!-- <img src="assets/images/task-details.jpg" class="img-fluid"> -->
+      
+      <circle-progress
+    *ngFor="let dashboards of dashboardData"
+    [percent]="dashboards.taskDetailsBMOpen"
+    [radius]="70"
+    [outerStrokeWidth]="16"
+    [innerStrokeWidth]="8"
+    [outerStrokeColor]="'#ff0000'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [animationDuration]="300"
+    ></circle-progress>
+    <mat-label>Open</mat-label>
+
+    <circle-progress
+    *ngFor="let dashboards of dashboardData"
+    [percent]="dashboards.taskDetailsBMClosed"
+    [radius]="70"
+    [outerStrokeWidth]="16"
+    [innerStrokeWidth]="8"
+    [outerStrokeColor]="'#78C000'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [animationDuration]="300"
+    ></circle-progress>
+    <mat-label>Closed</mat-label>
+
+    <circle-progress
+    *ngFor="let dashboards of dashboardData"
+    [percent]="dashboards.taskDetailsBMInProgress"
+    [radius]="70"
+    [outerStrokeWidth]="16"
+    [innerStrokeWidth]="8"
+    [outerStrokeColor]="'#FFFF00'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [animationDuration]="300"
+    ></circle-progress>
+    <mat-label>Inprogress</mat-label>
+
       </div>
       </div>
     </div>
@@ -137,8 +182,49 @@
     <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
-      Task Details Head Office
-      <img src="assets/images/task-details.jpg" class="img-fluid">
+      <h3>Task Details Head Office</h3>
+      <!-- <img src="assets/images/task-details.jpg" class="img-fluid"> -->
+
+      <circle-progress
+    *ngFor="let dashboards of dashboardData"
+    [percent]="dashboards.taskDetailsHOOpen"
+    [radius]="70"
+    [outerStrokeWidth]="16"
+    [innerStrokeWidth]="8"
+    [outerStrokeColor]="'#ff0000'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [animationDuration]="300"
+    ></circle-progress>
+    <mat-label>Open</mat-label>
+
+    <circle-progress
+    *ngFor="let dashboards of dashboardData"
+    [percent]="dashboards.taskDetailsHOClosed"
+    [radius]="70"
+    [outerStrokeWidth]="16"
+    [innerStrokeWidth]="8"
+    [outerStrokeColor]="'#78C000'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [animationDuration]="300"
+    ></circle-progress>
+    <mat-label>Closed</mat-label>
+
+    <circle-progress
+    *ngFor="let dashboards of dashboardData"
+    [percent]="dashboards.taskDetailsHOInprogress"
+    [radius]="70"
+    [outerStrokeWidth]="16"
+    [innerStrokeWidth]="8"
+    [outerStrokeColor]="'#FFFF00'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [animationDuration]="300"
+    ></circle-progress>
+    <mat-label>Inprogress</mat-label>
+
+
       </div>
       </div>
     </div>
@@ -287,26 +373,4 @@
     </div>
   </div>
   
-</div>
-
-<!-- <div class = "continer">
-<h3> Piechart</h3>
-
-
-      <igx-doughnut-chart height="100%" width="100%" >
-          <igx-ring-series [dataSource] = "data"
-              valueMemberPath="MarketShare"
-              labelMemberPath="Company">
-          </igx-ring-series>
-      </igx-doughnut-chart>
-
-</div> -->
-
-<div class="container"> 
-  <div class="chart">
-      <igx-doughnut-chart height="100%" width="100%" >
-          <igx-ring-series [dataSource] = "data" valueMemberPath="Value" labelMemberPath="Label">
-          </igx-ring-series>
-      </igx-doughnut-chart>
-  </div>
 </div>

@@ -15,7 +15,8 @@ enum appModels {
     ANALYTICS_ENQUIRY = 'fineract-provider/api/v1/customers/branchAnalytic?command=enquiry',
     ANALYTICS_CUS_ONBOARD = 'fineract-provider/api/v1/customers/branchAnalytic?command=customerOnboard',
     ANALYTICS_OVERALL_DATA = 'fineract-provider/api/v1/Branch/getBranchAnalyticsData',
-    GET_DOCUMENT_DETAILS = 'fineract-provider/api/v1/fieldExecutive/getDocuments'
+    GET_DOCUMENT_DETAILS = 'fineract-provider/api/v1/fieldExecutive/getDocuments',
+    DASHBOARD_STATUS = 'fineract-provider/api/v1/Cashier/getCashierAnalyticsData'
 }
 
 
