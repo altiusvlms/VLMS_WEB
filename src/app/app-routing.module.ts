@@ -93,7 +93,6 @@ const routes: Routes = [
     path: "cashier",
     loadChildren: () =>
       import("./components/branch-manager/loan-application/loan-application.module").then(
-        
         l => l.LoanApplicationModule
       )
   },

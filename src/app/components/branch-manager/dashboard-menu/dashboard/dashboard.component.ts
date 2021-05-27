@@ -112,6 +112,8 @@ export class DashboardComponent implements OnInit {
           return value + '<b>Mo</b>';
       }
     }
+
+    
   };
 
    TotalInterest : number;
@@ -119,21 +121,19 @@ export class DashboardComponent implements OnInit {
    MonthlyDue : number;
 
 
+   public data: any;
+  dashboardData: any;
+  newLoanvsClosedLoanAmount: any;
 
+  constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { this.yrToggel = true;
+  }
 
-  constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { this.yrToggel = true; }
-
-  
-
-  
 
   ngAfterViewInit() {
-    // debugger
     this.update();
   }
 
   tbupdate(id : any) {
-    // debugger
     if (id == 0) {
       this.pemi.value = (Number(this.query.amount) / 100000 ).toString();
     }
@@ -194,30 +194,8 @@ console.log(this.fromdate);
 
 
   ngOnInit(): void {
-    // this.mobileNumFetch()
-    
-    // window.onload = function () {
-    //   let chart = new CanvasJS.Chart("chartContainer",
-    //   {
-    //     title:{
-    //       text: "Top U.S Smartphone Operating Systems By Market Share, Q3 2012"
-    //     },
-    //     data: [
-    //     {
-    //      type: "doughnut",
-    //      dataPoints: [
-    //      {  y: 53.37, indexLabel: "Android" },
-    //      {  y: 35.0, indexLabel: "Apple iOS" },
-    //      {  y: 7, indexLabel: "Blackberry" },
-    //      {  y: 2, indexLabel: "Windows Phone" },
-    //      {  y: 5, indexLabel: "Others" }
-    //      ]
-    //    }
-    //    ]
-    //  });
-  
-    //   chart.render();
-    // }
+  this.dashboardStatusbar();  
+   
   }
 
   customer(){
@@ -277,72 +255,152 @@ console.log(this.fromdate);
     // this.router.navigate(['branch-manager/newloan-process']);
   // }
   }
-  // doughnutchart(){
-  //   // chartOptions: Highcharts.Options = {
-  //   Highcharts.chart('donut', {
-  //     chart: {
-  //       type: 'pie'
-  //     },
-  //     title: {
-  //       text: 'Browser market share, January, 2018'
-  //     },
-  //     subtitle: {
-  //       text: 'Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
-  //     },
-  //     plotOptions: {
-  //       pie: {
-  //         shadow: false,
-  //         center: ['50%', '50%']
-  //       }
-  //     },
-  //     tooltip: {
-  //       valueSuffix: '%'
-  //     },
-  //     series: [{
-  //       name: 'Browsers',
-  //       // data: browserData,
-  //       size: '60%',
-  //       dataLabels: {
-  //         formatter: function () {
-  //           return this.y > 5 ? this.point.name : null;
-  //         },
-  //         color: '#ffffff',
-  //         distance: -30
-  //       }
-  //     }, {
-  //       name: 'Versions',
-  //       // data: versionsData,
-  //       size: '80%',
-  //       innerSize: '60%',
-  //       dataLabels: {
-  //         formatter: function () {
-  //           // display only if larger than 1
-  //           return this.y > 1 ? '<b>' + this.point.name + ':</b> ' +
-  //             this.y + '%' : null;
-  //         }
-  //       },
-  //       id: 'versions'
-  //     }],
-  //     responsive: {
-  //       rules: [{
-  //         condition: {
-  //           maxWidth: 400
-  //         },
-  //         chartOptions: {
-  //           series: [{
-  //           }, {
-  //             id: 'versions',
-  //             dataLabels: {
-  //               enabled: false
-  //             }
-  //           }]
-  //         }
-  //       }]
-  //     }
-  //   })
-  //   }
-  
+
+  dashboardStatusbar(){
+    this.crudService.get(`${appModels.DASHBOARD_STATUS}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      this.dashboardData = data;
+      console.log(this.dashboardData)
+      Highcharts.chart("newLoanvsClosedLoan", this.newLoanvsClosedLoan() );
+      console.log(this.newLoanvsClosedLoan)
+      Highcharts.chart("amountCollection", this.newLoanvsClosedLoans() );
+      
+    })
+  }
+
+  // Demand Vs Collection Pie chart
+  newLoanvsClosedLoan():any{
+    let newLoan = this.dashboardData[0].newloan
+    let closedLoan = this.dashboardData[0].closedloan
     
+      this.newLoanvsClosedLoanAmount = {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+      title: {
+        text: 'New Loan vs Closed Loan'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: {point.y}'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.y}'
+            // format: '<b>{point.name}</b>: {point.y:.1f}'
+          }
+        }
+      },
+      series: [{
+        name: 'Count',
+        colorByPoint: true,
+        data: [{
+          name: 'New Loan',
+          y: newLoan,
+          // sliced: true,
+          // selected: true
+          
+        }, {
+          name: 'Closed Loan',
+          y: closedLoan,
+        },
+      ]
+      }]
+    
+    }
+    return this.newLoanvsClosedLoanAmount;
+    }
+
+    loanCollectedbankVsCashAmountss:any
+    // Semi Doughtnut Chart
+    newLoanvsClosedLoans():any{
+
+      let bankCashCollection = this.dashboardData[0].bankCashCollection
+    // let closedloan = this.dashboardData[0].closedloan
+
+    // Highcharts.chart('newLoanvsClosedLoans', {
+      this.loanCollectedbankVsCashAmountss = {      
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+      },
+      title: {
+        text: 'Total Collection',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: 60
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.y}'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        pie: {
+          dataLabels: {
+            enabled: true,
+            distance: -50,
+            style: {
+              fontWeight: 'bold',
+              color: 'white'
+            }
+          },
+          startAngle: -90,
+          endAngle: 90,
+          center: ['50%', '75%'],
+          size: '110%'
+        }
+      },
+      series: [{
+        type: 'pie',
+        name: 'Amount',
+        innerSize: '50%',
+        data: [
+          // ['Chrome', 58.9],
+          // ['Firefox', 13.29],
+          // ['Internet Explorer', 13],
+          // ['Edge', 3.78],
+          // ['Safari', 3.42],
+          {
+            name: 'Bank Cash Collection',
+            y: bankCashCollection,
+            dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}</b>: {point.y}'
+            }
+          },
+          // {
+          //   name: 'Other',
+          //   y: closedloan,
+          //   dataLabels: {
+          //     enabled: false
+          //   }
+          // }
+        ]
+      }]
+    }
+    // });
+    return this.loanCollectedbankVsCashAmountss;
+  }
+   
 
 }
 
@@ -375,7 +433,6 @@ export class AdvancedSearch {
   })
 
   /** Advance Search Variables */
-  showSearchbtn : Boolean = true;
   customerLoanDetails : any = [];
   filterResponse:any = [];
   searchAccountNo: String = '';
@@ -412,7 +469,6 @@ export class AdvancedSearch {
 /** Clear the Search */
   clearSearch(){
     this.advanceSearchForms.reset();
-    this.showSearchbtn = true;
     this.getCustomerDetails();
     this.searchAccountNo = '';
     this.searchName = '';
@@ -462,7 +518,6 @@ export class AdvancedSearch {
 
   /** Search for Filtered data */
   searchdata(){
-    this.showSearchbtn = false;
     for (let selectedUser of this.customerLoanDetails) {
       if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''){
       if (
@@ -487,5 +542,6 @@ export class AdvancedSearch {
       this.customerLoanDetails = [];
     }
   }
+  
 
 }

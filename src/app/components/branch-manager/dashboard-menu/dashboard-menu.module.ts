@@ -27,6 +27,9 @@ import { Ng5SliderModule } from 'ng5-slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 // For MDB Angular Pro
 import { ChartsModule, ChartSimpleModule, WavesModule } from 'ng-uikit-pro-standard'
+import { IgxDoughnutChartModule, IgxRingSeriesModule } from "igniteui-angular-charts";
+import { NgCircleProgressModule } from 'ng-circle-progress';
+// import { IgxPieChartModule } from 'igniteui-angular-charts';
 // import {MatFormFieldModule} from '@angular/material/form-field';
 
 // import { ChartsModule } from 'ng2-charts';
@@ -48,7 +51,20 @@ import { chart } from 'chart.js'
     MatFormFieldModule,
     ChartsModule,
     ChartSimpleModule,
-    WavesModule
+    WavesModule,
+    IgxDoughnutChartModule,
+    IgxRingSeriesModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
+      
+    })
+    // IgxPieChartModule
     // MatFormFieldModule,
     // ChartsModule
     // chart

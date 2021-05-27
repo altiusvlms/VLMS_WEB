@@ -30,8 +30,9 @@ export class AnalyticsComponent implements OnInit {
   analyticsCusOnboardData : any;
   analyticsOverallData: any;
   // this.analyticsData = 
-
-  constructor(private router: Router,private crudService: CrudService) { }
+  data:any;
+  
+  constructor(private router: Router,private crudService: CrudService) {   }
 
   ngOnInit(): void {
     // this.getAnalytics();
@@ -82,19 +83,6 @@ export class AnalyticsComponent implements OnInit {
       console.log(this.analyticsCusOnboardData)
     })
   }
-
-  // getOverallData(){
-  //   this.crudService.get(`${appModels.ANALYTICS_OVERALL_DATA}`, {
-  //     params: {
-  //       tenantIdentifier: 'default'
-  //     }
-  //   }).pipe(untilDestroyed(this)).subscribe(data => {
-  //     // console.log(data);
-  //     this.analyticsOverallData = data;
-  //     console.log("analyticsOverallData")
-  //     console.log(this.analyticsOverallData)
-  //   })
-  // }
 
   getOverallData(){
     this.crudService.get(`${appModels.ANALYTICS_OVERALL_DATA}`, {
@@ -249,7 +237,7 @@ export class AnalyticsComponent implements OnInit {
       text: 'Demand vs Collection'
     },
     tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      pointFormat: '{series.name}: {point.y}'
     },
     accessibility: {
       point: {
@@ -262,12 +250,13 @@ export class AnalyticsComponent implements OnInit {
         cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          format: '<b>{point.name}</b>: {point.y}'
+          // format: '<b>{point.name}</b>: {point.y:.1f}'
         }
       }
     },
     series: [{
-      name: 'Brands',
+      name: 'Amount',
       colorByPoint: true,
       data: [{
         name: 'Cash Demand',
@@ -297,8 +286,7 @@ export class AnalyticsComponent implements OnInit {
 
   // Loan Amount Collected (Bank vs Cash)
   loanCollectedbankVsCashAmount :any
-    
-  // Demand Vs Collection Pie chart
+  
   loanCollectedbankVsCash():any{
   // let cashDemands = this.analyticsOverallData[0].cashDemand  
   // let cashCollections = this.analyticsOverallData[0].cashCollection
@@ -317,7 +305,7 @@ export class AnalyticsComponent implements OnInit {
       text: 'Loan Amount Collected (Bank vs Cash)'
     },
     tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      pointFormat: '{series.name}: {point.y}'
     },
     accessibility: {
       point: {
@@ -330,7 +318,7 @@ export class AnalyticsComponent implements OnInit {
         cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          format: '<b>{point.name}</b>: {point.y}'
         }
       }
     },
@@ -548,7 +536,7 @@ export class AnalyticsComponent implements OnInit {
       text: 'Dealer Onboard'
     },
     tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      pointFormat: '{series.name}: {point.y}'
     },
     accessibility: {
       point: {
@@ -561,7 +549,7 @@ export class AnalyticsComponent implements OnInit {
         cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          format: '<b>{point.name}</b>: {point.y}'
         }
       }
     },
@@ -635,7 +623,7 @@ export class AnalyticsComponent implements OnInit {
       text: 'Enquiry vs Conversion'
     },
     tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      pointFormat: '{series.name}: {point.y}'
     },
     accessibility: {
       point: {
@@ -648,7 +636,7 @@ export class AnalyticsComponent implements OnInit {
         cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          format: '<b>{point.name}</b>: {point.y}'
         }
       }
     },
@@ -799,7 +787,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
     text: 'Insurance Expired vs Renewal'
   },
   tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: {point.y}'
   },
   accessibility: {
     point: {
@@ -812,7 +800,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        format: '<b>{point.name}</b>: {point.y}'
       }
     }
   },
@@ -866,7 +854,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
     text: 'Insurance Hold vs Completed'
   },
   tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: {point.y}'
   },
   accessibility: {
     point: {
@@ -879,7 +867,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        format: '<b>{point.name}</b>: {point.y}'
       }
     }
   },
@@ -934,7 +922,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
     text: 'Loan Disbursal(%)'
   },
   tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: {point.y}'
   },
   accessibility: {
     point: {
@@ -947,7 +935,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        format: '<b>{point.name}</b>: {point.y}'
       }
     }
   },
@@ -1001,7 +989,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
     text: 'Disbursal Bank vs Cash'
   },
   tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: {point.y}'
   },
   accessibility: {
     point: {
@@ -1014,7 +1002,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        format: '<b>{point.name}</b>: {point.y}'
       }
     }
   },
@@ -1146,7 +1134,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
     text: 'Disbursal Repossessed Vs Relesed'
   },
   tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: {point.y}'
   },
   accessibility: {
     point: {
@@ -1159,7 +1147,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        format: '<b>{point.name}</b>: {point.y}'
       }
     }
   },
@@ -1214,7 +1202,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
     text: 'Allocated vs Expense made'
   },
   tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: {point.y}'
   },
   accessibility: {
     point: {
@@ -1227,7 +1215,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        format: '<b>{point.name}</b>: {point.y}'
       }
     }
   },
@@ -1281,7 +1269,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
     text: 'RTO Expenses vs Completed'
   },
   tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: {point.y}'
   },
   accessibility: {
     point: {
@@ -1294,7 +1282,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        format: '<b>{point.name}</b>: {point.y}'
       }
     }
   },
@@ -1349,7 +1337,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
     text: 'Doc Pending vs Completed'
   },
   tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: {point.y}'
   },
   accessibility: {
     point: {
@@ -1362,7 +1350,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        format: '<b>{point.name}</b>: {point.y}'
       }
     }
   },
@@ -1416,7 +1404,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
     text: 'AGT Assigned vs Not Assigned (live)'
   },
   tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    pointFormat: '{series.name}: {point.y}'
   },
   accessibility: {
     point: {
@@ -1429,7 +1417,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        format: '<b>{point.name}</b>: {point.y}'
       }
     }
   },

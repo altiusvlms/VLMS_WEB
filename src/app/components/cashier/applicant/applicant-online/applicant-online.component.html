@@ -27,10 +27,11 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr  *ngFor="let applicant of applicantLoanDetails">
+          <tbody *ngFor="let applicant of applicantLoanDetails;let i=index" >
+            <tr>
               <td>{{applicant.id}}</td>
-              <td></td>
+              <td ><img [src]="allCustomerImage[i]?.image" style="width: 50%;object-fit: contain;
+                object-position: center;"></td>
               <td>{{applicant.customerName}}</td>
               <td>{{applicant.customerDetails.mobileNo}}</td>
               <td>{{applicant.loanDetailsData.loanAmount}}</td>
@@ -45,7 +46,7 @@
               <td>{{applicant.customerDetails.applicantType}}</td>
               <td></td>
               <td>{{applicant.loanDetailsData.payout}}</td>
-              <td><span>View More</span><br><span (click)="pickApplicant(applicant.id)">Pick</span></td>
+              <td><button class="btn_blue" (click)="viewApplicant(applicant.id)">View More</button><br><button class="btn_blue" (click)="pickApplicant(applicant.id)">Pick</button></td>
             </tr>
           </tbody>
       </table>

@@ -172,6 +172,17 @@
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field></div>
 
+        <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>AGT Number</mat-label>
+          <input matInput formControlName="agtnumber">
+      </mat-form-field>
+      <!-- <div *ngIf="manageEmployeeForm.controls['agtnumber'].invalid && (manageEmployeeForm.controls['agtnumber'].dirty || manageEmployeeForm.controls['agtnumber'].touched)" class="alert alert-danger">
+          <div *ngIf="manageEmployeeForm.controls['agtnumber'].errors.required">
+              Please enter AGT Number!
+          </div>
+      </div> -->
+    </div>
+
           
         </div>
       </div>  
@@ -182,7 +193,7 @@
       <h2>Add Communication Address</h2>
 
       <div class="container">
-        <div class="row" formGroupName="communicationAdd">
+        <div class="row" formGroupName="employee_communicationAddress">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Address Line 1</mat-label>
             <input matInput formControlName="addressLine1">
@@ -197,7 +208,7 @@
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Enter Pincode</mat-label>
-            <input matInput formControlName="postalCode">
+            <input matInput formControlName="postalCode" minlength=6 maxlength=6>
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Area</mat-label>
@@ -229,7 +240,7 @@
       <h2>Add permanent address</h2>
 
       <div class="container">
-        <div class="row" formGroupName="permanentAdd">
+        <div class="row" formGroupName="employee_permanentAddress">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Address Line 1</mat-label>
             <input matInput formControlName="addressLine1">
@@ -244,7 +255,7 @@
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Enter Pincode</mat-label>
-            <input matInput formControlName="postalCode">
+            <input matInput formControlName="postalCode" minlength=6 maxlength=6>
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Area</mat-label>
@@ -291,8 +302,14 @@
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>IFSC</mat-label>
-            <input matInput formControlName="IFSC">
-        </mat-form-field></div>
+            <input #IFSC matInput formControlName="IFSC" (input)="IFSC.value = IFSC.value.toUpperCase()">
+        </mat-form-field>
+        <!-- <div *ngIf="manageEmployeeForm.controls['IFSC'].invalid && (manageEmployeeForm.controls['IFSC'].dirty || manageEmployeeForm.controls['IFSC'].touched)" class="alert alert-danger">
+          <div *ngIf="manageEmployeeForm.controls['IFSC'].errors.required">
+              Please enter IFSC!
+          </div>
+      </div> -->
+      </div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Bank</mat-label>
             <mat-select formControlName="bankName">
@@ -325,7 +342,7 @@
     <mat-tab label="Insurance Details"><!-- Insurance Details -->
 
       <div class="container">
-        <div class="row" formGroupName="insuranceDetails">
+        <div class="row" formGroupName="general_insurance">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Policy No</mat-label>
             <input matInput formControlName="policyNumber">
@@ -347,7 +364,7 @@
       <!-- <form [formGroup] = "manageEmployeeForm"> -->
 
       <div class="container">
-        <div class="row" formGroupName="accidentalInsuranceDetails">
+        <div class="row" formGroupName="accidental_insurance">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Policy No</mat-label>
             <input matInput formControlName="policyNumber">
@@ -360,10 +377,10 @@
             <mat-label>Policy Coverage</mat-label>
             <input matInput formControlName="policyCoverage">
         </mat-form-field></div>
-          <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
+          <!-- <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>AGT Number</mat-label>
-            <input matInput>
-        </mat-form-field></div>
+            <input matInputformControlName="agtnumber">
+        </mat-form-field></div> -->
           <div class="col-4 col-sm-4"></div>
           <div class="col-4 col-sm-4"></div>
         </div>
@@ -403,7 +420,7 @@
      
 
       <div class="container">
-        <div class="row"  formGroupName="schoolQualification">
+        <div class="row"  formGroupName="school_qualification">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>School/Qualification</mat-label>
             <input matInput formControlName="university">
@@ -428,7 +445,7 @@
       </div>    
 
       <div class="container">
-        <div class="row"  formGroupName="collegeQualification">
+        <div class="row"  formGroupName="college_qualification">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Qualification</mat-label>
             <input matInput formControlName="qualification">
@@ -446,7 +463,7 @@
       </div>    
 
       <div class="container">
-        <div class="row"  formGroupName="graduateQualification">
+        <div class="row"  formGroupName="graduate_qualification">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>GraduateQualification</mat-label>
             <input matInput formControlName="university">
@@ -468,7 +485,7 @@
       </div>    
 
       <div class="container">
-        <div class="row" formGroupName="postgraduateQualification">
+        <div class="row" formGroupName="postgraduate_qualification">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>PostgraduateQualification</mat-label>
             <input matInput formControlName="university">

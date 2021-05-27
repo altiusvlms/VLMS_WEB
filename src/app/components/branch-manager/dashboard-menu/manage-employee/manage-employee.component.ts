@@ -99,9 +99,11 @@ export class ManageEmployeeComponent implements OnInit {
     bloodGroup: new FormControl('', Validators.required),
     fatherName: new FormControl('', Validators.required),
     vehicleNumber: new FormControl('', Validators.required),
+    agtnumber: new FormControl('', Validators.required),
     doj: new FormControl('', Validators.required),
     dateFormat:new FormControl('dd MMMM yyyy', Validators.required),
     vehicleType:new FormControl('', Validators.required),
+    
 
     // Add bank details
     // bankDetails :  new FormGroup({
@@ -115,7 +117,7 @@ export class ManageEmployeeComponent implements OnInit {
     locale:new FormControl('en', Validators.required),
     // }),
 
-    communicationAdd :  new FormGroup({
+    employee_communicationAddress :  new FormGroup({
       addressLine1:new FormControl('',),
       addressLine2:new FormControl('',),
       landmark:new FormControl('',),
@@ -125,7 +127,7 @@ export class ManageEmployeeComponent implements OnInit {
       state:new FormControl('',)
     }),
 
-    permanentAdd  : new FormGroup({
+    employee_permanentAddress  : new FormGroup({
       addressLine1:new FormControl('',),
       addressLine2:new FormControl('',),
       landmark:new FormControl('',),
@@ -135,40 +137,40 @@ export class ManageEmployeeComponent implements OnInit {
       state:new FormControl('',)
     }),
 
-    insuranceDetails :  new FormGroup({
+    general_insurance :  new FormGroup({
       policyNumber:new FormControl('',),
       companyCoverage:new FormControl('',),
       policyCoverage:new FormControl('',),
     }),
 
-    accidentalInsuranceDetails :  new FormGroup({
+    accidental_insurance :  new FormGroup({
       policyNumber:new FormControl('',),
       companyCoverage:new FormControl('',),
       policyCoverage:new FormControl('',),
     }),
 
-    schoolQualification : new FormGroup({
+    school_qualification : new FormGroup({
       university:new FormControl('',),
       qualification: new FormControl('',),
       percentage : new FormControl('',),
       passingyear : new FormControl('',),
     }),
     
-    collegeQualification : new FormGroup({
+    college_qualification : new FormGroup({
       university:new FormControl('',),
       qualification: new FormControl('',),
       percentage : new FormControl('',),
       passingyear: new FormControl('',),
     }),
   
-    graduateQualification :  new FormGroup({
+    graduate_qualification :  new FormGroup({
       university:new FormControl('',),
       qualification: new FormControl('',),
       percentage : new FormControl('',),
       passingyear : new FormControl('',),
     }),
 
-    postgraduateQualification :  new FormGroup({
+    postgraduate_qualification :  new FormGroup({
       university:new FormControl('',),
       qualification: new FormControl('',),
       percentage : new FormControl('',),
@@ -222,7 +224,12 @@ export class ManageEmployeeComponent implements OnInit {
 
 /** Save Enquiry */
 manageEmployee(){
+if(this.manageEmployeeForm.invalid) {
+  alert("Please Enter Required Fields")
+  return;
+}
   this.submitted = true;
+  console.log(this.manageEmployeeForm.value)
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
   this.crudService.post(`${appModels.CREATEEMPLOYEE}`, this.manageEmployeeForm.value ,
@@ -236,6 +243,7 @@ manageEmployee(){
     this.toast.success("Employee Created successfully")
     this.EmployeeId = data.resourceId;
     console.log(this.EmployeeId);
+  
 
       // this.resourceID = this.employeeList[0].id;
 
@@ -289,7 +297,6 @@ getSingleEmployeeList(){
     }
   }).pipe(untilDestroyed(this)).subscribe(response => {
     console.log(response)
-
     for (var singleData of response) {
       if(singleData.id == this.id){
         this.employeeArray.push(singleData)
@@ -314,6 +321,7 @@ this.manageEmployeeForm.patchValue({
     spousename: this.employeeArray[0].spousename,
     bloodGroup: this.employeeArray[0].bloodGroup,
     fatherName: this.employeeArray[0].fatherName,
+    agtnumber: this.employeeArray[0].agtnumber,
     vehicleNumber: this.employeeArray[0].vehicleNumber,
     doj: this.datepipe.transform(this.employeeArray[0].dob, 'yyyy-MM-dd'),
     dateFormat: "dd MMMM yyyy",
@@ -325,11 +333,10 @@ this.manageEmployeeForm.patchValue({
     accountHolderName: this.employeeArray[0].bankDetails.accountHolderName,
     IFSC: this.employeeArray[0].bankDetails.IFSC,
     bankName: this.employeeArray[0].bankDetails.bankName,
-    branchName: this.employeeArray[0].bankDetails.branchName
+    branchName: this.employeeArray[0].bankDetails.branchName,
     
-})
-this.manageEmployeeForm.patchValue({
-  communicationAdd:{
+
+  employee_communicationAddress:{
     addressLine1:this.employeeArray[0].communicationAdd.addressLine1,
     addressLine2: this.employeeArray[0].communicationAdd.addressLine2,
     area : this.employeeArray[0].communicationAdd.area,
@@ -337,69 +344,61 @@ this.manageEmployeeForm.patchValue({
     landmark : this.employeeArray[0].communicationAdd.landmark,
     postalCode : this.employeeArray[0].communicationAdd.postalCode,
     state : this.employeeArray[0].communicationAdd.state
-}
-})
-this.manageEmployeeForm.patchValue({
-  permanentAdd:{
+},
+
+  employee_permanentAddress:{
     addressLine1:this.employeeArray[0].permanentAdd.addressLine1,
     addressLine2: this.employeeArray[0].permanentAdd.addressLine2,
     area : this.employeeArray[0].permanentAdd.area,
     city : this.employeeArray[0].permanentAdd.city,
     landmark : this.employeeArray[0].permanentAdd.landmark,
     postalCode : this.employeeArray[0].permanentAdd.postalCode,
-    state : this.employeeArray[0].permanentAdd.state
-}
-})
-this.manageEmployeeForm.patchValue({
-  schoolQualification:{
+    state : this.employeeArray[0].permanentAdd.state,
+},
+
+  school_qualification:{
     university:this.employeeArray[0].schoolQualification.university,
     qualification: this.employeeArray[0].schoolQualification.qualification,
     percentage : this.employeeArray[0].schoolQualification.percentage,
     passingyear : this.employeeArray[0].schoolQualification.passingyear,
-  }
-})
+  },
 
-this.manageEmployeeForm.patchValue({
-  collegeQualification:{
+  college_qualification:{
   university:this.employeeArray[0].collegeQualification.university,
   qualification: this.employeeArray[0].collegeQualification.qualification,
   percentage : this.employeeArray[0].collegeQualification.percentage,
   passingyear : this.employeeArray[0].collegeQualification.passingyear,
-  }
-})
+  },
 
-this.manageEmployeeForm.patchValue({
-  graduateQualification:{
+  graduate_qualification:{
   university:this.employeeArray[0].graduateQualification.university,
   qualification: this.employeeArray[0].graduateQualification.qualification,
   percentage : this.employeeArray[0].graduateQualification.percentage,
   passingyear : this.employeeArray[0].graduateQualification.passingyear,
-  }
-})
+  },
 
-this.manageEmployeeForm.patchValue({
-  postgraduateQualification:{
+  postgraduate_qualification:{
   university:this.employeeArray[0].postgraduateQualification.university,
   qualification: this.employeeArray[0].postgraduateQualification.qualification,
   percentage : this.employeeArray[0].postgraduateQualification.percentage,
   passingyear : this.employeeArray[0].postgraduateQualification.passingyear,
-  }
-})
-
-this.manageEmployeeForm.patchValue({
-  insuranceDetails:{
+  },
+  
+  // general_insurance:  [{
+  general_insurance:{
   policyNumber:this.employeeArray[0].insuranceDetails.policyNumber,
   companyCoverage: this.employeeArray[0].insuranceDetails.companyCoverage,
   policyCoverage : this.employeeArray[0].insuranceDetails.policyCoverage,
-  }
+  },
+  accidental_insurance:{
+    policyNumber:this.employeeArray[0].accidentalInsuranceDetails.policyNumber,
+    companyCoverage: this.employeeArray[0].accidentalInsuranceDetails.companyCoverage,
+    policyCoverage : this.employeeArray[0].accidentalInsuranceDetails.policyCoverage,
+    }
+  // }]
+  
 })
-this.manageEmployeeForm.patchValue({
-  accidentalInsuranceDetails:{
-  policyNumber:this.employeeArray[0].accidentalInsuranceDetails.policyNumber,
-  companyCoverage: this.employeeArray[0].accidentalInsuranceDetails.companyCoverage,
-  policyCoverage : this.employeeArray[0].accidentalInsuranceDetails.policyCoverage,
-  }
-})
+
 })
 }
 
@@ -436,12 +435,6 @@ uploadImages2(evt2: any){
   }
 }
 
-// uploadImages2(evt2 : any){
-//   {
-//   this.Imagefileform2 = evt2.target.files[0];
-//   console.log(this.Imagefileform2);
-//   }
-// }
 
 CalculateAge(){
   
@@ -453,52 +446,39 @@ CalculateAge(){
     console.log(this.age);
     this.manageEmployeeForm.value.age = this.age;
   }
-
 }
 
 updateEmployeeDetails(){
   console.log("this.manageEmployeeForm.value")
-  console.log(this.manageEmployeeForm.value)
+  // console.log(this.manageEmployeeForm.value)
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
   this.crudService.update(`${appModels.EMPLOYEE}/updateEmployee`,this.manageEmployeeForm.value,
   this.id,
   ).pipe(untilDestroyed(this)).subscribe(response => {
   this.toast.success("Updated Successfully");
-  
-  
-  // this.showUpdatebtn = false;
-  // this.manageEmployeeForm.disable();
 })
 }
 
 updateEmployeeEducationDetails(){
-  console.log("this.manageEmployeeForm.value")
+  // console.log("this.manageEmployeeForm.value")
   console.log(this.manageEmployeeForm.value)
-  // this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
-  // this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
-  this.crudService.update(`${appModels.EMPLOYEE}/updateQualification`,this.manageEmployeeForm.value.schoolQualification,
+  this.crudService.update(`${appModels.EMPLOYEE}/updateQualification`,this.manageEmployeeForm.value.school_qualification,
   this.id,
   ).pipe(untilDestroyed(this)).subscribe(response => {
     this.employeeEducationDetails = response;
-  // this.toast.success("Qualifications Updated Successfully");
-  // this.showUpdatebtn = false;
-  // this.manageEmployeeForm.disable();
 })
 }
 
 updateEmployeeInsuranceDetails(){
   console.log("this.manageEmployeeForm.value")
-  console.log(this.manageEmployeeForm.value)
+  // console.log(this.manageEmployeeForm.value)
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
-  this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeForm.value.insuranceDetails,
+  this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeForm.value.general_insurance,
   this.id,
   ).pipe(untilDestroyed(this)).subscribe(response => {
     this.employeeInsuranceDetails = response;
-  // this.toast.success("Insurance Updated Successfully");
-  // this.showUpdatebtn = false;
-  // this.manageEmployeeForm.disable();
 })
 }
 
