@@ -25,10 +25,6 @@ export class LoanDisbursalComponent implements OnInit {
   dataSource = new MatTableDataSource();
   loanDisburalData: any;
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
   testImage:any;
   CustomerDetail_Data:any;

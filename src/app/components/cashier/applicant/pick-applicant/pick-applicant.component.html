@@ -6,7 +6,8 @@
         <div class="card-body">
         <div class="row" *ngFor="let applicant of applicantDetails">
             <div class="col-sm-2">
-                <p>Applicant Image</p>
+              <img [src]="applicantImage" style="width: 50%;object-fit: contain;
+              object-position: center;">
             </div>
             <div class="col-sm-2">
                 <p>{{applicant.customerName}}</p>

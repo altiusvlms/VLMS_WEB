@@ -296,7 +296,6 @@ getSingleEmployeeList(){
     }
   }).pipe(untilDestroyed(this)).subscribe(response => {
     console.log(response)
-
     for (var singleData of response) {
       if(singleData.id == this.id){
         this.employeeArray.push(singleData)

@@ -433,7 +433,6 @@ export class AdvancedSearch {
   })
 
   /** Advance Search Variables */
-  showSearchbtn : Boolean = true;
   customerLoanDetails : any = [];
   filterResponse:any = [];
   searchAccountNo: String = '';
@@ -470,7 +469,6 @@ export class AdvancedSearch {
 /** Clear the Search */
   clearSearch(){
     this.advanceSearchForms.reset();
-    this.showSearchbtn = true;
     this.getCustomerDetails();
     this.searchAccountNo = '';
     this.searchName = '';
@@ -520,7 +518,6 @@ export class AdvancedSearch {
 
   /** Search for Filtered data */
   searchdata(){
-    this.showSearchbtn = false;
     for (let selectedUser of this.customerLoanDetails) {
       if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''){
       if (

@@ -79,6 +79,10 @@ export class CreateTask {
   editDataTask : any;
   editIcon : Boolean = false;
   assignToName: any;
+  customername: any;
+  customerMobileNo: any;
+  customerList: any = [];
+  showDropdown: Boolean = false;
 
   constructor(public dialogRef: MatDialogRef<CreateTask>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
     private crudService: CrudService,
@@ -179,14 +183,14 @@ export class CreateTask {
       this.dialogRef.close();
     }
 
-/** Filter on CustomerName based Mobile Number */    
-    customername: any;
-    customerList: any = [];
+/** Filter on CustomerName and Mobile Number */    
     applyFilter(value : any , string_val: any){
+      this.showDropdown = true;
       if(string_val == 'regNo'){
        const filterValue = (event.target as HTMLInputElement).value;
        this.customername = filterValue.trim().toLowerCase();
      }
+     if(this.customername != ''){
      this.crudService.get(`${appModels.GETEMPLOYEE}`, {
       params: {
         tenantIdentifier: 'default'
@@ -199,13 +203,23 @@ export class CreateTask {
       })
       })
     }
+    else{
+      this.customerList = [];
+      this.showDropdown = false;
+      this.createTaskForms.patchValue({
+        customerMobileNo:'',
+      })
+    }
+    }
 
+/** Auto Fetch for Customer based on MobileNo and MobileNo based on CustomerName */    
     customer(val: any){
+      this.showDropdown = false;
       this.customerList.map((res: any) => {
         if(res.name.toLowerCase().search(val.value.toLowerCase()) != -1 ){
-        this.createTaskForms
-        .patchValue({
-          customerMobileNo:res.mobileNumber
+        this.createTaskForms.patchValue({
+          customerMobileNo:res.mobileNumber,
+          customerRegNo:val.value
         })
         }
       })

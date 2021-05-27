@@ -17,11 +17,11 @@ export class AuthenticationService {
    post(relativeUrlPath: string, body: any, params?: object): Observable<any> {
     console.log(relativeUrlPath,body,params)
     return this.http.post(relativeUrlPath, body, params);
-}
+    }
 
-get windowRef() {
-  return window
-}
+    get windowRef() {
+      return window
+    }
   
 }
 

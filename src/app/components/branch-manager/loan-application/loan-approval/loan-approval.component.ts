@@ -27,12 +27,6 @@ export class LoanApprovalComponent implements OnInit {
   dataSource = new MatTableDataSource();
   loanApprovalData: any;
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-
 
   constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService) { }
 
