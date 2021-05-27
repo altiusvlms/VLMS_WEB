@@ -172,6 +172,17 @@
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field></div>
 
+        <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>AGT Number</mat-label>
+          <input matInput formControlName="agtnumber">
+      </mat-form-field>
+      <!-- <div *ngIf="manageEmployeeForm.controls['agtnumber'].invalid && (manageEmployeeForm.controls['agtnumber'].dirty || manageEmployeeForm.controls['agtnumber'].touched)" class="alert alert-danger">
+          <div *ngIf="manageEmployeeForm.controls['agtnumber'].errors.required">
+              Please enter AGT Number!
+          </div>
+      </div> -->
+    </div>
+
           
         </div>
       </div>  
@@ -291,14 +302,13 @@
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>IFSC</mat-label>
-            <input matInput formControlName="IFSC">
+            <input #IFSC matInput formControlName="IFSC" (input)="IFSC.value = IFSC.value.toUpperCase()">
         </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['IFSC'].invalid && (manageEmployeeForm.controls['IFSC'].dirty || manageEmployeeForm.controls['IFSC'].touched)" class="alert alert-danger">
+        <!-- <div *ngIf="manageEmployeeForm.controls['IFSC'].invalid && (manageEmployeeForm.controls['IFSC'].dirty || manageEmployeeForm.controls['IFSC'].touched)" class="alert alert-danger">
           <div *ngIf="manageEmployeeForm.controls['IFSC'].errors.required">
               Please enter IFSC!
           </div>
-      </div>
-      
+      </div> -->
       </div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Bank</mat-label>
@@ -367,10 +377,10 @@
             <mat-label>Policy Coverage</mat-label>
             <input matInput formControlName="policyCoverage">
         </mat-form-field></div>
-          <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
+          <!-- <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>AGT Number</mat-label>
-            <input matInput>
-        </mat-form-field></div>
+            <input matInputformControlName="agtnumber">
+        </mat-form-field></div> -->
           <div class="col-4 col-sm-4"></div>
           <div class="col-4 col-sm-4"></div>
         </div>
