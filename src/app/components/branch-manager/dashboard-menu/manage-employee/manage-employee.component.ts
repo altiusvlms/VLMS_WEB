@@ -224,7 +224,7 @@ export class ManageEmployeeComponent implements OnInit {
 /** Save Enquiry */
 manageEmployee(){
 if(this.manageEmployeeForm.invalid) {
-  alert("Please enter required fields")
+  alert("Please Enter Required Fields")
   return;
 }
   this.submitted = true;
