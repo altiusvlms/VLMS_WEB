@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 import { FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 
 
-
+import {DomSanitizer} from "@angular/platform-browser";
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 import { CLASS_NAME } from '@angular/flex-layout';
 import { single } from 'rxjs/operators';
@@ -51,7 +51,7 @@ export class ManageEmployeeComponent implements OnInit {
   // manageEmployeeForm:any  
   // forvalue : CLASS_NAME;
   // userForm: FormGroup;
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder) { }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer) { }
 
   submitted: Boolean = false;
 
@@ -227,6 +227,8 @@ if(this.manageEmployeeForm.invalid) {
   alert("Please Enter Required Fields")
   return;
 }
+
+
   this.submitted = true;
   console.log(this.manageEmployeeForm.value)
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
@@ -237,52 +239,38 @@ if(this.manageEmployeeForm.invalid) {
     }}
   ).pipe(untilDestroyed(this)).subscribe( data => {
     this.responseId = data.resourceId;
-    console.log("data")
-    console.log(this.responseId)
     this.toast.success("Employee Created successfully")
     this.EmployeeId = data.resourceId;
-    console.log(this.EmployeeId);
   
+const formData = new FormData();      
+formData.append("file",this.Imagefileform);
+    this.crudService.upload_Image(`${appModels.COMMON}/images/employee_adhar/${this.EmployeeId}`, formData,
+    { params:{
+          documentNumber:"12345" ,
+          tenantIdentifier: "default"   
+        }}
+    ).pipe(untilDestroyed(this))
+      .subscribe( async data => {
+        console.log(data)
 
-      // this.resourceID = this.employeeList[0].id;
-
-    
-    // this.toast.success("posted successfully");
-
-    const formData = new FormData();      
-    formData.append("file",this.Imagefileform);
-        this.crudService.upload_Image(`${appModels.COMMON}/images/employee_pancard/1`, formData,
-        { params:{
-              tenantIdentifier: "default"   
-            }}
-        ).pipe(untilDestroyed(this))
-          .subscribe( async data => {
-            console.log(data)
-
-            const formData = new FormData();      
-    formData.append("file",this.Imagefileform2);
-        this.crudService.upload_Image(`${appModels.COMMON}/images/employee_adhar/1`, formData,
-        { params:{
-              tenantIdentifier: "default"   
-            }}
-        ).pipe(untilDestroyed(this))
-          .subscribe( async data => {
-            console.log(data)
-          })
-          })
+        const formData = new FormData();      
+formData.append("file",this.Imagefileform2);
+    this.crudService.upload_Image(`${appModels.COMMON}/images/employee_pancard/${this.EmployeeId}`, formData,
+    { params:{
+          documentNumber:"12345" ,
+          tenantIdentifier: "default"   
+        }}
+    ).pipe(untilDestroyed(this))
+      .subscribe( async data => {
+        console.log(data)
+      })
+      })
+  
         })
-      // }
-      // else {
-      //   alert("Please Enter Required Fields")
-      // }
+  
   
 }
-// uploadImages1(evt1 : any){
-//   {
-//   this.Imagefileform = evt1.target.files[0];
-//   console.log(this.Imagefileform);
-//   }
-// }
+
 
 employeeArray: any = [];
 data : any;
@@ -294,11 +282,17 @@ getSingleEmployeeList(){
     params: {
       tenantIdentifier: 'default'
     }
-  }).pipe(untilDestroyed(this)).subscribe(response => {
+  }).pipe(untilDestroyed(this)).subscribe(async response => {
     console.log(response)
     for (var singleData of response) {
       if(singleData.id == this.id){
         this.employeeArray.push(singleData)
+        await this.crudService.get_Image(`${appModels.IMAGES}/employee_adhar/${singleData.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+          this.engineImgURL = this.sanitizer.bypassSecurityTrustUrl(data);
+        })
+        await this.crudService.get_Image(`${appModels.IMAGES}/employee_pancard/${singleData.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+          this.engineImgURLS = this.sanitizer.bypassSecurityTrustUrl(data);
+        })
       }
     }
  
