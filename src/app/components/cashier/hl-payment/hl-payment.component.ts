@@ -11,5 +11,20 @@ export class HlPaymentComponent implements OnInit {
 
   ngOnInit(): void {
   }
+//   groups=[
+//     {
+//       "name": "pencils",
+//       "items": "red pencil"
+//     },
+//     {
+//       "name": "rubbers",
+//       "items": "big rubber"
+//     },
+//  ];
+
+//   addItem(index : any) {
+//     var currentElement = this.groups[index];  
+//     this.groups.splice(index, 0, currentElement);
+//   }
 
 }

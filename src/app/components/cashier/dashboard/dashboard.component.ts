@@ -29,6 +29,9 @@ export class DashboardComponent implements OnInit {
   customersOnline(){
     this.router.navigate(['cashier/applicant_online']);
   }
+  yetToReceipt(){
+    this.router.navigate(['cashier/yet-to-receipt']);
+  }
 
   /** Advance Search Open the Dialog Model */
   advancedSearch() {

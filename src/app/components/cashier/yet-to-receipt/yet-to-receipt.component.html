@@ -1,5 +1,4 @@
 
-
   <div class="container">
     
     <div class="header_title">
@@ -51,7 +50,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <th><button>Create Receipt</button></th>
+        <th><button [routerLink]="['/cashier/create-receipt']">Create Receipt</button></th>
       </tr>
     </tbody>
 </table>
@@ -59,17 +58,5 @@
 
 </div></div>
 
-<h2>Basic Table</h2>
-    <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>            
-    <table class="table border">
-  
-      <tbody>
-        <tr *ngFor="let row of groups">
-         <td> {{row.name}} </td>
-         <td> {{row.items}} </td>
-         <td> <button (click)="addItem(i)">Add</button> </td>
-        </tr>
-      </tbody>
-    </table>
 
   </div> 

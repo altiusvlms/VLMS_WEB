@@ -1,4 +1,46 @@
-<div class="container">
+<div *ngIf="showPopup">
+  <!-- <div class="col-sm-2">
+      <div>
+          <button type="button"  data-toggle="modal" data-target="#searchtab" class="btn_blue">
+              Create
+          </button>
+      </div>
+    </div> -->
+
+  <!-- Model for release -->
+  <div class="modal fade" id="searchtab" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <h5 class="modal-title" id="createEnquiryModalLabel">Create Enquiry</h5> -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+    
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <mat-label>Favorite food</mat-label>
+              <input matInput placeholder="Ex. Pizza" value="Sushi">
+            </mat-form-field>
+          
+            
+          </form>
+
+    
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+          <button type="button" class="btn btn-primary"  data-dismiss="modal" data-toggle="modal"  data-target="#searchtab">Create receipt</button>
+ 
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="container" *ngIf="!showPopup">
   <div class="header_title">
     <h2>Receipt</h2>
     <div class="header_right">
@@ -384,4 +426,6 @@
       </div>
     </div>
 
-    <div class="container">
+</div>
+
+    <!-- <div class="container"> -->

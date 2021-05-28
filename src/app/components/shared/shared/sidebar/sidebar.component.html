@@ -77,7 +77,7 @@
             <a [routerLinkActive]="['active']"  aria-expanded="false">Report</a>
            </li>
            <li >
-            <a [routerLinkActive]="['active']"  aria-expanded="false" >Create Receipt</a>
+            <a [routerLinkActive]="['active']" [routerLink]="['/cashier/create-receipt']" aria-expanded="false" data-toggle="modal" data-target="#searchtab">Create Receipt</a>
            </li>
            <li >
             <a [routerLinkActive]="['active']"  [routerLink]="['/cashier/enquiry-list']"  aria-expanded="false" >Create Enquiry</a>
@@ -92,7 +92,7 @@
             <a [routerLinkActive]="['active']"  [routerLink]="['/cashier/my-task']" aria-expanded="false" >My Task</a>
            </li>
            <li >
-            <a [routerLinkActive]="['active']"  aria-expanded="false" >Create HL Payment</a>
+            <a [routerLinkActive]="['active']"  [routerLink]="['/cashier/hl-payment']" aria-expanded="false" >Create HL Payment</a>
            </li>
            <li >
             <a [routerLinkActive]="['active']"  aria-expanded="false" >Create Voucher</a>
