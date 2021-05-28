@@ -237,9 +237,9 @@ manageEmployee(){
       tenantIdentifier: "default"   
     }}
   ).pipe(untilDestroyed(this)).subscribe( data => {
-    this.responseId = data.resourceId;
+    this.responseId = data;
     console.log("data")
-    console.log(data.resourceId.data)
+    console.log(data.resourceId)
     console.log(this.responseId)
     this.toast.success("Employee Created successfully")
     this.EmployeeId = data.resourceId;

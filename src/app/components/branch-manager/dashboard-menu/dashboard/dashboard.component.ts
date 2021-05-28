@@ -63,11 +63,11 @@ export class DashboardComponent implements OnInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
-          return value + '<b>T</b>';
+          return value + '<b>L</b>';
         case LabelType.High:
-          return value + '<b>T</b>';
+          return value + '<b>L</b>';
         default:
-          return value + '<b>T</b>';
+          return value + '<b>L</b>';
       }
     }
   };
@@ -124,6 +124,7 @@ export class DashboardComponent implements OnInit {
    public data: any;
   dashboardData: any;
   newLoanvsClosedLoanAmount: any;
+  enquiryDashboardCount:any;
 
   constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { this.yrToggel = true;
   }
@@ -195,7 +196,7 @@ console.log(this.fromdate);
 
   ngOnInit(): void {
   this.dashboardStatusbar();  
-   
+  this.enquiryStatusData(); 
   }
 
   customer(){
@@ -268,6 +269,19 @@ console.log(this.fromdate);
       console.log(this.newLoanvsClosedLoan)
       Highcharts.chart("amountCollection", this.newLoanvsClosedLoans() );
       
+    })
+  }
+
+  enquiryStatusData(){
+    this.crudService.get(`${appModels.ANALYTICS_OVERALL_DATA}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      // console.log(data);
+      this.enquiryDashboardCount = data;
+      console.log("enquiryDashboardCount")
+      console.log(this.enquiryDashboardCount)      
     })
   }
 
