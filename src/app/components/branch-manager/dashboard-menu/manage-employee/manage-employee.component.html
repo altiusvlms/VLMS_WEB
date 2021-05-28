@@ -400,7 +400,8 @@
               </select>
           <span class="required-field">*</span>
           <input #file type="file" accept='image/*' formControlName="Pan_photo" (change)="uploadImages1($event)"   />
-         <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" >
+         <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+         object-position: center;">
           </label></div>
           
             <div class="col-4 col-sm-4"><label>ID Proof:
@@ -410,7 +411,8 @@
               </select>
           <span class="required-field">*</span>
           <input #file type="file" accept='image/*' formControlName="Aadhar_photo" (change)="uploadImages2($event)"   />
-          <img [src] ="engineImgURLS ? engineImgURLS : 'assets/images/empty_image.png'" >
+          <img [src] ="engineImgURLS ? engineImgURLS : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+          object-position: center;">
         </label></div>
           </div>
         </div>    
