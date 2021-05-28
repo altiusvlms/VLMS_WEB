@@ -26,7 +26,9 @@ export class CashLimitComponent implements OnInit {
   'Approval','Action'];
   dataSource = new MatTableDataSource();
   cashLimitData: any;
-
+  FieldExicutives:any = [];
+  resFieldExecutiveId:any;
+  resFieldexeid:any;
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -36,8 +38,9 @@ export class CashLimitComponent implements OnInit {
   constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService) { }
 
   AddExecutiveForms = new FormGroup({
-    Field_Executive: new FormControl('', Validators.required),
-    Cost_Limit: new FormControl('', Validators.required),
+    feName: new FormControl('', Validators.required),
+    cashLimit: new FormControl('', Validators.required),
+    locale: new FormControl('en',),
   })
   EditExecutiveForms = new FormGroup({
     Req_Amount: new FormControl('', Validators.required),
@@ -59,6 +62,14 @@ export class CashLimitComponent implements OnInit {
   }
 
   saverequest(){
+    this.crudService.post(`${appModels.FIELDEXECUTIVE}/feCashInHand`, this.AddExecutiveForms.value,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+    ).pipe(untilDestroyed(this)).subscribe( data => {
+      this.resFieldExecutiveId = data.resourceId;
+      console.log(data)
+    })
     this.toast.success("Created Successfully");
   };
 
@@ -67,6 +78,17 @@ export class CashLimitComponent implements OnInit {
   }
   Edit_changes(){}
  
+  AddNew(){
+    this.crudService.get(`${appModels.FIELDEXECUTIVE}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.FieldExicutives = data;
+
+    })
+  }
   Cash_hand_Limit(){
     this.crudService.get(`${appModels.FIELDEXECUTIVE}/feCashInHand`, {
       params: {
@@ -74,6 +96,7 @@ export class CashLimitComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
+      this.resFieldexeid = data.id
       this.cashLimitData = data;
       this.dataSource = new MatTableDataSource(this.cashLimitData)
 

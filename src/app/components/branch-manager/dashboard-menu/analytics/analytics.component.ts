@@ -32,17 +32,7 @@ export class AnalyticsComponent implements OnInit {
   // this.analyticsData = 
   data:any;
   
-  constructor(private router: Router,private crudService: CrudService) { 
-    this.data = [
-      { Label: "Administration", Value: 2 },
-      { Label: "Sales", Value: 8 },
-      { Label: "IT", Value: 3 },
-      { Label: "Marketing", Value: 8 },
-      { Label: "Development", Value: 4 },
-      { Label: "Customer Support", Value: 6 }
-  ];
-
-  }
+  constructor(private router: Router,private crudService: CrudService) {   }
 
   ngOnInit(): void {
     // this.getAnalytics();
@@ -93,19 +83,6 @@ export class AnalyticsComponent implements OnInit {
       console.log(this.analyticsCusOnboardData)
     })
   }
-
-  // getOverallData(){
-  //   this.crudService.get(`${appModels.ANALYTICS_OVERALL_DATA}`, {
-  //     params: {
-  //       tenantIdentifier: 'default'
-  //     }
-  //   }).pipe(untilDestroyed(this)).subscribe(data => {
-  //     // console.log(data);
-  //     this.analyticsOverallData = data;
-  //     console.log("analyticsOverallData")
-  //     console.log(this.analyticsOverallData)
-  //   })
-  // }
 
   getOverallData(){
     this.crudService.get(`${appModels.ANALYTICS_OVERALL_DATA}`, {
@@ -309,8 +286,7 @@ export class AnalyticsComponent implements OnInit {
 
   // Loan Amount Collected (Bank vs Cash)
   loanCollectedbankVsCashAmount :any
-    
-  // Demand Vs Collection Pie chart
+  
   loanCollectedbankVsCash():any{
   // let cashDemands = this.analyticsOverallData[0].cashDemand  
   // let cashCollections = this.analyticsOverallData[0].cashCollection

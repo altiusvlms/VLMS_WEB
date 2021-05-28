@@ -99,6 +99,7 @@ export class ManageEmployeeComponent implements OnInit {
     bloodGroup: new FormControl('', Validators.required),
     fatherName: new FormControl('', Validators.required),
     vehicleNumber: new FormControl('', Validators.required),
+    agtnumber: new FormControl('', Validators.required),
     doj: new FormControl('', Validators.required),
     dateFormat:new FormControl('dd MMMM yyyy', Validators.required),
     vehicleType:new FormControl('', Validators.required),
@@ -314,6 +315,7 @@ this.manageEmployeeForm.patchValue({
     spousename: this.employeeArray[0].spousename,
     bloodGroup: this.employeeArray[0].bloodGroup,
     fatherName: this.employeeArray[0].fatherName,
+    agtnumber: this.employeeArray[0].agtnumber,
     vehicleNumber: this.employeeArray[0].vehicleNumber,
     doj: this.datepipe.transform(this.employeeArray[0].dob, 'yyyy-MM-dd'),
     dateFormat: "dd MMMM yyyy",
@@ -442,7 +444,7 @@ CalculateAge(){
 
 updateEmployeeDetails(){
   console.log("this.manageEmployeeForm.value")
-  console.log(this.manageEmployeeForm.value)
+  // console.log(this.manageEmployeeForm.value)
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
   this.crudService.update(`${appModels.EMPLOYEE}/updateEmployee`,this.manageEmployeeForm.value,
@@ -453,7 +455,7 @@ updateEmployeeDetails(){
 }
 
 updateEmployeeEducationDetails(){
-  console.log("this.manageEmployeeForm.value")
+  // console.log("this.manageEmployeeForm.value")
   console.log(this.manageEmployeeForm.value)
   this.crudService.update(`${appModels.EMPLOYEE}/updateQualification`,this.manageEmployeeForm.value.school_qualification,
   this.id,
@@ -464,7 +466,7 @@ updateEmployeeEducationDetails(){
 
 updateEmployeeInsuranceDetails(){
   console.log("this.manageEmployeeForm.value")
-  console.log(this.manageEmployeeForm.value)
+  // console.log(this.manageEmployeeForm.value)
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
   this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeForm.value.general_insurance,

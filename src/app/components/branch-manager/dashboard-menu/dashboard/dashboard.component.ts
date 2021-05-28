@@ -122,33 +122,18 @@ export class DashboardComponent implements OnInit {
 
 
    public data: any;
+  dashboardData: any;
+  newLoanvsClosedLoanAmount: any;
 
-  constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { 
-    this.yrToggel = true;
-    // debugger
-    this.data = [
-      { Label: "Administration", Value: 2 },
-      { Label: "Sales", Value: 8 },
-      { Label: "IT", Value: 3 },
-      { Label: "Marketing", Value: 8 },
-      { Label: "Development", Value: 4 },
-      { Label: "Customer Support", Value: 6 }
-  ];
-  console.log("data")
-  console.log(this.data)
+  constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { this.yrToggel = true;
   }
 
-     
-
-  
 
   ngAfterViewInit() {
-    // debugger
     this.update();
   }
 
   tbupdate(id : any) {
-    // debugger
     if (id == 0) {
       this.pemi.value = (Number(this.query.amount) / 100000 ).toString();
     }
@@ -209,8 +194,7 @@ console.log(this.fromdate);
 
 
   ngOnInit(): void {
-    // this.mobileNumFetch()
-    
+  this.dashboardStatusbar();  
    
   }
 
@@ -271,7 +255,152 @@ console.log(this.fromdate);
     // this.router.navigate(['branch-manager/newloan-process']);
   // }
   }
+
+  dashboardStatusbar(){
+    this.crudService.get(`${appModels.DASHBOARD_STATUS}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      this.dashboardData = data;
+      console.log(this.dashboardData)
+      Highcharts.chart("newLoanvsClosedLoan", this.newLoanvsClosedLoan() );
+      console.log(this.newLoanvsClosedLoan)
+      Highcharts.chart("amountCollection", this.newLoanvsClosedLoans() );
+      
+    })
+  }
+
+  // Demand Vs Collection Pie chart
+  newLoanvsClosedLoan():any{
+    let newLoan = this.dashboardData[0].newloan
+    let closedLoan = this.dashboardData[0].closedloan
     
+      this.newLoanvsClosedLoanAmount = {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+      title: {
+        text: 'New Loan vs Closed Loan'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: {point.y}'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.y}'
+            // format: '<b>{point.name}</b>: {point.y:.1f}'
+          }
+        }
+      },
+      series: [{
+        name: 'Count',
+        colorByPoint: true,
+        data: [{
+          name: 'New Loan',
+          y: newLoan,
+          // sliced: true,
+          // selected: true
+          
+        }, {
+          name: 'Closed Loan',
+          y: closedLoan,
+        },
+      ]
+      }]
+    
+    }
+    return this.newLoanvsClosedLoanAmount;
+    }
+
+    loanCollectedbankVsCashAmountss:any
+    // Semi Doughtnut Chart
+    newLoanvsClosedLoans():any{
+
+      let bankCashCollection = this.dashboardData[0].bankCashCollection
+    // let closedloan = this.dashboardData[0].closedloan
+
+    // Highcharts.chart('newLoanvsClosedLoans', {
+      this.loanCollectedbankVsCashAmountss = {      
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+      },
+      title: {
+        text: 'Total Collection',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: 60
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.y}'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        pie: {
+          dataLabels: {
+            enabled: true,
+            distance: -50,
+            style: {
+              fontWeight: 'bold',
+              color: 'white'
+            }
+          },
+          startAngle: -90,
+          endAngle: 90,
+          center: ['50%', '75%'],
+          size: '110%'
+        }
+      },
+      series: [{
+        type: 'pie',
+        name: 'Amount',
+        innerSize: '50%',
+        data: [
+          // ['Chrome', 58.9],
+          // ['Firefox', 13.29],
+          // ['Internet Explorer', 13],
+          // ['Edge', 3.78],
+          // ['Safari', 3.42],
+          {
+            name: 'Bank Cash Collection',
+            y: bankCashCollection,
+            dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}</b>: {point.y}'
+            }
+          },
+          // {
+          //   name: 'Other',
+          //   y: closedloan,
+          //   dataLabels: {
+          //     enabled: false
+          //   }
+          // }
+        ]
+      }]
+    }
+    // });
+    return this.loanCollectedbankVsCashAmountss;
+  }
+   
 
 }
 
