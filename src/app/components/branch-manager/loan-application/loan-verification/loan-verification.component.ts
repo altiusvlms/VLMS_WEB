@@ -126,7 +126,11 @@ export class LoanVerificationComponent implements OnInit {
   }
   searchdata(){
     for (let selectedUser of this.customerLoanDetails) {
-      if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''){
+       /** loanAmount type of Number */
+      let loanAmount = selectedUser.loanDetailsData.loanAmount;
+       /** LoanAmount Values convert Number to String */
+      let LoanAmount = loanAmount.toString();
+      if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== '' || this.searchLoanAmount !== ''){
       if (
         selectedUser.bankDetails.accountNumber.toLowerCase().search(this.searchAccountNo.toLowerCase()) != -1  &&
         selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1  &&
@@ -134,7 +138,7 @@ export class LoanVerificationComponent implements OnInit {
         selectedUser.vehicleDetails.vehicleNumber.toLowerCase().search(this.searchVehicleNo.toLowerCase()) != -1 &&
         selectedUser.customerDetails.mobileNo.toLowerCase().search(this.searchMobileNo.toLowerCase()) != -1 &&
         selectedUser.vehicleDetails.chassisNumber.toLowerCase().search(this.searchChassisNo.toLowerCase()) != -1 
-        // && selectedUser.loanDetailsData.loanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 
+        && LoanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 
       ){
           this.filterResponse.push(selectedUser)
       }

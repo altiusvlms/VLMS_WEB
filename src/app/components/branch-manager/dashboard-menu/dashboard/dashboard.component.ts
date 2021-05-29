@@ -11,6 +11,8 @@ import { SharedService } from '../../../../services/shared.service';
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 import { Options, LabelType } from 'ng5-slider';
 import * as Highcharts from 'highcharts';
+import {DomSanitizer} from "@angular/platform-browser";
+
 // import * as CanvasJS from '../../../../../../node_modules/canvasjs/dist/canva';
 // import * as CanvasJS from '../../../../../';
 @UntilDestroy({ checkProperties: true })
@@ -159,7 +161,6 @@ export class DashboardComponent implements OnInit {
     var rateOfInterest = Number(this.query.interest);
     var numberOfMonths = (this.yrToggel) ? (Number(this.query.tenureYr) * 12) : Number(this.query.tenureMo);
     // var monthlyInterestRatio = (rateOfInterest / 100) / 12;
-console.log(this.fromdate);
      this.TotalInterest = (loanAmount * rateOfInterest) / 100;
 
      this.TotalPayable = loanAmount + this.TotalInterest;
@@ -178,13 +179,11 @@ console.log(this.fromdate);
       var daydiff = totaltimediff / ( 1000 * 3600 * 24);
      var interestPerYear = Number (this.query.interest) * 100 / 365;
      var dueInterest = Number (Math.round(interestPerYear))
-     console.log("dueInterest")
-     console.log(dueInterest)
+    
 
       var delayDueAmount = dueInterest * daydiff;
       this.delayDueAmount = Number ((Math.ceil(delayDueAmount / 10) * 10))
-      console.log("delayDueAmount")
-      console.log(this.delayDueAmount)
+     
 
      this.totalAmt = this.delayDueAmount + this.MonthlyCorrectDue
 
@@ -226,23 +225,19 @@ console.log(this.fromdate);
   }
   
   mobileNumFetch(mobile : any){
-    console.log(mobile)
     // if (this.mobileNum) {
     this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
       params: {
         tenantIdentifier: 'default'
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
-      console.log(data);
       for(let mobileNo of data){
         this.mobileNum = mobileNo.customerGuarantor.mobileNumber;
         var id = mobileNo.customerGuarantor.id;
         
       }
       
-      console.log("mobilenum")
-      console.log(this.mobileNum)
-      
+    
       if (this.mobileNum) {
         this.router.navigate(['branch-manager/loan-process/'  + id]);
       }
@@ -263,9 +258,7 @@ console.log(this.fromdate);
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
       this.dashboardData = data;
-      console.log(this.dashboardData)
       Highcharts.chart("newLoanvsClosedLoan", this.newLoanvsClosedLoan() );
-      console.log(this.newLoanvsClosedLoan)
       Highcharts.chart("amountCollection", this.newLoanvsClosedLoans() );
       
     })
@@ -435,6 +428,8 @@ export class AdvancedSearch {
   /** Advance Search Variables */
   customerLoanDetails : any = [];
   filterResponse:any = [];
+  customerImage: any;
+  allCustomerImage: any = [];
   searchAccountNo: String = '';
   searchName: String = '';
   searchModel: String = '';
@@ -443,7 +438,7 @@ export class AdvancedSearch {
   searchChassisNo: String = '';
   searchLoanAmount: String = '';
 
-  constructor(public dialogRef: MatDialogRef<AdvancedSearch>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private crudService: CrudService,private sharedService: SharedService) {
+  constructor(public dialogRef: MatDialogRef<AdvancedSearch>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private crudService: CrudService,private sharedService: SharedService,private sanitizer:DomSanitizer) {
 
 
     
@@ -460,9 +455,21 @@ export class AdvancedSearch {
       params: {
         tenantIdentifier: 'default'
       }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      this.customerLoanDetails = data;
-      console.log(this.customerLoanDetails)
+    }).pipe(untilDestroyed(this)).subscribe(async response => {
+      this.customerLoanDetails = response;
+
+  /**Customer Image Get API */    
+      await this.customerLoanDetails.map((res: any) => {
+        this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${res.customerDetails.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
+         this.customerImage =  this.sanitizer.bypassSecurityTrustUrl(data);
+            this.allCustomerImage.push({image:this.customerImage})
+        },error => {
+          console.error(error);
+          this.customerImage = 'assets/images/empty_image.png';
+          this.allCustomerImage.push({image:this.customerImage} )
+       });
+    })
+
     })
   }
 
@@ -519,7 +526,11 @@ export class AdvancedSearch {
   /** Search for Filtered data */
   searchdata(){
     for (let selectedUser of this.customerLoanDetails) {
-      if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''){
+       /** loanAmount type of Number */
+      let loanAmount = selectedUser.loanDetailsData.loanAmount;
+       /** LoanAmount Values convert Number to String */
+      let LoanAmount = loanAmount.toString();
+      if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''  || this.searchLoanAmount !== ''){
       if (
         selectedUser.bankDetails.accountNumber.toLowerCase().search(this.searchAccountNo.toLowerCase()) != -1  &&
         selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1  &&
@@ -527,7 +538,7 @@ export class AdvancedSearch {
         selectedUser.vehicleDetails.vehicleNumber.toLowerCase().search(this.searchVehicleNo.toLowerCase()) != -1 &&
         selectedUser.customerDetails.mobileNo.toLowerCase().search(this.searchMobileNo.toLowerCase()) != -1 &&
         selectedUser.vehicleDetails.chassisNumber.toLowerCase().search(this.searchChassisNo.toLowerCase()) != -1 
-        // && selectedUser.loanDetailsData.loanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 
+        && LoanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 
       ){
           this.filterResponse.push(selectedUser)
       }
