@@ -41,7 +41,7 @@
         </div>
         <div class="col-sm-3">
           <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Vehicle Number</mat-label>
+            <mat-label>Vehicle No</mat-label>
             <input matInput formControlName="vehicleNo"   (keyup)="applyFilter($event, 'vehicleno')" >
           </mat-form-field>
         </div>
@@ -120,14 +120,17 @@
         <th>Applicant Photo</th> 
         <th>Applicant Name</th>
         <th>Applicant Mobile No</th>
+        <th>AGT NO</th>
         <th>Loan Amount</th>
         <th>Loan Term</th>
         <th>Interest %</th>
         <th>EMI Amount</th>
         <th>Ref By</th>
+        <th>Vehicle No</th>
         <th>Vehicle Make</th>
         <th>Vehicle Model</th>
         <th>Vehicle Type</th>
+        <th>Chassis No</th>
         <th>Loan Type</th>
         <th>Applicant Type</th>
         <th>Approver</th>
@@ -140,14 +143,17 @@
           object-position: center;"></td>
         <td>{{customer?.customerName}}</td>
         <td>{{customer?.customerDetails.mobileNo}}</td>
+        <td>{{customer?.bankDetails.accountNumber}}</td>
         <td>{{customer?.loanDetailsData.loanAmount}}</td>
         <td>{{customer?.loanDetailsData.loanTerm}}</td>
         <td>{{customer?.loanDetailsData.loanInterest}}%</td>
         <td>{{customer?.loanDetailsData.emi}}</td>
         <td>{{customer?.customerDetails.refBy}}</td>
+        <td>{{customer?.vehicleDetails.vehicleNumber}}</td>
         <td>{{customer?.vehicleDetails.maker}}</td>
         <td>{{customer?.vehicleDetails.model}}</td>
         <td>{{customer?.vehicleType}}</td>
+        <td>{{customer?.vehicleDetails.chassisNumber}}</td>
         <td></td>
         <td>{{customer?.customerDetails.applicantType}}</td>
         <td></td>
