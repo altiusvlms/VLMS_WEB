@@ -749,17 +749,19 @@ insuranceExpired(){
       //   name: 'New Loan Count',
       //   data: [this.analyticsOverallData[0].loanAmountBankCollection]
     
-      // }, {
+      // },
+      //  {
       //   type:undefined,
       //   name: 'Insurance Expired',
       //   data: [this.analyticsOverallData[0].insuranceExpired]
     
-      // }, {
-      //   type:undefined,
-      //   name: 'Repossessed',
-      //   data: [this.analyticsOverallData[0].disbursalRepossessed]
+      // }, 
+      {
+        type:undefined,
+        name: 'Repossessed',
+        data: [this.analyticsOverallData[0].disbursalRepossessed]
     
-      // }
+      }
     ]
     }) 
  
@@ -1046,7 +1048,7 @@ repossessedGraph(){
         text: 'Repossessed'
       },
       subtitle: {
-        text: 'amount'
+        text: ''
       },
       xAxis: {
         categories: [
@@ -1068,7 +1070,7 @@ repossessedGraph(){
       yAxis: {
         min: 0,
         title: {
-          text: 'Amount Collected'
+          text: 'Value'
         }
       },
       tooltip: {
@@ -1085,28 +1087,31 @@ repossessedGraph(){
           borderWidth: 0
         }
       },
-      series: [{
-        type:undefined,
-        name: 'Collection',
-        data: [this.analyticsOverallData[0].cashCollection]
+      series: [
+      //   {
+      //   type:undefined,
+      //   name: 'Collection',
+      //   data: [this.analyticsOverallData[0].cashCollection]
     
-      }, 
+      // }, 
+      // {
+      //   type:undefined,
+      //   name: 'New Loan Count',
+      //   data: [this.analyticsOverallData[0].loanAmountBankCollection]
+    
+      // },
       {
-        type:undefined,
-        name: 'New Loan Count',
-        data: [this.analyticsOverallData[0].loanAmountBankCollection]
-    
-      }, {
-        type:undefined,
-        name: 'Insurance Expired',
-        data: [this.analyticsOverallData[0].insuranceExpired]
-    
-      }, {
         type:undefined,
         name: 'Repossessed',
         data: [this.analyticsOverallData[0].disbursalRepossessed]
     
-      }
+      },
+       {
+        type:undefined,
+        name: 'Insurance Expired',
+        data: [this.analyticsOverallData[0].insuranceExpired]
+    
+      }, 
     ]
     }) 
  
@@ -1187,8 +1192,8 @@ allocatedVsExpensesAmount :any
 allocatedVsExpenses():any{
 let allocatedCash = this.analyticsOverallData[0].allocatedCash  
 let expense = this.analyticsOverallData[0].expense
-let loanAmountCashCollections = this.analyticsOverallData[0].loanAmountCashCollection
-let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankCollection
+// let loanAmountCashCollections = this.analyticsOverallData[0].loanAmountCashCollection
+// let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankCollection
 
 
   this.allocatedVsExpensesAmount = {
@@ -1245,7 +1250,7 @@ let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankColle
   }]
 
 }
-return this.loanDisbursalPie;
+return this.allocatedVsExpensesAmount;
 }
 
 rtoExpensesVsCompletedAmount :any
@@ -1254,8 +1259,8 @@ rtoExpensesVsCompletedAmount :any
 rtoExpensesVsCompleted():any{
 let rtoExpenses = this.analyticsOverallData[0].rtoExpenses  
 let rtoCompleted = this.analyticsOverallData[0].rtoCompleted
-let loanAmountCashCollections = this.analyticsOverallData[0].loanAmountCashCollection
-let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankCollection
+// let loanAmountCashCollections = this.analyticsOverallData[0].loanAmountCashCollection
+// let loanAmountBankCollections = this.analyticsOverallData[0].loanAmountBankCollection
 
 
   this.rtoExpensesVsCompletedAmount = {

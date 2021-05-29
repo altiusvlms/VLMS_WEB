@@ -224,12 +224,10 @@ export class ManageEmployeeComponent implements OnInit {
 
 /** Save Enquiry */
 manageEmployee(){
-if(this.manageEmployeeForm.invalid) {
-  alert("Please Enter Required Fields")
-  return;
-}
-
-
+// if(this.manageEmployeeForm.invalid) {
+//   alert("Please Enter Required Fields")
+//   return;
+// }
   this.submitted = true;
   console.log(this.manageEmployeeForm.value)
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
@@ -239,7 +237,10 @@ if(this.manageEmployeeForm.invalid) {
       tenantIdentifier: "default"   
     }}
   ).pipe(untilDestroyed(this)).subscribe( data => {
-    this.responseId = data.resourceId;
+    this.responseId = data;
+    console.log("data")
+    console.log(data.resourceId)
+    console.log(this.responseId)
     this.toast.success("Employee Created successfully")
     this.EmployeeId = data.resourceId;
   

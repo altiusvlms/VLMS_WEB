@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'vlms-create-receipt',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateReceiptComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private router: Router) { }
+ 
+  showPopup:Boolean = true;
   ngOnInit(): void {
-  }
+  this.showPopup = true;
 
+  }
+  searchtab(){
+    this.router.navigate(['/cashier/create-receipt']);
+  }
 }

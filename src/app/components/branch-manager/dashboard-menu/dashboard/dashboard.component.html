@@ -25,12 +25,13 @@
     </div>
    </div>
 
-  <div class="row">
+  <div class="row" *ngFor="let enquiry of enquiryDashboardCount">
     <div class="col-sm-3">
       <div class="card">
         <div class="card-body">
       <div (click)="customerEntrol()"> New Enrolement</div>
-      <div>24 Nos</div>
+      
+      <div></div>
 
       </div>
       </div>
@@ -39,7 +40,7 @@
       <div class="card">
         <div class="card-body">
       <div (click)="enquiry()">New Enquiry</div>
-      <div>24 Nos</div>
+      <div>{{enquiry.enquiryWalkIn}} Nos</div>
 
       </div>
       </div>
@@ -48,7 +49,7 @@
       <div class="card">
         <div class="card-body">
       <div>Ins Exp.Live</div>
-      <div>24 Nos</div>
+      <div>{{enquiry.insuranceExpired}} Nos</div>
 
       </div>
       </div>
@@ -57,7 +58,7 @@
       <div class="card">
         <div class="card-body">
       <div>Ins Exp.Terminated</div>
-      <div>24 Nos</div>
+      <div>{{enquiry.insuranceCompleted}} Nos</div>
 
       </div>
       </div>
@@ -235,7 +236,7 @@
     <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
-      EMI Collection
+      EMI Calculator
       <!-- EMI  -->
 <div class="spacer">
   <div class="row">
@@ -245,7 +246,7 @@
         <div class="form-group">
           <div >
             <span class="left-title">
-              Home Loan Amount
+              Loan Amount
             </span>
             <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
               [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" />
