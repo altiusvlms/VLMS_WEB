@@ -1,46 +1,5 @@
-<div *ngIf="showPopup">
-  <!-- <div class="col-sm-2">
-      <div>
-          <button type="button"  data-toggle="modal" data-target="#searchtab" class="btn_blue">
-              Create
-          </button>
-      </div>
-    </div> -->
 
-  <!-- Model for Search -->
-  <div class="modal fade" id="searchtab" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <!-- <h5 class="modal-title" id="createEnquiryModalLabel">Create Enquiry</h5> -->
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-    
-          <form class="example-form">
-            <mat-form-field class="example-full-width">
-              <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="Sushi">
-            </mat-form-field>
-          
-            
-          </form>
-
-    
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-          <button type="button" class="btn btn-primary"  data-dismiss="modal" data-toggle="modal"  data-target="#searchtab">Create receipt</button>
- 
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-<div class="container" *ngIf="!showPopup">
+<div class="container">
   <div class="header_title">
     <h2>Receipt</h2>
     <div class="header_right">
@@ -50,35 +9,35 @@
 
 
   <!-- As Mock -->
-    <div class="card">
-      <div class="card-body">
-  <div class="row">
+<div class="card">
+<div class="card-body">
+  <div class="row" *ngFor="let loan of getCustomerLoanDetails">
     <div class="col-sm-2">
-      <div> Customer Image</div>
-      <div>Customer ID: KF-0012</div>
+      <div> <img [src]="customerImage ? customerImage : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+        object-position: center;"></div>
+      <div>Customer ID: {{loan.id}}</div>
     </div>
     <div class="col-sm-2">
-      <div>Robin</div>
-      <div>8765765465</div>
+      <div>{{loan.customerDetails.name}}</div>
+      <div>{{loan.customerDetails.mobileNo}}</div>
     </div>
     <div class="col-sm-2">
-      <div>Loan Term: 8 Month</div>
-      <div>EMI: 5200</div>
-      <div>paid due:2/8</div>
+      <div>Loan Amount: {{loan.loanDetailsData.loanAmount}}</div>
+      <div>Loan Term: {{loan.loanDetailsData.loanTerm}}</div>
+      <div>EMI: {{loan.loanDetailsData.emi}}</div>
+      <div>Intrest: {{loan.loanDetailsData.interestInr}}</div>
     </div>
     <div class="col-sm-2">
-      <div>Loan Amount:50,000</div>
-      <div>intrest: 2.5</div>
-      <div>pending due: 1/8</div>
+      <div>Paid Due:</div>
+      <div>Current Due: </div>
+      <div>Pending Due: </div>
     </div>
     <div class="col-sm-2">
-      <div>TO PAY: 42,000</div>
-      <div></div>
-      <div>Current due:1/8</div>
+      <div>TO PAY:  {{loan.loanDetailsData.payout}}</div>
     </div>
-
-
-  </div></div></div>
+  </div>
+</div>
+</div>
 
   <div class="row">
     <div class="col-md-6">
@@ -323,11 +282,10 @@
       <!-- models -->
 
     
-    <div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
+    <div class="modal fade" id="createEnquiryModal" tabindex="-1" role="dialog" aria-labelledby="createReceiptModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <!-- <h5 class="modal-title" id="createEnquiryModalLabel">Create Enquiry</h5> -->
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -354,11 +312,10 @@
     </div>
 
     <!-- Model for release -->
-    <div class="modal fade" id="release" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
+    <div class="modal fade" id="release" tabindex="-1" role="dialog" aria-labelledby="createReceiptModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <!-- <h5 class="modal-title" id="createEnquiryModalLabel">Create Enquiry</h5> -->
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -384,11 +341,10 @@
 
     <!-- Model for Sold -->
 
-    <div class="modal fade" id="sold" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
+    <div class="modal fade" id="sold" tabindex="-1" role="dialog" aria-labelledby="createReceiptModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <!-- <h5 class="modal-title" id="createEnquiryModalLabel">Create Enquiry</h5> -->
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

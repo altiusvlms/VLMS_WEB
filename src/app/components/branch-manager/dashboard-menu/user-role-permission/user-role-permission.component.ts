@@ -1,5 +1,7 @@
 /** Angular Imports */
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
@@ -16,11 +18,17 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 export class UserRolePermissionComponent implements OnInit {
   showUserTable :Boolean = true;
   showPermissionTable :Boolean  = false;
-  userListData:any ;
-  constructor(private crudService: CrudService) { }
+  roleListData:any ;
+  constructor(private crudService: CrudService, private toast: ToastrService) { }
+
+  /** Create Role Forms */
+  createRoleForms = new FormGroup({
+    name: new FormControl(''),
+    description: new FormControl('')
+  })
 
   ngOnInit(): void {
-    this.getUserList();
+    this.getRoleList();
   }
   
   ngOnDestroy() { }
@@ -30,18 +38,30 @@ export class UserRolePermissionComponent implements OnInit {
     this.showPermissionTable = false;
     this.showUserTable = true;
   }
+
   permission(){
     this.showUserTable = false;
     this.showPermissionTable = true;
   }
-  getUserList(){
-    this.crudService.get(`${appModels.USERS}`, {
+
+  getRoleList(){
+    this.crudService.get(`${appModels.ROLES}`, {
       params: {
         tenantIdentifier: 'default'
       }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      console.log(data);
-      this.userListData = data;
+    }).pipe(untilDestroyed(this)).subscribe(response => {
+      console.log(response);
+      this.roleListData = response;
+    })
+  }
+
+  saveRole(){
+    this.crudService.post(`${appModels.ROLES}`, this.createRoleForms.value,
+    {params:{
+    tenantIdentifier: "default"   
+    }}
+    ).pipe(untilDestroyed(this)).subscribe(response => {
+      this.toast.success("Roles Saved Succesfully");  
     })
   }
 

@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import {  CrudService } from '../../../services/crud.service';
 import { appModels } from '../../../services/utils/enum.util';
 import { SharedService } from '../../../services/shared.service';
+import {DomSanitizer} from "@angular/platform-browser";
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
@@ -74,6 +75,8 @@ export class AdvancedSearch {
   /** Advance Search Variables */
   customerLoanDetails : any = [];
   filterResponse:any = [];
+  customerImage: any;
+  allCustomerImage: any = [];
   searchAccountNo: String = '';
   searchName: String = '';
   searchModel: String = '';
@@ -82,7 +85,7 @@ export class AdvancedSearch {
   searchChassisNo: String = '';
   searchLoanAmount: String = '';
 
-  constructor(public dialogRef: MatDialogRef<AdvancedSearch>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private crudService: CrudService,private sharedService: SharedService) { }
+  constructor(public dialogRef: MatDialogRef<AdvancedSearch>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private crudService: CrudService,private sharedService: SharedService,private sanitizer:DomSanitizer) { }
 
   ngOnInit() {
     this.getCustomerDetails();
@@ -95,9 +98,20 @@ export class AdvancedSearch {
       params: {
         tenantIdentifier: 'default'
       }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      this.customerLoanDetails = data;
+    }).pipe(untilDestroyed(this)).subscribe(async response => {
+      this.customerLoanDetails = response;
       console.log(this.customerLoanDetails)
+        /**Customer Image Get API */    
+        await this.customerLoanDetails.map((res: any) => {
+          this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${res.customerDetails.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
+           this.customerImage =  this.sanitizer.bypassSecurityTrustUrl(data);
+              this.allCustomerImage.push({image:this.customerImage})
+          },error => {
+            console.error(error);
+            this.customerImage = 'assets/images/empty_image.png';
+            this.allCustomerImage.push({image:this.customerImage} )
+         });
+      })
     })
   }
 
@@ -155,7 +169,11 @@ export class AdvancedSearch {
   /** Search for Filtered data */
   searchdata(){
     for (let selectedUser of this.customerLoanDetails) {
-      if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''){
+       /** loanAmount type of Number */
+       let loanAmount = selectedUser.loanDetailsData.loanAmount;
+       /** LoanAmount Values convert Number to String */
+      let LoanAmount = loanAmount.toString();
+      if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== '' || this.searchLoanAmount !== ''){
       if (
         selectedUser.bankDetails.accountNumber.toLowerCase().search(this.searchAccountNo.toLowerCase()) != -1  &&
         selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1  &&
@@ -163,7 +181,7 @@ export class AdvancedSearch {
         selectedUser.vehicleDetails.vehicleNumber.toLowerCase().search(this.searchVehicleNo.toLowerCase()) != -1 &&
         selectedUser.customerDetails.mobileNo.toLowerCase().search(this.searchMobileNo.toLowerCase()) != -1 &&
         selectedUser.vehicleDetails.chassisNumber.toLowerCase().search(this.searchChassisNo.toLowerCase()) != -1 
-        // && selectedUser.loanDetailsData.loanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 
+        && LoanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 
       ){
           this.filterResponse.push(selectedUser)
       }

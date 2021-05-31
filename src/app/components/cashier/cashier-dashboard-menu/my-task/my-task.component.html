@@ -13,7 +13,7 @@
       <div class="card">
         <div class="card-body">
           <table class="table table-striped">
-            <thead>
+            <thead >
                 <tr>
                   <th>Assigned By</th>
                   <th>Task</th>
@@ -23,12 +23,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let task of taskListData;let i = index;">
                   <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><button class="btn_blue" (click)="editMyTask()">Edit</button></td>
+                  <td>{{task.taskType}}</td>
+                  <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>
+                  <td>{{task.status  ? task.status : "open"}}</td>
+                  <td *ngIf="task.status != 'Completed'"><button class="btn_blue" (click)="editMyTask(task)">Edit</button></td>
                 </tr>
               </tbody>
           </table>

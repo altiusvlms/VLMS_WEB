@@ -29,9 +29,6 @@ import { AngularFireModule } from '@angular/fire'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireStorageModule } from '@angular/fire/storage'
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { CreateReceiptComponent } from './components/cashier/create-receipt/create-receipt.component';
-import { YetToReceiptComponent } from './components/cashier/yet-to-receipt/yet-to-receipt.component';
-import { HlPaymentComponent } from './components/cashier/hl-payment/hl-payment.component';
 
 /** Custom Fire Base Config */
 const firebaseConfig = {
@@ -70,7 +67,7 @@ const firebaseConfig = {
     IgxPieChartModule
     
   ],
-  declarations: [WebAppComponent, CreateReceiptComponent, YetToReceiptComponent, HlPaymentComponent],
+  declarations: [WebAppComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     DatePipe],
