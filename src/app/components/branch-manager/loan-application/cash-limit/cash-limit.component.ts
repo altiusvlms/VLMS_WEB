@@ -8,6 +8,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SharedService } from '../../../../services/shared.service';
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -41,7 +42,7 @@ export class CashLimitComponent implements OnInit {
   }
 
 
-  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService) { }
+  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService, private sharedService: SharedService) { }
 
   AddExecutiveForms = new FormGroup({
     feName: new FormControl('', Validators.required),
@@ -50,7 +51,9 @@ export class CashLimitComponent implements OnInit {
     cashLimit: new FormControl('100', Validators.required),
     requiredAmount: new FormControl('', Validators.required),
     status: new FormControl('pending', Validators.required),
-    locale:new FormControl('en', Validators.required)
+    locale:new FormControl('en', Validators.required),
+    approveAmount:new FormControl('en', Validators.required),
+    requiredOn:new FormControl('en', Validators.required)
   })
   EditExecutiveForms = new FormGroup({
     Req_Amount: new FormControl('', Validators.required),
@@ -60,16 +63,40 @@ export class CashLimitComponent implements OnInit {
   }) 
   ngOnInit(): void {
     this.listFieldExecutive();
-    this.getSingleRequestList();
+    // this.getSingleRequestList();
     
   }
   ngOnDestroy() { } 
   
 
-  Edit_request(){
+  Edit_request(value :any){
+    console.log(value)
+    this.AddExecutiveForms.patchValue({
+      feName: value.fieldExecutiveName,
+      requiredOn : value.requiredOn,
+      requiredAmount :value.requiredAmount,
+      approveAmount :value.approveAmount,
+      status: value.status,
+      
+    
+    })
 
   }
-  Delete_request(){
+  Delete_request(value :any){
+    console.log(value)
+    // console.log(this.AddExecutiveForms.value)
+    if (confirm(`Are you sure, you want to delete?`)) {
+      this.crudService.delete(`${appModels.FIELDEXECUTIVE}/deleteCashInHand`, value.id)
+      .pipe(untilDestroyed(this)).subscribe(deleted => {
+        // this.dialogRef.close(deleted);
+        this.sharedService.setLoaderShownProperty(false); 
+        this.toast.success("Deleted Succesfully"); 
+      })
+      }
+
+
+
+
 
   }
 
@@ -141,34 +168,35 @@ export class CashLimitComponent implements OnInit {
     })
   }
 
-  getSingleRequestList(){
-    this.crudService.get(`${appModels.FIELDEXECUTIVE}/feCashInHand`, {
-      params: {
-        tenantIdentifier: 'default'
-      }
-    }).pipe(untilDestroyed(this)).subscribe(data => {
-      console.log(data);
-      this.resFieldexeid = data.id
-      this.cashLimitData = data;
-      // this.dataSource = new MatTableDataSource(this.cashLimitData)
-      console.log("cashLimitData1")
-      console.log(this.cashLimitData)
+  // getSingleRequestList(){
+  //   this.crudService.get(`${appModels.FIELDEXECUTIVE}/feCashInHand`, {
+  //     params: {
+  //       tenantIdentifier: 'default'
+  //     }
+  //   }).pipe(untilDestroyed(this)).subscribe(response => {
+  //     // console.log(data);
+  //     // this.resFieldexeid = data.id
+  //     // this.cashLimitData = data;
+  //     // this.dataSource = new MatTableDataSource(this.cashLimitData)
+  //     // console.log("cashLimitData1")
+  //     // console.log(this.cashLimitData)
       
-      for (var singleData of this.cashLimitData){
-        this.getIdSingleData.push(singleData)
-        if(this.getIdSingleData.id){
-          console.log(this.getIdSingleData.id)
-        }
-      }
+  //     for (var singleData of response){
+  //       this.getIdSingleData.push(singleData)
+  //       console.log(this.getIdSingleData.id)
+  //       // if(this.getIdSingleData.id){
+  //       //   console.log(this.getIdSingleData.id)
+  //       // }
+  //     }
       
 
-      this.AddExecutiveForms.patchValue({
-        status: this.getIdSingleData[0].status,
-        requiredAmount :this.getIdSingleData[0].requiredAmount,
-      })
+      // this.AddExecutiveForms.patchValue({
+      //   status: this.getIdSingleData[0].status,
+      //   requiredAmount :this.getIdSingleData[0].requiredAmount,
+      // })
     
-    })
-  }
+    // })
+  // }
 
   updateFieldexeDetails(){
     console.log(this.AddExecutiveForms.value)
