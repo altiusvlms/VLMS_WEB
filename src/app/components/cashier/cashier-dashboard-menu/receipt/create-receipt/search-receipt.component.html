@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="header_title">
+      <h2>Create Receipt</h2>
+      <div class="header_right">
+      <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="searchForms" >
+    
+    
+        <div class="row">
+          <div class="col-4 col-sm-4">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Customer Name</mat-label>
+            <input matInput type='text'  formControlName="customerName" (keyup)="applyFilter($event, 'name')">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerList.length > 0 && showDropdown">
+            <mat-label>Please Select Customer Name</mat-label>
+            <mat-select  formControlName="customerName" (selectionChange)="customer($event)">
+                <mat-option  *ngFor="let customers of customerList"  value="{{customers.customerDetails.name}}" >{{customers.customerDetails.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+         </div>
+         <div class="col-4 col-sm-4">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Mobile No</mat-label>
+            <input matInput type='text'  formControlName="customerMobileNo">
+          </mat-form-field>
+        </div>
+        </div>
+        
+    </form>
+    </div>
+  </div>
+
+    <button type="button" class="btn_blue"   (click)="createReceipt()">Create Receipt</button>
+
+</div>

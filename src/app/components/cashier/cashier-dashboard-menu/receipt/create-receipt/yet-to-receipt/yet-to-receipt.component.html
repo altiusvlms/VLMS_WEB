@@ -1,0 +1,66 @@
+
+  <div class="container">
+    
+    <div class="header_title">
+      <h2>Yet To Receipt</h2>
+    </div>
+    <div class="header_right">
+      <button class="btn_blue" (click)="createReceipt()">Create Receipt</button>
+  </div>
+
+
+<!-- Loan Application Table -->
+<div class="card">
+  <div class="card-body">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Applicant ID </th>
+        <th>Applicant Photo</th> 
+        <th>Applicant Name</th>
+        <th>Applicant Mobile No.</th>
+        <th>Loan Amount</th>
+        <th>Loan Term</th>
+        <th>Interest %</th>
+        <th>EMI</th>
+        <th>Ref By</th>
+        <th>Vehicle Make</th>
+        <th>Vehicle Model</th>
+        <th>Vehicle Type</th>
+        <th>Applicant Type</th>
+        <th>Loan Type</th>
+        <th>Approved By</th>
+        <th>Payment Type</th>
+        <th>Amount Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let customer of customerLoanDetails;let i=index">
+        <td>{{customer?.id}}</td>
+        <td><img [src]="allCustomerImage[i]?.image" style="width: 50%;object-fit: contain;
+          object-position: center;"></td>
+        <td>{{customer?.customerName}}</td>
+        <td>{{customer?.customerDetails.mobileNo}}</td>
+        <td>{{customer?.loanDetailsData.loanAmount}}</td>
+        <td>{{customer?.loanDetailsData.loanTerm}}</td>
+        <td>{{customer?.loanDetailsData.loanInterest}}%</td>
+        <td>{{customer?.loanDetailsData.emi}}</td>
+        <td>{{customer?.customerDetails.refBy}}</td>
+        <td>{{customer?.vehicleDetails.maker}}</td>
+        <td>{{customer?.vehicleDetails.model}}</td>
+        <td>{{customer?.vehicleType}}</td>
+        <td>{{customer?.customerDetails.applicantType}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th><button class="btn_blue" (click)="createReceiptByID(id)">Create Receipt</button></th>
+      </tr>
+    </tbody>
+</table>
+
+
+</div></div>
+
+
+  </div> 

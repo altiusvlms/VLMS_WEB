@@ -191,13 +191,13 @@ export class CreateTask {
        this.customername = filterValue.trim().toLowerCase();
      }
      if(this.customername != ''){
-     this.crudService.get(`${appModels.GETEMPLOYEE}`, {
+     this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
       params: {
         tenantIdentifier: 'default'
       }
     }).pipe(untilDestroyed(this)).subscribe(async response => {
       await response.map((res: any) => {
-        if(res.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
+        if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
         this.customerList.push(res);
         }
       })
@@ -216,9 +216,9 @@ export class CreateTask {
     customer(val: any){
       this.showDropdown = false;
       this.customerList.map((res: any) => {
-        if(res.name.toLowerCase().search(val.value.toLowerCase()) != -1 ){
+        if(res.customerDetails.name.toLowerCase().search(val.value.toLowerCase()) != -1 ){
         this.createTaskForms.patchValue({
-          customerMobileNo:res.mobileNumber,
+          customerMobileNo:res.customerDetails.mobileNo,
           customerRegNo:val.value
         })
         }

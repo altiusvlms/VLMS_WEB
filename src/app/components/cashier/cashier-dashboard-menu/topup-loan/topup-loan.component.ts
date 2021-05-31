@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mifosx-topup-loan',
+  selector: 'vlms-topup-loan',
   templateUrl: './topup-loan.component.html',
   styleUrls: ['./topup-loan.component.scss']
 })

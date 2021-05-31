@@ -4,48 +4,35 @@
 <!-- User/Permission -->
 
 <div class="header_title">
-  <h2>User Role Permission</h2>
-  <button type="button" class="btn_blue" data-toggle="modal" data-target="#exampleModal">
-    Create User
-  </button>
-    </div>
+  <h2>Roles & Permission</h2>
+</div>
 
-<!-- /** Create Task Button */ -->
 
-<!-- 
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" (click)="user()">User</a></li>
-    <li><a data-toggle="tab" (click)="permission()">Permission</a></li>
-  </ul> -->
   <div class="card">
     <div class="card-body">
   <mat-tab-group>
-    <mat-tab label="User"> 
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>S.No</th>
-      <th>Name</th> 
-      <th>Designation</th>
-      <th>Branch Name</th>
-      <th>Contact Number</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr  *ngFor="let user of userListData;let i = index;">
-      <td>{{i+1}}</td>
-      <td>{{user.name}}</td>
-      <td></td>
-      <td>{{user.officeName}}</td>
-      <td>{{user.username}}</td>
-      <td></td>
-      <td data-toggle="modal" data-target="#exampleModal">Edit</td>
-    </tr>
-  </tbody>
-  </table>  
-</mat-tab>
+    <mat-tab label="Role"> 
+      <button type="button" class="btn_blue" data-toggle="modal" data-target="#roleModal">
+        Create Role
+      </button>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Designation</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let role of roleListData;let i = index;">
+          <td>{{i+1}}</td>
+          <td>{{role.description}}</td>
+          <td data-toggle="modal" data-target="#roleModal">Edit</td>
+        </tr>
+      </tbody>
+      </table>  
+    </mat-tab>
+
     <mat-tab label="Permission"> 
       
       <table class="table table-striped">
@@ -111,87 +98,38 @@
 
   
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="roleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
+        <form [formGroup]="createRoleForms" >
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create User</h5>
+          <h5 class="modal-title" id="roleModalLabel">Create Role</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <!-- <h4>Assign Customer</h4> -->
-          <div >
+          <div>
             <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>NAME</mat-label>
-              <input matInput type="text" id="fname" name="fname" pattern="[A-Za-z]" >
+              <mat-label>Name</mat-label>
+              <input matInput type="text" formControlName="name">
             </mat-form-field>
         </div>
-        <div >
+        <div>
           <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>DESIGNATION</mat-label>
-            <input matInput type="text" id="fname" name="fname">
+            <mat-label>Designation</mat-label>
+            <input matInput type="text" formControlName="description" >
           </mat-form-field>
-      </div>
-      <div >
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>number</mat-label>
-          <input matInput type="number" id="fname" name="fname">
-        </mat-form-field>
-    </div>
-    <div >
-      <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>ACCOUNT STATUS</mat-label>
-        <input matInput type="text" id="fname" name="fname">
-      </mat-form-field>
-  </div>
+        </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Send for Approval</button>
+          <button type="button" class="btn btn-primary" (click)="saveRole()">Save</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
   </div>
 
-<!-- Manage Employee -->
-
-<div class="container">
-<div class="card">
-  <div class="card-body">
-  <button class="btn default" >Total(10)</button>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>S.No</th>
-      <th>Name</th> 
-      <th>Designation</th>
-      <th>Contact Number</th>
-      <th>Vehicle No</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr >
-      <td>01</td>
-      <td>Ada Lovelce</td>
-      <td>Field executive</td>
-      <td>789456123</td>
-      <td>TN 37  DA 4562</td>
-      <td>Approve</td>
-      <td>Edit</td>
-      
-    </tr>
-    <td>01</td>
-      <td>Grace</td>
-      <td>Sr. Field executive</td>
-      <td>789456123</td>
-      <td>TN 37  DA 4562</td>
-      <td>Approve</td>
-      <td>Edit</td>
-    </tbody>
-  </table>  
-</div></div></div>

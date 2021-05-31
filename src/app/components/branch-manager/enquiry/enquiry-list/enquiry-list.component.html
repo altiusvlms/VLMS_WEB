@@ -9,54 +9,45 @@
     <div class="row">
       
         <div class="col-sm-4">
-            <div>
                 <button type="button"  data-toggle="modal" data-target="#createEnquiryModal" class="btn_blue">
                     Create Enquiry
                 </button>
-            </div>
         </div>
       <div class="col-sm-4">
-        <div>
-          <mat-form-field>
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
-          </mat-form-field>
-        </div>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Search</mat-label>
+          <input matInput type="search" (keyup)="applyFilter($event)"  placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" />
+        </mat-form-field>
     </div>
     </div>
   </div>
   </div>
   <div>
-     <div class="form-group">
+     <div class="row">
           <div class="col-md-4">
-            <div>
               <span class="left-title">From Date</span><br>
-              <mat-form-field appearance="fill">
+              <mat-form-field  appearance="outline" class="example-full-width">
                 <mat-label>Choose a date</mat-label>
                 <input matInput [(ngModel)]="fromdate" [matDatepicker]="picker1">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field><br>
-            </div>
           </div>
-        </div>
 
-        <div class="form-group">
           <div class="col-md-4">
-            <div>
               <span class="left-title">To Date</span><br>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Choose a date</mat-label>
                 <input matInput [(ngModel)]="todate" [matDatepicker]="picker2"  >
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
             </div>
-          </div>
         </div>
 
 <button type="button" class="btn btn-primary" (click)="Filterdate()">Filter</button>
-<button type="button" class="btn btn-primary" (click)="clear()">Clear</button>
+<button type="button" class="btn btn-secondary" (click)="clear()">Clear</button>
 
 
 

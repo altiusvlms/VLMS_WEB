@@ -1,0 +1,202 @@
+
+<!-- /** Create HL Payment */ -->
+<div class="container">
+  <div class="header_title">
+      <h2>HL Payment</h2>
+    </div>
+
+<div class="card">
+<div class="card-body">
+  <form [formGroup]="createHlForms" >
+      <div class="row">
+          <div class="col-4 col-sm-4">
+              <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label> Date</mat-label>
+                  <input matInput [matDatepicker]="dp" placeholder="Date" formControlName="postDate" >
+                  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field>
+          </div>
+          <div class="col-4 col-sm-4">
+              <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>S.No</mat-label>
+                  <input matInput type='text'>
+              </mat-form-field>
+          </div>
+          <div class="col-4 col-sm-4">
+              <mat-form-field appearance="outline" class="example-full-width" >
+                  <mat-label>Type</mat-label>
+                  <mat-select formControlName="postType"  (selectionChange)="onTypeChange($event.value)">
+                    <mat-option  value="RTO_Charges">RTO Charges</mat-option>
+                    <mat-option  value="insurance">Insurance</mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+              <mat-checkbox data-toggle="modal" data-target="#generateChildLoanModal">For Child Loan</mat-checkbox>
+
+          </div>
+          <div class="col-4 col-sm-4">
+              <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Agent</mat-label>
+                  <input matInput type='text' formControlName="agent" >
+              </mat-form-field>
+          </div>
+      </div>
+
+    <!-- /** Insurence Type based on Table */ -->
+      <table  class="table table-striped" *ngIf="showInsurenceTable">
+          <thead>
+              <tr>
+                  <th>AGT NO</th>
+                  <th>Customer Name</th>
+                  <th>Actual Amount</th>
+                  <th>Post Amount</th>
+                  <th>Expire Date</th>
+                  <th>Policy No</th>
+                  <th>Insurance Company</th>
+                  <th>Remark</th>
+                  <th></th>
+                </tr>
+          </thead>
+          <tbody *ngFor="let field of fieldArray; let i = index" >
+              <tr >
+                <td>  
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type='text' formControlName="agtno" >
+                  </mat-form-field></td>
+                <td> <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput type='text' formControlName="customerName" >
+                      </mat-form-field> </td>
+                <td> <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput type='text' formControlName="actualAmount" >
+              </mat-form-field></td>
+                <td> <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput type='text' formControlName="postAmount" >
+              </mat-form-field></td> 
+                <td>                <mat-form-field appearance="outline" class="example-full-width"> 
+                    <input matInput [matDatepicker]="dp" placeholder="Date" formControlName="expiryDate" >
+                  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field></td> 
+                <td> <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput type='text' formControlName="policyNo" >
+              </mat-form-field></td> 
+              <td> <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput type='text' formControlName="insuranceCompany" >
+              </mat-form-field></td> 
+              <td> <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput type='text' formControlName="remark" >
+            </mat-form-field></td> 
+            <td>
+              </tr>
+
+              <t><button class="btn btn-primary" type="button" (click)="addFieldValue()">Add</button></t>
+              <tr *ngIf="i>0"> <button class="btn btn-primary"  type="button" (click)="deleteFieldValue(i)">Delete</button>     </tr>
+          </tbody>
+      </table>
+
+
+    <!-- /** RTO Type based on Table */ -->
+
+    <table  class="table table-striped" *ngIf="showRTOTable">
+      <thead>
+          <tr>
+              <th>AGT NO</th>
+              <th>Customer Name</th>
+              <th>Actual Amount</th>
+              <th>Post Amount</th>
+              <th>Remark</th>
+              <th></th>
+            </tr>
+      </thead>
+      <tbody *ngFor="let field of fieldArray; let i = index" >
+          <tr >
+            <td>  
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput type='text' formControlName="agtno" >
+              </mat-form-field></td>
+            <td> <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput type='text' formControlName="customerName" >
+                  </mat-form-field> </td>
+            <td> <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput type='text' formControlName="actualAmount" >
+          </mat-form-field></td>
+            <td> <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput type='text' formControlName="postAmount" >
+          </mat-form-field></td> 
+      
+          <td> <mat-form-field appearance="outline" class="example-full-width">
+            <input matInput type='text' formControlName="remark" >
+        </mat-form-field></td> 
+        <td>
+          </tr>
+
+          <t><button class="btn btn-primary" type="button" (click)="addFieldValue()">Add</button></t>
+          <tr *ngIf="i>0"> <button class="btn btn-primary"  type="button" (click)="deleteFieldValue(i)">Delete</button>     </tr>
+      </tbody>
+  </table>
+
+
+
+      <div class="col-4 col-sm-4">
+          <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Pay Mode</mat-label>
+              <mat-select >
+                <mat-option  value="cash">Cash</mat-option>
+                <mat-option  value="online">Online</mat-option>
+              </mat-select>            
+          </mat-form-field>
+      </div>
+
+      <div class="row">
+          <button class="btn_blue" (click)="saveHl()" >Save</button>
+
+      </div>
+  </form>
+</div>
+</div> 
+
+</div>
+
+
+
+
+<div class="modal fade" id="generateChildLoanModal" tabindex="-1" role="dialog" aria-labelledby="generateChildLoanModalLabel"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-4 col-sm-4">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Loan Amount</mat-label>
+              <input matInput type='text'>
+          </mat-form-field>
+        </div>
+        <div class="col-4 col-sm-4">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Interest%</mat-label>
+            <input matInput type='text'>
+        </mat-form-field>
+      </div>
+      <div class="col-4 col-sm-4">
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Loan Term</mat-label>
+          <input matInput type='text'>
+      </mat-form-field>
+      </div>
+    <div class="col-4 col-sm-4">
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Loan EMI</mat-label>
+        <input matInput type='text'>
+    </mat-form-field>
+    </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

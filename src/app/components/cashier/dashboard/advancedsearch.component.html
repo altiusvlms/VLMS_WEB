@@ -106,37 +106,36 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                  <th>Customer Image</th>
                   <th>Name</th>
                   <th>Mobile No</th>
-                  <!-- <th>Branch</th> -->
                   <th>Vehicle No</th>
                   <th>Vehicle Model</th>
                   <th>Chassis No</th>
                   <th>AGT NO</th>
-                  <!-- <th>Customer Image</th> -->
                   <th>Loan Amount</th>
                   <th>Due Pending</th>
                   <th>Due Date</th>
-                  <th>Actions</th>
+                  <!-- <th>Actions</th> -->
                 </tr>
               </thead>
-              <tbody *ngFor="let customerData of customerLoanDetails">
+              <tbody *ngFor="let customerData of customerLoanDetails;let i=index">
                 <tr>
+                  <td><img [src]="allCustomerImage[i]?.image" style="width: 50%;object-fit: contain;
+                    object-position: center;"></td>
                   <td>{{customerData.customerName}}</td>
                   <td>{{customerData.customerDetails.mobileNo}}</td>
-                  <!-- <td></td> -->
                   <td>{{customerData.vehicleDetails.vehicleNumber}}</td>
                   <td>{{customerData.vehicleDetails.model}}</td>
                   <td>{{customerData.vehicleDetails.chassisNumber}}</td>
                   <td>{{customerData.bankDetails.accountNumber}}</td>
                   <td>{{customerData.loanDetailsData.loanAmount}}</td>
-                  <!-- <td></td> -->
                   <td></td>
                   <td></td>
-                  <td><span>Receipt</span>
+                  <!-- <td><span>Receipt</span>
                     <span>ReLoan</span>
                     <span>CloseLoan</span>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
         </table>

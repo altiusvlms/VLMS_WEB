@@ -11,7 +11,10 @@ import { SharedModule } from '../../shared/shared/shared.module';
 /** Custom Components */
 import { MyTaskComponent,EditMyTask } from './my-task/my-task.component';
 import { TopupLoanComponent } from './topup-loan/topup-loan.component';
-
+import { CreateReceiptComponent,SearchReceipt } from './receipt/create-receipt/create-receipt.component';
+import { HlPaymentComponent } from './receipt/hl-payment/hl-payment.component';
+import { HlPaymentListComponent } from './receipt/hl-payment/hl-payment-list/hl-payment-list.component';
+import { YetToReceiptComponent } from './receipt/create-receipt/yet-to-receipt/yet-to-receipt.component';
 
 
 
@@ -19,7 +22,7 @@ import { TopupLoanComponent } from './topup-loan/topup-loan.component';
 /** Cashier Dashboard Menu Module */
 
 @NgModule({
-  declarations: [MyTaskComponent,EditMyTask, TopupLoanComponent],
+  declarations: [MyTaskComponent,EditMyTask, TopupLoanComponent,CreateReceiptComponent,SearchReceipt,HlPaymentComponent, HlPaymentListComponent,YetToReceiptComponent],
   imports: [
     CommonModule,
     CashierDashboardMenuRoutingModule,
