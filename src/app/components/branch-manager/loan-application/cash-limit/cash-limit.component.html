@@ -19,7 +19,7 @@
               
                 <ng-container matColumnDef="Sr no">
                   <th mat-header-cell *matHeaderCellDef> Sr no </th>
-                  <td mat-cell *matCellDef="let element,,let i = index;"> {{i}} </td>
+                  <td mat-cell *matCellDef="let element,,let i = index;"> {{i + 1}} </td>
                 </ng-container>
               
                 <ng-container matColumnDef="fieldExecutive">
@@ -88,24 +88,35 @@
             <div>
                 <select formControlName="feName" class="form-control">
                     <option>Field Executive</option>
-                    <option *ngFor="let FieldExicutive of FieldExicutives">{{FieldExicutive.fieldExecutiveName}}</option>
+                    <option  *ngFor="let FieldExicutive of FieldExicutives" value="{{FieldExicutive.fieldExecutiveName}}">{{FieldExicutive.fieldExecutiveName}}</option>
                   </select>
                </div>
-            
-            <div >
+          
+            <div >    
               <mat-form-field  appearance="outline"   class="example-full-width" >
                 <mat-label>Cost Limit</mat-label>
-                <input matInput  type='text'  formControlName="cashLimit" >
+                <input matInput  type='text'  formControlName="cashInHand" >
               </mat-form-field>
-          </div>
-               </form>
-        </div>
+          </div>  
+          <div >
+            <!-- <form [formGroup]="AddExecutiveForms"> -->
+            <mat-form-field  appearance="outline"   class="example-full-width" >
+              <mat-label>Required Amount</mat-label>
+              <input matInput  type='text'  formControlName="requiredAmount" >
+            </mat-form-field>
+          
+        </div>  
+               
+        
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="saverequest()" data-dismiss="modal" class="btn_blue">Save</button>
+          <button type="button" class="btn btn-primary" (click)="saveRequest()" data-dismiss="modal" class="btn_blue">Save</button>
         </div>
+      </form>
+      </div>
       </div>
     </div>
   </div>
+
   
   <div class="modal fade" id="createEnquiryModals" tabindex="-1" role="dialog" aria-labelledby="createEnquiryModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -117,11 +128,24 @@
           </button>
         </div>
         <div class="modal-body">
-    <form [formGroup]="EditExecutiveForms" >
-            <div>
+    <form [formGroup]="updateFieldexeDetails" >
+            <!-- <div>
                 <label>Branch"</label>
                       Thudiyalore
-               </div>
+               </div> -->
+               <div >
+                
+                <!-- <mat-form-field  appearance="outline"   class="example-full-width" >
+                  <mat-label>Branch</mat-label>
+                  <input matInput  type='text' *ngFor="let cash of this.cashLimitData">
+                  <div>
+                  {{cash.fieldExecutiveName}}</div>
+                </mat-form-field> -->
+                <div class="row" *ngFor="let cash of cashLimitData">
+                  <div>{{cash.fieldExecutiveName}}</div>
+                </div>
+              
+            </div>  
                <div>
                 <label>Req By:</label>
                       Robin

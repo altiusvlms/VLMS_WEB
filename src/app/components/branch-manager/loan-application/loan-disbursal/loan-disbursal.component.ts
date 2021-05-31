@@ -28,14 +28,26 @@ export class LoanDisbursalComponent implements OnInit {
 
   testImage:any;
   CustomerDetail_Data:any;
-
+  resFieldExecutiveId:any;
 
   constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService) { }
     
-  requestForms = new FormGroup({
-    Cash_Limit: new FormControl('', Validators.required),
-    Notes: new FormControl('', Validators.required),
-  })    
+
+  AddExecutiveForms = new FormGroup({
+    feName: new FormControl('chennai', Validators.required),
+    cashInHand: new FormControl('', Validators.required),
+    fieldExecutiveId: new FormControl('1', Validators.required),
+    cashLimit: new FormControl('100', Validators.required),
+    requiredAmount: new FormControl('100', Validators.required),
+    status: new FormControl('pending', Validators.required),
+    locale:new FormControl('en', Validators.required)
+  })
+
+
+  // requestForms = new FormGroup({
+  //   Cash_Limit: new FormControl('', Validators.required),
+  //   Notes: new FormControl('', Validators.required),
+  // })    
   ngOnInit(): void {
     this.Loan_Disbural_Limit();
   }
@@ -57,5 +69,32 @@ export class LoanDisbursalComponent implements OnInit {
 
     })
   }
+
+  // Post API
+  saveRequest(){
+    for(var singleDat of this.loanDisburalData){
+      // console.log("singleDat")
+      // console.log(singleDat.fieldExecutiveName)
+      if(singleDat.fieldExecutiveName == this.AddExecutiveForms.value.feName){
+        console.log(singleDat)
+        this.AddExecutiveForms.value.fieldExecutiveId=singleDat.id
+      }
+    }
+    console.log(this.AddExecutiveForms.value)
+    // debugger
+    // console.log(this.AddExecutiveForms.controls.feName.value)
+    this.crudService.post(`${appModels.FIELDEXECUTIVE}/feCashInHand`, this.AddExecutiveForms.value,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+    ).pipe(untilDestroyed(this)).subscribe( data => {
+      this.resFieldExecutiveId = data.resourceId
+      console.log("data")
+      console.log(this.resFieldExecutiveId)
+      this.toast.success("Created Successfully");
+      this.Loan_Disbural_Limit();    
+    })
+    
+  };
 
 }

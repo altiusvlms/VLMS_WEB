@@ -73,24 +73,24 @@
           </button>
         </div>
         <div class="modal-body">
-    <form [formGroup]="requestForms" >
+    <form [formGroup]="AddExecutiveForms" >
             
             <div >
               <mat-form-field  appearance="outline"  class="example-full-width" >
                 <mat-label>Cash Limit</mat-label>
-                <input matInput  type='text'  formControlName="Cash_Limit"  >
+                <input matInput  type='text'  formControlName="cashInHand"  >
               </mat-form-field>
           </div>
           <div >
             <mat-form-field  appearance="outline"   class="example-full-width" >
               <mat-label>Notes</mat-label>
-              <input matInput  type='Notes'  formControlName="Notes" >
+              <input matInput  type='text' >
             </mat-form-field>
         </div>
                </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="saverequest()" data-dismiss="modal" >Save</button>
+          <button type="button" class="btn btn-primary" (click)="saveRequest()" data-dismiss="modal" >Save</button>
         </div>
       </div>
     </div>
