@@ -46,12 +46,12 @@
           <td mat-cell *matCellDef="let element">{{element.status}} </td>
         </ng-container>
         
-        <ng-container matColumnDef="Action">
+        <!-- <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef> Action </th>
           <td mat-cell *matCellDef="let element">
             <button mat-button (click)="Requestapproveprocess()">Approve request</button>
              </td>
-        </ng-container>
+        </ng-container> -->
       
         
       
@@ -77,25 +77,59 @@
         </button>
       </div>
       <div class="modal-body">
-  <form [formGroup]="requestForms" >
+  <form [formGroup]="AddLoanApprovalForm" >
           
+    <div >
+      <mat-form-field  appearance="outline"  class="example-full-width" >
+        <mat-label>Branch</mat-label>
+        <input matInput  type='text'  formControlName="branchName">
+      </mat-form-field>
+  </div>
+  <div >
+    <mat-form-field  appearance="outline"  class="example-full-width" >
+      <mat-label>Cash Limit</mat-label>
+      <input matInput  type='text'  formControlName="cashLimit">
+    </mat-form-field>
+</div>
           <div >
-            <mat-form-field  appearance="outline"   class="example-full-width" >
-              <mat-label>Cash Limit</mat-label>
-              <input matInput  type='text'  formControlName="Cash_Limit" >
+            <mat-form-field  appearance="outline"  class="example-full-width" >
+              <mat-label>Requested Amount</mat-label>
+              <input matInput  type='text'  formControlName="requestedAmount">
             </mat-form-field>
         </div>
+        
+        <div>
+          <mat-form-field appearance="outline" class="example-full-width">
+          <input matInput [matDatepicker]="dp" placeholder="Required On" formControlName="requestedOn">
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp id="createEnquiryModalLabel"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+
+        <div >
+          <mat-form-field  appearance="outline"  class="example-full-width" >
+            <mat-label>Duration</mat-label>
+            <input matInput  type='text'  formControlName="duration">
+          </mat-form-field>
+      </div>
+        <div >
+          <mat-form-field  appearance="outline"  class="example-full-width" >
+            <mat-label>Approved Amount</mat-label>
+            <input matInput  type='text'  formControlName="approvedAmount">
+          </mat-form-field>
+      </div>
         <div >
           <mat-form-field  appearance="outline"   class="example-full-width" >
             <mat-label>Notes</mat-label>
-            <input matInput  type='Notes'  formControlName="Notes" >
+            <input matInput  type='text' >
           </mat-form-field>
       </div>
           
              </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="saverequest()" data-dismiss="modal" >Save</button>
+        <button type="button" class="btn btn-primary" (click)="saveRequest()" data-dismiss="modal" >Save</button>
       </div>
     </div>
   </div>

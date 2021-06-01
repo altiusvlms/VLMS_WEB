@@ -1,0 +1,41 @@
+<div class="container"> 
+    <div class="header_title">
+    <h2>Cash Limit</h2>
+    <div class="header_right">
+    <!-- <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+  </button> -->
+</div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+          <form [formGroup]="cashLimitForms" >
+            <div class="row" *ngFor="let arrayvalue of array_cashlimit">
+
+              <div class="col-sm-4">
+                <div>Req by:{{arrayvalue.fieldExecutiveName}}</div>
+                <div>Req On:{{arrayvalue.requiredOn}}</div>
+                <!-- <div>Due Date:{{customer.dueDate | date:"dd MMMM yyyy"}}</div> -->
+              </div>
+              
+              
+            </div><br>
+          <div class="row">
+              
+              <div class="col-4 col-sm-4">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Req Amount</mat-label>
+                    <input matInput type='text' formControlName="requiredAmount" />
+                    
+                </mat-form-field>    
+            </div>
+          </div>
+        <div class="col-12 col-sm-12">
+            <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+            <button type="button" class="btn btn-primary" (click)="updateCashLimit()" >Update</button>
+        </div>
+      </form>
+        </div>
+    </div>
+
+</div>

@@ -53,8 +53,8 @@
                 <ng-container matColumnDef="Action">
                   <th mat-header-cell *matHeaderCellDef> Action </th>
                   <td mat-cell *matCellDef="let element">
-                    <button mat-button (click)="Edit_request(element)"  data-toggle="modal" data-target="#createEnquiryModals">Edit</button>
-                    <button mat-button (click)="Delete_request(element)">Delete</button>
+                    <button mat-button (click)="Edit_request(element)">Edit</button>
+                    <!-- <button mat-button (click)="Delete_request(element)">Delete</button> -->
 
                     </td>
                 </ng-container>
@@ -130,8 +130,11 @@
         <div class="modal-body">
     <form [formGroup]="AddExecutiveForms" >
             <!-- <div>
-                <label>Branch"</label>
-                      Thudiyalore
+                <label>Branch</label>
+                <input type='text' *ngFor="let sin of value">
+                <div>
+                  {{sin.fieldExecutiveName}}
+                </div>
                </div> -->
                <div >
                 <mat-form-field  appearance="outline"   class="example-full-width" >
@@ -159,12 +162,12 @@
               <input matInput  type='text'  formControlName="requestOnDate" >
             </mat-form-field>
         </div> -->
-        <div >
+        <!-- <div >
           <mat-form-field  appearance="outline"   class="example-full-width" >
             <mat-label>Approved Amount</mat-label>
             <input matInput  type='text'  formControlName="approveAmount">
           </mat-form-field>
-      </div>
+      </div> -->
           <!-- <div >
             <mat-form-field  appearance="outline"   class="example-full-width" >
               <mat-label>Approve Amount</mat-label>
@@ -181,7 +184,7 @@
                </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="updateFieldexeDetails()" data-dismiss="modal" class="btn_blue">Save</button>
+          <!-- <button type="button" class="btn btn-primary" (click)="updateFieldexeDetails()" data-dismiss="modal" class="btn_blue">Save</button> -->
         </div>
       </div>
     </div>
