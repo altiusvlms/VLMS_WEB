@@ -1,13 +1,15 @@
 
 
-<!-- /** Create HL Payment */ -->
+<!-- /** HL Payment List */ -->
 <div class="container">
     <div class="header_title">
         <h2>HL Payment List</h2>
       </div>
       <div class="header_right">
           <button class="btn_blue" (click)="createHL()">New</button>
-          <button class="btn_blue">Action</button>
+          <!-- <button class="btn_blue">Action</button> -->
+          <button  class="btn_blue" (click)="openPDF()">Print</button>
+
       </div>
 
       <div class="card">
@@ -28,12 +30,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let hl of HlPayment;let i = index;">
-                  <td> <mat-checkbox >
-                    {{hl.id}}
-                    </mat-checkbox>
+                  <td> <mat-checkbox  (change)="eventCheck(hl,$event)" >
+                  </mat-checkbox>
                 </td>
                   <td>{{hl.postDate | date:"dd MMMM yyyy"}}</td>
-                  <td>{{hl.AGTNO}}</td>
+                  <td>{{hl.agtNo}}</td>
                   <td>{{hl.customerName}}</td>
                   <td>{{hl.postType}}</td>
                   <td>{{hl.agent}}</td>
@@ -46,3 +47,36 @@
         </div>
     </div>
 </div>
+
+
+<div class="container" >
+  <div id="pdfTable" >
+  
+    <table class="table table-striped" *ngIf="arrayOfPrint.length > 0">
+      <thead >
+        <tr>
+          <th>Post Date</th>
+          <th>AGT NO</th>
+          <th>Customer Name</th>
+          <th>Post Type</th>
+          <th>Agent</th>
+          <th>Actual Amount</th>
+          <th>Post Amount</th>
+          <th>Remark</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let print of arrayOfPrint;let i = index;">
+          <td>{{print.postDate | date:"dd MMMM yyyy"}}</td>
+          <td>{{print.agtNo}}</td>
+          <td>{{print.customerName}}</td>
+          <td>{{print.postType}}</td>
+          <td>{{print.agent}}</td>
+          <td>{{print.actualAmount}}</td>
+          <td>{{print.postAmount}}</td>
+          <td>{{print.remark}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>

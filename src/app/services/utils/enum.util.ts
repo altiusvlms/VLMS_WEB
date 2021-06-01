@@ -18,7 +18,9 @@ enum appModels {
     GET_DOCUMENT_DETAILS = 'fineract-provider/api/v1/fieldExecutive/getDocuments',
     DASHBOARD_STATUS = 'fineract-provider/api/v1/Cashier/getCashierAnalyticsData',
     ROLES ='fineract-provider/api/v1/roles',
-    HL_PAYMENT = 'fineract-provider/api/v1/Cashier'
+    PERMISSION = 'fineract-provider/api/v1/permissions',
+    HL_PAYMENT = 'fineract-provider/api/v1/Cashier',
+    VOUCHER = 'fineract-provider/api/v1/Cashier'
 }
 
 

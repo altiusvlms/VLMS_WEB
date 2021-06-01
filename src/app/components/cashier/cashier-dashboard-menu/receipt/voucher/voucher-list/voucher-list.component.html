@@ -1,0 +1,77 @@
+
+
+<!-- /** Voucher */ -->
+<div class="container">
+    <div class="header_title">
+        <h2>Voucher List</h2>
+      </div>
+      <div class="header_right">
+          <button class="btn_blue" (click)="createVoucher()">New</button>
+          <!-- <button class="btn_blue" (click)="openPDF()">Action</button> -->
+          <button  class="btn_blue" (click)="openPDF()">Print</button>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead >
+                <tr>
+                  <th>Select</th>
+                  <th>Created Date</th>
+                  <th>Particulars</th>
+                  <th>Voucher Type</th>
+                  <th>Voucher No</th>
+                  <th>Credit</th>
+                  <th>Debit</th>
+                  <th>Remark</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let voucher of voucherList;let i = index;">
+                  <td> <mat-checkbox  (change)="eventCheck(voucher,$event)" >
+                    </mat-checkbox>
+                </td>
+                  <td>{{voucher.createdDate | date:"dd MMMM yyyy"}}</td>
+                  <td>{{voucher.particulars}}</td>
+                  <td>{{voucher.voucherType}}</td>
+                  <td>{{voucher.voucherNumber}}</td>
+                  <td>{{voucher.credit}}</td>
+                  <td>{{voucher.debit}}</td>
+                  <td>{{voucher.remarks}}</td>
+                </tr>
+              </tbody>
+          </table>
+
+        </div>
+    </div>
+</div>
+
+<div class="container" >
+<div id="pdfTable" >
+
+  <table class="table table-striped" *ngIf="arrayOfPrint.length > 0">
+    <thead >
+        <tr>
+          <th>Created Date</th>
+          <th>Particulars</th>
+          <th>Voucher Type</th>
+          <th>Voucher No</th>
+          <th>Credit</th>
+          <th>Debit</th>
+          <th>Remark</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let val of arrayOfPrint">
+          <td>{{val.createdDate | date:"dd MMMM yyyy"}}</td>
+          <td>{{val.particulars}}</td>
+          <td>{{val.voucherType}}</td>
+          <td>{{val.voucherNumber}}</td>
+          <td>{{val.credit}}</td>
+          <td>{{val.debit}}</td>
+          <td>{{val.remarks}}</td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+</div>

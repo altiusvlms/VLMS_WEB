@@ -1,0 +1,86 @@
+
+
+<!-- /** Create Voucher */ -->
+<div class="container">
+    <div class="header_title">
+        <h2>Voucher</h2>
+    </div>
+    <div class="card">
+        <div class="card-body">
+          <form [formGroup]="createVoucherForms" >
+              <div class="row">
+                <div class="col-4 col-sm-4">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Created Date</mat-label>
+                        <input matInput [matDatepicker]="dp" placeholder="Date" formControlName="createdDate" >
+                        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp></mat-datepicker>
+                </mat-form-field>
+                </div>
+                  <div class="col-4 col-sm-4">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Voucher No</mat-label>
+                          <input matInput type='text' formControlName="voucherNumber" >
+                      </mat-form-field>
+                  </div>
+                  <div class="col-4 col-sm-4">
+                      <mat-form-field appearance="outline" class="example-full-width" >
+                          <mat-label>Voucher Type</mat-label>
+                          <!-- <mat-select formControlName="voucherType"  (selectionChange)="onTypeChange($event.value)">
+                            <mat-option  value="payment">payment</mat-option>
+                          </mat-select> -->
+                          <input matInput type='text' formControlName="voucherType" >
+                      </mat-form-field>
+                  </div>
+              </div>
+
+
+              <table  class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Particulars</th>
+                        <th>Credit</th>
+                        <th>Debit</th>
+                      </tr>
+                </thead>
+                <tbody *ngFor="let field of fieldArray; let i = index" >
+                    <tr >
+                      <td>  
+                          <mat-form-field appearance="outline" class="example-full-width">
+                            <input matInput type='text'  >
+                        </mat-form-field></td>
+                      <td> <mat-form-field appearance="outline" class="example-full-width">
+                            <input matInput type='text' formControlName="particulars" >
+                            </mat-form-field> </td>
+                      <td> <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type='text' formControlName="credit" >
+                    </mat-form-field></td>
+                      <td> <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type='text' formControlName="debit" >
+                    </mat-form-field></td> 
+                    </tr>
+                    <t><button class="btn btn-primary" type="button" (click)="addFieldValue()">Add</button></t>
+                    <tr *ngIf="i>0"> <button class="btn btn-primary"  type="button" (click)="deleteFieldValue(i)">Delete</button>     </tr>
+                </tbody>
+            </table>
+
+            <div class="col-4 col-sm-4">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Remark</mat-label>
+                    <input matInput type='text' formControlName="remarks" >   
+                </mat-form-field>
+            </div>
+
+            
+        <div class="row">
+            <button class="btn_blue" (click)="saveVoucher()" >Save</button>
+        </div>
+
+    </form>
+
+
+</div>
+</div>
+</div>
+

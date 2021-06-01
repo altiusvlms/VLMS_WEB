@@ -10,7 +10,7 @@ import { SharedModule } from '../../shared/shared/shared.module';
 
 /** Custom Components */
 import { ApplicantOnlineComponent } from './applicant-online/applicant-online.component';
-import { PickApplicantComponent } from './pick-applicant/pick-applicant.component';
+import { PickApplicantComponent,SendToApprover } from './pick-applicant/pick-applicant.component';
 
 
 
@@ -18,7 +18,7 @@ import { PickApplicantComponent } from './pick-applicant/pick-applicant.componen
 /** Applicant Module */
 
 @NgModule({
-  declarations: [ApplicantOnlineComponent, PickApplicantComponent],
+  declarations: [ApplicantOnlineComponent, PickApplicantComponent,SendToApprover],
   imports: [
     CommonModule,
     ApplicantRoutingModule,

@@ -206,6 +206,7 @@ export class LoanProcessComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
+      console.log(this.id)
     });
     this.getCustomerDetails(); 
     

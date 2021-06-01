@@ -36,12 +36,15 @@
         </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
         <span>View More</span>
-    </div>
+    </div> -->
 
     <div class="card">
         <div class="card-body">
+          <div class="header_right">
+            <!-- tesr -->
+          </div>
       <form class="example-form"  [formGroup]="applicantDetailsForm" >
           <div class="row" formGroupName="loanDetailsData">
             <div class="col-4 col-sm-4">                 
@@ -146,8 +149,8 @@
             <div class="row"  formGroupName="bankDetails">
               <div class="col-4 col-sm-4">                 
                 <mat-form-field  appearance="outline"  class="example-full-width" >
-                  <mat-label>Transfer Amount1</mat-label>
-                  <input matInput type='text'  >
+                  <mat-label>Transfer Amount</mat-label>
+                  <input matInput type='text'  formControlName="loanEligibleAmount" >
                   </mat-form-field>
               </div>
               <p>Bank Details</p>
@@ -190,7 +193,7 @@
             </div> 
           <div class="row">
               <button class="btn_blue">Save</button>
-              <button class="btn_blue">Save & Process</button>
+              <button class="btn_blue" (click)="saveProcess()">Save & Process</button>
           </div>
       </form>
         </div>

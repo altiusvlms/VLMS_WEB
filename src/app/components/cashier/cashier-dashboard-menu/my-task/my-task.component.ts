@@ -39,6 +39,7 @@ export class MyTaskComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
       this.taskListData= response;
+      console.log(this.taskListData)
       this.sharedService.setLoaderShownProperty(false);  
     })
   }

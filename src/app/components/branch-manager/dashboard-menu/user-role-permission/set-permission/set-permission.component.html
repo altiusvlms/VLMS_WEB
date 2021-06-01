@@ -1,0 +1,52 @@
+
+<!-- /** Set Permission */ -->
+<div class="container">
+    <div class="header_title">
+        <h2>Set Permission</h2>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+        
+                <div class="col-4 col-sm-4">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Select Role</mat-label>
+                        <mat-select >
+                            <mat-option  *ngFor="let name of roleListData"  value="{{name.description}}">{{name.description}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-4 col-sm-4">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Select User</mat-label>
+                        <mat-select >
+                            <mat-option  *ngFor="let name of roleListData"  value="{{name.name}}">{{name.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <table class="table table-striped" >
+                <thead>
+                  <tr>
+                    <th>Modules</th>
+                    <th>Create</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor="let permission of permissionListData">
+                    <td>{{permission.entityName}}</td>
+                    <td *ngIf="permission.actionName == 'CREATE'">  <mat-checkbox [checked]="permission.selected"></mat-checkbox></td>
+                     <td *ngIf="permission.actionName == 'UPDATE'">  <mat-checkbox [checked]="permission.selected"></mat-checkbox></td>
+                     <td *ngIf="permission.actionName == 'DELETE'">  <mat-checkbox [checked]="permission.selected"></mat-checkbox></td>
+                  </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>    
+
+</div>    
