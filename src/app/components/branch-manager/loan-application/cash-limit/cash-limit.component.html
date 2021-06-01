@@ -19,7 +19,7 @@
               
                 <ng-container matColumnDef="Sr no">
                   <th mat-header-cell *matHeaderCellDef> Sr no </th>
-                  <td mat-cell *matCellDef="let element,,let i = index;"> {{i + 1}} </td>
+                  <td mat-cell *matCellDef="let element,let i = index;"> {{i + 1}} </td>
                 </ng-container>
               
                 <ng-container matColumnDef="fieldExecutive">
@@ -53,8 +53,8 @@
                 <ng-container matColumnDef="Action">
                   <th mat-header-cell *matHeaderCellDef> Action </th>
                   <td mat-cell *matCellDef="let element">
-                    <button mat-button (click)="Edit_request()"  data-toggle="modal" data-target="#createEnquiryModals">Edit</button>
-                    <button mat-button (click)="Delete_request()">Delete</button>
+                    <button mat-button (click)="Edit_request(element)">Edit</button>
+                    <!-- <button mat-button (click)="Delete_request(element)">Delete</button> -->
 
                     </td>
                 </ng-container>
@@ -128,56 +128,63 @@
           </button>
         </div>
         <div class="modal-body">
-    <form [formGroup]="updateFieldexeDetails" >
+    <form [formGroup]="AddExecutiveForms" >
             <!-- <div>
-                <label>Branch"</label>
-                      Thudiyalore
+                <label>Branch</label>
+                <input type='text' *ngFor="let sin of value">
+                <div>
+                  {{sin.fieldExecutiveName}}
+                </div>
                </div> -->
                <div >
-                
-                <!-- <mat-form-field  appearance="outline"   class="example-full-width" >
-                  <mat-label>Branch</mat-label>
-                  <input matInput  type='text' *ngFor="let cash of this.cashLimitData">
-                  <div>
-                  {{cash.fieldExecutiveName}}</div>
-                </mat-form-field> -->
-                <div class="row" *ngFor="let cash of cashLimitData">
-                  <div>{{cash.fieldExecutiveName}}</div>
-                </div>
-              
+                <mat-form-field  appearance="outline"   class="example-full-width" >
+                  <mat-label>Req Name</mat-label>
+                  <input matInput  type='text' formControlName = "feName">
+                </mat-form-field>
             </div>  
-               <div>
-                <label>Req By:</label>
-                      Robin
-               </div>
-               <div>
-                <label>Req On:</label>
-                      20 jan 2021
-               </div>
+            <div >
+              <mat-form-field  appearance="outline"   class="example-full-width" >
+                <mat-label>Req On</mat-label>
+                <input matInput  type='text' formControlName = "requiredOn">
+              </mat-form-field>
+          </div>  
+               
             
             <div >
               <mat-form-field  appearance="outline"   class="example-full-width" >
                 <mat-label>Req Amount</mat-label>
-                <input matInput  type='text'  formControlName="Req_Amount" >
+                <input matInput  type='text'  formControlName="requiredAmount" >
               </mat-form-field>
           </div>
-          <div >
+          <!-- <div >
+            <mat-form-field  appearance="outline"   class="example-full-width" >
+              <mat-label>Req On Date</mat-label>
+              <input matInput  type='text'  formControlName="requestOnDate" >
+            </mat-form-field>
+        </div> -->
+        <!-- <div >
+          <mat-form-field  appearance="outline"   class="example-full-width" >
+            <mat-label>Approved Amount</mat-label>
+            <input matInput  type='text'  formControlName="approveAmount">
+          </mat-form-field>
+      </div> -->
+          <!-- <div >
             <mat-form-field  appearance="outline"   class="example-full-width" >
               <mat-label>Approve Amount</mat-label>
               <input matInput  type='text'  formControlName="Approve_Amount" >
             </mat-form-field>
-        </div>
-        <div >
+        </div> -->
+        <!-- <div >
           <mat-form-field  appearance="outline"   class="example-full-width" >
             <mat-label>Notes</mat-label>
             <input matInput  type='text'  formControlName="Notes" >
           </mat-form-field>
-      </div>
+      </div> -->
 
                </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="Edit_changes()" data-dismiss="modal" class="btn_blue">Save</button>
+          <!-- <button type="button" class="btn btn-primary" (click)="updateFieldexeDetails()" data-dismiss="modal" class="btn_blue">Save</button> -->
         </div>
       </div>
     </div>

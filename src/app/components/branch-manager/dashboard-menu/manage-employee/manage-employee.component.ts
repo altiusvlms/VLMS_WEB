@@ -15,6 +15,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 import { CLASS_NAME } from '@angular/flex-layout';
 import { single } from 'rxjs/operators';
+import { generalAccidentialIns } from './manage-employee.model';
 
 @UntilDestroy({ checkProperties: true })
 
@@ -47,6 +48,7 @@ export class ManageEmployeeComponent implements OnInit {
   employeeInsuranceDetails:any;
   showSpouse : Boolean = false;
   documentDetails : any;
+  generalAccidentialIns : generalAccidentialIns;
 
   // manageEmployeeForm:any  
   // forvalue : CLASS_NAME;
@@ -118,23 +120,23 @@ export class ManageEmployeeComponent implements OnInit {
     // }),
 
     employee_communicationAddress :  new FormGroup({
-      addressLine1:new FormControl('',),
-      addressLine2:new FormControl('',),
-      landmark:new FormControl('',),
-      postalCode:new FormControl('',),
-      area:new FormControl('',),
-      city:new FormControl('',),
-      state:new FormControl('',)
+      addressLine1:new FormControl(''),
+      addressLine2:new FormControl(''),
+      landmark:new FormControl(''),
+      postalCode:new FormControl(''),
+      area:new FormControl(''),
+      city:new FormControl(''),
+      state:new FormControl('')
     }),
 
     employee_permanentAddress  : new FormGroup({
-      addressLine1:new FormControl('',),
-      addressLine2:new FormControl('',),
-      landmark:new FormControl('',),
-      postalCode:new FormControl('',),
-      area:new FormControl('',),
-      city:new FormControl('',),
-      state:new FormControl('',)
+      addressLine1:new FormControl(''),
+      addressLine2:new FormControl(''),
+      landmark:new FormControl(''),
+      postalCode:new FormControl(''),
+      area:new FormControl(''),
+      city:new FormControl(''),
+      state:new FormControl('')
     }),
 
     general_insurance :  new FormGroup({
@@ -150,10 +152,10 @@ export class ManageEmployeeComponent implements OnInit {
     }),
 
     school_qualification : new FormGroup({
-      university:new FormControl('',),
-      qualification: new FormControl('',),
-      percentage : new FormControl('',),
-      passingyear : new FormControl('',),
+      university:new FormControl(''),
+      qualification: new FormControl(''),
+      percentage : new FormControl(''),
+      passingyear : new FormControl(''),
     }),
     
     college_qualification : new FormGroup({
@@ -300,7 +302,8 @@ getSingleEmployeeList(){
  
     console.log(this.employeeArray)
 
-  
+    
+     
 this.manageEmployeeForm.patchValue({
     name: this.employeeArray[0].name,
     calledName:this.employeeArray[0].calledName,
@@ -330,7 +333,7 @@ this.manageEmployeeForm.patchValue({
     bankName: this.employeeArray[0].bankDetails.bankName,
     branchName: this.employeeArray[0].bankDetails.branchName,
     
-
+// replace("\"\"", "")
   employee_communicationAddress:{
     addressLine1:this.employeeArray[0].communicationAdd.addressLine1,
     addressLine2: this.employeeArray[0].communicationAdd.addressLine2,
@@ -379,7 +382,8 @@ this.manageEmployeeForm.patchValue({
   passingyear : this.employeeArray[0].postgraduateQualification.passingyear,
   },
   
-  // general_insurance:  [{
+  
+    
   general_insurance:{
   policyNumber:this.employeeArray[0].insuranceDetails.policyNumber,
   companyCoverage: this.employeeArray[0].insuranceDetails.companyCoverage,
@@ -390,8 +394,7 @@ this.manageEmployeeForm.patchValue({
     companyCoverage: this.employeeArray[0].accidentalInsuranceDetails.companyCoverage,
     policyCoverage : this.employeeArray[0].accidentalInsuranceDetails.policyCoverage,
     }
-  // }]
-  
+    
 })
 
 })
@@ -464,13 +467,15 @@ updateEmployeeEducationDetails(){
     this.employeeEducationDetails = response;
 })
 }
-
+// this.generalAccidentialIns,
 updateEmployeeInsuranceDetails(){
+  this.generalAccidentialIns.general_insurance = this.manageEmployeeForm.value.general_insurance.value
+  this.generalAccidentialIns.accidental_insurance = this.manageEmployeeForm.value.accidental_insurance.value
   console.log("this.manageEmployeeForm.value")
   // console.log(this.manageEmployeeForm.value)
-  this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
-  this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
-  this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeForm.value.general_insurance,
+  // this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
+  // this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
+  this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.generalAccidentialIns,
   this.id,
   ).pipe(untilDestroyed(this)).subscribe(response => {
     this.employeeInsuranceDetails = response;

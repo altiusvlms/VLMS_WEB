@@ -7,6 +7,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -30,17 +31,19 @@ export class LoanDisbursalComponent implements OnInit {
   CustomerDetail_Data:any;
   resFieldExecutiveId:any;
 
-  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService) { }
+  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService, public datepipe: DatePipe) { }
     
 
-  AddExecutiveForms = new FormGroup({
-    feName: new FormControl('chennai', Validators.required),
-    cashInHand: new FormControl('', Validators.required),
-    fieldExecutiveId: new FormControl('1', Validators.required),
-    cashLimit: new FormControl('100', Validators.required),
-    requiredAmount: new FormControl('100', Validators.required),
-    status: new FormControl('pending', Validators.required),
-    locale:new FormControl('en', Validators.required)
+  AddLoanDisbursalForm = new FormGroup({
+    branchName: new FormControl('', Validators.required),
+    cashLimit: new FormControl('', Validators.required),
+    duration: new FormControl('', Validators.required),
+    requestedOn:new FormControl('', Validators.required),
+    dateFormat:new FormControl('dd MMMM yyyy', Validators.required),
+    locale:new FormControl('en', Validators.required),
+    requestedAmount:new FormControl('', Validators.required),
+    approvedAmount:new FormControl('', Validators.required),
+    status:new FormControl('pending', Validators.required)
   })
 
 
@@ -53,9 +56,9 @@ export class LoanDisbursalComponent implements OnInit {
   }
   ngOnDestroy() { } 
 
-  saverequest(){
-    this.toast.success("Created Successfully");
-  };
+  // saverequest(){
+  //   this.toast.success("Created Successfully");
+  // };
 
   Loan_Disbural_Limit(){
     this.crudService.get(`${appModels.EMPLOYEE}/getLoanDisbursal`, {
@@ -75,15 +78,16 @@ export class LoanDisbursalComponent implements OnInit {
     for(var singleDat of this.loanDisburalData){
       // console.log("singleDat")
       // console.log(singleDat.fieldExecutiveName)
-      if(singleDat.fieldExecutiveName == this.AddExecutiveForms.value.feName){
+      if(singleDat.fieldExecutiveName == this.AddLoanDisbursalForm.value.feName){
         console.log(singleDat)
-        this.AddExecutiveForms.value.fieldExecutiveId=singleDat.id
+        this.AddLoanDisbursalForm.value.fieldExecutiveId=singleDat.id
       }
     }
-    console.log(this.AddExecutiveForms.value)
+    console.log(this.AddLoanDisbursalForm.value)
     // debugger
     // console.log(this.AddExecutiveForms.controls.feName.value)
-    this.crudService.post(`${appModels.FIELDEXECUTIVE}/feCashInHand`, this.AddExecutiveForms.value,
+    this.AddLoanDisbursalForm.value.requestedOn=this.datepipe.transform(this.AddLoanDisbursalForm.value.requestedOn, 'dd MMMM yyyy');
+    this.crudService.post(`${appModels.EMPLOYEE}/submitLoanDisbursal`, this.AddLoanDisbursalForm.value,
       { params:{
         tenantIdentifier: "default"   
       }}
