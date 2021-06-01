@@ -59,9 +59,6 @@ export class LoanProcessComponent implements OnInit {
   passbookImage: any;
 
 
-  showCommunication:Boolean = true;
-  showPermanent:Boolean = false;
-  showOffice:Boolean = false;
 
   showUpdatebtn : Boolean = false;
 
@@ -221,21 +218,6 @@ export class LoanProcessComponent implements OnInit {
   }
   previousStep() {
     this.selectedIndex -= 1;
-  }
-  communicationAddress(){
-    this.showCommunication = true;
-    this.showPermanent = false;
-    this.showOffice = false;
-  }
-  permanentAddress(){
-    this.showPermanent = true;
-    this.showCommunication = false;
-    this.showOffice = false;
-  }
-  officeAddress(){
-    this.showOffice = true;
-    this.showPermanent = false;
-    this.showCommunication = false;
   }
 
   ngOnDestroy() { }

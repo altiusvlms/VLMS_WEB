@@ -17,6 +17,7 @@ import { HlPaymentListComponent } from './receipt/hl-payment/hl-payment-list/hl-
 import { YetToReceiptComponent } from './receipt/create-receipt/yet-to-receipt/yet-to-receipt.component';
 import { VoucherComponent } from './receipt/voucher/voucher.component';
 import { VoucherListComponent } from './receipt/voucher/voucher-list/voucher-list.component';
+import { LetterComponent } from './letter/letter.component';
 
 
 
@@ -24,7 +25,7 @@ import { VoucherListComponent } from './receipt/voucher/voucher-list/voucher-lis
 /** Cashier Dashboard Menu Module */
 
 @NgModule({
-  declarations: [MyTaskComponent,EditMyTask, TopupLoanComponent,CreateReceiptComponent,SearchReceipt,HlPaymentComponent, HlPaymentListComponent,YetToReceiptComponent, VoucherComponent, VoucherListComponent],
+  declarations: [MyTaskComponent,EditMyTask, TopupLoanComponent,CreateReceiptComponent,SearchReceipt,HlPaymentComponent, HlPaymentListComponent,YetToReceiptComponent, VoucherComponent, VoucherListComponent, LetterComponent],
   imports: [
     CommonModule,
     CashierDashboardMenuRoutingModule,

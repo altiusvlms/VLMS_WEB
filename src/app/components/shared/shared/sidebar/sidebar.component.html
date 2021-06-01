@@ -97,9 +97,23 @@
            <li >
             <a [routerLinkActive]="['active']" [routerLink]="['/cashier/voucher-list']"  aria-expanded="false" >Create Voucher</a>
            </li>
-           <li >
-            <a [routerLinkActive]="['active']"  aria-expanded="false" >Letter</a>
-           </li>
+           <li class="has-sub"> <a  [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" >Letter</a>
+            <ul>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >B Shedule</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >Settlement</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >Repossessed</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >Seizing</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >Rc Endt Cancel</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >Inc Endt Cancel</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >Inc Transfer Noc</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >Name Trans</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >RTO Work</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >Due Reminder</a></li>
+              <li><a [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" mat-menu-item >Complaint</a></li>
+            </ul>
+          </li>
+
+
        </ul>
      </div>
    </div>

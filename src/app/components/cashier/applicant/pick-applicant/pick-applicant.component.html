@@ -2,6 +2,33 @@
     <div class="header_title">
         <h2>Picked!!</h2>
       </div>
+
+    
+      <div class="card" *ngIf="arrayOfapprovel.length > 0">
+        <div class="card-body">
+          <div class="row" *ngFor="let loan of arrayOfapprovel">
+            <div class="col-sm-2" style="color:#28a745">
+              {{loan.loanTransfer}}
+            </div>
+            <div class="col-sm-2" style="color:#28a745">
+              {{loan.DCTransfer}}
+          </div>
+          <div class="col-sm-2" style="color:#28a745">
+            {{loan.request}}
+          </div>
+          <div class="col-sm-2" style="color:#28a745">
+            {{loan.authoriser}}
+          </div>
+          <div class="col-sm-2" style="color:#28a745">
+            {{loan.remindAuthoriser}}
+          </div>
+          <div class="col-sm-2" style="color:#28a745">
+            {{loan.additionalTransfer}}
+          </div>
+          </div>
+          </div>
+      </div>
+
     <div class="card">
         <div class="card-body">
         <div class="row" *ngFor="let applicant of applicantDetails">
@@ -42,9 +69,7 @@
 
     <div class="card">
         <div class="card-body">
-          <div class="header_right">
-            <!-- tesr -->
-          </div>
+  
       <form class="example-form"  [formGroup]="applicantDetailsForm" >
           <div class="row" formGroupName="loanDetailsData">
             <div class="col-4 col-sm-4">                 
@@ -192,7 +217,7 @@
               </div>
             </div> 
           <div class="row">
-              <button class="btn_blue">Save</button>
+              <button class="btn_blue" (click)="save()">Save</button>
               <button class="btn_blue" (click)="saveProcess()">Save & Process</button>
           </div>
       </form>

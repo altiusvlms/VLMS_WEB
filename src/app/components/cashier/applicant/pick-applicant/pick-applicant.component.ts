@@ -22,7 +22,7 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class PickApplicantComponent implements OnInit {
 
-  constructor(private router: Router,private crudService: CrudService,private route: ActivatedRoute,private sanitizer:DomSanitizer,private dialog: MatDialog) { }
+  constructor(private router: Router,private crudService: CrudService,private route: ActivatedRoute,private sanitizer:DomSanitizer,private dialog: MatDialog,public datepipe: DatePipe,private toast: ToastrService) { }
 
   /** Pick Applicant Variables */
   id: any;
@@ -56,6 +56,14 @@ export class PickApplicantComponent implements OnInit {
     })
   })
 
+  approvelForm = new FormGroup({
+    approvedOnDate: new FormControl(''),
+    approvedLoanAmount: new FormControl(''),
+    expectedDisbursementDate: new FormControl(''),
+    disbursementData: new FormControl(''),
+    locale: new FormControl('en'),
+    dateFormat: new FormControl('dd MMMM yyyy')
+  })
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -109,12 +117,47 @@ export class PickApplicantComponent implements OnInit {
     })
   }
 
+  save(){
+    this.applicantDetailsForm.value.loanDetailsData.dueDate = this.datepipe.transform(this.applicantDetailsForm.value.loanDetailsData.dueDate, 'dd MMMM yyyy');
+    this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyLoanDetails`,this.applicantDetailsForm.value.loanDetailsData,
+    this.applicantDetails.loanDetailsData.id,
+   ).pipe(untilDestroyed(this)).subscribe(async response => {
+    this.toast.success("Saved Successfully");
+
+    await this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyBankDetails`,this.applicantDetailsForm.value.bankDetails,
+    this.applicantDetails.bankDetails.id,
+    ).pipe(untilDestroyed(this)).subscribe(response => {
+
+    //   this.approvelForm.value.approvedOnDate=this.datepipe.transform(this.approvelForm.value.approvedOnDate, 'dd MMMM yyyy');
+    //   this.approvelForm.value.expectedDisbursementDate=this.datepipe.transform(this.approvelForm.value.expectedDisbursementDate, 'dd MMMM yyyy');
+    // this.crudService.post(`${appModels.APPROVEL}/${response.resourceId}`, this.approvelForm.value,
+    //   {params:{
+    //     command: "approve"   
+    //   }}
+    // ).pipe(untilDestroyed(this)).subscribe(response => {
+    // })
+
+  })
+  })
+  }
+  arrayOfapprovel: any = [];
+  getApprovelData: any;
+
+  getStep2(){
+    this.getApprovelData = JSON.parse(localStorage.getItem('sentoToApprover'));
+    this.arrayOfapprovel.push(this.getApprovelData);
+    console.log(this.arrayOfapprovel)
+  }
+
   saveProcess(){
     console.log("test")
     const dialogRef = this.dialog.open(SendToApprover, {
       width: '100vw',
       height: '90vh',
     });  
+    dialogRef.afterClosed().subscribe((response : any) => {
+        this.getStep2();
+    });
   }
 
 }
@@ -157,22 +200,20 @@ export class SendToApprover {
 
     ngOnInit(): void {
     }
+
     step1(){
-       console.log(this.step1Form.value)
        if(this.step1Form.value.branch !== ''){
-         console.log("tesrs")
          this.showStep2 = true;
        }
     }
     step2(){
-      console.log(this.step2Form.value)
       this.sendToapproval = this.step2Form.value;
-      console.log( this.sendToapproval)
-      localStorage.setItem('sentoToApprover', this.sendToapproval);
+      localStorage.setItem('sentoToApprover', JSON.stringify(this.sendToapproval));
       this.dialogRef.close();
+    }
 
-    }
     back(){
-      this.showStep2 = true;
+      this.showStep2 = false;
     }
+
   }

@@ -131,7 +131,7 @@ export class SearchReceipt {
     this.dialogRef.close();
   }
   createReceipt(){
-    this.close();
+    this.dialogRef.close();
     this.customerList.map((res: any) => {
       if(res.customerDetails.name == this.searchForms.value.customerName){
           this.router.navigate(['/cashier/create-receipt/' +res.customerDetails.id]);

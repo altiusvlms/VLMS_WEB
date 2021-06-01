@@ -50,6 +50,7 @@ export class YetToReceiptComponent implements OnInit {
   }
 
   createReceiptByID(id: any){
+    console.log(id)
     this.router.navigate(['cashier/create-receipt/'  + id]);
   }
   createReceipt(){

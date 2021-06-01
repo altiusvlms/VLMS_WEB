@@ -20,7 +20,9 @@ enum appModels {
     ROLES ='fineract-provider/api/v1/roles',
     PERMISSION = 'fineract-provider/api/v1/permissions',
     HL_PAYMENT = 'fineract-provider/api/v1/Cashier',
-    VOUCHER = 'fineract-provider/api/v1/Cashier'
+    VOUCHER = 'fineract-provider/api/v1/Cashier',
+    MY_TASK = 'fineract-provider/api/v1/Cashier',
+    APPROVEL = 'fineract-provider/api/v1/loans/'
 }
 
 

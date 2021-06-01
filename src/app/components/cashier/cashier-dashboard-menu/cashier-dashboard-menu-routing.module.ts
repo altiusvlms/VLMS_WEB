@@ -14,6 +14,7 @@ import { HlPaymentListComponent } from './receipt/hl-payment/hl-payment-list/hl-
 import { YetToReceiptComponent } from './receipt/create-receipt/yet-to-receipt/yet-to-receipt.component';
 import { VoucherComponent } from './receipt/voucher/voucher.component';
 import { VoucherListComponent } from './receipt/voucher/voucher-list/voucher-list.component';
+import { LetterComponent } from './letter/letter.component';
 
 
 
@@ -29,6 +30,7 @@ const routes: Routes = [
     { path: 'yet-to-receipt', component: YetToReceiptComponent },
     { path: 'voucher', component: VoucherComponent },
     { path: 'voucher-list', component: VoucherListComponent },
+    { path: 'letter', component: LetterComponent },
   ])
 ];
 

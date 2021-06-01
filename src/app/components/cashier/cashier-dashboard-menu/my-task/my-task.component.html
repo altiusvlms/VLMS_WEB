@@ -2,13 +2,13 @@
 <div class="container">
     <div class="header_title">
         <h2>My Task</h2>
-        <div class="header_right">
+        <!-- <div class="header_right">
             <mat-form-field appearance="outline">
                 <mat-label>Search</mat-label>
                 <input matInput placeholder="Search" />
                 <mat-icon matPrefix>search</mat-icon>
               </mat-form-field> 
-        </div>
+        </div> -->
       </div>
       <div class="card">
         <div class="card-body">
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let task of taskListData;let i = index;">
-                  <td></td>
+                  <td>{{task.assignBy}}</td>
                   <td>{{task.taskType}}</td>
                   <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>
                   <td>{{task.status  ? task.status : "open"}}</td>

@@ -41,7 +41,7 @@
 
   <!-- Tab 1 -->
 
-  <mat-tab label="Applicant"> 
+  <mat-tab label="Applicant"  [disabled]='!selectedIndex.isActive'> 
     
           <form [formGroup]="applicantForm" >
             <div formGroupName="customerDetails">
@@ -373,7 +373,7 @@
   </mat-tab>
 
   <!-- Tab2 -->
-  <mat-tab label="Co-Applicant">
+  <mat-tab label="Co-Applicant"  [disabled]='!selectedIndex.isActive'>
     
         <form class="example-form"  [formGroup]="co_applicantForm">
         <div formGroupName="customerGuarantor">
@@ -483,11 +483,9 @@
               </div>
               </div></div></div>
           
-              <div class="container">
                 <div class="row">
                   <div class="col-6 col-sm-6"><div class="card">
                     <div class="card-body">
-                      <div class="container">
                         <p>ID Proofs</p>
                         <div class="row">
                           <div class="col-12 col-sm-12">
@@ -518,158 +516,189 @@
                           </div>        
                   
                   
-                  </div></div></div></div></div>
+                  </div></div></div></div>
                   
-                  <div class="col-6 col-sm-6"><div class="card">
+                  <div class="col-md-6"><div class="card">
                     <div class="card-body">
             <form [formGroup]="co_applicantAddressForm">
-                <div class="col-sm-2" style="margin-left:5%">
+                <div>
                   <h2>ADD ADDRESS</h2>
-                  <button class="btn btn-primary" (click)="communicationAddress()">Communication Address</button>
-                  <button class="btn btn-primary" (click)="permanentAddress()">Permanent Address</button>
-                  <button class="btn btn-primary" (click)="officeAddress()">Office Address</button>
-                </div>
-                  <div class="col-sm-2" formGroupName="communicationAdd" *ngIf="showCommunication">Communication Address:
-                  <div  > 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Address Line1</mat-label>
-                        <input matInput type="text" formControlName="addressLine1">
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Address Line2</mat-label>
-                        <input matInput type="text" formControlName="addressLine2">
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Area</mat-label>
-                        <input matInput type="text" formControlName="area">
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>City</mat-label>
-                        <input matInput type="text" formControlName="city">
-                      </mat-form-field>
-                  </div>
-              
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Landmark</mat-label>
-                        <input matInput type="text" formControlName="landmark">
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Pincode</mat-label>
-                        <input matInput type="text" formControlName="postalCode">
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>State</mat-label>
-                        <input matInput type="text" formControlName="state">
-                      </mat-form-field>
-                  </div>
-                  </div>
-                  <div class="col-sm-2" formGroupName="permanentAdd"  *ngIf="showPermanent" >Permanent Address:
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Address Line1</mat-label>
-                        <input matInput type="text" formControlName="addressLine1">
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Address Line2</mat-label>
-                        <input matInput type="text" formControlName="addressLine2" >
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Area</mat-label>
-                        <input matInput type="text" formControlName="area" >
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>City</mat-label>
-                        <input matInput type="text" formControlName="city">
-                      </mat-form-field>
-                  </div>
-                 
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Landmark</mat-label>
-                        <input matInput type="text"  formControlName="landmark">
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Pincode</mat-label>
-                        <input matInput type="text" formControlName="postalCode">
-                      </mat-form-field>
-                  </div>
-                  <div> 
-                      <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>State</mat-label>
-                        <input matInput type="text" formControlName="state">
-                      </mat-form-field>
-                  </div>
-                  </div>
-                  <div class="col-sm-2" formGroupName="officeAdd" *ngIf="showOffice" >Office Address:
-                    <div> 
-                        <mat-form-field appearance="outline" class="example-full-width">
-                          <mat-label>Address Line1</mat-label>
-                          <input matInput type="text" formControlName="addressLine1" >
-                        </mat-form-field>
-                    </div>
-                    <div> 
-                        <mat-form-field appearance="outline" class="example-full-width">
-                          <mat-label>Address Line2</mat-label>
-                          <input matInput type="text" formControlName="addressLine2">
-                        </mat-form-field>
-                    </div>
-                    <div> 
-                        <mat-form-field appearance="outline" class="example-full-width">
-                          <mat-label>Area</mat-label>
-                          <input matInput type="text" formControlName="area" >
-                        </mat-form-field>
-                    </div>
-                    <div> 
-                        <mat-form-field appearance="outline" class="example-full-width">
-                          <mat-label>City</mat-label>
-                          <input matInput type="text" formControlName="city">
-                        </mat-form-field>
-                    </div>
-                  
-                    <div> 
-                        <mat-form-field appearance="outline" class="example-full-width">
-                          <mat-label>Landmark</mat-label>
-                          <input matInput type="text"  formControlName="landmark">
-                        </mat-form-field>
-                    </div>
-                    <div> 
-                        <mat-form-field appearance="outline" class="example-full-width">
-                          <mat-label>Pincode</mat-label>
-                          <input matInput type="text" formControlName="postalCode">
-                        </mat-form-field>
-                    </div>
-                    <div> 
-                        <mat-form-field appearance="outline" class="example-full-width">
-                          <mat-label>State</mat-label>
-                          <input matInput type="text" formControlName="state" >
-                        </mat-form-field>
-                    </div>
-                  </div>
-            </form>
-            </div></div></div>
 
-                  
+                  <mat-accordion>
+                    <mat-expansion-panel >
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Communication Address
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div class="row">
+                        <div formGroupName="communicationAdd" >
+                          <div  > 
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Address Line1</mat-label>
+                              <input matInput type="text" formControlName="addressLine1">
+                            </mat-form-field>
+                        </div>
+                        <div> 
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Address Line2</mat-label>
+                              <input matInput type="text" formControlName="addressLine2">
+                            </mat-form-field>
+                        </div>
+                        <div> 
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Area</mat-label>
+                              <input matInput type="text" formControlName="area">
+                            </mat-form-field>
+                        </div>
+                        <div> 
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>City</mat-label>
+                              <input matInput type="text" formControlName="city">
+                            </mat-form-field>
+                        </div>
+                    
+                        <div> 
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Landmark</mat-label>
+                              <input matInput type="text" formControlName="landmark">
+                            </mat-form-field>
+                        </div>
+                        <div> 
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Pincode</mat-label>
+                              <input matInput type="text" formControlName="postalCode">
+                            </mat-form-field>
+                        </div>
+                        <div> 
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>State</mat-label>
+                              <input matInput type="text" formControlName="state">
+                            </mat-form-field>
+                        </div>
+                        </div>
+                    </div>
+                      </mat-expansion-panel>
+
+                      <mat-expansion-panel >
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            Permanent Address
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                          <div formGroupName="permanentAdd" >
+                            <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line1</mat-label>
+                                <input matInput type="text" formControlName="addressLine1">
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line2</mat-label>
+                                <input matInput type="text" formControlName="addressLine2" >
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Area</mat-label>
+                                <input matInput type="text" formControlName="area" >
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>City</mat-label>
+                                <input matInput type="text" formControlName="city">
+                              </mat-form-field>
+                          </div>
+                        
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Landmark</mat-label>
+                                <input matInput type="text"  formControlName="landmark">
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Pincode</mat-label>
+                                <input matInput type="text" formControlName="postalCode">
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>State</mat-label>
+                                <input matInput type="text" formControlName="state">
+                              </mat-form-field>
+                          </div>
+                          </div>
+                        </div>
+                      </mat-expansion-panel>
+
+                      <mat-expansion-panel >
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            Office Address
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                          <div formGroupName="officeAdd">
+                            <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line1</mat-label>
+                                <input matInput type="text" formControlName="addressLine1" >
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line2</mat-label>
+                                <input matInput type="text" formControlName="addressLine2">
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Area</mat-label>
+                                <input matInput type="text" formControlName="area" >
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>City</mat-label>
+                                <input matInput type="text" formControlName="city">
+                              </mat-form-field>
+                          </div>
+                        
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Landmark</mat-label>
+                                <input matInput type="text"  formControlName="landmark">
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Pincode</mat-label>
+                                <input matInput type="text" formControlName="postalCode">
+                              </mat-form-field>
+                          </div>
+                          <div> 
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>State</mat-label>
+                                <input matInput type="text" formControlName="state" >
+                              </mat-form-field>
+                          </div>
+                          </div>
+                        </div>
+                        </mat-expansion-panel>
+
+
+                </mat-accordion>
                 </div>
-              </div>    
+            </form>
+            </div>
+          </div>
+        </div>
+
+                </div>
 
               
           
@@ -685,16 +714,15 @@
 
   <!-- Tab3 -->
 
-  <mat-tab label="Vehicle Details">
+  <mat-tab label="Vehicle Details"  [disabled]='!selectedIndex.isActive'>
 
-    <mat-card class="example-card">
-        <mat-card-content>
           <form class="example-form"  [formGroup]="vehicleForm">
           <div formGroupName="vehicleDetails" >
-            <div class="row">
+            <div class="card">
+              <div class="card-body">
             <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editVehicleDetails()">edit</span>
 
-
+        <div class="row">
             <div class="col-4 col-sm-4">
                     <mat-form-field  appearance="outline" class="example-full-width">
                       <mat-label>Vehicle Number</mat-label>
@@ -770,6 +798,8 @@
                     <input matInput type='text'  >
                   </mat-form-field>
               </div>
+
+
               <div class="col-4 col-sm-4">
                 <label>Engine Image:
                   <img class="image_size"  [src]="engineImage ? engineImage : 'assets/images/empty_image.png'" >
@@ -782,17 +812,17 @@
               </div>
        
  
-              <div> 
+              <div class="col-4 col-sm-4"> 
                 <label>Insurence Policy Image:
                   <img class="image_size"  [src]="vehicleInsurenceImage ? vehicleInsurenceImage : 'assets/images/empty_image.png'" >
                 </label>
               </div>
-              <div> 
+              <div class="col-4 col-sm-4"> 
                 <label>Live KM Reading:
                   <img class="image_size"  [src]="kmReadingImage ? kmReadingImage : 'assets/images/empty_image.png'" >
                 </label>
               </div>
-              <div> 
+              <div class="col-4 col-sm-4"> 
                 <label>RC Book:
                   <img class="image_size"  [src]="rcBookImage ? rcBookImage : 'assets/images/empty_image.png'" >
                 </label>
@@ -803,50 +833,46 @@
             <button type="button" class="btn btn-primary">Vehicle Transaction History</button>
             <button type="button" class="btn btn-primary">Vehicle Challan report</button>
           </div> -->
-            
-            </div>
            
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="row"><label>Vehicle Image:</label></div>
+              <div class="col-4 col-sm-4">
                   <label>Front View
                   <img class="image_size"  [src]="vehicleFrontImage ? vehicleFrontImage : 'assets/images/empty_image.png'" >
                 </label>
               </div>
-              <div class="col-sm-3">
+              <div class="col-4 col-sm-4">
                 <label>Back View
                   <img class="image_size"  [src]="vehicleBackImage ? vehicleBackImage : 'assets/images/empty_image.png'" >
                 </label>
               </div>
-              <div class="col-sm-3">
+              <div class="col-4 col-sm-4">
                 <label>Side View 1
                   <img class="image_size"  [src]="vehicleSide1Image ? vehicleSide1Image : 'assets/images/empty_image.png'" >
                 </label>
               </div>
-              <div class="col-sm-3">
+              <div class="col-4 col-sm-4">
                 <label>Side View 2
                   <img class="image_size"  [src]="vehicleSide2Image ? vehicleSide2Image : 'assets/images/empty_image.png'" >
                 </label>
               </div>
               
             </div>
+            </div>
+      </div>
               
             <button class="btn btn-secondary" (click)="previousStep()">&laquo; Previous</button>
             <button *ngIf="showUpdatebtn" class="btn btn-secondary" (click)="updateVehicleDetails()">Update</button>
             <button class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
           </div>
           </form>
-        </mat-card-content>
-    </mat-card>
 
   </mat-tab>
   
   <!-- Tab4 -->
-  <mat-tab label="Loan Transfer">
-    <mat-card class="example-card">
-    <mat-card-content>
+  <mat-tab label="Loan Transfer"  [disabled]='!selectedIndex.isActive'>
       <form class="example-form"  [formGroup]="loanForm"  >
-        <div class="row" formGroupName = "loanDetailsData">
+        <div formGroupName = "loanDetailsData">
+          <div class="card">
+            <div class="card-body">
           <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editLoanDetails()">edit</span>
           <div class="row">
             <div class="col-4 col-sm-4"> 
@@ -970,31 +996,8 @@
             </div> -->
 
           </div>
-          <!-- <div class="col-sm-2" style="margin-left:50%">
-            APPLICANT EXPECTATION
-            <div>
-              <label>Loan Amount 
-              <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput  type='text' >
-              </mat-form-field>
-            </label>
-              <label>Interest %
-              <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput  type='text' >
-              </mat-form-field>
-            </label>
-              <label>Loan Term 
-              <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput type='text' >
-              </mat-form-field>
-            </label>
-              <label>Due Date 
-              <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput type='date' >
-              </mat-form-field>
-            </label>
-            </div>
-          </div> -->
+      </div>
+      </div>
 
 
         </div>
@@ -1003,20 +1006,18 @@
         <button  class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
 
       </form>
-    </mat-card-content>
-    </mat-card>
   </mat-tab>
 
   <!-- Tab5 -->
-  <mat-tab label="Bank details">
-    <mat-card class="example-card">
-    <mat-card-content>
+  <mat-tab label="Bank details"  [disabled]='!selectedIndex.isActive'>
       <form class="example-form"  [formGroup]="bankForm" >
       <div formGroupName="bankDetails">
-          <p>Transfer Amount </p>
+        <div class="card">
+          <div class="card-body">
+          <p >Transfer Amount 10000</p>
         &nbsp;
-        <div class="row">
           <span  class="material-icons" matTooltip="Edit" style="float: right;" (click)="editBankDetails()">edit</span>
+          <div class="row">
           <div class="col-sm-2">
             <div> 
               <label>Pass Book Image:                 
@@ -1081,46 +1082,15 @@
                 </mat-form-field>
             </div>
 
-          <!-- <div class="col-sm-2" style="margin-left: 50%;">
-            <p>Loan Summary </p>
-            <label> Loan Amount:
-              <mat-form-field  appearance="outline" class="example-full-width">
-                <input matInput type='text'  >
-                </mat-form-field>
-            </label>
-            <label> Intrest%:
-              <mat-form-field  appearance="outline" class="example-full-width">
-                <input matInput type='text'  >
-                </mat-form-field>
-            </label>
-            <label> Loan Term:
-              <mat-form-field  appearance="outline" class="example-full-width">
-                <input matInput type='text'  >
-                </mat-form-field>
-            </label>
-            <label> Due Date:
-              <mat-form-field  appearance="outline" class="example-full-width">
-                <input matInput type='date'  >
-                </mat-form-field>
-            </label>
-            <label> To Pay :
-              <mat-form-field  appearance="outline" class="example-full-width">
-                <input matInput type='text'  >
-                </mat-form-field>
-            </label>
-          </div> -->
         </div>
         
         <button class="btn btn-secondary"  (click)="previousStep()">&laquo; Previous</button>
         <button *ngIf="showUpdatebtn" class="btn btn-secondary" (click)="updateBankDetails()">Update</button>
-    </div>
+        </div>
+        </div>
+        </div>
       </form>
-    </mat-card-content>
-    <mat-card-actions>
-      
-    </mat-card-actions>
-   
-  </mat-card>
+
   </mat-tab>
 
 </mat-tab-group>

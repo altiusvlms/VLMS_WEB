@@ -33,13 +33,12 @@ export class MyTaskComponent implements OnInit {
 
   /** Task Management List */
   getTaskList(){
-    this.crudService.get(`${appModels.FIELDEXECUTIVE}/getTask`, {
+    this.crudService.get(`${appModels.MY_TASK}/getCashierTaskData`, {
       params: {
         tenantIdentifier: 'default'
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
       this.taskListData= response;
-      console.log(this.taskListData)
       this.sharedService.setLoaderShownProperty(false);  
     })
   }
