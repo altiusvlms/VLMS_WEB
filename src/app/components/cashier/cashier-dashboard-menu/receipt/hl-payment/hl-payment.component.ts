@@ -24,7 +24,7 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class HlPaymentComponent implements OnInit {
 
-  constructor(private crudService: CrudService,private toast: ToastrService, private sharedService: SharedService,private dialog: MatDialog,public datepipe: DatePipe) { }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private sharedService: SharedService,private dialog: MatDialog,public datepipe: DatePipe) { }
 
   fieldArray: any = [];
   showInsurenceTable: Boolean = false;
@@ -52,9 +52,6 @@ export class HlPaymentComponent implements OnInit {
 
     addFieldValue() {
         this.fieldArray.push(this.createHlForms.value);
-        if(this.fieldArray.length == this.fieldArray.length + 1){
-        this.createHlForms.reset();
-        }
     }
 
     deleteFieldValue(index: any) {
@@ -75,16 +72,21 @@ export class HlPaymentComponent implements OnInit {
     }
 
     saveHl(){
-      console.log(this.createHlForms.value)
       this.createHlForms.value.postDate=this.datepipe.transform(this.createHlForms.value.postDate, 'dd MMMM yyyy');
       this.createHlForms.value.expiryDate=this.datepipe.transform(this.createHlForms.value.expiryDate, 'dd MMMM yyyy');
-      this.crudService.post(`${appModels.HL_PAYMENT}/createHLPayment`, {... this.createHlForms.value},
+
+      if(this.createHlForms.value.expiryDate == null){
+        this.createHlForms.value.expiryDate=this.datepipe.transform(this.createHlForms.value.postDate, 'dd MMMM yyyy');
+      }
+
+      this.crudService.post(`${appModels.HL_PAYMENT}/createHLPayment`,this.createHlForms.value,
         {params:{
         tenantIdentifier: "default"   
         }}
       ).pipe(untilDestroyed(this)).subscribe(saved => {
           this.sharedService.setLoaderShownProperty(false); 
-          this.toast.success("HL Payment Saved Succesfully");  
+          this.toast.success("HL Payment Saved Succesfully");
+          this.router.navigate(['/cashier/hl-payment-list'])  
         })
     }
 

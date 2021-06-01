@@ -7,19 +7,16 @@ import DashboardMenuRoutingModule from './dashboard-menu-routing.module';
 
 /** Custom Material and Form Module */
 import { SharedModule } from '../../shared/shared/shared.module';
-// import {EMIModule} from './emi/emi.module'
 
 /** Custom Components */
 import { DashboardComponent,AdvancedSearch } from './dashboard/dashboard.component';
-import { UserRolePermissionComponent } from './user-role-permission/user-role-permission.component';
+import { UserRolePermissionComponent ,CreateRole} from './user-role-permission/user-role-permission.component';
 import { AssignTargetsComponent } from './assign-targets/assign-targets.component';
 import { CustomerManagementComponent } from './customer-management/customer-management.component';
 import { TaskManagementComponent ,CreateTask} from './task-management/task-management.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
-import { LoanManagementComponent } from './loan-management/loan-management.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { MatTabsModule } from '@angular/material/tabs';
-// import { ExistingUserComponent } from './existing-user/existing-user.component';
 import { ExistingEmployeeComponent } from './existing-employee/existing-employee.component';
 import { TopupLoanComponent } from './topup-loan/topup-loan.component';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
@@ -29,19 +26,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ChartsModule, ChartSimpleModule, WavesModule } from 'ng-uikit-pro-standard'
 import { IgxDoughnutChartModule, IgxRingSeriesModule } from "igniteui-angular-charts";
 import { NgCircleProgressModule } from 'ng-circle-progress';
-// import { IgxPieChartModule } from 'igniteui-angular-charts';
-// import {MatFormFieldModule} from '@angular/material/form-field';
 
-// import { ChartsModule } from 'ng2-charts';
-import { chart } from 'chart.js'
-// import { ChartsModule } from 'ng2-charts';
-// import { PieChartComponent } from './piechart/piechart';
+import { chart } from 'chart.js';
+import { SetPermissionComponent } from './user-role-permission/set-permission/set-permission.component';
 
 
 /** Dashboard Menu Module */
 
 @NgModule({
-  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, LoanManagementComponent, ManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent, ExistingEmployeeComponent],
+  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent,CreateRole, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, ManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent, ExistingEmployeeComponent, SetPermissionComponent],
   imports: [
     CommonModule,
     DashboardMenuRoutingModule,
@@ -64,11 +57,6 @@ import { chart } from 'chart.js'
       animationDuration: 300,
       
     })
-    // IgxPieChartModule
-    // MatFormFieldModule,
-    // ChartsModule
-    // chart
-    // ChartsModule
   ]
 })
 export class DashboardMenuModule { }

@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="header_title">
+        <h2>Transfer</h2>
+    </div>
+    <div>
+    <form class="example-form"  [formGroup]="step1Form" >
+
+    <div *ngIf="!showStep2">
+            <div class="row" >
+                <mat-radio-group aria-label="Select an option"  formControlName="branch">
+                    <mat-radio-button value="branch" >Branch</mat-radio-button>
+                  </mat-radio-group>
+            </div>
+            <!-- <div class="row">
+                <mat-radio-group aria-label="Select an option" formControlName="creator">
+                    <mat-radio-button value="creator"  >Creator</mat-radio-button>
+                  </mat-radio-group>
+            </div>
+            <div class="row">
+                <mat-radio-group aria-label="Select an option"  formControlName="approver">
+                    <mat-radio-button value="approver" >Approver</mat-radio-button>
+                  </mat-radio-group>
+            </div>
+            <div class="row">
+                <mat-radio-group aria-label="Select an option" formControlName="authoriser">
+                    <mat-radio-button value="authoriser"  >Authoriser</mat-radio-button>
+                  </mat-radio-group>
+            </div> -->
+
+            <button class="btn_blue" (click)="step1()">Next</button>
+
+    </div>
+    </form>
+    </div>
+
+<div *ngIf="showStep2">
+    <form class="example-form"  [formGroup]="step2Form" >
+
+        <div >
+                <div class="row" >
+                    <mat-radio-group aria-label="Select an option"  formControlName="loanTransfer">
+                        <mat-radio-button value="Loan Transfer Beneficiary Added" valueSelected>Loan Transfer Beneficiary Added</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <div class="row">
+                    <mat-radio-group aria-label="Select an option" formControlName="DCTransfer">
+                        <mat-radio-button value="DC Transfer Beneficiary Added">DC Transfer Beneficiary Added</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <div class="row">
+                    <mat-radio-group aria-label="Select an option"  formControlName="request">
+                        <mat-radio-button value="Loan Transfer Request" >Loan Transfer Request</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <div class="row">
+                    <mat-radio-group aria-label="Select an option" formControlName="authoriser">
+                        <mat-radio-button value="Change Bank/Creator/Authoriser"  >Change Bank/Creator/Authoriser</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <div class="row">
+                    <mat-radio-group aria-label="Select an option" formControlName="remindAuthoriser">
+                        <mat-radio-button value="Remind Creator/Authoriser">Remind Creator/Authoriser</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <div class="row">
+                    <mat-radio-group aria-label="Select an option" formControlName="additionalTransfer">
+                        <mat-radio-button value="Additional Transfer Doc">Additional Transfer Doc</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <button class="btn_blue" (click)="back()">Back</button>
+                <button class="btn_blue" (click)="step2()">Next</button>
+                
+        </div>
+        </form>
+    </div>
+</div>

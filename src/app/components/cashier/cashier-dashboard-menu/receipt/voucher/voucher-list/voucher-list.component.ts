@@ -2,7 +2,6 @@
 import { Component, OnInit,Inject } from '@angular/core';
 
 /** Custom Forms */
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import {  CrudService } from '../../../../../../services/crud.service';
 import { appModels } from '../../../../../../services/utils/enum.util';
@@ -17,31 +16,31 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 
 
 @Component({
-  selector: 'vlms-hl-payment-list',
-  templateUrl: './hl-payment-list.component.html',
-  styleUrls: ['./hl-payment-list.component.scss']
+  selector: 'vlms-voucher-list',
+  templateUrl: './voucher-list.component.html',
+  styleUrls: ['./voucher-list.component.scss']
 })
-export class HlPaymentListComponent implements OnInit {
+export class VoucherListComponent implements OnInit {
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private sharedService: SharedService,public datepipe: DatePipe) { }
 
-  HlPayment: any;
+  voucherList: any;
   arrayOfPrint: any = [];
 
   ngOnInit(): void {
-    this.getHLPaymentList();
+    this.getVoucherList();
   }
-  createHL(){
-    this.router.navigate(['/cashier/hl-payment'])
+
+  createVoucher(){
+    this.router.navigate(['/cashier/voucher'])
   }
-  getHLPaymentList(){
-    this.crudService.get(`${appModels.HL_PAYMENT}/getHLData`, {
+  getVoucherList(){
+    this.crudService.get(`${appModels.VOUCHER}/getVoucherData`, {
       params: {
         tenantIdentifier: 'default'
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
-      this.HlPayment = response;
-      console.log(this.HlPayment )
+      this.voucherList = response;
       this.sharedService.setLoaderShownProperty(false);  
     })
   }
@@ -50,16 +49,18 @@ export class HlPaymentListComponent implements OnInit {
     if(event.checked === true){
       this.arrayOfPrint.push(value);
     }
+ 
   }
 
-  openPDF() {
-    var data = document.getElementById('pdfTable');
-    const WindowPrt = window.open('', '', 'left=0,top=0,width=800,height=700,toolbar=0,scrollbars=0,location=no,status=no,titlebar=no, fontFamily=Titillium Web');
-    WindowPrt.document.write(data.innerHTML);
-    WindowPrt.document.close();
-    WindowPrt.focus();
-    WindowPrt.print();
-    WindowPrt.close();
-   this.arrayOfPrint = [];
-  }
+  
+openPDF() {
+  var data = document.getElementById('pdfTable');
+  const WindowPrt = window.open('', '', 'left=0,top=0,width=800,height=700,toolbar=0,scrollbars=0,location=no,status=no,titlebar=no, fontFamily=Titillium Web');
+  WindowPrt.document.write(data.innerHTML);
+  WindowPrt.document.close();
+  WindowPrt.focus();
+  WindowPrt.print();
+  WindowPrt.close();
+ this.arrayOfPrint = [];
+}
 }

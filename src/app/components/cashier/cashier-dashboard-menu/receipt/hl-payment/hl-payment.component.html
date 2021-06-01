@@ -32,7 +32,7 @@
                   </mat-select>
               </mat-form-field>
 
-              <mat-checkbox data-toggle="modal" data-target="#generateChildLoanModal">For Child Loan</mat-checkbox>
+              <mat-checkbox  *ngIf="showInsurenceTable" data-toggle="modal" data-target="#generateChildLoanModal">For Child Loan</mat-checkbox>
 
           </div>
           <div class="col-4 col-sm-4">

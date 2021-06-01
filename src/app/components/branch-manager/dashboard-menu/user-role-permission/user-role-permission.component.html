@@ -3,16 +3,17 @@
 <div class="container">
 <!-- User/Permission -->
 
-<div class="header_title">
-  <h2>Roles & Permission</h2>
-</div>
+  <div class="header_title">
+    <h2>Roles & Permission</h2>
+  </div>
 
 
   <div class="card">
-    <div class="card-body">
-  <mat-tab-group>
-    <mat-tab label="Role"> 
-      <button type="button" class="btn_blue" data-toggle="modal" data-target="#roleModal">
+  <div class="card-body">
+    <!-- /** Role List */ -->
+    <mat-tab-group>
+      <mat-tab label="Role"> 
+      <button type="button" class="btn_blue" (click)="createEditRole(null)">
         Create Role
       </button>
       <table class="table table-striped">
@@ -27,109 +28,39 @@
         <tr  *ngFor="let role of roleListData;let i = index;">
           <td>{{i+1}}</td>
           <td>{{role.description}}</td>
-          <td data-toggle="modal" data-target="#roleModal">Edit</td>
+          <td><button type="button" class="btn_blue" (click)="createEditRole(role)">Edit</button></td>
         </tr>
       </tbody>
       </table>  
     </mat-tab>
 
+    <!-- /** Permission List */ -->
     <mat-tab label="Permission"> 
-      
+      <button type="button" class="btn_blue" (click)="createPermission()">
+        Create Permission
+      </button>
       <table class="table table-striped">
         <thead>
         <tr>
-          <th>sr.no</th>
-          <th>Branch</th> 
-          <th>New customer</th>
-          <th>Loan Amount</th>
-          <th>Creadit Date</th>
-          <th>Target Date</th>
+          <th>S.No</th>
+          <th>Employee Name</th>
+          <th>Designation</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Thudialore</td>
-          <td>60</td>
-          <td>10000</td>
-          <td>01.Mar.2021</td>
-          <td>21.Mar.2021</td>
+        <tr  *ngFor="let role of roleListData;let i = index;">
+          <td>{{i+1}}</td>
+          <td>{{role.name}}</td>
+          <td>{{role.description}}</td>
+          <td><button type="button" class="btn_blue" >Edit</button></td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>Koundampalayam</td>
-            <td>52</td>
-            <td>50000</td>
-            <td>01.Mar.2021</td>
-            <td>21.Mar.2021</td>
-        </tr>      
-      </tbody>      
-      </table>
-
-    </mat-tab>
-  </mat-tab-group>
-</div></div>
-
-
-    
-
-  <!-- /** Create Task Model */ -->
-
-<div class="modal fade" id="createtaskModal" tabindex="-1" role="dialog" aria-labelledby="createtaskModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="createtaskModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
+      </tbody>
+      </table> 
+      </mat-tab>
+    </mat-tab-group>
+  </div>
   </div>
 
-
-  
-  <!-- Modal -->
-  <div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="roleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form [formGroup]="createRoleForms" >
-        <div class="modal-header">
-          <h5 class="modal-title" id="roleModalLabel">Create Role</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div>
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Name</mat-label>
-              <input matInput type="text" formControlName="name">
-            </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Designation</mat-label>
-            <input matInput type="text" formControlName="description" >
-          </mat-form-field>
-        </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="saveRole()">Save</button>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
   </div>
 

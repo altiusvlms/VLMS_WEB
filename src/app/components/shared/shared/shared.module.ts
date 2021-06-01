@@ -66,7 +66,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 
 
-
 /** Shared Module */
 
 @NgModule({
@@ -114,8 +113,8 @@ import { MatTreeModule } from '@angular/material/tree';
     MatStepperModule,
     MatTooltipModule,
     MatTreeModule,
-    MatBadgeModule,
-  ],
+    MatBadgeModule
+    ],
   exports: [SharedComponent,HeaderComponent,SidebarComponent,LoaderComponent,
     RouterModule,
     FormsModule,
