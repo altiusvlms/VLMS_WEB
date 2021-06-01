@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import {DomSanitizer} from "@angular/platform-browser";
+import { Options, LabelType } from 'ng5-slider';
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -24,10 +25,119 @@ export class NewloanProcessComponent implements OnInit {
   vehicletransectionhistory: any;
   vehiclechallanhistory: any;
 
+  // EMI
+  pemi = {
+    value: "25"
+  }
+  remi = {
+    value: "8.5"
+  }
+  temi = {
+    value: "20"
+  }
+  memi = {
+    value: "240"
+  }
+
+  query = {
+    amount: "",
+    interest: "",
+    tenureYr: "",
+    tenureMo: ""
+  }
+
+  result = {
+    emi: "",
+    interest: "",
+    total: ""
+  }
+
+  yrToggel: boolean;
+  poptions: Options = {
+    floor: 1,
+    ceil: 200,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>L</b>';
+        case LabelType.High:
+          return value + '<b>L</b>';
+        default:
+          return value + '<b>L</b>';
+      }
+    }
+  };
+  roptions: Options = {
+    floor: 5,
+    ceil: 30,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>%</b>';
+        case LabelType.High:
+          return value + '<b>%</b>';
+        default:
+          return value + '<b>%</b>';
+      }
+    }
+  };
+  toptions: Options = {
+    floor: 1,
+    ceil: 30,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>Yr</b>';
+        case LabelType.High:
+          return value + '<b>Yr</b>';
+        default:
+          return value + '<b>Yr</b>';
+      }
+    }
+  };
+  moptions: Options = {
+    floor: 1,
+    ceil: 360,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>Mo</b>';
+        case LabelType.High:
+          return value + '<b>Mo</b>';
+        default:
+          return value + '<b>Mo</b>';
+      }
+    }
+
+    
+  };
+
+
 
   constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private sanitizer:DomSanitizer, private route: ActivatedRoute,public datepipe: DatePipe) {
     this.getUserId();    
    }
+
+  //  EMI
+   ngAfterViewInit() {
+    this.update();
+  }
+
+  tbupdate(id : any) {
+    if (id == 0) {
+      this.pemi.value = (Number(this.query.amount) / 100000 ).toString();
+    }
+    else if (id == 1) {
+      this.remi.value = this.query.interest;
+    }
+    else if (id == 2) {
+      this.temi.value = this.query.tenureYr;
+    }
+    else if (id == 3) {
+      this.memi.value = this.query.tenureMo;
+    }
+    this.update();
+  }
 
   mobile_num = localStorage.getItem("mobile_number");
   id:any;
@@ -925,4 +1035,21 @@ export class NewloanProcessComponent implements OnInit {
   }
 }
 
+// EMI
+TotalInterest:any;
+TotalPayable:any;
+MonthlyCorrectDue:any
+update() {
+  // debugger
+  var loanAmount = Number(this.query.amount);
+  var rateOfInterest = Number(this.query.interest);
+  var numberOfMonths = (this.yrToggel) ? (Number(this.query.tenureYr) * 12) : Number(this.query.tenureMo);
+  // var monthlyInterestRatio = (rateOfInterest / 100) / 12;
+   this.TotalInterest = (loanAmount * rateOfInterest) / 100;
+
+   this.TotalPayable = loanAmount + this.TotalInterest;
+
+   var MonthlyDue = this.TotalPayable / numberOfMonths;
+   this.MonthlyCorrectDue = Number (Math.round(MonthlyDue))
+}
 }

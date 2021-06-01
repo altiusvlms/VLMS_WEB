@@ -8,6 +8,7 @@ import { LoanApplicationRoutingModule } from './loan-application-routing.module'
 /** Custom Material and Form Module */
 import { SharedModule } from '../../shared/shared/shared.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Ng5SliderModule } from 'ng5-slider';
 
 /** Custom Components */
 import { LoanProcessComponent } from './loan-process/loan-process.component';
@@ -25,7 +26,8 @@ import { CashLimitComponent , EditCashLimit} from './cash-limit/cash-limit.compo
     CommonModule,
     LoanApplicationRoutingModule,
     SharedModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    Ng5SliderModule
     ]
 })
 export class LoanApplicationModule { }

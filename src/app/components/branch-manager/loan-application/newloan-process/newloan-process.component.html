@@ -901,7 +901,69 @@
               <div class="card">
                 <div class="card-body">
               <div class="row">
-                  <div class="col-4 col-sm-4"> 
+                <!-- EMI -->
+                <div class="col-4 col-sm-4">
+                  <div class="input-group">
+                            <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
+                              [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" (userChangeEnd)="update()" />
+                  </div></div>
+              
+                  <div class="col-4 col-sm-4">
+                    <div class="input-group">
+                            <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
+                              [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" (userChangeEnd)="update()"/>
+                          </div></div>
+                          
+                          <div class="col-4 col-sm-4">
+                              <div class="input-group">
+                                <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
+                              placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;" (userChangeEnd)="update()">
+                                <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
+                              placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo">
+                              <div class="input-group-append">
+                                <button class="" [ngClass]="{'active':yrToggel}"
+                                  (click)="yrToggel=true;update()" type="button">Yr</button>
+                                <button class="" [ngClass]="{'active':!yrToggel}"
+                                  (click)="yrToggel=false;update()" type="button">Mo</button>
+                                </div>
+                              </div>
+                              </div>
+                        
+                         
+                        
+                        <div class="col-4 col-sm-4">
+                          <div class="card">
+                            <div class="card-body">
+                          <div>Loan EMI</div>
+                          <div>{{MonthlyCorrectDue}}</div>
+                    
+                          </div>
+                          </div>
+                        </div>
+                        
+              
+                        <div class="col-4 col-sm-4">
+                          <div class="card">
+                            <div class="card-body">
+                          <div>Total Interest</div>
+                          <div>{{TotalInterest}}</div>
+                    
+                          </div>
+                          </div>
+                        </div>
+                        <div class="col-4 col-sm-4">
+                          <div class="card">
+                            <div class="card-body">
+                          <div>Loan Amount</div>
+                          <div>{{TotalPayable}}</div>
+                    
+                          </div>
+                          </div>
+                        </div>
+
+
+                <!-- As mock field -->
+                  <!-- <div class="col-4 col-sm-4"> 
                       <mat-form-field  appearance="outline"  class="example-full-width" >
                         <mat-label>Loan Amount</mat-label> 
                         <input matInput type='text' formControlName="loanAmount">
@@ -936,7 +998,7 @@
                         <mat-label>Due Date</mat-label> 
                         <input matInput  type='date'  formControlName="dueDate">
                       </mat-form-field>
-                  </div>
+                  </div> -->
                   <div class="col-4 col-sm-4"> 
                       <mat-form-field  appearance="outline"  class="example-full-width" >
                         <mat-label>Doc Charge</mat-label> 
@@ -1071,3 +1133,70 @@
 
   </mat-tab-group>
 </div>
+<!-- EMI -->
+<!-- <div class = "container">
+  <div class="col-md-3">
+    <div class="input-group">
+              <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
+                [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" (userChangeEnd)="update()" />
+    </div></div>
+
+    <div class="col-md-3">
+      <div class="input-group">
+              <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
+                [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" (userChangeEnd)="update()"/>
+            </div></div>
+            
+            <div class="col-md-3">
+                <div class="input-group">
+                  <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
+                placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;" (userChangeEnd)="update()">
+                  <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
+                placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo">
+                <div class="input-group-append">
+                  <button class="" [ngClass]="{'active':yrToggel}"
+                    (click)="yrToggel=true;update()" type="button">Yr</button>
+                  <button class="" [ngClass]="{'active':!yrToggel}"
+                    (click)="yrToggel=false;update()" type="button">Mo</button>
+                  </div>
+                </div>
+                </div>
+          
+           
+          
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body">
+            <div>Loan EMI</div>
+            <div>{{MonthlyCorrectDue}}</div>
+      
+            </div>
+            </div>
+          </div>
+          
+
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body">
+            <div>Total Interest</div>
+            <div>{{TotalInterest}}</div>
+      
+            </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body">
+            <div>Loan Amount</div>
+            <div>{{TotalPayable}}</div>
+      
+            </div>
+            </div>
+          </div> -->
+          
+          
+  
+          
+
+
+<!-- </div> -->
