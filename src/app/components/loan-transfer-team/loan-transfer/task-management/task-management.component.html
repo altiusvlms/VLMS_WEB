@@ -1,1 +1,55 @@
-<p>task-management works!</p>
+
+<!-- /** Create Task Button */ -->
+<div class="container">
+    <div class="header_title">
+      <h2>My Task</h2>
+      <div class="header_right">
+        <button type="button"  (click)="createViewTask(null)" class="btn_blue">
+          Create Task
+        </button>
+      </div>
+    </div>
+  
+  
+  </div>
+  
+  <!-- /** Task Management List Table */ -->
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sr.No</th>
+          <th>Branch</th>
+          <th>Created</th>
+          <th>Task</th>
+          <th>Due Date</th>
+          <th>Assign To</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of taskListData;let i = index;">
+          <td>{{i+1}}</td>
+          <td></td>
+          <td>{{task.createdDate | date:"dd MMMM yyyy"}}</td>
+          <td>{{task.taskType}}</td>
+          <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>
+          <td>{{task.assignTo}}</td>
+          <td>{{task.status ? task.status : "open"}}</td>
+          <td><button class="btn_blue" (click)="createViewTask(task)">View</button></td>
+        </tr>
+      </tbody>
+  </table>
+  <ng-container>
+    <div *ngIf="taskListData.length === 0">
+      No Data Found.
+    </div>
+  </ng-container>
+   </div></div>
+  </div>
+  
+  
+  

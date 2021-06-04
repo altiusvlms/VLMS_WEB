@@ -12,7 +12,7 @@ import { SharedModule } from '../../shared/shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerOnlineComponent } from './customer-online/customer-online.component';
 import { LoanAmountAddedComponent } from './loan-amount-added/loan-amount-added.component';
-import { TaskManagementComponent } from './task-management/task-management.component';
+import { TaskManagementComponent ,CreateTask} from './task-management/task-management.component';
 
 
 
@@ -21,7 +21,7 @@ import { TaskManagementComponent } from './task-management/task-management.compo
 /** Loan Transfer Module */
 
 @NgModule({
-  declarations: [DashboardComponent, CustomerOnlineComponent, LoanAmountAddedComponent, TaskManagementComponent],
+  declarations: [DashboardComponent, CustomerOnlineComponent, LoanAmountAddedComponent, TaskManagementComponent,CreateTask],
   imports: [
     CommonModule,
     LoanTransferRoutingModule,
