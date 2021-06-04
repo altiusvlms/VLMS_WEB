@@ -905,21 +905,21 @@
                 <div class="col-4 col-sm-4">
                   <div class="input-group">
                             <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
-                              [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" (userChangeEnd)="update()" />
+                              [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" formControlName="loanAmount" (userChangeEnd)="update()" />
                   </div></div>
               
                   <div class="col-4 col-sm-4">
                     <div class="input-group">
                             <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
-                              [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" (userChangeEnd)="update()"/>
+                              [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" formControlName="loanInterest" (userChangeEnd)="update()"/>
                           </div></div>
                           
                           <div class="col-4 col-sm-4">
                               <div class="input-group">
                                 <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
-                              placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;" (userChangeEnd)="update()">
+                              placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;" formControlName="loanTerm" (userChangeEnd)="update()">
                                 <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
-                              placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo">
+                              placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo"style="width:30%;float:right;" formControlName="loanTerm" (userChangeEnd)="update()">
                               <div class="input-group-append">
                                 <button class="" [ngClass]="{'active':yrToggel}"
                                   (click)="yrToggel=true;update()" type="button">Yr</button>
