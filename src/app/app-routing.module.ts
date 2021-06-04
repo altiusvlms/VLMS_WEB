@@ -96,7 +96,17 @@ const routes: Routes = [
         l => l.LoanApplicationModule
       )
   },
+
+
   
+/** Loan Transfer Routes */
+{
+  path: "loan-transfer-team",
+  loadChildren: () =>
+    import("./components/loan-transfer-team/loan-transfer/loan-transfer.module").then(
+      l => l.LoanTransferModule
+    )
+},
   
 
 
