@@ -197,8 +197,6 @@ export class SendToApprover {
 
     showStep2:Boolean = false;
     sendToapproval: any;
-    showStep3:Boolean = false;
-    showStep4:Boolean = false;
 
     ngOnInit(): void {
     }
@@ -206,37 +204,16 @@ export class SendToApprover {
     step1(){
        if(this.step1Form.value.branch !== ''){
          this.showStep2 = true;
-        //  this.showStep3 = false;
        }
     }
     step2(){
-      this.showStep3 = true;
-      this.showStep2 = false;
-      if(this.step1Form.value.branch == ''){
-        this.step1Form.value.branch = false;
-      }
-      this.showStep4 = false;
-      // this.sendToapproval = this.step2Form.value;
-      // localStorage.setItem('sentoToApprover', JSON.stringify(this.sendToapproval));
-      // this.dialogRef.close();
-    }
-    step3(){
-      this.showStep4 = true;
-      this.showStep2 = false;
-      this.showStep3 = false;
-      this.step1Form.value.branch = false;
+      this.sendToapproval = this.step2Form.value;
+      localStorage.setItem('sentoToApprover', JSON.stringify(this.sendToapproval));
+      this.dialogRef.close();
     }
 
-    back1(){
+    back(){
       this.showStep2 = false;
-      // this.showStep3 = false;
     }
-    back2(){
-      this.showStep2 = true;
-      this.showStep3 = false;
-    }
-    back3(){
-      this.showStep3 = true;
-      this.showStep4 = false;
-    }
+
   }
