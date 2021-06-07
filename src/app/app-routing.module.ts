@@ -69,6 +69,14 @@ const routes: Routes = [
   },
   /** Some same component used for branchManager Modules and Cashier Modules */
   {
+    path: "branch-manager",
+    loadChildren: () =>
+      import("./components/cashier/cashier-dashboard-menu/cashier-dashboard-menu.module").then(
+        c => c.CashierDashboardMenuModule
+      )
+  },
+
+  {
     path: "cashier",
     loadChildren: () =>
       import("./components/branch-manager/dashboard-menu/dashboard-menu.module").then(
