@@ -699,7 +699,7 @@ insuranceExpired(){
         text: 'Insurance Expired'
       },
       subtitle: {
-        text: 'amount'
+        // text: 'amount'
       },
       xAxis: {
         categories: [
@@ -721,7 +721,7 @@ insuranceExpired(){
       yAxis: {
         min: 0,
         title: {
-          text: 'Amount Collected'
+          text: 'Count'
         }
       },
       tooltip: {
