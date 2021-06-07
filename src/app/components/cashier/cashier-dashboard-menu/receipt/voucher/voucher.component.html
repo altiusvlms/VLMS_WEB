@@ -1,5 +1,4 @@
 
-
 <!-- /** Create Voucher */ -->
 <div class="container">
     <div class="header_title">
@@ -34,34 +33,46 @@
                   </div>
               </div>
 
+              <p>Account Entries</p>
 
-              <table  class="table table-striped">
+              <table  class="table table-striped"  formArrayName="voucher">
                 <thead>
                     <tr>
                         <th>Type</th>
                         <th>Particulars</th>
                         <th>Credit</th>
                         <th>Debit</th>
+                        <th width="150px"><button type="button" (click)="addVoucher()" class="btn btn-primary">Add More</button></th>
                       </tr>
+        
                 </thead>
-                <tbody *ngFor="let field of fieldArray; let i = index" >
-                    <tr >
-                      <td>  
+                <tbody >
+                    <tr *ngFor="let voucher of voucher().controls; let i=index" [formGroupName]="i">
+                        <td>  
                           <mat-form-field appearance="outline" class="example-full-width">
                             <input matInput type='text'  >
-                        </mat-form-field></td>
-                      <td> <mat-form-field appearance="outline" class="example-full-width">
-                            <input matInput type='text' formControlName="particulars" >
-                            </mat-form-field> </td>
-                      <td> <mat-form-field appearance="outline" class="example-full-width">
-                        <input matInput type='text' formControlName="credit" >
-                    </mat-form-field></td>
-                      <td> <mat-form-field appearance="outline" class="example-full-width">
-                        <input matInput type='text' formControlName="debit" >
-                    </mat-form-field></td> 
+                          </mat-form-field>
+                        </td>
+                        <td> 
+                           <mat-form-field appearance="outline" class="example-full-width">
+                            <input matInput type='text' formControlName="particulars"  >
+                            </mat-form-field> 
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline" class="example-full-width">
+                             <input matInput type='text' formControlName="debit" >
+                           </mat-form-field>
+                        </td> 
+                        <td> 
+                            <mat-form-field appearance="outline" class="example-full-width">
+                            <input matInput type='text' formControlName="credit" >
+                            </mat-form-field>
+                        </td>
+                        <td>
+                        <button (click)="removeVoucher(i)" class="btn btn-danger">Remove</button>
+                        </td>
                     </tr>
-                    <t><button class="btn btn-primary" type="button" (click)="addFieldValue()">Add</button></t>
-                    <tr *ngIf="i>0"> <button class="btn btn-primary"  type="button" (click)="deleteFieldValue(i)">Delete</button>     </tr>
+                 
                 </tbody>
             </table>
 
@@ -74,7 +85,7 @@
 
             
         <div class="row">
-            <button class="btn_blue" (click)="saveVoucher()" >Save</button>
+            <button type="submit" class="btn_blue" (click)="saveVoucher()">Submit</button>
         </div>
 
     </form>
@@ -83,4 +94,3 @@
 </div>
 </div>
 </div>
-
