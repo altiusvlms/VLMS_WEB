@@ -24,19 +24,23 @@ export class CreateReceiptComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
-     if(this.id){
+     if(this.id !== undefined || null){
       this.getReceipt();
      }
+     else{
+      this.viewPopUp();
+     }
     })
-    this.viewPopUp();
-  }
 
+  }
   
   viewPopUp(){
       const dialogRef = this.dialog.open(SearchReceipt, {
         width: '50vw',
         height: '50vh',
-      });  
+      });   
+      dialogRef.afterClosed().subscribe((response : any) => {
+      });     
     }
  
   getReceipt(){
@@ -130,11 +134,20 @@ export class SearchReceipt {
   close() {
     this.dialogRef.close();
   }
+  role: any;
   createReceipt(){
-    this.dialogRef.close();
     this.customerList.map((res: any) => {
-      if(res.customerDetails.name == this.searchForms.value.customerName){
-          this.router.navigate(['/cashier/create-receipt/' +res.customerDetails.id]);
+    this.role = localStorage.getItem("roles");
+      if(this.role === "Cashier"){
+          if(res.customerDetails.name == this.searchForms.value.customerName){
+              this.router.navigate(['/cashier/create-receipt/' +res.customerDetails.id]);
+              this.dialogRef.close(res.customerDetails.name);
+          }
+      }
+      else{
+        if(res.customerDetails.name == this.searchForms.value.customerName){
+          this.router.navigate(['/branch-manager/create-receipt/' +res.customerDetails.id]);
+      }
       }
     })
   }
