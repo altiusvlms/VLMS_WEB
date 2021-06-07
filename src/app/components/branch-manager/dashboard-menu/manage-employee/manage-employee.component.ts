@@ -15,7 +15,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 import { CLASS_NAME } from '@angular/flex-layout';
 import { single } from 'rxjs/operators';
-import { generalAccidentialIns } from './manage-employee.model';
+// import { generalAccidentialIns } from './manage-employee.model';
 
 @UntilDestroy({ checkProperties: true })
 
@@ -48,7 +48,7 @@ export class ManageEmployeeComponent implements OnInit {
   employeeInsuranceDetails:any;
   showSpouse : Boolean = false;
   documentDetails : any;
-  generalAccidentialIns : generalAccidentialIns;
+  // generalAccidentialIns : generalAccidentialIns;
 
   // manageEmployeeForm:any  
   // forvalue : CLASS_NAME;
@@ -469,13 +469,13 @@ updateEmployeeEducationDetails(){
 }
 // this.generalAccidentialIns,
 updateEmployeeInsuranceDetails(){
-  this.generalAccidentialIns.general_insurance = this.manageEmployeeForm.value.general_insurance.value
-  this.generalAccidentialIns.accidental_insurance = this.manageEmployeeForm.value.accidental_insurance.value
+  // this.generalAccidentialIns.general_insurance = this.manageEmployeeForm.value.general_insurance.value
+  // this.generalAccidentialIns.accidental_insurance = this.manageEmployeeForm.value.accidental_insurance.value
   console.log("this.manageEmployeeForm.value")
   // console.log(this.manageEmployeeForm.value)
   // this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   // this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
-  this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.generalAccidentialIns,
+  this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeForm.value.general_insurance,
   this.id,
   ).pipe(untilDestroyed(this)).subscribe(response => {
     this.employeeInsuranceDetails = response;
