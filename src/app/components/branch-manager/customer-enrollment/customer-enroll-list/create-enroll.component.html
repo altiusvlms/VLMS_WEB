@@ -158,9 +158,9 @@
 
               <!-- <p *ngIf="createCustomerEnrolForms.controls.file2.errors?.required" style="color: red">This field is required!</p> -->
               <img [src] ="PanImageForm ? PanImageForm : 'assets/images/empty_image.png'" >
-              <button (click)="onClickOpenForm()" class="btn_blue"> 
+              <!-- <button (click)="onClickOpenForm()" class="btn_blue"> 
                 <mat-icon>add</mat-icon>
-             </button> 
+             </button>  -->
             </label>
 
             
@@ -175,9 +175,9 @@
             </select>
             <input #file type="file" accept='image/*' (change)="uploadAadharAditional($event)"   />
             <img [src] ="AditionalImage ? AditionalImage : 'assets/images/empty_image.png'" >
-            <button (click)="onClickOpenForm2()" class="btn_blue"> 
+            <!-- <button (click)="onClickOpenForm2()" class="btn_blue"> 
               <mat-icon>add</mat-icon>
-            </button> 
+            </button>  -->
           </label>  
         </div>
        
