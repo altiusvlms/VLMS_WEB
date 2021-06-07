@@ -17,7 +17,7 @@
           <table class="table table-striped">
             <thead >
                 <tr>
-                  <th>Select</th>
+                  <!-- <th>Select</th> -->
                   <th>Post Date</th>
                   <th>AGT NO</th>
                   <th>Customer Name</th>
@@ -29,7 +29,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let hl of HlPayment;let i = index;">
+              <tr>
+                <td>07 June 2021</td>
+                <td>765458</td>
+                <td>Test</td>
+                <td>RTO charges</td>
+                <td>Testing</td>
+                <td>20000</td>
+                <td>2000</td>
+                <td>No</td>
+              </tr>
+                <!-- <tr *ngFor="let hl of HlPayment;let i = index;">
                   <td> <mat-checkbox  (change)="eventCheck(hl,$event)" >
                   </mat-checkbox>
                 </td>
@@ -41,7 +51,7 @@
                   <td>{{hl.actualAmount}}</td>
                   <td>{{hl.postAmount}}</td>
                   <td>{{hl.remark}}</td>
-                </tr>
+                </tr> -->
               </tbody>
           </table>
         </div>
