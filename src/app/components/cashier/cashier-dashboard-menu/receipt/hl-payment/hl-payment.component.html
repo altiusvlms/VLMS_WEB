@@ -14,8 +14,8 @@
                   <mat-label> Date</mat-label>
                   <input matInput [matDatepicker]="dp" placeholder="Date" formControlName="postDate" >
                   <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-              <mat-datepicker #dp></mat-datepicker>
-          </mat-form-field>
+                  <mat-datepicker #dp></mat-datepicker>
+              </mat-form-field>
           </div>
           <div class="col-4 col-sm-4">
               <mat-form-field appearance="outline" class="example-full-width">
@@ -31,7 +31,7 @@
                     <mat-option  value="insurance">Insurance</mat-option>
                   </mat-select>
               </mat-form-field>
-
+              
               <mat-checkbox  *ngIf="showInsurenceTable" data-toggle="modal" data-target="#generateChildLoanModal">For Child Loan</mat-checkbox>
 
           </div>
@@ -44,7 +44,8 @@
       </div>
 
     <!-- /** Insurence Type based on Table */ -->
-      <table  class="table table-striped" *ngIf="showInsurenceTable">
+    <div *ngIf="showInsurenceTable">
+      <table  class="table table-striped"  formArrayName="hl">
           <thead>
               <tr>
                   <th>AGT NO</th>
@@ -55,50 +56,66 @@
                   <th>Policy No</th>
                   <th>Insurance Company</th>
                   <th>Remark</th>
-                  <th></th>
+                  <th width="150px"><button type="button" (click)="addHl()" class="btn btn-primary">Add More</button></th>
                 </tr>
           </thead>
-          <tbody *ngFor="let field of fieldArray; let i = index" >
-              <tr >
+          <tbody  >
+              <tr *ngFor="let hl of hl().controls; let i=index" [formGroupName]="i">
                 <td>  
                     <mat-form-field appearance="outline" class="example-full-width">
                       <input matInput type='text' formControlName="agtno" >
-                  </mat-form-field></td>
-                <td> <mat-form-field appearance="outline" class="example-full-width">
+                    </mat-form-field>
+                </td>
+                <td> 
+                  <mat-form-field appearance="outline" class="example-full-width">
                       <input matInput type='text' formControlName="customerName" >
-                      </mat-form-field> </td>
-                <td> <mat-form-field appearance="outline" class="example-full-width">
+                  </mat-form-field> 
+                </td>
+                <td> 
+                  <mat-form-field appearance="outline" class="example-full-width">
                   <input matInput type='text' formControlName="actualAmount" >
-              </mat-form-field></td>
-                <td> <mat-form-field appearance="outline" class="example-full-width">
+                  </mat-form-field>
+                </td>
+                <td> 
+                  <mat-form-field appearance="outline" class="example-full-width">
                   <input matInput type='text' formControlName="postAmount" >
-              </mat-form-field></td> 
-                <td>                <mat-form-field appearance="outline" class="example-full-width"> 
-                    <input matInput [matDatepicker]="dp" placeholder="Date" formControlName="expiryDate" >
+                  </mat-form-field>
+                </td> 
+                <td>                
+                  <mat-form-field appearance="outline" class="example-full-width"> 
+                  <input matInput [matDatepicker]="dp" placeholder="Date" formControlName="expiryDate" >
                   <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-              <mat-datepicker #dp></mat-datepicker>
-          </mat-form-field></td> 
-                <td> <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-datepicker #dp></mat-datepicker>
+                  </mat-form-field>
+                </td> 
+                <td> 
+                  <mat-form-field appearance="outline" class="example-full-width">
                   <input matInput type='text' formControlName="policyNo" >
-              </mat-form-field></td> 
-              <td> <mat-form-field appearance="outline" class="example-full-width">
+                  </mat-form-field>
+                </td> 
+                <td> 
+                  <mat-form-field appearance="outline" class="example-full-width">
                   <input matInput type='text' formControlName="insuranceCompany" >
-              </mat-form-field></td> 
-              <td> <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput type='text' formControlName="remark" >
-            </mat-form-field></td> 
-            <td>
+                  </mat-form-field>
+                </td> 
+                <td> 
+                  <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput type='text' formControlName="remark" >
+                  </mat-form-field>
+                </td> 
+                <td>
+                  <button (click)="removeHl(i)" class="btn btn-danger">Remove</button>
+                </td>
+           
               </tr>
 
-              <t><button class="btn btn-primary" type="button" (click)="addFieldValue()">Add</button></t>
-              <tr *ngIf="i>0"> <button class="btn btn-primary"  type="button" (click)="deleteFieldValue(i)">Delete</button>     </tr>
           </tbody>
       </table>
-
+    </div>
 
     <!-- /** RTO Type based on Table */ -->
-
-    <table  class="table table-striped" *ngIf="showRTOTable">
+<div *ngIf="showRTOTable">
+    <table  class="table table-striped"  *ngFor="let hl of hl().controls; let i=index" [formGroupName]="i">
       <thead>
           <tr>
               <th>AGT NO</th>
@@ -106,38 +123,43 @@
               <th>Actual Amount</th>
               <th>Post Amount</th>
               <th>Remark</th>
-              <th></th>
+              <th width="150px"><button type="button" (click)="addHl()" class="btn btn-primary">Add More</button></th>
             </tr>
       </thead>
-      <tbody *ngFor="let field of fieldArray; let i = index" >
+      <tbody  >
           <tr >
             <td>  
                 <mat-form-field appearance="outline" class="example-full-width">
                   <input matInput type='text' formControlName="agtno" >
-              </mat-form-field></td>
-            <td> <mat-form-field appearance="outline" class="example-full-width">
+                </mat-form-field>
+            </td>
+            <td> 
+                <mat-form-field appearance="outline" class="example-full-width">
                   <input matInput type='text' formControlName="customerName" >
-                  </mat-form-field> </td>
-            <td> <mat-form-field appearance="outline" class="example-full-width">
+                </mat-form-field> 
+            </td>
+            <td> 
+              <mat-form-field appearance="outline" class="example-full-width">
               <input matInput type='text' formControlName="actualAmount" >
-          </mat-form-field></td>
-            <td> <mat-form-field appearance="outline" class="example-full-width">
+              </mat-form-field>
+            </td>
+            <td> 
+              <mat-form-field appearance="outline" class="example-full-width">
               <input matInput type='text' formControlName="postAmount" >
-          </mat-form-field></td> 
-      
-          <td> <mat-form-field appearance="outline" class="example-full-width">
-            <input matInput type='text' formControlName="remark" >
-        </mat-form-field></td> 
-        <td>
-          </tr>
-
-          <t><button class="btn btn-primary" type="button" (click)="addFieldValue()">Add</button></t>
-          <tr *ngIf="i>0"> <button class="btn btn-primary"  type="button" (click)="deleteFieldValue(i)">Delete</button>     </tr>
+              </mat-form-field>
+            </td> 
+            <td> 
+              <mat-form-field appearance="outline" class="example-full-width">
+              <input matInput type='text' formControlName="remark" >
+              </mat-form-field>
+            </td> 
+            <td>
+              <button (click)="removeHl(i)" class="btn btn-danger">Remove</button>
+            </td>
+       </tr>
       </tbody>
-  </table>
-
-
-
+    </table>
+  </div>
       <div class="col-4 col-sm-4">
           <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Pay Mode</mat-label>
@@ -150,7 +172,6 @@
 
       <div class="row">
           <button class="btn_blue" (click)="saveHl()" >Save</button>
-
       </div>
   </form>
 </div>

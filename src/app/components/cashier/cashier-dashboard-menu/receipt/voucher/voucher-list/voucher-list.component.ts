@@ -41,6 +41,7 @@ export class VoucherListComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
       this.voucherList = response;
+      console.log( this.voucherList)
       this.sharedService.setLoaderShownProperty(false);  
     })
   }

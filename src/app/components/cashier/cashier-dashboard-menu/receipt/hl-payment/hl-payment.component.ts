@@ -2,7 +2,7 @@
 import { Component, OnInit,Inject } from '@angular/core';
 
 /** Custom Forms */
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup,FormArray, FormControl, Validators } from '@angular/forms';
 
 import {  CrudService } from '../../../../../services/crud.service';
 import { appModels } from '../../../../../services/utils/enum.util';
@@ -24,48 +24,58 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class HlPaymentComponent implements OnInit {
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private sharedService: SharedService,private dialog: MatDialog,public datepipe: DatePipe) { }
-
-  fieldArray: any = [];
+  createHlForms: FormGroup;
   showInsurenceTable: Boolean = false;
   showRTOTable:Boolean = false;
+  
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private sharedService: SharedService,private dialog: MatDialog,public datepipe: DatePipe,private fb:FormBuilder) { 
+    this.createHlForms = this.fb.group({
+      postDate: '',
+      postType: '',
+      agent: '',
+      dateFormat:'dd MMMM yyyy',
+      locale: 'en',
+      hl: this.fb.array([]) ,
+    });
+  }
 
-    /** Create HL Payment Forms */
-    createHlForms = new FormGroup({
-      postDate: new FormControl(''),
-      postType: new FormControl(''),
-      agent: new FormControl(''),
-      agtno: new FormControl(''),
-      customerName: new FormControl(''),
-      actualAmount: new FormControl(''),
-      postAmount: new FormControl(''),
-      expiryDate: new FormControl(''),
-      policyNo: new FormControl(''),
-      insuranceCompany: new FormControl(''),
-      remark: new FormControl(''),
-      dateFormat: new FormControl('dd MMMM yyyy'),
-      locale: new FormControl('en'),
-    })
+
 
     ngOnInit(): void {
     }
 
-    addFieldValue() {
-        this.fieldArray.push(this.createHlForms.value);
+    hl() : FormArray {
+      return this.createHlForms.get("hl") as FormArray;
+    }
+  
+    newHl(): FormGroup {
+      return this.fb.group({
+        agtno: '',
+        customerName: '',
+        actualAmount: '',
+        postAmount: '',
+        expiryDate: '',
+        policyNo: '',
+        insuranceCompany: '',
+        remark: '',
+      })
+    }
+     
+    addHl() {
+      this.hl().push(this.newHl());
+    }
+     
+    removeHl(i:number) {
+      this.hl().removeAt(i);
     }
 
-    deleteFieldValue(index: any) {
-        this.fieldArray.splice(index, 1);
-    }
 
     onTypeChange(value: any){
       if(value == 'insurance'){
-        this.fieldArray.length = 1;
         this.showInsurenceTable = true;
         this.showRTOTable = false;
       }
       else if(value == 'RTO_Charges'){
-        this.fieldArray.push(this.createHlForms.value);
         this.showInsurenceTable = false;
         this.showRTOTable = true;
       }

@@ -255,6 +255,26 @@ export class NewloanProcessComponent implements OnInit {
     interestINR: new FormControl(''),
     dueDate: new FormControl(''),
 
+    principal: new FormControl('5000'),
+    loanTermFrequency: new FormControl('15'),
+    numberOfRepayments: new FormControl('5'),
+    interestRatePerPeriod: new FormControl('3'),
+    expectedDisbursementDate: new FormControl('30 May 2021'),
+    productId: new FormControl('1'),
+    disbursementData: new FormControl('[]'),
+    repaymentEvery: new FormControl('1'),
+    repaymentFrequencyType: new FormControl('2'),
+    allowPartialPeriodInterestCalcualtion: new FormControl('false'),
+    transactionProcessingStrategyId: new FormControl('1'),
+    loanTermFrequencyType: new FormControl('2'),
+    amortizationType: new FormControl('1'),
+    isEqualAmortization: new FormControl('false'),
+    interestType: new FormControl('0'),
+    interestCalculationPeriodType: new FormControl('1'),
+    rates: new FormControl('[]'),
+    loanType: new FormControl('individual'),
+    submittedOnDate: new FormControl('30 May 2021'),
+
   //bank 
     accountNumber: new FormControl(''),
     accountHolderName: new FormControl(''),
@@ -324,6 +344,18 @@ export class NewloanProcessComponent implements OnInit {
 
   })
 
+
+  approverForm = new FormGroup({
+    approvedOnDate: new FormControl('30 May 2021'),
+    approvedLoanAmount: new FormControl('6000'),
+    expectedDisbursementDate: new FormControl('30 May 2021'),
+    disbursementData: new FormControl('[]'),
+    dateFormat:new FormControl('dd MMMM yyyy'),
+    locale:new FormControl('en'),
+  })
+
+  
+  
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
@@ -714,7 +746,7 @@ export class NewloanProcessComponent implements OnInit {
   saveNewLoan(){
     this.getUserId();    
     this.submitted = true;
-    if(this.newLoanForm.valid){
+    // if(this.newLoanForm.valid){
     console.log(this.userId)
     console.log(this.newLoanForm.value)
     this.newLoanForm.value.salaryDate = this.datepipe.transform(this.newLoanForm.value.salaryDate, 'dd MMMM yyyy');
@@ -737,6 +769,14 @@ export class NewloanProcessComponent implements OnInit {
           this.customer_Id = data.customerId;
           this.guarantor_Id = data.guarantorId;
           this.bankDetails_Id = data.bankDetailsId;
+
+          this.crudService.post(`${appModels.APPROVEL}/${this.resource_Id}`, this.approverForm.value,
+          { params:{
+            command: "approve"   
+          }}
+        ).pipe(untilDestroyed(this)).subscribe( async data => {
+          console.log(data)
+        })
 
     //Applicant   
       if (this.customer_Id !== undefined || null){
@@ -1029,10 +1069,10 @@ export class NewloanProcessComponent implements OnInit {
     this.toast.success("Loan Submitted Successfully");
     this.router.navigate(['branch-manager/loan-verification'])
 
-  }
-  else{
-    alert("Please Enter Required Fields")
-  }
+  // }
+  // else{
+  //   alert("Please Enter Required Fields")
+  // }
 }
 
 // EMI
