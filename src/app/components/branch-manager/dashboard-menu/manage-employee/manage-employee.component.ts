@@ -186,15 +186,18 @@ export class ManageEmployeeComponent implements OnInit {
       // proof2: new FormControl('', Validators.required),
     }) 
 
+    showSubmitBtn :Boolean = false;
 
 
   ngOnInit(): void {
+    this.showSubmitBtn = true;
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
       // this.employeeEducationDetails();
       // this.employeeInsuranceDetails();
     })
     if(this.id != undefined){
+      this.showSubmitBtn = false;
       this.getSingleEmployeeList();
       }
       this.getDocumentDetails();
@@ -223,7 +226,6 @@ export class ManageEmployeeComponent implements OnInit {
     this.documentDetails = response;
   });
   }
-
 /** Save Enquiry */
 manageEmployee(){
 // if(this.manageEmployeeForm.invalid) {

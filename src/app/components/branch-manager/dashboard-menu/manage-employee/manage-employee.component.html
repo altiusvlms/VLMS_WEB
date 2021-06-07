@@ -509,8 +509,8 @@
         </div>
       </div>    
      
-      <button type="submit" (click)="updateEmployeeDetails();updateEmployeeEducationDetails();updateEmployeeInsuranceDetails()">Update</button>
-      <button type="submit" (click)="manageEmployee()">Submit</button>
+      <button type="submit" class="btn_blue"  *ngIf="!showSubmitBtn"  (click)="updateEmployeeDetails();updateEmployeeEducationDetails();updateEmployeeInsuranceDetails()">Update</button>
+      <button type="submit" class="btn_blue" *ngIf="showSubmitBtn"  (click)="manageEmployee()">Submit</button>
 
        </mat-tab>
        <!-- <button type="submit" (click)="updateEmployeeDetails()">update</button>
