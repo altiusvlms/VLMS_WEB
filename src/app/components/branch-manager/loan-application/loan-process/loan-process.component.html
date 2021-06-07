@@ -193,7 +193,7 @@
                   </div></div></div>
                   <div class="col-6 col-sm-6"><div class="card">
                     <div class="card-body">
-            <form [formGroup]="applicantAddressForm">
+            
               <mat-accordion>
                 <mat-expansion-panel >
                   <mat-expansion-panel-header>
@@ -202,7 +202,7 @@
                     </mat-panel-title>
 
                   </mat-expansion-panel-header>
-                  <div class="row">
+                  <div class="row" formGroupName="communicationAdd">
                     <div class="col-6 col-sm-6">
                       <mat-form-field appearance="outline" class="example-full-width">
                         <mat-label>Address Line1</mat-label>
@@ -254,7 +254,7 @@
                     </mat-panel-title>
 
                   </mat-expansion-panel-header>
-                  <div class="row">
+                  <div class="row" formGroupName="permanentAdd">
                               
                     <div class="col-6 col-sm-6">
                       <mat-form-field appearance="outline" class="example-full-width">
@@ -307,7 +307,7 @@
                     </mat-panel-title>
 
                   </mat-expansion-panel-header>
-                  <div class="row">
+                  <div class="row"  formGroupName="officeAdd">
                               
                     <div class="col-6 col-sm-4">
                       <mat-form-field appearance="outline" class="example-full-width">
@@ -357,10 +357,6 @@
               </mat-accordion>
                     
 
-
-
-                
-              </form>
                     </div></div></div>
                 </div>
             
@@ -520,7 +516,6 @@
                   
                   <div class="col-md-6"><div class="card">
                     <div class="card-body">
-            <form [formGroup]="co_applicantAddressForm">
                 <div>
                   <h2>ADD ADDRESS</h2>
 
@@ -531,8 +526,8 @@
                           Communication Address
                         </mat-panel-title>
                       </mat-expansion-panel-header>
-                      <div class="row">
-                        <div formGroupName="communicationAdd" >
+                      <div class="row" formGroupName="communicationAdd">
+                        <div >
                           <div  > 
                             <mat-form-field appearance="outline" class="example-full-width">
                               <mat-label>Address Line1</mat-label>
@@ -586,8 +581,8 @@
                             Permanent Address
                           </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <div class="row">
-                          <div formGroupName="permanentAdd" >
+                        <div class="row" formGroupName="permanentAdd" >
+                          <div >
                             <div> 
                               <mat-form-field appearance="outline" class="example-full-width">
                                 <mat-label>Address Line1</mat-label>
@@ -641,8 +636,8 @@
                             Office Address
                           </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <div class="row">
-                          <div formGroupName="officeAdd">
+                        <div class="row" formGroupName="officeAdd">
+                          <div >
                             <div> 
                               <mat-form-field appearance="outline" class="example-full-width">
                                 <mat-label>Address Line1</mat-label>
@@ -693,7 +688,7 @@
 
                 </mat-accordion>
                 </div>
-            </form>
+           
             </div>
           </div>
         </div>
