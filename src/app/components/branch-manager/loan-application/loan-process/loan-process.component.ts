@@ -80,30 +80,8 @@ export class LoanProcessComponent implements OnInit {
         monthlyIncome:new FormControl('', Validators.required),
         salaryDate:new FormControl('', Validators.required),
         salaryPeriod:new FormControl('', Validators.required),
-        maritalStatus:new FormControl('', Validators.required)
-
-      })
-    })
-    applicantAddressForm = new FormGroup({
+        maritalStatus:new FormControl('', Validators.required),
         communicationAdd : new FormGroup({
-        addressLine1:new FormControl(''),
-        addressLine2:new FormControl(''),
-        area:new FormControl(''),
-        city:new FormControl(''),
-        landmark:new FormControl(''),
-        postalCode:new FormControl(''),
-        state:new FormControl('')
-        }),
-        permanentAdd: new FormGroup({
-        addressLine1:new FormControl(''),
-        addressLine2:new FormControl(''),
-        area:new FormControl(''),
-        city:new FormControl(''),
-        landmark:new FormControl(''),
-        postalCode:new FormControl(''),
-        state:new FormControl('')
-        }),
-        officeAdd: new FormGroup({
           addressLine1:new FormControl(''),
           addressLine2:new FormControl(''),
           area:new FormControl(''),
@@ -111,8 +89,28 @@ export class LoanProcessComponent implements OnInit {
           landmark:new FormControl(''),
           postalCode:new FormControl(''),
           state:new FormControl('')
-          })
+          }),
+          permanentAdd: new FormGroup({
+          addressLine1:new FormControl(''),
+          addressLine2:new FormControl(''),
+          area:new FormControl(''),
+          city:new FormControl(''),
+          landmark:new FormControl(''),
+          postalCode:new FormControl(''),
+          state:new FormControl('')
+          }),
+          officeAdd: new FormGroup({
+            addressLine1:new FormControl(''),
+            addressLine2:new FormControl(''),
+            area:new FormControl(''),
+            city:new FormControl(''),
+            landmark:new FormControl(''),
+            postalCode:new FormControl(''),
+            state:new FormControl('')
+            })
+      })
     })
+  
 
 
 
@@ -123,38 +121,37 @@ export class LoanProcessComponent implements OnInit {
         spouseName: new FormControl(''),
         gender: new FormControl(''),
         dob:new FormControl('', Validators.required),
-        maritalStatus:new FormControl('', Validators.required)
+        maritalStatus:new FormControl('', Validators.required),
+        communicationAdd : new FormGroup({
+          addressLine1:new FormControl(''),
+          addressLine2:new FormControl(''),
+          area:new FormControl(''),
+          city:new FormControl(''),
+          landmark:new FormControl(''),
+          postalCode:new FormControl(''),
+          state:new FormControl('')
+          }),
+          permanentAdd: new FormGroup({
+          addressLine1:new FormControl(''),
+          addressLine2:new FormControl(''),
+          area:new FormControl(''),
+          city:new FormControl(''),
+          landmark:new FormControl(''),
+          postalCode:new FormControl(''),
+          state:new FormControl('')
+          }),
+          officeAdd: new FormGroup({
+            addressLine1:new FormControl(''),
+            addressLine2:new FormControl(''),
+            area:new FormControl(''),
+            city:new FormControl(''),
+            landmark:new FormControl(''),
+            postalCode:new FormControl(''),
+            state:new FormControl('')
+            })
       })
     })
-    co_applicantAddressForm = new FormGroup({
-      communicationAdd : new FormGroup({
-      addressLine1:new FormControl(''),
-      addressLine2:new FormControl(''),
-      area:new FormControl(''),
-      city:new FormControl(''),
-      landmark:new FormControl(''),
-      postalCode:new FormControl(''),
-      state:new FormControl('')
-      }),
-      permanentAdd: new FormGroup({
-      addressLine1:new FormControl(''),
-      addressLine2:new FormControl(''),
-      area:new FormControl(''),
-      city:new FormControl(''),
-      landmark:new FormControl(''),
-      postalCode:new FormControl(''),
-      state:new FormControl('')
-      }),
-      officeAdd: new FormGroup({
-        addressLine1:new FormControl(''),
-        addressLine2:new FormControl(''),
-        area:new FormControl(''),
-        city:new FormControl(''),
-        landmark:new FormControl(''),
-        postalCode:new FormControl(''),
-        state:new FormControl('')
-        })
-  })
+ 
 
     vehicleForm = new FormGroup({
       vehicleDetails:new FormGroup({
@@ -229,7 +226,6 @@ export class LoanProcessComponent implements OnInit {
     this.loanForm.disable();
     this.bankForm.disable();
     this.applicantForm.disable();
-    this.co_applicantAddressForm.disable();
 
     this.crudService.get(`${appModels.CUSTOMERS}/loanByLoanId/${this.id}`, {
       params: {
@@ -256,12 +252,7 @@ export class LoanProcessComponent implements OnInit {
           salaryPeriod:response.customerDetails.salaryPeriod,
           maritalStatus:response.customerDetails.maritalStatus,        
          
-        }
-      })
-
-      
-      this.applicantAddressForm.patchValue({
-        communicationAdd:{
+          communicationAdd:{
             addressLine1:response.customerDetails.communicationAdd.addressLine1,
             addressLine2:response.customerDetails.communicationAdd.addressLine2,
             area:response.customerDetails.communicationAdd.area,
@@ -288,7 +279,10 @@ export class LoanProcessComponent implements OnInit {
             postalCode:response.customerDetails.officeAdd.postalCode,
             state:response.customerDetails.officeAdd.state
           }
+        }
       })
+
+   
 
       this.co_applicantForm.patchValue({
         customerGuarantor:{
@@ -298,11 +292,7 @@ export class LoanProcessComponent implements OnInit {
           gender: response.customerGuarantor.gender,
           dob:this.datepipe.transform(response.customerGuarantor.dob, 'yyyy-MM-dd'),
           maritalStatus:response.customerGuarantor.maritalStatus,
-                  
-        }
-      })
 
-      this.co_applicantAddressForm.patchValue({
           communicationAdd:{
             addressLine1:response.customerGuarantor.communicationAdd.addressLine1,
             addressLine2:response.customerGuarantor.communicationAdd.addressLine2,
@@ -330,7 +320,10 @@ export class LoanProcessComponent implements OnInit {
             postalCode:response.customerGuarantor.officeAdd.postalCode,
             state:response.customerGuarantor.officeAdd.state
           }
+        }
       })
+
+     
       this.loanForm.patchValue({
         loanDetailsData:{
           loanAmount: response.loanDetailsData.loanAmount,
@@ -468,7 +461,6 @@ if(this.customerID !== null || undefined){
 
     editGuarantorDetails(){
       this.co_applicantForm.enable();
-      this.co_applicantAddressForm.enable();
       this.showUpdatebtn = true;
     }
 
