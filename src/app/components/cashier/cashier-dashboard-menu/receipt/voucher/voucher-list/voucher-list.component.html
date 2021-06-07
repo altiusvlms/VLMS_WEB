@@ -35,8 +35,8 @@
                   <td>{{voucher.particulars}}</td>
                   <td>{{voucher.voucherType}}</td>
                   <td>{{voucher.voucherNumber}}</td>
-                  <td>{{voucher.credit}}</td>
-                  <td>{{voucher.debit}}</td>
+                  <td>{{voucher.credit ? voucher.credit : "0"}}</td>
+                  <td>{{voucher.debit ? voucher.debit : "0"}}</td>
                   <td>{{voucher.remarks}}</td>
                 </tr>
               </tbody>
