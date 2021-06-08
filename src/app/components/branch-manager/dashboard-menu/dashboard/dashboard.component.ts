@@ -169,28 +169,28 @@ export class DashboardComponent implements OnInit {
      var MonthlyDue = this.TotalPayable / numberOfMonths;
      this.MonthlyCorrectDue = Number (Math.round(MonthlyDue))
 
-    this.DueCalc();
+    // this.DueCalc();
   }
   daydiff:any;
   delayDueAmount:any;
   totalAmt : any;
-  DueCalc(){
-    // debugger
-     var totaltimediff =  this.todate.getTime() - this.fromdate.getTime();
-      var daydiff = totaltimediff / ( 1000 * 3600 * 24);
-     var interestPerYear = Number (this.query.interest) * 100 / 365;
-     var dueInterest = Number (Math.round(interestPerYear))
+  // DueCalc(){
+  //   // debugger
+  //    var totaltimediff =  this.todate.getTime() - this.fromdate.getTime();
+  //     var daydiff = totaltimediff / ( 1000 * 3600 * 24);
+  //    var interestPerYear = Number (this.query.interest) * 100 / 365;
+  //    var dueInterest = Number (Math.round(interestPerYear))
     
 
-      var delayDueAmount = dueInterest * daydiff;
-      this.delayDueAmount = Number ((Math.ceil(delayDueAmount / 10) * 10))
+  //     var delayDueAmount = dueInterest * daydiff;
+  //     this.delayDueAmount = Number ((Math.ceil(delayDueAmount / 10) * 10))
      
 
-     this.totalAmt = this.delayDueAmount + this.MonthlyCorrectDue
+  //    this.totalAmt = this.delayDueAmount + this.MonthlyCorrectDue
 
 
 
-  }
+  // }
 
 
   ngOnInit(): void {

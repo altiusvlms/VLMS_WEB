@@ -53,7 +53,9 @@ export class ManageEmployeeComponent implements OnInit {
   // manageEmployeeForm:any  
   // forvalue : CLASS_NAME;
   // userForm: FormGroup;
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer) { }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer) {
+    // this.generalAccidentialIns = new generalAccidentialIns();
+   }
 
   submitted: Boolean = false;
 
@@ -301,7 +303,7 @@ getSingleEmployeeList(){
         })
       }
     }
- 
+//  debugger
     console.log(this.employeeArray)
 
     
@@ -336,64 +338,64 @@ this.manageEmployeeForm.patchValue({
     branchName: this.employeeArray[0].bankDetails.branchName,
     
   employee_communicationAddress:{
-    addressLine1:this.employeeArray[0].communicationAdd.addressLine1.slice(1, -1),
-    addressLine2: this.employeeArray[0].communicationAdd.addressLine2.slice(1, -1),
-    area : this.employeeArray[0].communicationAdd.area,
-    city : this.employeeArray[0].communicationAdd.city,
-    landmark : this.employeeArray[0].communicationAdd.landmark.slice(1, -1),
-    postalCode : this.employeeArray[0].communicationAdd.postalCode.slice(1, -1),
-    state : this.employeeArray[0].communicationAdd.state
+    addressLine1:JSON.parse(this.employeeArray[0].communicationAdd.addressLine1),
+    addressLine2: JSON.parse(this.employeeArray[0].communicationAdd.addressLine2),
+    area : JSON.parse(this.employeeArray[0].communicationAdd.area),
+    city : JSON.parse(this.employeeArray[0].communicationAdd.city),
+    landmark : JSON.parse(this.employeeArray[0].communicationAdd.landmark),
+    postalCode : this.employeeArray[0].communicationAdd.postalCode,
+    state : JSON.parse(this.employeeArray[0].communicationAdd.state)
 },
 
   employee_permanentAddress:{
-    addressLine1:this.employeeArray[0].permanentAdd.addressLine1,
-    addressLine2: this.employeeArray[0].permanentAdd.addressLine2,
-    area : this.employeeArray[0].permanentAdd.area,
-    city : this.employeeArray[0].permanentAdd.city,
-    landmark : this.employeeArray[0].permanentAdd.landmark,
+    addressLine1:JSON.parse(this.employeeArray[0].permanentAdd.addressLine1),
+    addressLine2: JSON.parse(this.employeeArray[0].permanentAdd.addressLine2),
+    area : JSON.parse(this.employeeArray[0].permanentAdd.area),
+    city : JSON.parse(this.employeeArray[0].permanentAdd.city),
+    landmark : JSON.parse(this.employeeArray[0].permanentAdd.landmark),
     postalCode : this.employeeArray[0].permanentAdd.postalCode,
-    state : this.employeeArray[0].permanentAdd.state,
+    state : JSON.parse(this.employeeArray[0].permanentAdd.state),
 },
 
   school_qualification:{
-    university:this.employeeArray[0].schoolQualification.university,
-    qualification: this.employeeArray[0].schoolQualification.qualification,
-    percentage : this.employeeArray[0].schoolQualification.percentage,
-    passingyear : this.employeeArray[0].schoolQualification.passingyear,
+    university:JSON.parse(this.employeeArray[0].schoolQualification.university),
+    qualification: JSON.parse(this.employeeArray[0].schoolQualification.qualification),
+    percentage : JSON.parse(this.employeeArray[0].schoolQualification.percentage),
+    passingyear : JSON.parse(this.employeeArray[0].schoolQualification.passingyear),
   },
 
   college_qualification:{
-  university:this.employeeArray[0].collegeQualification.university,
-  qualification: this.employeeArray[0].collegeQualification.qualification,
-  percentage : this.employeeArray[0].collegeQualification.percentage,
-  passingyear : this.employeeArray[0].collegeQualification.passingyear,
+  university:JSON.parse(this.employeeArray[0].collegeQualification.university),
+  qualification: JSON.parse(this.employeeArray[0].collegeQualification.qualification),
+  percentage : JSON.parse(this.employeeArray[0].collegeQualification.percentage),
+  passingyear : JSON.parse(this.employeeArray[0].collegeQualification.passingyear),
   },
 
   graduate_qualification:{
-  university:this.employeeArray[0].graduateQualification.university,
-  qualification: this.employeeArray[0].graduateQualification.qualification,
-  percentage : this.employeeArray[0].graduateQualification.percentage,
-  passingyear : this.employeeArray[0].graduateQualification.passingyear,
+  university:JSON.parse(this.employeeArray[0].graduateQualification.university),
+  qualification: JSON.parse(this.employeeArray[0].graduateQualification.qualification),
+  percentage : JSON.parse(this.employeeArray[0].graduateQualification.percentage),
+  passingyear : JSON.parse(this.employeeArray[0].graduateQualification.passingyear),
   },
 
   postgraduate_qualification:{
-  university:this.employeeArray[0].postgraduateQualification.university,
-  qualification: this.employeeArray[0].postgraduateQualification.qualification,
-  percentage : this.employeeArray[0].postgraduateQualification.percentage,
-  passingyear : this.employeeArray[0].postgraduateQualification.passingyear,
+  university:JSON.parse(this.employeeArray[0].postgraduateQualification.university),
+  qualification: JSON.parse(this.employeeArray[0].postgraduateQualification.qualification),
+  percentage : JSON.parse(this.employeeArray[0].postgraduateQualification.percentage),
+  passingyear : JSON.parse(this.employeeArray[0].postgraduateQualification.passingyear),
   },
   
   
     
   general_insurance:{
-  policyNumber:this.employeeArray[0].insuranceDetails.policyNumber,
-  companyCoverage: this.employeeArray[0].insuranceDetails.companyCoverage,
-  policyCoverage : this.employeeArray[0].insuranceDetails.policyCoverage,
+  policyNumber: JSON.parse(this.employeeArray[0].insuranceDetails.policyNumber),
+  companyCoverage: JSON.parse(this.employeeArray[0].insuranceDetails.companyCoverage),
+  policyCoverage : JSON.parse(this.employeeArray[0].insuranceDetails.policyCoverage),
   },
   accidental_insurance:{
-    policyNumber:this.employeeArray[0].accidentalInsuranceDetails.policyNumber,
-    companyCoverage: this.employeeArray[0].accidentalInsuranceDetails.companyCoverage,
-    policyCoverage : this.employeeArray[0].accidentalInsuranceDetails.policyCoverage,
+    policyNumber:JSON.parse(this.employeeArray[0].accidentalInsuranceDetails.policyNumber),
+    companyCoverage: JSON.parse(this.employeeArray[0].accidentalInsuranceDetails.companyCoverage),
+    policyCoverage : JSON.parse(this.employeeArray[0].accidentalInsuranceDetails.policyCoverage),
     }
     
 })
@@ -477,10 +479,21 @@ updateEmployeeInsuranceDetails(){
   // this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   // this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
   this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeForm.value.general_insurance,
+  this.employee.id,
+
+  ).pipe(untilDestroyed(this)).subscribe(response => {
+    this.employeeInsuranceDetails = response;
+    console.log(this.manageEmployeeForm.value)
+})
+}
+
+updateAddress(){
+  this.crudService.update(`${appModels.ADDRESS}`,this.manageEmployeeForm.value.employee_communicationAddress,
   this.id,
   ).pipe(untilDestroyed(this)).subscribe(response => {
     this.employeeInsuranceDetails = response;
 })
 }
+
 
 }

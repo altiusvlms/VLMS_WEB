@@ -11,6 +11,7 @@ enum appModels {
     CREATEEMPLOYEE = 'fineract-provider/api/v1/Employee/createEmployee',
     EMPLOYEE = 'fineract-provider/api/v1/Employee',
     GETEMPLOYEE = 'fineract-provider/api/v1/Employee/getEmployees',
+    ADDRESS = 'fineract-provider/api/v1/customers/address',
     ANALYTICS_TOTAL_COUNT = 'fineract-provider/api/v1/customers/branchAnalytic?command=loanApplications',
     ANALYTICS_ENQUIRY = 'fineract-provider/api/v1/customers/branchAnalytic?command=enquiry',
     ANALYTICS_CUS_ONBOARD = 'fineract-provider/api/v1/customers/branchAnalytic?command=customerOnboard',
