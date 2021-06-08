@@ -102,11 +102,25 @@ export class SearchReceipt {
       tenantIdentifier: 'default'
     }
   }).pipe(untilDestroyed(this)).subscribe(async response => {
-    await response.map((res: any) => {
-      if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
-      this.customerList.push(res);
-      }
-    })
+    // console.log(response)
+    for(let x of response){
+      // console.log(x)
+        if (
+          x.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
+            this.customerList.push(x)
+        }
+    }
+    // console.log(this.customerList)
+
+    var mySet = new Set(this.customerList);
+    this.customerList = [...mySet];
+console.log(this.customerList);
+    // await response.map((res: any) => {
+    //   if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
+    //   this.customerList = res;
+    //   console.log(this.customerList)
+    //   }
+    // })
     })
   }
   else{
@@ -137,16 +151,18 @@ export class SearchReceipt {
   role: any;
   createReceipt(){
     this.customerList.map((res: any) => {
+      console.log(res)
     this.role = localStorage.getItem("roles");
       if(this.role === "Cashier"){
           if(res.customerDetails.name == this.searchForms.value.customerName){
-              this.router.navigate(['/cashier/create-receipt/' +res.customerDetails.id]);
+              this.router.navigate(['/cashier/create-receipt/' +res.id]);
               this.dialogRef.close(res.customerDetails.name);
           }
       }
       else{
         if(res.customerDetails.name == this.searchForms.value.customerName){
-          this.router.navigate(['/branch-manager/create-receipt/' +res.customerDetails.id]);
+          this.router.navigate(['/branch-manager/create-receipt/' +res.id]);
+          this.dialogRef.close(res.customerDetails.name);
       }
       }
     })

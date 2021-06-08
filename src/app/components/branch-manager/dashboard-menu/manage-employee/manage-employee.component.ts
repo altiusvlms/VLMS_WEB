@@ -335,14 +335,13 @@ this.manageEmployeeForm.patchValue({
     bankName: this.employeeArray[0].bankDetails.bankName,
     branchName: this.employeeArray[0].bankDetails.branchName,
     
-// replace("\"\"", "")
   employee_communicationAddress:{
-    addressLine1:this.employeeArray[0].communicationAdd.addressLine1,
-    addressLine2: this.employeeArray[0].communicationAdd.addressLine2,
+    addressLine1:this.employeeArray[0].communicationAdd.addressLine1.slice(1, -1),
+    addressLine2: this.employeeArray[0].communicationAdd.addressLine2.slice(1, -1),
     area : this.employeeArray[0].communicationAdd.area,
     city : this.employeeArray[0].communicationAdd.city,
-    landmark : this.employeeArray[0].communicationAdd.landmark,
-    postalCode : this.employeeArray[0].communicationAdd.postalCode,
+    landmark : this.employeeArray[0].communicationAdd.landmark.slice(1, -1),
+    postalCode : this.employeeArray[0].communicationAdd.postalCode.slice(1, -1),
     state : this.employeeArray[0].communicationAdd.state
 },
 

@@ -22,9 +22,11 @@ export class ApplicantOnlineComponent implements OnInit {
   applicantLoanDetails : any = [];
   customerImage: any;
   allCustomerImage: any = [];
+  loanTypeDetails: any;
 
   ngOnInit(): void {
     this.getApplicantLoanDetails();
+    this.getLoanType();
   }
  
   /** Get the Applicant Loan Details */
@@ -48,6 +50,19 @@ export class ApplicantOnlineComponent implements OnInit {
     })
     this.allCustomerImage = [];
 
+  }
+
+/** Get the Applicant Loan Type Details */
+  getLoanType(){
+    this.crudService.get(`${appModels.APPROVEL}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async respose => {
+     await respose.pageItems.map((res: any) => {
+       this.loanTypeDetails = res.loanType;
+        })
+    });
   }
 
   /** Page Navigate to Pick Applicant */
