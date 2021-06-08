@@ -7,7 +7,7 @@
       </div>
       <div class="header_right">
           <button class="btn_blue" (click)="createVoucher()">New</button>
-          <!-- <button class="btn_blue" (click)="openPDF()">Action</button> -->
+          <!-- <button class="btn_blue" >Action</button> -->
           <button  class="btn_blue" (click)="openPDF()">Print</button>
       </div>
 
@@ -31,10 +31,10 @@
                   <td> <mat-checkbox  (change)="eventCheck(voucher,$event)" >
                     </mat-checkbox>
                 </td>
-                  <td>{{voucher.createdDate | date:"dd MMMM yyyy"}}</td>
+                  <td>{{voucher.voucherData.createdDate | date:"dd MMMM yyyy"}}</td>
                   <td>{{voucher.particulars}}</td>
-                  <td>{{voucher.voucherType}}</td>
-                  <td>{{voucher.voucherNumber}}</td>
+                  <td>{{voucher.voucherData.voucherType}}</td>
+                  <td>{{voucher.voucherData.voucherNumber}}</td>
                   <td>{{voucher.credit ? voucher.credit : "0"}}</td>
                   <td>{{voucher.debit ? voucher.debit : "0"}}</td>
                   <td>{{voucher.remarks}}</td>
@@ -63,12 +63,12 @@
     </thead>
     <tbody>
         <tr  *ngFor="let val of arrayOfPrint">
-          <td>{{val.createdDate | date:"dd MMMM yyyy"}}</td>
+          <td>{{val.voucherData.createdDate | date:"dd MMMM yyyy"}}</td>
           <td>{{val.particulars}}</td>
-          <td>{{val.voucherType}}</td>
-          <td>{{val.voucherNumber}}</td>
-          <td>{{val.credit}}</td>
-          <td>{{val.debit}}</td>
+          <td>{{val.voucherData.voucherType}}</td>
+          <td>{{val.voucherData.voucherNumber}}</td>
+          <td>{{val.credit ? val.credit : "0"}}</td>
+          <td>{{val.debit ? val.debit : "0"}}</td>
           <td>{{val.remarks}}</td>
         </tr>
       </tbody>

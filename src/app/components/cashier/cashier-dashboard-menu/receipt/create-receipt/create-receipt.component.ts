@@ -102,19 +102,13 @@ export class SearchReceipt {
       tenantIdentifier: 'default'
     }
   }).pipe(untilDestroyed(this)).subscribe(async response => {
-    // console.log(response)
     for(let x of response){
-      // console.log(x)
         if (
           x.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
             this.customerList.push(x)
         }
     }
-    // console.log(this.customerList)
-
-    var mySet = new Set(this.customerList);
-    this.customerList = [...mySet];
-console.log(this.customerList);
+    console.log(this.customerList);
     // await response.map((res: any) => {
     //   if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
     //   this.customerList = res;
