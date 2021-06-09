@@ -42,6 +42,7 @@ export class LoanVerificationComponent implements OnInit {
     customerLoanDetails : any = [];
     customerImage: any;
     allCustomerImage: any = [];
+    loanTypeDetails: any;
     filterResponse:any = [];
     searchAccountNo: String = '';
     searchName: String = '';
@@ -57,6 +58,7 @@ export class LoanVerificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLoanVerification();
+    this.getLoanType();
   }
 
   ngOnDestroy() { }
@@ -65,6 +67,7 @@ export class LoanVerificationComponent implements OnInit {
   loanProcess(id : any) {
     this.router.navigate(['branch-manager/loan-process/'  + id]);
   }
+
 
    getLoanVerification(){
     this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
@@ -86,6 +89,18 @@ export class LoanVerificationComponent implements OnInit {
     })
     })
     this.allCustomerImage = [];
+  }
+
+  getLoanType(){
+    this.crudService.get(`${appModels.APPROVEL}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async respose => {
+     await respose.pageItems.map((res: any) => {
+       this.loanTypeDetails = res.loanType;
+        })
+    });
   }
 
   advancedSearch() {

@@ -337,7 +337,6 @@ this.manageEmployeeForm.patchValue({
     bankName: this.employeeArray[0].bankDetails.bankName,
     branchName: this.employeeArray[0].bankDetails.branchName,
     
-// replace("\"\"", "")
   employee_communicationAddress:{
     addressLine1:JSON.parse(this.employeeArray[0].communicationAdd.addressLine1),
     addressLine2: JSON.parse(this.employeeArray[0].communicationAdd.addressLine2),
