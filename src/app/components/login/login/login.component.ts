@@ -20,7 +20,8 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class LoginComponent implements OnInit {
   
-
+  hide = true;
+  
   constructor(private router: Router, private _auth:AuthenticationService,private toast: ToastrService, private crudService: CrudService) { }
 
 /**Login Forms */
@@ -60,6 +61,10 @@ export class LoginComponent implements OnInit {
   forgotPassword(){
   this.router.navigate(["/forget-password"]);
 }
+
+get passwordInput() { 
+  return this.createLoginForms.get('password'); 
+}  
 
 
 

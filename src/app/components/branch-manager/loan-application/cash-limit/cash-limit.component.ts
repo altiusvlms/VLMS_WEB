@@ -58,12 +58,12 @@ export class CashLimitComponent implements OnInit {
     approveAmount:new FormControl('', Validators.required),
     requiredOn:new FormControl('', Validators.required)
   })
-  EditExecutiveForms = new FormGroup({
-    Req_Amount: new FormControl('', Validators.required),
-    Approve_Amount: new FormControl('', Validators.required),
-    Notes: new FormControl('', Validators.required),
+  // EditExecutiveForms = new FormGroup({
+  //   Req_Amount: new FormControl('', Validators.required),
+  //   Approve_Amount: new FormControl('', Validators.required),
+  //   Notes: new FormControl('', Validators.required),
 
-  }) 
+  // }) 
   ngOnInit(): void {
     this.listFieldExecutive();
     // this.getSingleRequestList();
@@ -129,7 +129,8 @@ export class CashLimitComponent implements OnInit {
       console.log("data")
       console.log(this.resFieldExecutiveId)
       this.toast.success("Created Successfully");
-      this.listFieldExecutive()    
+      this.listFieldExecutive();
+      this.AddExecutiveForms.reset();    
     })
     
   };
