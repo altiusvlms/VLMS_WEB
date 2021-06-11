@@ -20,11 +20,14 @@
                             </mat-form-field>
                         </div>
                         <div class="form-group">
-                            <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Password</mat-label>
-                                <input matInput placeholder="password" formControlName="password" type="password" name="password" required>
-                            </mat-form-field>
-                        </div>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <!-- <mat-hint *ngIf="!passwordInput.value">Enter your password</mat-hint> -->
+                        </mat-form-field>
+                    </div>
+                        
                         <div class="text-right"><a class="forgot-password-link" (click)="forgotPassword()">Forgot password?</a></div>
                         <div class="text-center wrap">
                             <input name="login" class="btn_hvr" type="button" value="Sign In" (click)="loginusers()">

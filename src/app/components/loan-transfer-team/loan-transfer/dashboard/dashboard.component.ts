@@ -13,17 +13,27 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
 
+// Custom Routes
+import {  CrudService } from '../../../../services/crud.service';
+import { appModels } from '../../../../services/utils/enum.util';
+import { SharedService } from '../../../../services/shared.service';
+import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
+
+@UntilDestroy({ checkProperties: true })
+
 @Component({
   selector: 'vlms-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  loanTransferData: any;
   
 
   constructor(private router: Router,private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.getDashBoardData();
   }
 
   customerOnline(){

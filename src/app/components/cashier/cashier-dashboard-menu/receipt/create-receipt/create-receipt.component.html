@@ -39,14 +39,17 @@
 </div>
 </div>
 
-  <div class="row">
+  <div class="row" >
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
+          <form [formGroup]="loanRepaymentForm">
       <p>CREATE RECEIPT:</p>
       <div class="row">
+        <!-- <form [formGroup]="loanRepaymentForm"> -->
       <div class="col-md-6">   
       
+
           <mat-form-field  appearance="outline" class="example-full-width">
             <mat-label>Create Receipt</mat-label>
           <mat-select  >
@@ -70,9 +73,20 @@
         
       <mat-form-field  appearance="outline"  class="example-full-width">
         <mat-label>Enter amount</mat-label>
-      <input matInput type="number" id="fname"  name="fname">
+      <input matInput formControlName="transactionAmount" type="number" id="fname"  name="fname">
       </mat-form-field>
     </div>
+
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" class="example-full-width">
+      <input matInput [matDatepicker]="dp" placeholder="Date of Birth" formControlName="transactionDate">
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
+  </div>
+
+
+
     <div class="col-md-6">
         
       <mat-form-field  appearance="outline"  class="example-full-width">
@@ -126,15 +140,18 @@
                 </mat-select>
           </mat-form-field>
     </div>
-    <!-- <button type="submit">Create</button> -->
-    <div class="col-sm-2">
+    <button type="submit" (click) = "loanRepaymentReceipt()" >Create</button>
+    <!-- <div class="col-sm-2">
       <div>
           <button type="button"  data-toggle="modal" data-target="#createEnquiryModal" class="btn_blue">
               Create
           </button>
       </div>
+    </div> -->
+  <!-- </form> -->
     </div>
-    </div>
+  </form>
+
     </div></div>
 
     </div>
@@ -206,6 +223,7 @@
           <thead>
             <tr>
               <th>Sr.No</th>
+              <th>Loan Type</th>
               <th>Due Date</th>
               <th>Due Amount</th>
               <th>Receipted Date</th>
@@ -217,64 +235,25 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          
+          <tbody *ngFor="let tableValue of receiptData,let i = index">
+            
             <tr>
-              <td>1</td>
-              <td>7.jan.2021</td>
-              <td>3,200</td>
-              <td>10.jan.2021</td>
-              <td>1000</td>
-              <td>2,500</td>
-              <td>3</td>
+              <td>{{i + 1}}</td>
+              <td>{{loanType.value}}</td>
+              <td>{{tableValue.dueDate | date:"dd MMMM yyyy"}}</td>
+              <td>{{tableValue.totalDueForPeriod}}</td>
+              <td>{{tableValue.fromDate | date:"dd MMMM yyyy"}}</td>
+              <td>{{transactions[i]}}</td>
+              <td>{{tableValue.totalDueForPeriod - transactions[i]}}</td>
+              <td>{{delayDays}}</td>
               <td>200</td>
               <td>200</td>
               <td>
                 <button type="button" class="btn_blue"> <span>Edit</span></button>
               </td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>7.jan.2021</td>
-              <td>3,200</td>
-              <td>07.jan.2021</td>
-              <td>3,200</td>
-              <td>0</td>
-              <td>0</td>
-              <td>-</td>
-              <td>-</td>
-              <td>
-                <button type="button" class="btn_blue"> <span>Edit</span></button>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>7.jan.2021</td>
-              <td>3,200</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>0</td>
-              <td></td>
-              <td></td>
-              <td>
-                <button type="button" class="btn_blue"> <span>Edit</span></button>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>7.jan.2021</td>
-              <td>3,200</td>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>0</td>
-              <td></td>
-              <td></td>
-              <td>
-                <button type="button" class="btn_blue"> <span>Edit</span></button>
-              </td>
-            </tr>
-
+            
           </tbody>
         </table>
       </div></div>

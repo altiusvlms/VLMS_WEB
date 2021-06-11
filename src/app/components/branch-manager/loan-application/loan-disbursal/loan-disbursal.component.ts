@@ -96,7 +96,8 @@ export class LoanDisbursalComponent implements OnInit {
       console.log("data")
       console.log(this.resFieldExecutiveId)
       this.toast.success("Created Successfully");
-      this.Loan_Disbural_Limit();    
+      this.Loan_Disbural_Limit();
+      this.AddLoanDisbursalForm.reset();    
     })
     
   };

@@ -91,6 +91,7 @@ export class LoanApprovalComponent implements OnInit {
       console.log(this.resFieldExecutiveId)
       this.toast.success("Created Successfully");
       this.Loan_Approval_Limit();    
+      this.AddLoanApprovalForm.reset();
     })
     
   };
