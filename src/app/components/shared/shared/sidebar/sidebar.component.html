@@ -118,3 +118,23 @@
      </div>
    </div>
  
+
+   <!-- /** Loan Transfer Team Side Bar */ -->
+
+<div class="sidebar" *ngIf="role === 'LoanTransfer'">
+  <div class="navigation">
+     <div class="logo_sidebar"><img src="assets/images/logo.png"/></div>
+      <ul>
+          <li >
+            <a [routerLinkActive]="['active']" [routerLink]="['/loan-transfer-team/dashboard']" aria-expanded="false">Dashboard</a>
+          </li>
+          <li >
+              <a [routerLinkActive]="['active']" [routerLink]="['/loan-transfer-team/task-management']" aria-expanded="false">Task Management</a>
+          </li>
+          <li >
+            <a [routerLinkActive]="['active']" [routerLink]="['/loan-transfer-team/my-task']" aria-expanded="false">My Task</a>
+        </li>
+          </ul>
+  </div>
+</div>
+          

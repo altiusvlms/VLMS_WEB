@@ -1,1 +1,60 @@
-<p>loan-amount-added works!</p>
+<!-- Customer Online Table List-->
+<div class="container">
+    <div class="header_title">
+      <h2>Customer's Loan Amount Added</h2>
+    </div>
+<div class="card">
+  <div class="card-body">
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Customer ID </th>
+              <th>Customer Photo</th> 
+              <th>Customer Name</th>
+              <th>Customer Mobile No</th>
+              <th>Loan Amount</th>
+              <th>Loan Term</th>
+              <th>Interest %</th>
+              <th>EMI Amount</th>
+              <th>Ref By</th>
+              <th>Vehicle Make</th>
+              <th>Vehicle Model</th>
+              <th>Vehicle Type</th>
+              <th>Loan Type</th>
+              <th>Customer Type</th>
+              <th>Approver</th>
+              <th>To Pay</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let customer of customerLoanDetails;let i=index" >
+            <tr>
+              <td>{{customer.id}}</td>
+              <td ><img [src]="allCustomerImage[i]?.image" style="width: 50%;object-fit: contain;
+                object-position: center;"></td>
+              <td>{{customer.customerName}}</td>
+              <td>{{customer.customerDetails.mobileNo}}</td>
+              <td>{{customer.loanDetailsData.loanAmount}}</td>
+              <td>{{customer.loanDetailsData.loanTerm}}</td>
+              <td>{{customer.loanDetailsData.loanInterest}}</td>
+              <td>{{customer.loanDetailsData.emi}}</td>
+              <td>{{customer.customerDetails.refBy}}</td>
+              <td>{{customer.vehicleDetails.maker}}</td>
+              <td>{{customer.vehicleDetails.model}}</td>
+              <td>{{customer.vehicleType}}</td>
+              <td>{{loanTypeDetails.value}}</td>
+              <td>{{customer.customerDetails.applicantType}}</td>
+              <td></td>
+              <td>{{customer.loanDetailsData.payout}}</td>
+              <td><button class="btn_blue" (click)="pickCustomer(customer.id)">Pick</button></td>
+            </tr>
+          </tbody>
+      </table>
+      
+      <div *ngIf="customerLoanDetails.length ==0">
+        No Data Found.
+      </div>
+  </div>
+</div>
+
+</div>

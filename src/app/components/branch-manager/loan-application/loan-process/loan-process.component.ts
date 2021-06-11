@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute ,Params} from '@angular/router';
 
 // Custom Forms
-import {  CrudService } from '../../../../services/crud.service';
+import { CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import {DomSanitizer} from "@angular/platform-browser";
+import { DomSanitizer } from "@angular/platform-browser";
 import { DatePipe } from '@angular/common';
 
 
@@ -200,9 +200,10 @@ export class LoanProcessComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
-      console.log(this.id)
+      if(this.id !== undefined || null){
+        this.getCustomerDetails(); 
+      }
     });
-    this.getCustomerDetails(); 
     
   }
 

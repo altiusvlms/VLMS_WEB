@@ -1,0 +1,147 @@
+<!-- /** Loan Transfer Team Advanced Search */ -->
+<div class="container">
+    <div class="header_title">
+        <h2>Advance Search</h2>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="advanceSearchForms">
+            <button type="button" class="close" aria-label="Close" (click)="close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        <div class="row">
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>AGT NO</mat-label>
+                  <input matInput type='text' formControlName="accountNo" (keyup)="applyFilter($event, 'accountNumber')" >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Name</mat-label>
+                  <input matInput type='text' formControlName="customerName" (keyup)="applyFilter($event, 'name')" >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Vehicle Model</mat-label>
+                  <input matInput type='text' formControlName="vehiclemodel" (keyup)="applyFilter($event, 'model')" >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Vehicle Number</mat-label>
+                  <input matInput type='text' formControlName="vehicleNo" (keyup)="applyFilter($event, 'vehicleno')" >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Mobile No</mat-label>
+                  <input matInput type='text' formControlName="customerMobileNo" (keyup)="applyFilter($event, 'mobileno')" >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Chassis No</mat-label>
+                  <input matInput type='text' formControlName="chassisNo" (keyup)="applyFilter($event, 'chassisno')" >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>loan Amount</mat-label>
+                  <input matInput type='text' formControlName="loanAmount" (keyup)="applyFilter($event, 'loanamount')" >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>ID Proof</mat-label>
+                  <input matInput type='text' formControlName="idProof" >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Area</mat-label>
+                  <input matInput type='text' >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Dealer</mat-label>
+                  <input matInput type='text' >
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Select Loan Status</mat-label>
+                <mat-select >
+                    <mat-option value="live">live</mat-option>
+                    <mat-option value="terminated">Terminated</mat-option>
+                    <mat-option value="closed">Closed</mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Select No of Due</mat-label>
+                    <mat-select >
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+        </div>
+        <div class="col-12 col-sm-12">
+          <button type="button"  class="btn btn-secondary" (click)="searchdata()">Search</button>
+          <button type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
+        </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<!-- /** Cashier Advanced Search Table List*/ -->
+<div class="container">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Customer Image</th>
+                  <th>Name</th>
+                  <th>Mobile No</th>
+                  <th>Vehicle No</th>
+                  <th>Vehicle Model</th>
+                  <th>Chassis No</th>
+                  <th>AGT NO</th>
+                  <th>Loan Amount</th>
+                  <th>Due Pending</th>
+                  <th>Due Date</th>
+                  <!-- <th>Actions</th> -->
+                </tr>
+              </thead>
+              <tbody *ngFor="let customerData of customerLoanDetails;let i=index">
+                <tr>
+                  <td><img [src]="allCustomerImage[i]?.image" style="width: 50%;object-fit: contain;
+                    object-position: center;"></td>
+                  <td>{{customerData.customerName}}</td>
+                  <td>{{customerData.customerDetails.mobileNo}}</td>
+                  <td>{{customerData.vehicleDetails.vehicleNumber}}</td>
+                  <td>{{customerData.vehicleDetails.model}}</td>
+                  <td>{{customerData.vehicleDetails.chassisNumber}}</td>
+                  <td>{{customerData.bankDetails.accountNumber}}</td>
+                  <td>{{customerData.loanDetailsData.loanAmount}}</td>
+                  <td></td>
+                  <td></td>
+                  <!-- <td><span>Receipt</span>
+                    <span>ReLoan</span>
+                    <span>CloseLoan</span>
+                  </td> -->
+                </tr>
+              </tbody>
+        </table>
+        <div *ngIf="customerLoanDetails.length == 0">
+            No Data Found.
+        </div>
+        </div>
+    </div>
+</div>

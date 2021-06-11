@@ -12,7 +12,7 @@ import { AssignTargetsComponent } from './assign-targets/assign-targets.componen
 import { CustomerManagementComponent } from './customer-management/customer-management.component';
 import { TaskManagementComponent } from './task-management/task-management.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
-import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { ManageEmployeeComponent,EditManageEmployeeComponent } from './manage-employee/manage-employee.component';
 // import { ExistingUserComponent } from './existing-user/existing-user.component';
 import { ExistingEmployeeComponent } from './existing-employee/existing-employee.component';
 import { TopupLoanComponent } from './topup-loan/topup-loan.component';
@@ -29,7 +29,7 @@ const routes: Routes = [
     { path: 'task-management', component: TaskManagementComponent },
     { path: 'analytics', component: AnalyticsComponent },
     { path: 'manage-employee', component: ManageEmployeeComponent},
-    { path: 'manage-employee/:id', component: ManageEmployeeComponent},
+    { path: 'edit-manage-employee/:id', component: EditManageEmployeeComponent},
     { path: 'existing-employee', component: ExistingEmployeeComponent},    
     { path: 'topup-loan', component: TopupLoanComponent},
     { path: 'create-recipt', component:CreateReceiptComponent},

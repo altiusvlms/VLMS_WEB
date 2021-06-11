@@ -1,39 +1,38 @@
 <div class="container">
   <div class="header_title">
   <h2>Employee List</h2>
-    <button type="button" class="btn_blue" data-toggle="modal" data-target="#exampleModal" (click) = "manageemployee()">
+    <button type="button" class="btn_blue" data-toggle="modal" data-target="#exampleModal" (click) = "createEmployee()">
         Create Employee
-      </button>
+    </button>
     </div>
       <div class="card">
         <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>S.No</th>
-          <th>Name</th> 
-          <th>Designation</th>
-          <th>Contact Number</th>
-          <th>Vehicle No</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor = "let employee of employeeListData; let i = index ">        
-          <td>{{i+1}}</td>
-          <td>{{employee.name}}</td>
-          <td>{{employee.designation}}</td>
-          <td>{{employee.mobileNumber}}</td>
-          <td>{{employee.vehicleNumber}}</td>
-          <td>{{employee.status}}</td>
-          <td (click)="getSingleEmployeeList(employee.id)"><span class="material-icons-outlined">
-            edit_note
-            </span></td>
-        </tr>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Name</th> 
+            <th>Designation</th>
+            <th>Contact Number</th>
+            <th>Vehicle No</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
         <tbody>
-      </table>  
-</div></div>
-
-
+          <tr *ngFor = "let employee of employeeListData; let i = index ">        
+            <td>{{i+1}}</td>
+            <td>{{employee.name}}</td>
+            <td>{{employee.designation}}</td>
+            <td>{{employee.mobileNumber}}</td>
+            <td>{{employee.vehicleNumber}}</td>
+            <td>{{employee.status}}</td>
+            <td (click)="getSingleEmployeeList(employee.id)"><span class="material-icons-outlined">
+              edit_note
+              </span></td>
+          </tr>
+          <tbody>
+        </table>  
+        </div>
+      </div>
 </div>

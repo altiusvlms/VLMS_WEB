@@ -4,6 +4,7 @@
     <div class="card-body">
   <mat-tab-group>
     <form [formGroup]="manageEmployeeForm">
+      <!-- /** Tab1 */ -->
     <mat-tab label="Employee Details">
       <div class="container">
         <div class="row">
@@ -47,11 +48,6 @@
               <input matInput formControlName="mobileNumber" minlength=10 maxlength=10 pattern="[0-9]*">
           </mat-form-field>
           <span class="required-field" *ngIf="manageEmployeeForm.get('mobileNumber').hasError('pattern')">Please enter valid Mobile No, Only Number Allowed </span>
-          <!-- <div *ngIf="manageEmployeeForm.controls['mobileNumber'].invalid && (manageEmployeeForm.controls['mobileNumber'].dirty || manageEmployeeForm.controls['mobileNumber'].touched)" class="alert alert-danger">
-              <div *ngIf="manageEmployeeForm.controls['mobileNumber'].errors.required">
-                  Please enter Mobile Number!
-              </div>
-          </div> -->
           </div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Alternative Number</mat-label>
@@ -177,19 +173,14 @@
           <mat-label>AGT Number</mat-label>
           <input matInput formControlName="agtnumber">
       </mat-form-field>
-      <!-- <div *ngIf="manageEmployeeForm.controls['agtnumber'].invalid && (manageEmployeeForm.controls['agtnumber'].dirty || manageEmployeeForm.controls['agtnumber'].touched)" class="alert alert-danger">
-          <div *ngIf="manageEmployeeForm.controls['agtnumber'].errors.required">
-              Please enter AGT Number!
-          </div>
-      </div> -->
     </div>
-
-          
         </div>
       </div>  
-</mat-tab>
+    </mat-tab>
 
-    <mat-tab label="Add Address"><!-- Add Communication address -->
+ <!-- /** Tab2 */ -->
+    <!-- /** Add Communication address  */ -->
+    <mat-tab label="Add Address">
 
       <h2>Add Communication Address</h2>
 
@@ -214,15 +205,14 @@
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Area</mat-label>
             <mat-select formControlName="area">
-                <mat-option value="qew baba colony">Saibaba colony</mat-option>
-                <mat-option value="gp">GP</mat-option>
-                <mat-option value="hopes">Hopes</mat-option>
+                <mat-option value="saibaba_colony">Saibaba Colony</mat-option>
+                <mat-option value="gandhipuram">Gandhipuram</mat-option>
             </mat-select>
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>City</mat-label>
             <mat-select formControlName="city">
-                <mat-option value="cbe">Coimbatore</mat-option>
+                <mat-option value="coimbatore">Coimbatore</mat-option>
                 <mat-option value="chennai">Chennai</mat-option>
                 <mat-option value="bangalore">Bangalore</mat-option>
             </mat-select>
@@ -230,7 +220,7 @@
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>State</mat-label>
             <mat-select formControlName="state">
-                <mat-option value="TN">Tamilnadu</mat-option>
+                <mat-option value="tamilnadu">Tamilnadu</mat-option>
                 <mat-option value="Kerala">Kerala</mat-option>
                 <mat-option value="karnataka">karnataka</mat-option>
             </mat-select>
@@ -261,15 +251,14 @@
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Area</mat-label>
             <mat-select formControlName="area">
-                <mat-option value="sathy">Saibaba colony</mat-option>
-                <mat-option value="gp">GP</mat-option>
-                <mat-option value="hopes">Hopes</mat-option>
+                <mat-option value="saibaba_colony">Saibaba Colony</mat-option>
+                <mat-option value="gandhipuram">Gandhipuram</mat-option>
             </mat-select>
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>City</mat-label>
             <mat-select formControlName="city">
-                <mat-option value="bhanv">Bhavani</mat-option>
+                <mat-option value="coimbatore">Coimbatore</mat-option>
                 <mat-option value="chennai">Chennai</mat-option>
                 <mat-option value="bangalore">Bangalore</mat-option>
             </mat-select>
@@ -277,7 +266,7 @@
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>State</mat-label>
             <mat-select formControlName="state">
-                <mat-option value="TN">Tamilnadu</mat-option>
+                <mat-option value="tamilnadu">Tamilnadu</mat-option>
                 <mat-option value="Kerala">Kerala</mat-option>
                 <mat-option value="Karnataka">Karnataka</mat-option>
             </mat-select>
@@ -290,7 +279,9 @@
     
     </mat-tab>
 
-    <mat-tab label="Bank Details"> <!-- Add Bank detail -->
+<!-- /** Tab3 */ -->
+    <!-- /** Add Bank Detail  */ -->
+    <mat-tab label="Bank Details"> 
       <div class="container">
         <div class="row" >
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -305,11 +296,6 @@
             <mat-label>IFSC</mat-label>
             <input #IFSC matInput formControlName="IFSC" (input)="IFSC.value = IFSC.value.toUpperCase()">
         </mat-form-field>
-        <!-- <div *ngIf="manageEmployeeForm.controls['IFSC'].invalid && (manageEmployeeForm.controls['IFSC'].dirty || manageEmployeeForm.controls['IFSC'].touched)" class="alert alert-danger">
-          <div *ngIf="manageEmployeeForm.controls['IFSC'].errors.required">
-              Please enter IFSC!
-          </div>
-      </div> -->
       </div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Bank</mat-label>
@@ -339,9 +325,11 @@
         </mat-form-field></div>
         </div>
       </div>    
-</mat-tab>
-    <mat-tab label="Insurance Details"><!-- Insurance Details -->
+    </mat-tab>
 
+<!-- /** Tab4 */ -->
+    <!-- /** Insurance Details  */ -->
+    <mat-tab label="Insurance Details">
       <div class="container">
         <div class="row" formGroupName="general_insurance">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -356,14 +344,13 @@
             <mat-label>Policy Coverage</mat-label>
             <input matInput formControlName="policyCoverage">
         </mat-form-field></div>
-        <!-- <button type="submit" (click)="updateEmployeeInsuranceDetails()">Update</button> -->
         </div>
       </div>    
     </mat-tab>
-    <mat-tab label="Accident Insurance Details"> <!-- </form> -->
-      <!-- Accident Insurance Details -->
-      <!-- <form [formGroup] = "manageEmployeeForm"> -->
 
+<!-- /** Tab5 */ -->
+    <!-- /** Accident Insurance Details  */ -->    
+    <mat-tab label="Accident Insurance Details"> 
       <div class="container">
         <div class="row" formGroupName="accidental_insurance">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -387,45 +374,73 @@
         </div>
       </div>    
 
-      </mat-tab>
+    </mat-tab>
+
+<!-- /** Tab6 */ -->
+    <!-- /** Loan Details */ -->    
     <mat-tab label="Loan Details"> 
-      
-      <form [formGroup]="ImageEmployeeForm">
-        <div class="container">
-          <div class="row">
-          <h2>ID Proofs</h2>
-            <div class="col-4 col-sm-4"><label>ID Proof1:
-              <select  class="form-control">
-                <option >Choose Options</option>
-                <option *ngFor="let document of documentDetails">{{document.documentName}}</option>
-              </select>
-          <span class="required-field">*</span>
-          <input #file type="file" accept='image/*' formControlName="Pan_photo" (change)="uploadImages1($event)"   />
-         <img [src] ="engineImgURL ? engineImgURL : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
-         object-position: center;">
-          </label></div>
-          
+      <h2>ID Proofs</h2>
+      <form [formGroup]="documentImageForm">
+        <div class="container"  formArrayName="image">
+          <button class="btn_blue" (click)="addImage()">Add</button>
+          <div class="row" *ngFor="let image of image().controls; let i=index" [formGroupName]="i">
             <div class="col-4 col-sm-4"><label>ID Proof:
-              <select  class="form-control">
+              <select  class="form-control" formControlName="documentName">
                 <option >Choose Options</option>
                 <option *ngFor="let document of documentDetails">{{document.documentName}}</option>
               </select>
-          <span class="required-field">*</span>
-          <input #file type="file" accept='image/*' formControlName="Aadhar_photo" (change)="uploadImages2($event)"   />
-          <img [src] ="engineImgURLS ? engineImgURLS : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+
+              <div class="col-4 col-sm-12">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Document Number</mat-label>
+                  <input matInput type='text' formControlName="documentNo">
+              </mat-form-field>
+              </div>
+              <input #file type="file" accept='image/*'  (change)="uploadImages($event,i)" />
+             
+             <img [src]="imageURL0" style="width: 30%;object-fit: contain;
+             object-position: center;"/>
+ 
+
+        <!-- <img src = "{{[i]}} ? {{imageURL0}} : 'assets/images/empty_image.png'"  style="width: 30%;object-fit: contain;
+        object-position: center;"> -->
+         <!-- <img [src] ="ImgURL1 ? ImgURL1 : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+         object-position: center;"> -->
+          </label></div>
+          <div class="col-4 col-sm-4">
+            <button (click)="removeImage(i)" class="btn btn-danger">Remove</button>
+          </div>
+
+            <!-- <div class="col-4 col-sm-4"><label>ID Proof:
+              <select  class="form-control" formControlName="documentName1">
+                <option >Choose Options</option>
+                <option *ngFor="let document of documentDetails">{{document.documentName}}</option>
+              </select>
+
+              <div class="col-4 col-sm-4">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Document Number</mat-label>
+                  <input matInput type='text' ormControlName="documentNo1">
+              </mat-form-field>
+              </div>
+
+          <input #file type="file" accept='image/*' (change)="uploadImages2($event)"   />
+          <img [src] ="ImgURL2 ? ImgURL2 : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
           object-position: center;">
-        </label></div>
+        </label></div> -->
           </div>
         </div>    
-      
-      </form></mat-tab>
-    <mat-tab label="Education Qualification"><!-- Education Qualification -->
-     
-
+      </form>
+    </mat-tab>
+    
+<!-- /** Tab7 */ -->
+    <!-- /** Education Qualification */ --> 
+    <mat-tab label="Education Qualification">
+      <h2>School Qualification</h2>
       <div class="container">
         <div class="row"  formGroupName="school_qualification">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>School/Qualification</mat-label>
+            <mat-label>School Name</mat-label>
             <input matInput formControlName="university">
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -439,15 +454,15 @@
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Passing year</mat-label>
             <input matInput formControlName="passingyear">
-        </mat-form-field></div>
-          
+        </mat-form-field>
+        </div>
         </div>
       </div>    
-
+      <h2>College Qualification</h2>
       <div class="container">
         <div class="row"  formGroupName="college_qualification">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>College Qualification</mat-label>
+            <mat-label>College Name</mat-label>
             <input matInput formControlName="university">
         </mat-form-field></div>          
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -466,10 +481,11 @@
         </div>
       </div>    
 
+      <h2>Graduate Qualification</h2>
       <div class="container">
         <div class="row"  formGroupName="graduate_qualification">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>GraduateQualification</mat-label>
+            <mat-label>Graduate Qualification</mat-label>
             <input matInput formControlName="university">
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -488,10 +504,11 @@
         </div>
       </div>    
 
+      <h2>Post Graduate Qualification</h2>
       <div class="container">
         <div class="row" formGroupName="postgraduate_qualification">
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>PostgraduateQualification</mat-label>
+            <mat-label>Postgraduate Qualification</mat-label>
             <input matInput formControlName="university">
         </mat-form-field></div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
@@ -509,18 +526,15 @@
 
         </div>
       </div>    
-     
-      <button type="submit" class="btn_blue"  *ngIf="!showSubmitBtn"  (click)="updateEmployeeDetails();updateEmployeeEducationDetails();updateEmployeeInsuranceDetails();updateAddress">Update</button>
-      <button type="submit" class="btn_blue" *ngIf="showSubmitBtn"  (click)="manageEmployee()">Submit</button>
+      <button type="submit" class="btn_blue"   (click)="createEmployee()">Submit</button>
 
-       </mat-tab>
-       <!-- <button type="submit" (click)="updateEmployeeDetails()">update</button>
-      <button type="submit" (click)="manageEmployee()">Submit</button> -->
+    </mat-tab>
+<!-- 
+    <button type="submit" class="btn_blue"  *ngIf="!showSubmitBtn"  (click)="updateEmployeeDetails();updateEmployeeEducationDetails();updateEmployeeInsuranceDetails();updateAddress">Update</button> -->
+  
   </form>
   </mat-tab-group>
   </div>
   </div>
-  
-      
-  
+
 </div>

@@ -15,7 +15,7 @@ import { AssignTargetsComponent } from './assign-targets/assign-targets.componen
 import { CustomerManagementComponent } from './customer-management/customer-management.component';
 import { TaskManagementComponent ,CreateTask} from './task-management/task-management.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
-import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { ManageEmployeeComponent,EditManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ExistingEmployeeComponent } from './existing-employee/existing-employee.component';
 import { TopupLoanComponent } from './topup-loan/topup-loan.component';
@@ -34,7 +34,7 @@ import { SetPermissionComponent } from './user-role-permission/set-permission/se
 /** Dashboard Menu Module */
 
 @NgModule({
-  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent,CreateRole, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, ManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent, ExistingEmployeeComponent, SetPermissionComponent],
+  declarations: [DashboardComponent,AdvancedSearch,UserRolePermissionComponent,CreateRole, AssignTargetsComponent, CustomerManagementComponent, TaskManagementComponent, CreateTask,AnalyticsComponent, ManageEmployeeComponent,EditManageEmployeeComponent, TopupLoanComponent, CreateReceiptComponent, ExistingEmployeeComponent, SetPermissionComponent],
   imports: [
     CommonModule,
     DashboardMenuRoutingModule,
