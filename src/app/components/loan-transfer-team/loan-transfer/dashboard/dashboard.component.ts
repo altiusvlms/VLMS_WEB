@@ -13,11 +13,6 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
 
-// Custom Routes
-import {  CrudService } from '../../../../services/crud.service';
-import { appModels } from '../../../../services/utils/enum.util';
-import { SharedService } from '../../../../services/shared.service';
-import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy({ checkProperties: true })
 
@@ -33,7 +28,6 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router,private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getDashBoardData();
   }
 
   customerOnline(){
