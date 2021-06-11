@@ -23,7 +23,8 @@ enum appModels {
     HL_PAYMENT = 'fineract-provider/api/v1/Cashier',
     VOUCHER = 'fineract-provider/api/v1/Cashier',
     MY_TASK = 'fineract-provider/api/v1/Cashier',
-    APPROVEL = 'fineract-provider/api/v1/loans/'
+    APPROVEL = 'fineract-provider/api/v1/loans/',
+    LOAN_TRANSFER_TEAM = 'fineract-provider/api/v1/loanTransfer'
 }
 
 

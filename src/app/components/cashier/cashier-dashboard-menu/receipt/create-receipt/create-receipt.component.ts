@@ -6,6 +6,9 @@ import { appModels } from '../../../../../services/utils/enum.util';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {DomSanitizer} from "@angular/platform-browser";
 
+import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
+
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
@@ -16,22 +19,51 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class CreateReceiptComponent implements OnInit {
 
-  constructor(private router: Router,private crudService: CrudService,private dialog: MatDialog,private route: ActivatedRoute, private sanitizer:DomSanitizer) { }
+  
+
+  constructor(private router: Router,private crudService: CrudService,private dialog: MatDialog,private route: ActivatedRoute, private sanitizer:DomSanitizer,private toast: ToastrService, public datepipe: DatePipe) { }
   id: any;
   getCustomerLoanDetails: any = [];
   customerImage: any;
+  receiptData : any;
+  loanType:any;
+  transactions: any = [];
+  fromdate: any;
+  dueDate: any;
+  loanIDbyMobile:any = [];
+  loanIDMob:any = [];
+  startDate:any;
+  endDate:any;
+  delayDays:any;
+  // dates: any;
+  loanRepayment:any;
+  delayAmount:any;
+  startPay:any = [];
+  calAmt:any = [];
+
+  loanRepaymentForm = new FormGroup({
+    paymentTypeId: new FormControl('', Validators.required),
+    transactionAmount: new FormControl('', Validators.required),
+    transactionDate:new FormControl('', Validators.required),
+    locale:new FormControl('en', Validators.required),
+    dateFormat:new FormControl('dd MMMM yyyy', Validators.required),   
+  })
+
+  
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
      if(this.id !== undefined || null){
       this.getReceipt();
+      
      }
      else{
       this.viewPopUp();
      }
     })
-
+    // this.getLoanId();
+    // this.getCreateReceipt();
   }
   
   viewPopUp(){
@@ -42,7 +74,7 @@ export class CreateReceiptComponent implements OnInit {
       dialogRef.afterClosed().subscribe((response : any) => {
       });     
     }
- 
+    loanID: any;
   getReceipt(){
     this.crudService.get(`${appModels.CUSTOMERS}/loanByLoanId/${this.id}`, {
       params: {
@@ -53,8 +85,117 @@ export class CreateReceiptComponent implements OnInit {
         await this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${response.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
           this.customerImage = this.sanitizer.bypassSecurityTrustUrl(data);
         })
+        await this.crudService.get(`${appModels.CUSTOMERS}/loanByMobileNo/${response.customerDetails.mobileNo}`, {
+            params: {
+              tenantIdentifier: 'default'
+            }
+          }).pipe(untilDestroyed(this)).subscribe(res => {
+            console.log(res[0].id)
+            this.loanID = res[0].id;
+            console.log(this.loanID)
+            this.getCreateReceipt();
+          })
       })
   }
+
+  // getLoanId(){
+  //   this.crudService.get(`${appModels.CUSTOMERS}/loanByMobileNo/7585852883`, {
+  //     params: {
+  //       tenantIdentifier: 'default'
+  //     }
+  //   }).pipe(untilDestroyed(this)).subscribe(data => {
+  //     console.log(data);
+  //     for(var loanID of data){
+  //       this.loanIDbyMobile.push(loanID)
+  //       console.log(this.loanIDbyMobile[0].id);
+  //       this.loanIDMob.push(this.loanIDbyMobile[0].id)
+  //       console.log(this.loanIDMob);
+  //     }
+      
+  //   })
+  // }
+
+
+  getCreateReceipt(){
+    console.log(this.loanID)
+    // this.manageEmployeeForm.value.dob = this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
+    this.crudService.get(`${appModels.COMMON}/loans/${this.loanID}?associations=all&exclude=guarantors,futureSchedule`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      // console.log(data);
+      // console.log(data.loanType);
+      console.log(data.repaymentSchedule.periods);
+      
+      for(var i =1; i<data.repaymentSchedule.periods.length; i++){
+      
+        // console.log(data.repaymentSchedule.periods[i].fromDate)
+        // console.log(data.repaymentSchedule.periods[i].dueDate)
+        // console.log(this.dates.fromDate)
+        this.startDate = data.repaymentSchedule.periods[i].fromDate
+        this.endDate = data.repaymentSchedule.periods[i].dueDate
+        
+        var startDateStr = this.startDate[1] + '/' + this.startDate[2] + '/' + this.startDate[0]
+        this.startDate = new Date (startDateStr)
+
+        var endDateStr = this.endDate[1] + '/' + this.endDate[2] + '/' + this.endDate[0]
+        this.endDate = new Date (endDateStr)
+       
+      var totalTimeDiff =  this.endDate.getTime() - this.startDate.getTime();
+      var dayDiff = totalTimeDiff / ( 1000 * 3600 * 24);
+      console.log(dayDiff)
+      this.delayDays = dayDiff;
+      
+      
+    }
+      // console.log(data.repaymentSchedule.periods.fromDate);
+      // console.log(data.repaymentSchedule.periods.dueDate);
+      // console.log(data.transactions.amount);
+      // for(var dueAmount of data.transactions){
+      //   console.log(dueAmount.amount)
+      //   this.transactions.push(dueAmount.amount)
+      // }
+      // this.transactions.push(dueAmount.amount)
+      
+      this.receiptData = data.repaymentSchedule.periods;
+      this.loanType = data.loanType;
+      
+      // this.transactions.push(data.transactions.amount)
+      for(var dueAmount of data.transactions){
+        console.log(dueAmount)
+        this.transactions.push(dueAmount.amount)
+      }
+      // for(var startAmount of data.repaymentSchedule.periods){
+      //   console.log(startAmount)
+      //   this.startPay.push(startAmount.totalDueForPeriod)
+      // }
+      // debugger
+      var delayAmount = this.startPay[i] - this.transactions[i]
+      console.log(delayAmount)
+      this.calAmt.push(delayAmount)
+      console.log(this.calAmt);
+      // this.loanRepaymentReceipt();
+    })
+    this.loanRepaymentReceipt();
+  }
+
+  loanRepaymentReceipt(){
+    console.log(this.loanRepaymentForm.value)
+    
+    this.loanRepaymentForm.value.transactionDate=this.datepipe.transform(this.loanRepaymentForm.value.transactionDate, 'dd MMMM yyyy');
+    this.crudService.post(`${appModels.COMMON}/loans/${this.loanID}/transactions?command=repayment`, this.loanRepaymentForm.value,
+      { params:{
+        tenantIdentifier: "default"   
+      }}
+    ).pipe(untilDestroyed(this)).subscribe( data => {
+      console.log(data)
+      this.toast.success("Receipt Created")
+    })
+    
+  };
+
+  
 
 }
 

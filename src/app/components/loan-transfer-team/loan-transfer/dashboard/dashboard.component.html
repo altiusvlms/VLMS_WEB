@@ -9,10 +9,10 @@
       </div>
     </div>
   
-  <div class="card">
+  <div class="card" *ngFor = "let values of loanTransferData">
     <div class="card-body">
       <div class="row">
-        <div (click)="customerOnline()">8 New Customers Are Waiting For Loan Amount Approval  <button class="btn_blue" >View All</button></div> 
+        <div (click)="customerOnline()">({{values.customerOnLine}}) New Customers Are Waiting For Loan Amount Approval  <button class="btn_blue" >View All</button></div> 
       </div>
     </div>
   </div>
@@ -20,20 +20,20 @@
   <div class="header_title">
     <h2>Beneficiary Added</h2>
   </div>
-  <div class="card">
+  <div class="card" *ngFor = "let values of loanTransferData">
     <div class="card-body">
       <div class="row">
-        <div (click)="loanAmountAdded()">10 Customers Bank Account Added Need to Verify<button class="btn_blue" >View All</button></div> 
+        <div (click)="loanAmountAdded()">({{values.newBankAccount}}) Customers Bank Account Added Need to Verify<button class="btn_blue" >View All</button></div> 
       </div>
     </div>
   </div>
   <div class="header_title">
     <h2>Customer Loan Amount Added</h2>
   </div>
-  <div class="card">
+  <div class="card" *ngFor = "let values of loanTransferData">
     <div class="card-body">
       <div class="row">
-        <div>50 Customer's Loan Amount Need to be Tranferred<button class="btn_blue" >View All</button></div> 
+        <div>({{values.customerLoanTransferred}}) Customer's Loan Amount Need to be Tranferred<button class="btn_blue" >View All</button></div> 
       </div>
     </div>
   </div>
