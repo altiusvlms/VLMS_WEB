@@ -25,11 +25,31 @@ export class DashboardComponent implements OnInit {
   loanTransferData: any;
   
 
-  constructor(private router: Router,private dialog: MatDialog) { }
+  constructor(private router: Router,private dialog: MatDialog,private crudService: CrudService) { }
 
   ngOnInit(): void {
+    this.getDashBoardData();
   }
 
+
+  getDashBoardData(){
+    this.crudService.get(`${appModels.LOAN_TRANSFER_TEAM}/getLoanTransferDashboardData`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.loanTransferData = data;
+      // this.loanTransferData.push(data)
+      // for(var loanID of data){
+      //   this.loanIDbyMobile.push(loanID)
+      //   console.log(this.loanIDbyMobile[0].id);
+      //   this.loanIDMob.push(this.loanIDbyMobile[0].id)
+      //   console.log(this.loanIDMob);
+      // }
+      
+    })
+  }
   customerOnline(){
     this.router.navigate(['loan-transfer-team/customer-online'])
   }
@@ -93,6 +113,7 @@ export class AdvancedSearch {
     this.getCustomerDetails();
   }
   ngOnDestroy() {}
+
 
   /** Get the Customer Details */
   getCustomerDetails(){
