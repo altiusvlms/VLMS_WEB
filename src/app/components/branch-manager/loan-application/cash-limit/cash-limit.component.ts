@@ -126,6 +126,8 @@ export class CashLimitComponent implements OnInit {
       }}
     ).pipe(untilDestroyed(this)).subscribe( data => {
       this.resFieldExecutiveId = data.resourceId
+      this.sharedService.setLoaderShownProperty(false); 
+
       console.log("data")
       console.log(this.resFieldExecutiveId)
       this.toast.success("Created Successfully");
@@ -149,6 +151,8 @@ export class CashLimitComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
       this.FieldExicutives = data;
+      this.sharedService.setLoaderShownProperty(false); 
+
       console.log("FieldExicutivesID")
       console.log(this.FieldExicutives)
       console.log(this.FieldExicutives.id)
@@ -166,6 +170,8 @@ export class CashLimitComponent implements OnInit {
       this.resFieldexeid = response.id
       this.cashLimitData = response;
       this.dataSource = new MatTableDataSource(this.cashLimitData)
+      this.sharedService.setLoaderShownProperty(false); 
+
       
     })
   }

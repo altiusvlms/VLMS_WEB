@@ -30,7 +30,7 @@ export class LoanApprovalComponent implements OnInit {
   loanApprovalData: any;
   resFieldExecutiveId:any;
 
-  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService, public datepipe: DatePipe) { }
+  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService, public datepipe: DatePipe, private sharedService: SharedService) { }
 
   // requestForms = new FormGroup({
   //   Cash_Limit: new FormControl('', Validators.required),
@@ -64,6 +64,7 @@ export class LoanApprovalComponent implements OnInit {
       console.log(data);
       this.loanApprovalData = data;
       this.dataSource = new MatTableDataSource(this.loanApprovalData)
+      this.sharedService.setLoaderShownProperty(false);  
 
     })
   }
@@ -92,6 +93,7 @@ export class LoanApprovalComponent implements OnInit {
       this.toast.success("Created Successfully");
       this.Loan_Approval_Limit();    
       this.AddLoanApprovalForm.reset();
+      this.sharedService.setLoaderShownProperty(false);  
     })
     
   };

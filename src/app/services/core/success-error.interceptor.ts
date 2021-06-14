@@ -3,11 +3,13 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse } fr
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { SharedService } from '../shared.service';
 
 @Injectable()
-export class ErrorInterceptor implements HttpInterceptor {
+export class SuccessErrorInterceptor implements HttpInterceptor {
     constructor(
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private sharedService: SharedService,
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -26,12 +28,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
                 return throwError(err);
             }))
+
     }
 
     // Handle the success responses and its messages
     private successHandler(response: HttpEvent<any>): HttpEvent<any> {
         if (response instanceof HttpResponse) {
             let { body, headers } = response;
+            this.sharedService.setLoaderShownProperty(true);
             return response
         }
         return response;

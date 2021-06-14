@@ -4,6 +4,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { SharedService } from '../../../../services/shared.service';
 
 import {DomSanitizer} from "@angular/platform-browser";
 import { DatePipe } from '@angular/common';
@@ -53,7 +54,7 @@ export class LoanVerificationComponent implements OnInit {
     searchLoanAmount: String = '';
 
 
-  constructor(private router: Router,private crudService: CrudService,private sanitizer:DomSanitizer,public datepipe: DatePipe) { }
+  constructor(private router: Router,private crudService: CrudService,private sanitizer:DomSanitizer,public datepipe: DatePipe,private sharedService: SharedService) { }
 
 
   ngOnInit(): void {
@@ -76,15 +77,18 @@ export class LoanVerificationComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(async respose => {
       this.customerLoanDetails = respose;
+      this.sharedService.setLoaderShownProperty(false);  
 
       await this.customerLoanDetails.map((res: any) => {
         this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${res.customerDetails.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
          this.customerImage =  this.sanitizer.bypassSecurityTrustUrl(data);
             this.allCustomerImage.push({image:this.customerImage})
+            this.sharedService.setLoaderShownProperty(false);  
         },error => {
           console.error(error);
           this.customerImage = 'assets/images/empty_image.png';
           this.allCustomerImage.push({image:this.customerImage} )
+          this.sharedService.setLoaderShownProperty(false);  
        });
     })
     })
@@ -99,6 +103,8 @@ export class LoanVerificationComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(async respose => {
      await respose.pageItems.map((res: any) => {
        this.loanTypeDetails = res.loanType;
+             this.sharedService.setLoaderShownProperty(false);  
+
         })
     });
   }

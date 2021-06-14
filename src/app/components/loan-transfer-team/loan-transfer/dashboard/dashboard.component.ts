@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   loanTransferData: any;
   
 
-  constructor(private router: Router,private dialog: MatDialog,private crudService: CrudService) { }
+  constructor(private router: Router,private dialog: MatDialog,private crudService: CrudService,private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.getDashBoardData();
@@ -40,6 +40,8 @@ export class DashboardComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
       this.loanTransferData = data;
+      this.sharedService.setLoaderShownProperty(false);  
+
       // this.loanTransferData.push(data)
       // for(var loanID of data){
       //   this.loanIDbyMobile.push(loanID)
@@ -123,16 +125,21 @@ export class AdvancedSearch {
       }
     }).pipe(untilDestroyed(this)).subscribe(async response => {
       this.customerLoanDetails = response;
+      this.sharedService.setLoaderShownProperty(false);  
       console.log(this.customerLoanDetails)
         /**Customer Image Get API */    
         await this.customerLoanDetails.map((res: any) => {
           this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${res.customerDetails.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
            this.customerImage =  this.sanitizer.bypassSecurityTrustUrl(data);
               this.allCustomerImage.push({image:this.customerImage})
+              this.sharedService.setLoaderShownProperty(false);  
+
           },error => {
             console.error(error);
             this.customerImage = 'assets/images/empty_image.png';
             this.allCustomerImage.push({image:this.customerImage} )
+            this.sharedService.setLoaderShownProperty(false);  
+
          });
       })
     })

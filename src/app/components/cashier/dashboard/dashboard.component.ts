@@ -101,15 +101,21 @@ export class AdvancedSearch {
     }).pipe(untilDestroyed(this)).subscribe(async response => {
       this.customerLoanDetails = response;
       console.log(this.customerLoanDetails)
+      this.sharedService.setLoaderShownProperty(false);  
+
         /**Customer Image Get API */    
         await this.customerLoanDetails.map((res: any) => {
           this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${res.customerDetails.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
            this.customerImage =  this.sanitizer.bypassSecurityTrustUrl(data);
               this.allCustomerImage.push({image:this.customerImage})
+              this.sharedService.setLoaderShownProperty(false);  
+
           },error => {
             console.error(error);
             this.customerImage = 'assets/images/empty_image.png';
             this.allCustomerImage.push({image:this.customerImage} )
+            this.sharedService.setLoaderShownProperty(false);  
+
          });
       })
     })

@@ -100,11 +100,13 @@ export class CustomerEnrollListComponent implements OnInit {
         this.customerImage = this.sanitizer.bypassSecurityTrustUrl(data);
         this.allCustomerImage.push({image:this.customerImage})
         console.log(this.allCustomerImage)
+        this.sharedService.setLoaderShownProperty(false);
 
       },error => {
         console.error(error);
         this.customerImage = 'assets/images/empty_image.png';
         this.allCustomerImage.push({image:this.customerImage} )
+        this.sharedService.setLoaderShownProperty(false);
      });
       })
     })
@@ -146,7 +148,8 @@ export class CustomerEnrollListComponent implements OnInit {
     ).pipe(untilDestroyed(this)).subscribe( data => {
       console.log(data)
       this.EnrollVerfication_Data = data;
-      this.dataSource = new MatTableDataSource(this.EnrollVerfication_Data)
+      this.dataSource = new MatTableDataSource(this.EnrollVerfication_Data);
+      this.sharedService.setLoaderShownProperty(false);
     })
   }
   
@@ -219,14 +222,20 @@ export class CreateEnroll {
       this.crudService.get_Image(`${appModels.IMAGES}/enroll_customerimage/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
         this.ApplicantImageURL = this.sanitizer.bypassSecurityTrustUrl(data);
         console.log(this.ApplicantImageURL)
+        this.sharedService.setLoaderShownProperty(false);
+
       })
       this.crudService.get_Image(`${appModels.IMAGES}/enroll_adharphoto/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
         this.AadharimageForm = this.sanitizer.bypassSecurityTrustUrl(data);
         console.log(this.AadharimageForm)
+        this.sharedService.setLoaderShownProperty(false);
+
       })
       this.crudService.get_Image(`${appModels.IMAGES}/enroll_pancard/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
         this.PanImageForm = this.sanitizer.bypassSecurityTrustUrl(data);
         console.log(this.PanImageForm)
+        this.sharedService.setLoaderShownProperty(false);
+
       })
         
     this.createCustomerEnrolForms.disable();
@@ -397,6 +406,7 @@ onClickOpenForm(){
         ).pipe(untilDestroyed(this))
           .subscribe(data => {
             console.log(data);
+            this.sharedService.setLoaderShownProperty(false);
             const formData = new FormData();      
     formData.append("file",this.AadharImage);
         this.crudService.upload_Image(`${appModels.IMAGES}/enroll_adharphoto/${this.enrollid}`, formData,
@@ -415,6 +425,7 @@ onClickOpenForm(){
         ).pipe(untilDestroyed(this))
           .subscribe(data => {
             console.log(data);
+            this.sharedService.setLoaderShownProperty(false);
             const formData = new FormData();      
     formData.append("file",this.AadharAditional);
         this.crudService.upload_Image(`${appModels.IMAGES}/enroll_adharphoto1/${this.enrollid}`, formData,
@@ -433,6 +444,8 @@ onClickOpenForm(){
                 ).pipe(untilDestroyed(this))
                   .subscribe(data => {
                     console.log(data);
+                    this.sharedService.setLoaderShownProperty(false);
+
       // this.dialogRef.close(data);
       // this.sharedService.setLoaderShownProperty(false); 
                   })
@@ -532,6 +545,8 @@ onClickOpenForm(){
     }).subscribe(data => {
       console.log(data);
       this.EnrollVerfication_Data = data;
+      this.sharedService.setLoaderShownProperty(false);
+
     })
   }
 

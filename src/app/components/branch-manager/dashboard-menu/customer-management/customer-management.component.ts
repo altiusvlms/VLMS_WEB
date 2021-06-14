@@ -8,6 +8,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { SharedService } from '../../../../services/shared.service';
 
 
 
@@ -37,7 +38,7 @@ export class CustomerManagementComponent implements OnInit {
   CustomerDetail_Data:any;
 
 
-  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,public datepipe: DatePipe) { }
+  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,public datepipe: DatePipe,private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.getCustomerData();
@@ -52,7 +53,9 @@ export class CustomerManagementComponent implements OnInit {
     }).subscribe(data => {
       console.log(data);
       this.CustomerDetail_Data = data;
+      this.sharedService.setLoaderShownProperty(false); 
       this.dataSource = new MatTableDataSource(this.CustomerDetail_Data)
+      
 
     })
   }
@@ -65,6 +68,7 @@ export class CustomerManagementComponent implements OnInit {
   getImage(){
     this.crudService.get_Image(`${appModels.COMMON}/images/CustomerImage/4?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
       this.testImage = this.sanitizer.bypassSecurityTrustUrl(data);
+      this.sharedService.setLoaderShownProperty(false); 
       console.log( this.testImage)
     })
   }

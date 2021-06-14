@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 
+import { SharedService } from '../../../../services/shared.service';
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -31,7 +32,7 @@ export class LoanDisbursalComponent implements OnInit {
   CustomerDetail_Data:any;
   resFieldExecutiveId:any;
 
-  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService, public datepipe: DatePipe) { }
+  constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,private toast: ToastrService, public datepipe: DatePipe, private sharedService: SharedService) { }
     
 
   AddLoanDisbursalForm = new FormGroup({
@@ -69,6 +70,8 @@ export class LoanDisbursalComponent implements OnInit {
       console.log(data);
       this.loanDisburalData = data;
       this.dataSource = new MatTableDataSource(this.loanDisburalData)
+      this.sharedService.setLoaderShownProperty(false);  
+
 
     })
   }
@@ -98,6 +101,8 @@ export class LoanDisbursalComponent implements OnInit {
       this.toast.success("Created Successfully");
       this.Loan_Disbural_Limit();
       this.AddLoanDisbursalForm.reset();    
+      this.sharedService.setLoaderShownProperty(false);  
+
     })
     
   };

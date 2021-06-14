@@ -4,6 +4,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
+import { SharedService } from '../../../../services/shared.service';
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 import { Options } from "highcharts";
@@ -32,7 +33,7 @@ export class AnalyticsComponent implements OnInit {
   // this.analyticsData = 
   data:any;
   
-  constructor(private router: Router,private crudService: CrudService) {   }
+  constructor(private router: Router,private crudService: CrudService,private sharedService: SharedService) {   }
 
   ngOnInit(): void {
     // this.getAnalytics();
@@ -53,6 +54,7 @@ export class AnalyticsComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       // console.log(data);
       this.analyticsData = data.data;
+      this.sharedService.setLoaderShownProperty(false); 
       console.log("analytics")
       console.log(this.analyticsData)
     })
@@ -66,6 +68,7 @@ export class AnalyticsComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       // console.log(data);
       this.analyticsEnquiryData = data.data;
+      this.sharedService.setLoaderShownProperty(false); 
       console.log("analyEnquirytics")
       console.log(this.analyticsEnquiryData)
     })
@@ -79,6 +82,8 @@ export class AnalyticsComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       // console.log(data);
       this.analyticsCusOnboardData = data.data;
+      this.sharedService.setLoaderShownProperty(false); 
+
       console.log("analyticsCusOnboardData")
       console.log(this.analyticsCusOnboardData)
     })
@@ -92,6 +97,7 @@ export class AnalyticsComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       // console.log(data);
       this.analyticsOverallData = data;
+      this.sharedService.setLoaderShownProperty(false); 
       console.log("analyticsOverallData")
       console.log(this.analyticsOverallData)
       this.collectionGraph();

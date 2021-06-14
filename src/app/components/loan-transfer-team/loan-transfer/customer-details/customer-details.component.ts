@@ -5,6 +5,8 @@ import { Router, ActivatedRoute ,Params} from '@angular/router';
 // Custom Forms and Service and Routing
 import { CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
+import { SharedService } from '../../../../services/shared.service';
+
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DomSanitizer } from "@angular/platform-browser";
@@ -20,7 +22,7 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class CustomerDetailsComponent implements OnInit {
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute,private sanitizer:DomSanitizer,public datepipe: DatePipe) { }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute,private sanitizer:DomSanitizer,public datepipe: DatePipe,private sharedService: SharedService) { }
 
   id: any;
   customerList :  any = [];
@@ -216,6 +218,7 @@ export class CustomerDetailsComponent implements OnInit {
         tenantIdentifier: 'default'  
       }
     }).pipe(untilDestroyed(this)).subscribe(async response => {
+      this.sharedService.setLoaderShownProperty(false);  
 
       console.log(response)
       this.customerList.push(response);

@@ -6,6 +6,7 @@ import { Router, ActivatedRoute ,Params} from '@angular/router';
 
 import {  CrudService } from '../../../../../services/crud.service';
 import { appModels } from '../../../../../services/utils/enum.util';
+import { SharedService } from '../../../../../services/shared.service';
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
@@ -17,7 +18,7 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class SetPermissionComponent implements OnInit {
 
-  constructor(private router: Router,private crudService: CrudService, private toast: ToastrService) { }
+  constructor(private router: Router,private crudService: CrudService, private toast: ToastrService, private sharedService: SharedService) { }
 
   roleListData: any;
   permissionListData: any;
@@ -35,6 +36,8 @@ export class SetPermissionComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
       this.roleListData = response;
+      this.sharedService.setLoaderShownProperty(false); 
+
     })
   }
   pushdata: any = [];
@@ -45,6 +48,8 @@ export class SetPermissionComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
       this.permissionListData = response;
+      this.sharedService.setLoaderShownProperty(false); 
+
     })
   }
 

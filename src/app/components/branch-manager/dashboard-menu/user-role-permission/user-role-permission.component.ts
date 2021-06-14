@@ -6,6 +6,8 @@ import { Router, ActivatedRoute ,Params} from '@angular/router';
 
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
+import { SharedService } from '../../../../services/shared.service';
+
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -21,7 +23,7 @@ export class UserRolePermissionComponent implements OnInit {
   showUserTable :Boolean = true;
   showPermissionTable :Boolean  = false;
   roleListData:any ;
-  constructor(private router: Router,private crudService: CrudService, private toast: ToastrService,private dialog: MatDialog) { }
+  constructor(private router: Router,private crudService: CrudService, private toast: ToastrService,private dialog: MatDialog,private sharedService: SharedService) { }
 
 
 
@@ -50,6 +52,7 @@ export class UserRolePermissionComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(response => {
       console.log(response);
       this.roleListData = response;
+      this.sharedService.setLoaderShownProperty(false); 
     })
   }
 
@@ -90,7 +93,7 @@ export class CreateRole {
 
 
   constructor(public dialogRef: MatDialogRef<CreateRole>, private toast: ToastrService, @Inject(MAT_DIALOG_DATA) public response:any,
-    private crudService: CrudService,) { 
+    private crudService: CrudService,private sharedService: SharedService) { 
     if (response) {
       this.editDataRole = { ...response };
      this.createRoleForms
@@ -118,6 +121,7 @@ export class CreateRole {
       this.crudService.update(`${appModels.ROLES}`,this.createRoleForms.value,
         this.editDataRole['id'],
       ).pipe(untilDestroyed(this)).subscribe(updated => {
+        this.sharedService.setLoaderShownProperty(false); 
         this.dialogRef.close(updated);
         this.toast.success("Roles Updated Succesfully"); 
       })
@@ -127,6 +131,7 @@ export class CreateRole {
         tenantIdentifier: "default"   
         }}
       ).pipe(untilDestroyed(this)).subscribe(saved => {
+        this.sharedService.setLoaderShownProperty(false);
           this.dialogRef.close(saved);
           this.toast.success("Roles Saved Succesfully");  
         })
