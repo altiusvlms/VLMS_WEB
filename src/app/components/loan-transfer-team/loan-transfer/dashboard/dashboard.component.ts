@@ -14,7 +14,6 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 
 
 
-@UntilDestroy({ checkProperties: true })
 
 @Component({
   selector: 'vlms-dashboard',

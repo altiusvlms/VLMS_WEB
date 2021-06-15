@@ -41,6 +41,7 @@ getTaskList(){
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
       this.taskListData= response;
+      console.log( this.taskListData)
       this.sharedService.setLoaderShownProperty(false);  
     })
   }
@@ -53,8 +54,10 @@ getTaskList(){
       data: task ? task : null
     });  
     dialogRef.afterClosed().subscribe((response : any) => {
+      this.sharedService.setLoaderShownProperty(false); 
       if (response) {
         this.getTaskList();
+        this.sharedService.setLoaderShownProperty(false);  
       }
     });
   }
@@ -88,8 +91,12 @@ export class CreateTask {
   constructor(public dialogRef: MatDialogRef<CreateTask>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
     private crudService: CrudService,
     private sharedService: SharedService,public datepipe: DatePipe) { 
+      console.log(response)
     if (response) {
       this.editDataTask = { ...response };
+      if(response.status == ''){
+        response.status = "open";
+      }
      this.createTaskForms
     .patchValue({
       taskType:response.taskType,
@@ -98,7 +105,8 @@ export class CreateTask {
       vehicleNumber:response.vehicleNumber,
       dueDate:this.datepipe.transform(response.dueDate, 'yyyy-MM-dd'),
       assignTo:response.assignTo,
-      description:response.description
+      description:response.description,
+      status:response.status,
     });
     this.createTaskForms.disable();
     }
@@ -115,6 +123,8 @@ export class CreateTask {
       locale: new FormControl('en'),
       assignTo: new FormControl(''),
       description: new FormControl(''),
+      status: new FormControl(''),
+      
     })
 
  
@@ -153,6 +163,7 @@ export class CreateTask {
         tenantIdentifier: "default"   
         }}
       ).pipe(untilDestroyed(this)).subscribe(saved => {
+        console.log(saved)
           this.dialogRef.close(saved);
           this.sharedService.setLoaderShownProperty(false); 
           this.toast.success("Task Saved Succesfully");  

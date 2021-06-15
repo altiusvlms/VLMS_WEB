@@ -254,7 +254,9 @@ export class ManageEmployeeComponent implements OnInit {
     this.EmployeeId = response.resourceId;
     this.sharedService.setLoaderShownProperty(false); 
   for(let document of  this.documentImageForm.value.image){
-  
+
+    if(document.documentName === "aadhaar"){
+      console.log("aadhaar")
       const formData = new FormData();      
       formData.append("file",this.Imagefileform0);
       await this.crudService.upload_Image(`${appModels.COMMON}/images/employee_adhar/${this.EmployeeId}`, formData,
@@ -263,9 +265,13 @@ export class ManageEmployeeComponent implements OnInit {
                 tenantIdentifier: "default"   
               }}
           ).pipe(untilDestroyed(this))
-            .subscribe( async data => {
+            .subscribe(  data => {
               console.log(data)
               this.sharedService.setLoaderShownProperty(false); 
+            })
+          }
+          if(document.documentName === "driving-licence"){
+      console.log("driving-licence")
 
               const formData = new FormData();      
               formData.append("file",this.Imagefileform1);
@@ -275,11 +281,14 @@ export class ManageEmployeeComponent implements OnInit {
                         tenantIdentifier: "default"   
                       }}
                   ).pipe(untilDestroyed(this))
-                    .subscribe(async data => {
+                    .subscribe( data => {
                       console.log(data) 
                       this.sharedService.setLoaderShownProperty(false); 
+                    })
+                  }
 
-
+                  if(document.documentName === "pancard"){   
+console.log("pancard")
       const formData = new FormData();      
       formData.append("file",this.Imagefileform2);
       await  this.crudService.upload_Image(`${appModels.COMMON}/images/employee_pancard/${this.EmployeeId}`, formData,
@@ -293,8 +302,8 @@ export class ManageEmployeeComponent implements OnInit {
               this.sharedService.setLoaderShownProperty(false); 
 
             })
-            })
-          })
+          }
+      
         }
   })
   
