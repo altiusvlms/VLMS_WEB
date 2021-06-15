@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
+import { SharedService } from '../../../../services/shared.service';
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
@@ -20,7 +21,7 @@ export class ExistingEmployeeComponent implements OnInit {
 /** Manage Employee Variables  */
   employeeListData : any
 
-  constructor(private router: Router,private crudService: CrudService) { }
+  constructor(private router: Router,private crudService: CrudService,private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.getEmployeeList();
@@ -44,6 +45,7 @@ export class ExistingEmployeeComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
       this.employeeListData = response;
+      this.sharedService.setLoaderShownProperty(false); 
     })
   }
 

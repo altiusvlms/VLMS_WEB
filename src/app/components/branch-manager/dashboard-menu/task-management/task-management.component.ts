@@ -196,6 +196,7 @@ export class CreateTask {
         tenantIdentifier: 'default'
       }
     }).pipe(untilDestroyed(this)).subscribe(async response => {
+      this.sharedService.setLoaderShownProperty(false); 
       await response.map((res: any) => {
         if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
         this.customerList.push(res);

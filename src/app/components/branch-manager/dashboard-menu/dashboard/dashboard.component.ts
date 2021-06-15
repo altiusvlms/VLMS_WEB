@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
   newLoanvsClosedLoanAmount: any;
   enquiryDashboardCount:any;
 
-  constructor(private formBuilder: FormBuilder,private router: Router , private crudService: CrudService,private dialog: MatDialog) { this.yrToggel = true;
+  constructor(private formBuilder: FormBuilder,private router: Router , private sharedService: SharedService, private crudService: CrudService,private dialog: MatDialog) { this.yrToggel = true;
   }
 
 
@@ -261,7 +261,7 @@ export class DashboardComponent implements OnInit {
       this.dashboardData = data;
       Highcharts.chart("newLoanvsClosedLoan", this.newLoanvsClosedLoan() );
       Highcharts.chart("amountCollection", this.newLoanvsClosedLoans() );
-      
+      this.sharedService.setLoaderShownProperty(false);
     })
   }
 
@@ -273,6 +273,7 @@ export class DashboardComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       // console.log(data);
       this.enquiryDashboardCount = data;
+      this.sharedService.setLoaderShownProperty(false); 
       console.log("enquiryDashboardCount")
       console.log(this.enquiryDashboardCount)      
     })
@@ -477,10 +478,12 @@ export class AdvancedSearch {
         this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${res.customerDetails.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
          this.customerImage =  this.sanitizer.bypassSecurityTrustUrl(data);
             this.allCustomerImage.push({image:this.customerImage})
+            this.sharedService.setLoaderShownProperty(false);
         },error => {
           console.error(error);
           this.customerImage = 'assets/images/empty_image.png';
           this.allCustomerImage.push({image:this.customerImage} )
+          this.sharedService.setLoaderShownProperty(false);
        });
     })
 

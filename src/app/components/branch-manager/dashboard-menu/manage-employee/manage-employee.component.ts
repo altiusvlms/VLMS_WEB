@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { DomSanitizer} from "@angular/platform-browser";
+import { SharedService } from '../../../../services/shared.service';
+
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 @UntilDestroy({ checkProperties: true })
 
@@ -27,26 +29,19 @@ export class ManageEmployeeComponent implements OnInit {
 /** Manage Employee Variables */
   id:any;
   EmployeeId:any;
-  Imagefileform1: any;
-  Imagefileform2:any;
-  ImgURL1:any;
-  ImgURL2:any;
-  uploadImages_1:any;
-  uploadImages_2:any;
-  dob :string;
   age:number;
-  employeeList :  any = [];
   resourceID: any;
-  employee :any;
-  singleData:any;
-  employeeEducationDetails:any;
-  employeeInsuranceDetails:any;
   showSpouse : Boolean = false;
   documentDetails : any;
   submitted: Boolean = false;
+  Imagefileform0: any;
+  Imagefileform1: any;
+  Imagefileform2:any;
+  imageURL0: any;
+  imageURL1: any;
+  imageURL2: any;
 
-  
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer) {
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer,private sharedService: SharedService) {
    }
 
 /** Manage Employee Forms */
@@ -143,7 +138,6 @@ export class ManageEmployeeComponent implements OnInit {
     })
   })
 
-
   documentImageForm = new FormGroup({
     image: this.fb.array([]) 
   })
@@ -161,16 +155,13 @@ export class ManageEmployeeComponent implements OnInit {
    
   addImage() {
     this.image().push(this.newImage());
-
   }
    
   removeImage(i:number) {
     this.image().removeAt(i);
   }
 
-
   ngOnInit(): void {
-
       this.getDocumentDetails();
   }
   
@@ -194,6 +185,8 @@ export class ManageEmployeeComponent implements OnInit {
     }}
   ).pipe(untilDestroyed(this)).subscribe( response => {
     this.documentDetails = response;
+    this.sharedService.setLoaderShownProperty(false); 
+
   });
   }
 
@@ -206,43 +199,39 @@ export class ManageEmployeeComponent implements OnInit {
     }
   }
 
-  imageURL0: any;
-  airlineImages: any = [];
-  // imageurls: any =[];
-  uploadImages(event: any,index:any){
-    console.log(index)
-    console.log(event)
-    // if (event.target.files && event.target.files[0]) {
-    //   var filesAmount = event.target.files.length;
-    //   for (let i = 0; i < filesAmount; i++) {
-    //     var reader = new FileReader();
-    //     reader.onload = (event: any) => {
-    //       this.imageurls.push({ base64String: event.target.result, });
-    //     }
-    //     reader.readAsDataURL(event.target.files[i]);
-    //   }
-    // }
 
+  uploadImages(event: any,index:any){
     if(event.target.files[0].type == "image/png" || event.target.files[0].type == "image/jpeg" || event.target.files[0].type == "image/gif"){
-    this.Imagefileform1 = event.target.files[0];
-    console.log(this.Imagefileform1)
     if(index == 0){
     if (event.target.files && event.target.files[0]) {
+      this.Imagefileform0 = event.target.files[0];
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event) => {
-        this.imageURL0 = event.target['result'];
-        // console.log(this.imageURL0)
-        this.airlineImages.push(event.target['result']);
-        console.log(this.airlineImages);
-        console.log(this.airlineImages.length);
+        this.imageURL0 = event.target['result'];     
         }
       }
-      
+    }
+    else if(index == 1){
+      if (event.target.files && event.target.files[0]) {
+        this.Imagefileform1 = event.target.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = (event) => {
+          this.imageURL1 = event.target['result'];
+          }
+        }
       }
-      else {
-        this.imageURL0 = 'assets/images/empty_image.png';
-      }
+    else if(index == 2){
+      if (event.target.files && event.target.files[0]) {
+        this.Imagefileform2 = event.target.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = (event) => {
+        this.imageURL2 = event.target['result'];
+         } 
+        }
+      }    
     }
     else {
       alert("Only GIF, PNG and JPEG Data URL's are allowed.")
@@ -250,67 +239,64 @@ export class ManageEmployeeComponent implements OnInit {
 
   }
   
-  uploadImages2(evt2: any){
-    if(evt2.target.files[0].type == "image/png" || evt2.target.files[0].type == "image/jpeg" || evt2.target.files[0].type == "image/gif"){
-    this.Imagefileform2 = evt2.target.files[0];
-    if (evt2.target.files && evt2.target.files[0]) {
-      var reader = new FileReader();
-      reader.readAsDataURL(evt2.target.files[0]);
-      reader.onload = (event) => {
-        this.ImgURL2 = event.target['result'];
-        }
-      }
-    }
-    else {
-      alert("Only GIF, PNG and JPEG Data URL's are allowed.")
-    }
-  }
-
-
+  
   createEmployee(){
   this.submitted = true;
-  console.log(this.manageEmployeeForm.value)
-  console.log(this.documentImageForm.value)
-  console.log(this.Imagefileform1)
-
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
+
   this.crudService.post(`${appModels.CREATEEMPLOYEE}`, this.manageEmployeeForm.value ,
     { params:{
       tenantIdentifier: "default"   
     }}
   ).pipe(untilDestroyed(this)).subscribe(async response => {
-    console.log("data")
-    console.log(response)
     this.toast.success("Employee Created successfully")
     this.EmployeeId = response.resourceId;
-  console.log(this.EmployeeId)
-
-const formData = new FormData();      
-formData.append("file",this.Imagefileform1);
-await this.crudService.upload_Image(`${appModels.COMMON}/images/employee_adhar/${this.EmployeeId}`, formData,
-    { params:{
-          documentNumber:"12345" ,
-          tenantIdentifier: "default"   
-        }}
-    ).pipe(untilDestroyed(this))
-      .subscribe( async data => {
-        console.log(data)
-
-        const formData = new FormData();      
-formData.append("file",this.Imagefileform2);
-await  this.crudService.upload_Image(`${appModels.COMMON}/images/employee_pancard/${this.EmployeeId}`, formData,
-    { params:{
-          documentNumber:"12345" ,
-          tenantIdentifier: "default"   
-        }}
-    ).pipe(untilDestroyed(this))
-      .subscribe( data => {
-        console.log(data)
-      })
-      })
+    this.sharedService.setLoaderShownProperty(false); 
+  for(let document of  this.documentImageForm.value.image){
   
-        })
+      const formData = new FormData();      
+      formData.append("file",this.Imagefileform0);
+      await this.crudService.upload_Image(`${appModels.COMMON}/images/employee_adhar/${this.EmployeeId}`, formData,
+          { params:{
+                documentNumber: document.documentNo,
+                tenantIdentifier: "default"   
+              }}
+          ).pipe(untilDestroyed(this))
+            .subscribe( async data => {
+              console.log(data)
+              this.sharedService.setLoaderShownProperty(false); 
+
+              const formData = new FormData();      
+              formData.append("file",this.Imagefileform1);
+              await  this.crudService.upload_Image(`${appModels.COMMON}/images/employee_vehicle_licence/${this.EmployeeId}`, formData,
+                  { params:{
+                        documentNumber: document.documentNo,
+                        tenantIdentifier: "default"   
+                      }}
+                  ).pipe(untilDestroyed(this))
+                    .subscribe(async data => {
+                      console.log(data) 
+                      this.sharedService.setLoaderShownProperty(false); 
+
+
+      const formData = new FormData();      
+      formData.append("file",this.Imagefileform2);
+      await  this.crudService.upload_Image(`${appModels.COMMON}/images/employee_pancard/${this.EmployeeId}`, formData,
+          { params:{
+                documentNumber: document.documentNo,
+                tenantIdentifier: "default"   
+              }}
+          ).pipe(untilDestroyed(this))
+            .subscribe( data => {
+              console.log(data)
+              this.sharedService.setLoaderShownProperty(false); 
+
+            })
+            })
+          })
+        }
+  })
   
   
 }
@@ -319,75 +305,34 @@ await  this.crudService.upload_Image(`${appModels.COMMON}/images/employee_pancar
 employeeArray: any = [];
 data : any;
 
-getSingleEmployeeList(){
-  console.log("id")
-  console.log(this.id)
-  this.crudService.get(`${appModels.GETEMPLOYEE}`, {
-    params: {
-      tenantIdentifier: 'default'
-    }
-  }).pipe(untilDestroyed(this)).subscribe(async response => {
-    console.log(response)
-    for (var singleData of response) {
-      if(singleData.id == this.id){
-        this.employeeArray.push(singleData)
-        await this.crudService.get_Image(`${appModels.IMAGES}/employee_adhar/${singleData.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
-          this.ImgURL1 = this.sanitizer.bypassSecurityTrustUrl(data);
-        })
-        await this.crudService.get_Image(`${appModels.IMAGES}/employee_pancard/${singleData.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
-          this.ImgURL2 = this.sanitizer.bypassSecurityTrustUrl(data);
-        })
-      }
-    }
-//  debugger
-    console.log(this.employeeArray)
+// getSingleEmployeeList(){
+//   console.log("id")
+//   console.log(this.id)
+//   this.crudService.get(`${appModels.GETEMPLOYEE}`, {
+//     params: {
+//       tenantIdentifier: 'default'
+//     }
+//   }).pipe(untilDestroyed(this)).subscribe(async response => {
+//     console.log(response)
+//     for (var singleData of response) {
+//       if(singleData.id == this.id){
+//         this.employeeArray.push(singleData)
+//         await this.crudService.get_Image(`${appModels.IMAGES}/employee_adhar/${singleData.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+//           this.ImgURL1 = this.sanitizer.bypassSecurityTrustUrl(data);
+//         })
+//         await this.crudService.get_Image(`${appModels.IMAGES}/employee_pancard/${singleData.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+//           this.ImgURL2 = this.sanitizer.bypassSecurityTrustUrl(data);
+//         })
+//       }
+//     }
+//     console.log(this.employeeArray)
 
 
 
-})
-}
+// })
+// }
 
 
-
-
-
-
-
-
-
-updateEmployeeEducationDetails(){
-  // console.log("this.manageEmployeeForm.value")
-  console.log(this.manageEmployeeForm.value)
-  this.crudService.update(`${appModels.EMPLOYEE}/updateQualification`,this.manageEmployeeForm.value.school_qualification,
-  this.id,
-  ).pipe(untilDestroyed(this)).subscribe(response => {
-    this.employeeEducationDetails = response;
-})
-}
-// this.generalAccidentialIns,
-updateEmployeeInsuranceDetails(){
-  // this.generalAccidentialIns.general_insurance = this.manageEmployeeForm.value.general_insurance.value
-  // this.generalAccidentialIns.accidental_insurance = this.manageEmployeeForm.value.accidental_insurance.value
-  console.log("this.manageEmployeeForm.value")
-  // console.log(this.manageEmployeeForm.value)
-  // this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
-  // this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
-  this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeForm.value.general_insurance,
-  this.employee.id,
-
-  ).pipe(untilDestroyed(this)).subscribe(response => {
-    this.employeeInsuranceDetails = response;
-    console.log(this.manageEmployeeForm.value)
-})
-}
-
-updateAddress(){
-  this.crudService.update(`${appModels.ADDRESS}`,this.manageEmployeeForm.value.employee_communicationAddress,
-  this.id,
-  ).pipe(untilDestroyed(this)).subscribe(response => {
-    this.employeeInsuranceDetails = response;
-})
-}
 
 
 }
@@ -406,7 +351,7 @@ updateAddress(){
 
 export class EditManageEmployeeComponent implements OnInit {
    
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer) {
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer,private sharedService: SharedService) {
   }
 
   id:any;
@@ -555,7 +500,7 @@ accidentalID : any;
   newImage(): FormGroup {
     return this.fb.group({
       documentName: '',
-      documentNo: ''
+      documentNo: '',
     })
   }
    
@@ -587,6 +532,7 @@ accidentalID : any;
     }}
   ).pipe(untilDestroyed(this)).subscribe( response => {
     this.documentDetails = response;
+    this.sharedService.setLoaderShownProperty(false); 
   });
   }
 
@@ -608,6 +554,7 @@ accidentalID : any;
       }
     }).pipe(untilDestroyed(this)).subscribe(async response => {
       console.log(response)
+      this.sharedService.setLoaderShownProperty(false); 
 
       this.communicationAddID = response.communicationAdd.id;
       this.permanentAddID = response.permanentAdd.id;

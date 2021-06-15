@@ -5,6 +5,7 @@ import {  CrudService } from '../../../../../services/crud.service';
 import { appModels } from '../../../../../services/utils/enum.util';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {DomSanitizer} from "@angular/platform-browser";
+import { SharedService } from '../../../../../services/shared.service';
 
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
@@ -21,7 +22,7 @@ export class CreateReceiptComponent implements OnInit {
 
   
 
-  constructor(private router: Router,private crudService: CrudService,private dialog: MatDialog,private route: ActivatedRoute, private sanitizer:DomSanitizer,private toast: ToastrService, public datepipe: DatePipe) { }
+  constructor(private router: Router,private crudService: CrudService,private dialog: MatDialog,private route: ActivatedRoute, private sanitizer:DomSanitizer,private toast: ToastrService, public datepipe: DatePipe,private sharedService: SharedService) { }
   id: any;
   getCustomerLoanDetails: any = [];
   customerImage: any;
@@ -82,8 +83,12 @@ export class CreateReceiptComponent implements OnInit {
       }
       }).pipe(untilDestroyed(this)).subscribe(async response => {
         this.getCustomerLoanDetails.push(response)
+        this.sharedService.setLoaderShownProperty(false);  
+
         await this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${response.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
           this.customerImage = this.sanitizer.bypassSecurityTrustUrl(data);
+          this.sharedService.setLoaderShownProperty(false);  
+
         })
         await this.crudService.get(`${appModels.CUSTOMERS}/loanByMobileNo/${response.customerDetails.mobileNo}`, {
             params: {
@@ -94,6 +99,7 @@ export class CreateReceiptComponent implements OnInit {
             this.loanID = res[0].id;
             console.log(this.loanID)
             this.getCreateReceipt();
+            this.sharedService.setLoaderShownProperty(false);  
           })
       })
   }
@@ -127,7 +133,8 @@ export class CreateReceiptComponent implements OnInit {
       // console.log(data);
       // console.log(data.loanType);
       console.log(data.repaymentSchedule.periods);
-      
+      this.sharedService.setLoaderShownProperty(false);  
+
       for(var i =1; i<data.repaymentSchedule.periods.length; i++){
       
         // console.log(data.repaymentSchedule.periods[i].fromDate)
@@ -191,6 +198,7 @@ export class CreateReceiptComponent implements OnInit {
     ).pipe(untilDestroyed(this)).subscribe( data => {
       console.log(data)
       this.toast.success("Receipt Created")
+      this.sharedService.setLoaderShownProperty(false);  
     })
     
   };
@@ -212,7 +220,7 @@ export class CreateReceiptComponent implements OnInit {
 
 export class SearchReceipt {
 
-  constructor(public dialogRef: MatDialogRef<SearchReceipt>,private router: Router,private crudService: CrudService, @Inject(MAT_DIALOG_DATA) public response:any) { }
+  constructor(public dialogRef: MatDialogRef<SearchReceipt>,private router: Router,private crudService: CrudService, @Inject(MAT_DIALOG_DATA) public response:any,private sharedService: SharedService) { }
 
    
   customername: any;
@@ -243,6 +251,8 @@ export class SearchReceipt {
       tenantIdentifier: 'default'
     }
   }).pipe(untilDestroyed(this)).subscribe(async response => {
+    this.sharedService.setLoaderShownProperty(false);  
+
     for(let x of response){
         if (
           x.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){

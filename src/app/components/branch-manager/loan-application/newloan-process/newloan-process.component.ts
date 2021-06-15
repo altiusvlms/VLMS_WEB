@@ -6,11 +6,13 @@ import { Router, ActivatedRoute ,Params} from '@angular/router';
 // Custom Forms
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
+import { SharedService } from '../../../../services/shared.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import {DomSanitizer} from "@angular/platform-browser";
 import { Options, LabelType } from 'ng5-slider';
+
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -114,7 +116,7 @@ export class NewloanProcessComponent implements OnInit {
 
 
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private sanitizer:DomSanitizer, private route: ActivatedRoute,public datepipe: DatePipe) {
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private sanitizer:DomSanitizer, private route: ActivatedRoute,public datepipe: DatePipe,private sharedService: SharedService) {
     this.getUserId();    
    }
 
@@ -370,6 +372,7 @@ export class NewloanProcessComponent implements OnInit {
         tenantIdentifier: 'default'  
       }
     }).pipe(untilDestroyed(this)).subscribe(async response => {
+      this.sharedService.setLoaderShownProperty(false);  
 
       console.log(response.id)
       this.customerList.push(response);
@@ -425,6 +428,8 @@ export class NewloanProcessComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
       this.userId = data.id;
+      this.sharedService.setLoaderShownProperty(false);  
+
     })
   }
 
@@ -764,6 +769,8 @@ export class NewloanProcessComponent implements OnInit {
           }}
         ).pipe(untilDestroyed(this)).subscribe( async data => {
           console.log(data)
+          this.sharedService.setLoaderShownProperty(false);  
+
           this.vehicle_Id = data.vehicleId;
           this.resource_Id = data.resourceId;
           this.customer_Id = data.customerId;
@@ -775,6 +782,7 @@ export class NewloanProcessComponent implements OnInit {
             command: "approve"   
           }}
         ).pipe(untilDestroyed(this)).subscribe( async data => {
+          this.sharedService.setLoaderShownProperty(false);  
           console.log(data)
         })
 

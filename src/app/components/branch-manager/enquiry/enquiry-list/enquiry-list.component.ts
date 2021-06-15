@@ -13,6 +13,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {  CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
 import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../../../../services/shared.service';
 
 
 
@@ -57,7 +58,7 @@ export class EnquiryListComponent implements OnInit {
   EnquiryVerfication_Data:any;
   unamePattern = "^[A-Z]{2}[ \-][0-9]{2}[ ,][A-Z0-9]{2,3}[ \-][0-9]{4}$"
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private dialog: MatDialog,public datepipe: DatePipe) { }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService,private dialog: MatDialog,public datepipe: DatePipe,private sharedService: SharedService) { }
 
     /** Create Enquiry Form */
     createEnquiryForms = new FormGroup({
@@ -92,6 +93,8 @@ export class EnquiryListComponent implements OnInit {
       console.log(data);
       this.EnquiryVerfication_Data = data;
       this.dataSource = new MatTableDataSource(this.EnquiryVerfication_Data)
+      this.sharedService.setLoaderShownProperty(false); 
+
     })
   }
  /** Save Enquiry */
@@ -104,6 +107,7 @@ export class EnquiryListComponent implements OnInit {
     ).pipe(untilDestroyed(this)).subscribe( data => {
       this.showGenerateModel = true;
       this.responseEnquiryId = data.resourceId;
+      this.sharedService.setLoaderShownProperty(false); 
       console.log(data)
       this.getEnrollData();
       this.dialogRef.close(data);
@@ -128,6 +132,7 @@ export class EnquiryListComponent implements OnInit {
       console.log(data)
       this.EnquiryVerfication_Data = data;
       this.dataSource = new MatTableDataSource(this.EnquiryVerfication_Data)
+      this.sharedService.setLoaderShownProperty(false); 
     })
   }
   clear(){

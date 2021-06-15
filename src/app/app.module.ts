@@ -6,7 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /** Custom Interceptor and Services */
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/core/auth.interceptor';
-import { ErrorInterceptor } from './services/core/error.interceptor';
+import { SuccessErrorInterceptor } from './services/core/success-error.interceptor';
+import { SharedService } from './services/shared.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** Main Component */
@@ -69,7 +70,8 @@ const firebaseConfig = {
   ],
   declarations: [WebAppComponent],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SuccessErrorInterceptor, multi: true },
+    SharedService,
     DatePipe],
   bootstrap: [WebAppComponent]
 })

@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DomSanitizer } from "@angular/platform-browser";
 import { DatePipe } from '@angular/common';
+import { SharedService } from '../../../../services/shared.service';
 
 
 import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
@@ -24,7 +25,7 @@ export class LoanProcessComponent implements OnInit {
   
   
   
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute,private sanitizer:DomSanitizer,public datepipe: DatePipe) { }
+  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute,private sanitizer:DomSanitizer,public datepipe: DatePipe,private sharedService: SharedService) { }
 
  
   mobile_num = localStorage.getItem("mobile_number");
@@ -233,6 +234,7 @@ export class LoanProcessComponent implements OnInit {
         tenantIdentifier: 'default'  
       }
     }).pipe(untilDestroyed(this)).subscribe(async response => {
+      this.sharedService.setLoaderShownProperty(false);  
 
       console.log(response)
       this.customerList.push(response);
@@ -489,6 +491,7 @@ if(this.customerID !== null || undefined){
         this.toast.success("Updated Successfully");
         this.showUpdatebtn = false;
         this.applicantForm.disable();
+        this.sharedService.setLoaderShownProperty(false);  
       })
     }
     
@@ -500,6 +503,7 @@ if(this.customerID !== null || undefined){
         this.toast.success("Updated Successfully");
         this.showUpdatebtn = false;
         this.co_applicantForm.disable();
+        this.sharedService.setLoaderShownProperty(false);  
       })
     }
 
@@ -510,6 +514,7 @@ if(this.customerID !== null || undefined){
         this.toast.success("Updated Successfully");
         this.showUpdatebtn = false;
         this.vehicleForm.disable();
+        this.sharedService.setLoaderShownProperty(false);  
         })
     }
 
@@ -521,6 +526,7 @@ if(this.customerID !== null || undefined){
         this.toast.success("Updated Successfully");
         this.showUpdatebtn = false;
         this.loanForm.disable();
+        this.sharedService.setLoaderShownProperty(false);  
       })
     }
 
@@ -531,6 +537,7 @@ if(this.customerID !== null || undefined){
         this.toast.success("Updated Successfully");
         this.showUpdatebtn = false;
         this.bankForm.disable();
+        this.sharedService.setLoaderShownProperty(false);  
       })
     }
    

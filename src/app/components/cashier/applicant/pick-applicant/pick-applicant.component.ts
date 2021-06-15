@@ -22,7 +22,7 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class PickApplicantComponent implements OnInit {
 
-  constructor(private router: Router,private crudService: CrudService,private route: ActivatedRoute,private sanitizer:DomSanitizer,private dialog: MatDialog,public datepipe: DatePipe,private toast: ToastrService) { }
+  constructor(private router: Router,private crudService: CrudService,private route: ActivatedRoute,private sanitizer:DomSanitizer,private dialog: MatDialog,public datepipe: DatePipe,private toast: ToastrService, private sharedService: SharedService) { }
 
   /** Pick Applicant Variables */
   id: any;
@@ -81,9 +81,13 @@ export class PickApplicantComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(async response => {
       this.applicantDetails.push(response);
+                this.sharedService.setLoaderShownProperty(false);  
+
       console.log(this.applicantDetails)
        await this.crudService.get_Image(`${appModels.IMAGES}/customerimage/${this.applicantDetails[0].customerDetails.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(data => {
          this.applicantImage =  this.sanitizer.bypassSecurityTrustUrl(data);
+         this.sharedService.setLoaderShownProperty(false);  
+
         },error => {
           console.error(error);
           this.applicantImage = 'assets/images/empty_image.png';
@@ -123,10 +127,12 @@ export class PickApplicantComponent implements OnInit {
     this.applicantDetails.loanDetailsData.id,
    ).pipe(untilDestroyed(this)).subscribe(async response => {
     this.toast.success("Saved Successfully");
+    this.sharedService.setLoaderShownProperty(false);  
 
     await this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyBankDetails`,this.applicantDetailsForm.value.bankDetails,
     this.applicantDetails.bankDetails.id,
     ).pipe(untilDestroyed(this)).subscribe(response => {
+      this.sharedService.setLoaderShownProperty(false);  
 
     //   this.approvelForm.value.approvedOnDate=this.datepipe.transform(this.approvelForm.value.approvedOnDate, 'dd MMMM yyyy');
     //   this.approvelForm.value.expectedDisbursementDate=this.datepipe.transform(this.approvelForm.value.expectedDisbursementDate, 'dd MMMM yyyy');
