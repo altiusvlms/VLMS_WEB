@@ -186,7 +186,7 @@ export class SendToApprover {
         approver: new FormControl(''),
         authoriser: new FormControl(''),
       })
-      step2Form = new FormGroup({
+      branchForm = new FormGroup({
         loanTransfer: new FormControl(''),
         DCTransfer: new FormControl(''),
         request: new FormControl(''),
@@ -194,8 +194,24 @@ export class SendToApprover {
         remindAuthoriser: new FormControl(''),
         additionalTransfer: new FormControl('')
       })
+      areaForm = new FormGroup({
+        peelamedu : new FormControl(''),
+        gandhipuram : new FormControl(''),
+        ganapathy : new FormControl(''),
+        thudiyalur : new FormControl(''),
+        vadavalli : new FormControl(''),
+        sulur : new FormControl(''),
+      })
+      peelameduForm = new FormControl({
+        KAF :  new FormControl(''),
+        KI : new FormControl(''),
+        KHPF:  new FormControl(''),
+      })
+
 
     showStep2:Boolean = false;
+    showStep3:Boolean = false;
+    showStep4:Boolean = false;
     sendToapproval: any;
 
     ngOnInit(): void {
@@ -207,11 +223,23 @@ export class SendToApprover {
        }
     }
     step2(){
-      this.sendToapproval = this.step2Form.value;
-      localStorage.setItem('sentoToApprover', JSON.stringify(this.sendToapproval));
-      this.dialogRef.close();
+      // this.sendToapproval = this.branchForm.value;
+      // localStorage.setItem('sentoToApprover', JSON.stringify(this.sendToapproval));
+      // this.dialogRef.close();
+      if(this.branchForm.value.loanTransferBeneficiaryAdded !== ''){
+        this.showStep3 = true;
+      }
     }
-
+    step3(){
+      if(this.peelameduForm.value.KAF !== ''){
+        this.showStep4 = true;
+      }
+    }
+    // step4(){
+    //   if(this.peelameduForm.value.KAF !== ''){
+    //     this.showStep4 = true;
+    //   }
+    // }
     back(){
       this.showStep2 = false;
     }

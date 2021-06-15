@@ -116,6 +116,14 @@ const routes: Routes = [
     )
 },
   
+/** Shared Module */
+{
+  path: "emi-calculator",
+  loadChildren: () =>
+    import("./components/shared/shared/shared.module").then(
+      s => s.SharedModule 
+    )
+},
 
 
   {
