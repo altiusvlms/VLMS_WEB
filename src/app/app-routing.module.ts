@@ -120,8 +120,8 @@ const routes: Routes = [
 {
   path: "emi-calculator",
   loadChildren: () =>
-    import("./components/shared/shared/shared.module").then(
-      s => s.SharedModule 
+    import("./components/shared/shared/emi-calculator/emi-calculator.module").then(
+      e => e.EmiCalculatorModule 
     )
 },
 
