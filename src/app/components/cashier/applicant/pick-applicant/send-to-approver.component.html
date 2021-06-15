@@ -8,10 +8,10 @@
     <div *ngIf="!showStep2">
             <div class="row" >
                 <mat-radio-group aria-label="Select an option"  formControlName="branch">
-                    <mat-radio-button value="branch" >Branch</mat-radio-button>
+                    <mat-radio-button value="branch">Branch</mat-radio-button>
                   </mat-radio-group>
             </div>
-            <!-- <div class="row">
+            <div class="row">
                 <mat-radio-group aria-label="Select an option" formControlName="creator">
                     <mat-radio-button value="creator"  >Creator</mat-radio-button>
                   </mat-radio-group>
@@ -25,7 +25,7 @@
                 <mat-radio-group aria-label="Select an option" formControlName="authoriser">
                     <mat-radio-button value="authoriser"  >Authoriser</mat-radio-button>
                   </mat-radio-group>
-            </div> -->
+            </div>
 
             <button class="btn_blue" (click)="step1()">Next</button>
 
@@ -34,12 +34,12 @@
     </div>
 
 <div *ngIf="showStep2">
-    <form class="example-form"  [formGroup]="step2Form" >
+    <form class="example-form"  [formGroup]="branchForm" >
 
         <div >
                 <div class="row" >
                     <mat-radio-group aria-label="Select an option"  formControlName="loanTransfer">
-                        <mat-radio-button value="Loan Transfer Beneficiary Added" valueSelected>Loan Transfer Beneficiary Added</mat-radio-button>
+                        <mat-radio-button value="loanTransferBeneficiaryAdded" valueSelected>Loan Transfer Beneficiary Added</mat-radio-button>
                       </mat-radio-group>
                 </div>
                 <div class="row">
@@ -65,6 +65,75 @@
                 <div class="row">
                     <mat-radio-group aria-label="Select an option" formControlName="additionalTransfer">
                         <mat-radio-button value="Additional Transfer Doc">Additional Transfer Doc</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <button class="btn_blue" (click)="back()">Back</button>
+                <button class="btn_blue" (click)="step2()">Next</button>
+                
+        </div>
+        </form>
+    </div>
+
+    <!-- Loan Transfer Beneficiary Added -->
+    <div *ngIf="showStep3">
+        <form class="example-form"  [formGroup]="AreaForm" >
+    
+            <div >
+                    <div class="row" >
+                        <mat-radio-group aria-label="Select an option"  formControlName="loanTransfer">
+                            <mat-radio-button value="peelamedu" valueSelected>Peelamedu</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option" formControlName="DCTransfer">
+                            <mat-radio-button value="gandhipuram">Gandhipuram</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  formControlName="request">
+                            <mat-radio-button value="ganapathy" >Ganapathy</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option" formControlName="authoriser">
+                            <mat-radio-button value="thudiyalur">Thudiyalur</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option" formControlName="remindAuthoriser">
+                            <mat-radio-button value="vadavalli">Vadavalli</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option" formControlName="additionalTransfer">
+                            <mat-radio-button value="sulur">Sulur</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <button class="btn_blue" (click)="back()">Back</button>
+                    <button class="btn_blue" (click)="step3()">Next</button>
+                    
+            </div>
+            </form>
+        </div>
+        
+<!-- After choosing area -->
+<div *ngIf="showStep4">
+    <form class="example-form"  [formGroup]="peelameduForm" >
+
+        <div >
+                <div class="row" >
+                    <mat-radio-group aria-label="Select an option"  formControlName="loanTransfer">
+                        <mat-radio-button value="KAF" valueSelected>KAF</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <div class="row">
+                    <mat-radio-group aria-label="Select an option" formControlName="DCTransfer">
+                        <mat-radio-button value="KI">KI</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <div class="row">
+                    <mat-radio-group aria-label="Select an option"  formControlName="request">
+                        <mat-radio-button value="KHPF" >KHPF</mat-radio-button>
                       </mat-radio-group>
                 </div>
                 <button class="btn_blue" (click)="back()">Back</button>

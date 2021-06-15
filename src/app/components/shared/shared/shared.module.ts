@@ -14,9 +14,15 @@ import { SharedComponent } from './shared.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
+import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.component';
 
 /** Custom Validation Module */
 import { ValidateEqualModule } from 'ng-validate-equal';
+
+// Routing Module
+// import { SharedRoutingModule } from '../shared/shared.routing.module';
+// import { SharedRoutingModule } from './shared-routing.module';
+// import { SharedPathRoutingModule } from './shared-routing.module'
 
 /** Custom Charts  */
 import * as Highcharts from 'highcharts';
@@ -64,12 +70,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { Ng5SliderModule } from 'ng5-slider';
+
+
 
 
 /** Shared Module */
 
 @NgModule({
-  declarations: [SharedComponent,HeaderComponent, SidebarComponent, LoaderComponent],
+  declarations: [SharedComponent,HeaderComponent, SidebarComponent, LoaderComponent, EmiCalculatorComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -113,9 +122,11 @@ import { MatTreeModule } from '@angular/material/tree';
     MatStepperModule,
     MatTooltipModule,
     MatTreeModule,
-    MatBadgeModule
+    MatBadgeModule,
+    Ng5SliderModule,
+    // SharedPathRoutingModule
     ],
-  exports: [SharedComponent,HeaderComponent,SidebarComponent,LoaderComponent,
+  exports: [SharedComponent,HeaderComponent,SidebarComponent,LoaderComponent, EmiCalculatorComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -158,6 +169,8 @@ import { MatTreeModule } from '@angular/material/tree';
     MatTooltipModule,
     MatTreeModule,
     MatBadgeModule,
+    // SharedPathRoutingModule
+    
   ],
 })
 export class SharedModule { }
