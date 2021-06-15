@@ -14,15 +14,12 @@ import { SharedComponent } from './shared.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
-import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.component';
 
 /** Custom Validation Module */
 import { ValidateEqualModule } from 'ng-validate-equal';
 
-// Routing Module
-// import { SharedRoutingModule } from '../shared/shared.routing.module';
-// import { SharedRoutingModule } from './shared-routing.module';
-// import { SharedPathRoutingModule } from './shared-routing.module'
+
+
 
 /** Custom Charts  */
 import * as Highcharts from 'highcharts';
@@ -78,7 +75,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 /** Shared Module */
 
 @NgModule({
-  declarations: [SharedComponent,HeaderComponent, SidebarComponent, LoaderComponent, EmiCalculatorComponent],
+  declarations: [SharedComponent,HeaderComponent, SidebarComponent, LoaderComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -124,9 +121,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     MatTreeModule,
     MatBadgeModule,
     Ng5SliderModule,
-    // SharedPathRoutingModule
     ],
-  exports: [SharedComponent,HeaderComponent,SidebarComponent,LoaderComponent, EmiCalculatorComponent,
+  exports: [SharedComponent,HeaderComponent,SidebarComponent,LoaderComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -169,7 +165,6 @@ import { Ng5SliderModule } from 'ng5-slider';
     MatTooltipModule,
     MatTreeModule,
     MatBadgeModule,
-    // SharedPathRoutingModule
     
   ],
 })

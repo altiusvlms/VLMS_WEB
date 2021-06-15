@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /** Custom Services */
-import { Shell } from "../../../services/shell.service";
+import { Shell } from "../../../../services/shell.service";
 
 /** Custom Component */
-import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.component';
+import { EmiCalculatorComponent } from './emi-calculator.component';
+
 
 
 
@@ -14,8 +15,7 @@ import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.componen
 /** Loan Transfer Routes */
 const routes: Routes = [
   Shell.childRoutes([
-    { path: 'calculator', component: EmiCalculatorComponent },
-    
+    { path: 'calculator', component: EmiCalculatorComponent }
   ])
 ];
 
@@ -25,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export default class SharedPathRoutingModule { }
+export default class EmiCalculatorRoutingModule { }
