@@ -33,7 +33,7 @@ export class MyTaskComponent implements OnInit {
 
   /** Task Management List */
   getTaskList(){
-    this.crudService.get(`${appModels.MY_TASK}/getCashierTaskData`, {
+    this.crudService.get(`${appModels.LOAN_TRANSFER_TEAM}/getAllLoanTransferTask`, {
       params: {
         tenantIdentifier: 'default'
       }
@@ -114,7 +114,7 @@ export class EditMyTask {
     this.editDataTask.locale = 'en';
     this.editDataTask.status = this.createMyTaskForms.value.status;
     this.editDataTask.dueDate=this.datepipe.transform(this.editDataTask.dueDate, 'dd MMMM yyyy');
-      this.crudService.update(`${appModels.FIELDEXECUTIVE}/editTask`,this.editDataTask,
+      this.crudService.update(`${appModels.LOAN_TRANSFER_TEAM}/editTask`,this.editDataTask,
         this.editDataTask['id'],
       ).pipe(untilDestroyed(this)).subscribe(updated => {
         this.dialogRef.close(updated);

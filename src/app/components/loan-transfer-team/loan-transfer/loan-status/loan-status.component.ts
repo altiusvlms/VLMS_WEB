@@ -114,6 +114,22 @@ export class LoanStatusComponent implements OnInit {
     })
   }
 
+  UpdateloanStatus(){
+      this.applicantDetailsForm.value.loanDetailsData.dueDate = this.datepipe.transform(this.applicantDetailsForm.value.loanDetailsData.dueDate, 'dd MMMM yyyy');
+      this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyLoanDetails`,this.applicantDetailsForm.value.loanDetailsData,
+      this.applicantDetails[0].loanDetailsData.id,
+      ).pipe(untilDestroyed(this)).subscribe( async response => {
+
+      await  this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyBankDetails`,this.applicantDetailsForm.value.bankDetails,
+        this.applicantDetails[0].bankDetails.id,
+        ).pipe(untilDestroyed(this)).subscribe(response => {
+        this.toast.success("Updated Successfully");
+        this.sharedService.setLoaderShownProperty(false);  
+      })
+      })
+
+  }
+
   viewMore(id : any){
   this.router.navigate(['loan-transfer-team/customer-details/'  + id]);
   }

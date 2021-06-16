@@ -84,15 +84,19 @@ export class CreateTask {
   assignToName: any;
   customername: any;
   customerMobileNo: any;
+  customerMblno: any;
   customerList: any = [];
+  customerMobileNoBaseList: any = [];
   showDropdown: Boolean = false;
+  showStatus:Boolean = false;
+
   tasktype:any = ['Engine Number','Chassis Number','Insurance Details','Live KM Reading','RC Book','Vehicle Image'];
 
   constructor(public dialogRef: MatDialogRef<CreateTask>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
     private crudService: CrudService,
     private sharedService: SharedService,public datepipe: DatePipe) { 
-      console.log(response)
     if (response) {
+      this.showStatus = true;
       this.editDataTask = { ...response };
       if(response.status == ''){
         response.status = "open";
@@ -195,5 +199,96 @@ export class CreateTask {
       this.dialogRef.close();
     }
 
+/** Filter CustomerName Based on Mobile Number */    
+    applyFilter(value : any , string_val: any){
+          console.log(string_val)
+          this.showDropdown = true;
+          if(string_val == 'regNo'){
+          const filterValue = (event.target as HTMLInputElement).value;
+          this.customername = filterValue.trim().toLowerCase();
+        } 
+
+        if(this.customername != ''){
+        this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+          params: {
+            tenantIdentifier: 'default'
+          }
+        }).pipe(untilDestroyed(this)).subscribe(async response => {
+          console.log(response)
+          this.sharedService.setLoaderShownProperty(false); 
+          await response.map((res: any) => {
+            if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
+            this.customerList.push(res);
+            }
+          })
+          })
+        }
+        else{
+          this.customerList = [];
+          this.showDropdown = false;
+          this.createTaskForms.patchValue({
+            customerMobileNo:'',
+          })
+        }
+    }
+/** Filter  Mobile Number Based on CustomerName */    
+    applyfilter(value : any , string_val: any){
+          console.log(string_val)
+          this.showDropdown = true;
+          if(string_val == 'mobileno'){
+           const filterValue = (event.target as HTMLInputElement).value;
+           this.customerMblno = filterValue.trim().toLowerCase();
+         } 
+    
+         if(this.customerMblno != ''){
+         this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+          params: {
+            tenantIdentifier: 'default'
+          }
+        }).pipe(untilDestroyed(this)).subscribe(async response => {
+          console.log(response)
+          this.sharedService.setLoaderShownProperty(false); 
+          await response.map((res: any) => {
+            if(res.customerDetails.mobileNo.toLowerCase().search(this.customerMblno.toLowerCase()) != -1 ){
+            this.customerMobileNoBaseList.push(res);
+            }
+          })
+          })
+        }
+        else{
+          this.customerMobileNoBaseList = [];
+          this.showDropdown = false;
+          this.createTaskForms.patchValue({
+            customerRegNo:'',
+          })
+        }
+        }
+    
+/** Auto Fetch for MobileNo based on CustomerName */    
+    customer(val: any){
+      this.showDropdown = false;
+      this.customerList.map((res: any) => {
+        if(res.customerDetails.name.toLowerCase().search(val.value.toLowerCase()) != -1 ){
+        this.createTaskForms.patchValue({
+          customerMobileNo:res.customerDetails.mobileNo,
+          customerRegNo:val.value
+        })
+        }
+      })
+    }
+
+        
+/** Auto Fetch for CustomerName based on MobileNo */    
+    customerMobile(val: any){
+      this.showDropdown = false;
+      this.customerMobileNoBaseList.map((res: any) => {
+        if(res.customerDetails.mobileNo.toLowerCase().search(val.value.toLowerCase()) != -1 ){
+        this.createTaskForms.patchValue({
+          customerMobileNo:val.value,
+          customerRegNo:res.customerDetails.name
+        })
+        }
+      })
+    }
     
 }

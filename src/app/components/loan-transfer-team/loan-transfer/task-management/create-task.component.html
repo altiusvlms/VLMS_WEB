@@ -34,14 +34,30 @@
         <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Customer Name/ID</mat-label>
-                <input matInput type='text' formControlName="customerRegNo">
+                <input matInput type='text' formControlName="customerRegNo"  (keyup)="applyFilter($event, 'regNo')">
             </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerList.length > 0 && showDropdown">
+                <mat-label>Please Select Customer Name</mat-label>
+            <mat-select  formControlName="customerRegNo" (selectionChange)="customer($event)">
+                <mat-option  *ngFor="let customer of customerList"  value="{{customer.customerDetails.name}}" >{{customer.customerDetails.name}}</mat-option>
+            </mat-select>
+            </mat-form-field>
+
         </div>
         <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Customer Mobile No</mat-label>
-                <input matInput formControlName="customerMobileNo"  minlength="10" maxlength="10" pattern="[0-9]*" >
+                <input matInput formControlName="customerMobileNo"  minlength="10" maxlength="10" pattern="[0-9]*" (keyup)="applyfilter($event, 'mobileno')">
             </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerMobileNoBaseList.length > 0 && showDropdown">
+                <mat-label>Please Select Customer Mobile No</mat-label>
+            <mat-select  formControlName="customerMobileNo" (selectionChange)="customerMobile($event)">
+                <mat-option  *ngFor="let customer of customerMobileNoBaseList"  value="{{customer.customerDetails.mobileNo}}" >{{customer.customerDetails.mobileNo}}</mat-option>
+            </mat-select>
+            </mat-form-field>
+
             <span class="required-field" *ngIf="createTaskForms.get('customerMobileNo').hasError('pattern')">Please valid Mobile No, Only Number Allowed </span>
       </div>
         <div class="col-4 col-sm-4">    
@@ -74,7 +90,7 @@
             </mat-form-field>    
         </div>
 
-        <div class="col-4 col-sm-4" *ngIf="!editIcon">                 
+        <div class="col-4 col-sm-4" *ngIf="showStatus">                 
             <mat-radio-group aria-label="Select an option" formControlName="status">
               <mat-label>Status</mat-label>
               <mat-radio-button value="open">Open</mat-radio-button>
