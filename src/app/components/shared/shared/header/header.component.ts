@@ -19,4 +19,7 @@ export class HeaderComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['./login'])
   }
+  emiCalculator(){
+    this.router.navigate(["./emi-calculator/calculator"]);
+  }
 }

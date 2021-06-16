@@ -1,11 +1,14 @@
 <div class="header">
     <div class="header-right">
-      <span class="material-icons-outlined">
+      <!-- Emi calculator Icon need to change -->
+      <a class="material-icons-outlined" (click)="emiCalculator()">
         calendar_today
-        </span>
+      </a>
+      <!-- Notification Icon -->
         <a class="material-icons" matTooltip="Notifications">
             notifications
         </a>
+        <!-- Logout Icon -->
           <a  class="material-icons" matTooltip="logout" (click)="logout()">
             logout
           </a>
