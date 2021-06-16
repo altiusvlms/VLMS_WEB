@@ -39,7 +39,7 @@
 
             <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerList.length > 0 && showDropdown">
                 <mat-label>Please Select Customer Name</mat-label>
-            <mat-select  formControlName="customerRegNo" (selectionChange)="customer($event,'name')">
+            <mat-select  formControlName="customerRegNo" (selectionChange)="customer($event)">
                 <mat-option  *ngFor="let customer of customerList"  value="{{customer.customerDetails.name}}" >{{customer.customerDetails.name}}</mat-option>
             </mat-select>
             </mat-form-field>
@@ -48,13 +48,13 @@
         <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Customer Mobile No</mat-label>
-                <input matInput formControlName="customerMobileNo"  minlength="10" maxlength="10" pattern="[0-9]*" (keyup)="applyFilter($event, 'mobileno')">
+                <input matInput formControlName="customerMobileNo"  minlength="10" maxlength="10" pattern="[0-9]*" (keyup)="applyfilter($event, 'mobileno')">
             </mat-form-field>
             
-            <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerList.length > 0 && showDropdown">
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerMobileNoBaseList.length > 0 && showDropdown">
                 <mat-label>Please Select Customer Mobile No</mat-label>
-            <mat-select  formControlName="customerMobileNo" (selectionChange)="customer($event,'mobile')">
-                <mat-option  *ngFor="let customer of customerList"  value="{{customer.customerDetails.mobileNo}}" >{{customer.customerDetails.mobileNo}}</mat-option>
+            <mat-select  formControlName="customerMobileNo" (selectionChange)="customerMobile($event)">
+                <mat-option  *ngFor="let customer of customerMobileNoBaseList"  value="{{customer.customerDetails.mobileNo}}" >{{customer.customerDetails.mobileNo}}</mat-option>
             </mat-select>
             </mat-form-field>
 
