@@ -41,7 +41,7 @@
 
   <!-- Tab 1 -->
 
-  <mat-tab label="Applicant"  [disabled]='!selectedIndex.isActive'> 
+  <mat-tab label="Applicant" > 
     
           <form [formGroup]="applicantForm" >
             <div formGroupName="customerDetails">
@@ -369,7 +369,7 @@
   </mat-tab>
 
   <!-- Tab2 -->
-  <mat-tab label="Co-Applicant"  [disabled]='!selectedIndex.isActive'>
+  <mat-tab label="Co-Applicant" >
     
         <form class="example-form"  [formGroup]="co_applicantForm">
         <div formGroupName="customerGuarantor">
@@ -709,7 +709,7 @@
 
   <!-- Tab3 -->
 
-  <mat-tab label="Vehicle Details"  [disabled]='!selectedIndex.isActive'>
+  <mat-tab label="Vehicle Details"  >
 
           <form class="example-form"  [formGroup]="vehicleForm">
           <div formGroupName="vehicleDetails" >
@@ -863,7 +863,7 @@
   </mat-tab>
   
   <!-- Tab4 -->
-  <mat-tab label="Loan Transfer"  [disabled]='!selectedIndex.isActive'>
+  <mat-tab label="Loan Transfer"  >
       <form class="example-form"  [formGroup]="loanForm"  >
         <div formGroupName = "loanDetailsData">
           <div class="card">
@@ -1004,7 +1004,7 @@
   </mat-tab>
 
   <!-- Tab5 -->
-  <mat-tab label="Bank details"  [disabled]='!selectedIndex.isActive'>
+  <mat-tab label="Bank details" >
       <form class="example-form"  [formGroup]="bankForm" >
       <div formGroupName="bankDetails">
         <div class="card">

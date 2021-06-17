@@ -25,17 +25,13 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class CustomerManagementComponent implements OnInit {
 
-  displayedColumns = ['index','Customer Name', 'Contact no', 'Alternative contact number','D.O.B',
-  'Father’s Name','ID proof Type','Action'];
+  displayedColumns = ['index','customerName', 'mobileNo', 'altNumber','dob',
+  'fatherName','vehicleNumber','Action'];
   dataSource = new MatTableDataSource();
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
   testImage:any;
-  CustomerDetail_Data:any;
+  CustomerDetail:any;
 
 
   constructor(private crudService: CrudService,private sanitizer:DomSanitizer,private router: Router,public datepipe: DatePipe,private sharedService: SharedService) { }
@@ -45,18 +41,21 @@ export class CustomerManagementComponent implements OnInit {
   }
   ngOnDestroy() { } 
 
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
   getCustomerData() {
     this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
       params: {
         tenantIdentifier: 'default'
       }
-    }).subscribe(data => {
-      console.log(data);
-      this.CustomerDetail_Data = data;
+    }).subscribe(response => {
+      this.CustomerDetail = response;
       this.sharedService.setLoaderShownProperty(false); 
-      this.dataSource = new MatTableDataSource(this.CustomerDetail_Data)
-      
-
+      this.dataSource = new MatTableDataSource(this.CustomerDetail)
     })
   }
 

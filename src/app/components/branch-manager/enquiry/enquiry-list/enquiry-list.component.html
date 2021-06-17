@@ -55,89 +55,61 @@
     
 
 <!-- /** Enquiry List Table */ -->
-    <!-- <table class="table">
-        <thead>
-          <tr>
-            <th>Enquiry ID</th>
-            <th>Applicant Name</th>
-            <th>Applicant Mobile No.</th>
-            <th>Vehicle Number</th>
-            <th>Applicant Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let Enroll of EnquiryVerfication_Data">
-            <td>{{Enroll.id}}</td>
-            <td>{{Enroll.customerName}}</td>
-            <td>{{Enroll.mobileNumber}}</td>
-            <td>{{Enroll.vehicleNumber}}</td>
-            <td>{{Enroll.email}}</td>
-            <td><button type="button" (click)="createLoan()">Create Loan</button></td>
-          </tr>
-        </tbody>
-    </table>
-</div> -->
-
 
 
     <div class="mat-elevation-z8">
-<table mat-table [dataSource]="dataSource" >
+    <table mat-table [dataSource]="dataSource" >
 
-  <ng-container matColumnDef="index">
-    <th mat-header-cell *matHeaderCellDef> SI.No </th>
-    <td mat-cell *matCellDef="let element; let i = index;"> {{i}} </td>
-  </ng-container>
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> SI.No </th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+      </ng-container>
+         
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef> Created Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdDate  | date:"dd MMMM yyyy"}} </td>
+      </ng-container>
 
-  <!-- Position Column -->
-  <!-- <ng-container matColumnDef="Enquiry ID">
-    <th mat-header-cell *matHeaderCellDef> Enquiry ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container> -->
+      <ng-container matColumnDef="customerName">
+        <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
+      </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="customerName">
-    <th mat-header-cell *matHeaderCellDef> customerName </th>
-    <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
-  </ng-container>
+    
+      <ng-container matColumnDef="mobileNumber">
+        <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
+        <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
+      </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="mobileNumber">
-    <th mat-header-cell *matHeaderCellDef> mobileNumber </th>
-    <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
-  </ng-container>
+   
+      <ng-container matColumnDef="vehicleNumber">
+        <th mat-header-cell *matHeaderCellDef> Vehicle Number </th>
+        <td mat-cell *matCellDef="let element"> {{element.vehicleNumber}} </td>
+      </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="vehicleNumber">
-    <th mat-header-cell *matHeaderCellDef> vehicleNumber </th>
-    <td mat-cell *matCellDef="let element"> {{element.vehicleNumber}} </td>
-  </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button (click)="createLoan()" class="btn_blue">Create Loan</button>
+          </td>
+      </ng-container> 
 
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef> email </th>
-    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-  </ng-container>
-  <ng-container matColumnDef="Action">
-    <th mat-header-cell *matHeaderCellDef> Action </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-button (click)="createLoan()" class="btn_blue">Create Loan</button>
-       </td>
-  </ng-container> 
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      
+    </table>
 
   
+    <ng-container *ngIf="dataSource?.filteredData.length == 0">
+      <div class="no_data_msg">No Data Avaliable</div>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-  
-</table>
-
-<mat-paginator  [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-  
-
-<ng-container *ngIf="dataSource?.filteredData.length == 0">
-  <div class="no_data_msg">No Data Avaliable</div>
-</ng-container>
-</div>
+  </div>
 
 <!-- /** Create Enquiry Model*/ -->
 

@@ -39,8 +39,7 @@ export class CustomerEnrollListComponent implements OnInit {
   fromdate:any;
   todate:any;
 
-  displayedColumns = ['index','Customer Image', 'Applicant Name', 'Applicant Mobile No.1','Applicant Mobile No.2',
-  'D.O.B','Father’s Name','Applicant Type','Gender','Action'];
+  displayedColumns = ['index', 'createdDate', 'Customer Image', 'customerName', 'mobileNumber', 'alternateMobileNumber', 'dob', 'fatherName', 'applicantType', 'gender', 'Action'];
   dataSource = new MatTableDataSource();
   enrollid: any;
   customerList :  any = [];

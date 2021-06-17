@@ -26,7 +26,7 @@
             <td>{{employee.designation}}</td>
             <td>{{employee.mobileNumber}}</td>
             <td>{{employee.vehicleNumber}}</td>
-            <td>{{employee.status}}</td>
+            <td>{{employee.status ? employee.status : "In-Progress"}}</td>
             <td (click)="getSingleEmployeeList(employee.id)"><span class="material-icons-outlined">
               edit_note
               </span></td>

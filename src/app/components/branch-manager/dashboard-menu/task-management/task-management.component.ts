@@ -53,8 +53,10 @@ getTaskList(){
       data: task ? task : null
     });  
     dialogRef.afterClosed().subscribe((response : any) => {
+      this.sharedService.setLoaderShownProperty(false); 
       if (response) {
         this.getTaskList();
+        this.sharedService.setLoaderShownProperty(false); 
       }
     });
   }
@@ -83,12 +85,18 @@ export class CreateTask {
   customerMobileNo: any;
   customerList: any = [];
   showDropdown: Boolean = false;
+  showStatus:Boolean = false;
+  submitted: Boolean = false;
 
   constructor(public dialogRef: MatDialogRef<CreateTask>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
     private crudService: CrudService,
     private sharedService: SharedService,public datepipe: DatePipe) { 
     if (response) {
+      this.showStatus = true;
       this.editDataTask = { ...response };
+      if(response.status == ''){
+        response.status = "open";
+      }
      this.createTaskForms
     .patchValue({
       taskType:response.taskType,
@@ -97,7 +105,8 @@ export class CreateTask {
       vehicleNumber:response.vehicleNumber,
       dueDate:this.datepipe.transform(response.dueDate, 'yyyy-MM-dd'),
       assignTo:response.assignTo,
-      description:response.description
+      description:response.description,
+      status:response.status
     });
     this.createTaskForms.disable();
     }
@@ -105,15 +114,16 @@ export class CreateTask {
 
 /** Create Task Management Forms */
     createTaskForms = new FormGroup({
-      taskType: new FormControl(''),
-      customerRegNo: new FormControl(''),
-      customerMobileNo: new FormControl(''),
-      vehicleNumber: new FormControl(''),
-      dueDate: new FormControl(''),
+      taskType: new FormControl('', Validators.required),
+      customerRegNo: new FormControl('', Validators.required),
+      customerMobileNo: new FormControl('', Validators.required),
+      vehicleNumber: new FormControl('', Validators.required),
+      dueDate: new FormControl('', Validators.required),
       dateFormat: new FormControl('dd MMMM yyyy'),
       locale: new FormControl('en'),
-      assignTo: new FormControl(''),
-      description: new FormControl(''),
+      assignTo: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      status: new FormControl(''),
     })
 
  
@@ -122,6 +132,9 @@ export class CreateTask {
     this.assignToDetails();
   }
   ngOnDestroy() {}
+
+  get f() { return this.createTaskForms.controls; }
+
 
 /** Get the Field Executive Name(AssignTo --> DropDown Value) */
   assignToDetails(){
@@ -146,6 +159,11 @@ export class CreateTask {
         this.toast.success("Task Updated Succesfully"); 
       })
     } else {
+      this.submitted = true;
+        if (this.createTaskForms.invalid) {
+          alert("Please Enter All Required Fields");
+            return;
+        }
       this.createTaskForms.value.dueDate=this.datepipe.transform(this.createTaskForms.value.dueDate, 'dd MMMM yyyy');
       this.crudService.post(`${appModels.FIELDEXECUTIVE}/task`, this.createTaskForms.value,
         {params:{

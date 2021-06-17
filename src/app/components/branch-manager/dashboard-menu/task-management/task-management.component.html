@@ -20,7 +20,7 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Sr.No</th>
+        <th>Task ID</th>
         <th>Created</th>
         <th>Task</th>
         <th>Due Date</th>
@@ -31,7 +31,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let task of taskListData;let i = index;">
-        <td>{{i+1}}</td>
+        <td>{{task.id}}</td>
         <td>{{task.createdDate | date:"dd MMMM yyyy"}}</td>
         <td>{{task.taskType}}</td>
         <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>

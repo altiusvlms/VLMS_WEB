@@ -32,8 +32,7 @@ import { values } from 'lodash';
 export class EnquiryListComponent implements OnInit {
   [x: string]: any;
 
-  displayedColumnsa: string[] = ['position', 'name', 'weight', 'symbol','Action'];
-  displayedColumns = ['index','customerName', 'mobileNumber','vehicleNumber','email','Action'];
+  displayedColumns = ['index', 'createdDate', 'customerName', 'mobileNumber', 'vehicleNumber', 'email', 'Action'];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
