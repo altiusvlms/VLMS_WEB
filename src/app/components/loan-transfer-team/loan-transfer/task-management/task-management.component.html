@@ -33,7 +33,7 @@
       <tbody>
         <tr *ngFor="let task of taskListData;let i = index;">
           <td>{{task.id}}</td>
-          <td></td>
+          <td>{{task.branch}}</td>
           <td>{{task.createdDate | date:"dd MMMM yyyy"}}</td>
           <td>{{task.taskType}}</td>
           <td>{{task.dueDate | date:"dd MMMM yyyy"}}</td>

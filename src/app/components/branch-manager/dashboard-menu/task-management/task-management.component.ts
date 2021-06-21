@@ -87,6 +87,7 @@ export class CreateTask {
   showDropdown: Boolean = false;
   showStatus:Boolean = false;
   submitted: Boolean = false;
+  tasktype:any = ['Engine Number','Chassis Number','Insurance Details','Live KM Reading','RC Book','Vehicle Image'];
 
   constructor(public dialogRef: MatDialogRef<CreateTask>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
     private crudService: CrudService,
@@ -160,10 +161,9 @@ export class CreateTask {
       })
     } else {
       this.submitted = true;
-        if (this.createTaskForms.invalid) {
-          alert("Please Enter All Required Fields");
-            return;
-        }
+      if (this.createTaskForms.invalid) {
+        return;
+      }
       this.createTaskForms.value.dueDate=this.datepipe.transform(this.createTaskForms.value.dueDate, 'dd MMMM yyyy');
       this.crudService.post(`${appModels.FIELDEXECUTIVE}/task`, this.createTaskForms.value,
         {params:{

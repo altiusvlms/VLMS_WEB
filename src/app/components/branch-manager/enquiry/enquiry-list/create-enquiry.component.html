@@ -1,0 +1,80 @@
+
+
+<!-- /** Create Enquiry Model*/ -->
+<div class="container" *ngIf="!ShowEnquiryID">
+    <div class="header_title">
+        <h2>Create Enquiry</h2>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="createEnquiryForms" >
+                <div class="row">
+        
+                    <div class="col-4 col-sm-4">
+                        <mat-form-field appearance="outline" class="example-full-width" >
+                            <mat-label>Customer Name</mat-label>
+                            <input matInput type='text' formControlName="customerName" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.customerName.errors }">
+                        </mat-form-field>
+                        <div *ngIf="submitted && f.customerName.errors"  class="alert alert-danger">
+                            <div *ngIf="f.customerName.errors.required">Customer Name is Required!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-4 col-sm-4">
+                        <mat-form-field appearance="outline" class="example-full-width" >
+                            <mat-label >Mobile Number</mat-label>
+                            <input matInput type='text' formControlName="mobileNumber"  minlength="10" maxlength="10" pattern="[0-9]*" autocomplete="off"  [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }" >
+                        </mat-form-field>
+                        <div *ngIf="submitted && f.mobileNumber.errors"  class="alert alert-danger">
+                            <div *ngIf="f.mobileNumber.errors.required">Mobile Number is Required!</div>
+                            <div *ngIf="createEnquiryForms.get('mobileNumber').hasError('pattern')">Please Enter 10 Digit Mobile Number!</div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-4 col-sm-4">
+                        <mat-form-field appearance="outline" class="example-full-width" >
+                            <mat-label >Vehicle Number</mat-label>
+                            <input matInput type='text' id="code" #code formControlName="vehicleNumber"  maxlength="13" (input)="code.value=$event.target.value.toUpperCase()"  [ngClass]="{ 'is-invalid': submitted && f.vehicleNumber.errors }" >
+                        </mat-form-field>
+
+                        <div *ngIf="submitted && f.vehicleNumber.errors"  class="alert alert-danger">
+                            <div *ngIf="f.vehicleNumber.errors.required">Vehicle Number is Required!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-4 col-sm-4">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput type='email' formControlName="email" placeholder="Ex. example@gmail.com"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                        </mat-form-field> 
+                        <div *ngIf="submitted && f.email.errors"  class="alert alert-danger">
+                            <div *ngIf="f.email.errors.required">Email is Required!</div>
+                            <div *ngIf="createEnquiryForms.get('email').hasError('pattern')"> Please Enter a Valid Email Address!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12">
+                        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+                        <button type="button" class="btn btn-primary" (click)="saveEnquiry()">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- /** Show Enquiry ID Model*/ -->
+
+<div class="container" *ngIf="ShowEnquiryID">
+    <div class="card">
+        <div class="card-body">
+                <div  class="row"><p>Enquiry Generated Successfully</p></div>
+                <div  class="row"><p>Enquiry ID: {{enquiryID}}</p></div>
+            <div class="row">
+                <button class="btn_blue" (click)="close()">Done</button>
+            </div>
+        </div>
+      </div>
+</div>

@@ -9,12 +9,12 @@ import { SharedModule } from '../../../shared/shared/shared.module';
 import { EnquiryRoutingModule } from './enquiry-routing.module';
 
 /** Custom Components */
-import { EnquiryListComponent } from './enquiry-list.component';
+import { EnquiryListComponent,CreateEnquiry } from './enquiry-list.component';
 
 /** Enquiry Module */
 
 @NgModule({
-  declarations: [EnquiryListComponent],
+  declarations: [EnquiryListComponent,CreateEnquiry],
   imports: [
     CommonModule,
     EnquiryRoutingModule,
