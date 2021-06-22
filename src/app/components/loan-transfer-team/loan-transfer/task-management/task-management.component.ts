@@ -89,7 +89,7 @@ export class CreateTask {
   customerMobileNoBaseList: any = [];
   showDropdown: Boolean = false;
   showStatus:Boolean = false;
-
+  submitted:Boolean = false;
   tasktype:any = ['Engine Number','Chassis Number','Insurance Details','Live KM Reading','RC Book','Vehicle Image'];
 
   constructor(public dialogRef: MatDialogRef<CreateTask>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
@@ -103,6 +103,7 @@ export class CreateTask {
       }
      this.createTaskForms
     .patchValue({
+      branch:response.branch,
       taskType:response.taskType,
       customerRegNo:response.customerRegNo,
       customerMobileNo:response.customerMobileNo,
@@ -118,16 +119,17 @@ export class CreateTask {
 
 /** Create Task Management Forms */
     createTaskForms = new FormGroup({
-      taskType: new FormControl(''),
-      customerRegNo: new FormControl(''),
-      customerMobileNo: new FormControl(''),
-      vehicleNumber: new FormControl(''),
-      dueDate: new FormControl(''),
+      branch: new FormControl('', Validators.required),
+      taskType: new FormControl('', Validators.required),
+      customerRegNo: new FormControl('', Validators.required),
+      customerMobileNo: new FormControl('', Validators.required),
+      vehicleNumber: new FormControl('', Validators.required),
+      dueDate: new FormControl('', Validators.required),
       dateFormat: new FormControl('dd MMMM yyyy'),
       locale: new FormControl('en'),
-      assignTo: new FormControl(''),
-      description: new FormControl(''),
-      status: new FormControl(''),
+      assignTo: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
       
     })
 
@@ -137,6 +139,8 @@ export class CreateTask {
     this.assignToDetails();
   }
   ngOnDestroy() {}
+
+  get f() { return this.createTaskForms.controls; }
 
 /** Get the Field Executive Name(AssignTo --> DropDown Value) */
   assignToDetails(){
@@ -161,6 +165,10 @@ export class CreateTask {
         this.toast.success("Task Updated Succesfully"); 
       })
     } else {
+      this.submitted = true;
+      if (this.createTaskForms.invalid) {
+        return;
+      }
       this.createTaskForms.value.dueDate=this.datepipe.transform(this.createTaskForms.value.dueDate, 'dd MMMM yyyy');
       this.crudService.post(`${appModels.FIELDEXECUTIVE}/task`, this.createTaskForms.value,
         {params:{

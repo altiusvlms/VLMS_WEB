@@ -415,9 +415,21 @@
                 </mat-form-field>
                 </div>
                 <input #file type="file" accept='image/*'  (change)="uploadImages($event,i)" />
-               
-               <img [src]="imageURL0" style="width: 30%;object-fit: contain;
-               object-position: center;"/>
+                <div *ngIf="[i]== 0">
+                  <img [src] ="imageURL0 ? imageURL0 : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                  object-position: center;">
+               </div>
+              <div *ngIf="[i]== 1">
+                  <img [src] ="imageURL1 ? imageURL1 : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                  object-position: center;">
+                </div>
+              <div *ngIf="[i]== 2">
+                  <img [src] ="imageURL2 ? imageURL2 : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+                  object-position: center;">
+                </div>
+
+               <!-- <img [src]="imageURL0 ? imageURL0 : 'assets/images/empty_image.png'" style="width: 30%;object-fit: contain;
+               object-position: center;"/> -->
    
   
           <!-- <img src = "{{[i]}} ? {{imageURL0}} : 'assets/images/empty_image.png'"  style="width: 30%;object-fit: contain;

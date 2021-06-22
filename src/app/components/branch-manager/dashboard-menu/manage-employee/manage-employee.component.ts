@@ -41,7 +41,7 @@ export class ManageEmployeeComponent implements OnInit {
   imageURL1: any;
   imageURL2: any;
 
-  constructor(private router: Router,private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer,private sharedService: SharedService) {
+  constructor(private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer,private sharedService: SharedService) {
    }
 
 /** Manage Employee Forms */

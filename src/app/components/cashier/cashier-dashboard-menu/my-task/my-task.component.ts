@@ -39,6 +39,7 @@ export class MyTaskComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(response => {
       this.taskListData= response;
+      console.log( this.taskListData)
       this.sharedService.setLoaderShownProperty(false);  
     })
   }
@@ -114,7 +115,7 @@ export class EditMyTask {
     this.editDataTask.locale = 'en';
     this.editDataTask.status = this.createMyTaskForms.value.status;
     this.editDataTask.dueDate=this.datepipe.transform(this.editDataTask.dueDate, 'dd MMMM yyyy');
-      this.crudService.update(`${appModels.FIELDEXECUTIVE}/editTask`,this.editDataTask,
+      this.crudService.update(`${appModels.CASHIER_TASK}/editTask`,this.editDataTask,
         this.editDataTask['id'],
       ).pipe(untilDestroyed(this)).subscribe(updated => {
         this.dialogRef.close(updated);
