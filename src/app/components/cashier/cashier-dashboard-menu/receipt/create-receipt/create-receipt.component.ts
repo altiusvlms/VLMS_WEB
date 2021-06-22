@@ -41,6 +41,9 @@ export class CreateReceiptComponent implements OnInit {
   delayAmount:any;
   startPay:any = [];
   calAmt:any = [];
+  Topup : any;
+  printData: any;
+  arrayOfPrint: any = [];
 
   loanRepaymentForm = new FormGroup({
     paymentTypeId: new FormControl('', Validators.required),
@@ -64,7 +67,8 @@ export class CreateReceiptComponent implements OnInit {
      }
     })
     // this.getLoanId();
-    // this.getCreateReceipt();
+    this.getCreateReceipt();
+    // getCreateReceipt
   }
   
   viewPopUp(){
@@ -130,7 +134,12 @@ export class CreateReceiptComponent implements OnInit {
         tenantIdentifier: 'default'
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
-      // console.log(data);
+      console.log(data);
+      if( data.isTopup == true) {
+        this.Topup = data.isTopup;  
+      }
+      console.log(data.isTopup);
+      console.log(this.Topup);
       // console.log(data.loanType);
       console.log(data.repaymentSchedule.periods);
       this.sharedService.setLoaderShownProperty(false);  
@@ -197,11 +206,30 @@ export class CreateReceiptComponent implements OnInit {
       }}
     ).pipe(untilDestroyed(this)).subscribe( data => {
       console.log(data)
+      this.printData = data
       this.toast.success("Receipt Created")
       this.sharedService.setLoaderShownProperty(false);  
     })
     
-  };
+  }
+
+  // Print the receipt
+  eventCheck(value: any, event: any){
+    if(event.checked === true){
+      this.arrayOfPrint.push(value);
+    }
+  }
+
+  openPDF() {
+    var data = document.getElementById('pdfTable');
+    const WindowPrt = window.open('', '', 'left=0,top=0,width=800,height=700,toolbar=0,scrollbars=0,location=no,status=no,titlebar=no, fontFamily=Titillium Web');
+    WindowPrt.document.write(data.innerHTML);
+    WindowPrt.document.close();
+    WindowPrt.focus();
+    WindowPrt.print();
+    WindowPrt.close();
+   this.arrayOfPrint = [];
+  }
 
   
 
@@ -287,7 +315,14 @@ export class SearchReceipt {
         customerName:val.value
       })
       }
-    })
+      else{
+        this.searchForms.patchValue({
+          customername:res.customerDetails.name,
+          customerMobileNo:val.value
+        })
+      }
+    }
+    )
   }
   /** Close the Dialog Model */
   close() {

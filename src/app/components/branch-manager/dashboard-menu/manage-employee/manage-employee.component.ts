@@ -163,6 +163,7 @@ export class ManageEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
       this.getDocumentDetails();
+      
   }
   
   ngOnDestroy() { }
@@ -736,6 +737,7 @@ accidentalID : any;
     this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeInsuranceForm.value.insuranceDetails,
     this.insuranceID,
     ).pipe(untilDestroyed(this)).subscribe(response => {
+      // console.log('sss',response['insuranceDetails'])
     this.toast.success("Updated Successfully");
     })
   }

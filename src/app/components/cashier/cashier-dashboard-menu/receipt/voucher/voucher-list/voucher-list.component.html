@@ -24,6 +24,7 @@
                   <th>Credit</th>
                   <th>Debit</th>
                   <th>Remark</th>
+                  <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +39,9 @@
                   <td>{{voucher.credit ? voucher.credit : "0"}}</td>
                   <td>{{voucher.debit ? voucher.debit : "0"}}</td>
                   <td>{{voucher.remarks}}</td>
+                  <td (click)="deleteVoucher(voucher.id)"><span class="material-icons-outlined">
+                    delete
+                    </span></td>
                 </tr>
               </tbody>
           </table>
