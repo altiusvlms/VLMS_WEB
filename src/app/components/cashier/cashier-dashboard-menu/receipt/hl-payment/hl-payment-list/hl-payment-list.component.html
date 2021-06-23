@@ -17,6 +17,7 @@
           <table class="table table-striped">
             <thead >
                 <tr>
+                  <!-- <th>ID</th> -->
                   <th>Select</th>
                   <th>Post Date</th>
                   <th>AGT NO</th>
@@ -26,6 +27,7 @@
                   <th>Actual Amount</th>
                   <th>Post Amount</th>
                   <th>Remark</th>
+                  <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +35,7 @@
                   <td> <mat-checkbox  (change)="eventCheck(hl,$event)" >
                   </mat-checkbox>
                 </td>
+                <!-- <td>{{hl.id}}</td> -->
                   <td>{{hl.postDate | date:"dd MMMM yyyy"}}</td>
                   <td>{{hl.agtNo}}</td>
                   <td>{{hl.hlPaymentData.customerName}}</td>
@@ -41,6 +44,9 @@
                   <td>{{hl.hlPaymentData.actualAmount}}</td>
                   <td>{{hl.hlPaymentData.postAmount}}</td>
                   <td>{{hl.hlPaymentData.remark}}</td>
+                  <td (click)="deleteHlPayment(hl.id)"><span class="material-icons-outlined">
+                    delete
+                    </span></td>
                 </tr>
               </tbody>
           </table>
