@@ -207,6 +207,7 @@ export class CreateReceiptComponent implements OnInit {
     ).pipe(untilDestroyed(this)).subscribe( data => {
       console.log(data)
       this.printData = data
+      console.log(this.printData)
       this.toast.success("Receipt Created")
       this.sharedService.setLoaderShownProperty(false);  
     })
@@ -247,6 +248,7 @@ export class CreateReceiptComponent implements OnInit {
 @UntilDestroy({ checkProperties: true })
 
 export class SearchReceipt {
+  customerMobileNoBaseList: any = [];
 
   constructor(public dialogRef: MatDialogRef<SearchReceipt>,private router: Router,private crudService: CrudService, @Inject(MAT_DIALOG_DATA) public response:any,private sharedService: SharedService) { }
 
@@ -304,6 +306,44 @@ export class SearchReceipt {
     })
   }
   }
+    /** Filter on CustomerName and Mobile Number */    
+    applyfilter(value : any , string_val: any){
+      this.showDropdown = true;
+      if(string_val == 'customerMobileNo'){
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.customername = filterValue.trim().toLowerCase();
+    }
+    if(this.customername != ''){
+    this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async response => {
+      this.sharedService.setLoaderShownProperty(false);  
+  
+      for(let x of response){
+          if (
+            x.customerDetails.mobileNo.toLowerCase().search(this.customerMobileNo.toLowerCase()) != -1 ){
+              this.customerList.push(x)
+          }
+      }
+      console.log(this.customerList);
+      // await response.map((res: any) => {
+      //   if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
+      //   this.customerList = res;
+      //   console.log(this.customerList)
+      //   }
+      // })
+      })
+    }
+    else{
+      this.customerList = [];
+      this.showDropdown = false;
+      this.searchForms.patchValue({
+        customerName:'',
+      })
+    }
+    }
 
 /** Auto Fetch for Customer based on MobileNo and MobileNo based on CustomerName */    
   customer(val: any){
@@ -315,15 +355,29 @@ export class SearchReceipt {
         customerName:val.value
       })
       }
-      else{
-        this.searchForms.patchValue({
-          customername:res.customerDetails.name,
-          customerMobileNo:val.value
-        })
-      }
+      // else{
+      //   this.searchForms.patchValue({
+      //     customerName:res.customerDetails.name,
+      //     customerMobileNo:val.value
+      //   })
+      // }
     }
     )
   }
+
+  /** Auto Fetch for CustomerName based on MobileNo */    
+  customerMobile(val: any){
+    this.showDropdown = false;
+    this.customerMobileNoBaseList.map((res: any) => {
+      if(res.customerDetails.mobileNo.toLowerCase().search(val.value.toLowerCase()) != -1 ){
+      this.searchForms.patchValue({
+        customerMobileNo:val.value,
+        customerName:res.customerDetails.name
+      })
+      }
+    })
+  }
+
   /** Close the Dialog Model */
   close() {
     this.dialogRef.close();
