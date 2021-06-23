@@ -4,9 +4,9 @@ import { Component, OnInit ,Inject} from '@angular/core';
 /** Custom Services and Routing and Forms */
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute ,Params} from '@angular/router';
-import {  CrudService } from '../../../../services/crud.service';
+import { CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
-import {DomSanitizer} from "@angular/platform-browser";
+import { DomSanitizer} from "@angular/platform-browser";
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { SharedService } from '../../../../services/shared.service';
@@ -146,23 +146,16 @@ export class PickApplicantComponent implements OnInit {
   })
   })
   }
-  arrayOfapprovel: any = [];
-  getApprovelData: any;
 
-  getStep2(){
-    this.getApprovelData = JSON.parse(localStorage.getItem('sentoToApprover'));
-    this.arrayOfapprovel.push(this.getApprovelData);
-    console.log(this.arrayOfapprovel)
-  }
 
-  saveProcess(){
-    console.log("test")
+
+  saveProcess(applicantLoanID: any){
     const dialogRef = this.dialog.open(SendToApprover, {
       width: '100vw',
       height: '90vh',
+      data: applicantLoanID ? applicantLoanID : null
     });  
     dialogRef.afterClosed().subscribe((response : any) => {
-        this.getStep2();
     });
   }
 
@@ -180,74 +173,109 @@ export class PickApplicantComponent implements OnInit {
 
 export class SendToApprover {
 
+  applicantLoanId: any;
 
   constructor(public dialogRef: MatDialogRef<SendToApprover>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
     private crudService: CrudService,
-    private sharedService: SharedService,public datepipe: DatePipe) { 
+    private sharedService: SharedService,public datepipe: DatePipe) {
+      this.applicantLoanId = response;
     }
 
-    step1Form = new FormGroup({
-        branch: new FormControl(''),
-        creator: new FormControl(''),
-        approver: new FormControl(''),
-        authoriser: new FormControl(''),
+    showBranchStatus:Boolean = false;
+    showBranchList:Boolean = false;
+    showProcess: Boolean = true;
+    showPeelamedu:Boolean = false;
+    showLoanTransferDoc: Boolean = false;
+
+    processForm = new FormGroup({
+      process: new FormControl('')
       })
-      branchForm = new FormGroup({
-        loanTransfer: new FormControl(''),
-        DCTransfer: new FormControl(''),
-        request: new FormControl(''),
-        authoriser: new FormControl(''),
-        remindAuthoriser: new FormControl(''),
-        additionalTransfer: new FormControl('')
+
+    branchStatusForm = new FormGroup({
+        branchJob: new FormControl('')
       })
-      areaForm = new FormGroup({
-        peelamedu : new FormControl(''),
-        gandhipuram : new FormControl(''),
-        ganapathy : new FormControl(''),
-        thudiyalur : new FormControl(''),
-        vadavalli : new FormControl(''),
-        sulur : new FormControl(''),
+      
+    branchListForm = new FormGroup({
+      branchList : new FormControl('')
       })
+
       peelameduForm = new FormControl({
-        KAF :  new FormControl(''),
-        KI : new FormControl(''),
-        KHPF:  new FormControl(''),
+        peelameduBranch :  new FormControl('')
       })
 
-
-    showStep2:Boolean = false;
-    showStep3:Boolean = false;
-    showStep4:Boolean = false;
-    sendToapproval: any;
+      loanTransferForm = new FormControl({
+        loanAccountNo :  new FormControl('')
+      })
 
     ngOnInit(): void {
+     console.log( this.applicantLoanId )
     }
 
-    step1(){
-       if(this.step1Form.value.branch !== ''){
-         this.showStep2 = true;
-       }
-    }
-    step2(){
-      // this.sendToapproval = this.branchForm.value;
-      // localStorage.setItem('sentoToApprover', JSON.stringify(this.sendToapproval));
-      // this.dialogRef.close();
-      if(this.branchForm.value.loanTransferBeneficiaryAdded !== ''){
-        this.showStep3 = true;
+    processStep(){
+      console.log(this.processForm.value)
+      if(this.processForm.value.process == "branch"){
+          this.showBranchStatus = true;
+          this.showProcess = false;
       }
     }
-    step3(){
-      if(this.peelameduForm.value.KAF !== ''){
-        this.showStep4 = true;
+
+    branchStatusStep(){
+      console.log(this.branchStatusForm.value)
+      if(this.branchStatusForm.value.branchJob == "loanTransfer"){
+      this.showBranchList = true;
+      this.showBranchStatus = false;
+      this.showProcess = false;
+      // this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
+      //   params: {
+      //     command:this.branchStatusForm.value.branchJob,
+      //     tenantIdentifier: 'default'  
+      //   }
+      // }).pipe(untilDestroyed(this)).subscribe(async response => {
+      //   console.log(response)
+      // })
       }
     }
-    // step4(){
-    //   if(this.peelameduForm.value.KAF !== ''){
-    //     this.showStep4 = true;
-    //   }
-    // }
-    back(){
-      this.showStep2 = false;
+
+    branchStatusBack(){
+      this.showBranchStatus = false;
+      this.showProcess = true;
+    }
+
+    branchListStep(){
+      console.log(this.branchListForm.value)
+      if(this.branchListForm.value.branchList == "peelamedu"){
+        this.showPeelamedu = true;
+        this.showBranchList = false;
+      }
+
+    }
+
+    branchListBack(){
+      this.showBranchStatus = true;
+      this.showProcess = false;
+      this.showBranchList = false;
+    }
+
+    peelameduStep(){
+      this.showPeelamedu = false;
+      this.showLoanTransferDoc = true;
+    }
+
+    peelameduBack(){
+      this.showBranchList = true;
+      this.showLoanTransferDoc = false;
+    }
+
+    loanTransferBack(){
+      this.showPeelamedu = true;
+    }
+
+    loanTransferStep(){
+
+    }
+
+    close(){
+    this.dialogRef.close();
     }
 
   }

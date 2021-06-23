@@ -227,6 +227,8 @@ export class SearchReceipt {
   customerMobileNo: any;
   customerList: any = [];
   showDropdown: Boolean = false;
+  customerMblNo: any;
+  customerMobileList: any = [];
 
   searchForms = new FormGroup({
     customerName: new FormControl(''),
@@ -277,6 +279,39 @@ export class SearchReceipt {
   }
   }
 
+  /** Filter on CustomerName and Mobile Number */    
+  applyfilter(value : any , string_val: any){
+    this.showDropdown = true;
+    if(string_val == 'mobileno'){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.customerMblNo = filterValue.trim().toLowerCase();
+  }
+  if(this.customerMblNo != ''){
+  this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+    params: {
+      tenantIdentifier: 'default'
+    }
+  }).pipe(untilDestroyed(this)).subscribe(async response => {
+    this.sharedService.setLoaderShownProperty(false);  
+
+    for(let x of response){
+        if (
+          x.customerDetails.mobileNo.toLowerCase().search(this.customerMblNo.toLowerCase()) != -1 ){
+            this.customerMobileList.push(x)
+        }
+    }
+    console.log(this.customerMobileList);
+    })
+  }
+  else{
+    this.customerMobileList = [];
+    this.showDropdown = false;
+    this.searchForms.patchValue({
+      customerName:'',
+    })
+  }
+  }
+
 /** Auto Fetch for Customer based on MobileNo and MobileNo based on CustomerName */    
   customer(val: any){
     this.showDropdown = false;
@@ -289,6 +324,19 @@ export class SearchReceipt {
       }
     })
   }
+
+  customerMobile(val: any){
+    this.showDropdown = false;
+    this.customerMobileList.map((res: any) => {
+      if(res.customerDetails.mobileNo.toLowerCase().search(val.value.toLowerCase()) != -1 ){
+      this.searchForms.patchValue({
+        customerMobileNo:val.value,
+        customerName:res.customerDetails.name
+      })
+      }
+    })
+  }
+
   /** Close the Dialog Model */
   close() {
     this.dialogRef.close();
@@ -311,6 +359,24 @@ export class SearchReceipt {
       }
       }
     })
+
+    this.customerMobileList.map((res: any) => {
+      console.log(res)
+    this.role = localStorage.getItem("roles");
+      if(this.role === "Cashier"){
+          if(res.customerDetails.name == this.searchForms.value.customerName){
+              this.router.navigate(['/cashier/create-receipt/' +res.id]);
+              this.dialogRef.close(res.customerDetails.name);
+          }
+      }
+      else{
+        if(res.customerDetails.name == this.searchForms.value.customerName){
+          this.router.navigate(['/branch-manager/create-receipt/' +res.id]);
+          this.dialogRef.close(res.customerDetails.name);
+      }
+      }
+    })
+
   }
 
 }
