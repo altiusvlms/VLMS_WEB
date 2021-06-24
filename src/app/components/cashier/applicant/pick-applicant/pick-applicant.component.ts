@@ -124,13 +124,13 @@ export class PickApplicantComponent implements OnInit {
   save(){
     this.applicantDetailsForm.value.loanDetailsData.dueDate = this.datepipe.transform(this.applicantDetailsForm.value.loanDetailsData.dueDate, 'dd MMMM yyyy');
     this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyLoanDetails`,this.applicantDetailsForm.value.loanDetailsData,
-    this.applicantDetails.loanDetailsData.id,
+    this.applicantDetails[0].loanDetailsData.id,
    ).pipe(untilDestroyed(this)).subscribe(async response => {
     this.toast.success("Saved Successfully");
     this.sharedService.setLoaderShownProperty(false);  
 
     await this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyBankDetails`,this.applicantDetailsForm.value.bankDetails,
-    this.applicantDetails.bankDetails.id,
+    this.applicantDetails[0].bankDetails.id,
     ).pipe(untilDestroyed(this)).subscribe(response => {
       this.sharedService.setLoaderShownProperty(false);  
 
@@ -199,11 +199,11 @@ export class SendToApprover {
       branchList : new FormControl('')
       })
 
-      peelameduForm = new FormControl({
+      peelameduForm = new FormGroup({
         peelameduBranch :  new FormControl('')
       })
 
-      loanTransferForm = new FormControl({
+      loanTransferForm = new FormGroup({
         loanAccountNo :  new FormControl('')
       })
 
@@ -225,14 +225,14 @@ export class SendToApprover {
       this.showBranchList = true;
       this.showBranchStatus = false;
       this.showProcess = false;
-      // this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
-      //   params: {
-      //     command:this.branchStatusForm.value.branchJob,
-      //     tenantIdentifier: 'default'  
-      //   }
-      // }).pipe(untilDestroyed(this)).subscribe(async response => {
-      //   console.log(response)
-      // })
+      this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
+        params: {
+          command:this.branchStatusForm.value.branchJob,
+          tenantIdentifier: 'default'  
+        }
+      }).pipe(untilDestroyed(this)).subscribe(async response => {
+        console.log(response)
+      })
       }
     }
 

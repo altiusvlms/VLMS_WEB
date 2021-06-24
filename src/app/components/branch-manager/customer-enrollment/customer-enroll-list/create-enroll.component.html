@@ -88,12 +88,6 @@
             <div *ngIf="f.fatherName.errors.required">Father's Name is Required!</div>
         </div>
           </div>
-          <div  class="col-4 col-sm-4">
-            <mat-form-field appearance="outline" class="example-full-width" >
-              <mat-label>Spouse Name</mat-label>
-              <input matInput type='text' formControlName="spouseName"   autocomplete="off" >
-          </mat-form-field>
-          </div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Gender</mat-label>
             <mat-select  formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">

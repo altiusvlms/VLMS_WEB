@@ -36,7 +36,7 @@ export class CustomerEnrollListComponent implements OnInit {
   fromdate:any;
   todate:any;
 
-  displayedColumns = ['index', 'createdDate', 'Customer Image', 'customerName', 'mobileNumber', 'alternateMobileNumber', 'dob', 'fatherName', 'applicantType', 'gender', 'Action'];
+  displayedColumns = ['index', 'createdDate', 'customerName', 'mobileNumber', 'alternateMobileNumber', 'dob', 'fatherName', 'applicantType', 'gender', 'Action'];
   dataSource = new MatTableDataSource();
   customerList :  any = [];
   customerImage: any;
@@ -68,22 +68,22 @@ export class CustomerEnrollListComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.EnrollDetails)
       this.sharedService.setLoaderShownProperty(false); 
 
-      await this.EnrollDetails.map((res: any) => {
-      this.crudService.get_Image(`${appModels.IMAGES}/enroll_customerimage/${res.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
-        this.customerImage = this.sanitizer.bypassSecurityTrustUrl(data);
-        this.allCustomerImage.push({image:this.customerImage})
-        console.log(this.allCustomerImage)
-        this.sharedService.setLoaderShownProperty(false);
+    //   await this.EnrollDetails.map((res: any) => {
+    //   this.crudService.get_Image(`${appModels.IMAGES}/enroll_customerimage/${res.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
+    //     this.customerImage = this.sanitizer.bypassSecurityTrustUrl(data);
+    //     this.allCustomerImage.push({image:this.customerImage})
+    //     console.log(this.allCustomerImage)
+    //     this.sharedService.setLoaderShownProperty(false);
 
-      },error => {
-        console.error(error);
-        this.customerImage = 'assets/images/empty_image.png';
-        this.allCustomerImage.push({image:this.customerImage} )
-        this.sharedService.setLoaderShownProperty(false);
-     });
-      })
+    //   },error => {
+    //     console.error(error);
+    //     this.customerImage = 'assets/images/empty_image.png';
+    //     this.allCustomerImage.push({image:this.customerImage} )
+    //     this.sharedService.setLoaderShownProperty(false);
+    //  });
+    //   })
     })
-    this.allCustomerImage = [];
+    // this.allCustomerImage = [];
 
   }
 
@@ -99,6 +99,7 @@ export class CustomerEnrollListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data : any) => {
       this.sharedService.setLoaderShownProperty(false);
+      this.getEnrollData();
       if (data) {
         this.getEnrollData();
         this.sharedService.setLoaderShownProperty(false);
@@ -181,30 +182,48 @@ export class CreateEnroll {
       fatherName:data.fatherName,
       dob:this.datepipe.transform(data.dob, 'yyyy-MM-dd'),
       gender:data.gender,
-      spouseName:data.spouseName,
       applicantType:data.applicantType
     });
     this.resourceID = this.customerList[0].id;
     console.log(this.resourceID);
-    for(let document of  this.documentImageForm.value.image){
+    console.log(this.documentImageForm.value.image)
+    
+    this.crudService.get(`${appModels.GET_DOCUMENT_IMAGE}/${this.resourceID}`, {
+      params: {
+        command:'enrollData',
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async response => {
+      console.log(response);
+      for(let documentDetails of response){
+console.log(documentDetails.documentNumber)
+if(documentDetails.documentNumber){
+  console.log(documentDetails)
+}
+      }
+    })
 
-      this.crudService.get_Image(`${appModels.IMAGES}/enroll_customerimage/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
-        this.ApplicantImageURL = this.sanitizer.bypassSecurityTrustUrl(data);
-        console.log(this.ApplicantImageURL)
-        this.sharedService.setLoaderShownProperty(false);
 
-      })
-      this.crudService.get_Image(`${appModels.IMAGES}/enroll_adharphoto/${this.resourceID}?documentNumber:${document.documentNo}&tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
-        this.imageURL0 = this.sanitizer.bypassSecurityTrustUrl(data);
-        this.sharedService.setLoaderShownProperty(false);
+    this.crudService.get_Image(`${appModels.IMAGES}/enroll_customerimage/${this.resourceID}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
+      this.ApplicantImageURL = this.sanitizer.bypassSecurityTrustUrl(data);
+      console.log(this.ApplicantImageURL)
+      this.sharedService.setLoaderShownProperty(false);
 
-      })
-      this.crudService.get_Image(`${appModels.IMAGES}/enroll_pancard/${this.resourceID}?documentNumber:${document.documentNo}&tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
-        this.imageURL1 = this.sanitizer.bypassSecurityTrustUrl(data);
-        this.sharedService.setLoaderShownProperty(false);
+    })
+    // for(let document of  this.documentImageForm.value.image){
 
-      })
-    }
+    //   this.crudService.get_Image(`${appModels.IMAGES}/enroll_adharphoto/${this.resourceID}?documentNumber:${document.documentNo}&tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
+    //     this.imageURL0 = this.sanitizer.bypassSecurityTrustUrl(data);
+    //     console.log(this.imageURL0)
+    //     this.sharedService.setLoaderShownProperty(false);
+
+    //   })
+    //   this.crudService.get_Image(`${appModels.IMAGES}/enroll_pancard/${this.resourceID}?documentNumber:${document.documentNo}&tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
+    //     this.imageURL1 = this.sanitizer.bypassSecurityTrustUrl(data);
+    //     this.sharedService.setLoaderShownProperty(false);
+
+    //   })
+    // }
     this.createCustomerEnrolForms.disable();
     }
 
@@ -221,7 +240,6 @@ export class CreateEnroll {
       dateFormat: new FormControl("dd MMMM yyyy"),
       locale: new FormControl("en"),
       fatherName: new FormControl('', Validators.required),
-      spouseName: new FormControl(''),
       gender: new FormControl('', Validators.required),
       applicantType: new FormControl('', Validators.required),
     })
@@ -335,6 +353,7 @@ export class CreateEnroll {
    saveCustomerEnrolment(){
      console.log(this.documentImageForm.value);
      console.log(this.createCustomerEnrolForms.value)
+     console.log(this.editDataEnrol)
     if (this.editDataEnrol) {
       this.submitted = true;
       if (this.createCustomerEnrolForms.invalid) {
@@ -343,10 +362,12 @@ export class CreateEnroll {
       this.createCustomerEnrolForms.value.dob=this.datepipe.transform(this.createCustomerEnrolForms.value.dob, 'dd MMMM yyyy');
       this.crudService.update(`${appModels.FIELDEXECUTIVE}/updateEnroll`,this.createCustomerEnrolForms.value,
         this.editDataEnrol['id'],
-      ).pipe(untilDestroyed(this)).subscribe(updated => {
-        this.enrollid = updated;
+      ).pipe(untilDestroyed(this)).subscribe((updated: any) => {
+        this.dialogRef.close(updated);
+        this.enrollid = updated.resourceId;
         console.log(this.enrollid)
         this.sharedService.setLoaderShownProperty(false);  
+        
         for(let document of  this.documentImageForm.value.image){
           const formData = new FormData();      
           formData.append("file",this.ApplicantImage);
@@ -383,7 +404,6 @@ export class CreateEnroll {
               })
             }
       })
-      // this.getEnrollData();
         }
     else {
       this.submitted = true;
@@ -400,8 +420,6 @@ export class CreateEnroll {
       console.log(response)
       this.enrollid = response.resourceId;
       this.enrolIdentifier = response.resourceIdentifier;
-      this.ShowEnrolID = true;
-      this.sharedService.setLoaderShownProperty(false); 
       for(let document of  this.documentImageForm.value.image){
         const formData = new FormData();      
         formData.append("file",this.ApplicantImage);
@@ -437,6 +455,8 @@ export class CreateEnroll {
                     })
             })
           }
+          this.ShowEnrolID = true;
+          this.sharedService.setLoaderShownProperty(false); 
         })
   }
   }
@@ -446,17 +466,7 @@ export class CreateEnroll {
     this.createCustomerEnrolForms.enable();
   }
   
-  // getEnrollData() {
-  //   this.crudService.get(`${appModels.FIELDEXECUTIVE}/getEnroll`, {
-  //     params: {
-  //       tenantIdentifier: 'default'
-  //     }
-  //   }).subscribe(response => {
-  //     this.EnrollVerficationDetails = response;
-  //     this.sharedService.setLoaderShownProperty(false);
 
-  //   })
-  // }
 
   sendLoginCode() {
     const appVerifier = this.windowRef.recaptchaVerifier
