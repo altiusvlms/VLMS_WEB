@@ -187,6 +187,8 @@ export class SendToApprover {
     showPeelamedu:Boolean = false;
     showLoanTransferDoc: Boolean = false;
     showgandhipuram: Boolean = false;
+    showganapathy:Boolean = false;
+    showthudiyar:Boolean = false;
 
     processForm = new FormGroup({
       process: new FormControl('')
@@ -207,6 +209,14 @@ export class SendToApprover {
       gandhipuramForm = new FormGroup({
         gandhipuramBranch :  new FormControl('')
       })
+
+      ganapathyForm = new FormGroup({
+        ganapathyBranch :  new FormControl('')
+      })
+
+      thudiyalurForm = new FormGroup({
+        thudiyalurBranch :  new FormControl('')
+      }) 
 
       loanTransferForm = new FormGroup({
         loanAccountNo :  new FormControl('')
@@ -254,6 +264,12 @@ export class SendToApprover {
       }else if(this.branchListForm.value.branchList == "gandhipuram"){
         this.showgandhipuram = true;
         this.showBranchList = false;
+      }else if(this.branchListForm.value.branchList == "ganapathy"){
+        this.showganapathy = true;
+        this.showBranchList = false;
+      }else if(this.branchListForm.value.branchList == "thudiyalur"){
+        this.showganapathy = true;
+        this.showBranchList = false;
       }
 
     }
@@ -273,7 +289,15 @@ export class SendToApprover {
       this.showgandhipuram = false;
       this.showLoanTransferDoc = true;
     }
-
+    ganapathyStep(){
+      this.showganapathy = false;
+      this.showLoanTransferDoc = true;
+    }
+    thudiyalurStep(){
+      this.showthudiyar = false;
+      this.showLoanTransferDoc = true;
+    }
+// Backward
     peelameduBack(){
       this.showBranchList = true;
       this.showPeelamedu = false;
@@ -283,6 +307,12 @@ export class SendToApprover {
     gandhipuramBack(){
       this.showBranchList = true;
       this.showgandhipuram = false;
+      this.showLoanTransferDoc = false;
+    }
+
+    ganapathyBack(){
+      this.showBranchList = true;
+      this.showganapathy = false;
       this.showLoanTransferDoc = false;
     }
 

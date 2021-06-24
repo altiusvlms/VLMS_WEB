@@ -184,15 +184,15 @@
                 <th>DEBIT</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody  *ngFor = "let values of handloanValues">
               <tr>
-                <td>23.03.2021</td>
+                <td>{{values.fromDate | date:"dd MMMM yyyy"}}</td>
                 <td></td>
                 <td>INSURANCE</td>
                 <td></td>
                 <td>1000</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td></td>
                 <td>25.03.2021</td>
                 <td>INSURANCE</td>
@@ -205,7 +205,7 @@
                 <td>Pending Amount</td>
                 <td>500</td>
                 <td></td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
     </div></div></div>

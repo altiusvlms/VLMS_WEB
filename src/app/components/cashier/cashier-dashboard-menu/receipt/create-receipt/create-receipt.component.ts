@@ -45,6 +45,8 @@ export class CreateReceiptComponent implements OnInit {
   topupValues:any;
   childloanValues:any;
   childLoanID:any;
+  handLoanID:any;
+  handloanValues:any;
 
   loanRepaymentForm = new FormGroup({
     paymentTypeId: new FormControl('', Validators.required),
@@ -123,10 +125,10 @@ export class CreateReceiptComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
-      console.log(data.accountNo);
-      if( data.isTopup == true) {
-        this.Topup = data.isTopup;  
-      }
+      // console.log(data.accountNo);
+      // if( data.isTopup == true) {
+      //   this.Topup = data.isTopup;  
+      // }
       console.log(data.isTopup);
       console.log(this.Topup);
       // console.log(data.loanType);
@@ -183,7 +185,7 @@ export class CreateReceiptComponent implements OnInit {
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
-      console.log(data.accountNo);
+      // console.log(data.accountNo);
       this.topupValues = data.repaymentSchedule.periods;
       })
     }
@@ -206,6 +208,27 @@ export class CreateReceiptComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(data => {
       console.log(data);
       this.childloanValues = data.repaymentSchedule.periods;
+      })
+    }
+    })
+    // Hand Loan
+    await this.crudService.get(`${appModels.LOAN_TRANSFER_TEAM}/getLoanApplicationStatus?loanType=handloan&loanId=${this.loanID}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async data => {
+      console.log(data);
+      this.handLoanID = data.loanId
+      
+      if(data.LoanStatus == true) { 
+      console.log(this.handLoanID);
+    await this.crudService.get(`${appModels.COMMON}/loans/${this.handLoanID}?associations=all&exclude=guarantors,futureSchedule`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.handloanValues = data.repaymentSchedule.periods;
       })
     }
     })

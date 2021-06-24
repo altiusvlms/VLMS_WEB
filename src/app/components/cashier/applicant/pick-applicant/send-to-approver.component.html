@@ -171,6 +171,54 @@
             </form>
         </div>
 
+        <!-- Ganapathy -->
+     <div *ngIf="showganapathy"> 
+        <form class="example-form"  [formGroup]="ganapathyForm">
+            <h2>Ganapathy</h2>
+            <h3>Ganapathy<span class="required-field">*</span></h3>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="ganapathyBranch" formControlName="ganapathyBranch">
+                            <mat-radio-button value="KMF">KMF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="ganapathyBranch" formControlName="ganapathyBranch">
+                            <mat-radio-button value="KHPF">KHPF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    
+                    <button class="btn_blue" (click)="ganapathyBack()">Back</button>
+                    <button class="btn_blue" (click)="ganapathyStep()">Next</button>
+                    
+            </form>
+        </div>
+        
+        <!-- Thudiyar -->
+     <div *ngIf="showthudiyar"> 
+        <form class="example-form"  [formGroup]="thudiyalurForm">
+            <h2>Thudiyalur</h2>
+            <h3>Thudiyalur<span class="required-field">*</span></h3>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="thudiyalurBranch" formControlName="thudiyalurBranch">
+                            <mat-radio-button value="KTF">KTF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="thudiyalurBranch" formControlName="thudiyalurBranch">
+                            <mat-radio-button value="KFC">KFC</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row"> 
+                        <mat-radio-group aria-label="Select an option"  name="thudiyalurBranch" formControlName="thudiyalurBranch">
+                            <mat-radio-button value="KHPF">KHPF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <button class="btn_blue" (click)="thudiyalurBack()">Back</button>
+                    <button class="btn_blue" (click)="thudiyalurStep()">Next</button>
+                    
+            </form>
+        </div>
+
 
     <div *ngIf="showLoanTransferDoc"> 
         <form class="example-form"  [formGroup]="loanTransferForm" >
