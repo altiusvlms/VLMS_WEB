@@ -610,13 +610,13 @@ console.log(this.image().controls.length)
       })
       this.manageEmployeeAddressForm.patchValue({
         communicationAdd:{
-        addressLine1:response.communicationAdd.addressLine1,
-        addressLine2: response.communicationAdd.addressLine2,
-        area : response.communicationAdd.area,
-        city : response.communicationAdd.city,
-        landmark : response.communicationAdd.landmark,
-        postalCode : response.communicationAdd.postalCode,
-        state : response.communicationAdd.state
+        addressLine1: JSON.parse(response.communicationAdd.addressLine1),
+        addressLine2: JSON.parse(response.communicationAdd.addressLine2),
+        area : JSON.parse(response.communicationAdd.area),
+        city : JSON.parse(response.communicationAdd.city),
+        landmark : JSON.parse(response.communicationAdd.landmark),
+        postalCode : JSON.parse(response.communicationAdd.postalCode),
+        state : JSON.parse(response.communicationAdd.state)
         },
         permanentAdd:{
           addressLine1:response.permanentAdd.addressLine1,
