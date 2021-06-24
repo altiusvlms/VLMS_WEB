@@ -186,6 +186,7 @@ export class SendToApprover {
     showProcess: Boolean = true;
     showPeelamedu:Boolean = false;
     showLoanTransferDoc: Boolean = false;
+    showgandhipuram: Boolean = false;
 
     processForm = new FormGroup({
       process: new FormControl('')
@@ -201,6 +202,10 @@ export class SendToApprover {
 
       peelameduForm = new FormGroup({
         peelameduBranch :  new FormControl('')
+      })
+
+      gandhipuramForm = new FormGroup({
+        gandhipuramBranch :  new FormControl('')
       })
 
       loanTransferForm = new FormGroup({
@@ -246,6 +251,9 @@ export class SendToApprover {
       if(this.branchListForm.value.branchList == "peelamedu"){
         this.showPeelamedu = true;
         this.showBranchList = false;
+      }else if(this.branchListForm.value.branchList == "gandhipuram"){
+        this.showgandhipuram = true;
+        this.showBranchList = false;
       }
 
     }
@@ -261,13 +269,26 @@ export class SendToApprover {
       this.showLoanTransferDoc = true;
     }
 
+    gandhipuramStep(){
+      this.showgandhipuram = false;
+      this.showLoanTransferDoc = true;
+    }
+
     peelameduBack(){
       this.showBranchList = true;
+      this.showPeelamedu = false;
+      this.showLoanTransferDoc = false;
+    }
+
+    gandhipuramBack(){
+      this.showBranchList = true;
+      this.showgandhipuram = false;
       this.showLoanTransferDoc = false;
     }
 
     loanTransferBack(){
       this.showPeelamedu = true;
+      this.showLoanTransferDoc = false;
     }
 
     loanTransferStep(){

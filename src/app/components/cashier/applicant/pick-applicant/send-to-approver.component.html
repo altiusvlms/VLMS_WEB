@@ -119,6 +119,7 @@
             </form>
         </div> 
 
+<!-- Peelamedu -->
 <div *ngIf="showPeelamedu"> 
     <form class="example-form"  [formGroup]="peelameduForm">
         <h2>Peelamedu</h2>
@@ -142,8 +143,33 @@
                 <button class="btn_blue" (click)="peelameduStep()">Next</button>
                 
         </form>
-    </div> 
+    </div>
 
+     <!--Gandhipuram  -->
+     <div *ngIf="showgandhipuram"> 
+        <form class="example-form"  [formGroup]="gandhipuramForm">
+            <h2>Gandhipuram</h2>
+            <h3>Gandhipuram<span class="required-field">*</span></h3>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="gandhipuramBranch" formControlName="gandhipuramBranch">
+                            <mat-radio-button value="KC">KC</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="gandhipuramBranch" formControlName="gandhipuramBranch">
+                            <mat-radio-button value="KF">KF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="gandhipuramBranch" formControlName="gandhipuramBranch">
+                            <mat-radio-button value="KHPF">KHPF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <button class="btn_blue" (click)="gandhipuramBack()">Back</button>
+                    <button class="btn_blue" (click)="gandhipuramStep()">Next</button>
+                    
+            </form>
+        </div>
 
 
     <div *ngIf="showLoanTransferDoc"> 
