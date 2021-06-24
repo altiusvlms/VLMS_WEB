@@ -41,7 +41,7 @@ export class ManageEmployeeComponent implements OnInit {
   imageURL1: any;
   imageURL2: any;
 
-  constructor(private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer,private sharedService: SharedService) {
+  constructor(private crudService: CrudService,private toast: ToastrService, private route: ActivatedRoute, public datepipe: DatePipe, private fb: FormBuilder,private sanitizer:DomSanitizer,private sharedService: SharedService,private router: Router) {
    }
 
 /** Manage Employee Forms */
@@ -306,44 +306,9 @@ console.log("pancard")
           }
       
         }
+        this.router.navigate(['branch-manager/existing-employee']);
   })
-  
-  
 }
-
-
-employeeArray: any = [];
-data : any;
-
-// getSingleEmployeeList(){
-//   console.log("id")
-//   console.log(this.id)
-//   this.crudService.get(`${appModels.GETEMPLOYEE}`, {
-//     params: {
-//       tenantIdentifier: 'default'
-//     }
-//   }).pipe(untilDestroyed(this)).subscribe(async response => {
-//     console.log(response)
-//     for (var singleData of response) {
-//       if(singleData.id == this.id){
-//         this.employeeArray.push(singleData)
-//         await this.crudService.get_Image(`${appModels.IMAGES}/employee_adhar/${singleData.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
-//           this.ImgURL1 = this.sanitizer.bypassSecurityTrustUrl(data);
-//         })
-//         await this.crudService.get_Image(`${appModels.IMAGES}/employee_pancard/${singleData.id}?tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async data => {
-//           this.ImgURL2 = this.sanitizer.bypassSecurityTrustUrl(data);
-//         })
-//       }
-//     }
-//     console.log(this.employeeArray)
-
-
-
-// })
-// }
-
-
-
 
 }
 
@@ -372,13 +337,20 @@ export class EditManageEmployeeComponent implements OnInit {
   showUpdateBtn: Boolean = false;
   communicationAddID: any;
   permanentAddID: any;
- bankID: any;
- insuranceID: any;
-accidentalID : any;
- schoolID: any;
- collegeID: any;
- graduateID: any;
- postGraduateID: any;
+  bankID: any;
+  insuranceID: any;
+  accidentalID : any;
+  schoolID: any;
+  collegeID: any;
+  graduateID: any;
+  postGraduateID: any;
+
+  Imagefileform0: any;
+  Imagefileform1: any;
+  Imagefileform2:any;
+  imageURL0: any;
+  imageURL1: any;
+  imageURL2: any;
 
   manageEmployeeDetailsForm = new FormGroup({
     name : new FormControl('', Validators.required),
@@ -565,7 +537,48 @@ accidentalID : any;
     }).pipe(untilDestroyed(this)).subscribe(async response => {
       console.log(response)
       this.sharedService.setLoaderShownProperty(false); 
+   
+      this.crudService.get(`${appModels.GET_DOCUMENT_IMAGE}/${this.id}`, {
+        params: {
+          command:'employeeData',
+          tenantIdentifier: 'default'
+        }
+      }).pipe(untilDestroyed(this)).subscribe(async response => {
+        console.log(response);
+        for(let documentDetails of response){
+          this.documentImageForm.value.image = documentDetails;
+          this.documentImageForm.value.image.patchValue({
+              documentName:response.documentName,
+              documentNo:response.documentNo
+        })
+        console.log(this.documentImageForm)
 
+        console.log(this.documentImageForm.value)
+console.log(this.image().controls.length)
+          if(documentDetails.documentNumber){      
+            if(documentDetails.entityName === "employee_adhar"){
+                this.crudService.get_Image(`${appModels.IMAGES}/employee_adhar/${this.id}?documentNumber=${documentDetails.documentNumber}&tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
+                  this.imageURL0 = this.sanitizer.bypassSecurityTrustUrl(data);
+                  console.log(this.imageURL0)
+                  this.sharedService.setLoaderShownProperty(false);
+                  this.image().controls.length = 0;
+                },error => {
+                  this.sharedService.setLoaderShownProperty(false);  
+              });
+                }
+            else if (documentDetails.entityName === "employee_pancard"){
+            this.crudService.get_Image(`${appModels.IMAGES}/employee_pancard/${this.id}?documentNumber=${documentDetails.documentNumber}&tenantIdentifier=default`).pipe(untilDestroyed(this)).subscribe(async (data) => {
+              this.imageURL1 = this.sanitizer.bypassSecurityTrustUrl(data);
+              this.sharedService.setLoaderShownProperty(false);
+              this.image().controls.length = 1;
+            },error => {
+              this.sharedService.setLoaderShownProperty(false);  
+          })
+                }
+            }
+      }
+      })
+      
       this.communicationAddID = response.communicationAdd.id;
       this.permanentAddID = response.permanentAdd.id;
       this.bankID = response.bankDetails.id;
@@ -629,46 +642,46 @@ accidentalID : any;
       })
       this.manageEmployeeInsuranceForm.patchValue({
         insuranceDetails:{
-          policyNumber: JSON.parse(response.insuranceDetails.policyNumber),
-          companyCoverage: JSON.parse(response.insuranceDetails.companyCoverage),
-          policyCoverage : JSON.parse(response.insuranceDetails.policyCoverage),
+          policyNumber: response.insuranceDetails.policyNumber,
+          companyCoverage: response.insuranceDetails.companyCoverage,
+          policyCoverage : response.insuranceDetails.policyCoverage,
           }
       })
       this.manageEmployeeaccidentInsuranceForm.patchValue({
         accidentalInsuranceDetails:{
-          policyNumber:JSON.parse(response.accidentalInsuranceDetails.policyNumber),
-          companyCoverage: JSON.parse(response.accidentalInsuranceDetails.companyCoverage),
-          policyCoverage : JSON.parse(response.accidentalInsuranceDetails.policyCoverage),
+          policyNumber:response.accidentalInsuranceDetails.policyNumber,
+          companyCoverage: response.accidentalInsuranceDetails.companyCoverage,
+          policyCoverage : response.accidentalInsuranceDetails.policyCoverage,
           }
       })
 
       this.manageEmployeeQualificationForm.patchValue({
         schoolQualification:{
-            university:JSON.parse(response.schoolQualification.university),
-            qualification: JSON.parse(response.schoolQualification.qualification),
-            percentage : JSON.parse(response.schoolQualification.percentage),
-            passingyear : JSON.parse(response.schoolQualification.passingyear),
+            university:response.schoolQualification.university,
+            qualification: response.schoolQualification.qualification,
+            percentage : response.schoolQualification.percentage,
+            passingyear : response.schoolQualification.passingyear,
           },
         
         collegeQualification:{
-          university:JSON.parse(response.collegeQualification.university),
-          qualification: JSON.parse(response.collegeQualification.qualification),
-          percentage : JSON.parse(response.collegeQualification.percentage),
-          passingyear : JSON.parse(response.collegeQualification.passingyear),
+          university:response.collegeQualification.university,
+          qualification: response.collegeQualification.qualification,
+          percentage : response.collegeQualification.percentage,
+          passingyear : response.collegeQualification.passingyear,
           },
         
         graduateQualification:{
-          university:JSON.parse(response.graduateQualification.university),
-          qualification: JSON.parse(response.graduateQualification.qualification),
-          percentage : JSON.parse(response.graduateQualification.percentage),
-          passingyear : JSON.parse(response.graduateQualification.passingyear),
+          university:response.graduateQualification.university,
+          qualification: response.graduateQualification.qualification,
+          percentage : response.graduateQualification.percentage,
+          passingyear : response.graduateQualification.passingyear,
           },
         
         postgraduateQualification:{
-          university:JSON.parse(response.postgraduateQualification.university),
-          qualification: JSON.parse(response.postgraduateQualification.qualification),
-          percentage : JSON.parse(response.postgraduateQualification.percentage),
-          passingyear : JSON.parse(response.postgraduateQualification.passingyear),
+          university:response.postgraduateQualification.university,
+          qualification:response.postgraduateQualification.qualification,
+          percentage :response.postgraduateQualification.percentage,
+          passingyear : response.postgraduateQualification.passingyear,
           }
 
     })
@@ -737,7 +750,6 @@ accidentalID : any;
     this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeInsuranceForm.value.insuranceDetails,
     this.insuranceID,
     ).pipe(untilDestroyed(this)).subscribe(response => {
-      // console.log('sss',response['insuranceDetails'])
     this.toast.success("Updated Successfully");
     })
   }
