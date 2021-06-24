@@ -216,9 +216,9 @@
 <mat-tab-group>
   <mat-tab label="Parent Loan"> 
 
-<!-- <div class="card">
+<div class="card">
   <div class="card-body">
-        <table class="table table-striped"> -->
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Sr.No</th>
@@ -254,16 +254,16 @@
             </tr>
             
           </tbody>
-        <!-- </table>
-      </div></div> -->
+        </table>
+      </div></div>
 
     </mat-tab>
   <!-- Child Loan -->
   <mat-tab label="Child Loan"> 
 
-    <!-- <div class="card">
+    <div class="card">
       <div class="card-body">
-            <table class="table table-striped"> -->
+            <table class="table table-striped">
               <thead>
                 <tr>
                   <th>Sr.No</th>
@@ -280,53 +280,7 @@
                 </tr>
               </thead>
               
-              <tbody *ngFor="let tableValue of receiptData,let i = index">
-                
-                <tr>
-                  <td>{{i + 1}}</td>
-                  <td>{{loanType.value}}</td>
-                  <td>{{tableValue.dueDate | date:"dd MMMM yyyy"}}</td>
-                  <td>{{tableValue.totalDueForPeriod}}</td>
-                  <td>{{tableValue.fromDate | date:"dd MMMM yyyy"}}</td>
-                  <td>{{transactions[i]}}</td>
-                  <td>{{transactions[i] - tableValue.totalDueForPeriod}}</td>
-                  <td>{{delayDays}}</td>
-                  <td>200</td>
-                  <td>200</td>
-                  <td>
-                    <button type="button" class="btn_blue"> <span>Edit</span></button>
-                  </td>
-                </tr>
-                
-              </tbody>
-            <!-- </table>
-          </div></div> -->
-    
-        </mat-tab>
-  <!-- Top-up Loan -->
-  <mat-tab label="Top-up Loan" > 
-<!-- *ngIf = "Topup? false :true" -->
-    <!-- <div class="card">
-      <div class="card-body"> -->
-            <table  *ngIf = "Topup == true">
-              
-              <thead>
-                <tr>
-                  <th>Sr.No</th>
-                  <th>Loan Type</th>
-                  <th>Due Date</th>
-                  <th>Due Amount</th>
-                  <th>Receipted Date</th>
-                  <th>Due Received</th>
-                  <th>Due Balance</th>
-                  <th>Delay Days</th>
-                  <th>Default</th>
-                  <th>Received</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              
-              <tbody *ngFor="let tableValue of receiptData,let i = index">
+              <tbody *ngFor="let tableValue of childloanValues,let i = index">
                 
                 <tr>
                   <td>{{i + 1}}</td>
@@ -346,7 +300,53 @@
                 
               </tbody>
             </table>
-          <!-- </div></div> -->
+          </div></div>
+    
+        </mat-tab>
+  <!-- Top-up Loan -->
+  <mat-tab label="Top-up Loan" > 
+<!-- *ngIf = "Topup? false :true" -->
+    <div class="card">
+      <div class="card-body">
+            <table class="table table-striped">
+              
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Loan Type</th>
+                  <th>Due Date</th>
+                  <th>Due Amount</th>
+                  <th>Receipted Date</th>
+                  <th>Due Received</th>
+                  <th>Due Balance</th>
+                  <th>Delay Days</th>
+                  <th>Default</th>
+                  <th>Received</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              
+              <tbody *ngFor="let tableValue of topupValues,let i = index">
+                
+                <tr>
+                  <td>{{i + 1}}</td>
+                  <td>{{loanType.value}}</td>
+                  <td>{{tableValue.dueDate | date:"dd MMMM yyyy"}}</td>
+                  <td>{{tableValue.totalDueForPeriod}}</td>
+                  <td>{{tableValue.fromDate | date:"dd MMMM yyyy"}}</td>
+                  <td>{{transactions[i]}}</td>
+                  <td>{{transactions[i] - tableValue.totalDueForPeriod}}</td>
+                  <td>{{delayDays}}</td>
+                  <td>200</td>
+                  <td>200</td>
+                  <td>
+                    <button type="button" class="btn_blue"> <span>Edit</span></button>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div></div>
     
         </mat-tab>
     </mat-tab-group>
@@ -463,7 +463,7 @@
 </div>
       
 <!-- Print pdf -->
-<div class="container" >
+<div class="container">
   <div id="pdfTable" >
   
     <!-- <table class="table table-striped" *ngIf="arrayOfPrint.length > 0">
@@ -479,7 +479,7 @@
         </tr>
       </tbody>
     </table> -->
-    
+    <div>Enter amount</div>  
   <div>{{printData}}</div>
   </div>
 </div>
