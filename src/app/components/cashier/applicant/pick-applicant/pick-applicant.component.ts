@@ -146,6 +146,27 @@ export class PickApplicantComponent implements OnInit {
   })
   })
   }
+  showLoanApprovelDetails:Boolean = false;
+  loanApprovalStatus: any;
+
+  getLoanApprovel(){
+    this.crudService.get(`${appModels.APPROVEL}`, {
+    params: {
+      tenantIdentifier: 'default'  
+    }
+  }).pipe(untilDestroyed(this)).subscribe(async response => {
+    console.log(response)
+    this.sharedService.setLoaderShownProperty(false);  
+    for(let loanDetail of response.pageItems){
+      if(loanDetail.id === this.id){
+        console.log(loanDetail.status)
+        this.loanApprovalStatus = loanDetail.status;
+        this.showLoanApprovelDetails = true;
+      }
+    }
+
+  })
+  }
 
 
 
@@ -156,6 +177,8 @@ export class PickApplicantComponent implements OnInit {
       data: applicantLoanID ? applicantLoanID : null
     });  
     dialogRef.afterClosed().subscribe((response : any) => {
+      this.sharedService.setLoaderShownProperty(false);  
+      this.getLoanApprovel();
     });
   }
 
@@ -179,6 +202,7 @@ export class SendToApprover {
     private crudService: CrudService,
     private sharedService: SharedService,public datepipe: DatePipe) {
       this.applicantLoanId = response;
+      console.log(this.applicantLoanId)
     }
 
     showBranchStatus:Boolean = false;
@@ -222,9 +246,11 @@ export class SendToApprover {
         loanAccountNo :  new FormControl('')
       })
 
+
     ngOnInit(): void {
      console.log( this.applicantLoanId )
     }
+
 
     processStep(){
       console.log(this.processForm.value)
@@ -283,6 +309,7 @@ export class SendToApprover {
     peelameduStep(){
       this.showPeelamedu = false;
       this.showLoanTransferDoc = true;
+      this.dialogRef.close();
     }
 
     gandhipuramStep(){

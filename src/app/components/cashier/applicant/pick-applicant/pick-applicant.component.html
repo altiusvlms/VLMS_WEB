@@ -3,7 +3,15 @@
         <h2>Picked!!</h2>
       </div>
 
-    
+
+        <div class="card" *ngIf="showLoanApprovelDetails">
+        <div class="card-body">
+        <div class="row" >
+         <p>dara</p> 
+          <!-- {{loanApprovalStatus.value}} -->
+          </div>
+          </div>
+        </div>
 
     <div class="card">
         <div class="card-body">
@@ -45,7 +53,7 @@
 
     <div class="card">
         <div class="card-body">
-  
+   
       <form class="example-form"  [formGroup]="applicantDetailsForm" >
           <div class="row" formGroupName="loanDetailsData">
             <div class="col-4 col-sm-4">                 
@@ -185,12 +193,12 @@
                   <input matInput type='text'  formControlName="IFSC"  >
                   </mat-form-field>
               </div>
-                 <div class="col-4 col-sm-4">                 
+                 <!-- <div class="col-4 col-sm-4">                 
                 <mat-form-field  appearance="outline"  class="example-full-width" >
                   <mat-label>PassBook Image</mat-label>
                   <input matInput type='text'  >
                   </mat-form-field>
-              </div>
+              </div> -->
             </div> 
           <div class="row">
               <button class="btn_blue" (click)="save()">Save</button>
