@@ -1,6 +1,6 @@
 
 /** Angular Imports */
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 /** Header Component*/
@@ -10,10 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+ 
   constructor( private router: Router) { }
-
-  ngOnInit(): void {
+  public iconOnlyToggled = false;
+  public sidebarToggled = false;
+  ngOnInit(): void { 
   }
   logout(){
     localStorage.clear();
@@ -21,5 +22,24 @@ export class HeaderComponent implements OnInit {
   }
   emiCalculator(){
     this.router.navigate(["./emi-calculator/calculator"]);
+  }
+
+ 
+   // toggle sidebar
+   toggleSidebar() {
+    let assidebar = document.querySelector('#sidebar');
+    let body = document.querySelector('body');
+    console.log(body);
+   
+      this.sidebarToggled = !this.sidebarToggled;
+      console.log(this.sidebarToggled );
+      if(this.sidebarToggled) {
+        assidebar.classList.add('sidebar-hidden');
+        body.classList.add('activemenu');
+      } else {
+        assidebar.classList.remove('sidebar-hidden');
+        body.classList.remove('activemenu');
+      }
+    //}
   }
 }

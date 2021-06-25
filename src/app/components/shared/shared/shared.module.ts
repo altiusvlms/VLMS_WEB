@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 /** Custom Module */
 import { RouterModule } from '@angular/router';
-import {FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';

@@ -1,16 +1,49 @@
-<div class="header">
-    <div class="header-right">
-      <!-- Emi calculator Icon need to change -->
-      <a class="material-icons-outlined" (click)="emiCalculator()">
-        calendar_today
+
+<div class="header d-flex justify-content-between" style="top: 0;">
+  <div class="d-flex">
+    <!--  <div id="content">
+
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+              <button type="button" (click)="toggleSidebar()" id="sidebarCollapse" class="btn btn-link as-toggle-btn">
+                  <i class="fas fa-grip-lines"></i>
+                  
+              </button>
+          </div>
+      </nav> 
+  </div>-->
+    <div class="as-toggle-btn"  (click)="toggleSidebar()" id="sidebarCollapse">
+      <i class="fas fa-grip-lines as-icon-color-1"></i>
+    </div>
+    <div class="form-group has-search as-serch">
+      <span class="fa fa-search form-control-feedback"></span>
+      <input type="text" class="form-control" placeholder="Enter Search Keyword for Entre Application">
+    </div>
+  </div>
+
+    <div class="">
+      <!-- Emi calculator Icon  -->
+      <a class="as-emi-calc" (click)="emiCalculator()">
+       <div class="as-emi-icon"><div style="margin-left: 34px;"> EMI Calculator
+      </div></div>
       </a>
       <!-- Notification Icon -->
-        <a class="material-icons" matTooltip="Notifications">
-            notifications
+        <a class="fas fa-bell as-icon-color-1 as-position-relative as-font-18"  >
+            <div class="as-notifications-top"></div>
         </a>
+        <a class="as-right-line"></a>
+         <!-- User det -->
+         <a class="row">
+           <div class="as-color-1">John Doe</div>
+           <div class="fas fa-angle-down mx-2 mt-2 as-color-2"></div>
+           <div class="as-user-img" style="background-image: url(../../../../../assets/images/Profile_avatar.png);" ></div> 
+         </a>
         <!-- Logout Icon -->
-          <a  class="material-icons" matTooltip="logout" (click)="logout()">
+          <a  class="material-icons d-none" matTooltip="logout" (click)="logout()">
             logout
           </a>
     </div>
   </div>
+  
+

@@ -289,7 +289,7 @@ export class DashboardComponent implements OnInit {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'pie'
+        type: 'pie',
       },
       title: {
         text: 'New Loan vs Closed Loan'
@@ -349,9 +349,7 @@ export class DashboardComponent implements OnInit {
       },
       title: {
         text: 'Total Collection',
-        align: 'center',
-        verticalAlign: 'middle',
-        y: 60
+       
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.y}'
