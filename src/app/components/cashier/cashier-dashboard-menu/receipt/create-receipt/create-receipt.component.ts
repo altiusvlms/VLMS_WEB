@@ -271,6 +271,7 @@ export class CreateReceiptComponent implements OnInit {
     }
   }
 
+  showReceiptPDF:Boolean = false;
   openPDF() {
     var data = document.getElementById('pdfTable');
     const WindowPrt = window.open('', '', 'left=0,top=0,width=800,height=700,toolbar=0,scrollbars=0,location=no,status=no,titlebar=no, fontFamily=Titillium Web');
@@ -280,6 +281,7 @@ export class CreateReceiptComponent implements OnInit {
     WindowPrt.print();
     WindowPrt.close();
    this.arrayOfPrint = [];
+   this.showReceiptPDF = true;
   }
 
   
