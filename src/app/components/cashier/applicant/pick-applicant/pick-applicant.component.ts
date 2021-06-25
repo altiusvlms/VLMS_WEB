@@ -4,9 +4,9 @@ import { Component, OnInit ,Inject} from '@angular/core';
 /** Custom Services and Routing and Forms */
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute ,Params} from '@angular/router';
-import {  CrudService } from '../../../../services/crud.service';
+import { CrudService } from '../../../../services/crud.service';
 import { appModels } from '../../../../services/utils/enum.util';
-import {DomSanitizer} from "@angular/platform-browser";
+import { DomSanitizer} from "@angular/platform-browser";
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { SharedService } from '../../../../services/shared.service';
@@ -124,13 +124,13 @@ export class PickApplicantComponent implements OnInit {
   save(){
     this.applicantDetailsForm.value.loanDetailsData.dueDate = this.datepipe.transform(this.applicantDetailsForm.value.loanDetailsData.dueDate, 'dd MMMM yyyy');
     this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyLoanDetails`,this.applicantDetailsForm.value.loanDetailsData,
-    this.applicantDetails.loanDetailsData.id,
+    this.applicantDetails[0].loanDetailsData.id,
    ).pipe(untilDestroyed(this)).subscribe(async response => {
     this.toast.success("Saved Successfully");
     this.sharedService.setLoaderShownProperty(false);  
 
     await this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyBankDetails`,this.applicantDetailsForm.value.bankDetails,
-    this.applicantDetails.bankDetails.id,
+    this.applicantDetails[0].bankDetails.id,
     ).pipe(untilDestroyed(this)).subscribe(response => {
       this.sharedService.setLoaderShownProperty(false);  
 
@@ -146,23 +146,39 @@ export class PickApplicantComponent implements OnInit {
   })
   })
   }
-  arrayOfapprovel: any = [];
-  getApprovelData: any;
+  showLoanApprovelDetails:Boolean = false;
+  loanApprovalStatus: any;
 
-  getStep2(){
-    this.getApprovelData = JSON.parse(localStorage.getItem('sentoToApprover'));
-    this.arrayOfapprovel.push(this.getApprovelData);
-    console.log(this.arrayOfapprovel)
+  getLoanApprovel(){
+    this.crudService.get(`${appModels.APPROVEL}`, {
+    params: {
+      tenantIdentifier: 'default'  
+    }
+  }).pipe(untilDestroyed(this)).subscribe(async response => {
+    console.log(response)
+    this.sharedService.setLoaderShownProperty(false);  
+    for(let loanDetail of response.pageItems){
+      if(loanDetail.id === this.id){
+        console.log(loanDetail.status)
+        this.loanApprovalStatus = loanDetail.status;
+        this.showLoanApprovelDetails = true;
+      }
+    }
+
+  })
   }
 
-  saveProcess(){
-    console.log("test")
+
+
+  saveProcess(applicantLoanID: any){
     const dialogRef = this.dialog.open(SendToApprover, {
       width: '100vw',
       height: '90vh',
+      data: applicantLoanID ? applicantLoanID : null
     });  
     dialogRef.afterClosed().subscribe((response : any) => {
-        this.getStep2();
+      this.sharedService.setLoaderShownProperty(false);  
+      this.getLoanApprovel();
     });
   }
 
@@ -180,74 +196,164 @@ export class PickApplicantComponent implements OnInit {
 
 export class SendToApprover {
 
+  applicantLoanId: any;
 
   constructor(public dialogRef: MatDialogRef<SendToApprover>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
     private crudService: CrudService,
-    private sharedService: SharedService,public datepipe: DatePipe) { 
+    private sharedService: SharedService,public datepipe: DatePipe) {
+      this.applicantLoanId = response;
+      console.log(this.applicantLoanId)
     }
 
-    step1Form = new FormGroup({
-        branch: new FormControl(''),
-        creator: new FormControl(''),
-        approver: new FormControl(''),
-        authoriser: new FormControl(''),
-      })
-      branchForm = new FormGroup({
-        loanTransfer: new FormControl(''),
-        DCTransfer: new FormControl(''),
-        request: new FormControl(''),
-        authoriser: new FormControl(''),
-        remindAuthoriser: new FormControl(''),
-        additionalTransfer: new FormControl('')
-      })
-      areaForm = new FormGroup({
-        peelamedu : new FormControl(''),
-        gandhipuram : new FormControl(''),
-        ganapathy : new FormControl(''),
-        thudiyalur : new FormControl(''),
-        vadavalli : new FormControl(''),
-        sulur : new FormControl(''),
-      })
-      peelameduForm = new FormControl({
-        KAF :  new FormControl(''),
-        KI : new FormControl(''),
-        KHPF:  new FormControl(''),
+    showBranchStatus:Boolean = false;
+    showBranchList:Boolean = false;
+    showProcess: Boolean = true;
+    showPeelamedu:Boolean = false;
+    showLoanTransferDoc: Boolean = false;
+    showgandhipuram: Boolean = false;
+    showganapathy:Boolean = false;
+    showthudiyar:Boolean = false;
+
+    processForm = new FormGroup({
+      process: new FormControl('')
       })
 
+    branchStatusForm = new FormGroup({
+        branchJob: new FormControl('')
+      })
+      
+    branchListForm = new FormGroup({
+      branchList : new FormControl('')
+      })
 
-    showStep2:Boolean = false;
-    showStep3:Boolean = false;
-    showStep4:Boolean = false;
-    sendToapproval: any;
+      peelameduForm = new FormGroup({
+        peelameduBranch :  new FormControl('')
+      })
+
+      gandhipuramForm = new FormGroup({
+        gandhipuramBranch :  new FormControl('')
+      })
+
+      ganapathyForm = new FormGroup({
+        ganapathyBranch :  new FormControl('')
+      })
+
+      thudiyalurForm = new FormGroup({
+        thudiyalurBranch :  new FormControl('')
+      }) 
+
+      loanTransferForm = new FormGroup({
+        loanAccountNo :  new FormControl('')
+      })
+
 
     ngOnInit(): void {
+     console.log( this.applicantLoanId )
     }
 
-    step1(){
-       if(this.step1Form.value.branch !== ''){
-         this.showStep2 = true;
-       }
-    }
-    step2(){
-      // this.sendToapproval = this.branchForm.value;
-      // localStorage.setItem('sentoToApprover', JSON.stringify(this.sendToapproval));
-      // this.dialogRef.close();
-      if(this.branchForm.value.loanTransferBeneficiaryAdded !== ''){
-        this.showStep3 = true;
+
+    processStep(){
+      console.log(this.processForm.value)
+      if(this.processForm.value.process == "branch"){
+          this.showBranchStatus = true;
+          this.showProcess = false;
       }
     }
-    step3(){
-      if(this.peelameduForm.value.KAF !== ''){
-        this.showStep4 = true;
+
+    branchStatusStep(){
+      console.log(this.branchStatusForm.value)
+      if(this.branchStatusForm.value.branchJob == "loanTransfer"){
+      this.showBranchList = true;
+      this.showBranchStatus = false;
+      this.showProcess = false;
+      this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
+        params: {
+          command:this.branchStatusForm.value.branchJob,
+          tenantIdentifier: 'default'  
+        }
+      }).pipe(untilDestroyed(this)).subscribe(async response => {
+        console.log(response)
+      })
       }
     }
-    // step4(){
-    //   if(this.peelameduForm.value.KAF !== ''){
-    //     this.showStep4 = true;
-    //   }
-    // }
-    back(){
-      this.showStep2 = false;
+
+    branchStatusBack(){
+      this.showBranchStatus = false;
+      this.showProcess = true;
+    }
+
+    branchListStep(){
+      console.log(this.branchListForm.value)
+      if(this.branchListForm.value.branchList == "peelamedu"){
+        this.showPeelamedu = true;
+        this.showBranchList = false;
+      }else if(this.branchListForm.value.branchList == "gandhipuram"){
+        this.showgandhipuram = true;
+        this.showBranchList = false;
+      }else if(this.branchListForm.value.branchList == "ganapathy"){
+        this.showganapathy = true;
+        this.showBranchList = false;
+      }else if(this.branchListForm.value.branchList == "thudiyalur"){
+        this.showganapathy = true;
+        this.showBranchList = false;
+      }
+
+    }
+
+    branchListBack(){
+      this.showBranchStatus = true;
+      this.showProcess = false;
+      this.showBranchList = false;
+    }
+
+    peelameduStep(){
+      this.showPeelamedu = false;
+      this.showLoanTransferDoc = true;
+      this.dialogRef.close();
+    }
+
+    gandhipuramStep(){
+      this.showgandhipuram = false;
+      this.showLoanTransferDoc = true;
+    }
+    ganapathyStep(){
+      this.showganapathy = false;
+      this.showLoanTransferDoc = true;
+    }
+    thudiyalurStep(){
+      this.showthudiyar = false;
+      this.showLoanTransferDoc = true;
+    }
+// Backward
+    peelameduBack(){
+      this.showBranchList = true;
+      this.showPeelamedu = false;
+      this.showLoanTransferDoc = false;
+    }
+
+    gandhipuramBack(){
+      this.showBranchList = true;
+      this.showgandhipuram = false;
+      this.showLoanTransferDoc = false;
+    }
+
+    ganapathyBack(){
+      this.showBranchList = true;
+      this.showganapathy = false;
+      this.showLoanTransferDoc = false;
+    }
+
+    loanTransferBack(){
+      this.showPeelamedu = true;
+      this.showLoanTransferDoc = false;
+    }
+
+    loanTransferStep(){
+
+    }
+
+    close(){
+    this.dialogRef.close();
     }
 
   }

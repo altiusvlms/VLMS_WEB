@@ -35,7 +35,7 @@ export class TaskManagementComponent implements OnInit {
 
 /** Task Management List */
 getTaskList(){
-    this.crudService.get(`${appModels.LOAN_TRANSFER_TEAM}/getAllLoanTransferTask`, {
+    this.crudService.get(`${appModels.FIELDEXECUTIVE}/getTask`, {
       params: {
         tenantIdentifier: 'default'
       }
@@ -83,12 +83,13 @@ export class CreateTask {
   editIcon : Boolean = false;
   assignToName: any;
   customername: any;
-  customerno: any;
   customerMobileNo: any;
+  customerMblno: any;
   customerList: any = [];
+  customerMobileNoBaseList: any = [];
   showDropdown: Boolean = false;
   showStatus:Boolean = false;
-
+  submitted:Boolean = false;
   tasktype:any = ['Engine Number','Chassis Number','Insurance Details','Live KM Reading','RC Book','Vehicle Image'];
 
   constructor(public dialogRef: MatDialogRef<CreateTask>, private toast: ToastrService,private router: Router, @Inject(MAT_DIALOG_DATA) public response:any,
@@ -102,6 +103,7 @@ export class CreateTask {
       }
      this.createTaskForms
     .patchValue({
+      branch:response.branch,
       taskType:response.taskType,
       customerRegNo:response.customerRegNo,
       customerMobileNo:response.customerMobileNo,
@@ -117,16 +119,17 @@ export class CreateTask {
 
 /** Create Task Management Forms */
     createTaskForms = new FormGroup({
-      taskType: new FormControl(''),
-      customerRegNo: new FormControl(''),
-      customerMobileNo: new FormControl(''),
-      vehicleNumber: new FormControl(''),
-      dueDate: new FormControl(''),
+      branch: new FormControl('', Validators.required),
+      taskType: new FormControl('', Validators.required),
+      customerRegNo: new FormControl('', Validators.required),
+      customerMobileNo: new FormControl('', Validators.required),
+      vehicleNumber: new FormControl('', Validators.required),
+      dueDate: new FormControl('', Validators.required),
       dateFormat: new FormControl('dd MMMM yyyy'),
       locale: new FormControl('en'),
-      assignTo: new FormControl(''),
-      description: new FormControl(''),
-      status: new FormControl(''),
+      assignTo: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
       
     })
 
@@ -136,6 +139,8 @@ export class CreateTask {
     this.assignToDetails();
   }
   ngOnDestroy() {}
+
+  get f() { return this.createTaskForms.controls; }
 
 /** Get the Field Executive Name(AssignTo --> DropDown Value) */
   assignToDetails(){
@@ -152,7 +157,7 @@ export class CreateTask {
   saveUpdateTask(){
     if (this.editDataTask) {
       this.createTaskForms.value.dueDate=this.datepipe.transform(this.createTaskForms.value.dueDate, 'dd MMMM yyyy');
-      this.crudService.update(`${appModels.LOAN_TRANSFER_TEAM}/editTask`,this.createTaskForms.value,
+      this.crudService.update(`${appModels.FIELDEXECUTIVE}/editTask`,this.createTaskForms.value,
         this.editDataTask['id'],
       ).pipe(untilDestroyed(this)).subscribe(updated => {
         this.dialogRef.close(updated);
@@ -160,8 +165,12 @@ export class CreateTask {
         this.toast.success("Task Updated Succesfully"); 
       })
     } else {
+      this.submitted = true;
+      if (this.createTaskForms.invalid) {
+        return;
+      }
       this.createTaskForms.value.dueDate=this.datepipe.transform(this.createTaskForms.value.dueDate, 'dd MMMM yyyy');
-      this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/task`, this.createTaskForms.value,
+      this.crudService.post(`${appModels.FIELDEXECUTIVE}/task`, this.createTaskForms.value,
         {params:{
         tenantIdentifier: "default"   
         }}
@@ -198,60 +207,74 @@ export class CreateTask {
       this.dialogRef.close();
     }
 
-    /** Filter on CustomerName and Mobile Number */    
+/** Filter CustomerName Based on Mobile Number */    
     applyFilter(value : any , string_val: any){
-      console.log(string_val)
-      this.showDropdown = true;
-      if(string_val == 'regNo'){
-       const filterValue = (event.target as HTMLInputElement).value;
-       this.customername = filterValue.trim().toLowerCase();
-     } 
-     else if(string_val == 'mobileno'){
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.customerno = filterValue.trim().toLowerCase();
-     }
-     if(this.customername != '' || this.customerno != ''){
-     this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
-      params: {
-        tenantIdentifier: 'default'
-      }
-    }).pipe(untilDestroyed(this)).subscribe(async response => {
-      console.log(response)
-      this.sharedService.setLoaderShownProperty(false); 
-      console.log( this.customername)
-      console.log( this.customerno)
-      if(this.customername !== undefined && this.customerno === undefined){
-      await response.map((res: any) => {
-        if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
-        this.customerList.push(res);
-        }
-      })
-    }
-    else if(this.customerno !== undefined && this.customername === undefined){
-      await response.map((res: any) => {
-        if(res.customerDetails.mobileNo.toLowerCase().search(this.customerno.toLowerCase()) != -1 ){
-        this.customerList.push(res);
-        console.log( this.customerList)
-        }
-      })
-    }
-      })
-    }
-    else{
-      this.customerList = [];
-      this.showDropdown = false;
-      this.createTaskForms.patchValue({
-        customerMobileNo:'',
-      })
-    }
-    }
+          console.log(string_val)
+          this.showDropdown = true;
+          if(string_val == 'regNo'){
+          const filterValue = (event.target as HTMLInputElement).value;
+          this.customername = filterValue.trim().toLowerCase();
+        } 
 
-/** Auto Fetch for Customer based on MobileNo and MobileNo based on CustomerName */    
-    customer(val: any,stringVal: any){
-      console.log(val)
-      console.log(stringVal)
+        if(this.customername != ''){
+        this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+          params: {
+            tenantIdentifier: 'default'
+          }
+        }).pipe(untilDestroyed(this)).subscribe(async response => {
+          console.log(response)
+          this.sharedService.setLoaderShownProperty(false); 
+          await response.map((res: any) => {
+            if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
+            this.customerList.push(res);
+            }
+          })
+          })
+        }
+        else{
+          this.customerList = [];
+          this.showDropdown = false;
+          this.createTaskForms.patchValue({
+            customerMobileNo:'',
+          })
+        }
+    }
+/** Filter  Mobile Number Based on CustomerName */    
+    applyfilter(value : any , string_val: any){
+          console.log(string_val)
+          this.showDropdown = true;
+          if(string_val == 'mobileno'){
+           const filterValue = (event.target as HTMLInputElement).value;
+           this.customerMblno = filterValue.trim().toLowerCase();
+         } 
+    
+         if(this.customerMblno != ''){
+         this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+          params: {
+            tenantIdentifier: 'default'
+          }
+        }).pipe(untilDestroyed(this)).subscribe(async response => {
+          console.log(response)
+          this.sharedService.setLoaderShownProperty(false); 
+          await response.map((res: any) => {
+            if(res.customerDetails.mobileNo.toLowerCase().search(this.customerMblno.toLowerCase()) != -1 ){
+            this.customerMobileNoBaseList.push(res);
+            }
+          })
+          })
+        }
+        else{
+          this.customerMobileNoBaseList = [];
+          this.showDropdown = false;
+          this.createTaskForms.patchValue({
+            customerRegNo:'',
+          })
+        }
+        }
+    
+/** Auto Fetch for MobileNo based on CustomerName */    
+    customer(val: any){
       this.showDropdown = false;
-      if(stringVal === 'name'){
       this.customerList.map((res: any) => {
         if(res.customerDetails.name.toLowerCase().search(val.value.toLowerCase()) != -1 ){
         this.createTaskForms.patchValue({
@@ -261,17 +284,19 @@ export class CreateTask {
         }
       })
     }
-      if(stringVal === 'mobile'){
-      this.customerList.map((res: any) => {
+
+        
+/** Auto Fetch for CustomerName based on MobileNo */    
+    customerMobile(val: any){
+      this.showDropdown = false;
+      this.customerMobileNoBaseList.map((res: any) => {
         if(res.customerDetails.mobileNo.toLowerCase().search(val.value.toLowerCase()) != -1 ){
         this.createTaskForms.patchValue({
-          customerMobileNo: val.value,
+          customerMobileNo:val.value,
           customerRegNo:res.customerDetails.name
         })
         }
       })
-    }
-
     }
     
 }

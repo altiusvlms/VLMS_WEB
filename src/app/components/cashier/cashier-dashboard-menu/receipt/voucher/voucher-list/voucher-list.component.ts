@@ -67,4 +67,19 @@ openPDF() {
   WindowPrt.close();
   this.arrayOfPrint = [];
 }
+
+deleteVoucher(id: any){
+  console.log(id)
+  // this.editIcon = false;
+  if (confirm(`Are you sure, you want to delete?`)) {
+  this.crudService.delete(`${appModels.VOUCHER}/deleteVoucher`, id)
+  .pipe(untilDestroyed(this)).subscribe(deleted => {
+    // this.dialogRef.close(deleted);
+    this.sharedService.setLoaderShownProperty(false); 
+    this.toast.success("Deleted Succesfully"); 
+    this.getVoucherList();
+  })
+  }
+}
+
 }

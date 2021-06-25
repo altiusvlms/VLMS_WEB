@@ -14,32 +14,42 @@
     </div>
     <div class="row">
         <div class="col-4 col-sm-4">
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline" class="example-full-width"> 
                 <mat-label>Branch</mat-label>
-                <mat-select >
-                    <mat-option value="">Sulur</mat-option>
-                    <mat-option value="">Thudiyalore</mat-option>
+                <mat-select formControlName=""  [ngClass]="{ 'is-invalid': submitted && f.branch.errors }">
+                    <mat-option value="sulur">branchSulur</mat-option>
+                    <mat-option value="thudiyalore">Thudiyalore</mat-option>
+                    <mat-option value="chennai">Chennai</mat-option>
                 </mat-select>
             </mat-form-field>
+            <div *ngIf="submitted && f.branch.errors"  class="alert alert-danger">
+                <div *ngIf="f.branch.errors.required">Branch is Required!</div>
+            </div>
         </div>
         <div class="col-4 col-sm-4">
 
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Task Type</mat-label>
-                <mat-select  formControlName="taskType">
+                <mat-select  formControlName="taskType"  [ngClass]="{ 'is-invalid': submitted && f.taskType.errors }">
                     <mat-option  *ngFor="let task of tasktype"  value="{{task}}">{{task}}</mat-option>
                 </mat-select>
             </mat-form-field>
+            <div *ngIf="submitted && f.taskType.errors"  class="alert alert-danger">
+                <div *ngIf="f.taskType.errors.required">Task Type is Required!</div>
+            </div>
         </div>
         <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Customer Name/ID</mat-label>
-                <input matInput type='text' formControlName="customerRegNo"  (keyup)="applyFilter($event, 'regNo')">
+                <input matInput type='text' formControlName="customerRegNo"  (keyup)="applyFilter($event, 'regNo')"  [ngClass]="{ 'is-invalid': submitted && f.customerRegNo.errors }">
             </mat-form-field>
+            <div *ngIf="submitted && f.customerRegNo.errors"  class="alert alert-danger">
+                <div *ngIf="f.customerRegNo.errors.required">Customer Name is Required!</div>
+            </div>
 
             <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerList.length > 0 && showDropdown">
                 <mat-label>Please Select Customer Name</mat-label>
-            <mat-select  formControlName="customerRegNo" (selectionChange)="customer($event,'name')">
+            <mat-select  formControlName="customerRegNo" (selectionChange)="customer($event)">
                 <mat-option  *ngFor="let customer of customerList"  value="{{customer.customerDetails.name}}" >{{customer.customerDetails.name}}</mat-option>
             </mat-select>
             </mat-form-field>
@@ -48,46 +58,61 @@
         <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Customer Mobile No</mat-label>
-                <input matInput formControlName="customerMobileNo"  minlength="10" maxlength="10" pattern="[0-9]*" (keyup)="applyFilter($event, 'mobileno')">
+                <input matInput formControlName="customerMobileNo"  minlength="10" maxlength="10" pattern="[0-9]*" (keyup)="applyfilter($event, 'mobileno')"  [ngClass]="{ 'is-invalid': submitted && f.customerMobileNo.errors }">
             </mat-form-field>
+            <div *ngIf="submitted && f.customerMobileNo.errors"  class="alert alert-danger">
+                <div *ngIf="f.customerMobileNo.errors.required">Customer Mobile No is Required!</div>
+            </div>
             
-            <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerList.length > 0 && showDropdown">
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerMobileNoBaseList.length > 0 && showDropdown">
                 <mat-label>Please Select Customer Mobile No</mat-label>
-            <mat-select  formControlName="customerMobileNo" (selectionChange)="customer($event,'mobile')">
-                <mat-option  *ngFor="let customer of customerList"  value="{{customer.customerDetails.mobileNo}}" >{{customer.customerDetails.mobileNo}}</mat-option>
+            <mat-select  formControlName="customerMobileNo" (selectionChange)="customerMobile($event)">
+                <mat-option  *ngFor="let customer of customerMobileNoBaseList"  value="{{customer.customerDetails.mobileNo}}" >{{customer.customerDetails.mobileNo}}</mat-option>
             </mat-select>
             </mat-form-field>
 
-            <span class="required-field" *ngIf="createTaskForms.get('customerMobileNo').hasError('pattern')">Please valid Mobile No, Only Number Allowed </span>
+            <span class="required-field" *ngIf="createTaskForms.get('customerMobileNo').hasError('pattern')">Please Enter 10 digit Mobile Number!</span>
       </div>
         <div class="col-4 col-sm-4">    
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Vehicle Number</mat-label>
-                <input matInput type='text' id="code" #code formControlName="vehicleNumber"  maxlength="13" (input)="code.value=$event.target.value.toUpperCase()">
+                <input matInput type='text' id="code" #code formControlName="vehicleNumber"  maxlength="13" (input)="code.value=$event.target.value.toUpperCase()"  [ngClass]="{ 'is-invalid': submitted && f.vehicleNumber.errors }">
             </mat-form-field>                       
+            <div *ngIf="submitted && f.vehicleNumber.errors"  class="alert alert-danger">
+                <div *ngIf="f.vehicleNumber.errors.required">Vehicle No is Required!</div>
+            </div> 
         </div>
         <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Due Date</mat-label>
-                <input matInput [matDatepicker]="dp" placeholder="Due Date" formControlName="dueDate">
+                <input matInput [matDatepicker]="dp" placeholder="Due Date" formControlName="dueDate"  [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }">
                 <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
         </mat-form-field>
+        <div *ngIf="submitted && f.dueDate.errors"  class="alert alert-danger">
+            <div *ngIf="f.dueDate.errors.required">Due Date is Required!</div>
+        </div>
         </div>
         <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Assign To</mat-label>
-                <mat-select  formControlName="assignTo">
+                <mat-select  formControlName="assignTo"  [ngClass]="{ 'is-invalid': submitted && f.assignTo.errors }">
                     <mat-option  *ngFor="let name of assignToName"  value="{{name.fieldExecutiveName}}">{{name.fieldExecutiveName}}</mat-option>
                 </mat-select>
             </mat-form-field>
+            <div *ngIf="submitted && f.assignTo.errors"  class="alert alert-danger">
+                <div *ngIf="f.assignTo.errors.required">Assign To is Required!</div>
+            </div>
         </div>
         <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Description</mat-label>
-                <textarea matInput type='text' rows="4" cols="50" formControlName="description" >
+                <textarea matInput type='text' rows="4" cols="50" formControlName="description"  [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
                 </textarea>
-            </mat-form-field>    
+            </mat-form-field>
+            <div *ngIf="submitted && f.description.errors"  class="alert alert-danger">
+                <div *ngIf="f.description.errors.required">Description is Required!</div>
+            </div>    
         </div>
 
         <div class="col-4 col-sm-4" *ngIf="showStatus">                 

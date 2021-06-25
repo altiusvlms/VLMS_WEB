@@ -29,8 +29,14 @@
          <div class="col-4 col-sm-4">
           <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Mobile No</mat-label>
-            <input matInput type='text'  formControlName="customerMobileNo">
+            <input matInput type='text'  formControlName="customerMobileNo"  (keyup)="applyfilter($event, 'mobileno')">
           </mat-form-field>
+          <mat-form-field appearance="outline" class="example-full-width" *ngIf="customerMobileList.length > 0 && showDropdown">
+            <mat-label>Please Select Customer Name</mat-label>
+            <mat-select  formControlName="customerMobileNo" (selectionChange)="customerMobile($event)">
+                <mat-option  *ngFor="let customers of customerMobileList"  value="{{customers.customerDetails.mobileNo}}" >{{customers.customerDetails.mobileNo}}</mat-option>
+            </mat-select>
+        </mat-form-field>
         </div>
         </div>
         

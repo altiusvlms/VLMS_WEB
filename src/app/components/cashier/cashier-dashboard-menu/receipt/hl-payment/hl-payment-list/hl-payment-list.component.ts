@@ -27,9 +27,12 @@ export class HlPaymentListComponent implements OnInit {
 
   HlPayment: any;
   arrayOfPrint: any = [];
+  id : any;
 
   ngOnInit(): void {
+    
     this.getHLPaymentList();
+    
   }
   createHL(){
     this.router.navigate(['/cashier/hl-payment'])
@@ -62,4 +65,19 @@ export class HlPaymentListComponent implements OnInit {
     WindowPrt.close();
    this.arrayOfPrint = [];
   }
+
+  deleteHlPayment(id: any){
+    console.log(id)
+    // this.editIcon = false;
+    if (confirm(`Are you sure, you want to delete?`)) {
+    this.crudService.delete(`${appModels.HL_PAYMENT}/deleteHL`, id)
+    .pipe(untilDestroyed(this)).subscribe(deleted => {
+      // this.dialogRef.close(deleted);
+      this.sharedService.setLoaderShownProperty(false); 
+      this.toast.success("Deleted Succesfully"); 
+      this.getHLPaymentList();
+    })
+    }
+  }
+  
 }

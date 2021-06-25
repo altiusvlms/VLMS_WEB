@@ -1,145 +1,250 @@
 <div class="container">
+    <button type="button" class="close" (click)="close()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
     <div class="header_title">
-        <h2>Transfer</h2>
+        <h1>Transfer</h1>
     </div>
-    <div>
-    <form class="example-form"  [formGroup]="step1Form" >
 
-    <div *ngIf="!showStep2">
+    <div *ngIf="showProcess">
+    <form class="example-form"  [formGroup]="processForm" >
+        <h3>Process <span class="required-field">*</span></h3>
             <div class="row" >
-                <mat-radio-group aria-label="Select an option"  formControlName="branch">
+                <mat-radio-group aria-label="Select an option"  name="process" formControlName="process">
                     <mat-radio-button value="branch">Branch</mat-radio-button>
                   </mat-radio-group>
             </div>
             <div class="row">
-                <mat-radio-group aria-label="Select an option" formControlName="creator">
-                    <mat-radio-button value="creator"  >Creator</mat-radio-button>
+                <mat-radio-group aria-label="Select an option" name="process" formControlName="process">
+                    <mat-radio-button value="creator">Creator</mat-radio-button>
                   </mat-radio-group>
             </div>
             <div class="row">
-                <mat-radio-group aria-label="Select an option"  formControlName="approver">
-                    <mat-radio-button value="approver" >Approver</mat-radio-button>
+                <mat-radio-group aria-label="Select an option" name="process" formControlName="process">
+                    <mat-radio-button value="approver">Approver</mat-radio-button>
                   </mat-radio-group>
             </div>
             <div class="row">
-                <mat-radio-group aria-label="Select an option" formControlName="authoriser">
-                    <mat-radio-button value="authoriser"  >Authoriser</mat-radio-button>
+                <mat-radio-group aria-label="Select an option" name="process" formControlName="process">
+                    <mat-radio-button value="authoriser">Authoriser</mat-radio-button>
                   </mat-radio-group>
             </div>
 
-            <button class="btn_blue" (click)="step1()">Next</button>
-
-    </div>
+            <button class="btn_blue" (click)="processStep()">Next</button>
     </form>
     </div>
 
-<div *ngIf="showStep2">
-    <form class="example-form"  [formGroup]="branchForm" >
-
-        <div >
+<div *ngIf="showBranchStatus">
+    <form class="example-form"  [formGroup]="branchStatusForm" >
+        <h2>Branch Status</h2>
+        <h3>Branch Job <span class="required-field">*</span></h3>
                 <div class="row" >
-                    <mat-radio-group aria-label="Select an option"  formControlName="loanTransfer">
-                        <mat-radio-button value="loanTransferBeneficiaryAdded" valueSelected>Loan Transfer Beneficiary Added</mat-radio-button>
+                    <mat-radio-group aria-label="Select an option" name="branchJob"  formControlName="branchJob">
+                        <mat-radio-button value="loanTransfer">Loan Transfer Beneficiary Added</mat-radio-button>
                       </mat-radio-group>
                 </div>
                 <div class="row">
-                    <mat-radio-group aria-label="Select an option" formControlName="DCTransfer">
-                        <mat-radio-button value="DC Transfer Beneficiary Added">DC Transfer Beneficiary Added</mat-radio-button>
+                    <mat-radio-group aria-label="Select an option" name="branchJob" formControlName="branchJob">
+                        <mat-radio-button value="dcTransfer">DC Transfer Beneficiary Added</mat-radio-button>
                       </mat-radio-group>
                 </div>
                 <div class="row">
-                    <mat-radio-group aria-label="Select an option"  formControlName="request">
-                        <mat-radio-button value="Loan Transfer Request" >Loan Transfer Request</mat-radio-button>
+                    <mat-radio-group aria-label="Select an option" name="branchJob" formControlName="branchJob">
+                        <mat-radio-button value="loanTransferRequest">Loan Transfer Request</mat-radio-button>
                       </mat-radio-group>
                 </div>
                 <div class="row">
-                    <mat-radio-group aria-label="Select an option" formControlName="authoriser">
-                        <mat-radio-button value="Change Bank/Creator/Authoriser"  >Change Bank/Creator/Authoriser</mat-radio-button>
+                    <mat-radio-group aria-label="Select an option" name="branchJob" formControlName="branchJob">
+                        <mat-radio-button value="dcTransferRequest">DC Transfer Request</mat-radio-button>
                       </mat-radio-group>
                 </div>
                 <div class="row">
-                    <mat-radio-group aria-label="Select an option" formControlName="remindAuthoriser">
-                        <mat-radio-button value="Remind Creator/Authoriser">Remind Creator/Authoriser</mat-radio-button>
+                    <mat-radio-group aria-label="Select an option" name="branchJob" formControlName="branchJob">
+                        <mat-radio-button value="changeRequest">Change Bank/Creator/Authoriser</mat-radio-button>
                       </mat-radio-group>
                 </div>
                 <div class="row">
-                    <mat-radio-group aria-label="Select an option" formControlName="additionalTransfer">
-                        <mat-radio-button value="Additional Transfer Doc">Additional Transfer Doc</mat-radio-button>
+                    <mat-radio-group aria-label="Select an option" name="branchJob" formControlName="branchJob">
+                        <mat-radio-button value="reminderRequest">Remind Creator/Authoriser</mat-radio-button>
                       </mat-radio-group>
                 </div>
-                <button class="btn_blue" (click)="back()">Back</button>
-                <button class="btn_blue" (click)="step2()">Next</button>
+                <div class="row">
+                    <mat-radio-group aria-label="Select an option" name="branchJob" formControlName="branchJob">
+                        <mat-radio-button value="additionalDocumentRequest">Additional Transfer Doc</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <button class="btn_blue" (click)="branchStatusBack()">Back</button>
+                <button class="btn_blue" (click)="branchStatusStep()">Next</button>
                 
-        </div>
         </form>
     </div>
 
-    <!-- Loan Transfer Beneficiary Added -->
-    <div *ngIf="showStep3">
-        <form class="example-form"  [formGroup]="AreaForm" >
-    
-            <div >
+        <div *ngIf="showBranchList">
+            <form class="example-form"  [formGroup]="branchListForm">
+                <h2>Transfer Entry</h2>
+                <h3>Branch<span class="required-field">*</span></h3>
                     <div class="row" >
-                        <mat-radio-group aria-label="Select an option"  formControlName="loanTransfer">
-                            <mat-radio-button value="peelamedu" valueSelected>Peelamedu</mat-radio-button>
+                        <mat-radio-group aria-label="Select an option"  name="branchList" formControlName="branchList">
+                            <mat-radio-button value="peelamedu">Peelamedu</mat-radio-button>
                           </mat-radio-group>
                     </div>
                     <div class="row">
-                        <mat-radio-group aria-label="Select an option" formControlName="DCTransfer">
+                        <mat-radio-group aria-label="Select an option" name="branchList" formControlName="branchList">
                             <mat-radio-button value="gandhipuram">Gandhipuram</mat-radio-button>
                           </mat-radio-group>
                     </div>
                     <div class="row">
-                        <mat-radio-group aria-label="Select an option"  formControlName="request">
-                            <mat-radio-button value="ganapathy" >Ganapathy</mat-radio-button>
+                        <mat-radio-group aria-label="Select an option"  name="branchList" formControlName="branchList">
+                            <mat-radio-button value="ganapathy">Ganapathy</mat-radio-button>
                           </mat-radio-group>
                     </div>
                     <div class="row">
-                        <mat-radio-group aria-label="Select an option" formControlName="authoriser">
+                        <mat-radio-group aria-label="Select an option" name="branchList" formControlName="branchList">
                             <mat-radio-button value="thudiyalur">Thudiyalur</mat-radio-button>
                           </mat-radio-group>
                     </div>
                     <div class="row">
-                        <mat-radio-group aria-label="Select an option" formControlName="remindAuthoriser">
+                        <mat-radio-group aria-label="Select an option" name="branchList" formControlName="branchList">
                             <mat-radio-button value="vadavalli">Vadavalli</mat-radio-button>
                           </mat-radio-group>
                     </div>
                     <div class="row">
-                        <mat-radio-group aria-label="Select an option" formControlName="additionalTransfer">
+                        <mat-radio-group aria-label="Select an option" name="branchList" formControlName="branchList">
                             <mat-radio-button value="sulur">Sulur</mat-radio-button>
                           </mat-radio-group>
                     </div>
-                    <button class="btn_blue" (click)="back()">Back</button>
-                    <button class="btn_blue" (click)="step3()">Next</button>
+                    <button class="btn_blue" (click)="branchListBack()">Back</button>
+                    <button class="btn_blue" (click)="branchListStep()">Next</button>
                     
-            </div>
             </form>
-        </div>
-        
-<!-- After choosing area -->
-<div *ngIf="showStep4">
-    <form class="example-form"  [formGroup]="peelameduForm" >
+        </div> 
 
-        <div >
-                <div class="row" >
-                    <mat-radio-group aria-label="Select an option"  formControlName="loanTransfer">
-                        <mat-radio-button value="KAF" valueSelected>KAF</mat-radio-button>
+<!-- Peelamedu -->
+<div *ngIf="showPeelamedu"> 
+    <form class="example-form"  [formGroup]="peelameduForm">
+        <h2>Peelamedu</h2>
+        <h3>Peelamedu<span class="required-field">*</span></h3>
+                <div class="row">
+                    <mat-radio-group aria-label="Select an option"  name="peelameduBranch" formControlName="peelameduBranch">
+                        <mat-radio-button value="KAF">KAF</mat-radio-button>
                       </mat-radio-group>
                 </div>
                 <div class="row">
-                    <mat-radio-group aria-label="Select an option" formControlName="DCTransfer">
+                    <mat-radio-group aria-label="Select an option"  name="peelameduBranch" formControlName="peelameduBranch">
                         <mat-radio-button value="KI">KI</mat-radio-button>
                       </mat-radio-group>
                 </div>
                 <div class="row">
-                    <mat-radio-group aria-label="Select an option"  formControlName="request">
-                        <mat-radio-button value="KHPF" >KHPF</mat-radio-button>
+                    <mat-radio-group aria-label="Select an option"  name="peelameduBranch" formControlName="peelameduBranch">
+                        <mat-radio-button value="KHPF">KHPF</mat-radio-button>
                       </mat-radio-group>
                 </div>
-                <button class="btn_blue" (click)="back()">Back</button>
-                <button class="btn_blue" (click)="step2()">Next</button>
+                <button class="btn_blue" (click)="peelameduBack()">Back</button>
+                <button class="btn_blue" (click)="peelameduStep()">Next</button>
                 
-        </div>
         </form>
     </div>
+
+     <!--Gandhipuram  -->
+     <div *ngIf="showgandhipuram"> 
+        <form class="example-form"  [formGroup]="gandhipuramForm">
+            <h2>Gandhipuram</h2>
+            <h3>Gandhipuram<span class="required-field">*</span></h3>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="gandhipuramBranch" formControlName="gandhipuramBranch">
+                            <mat-radio-button value="KC">KC</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="gandhipuramBranch" formControlName="gandhipuramBranch">
+                            <mat-radio-button value="KF">KF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="gandhipuramBranch" formControlName="gandhipuramBranch">
+                            <mat-radio-button value="KHPF">KHPF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <button class="btn_blue" (click)="gandhipuramBack()">Back</button>
+                    <button class="btn_blue" (click)="gandhipuramStep()">Next</button>
+                    
+            </form>
+        </div>
+
+        <!-- Ganapathy -->
+     <div *ngIf="showganapathy"> 
+        <form class="example-form"  [formGroup]="ganapathyForm">
+            <h2>Ganapathy</h2>
+            <h3>Ganapathy<span class="required-field">*</span></h3>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="ganapathyBranch" formControlName="ganapathyBranch">
+                            <mat-radio-button value="KMF">KMF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="ganapathyBranch" formControlName="ganapathyBranch">
+                            <mat-radio-button value="KHPF">KHPF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    
+                    <button class="btn_blue" (click)="ganapathyBack()">Back</button>
+                    <button class="btn_blue" (click)="ganapathyStep()">Next</button>
+                    
+            </form>
+        </div>
+        
+        <!-- Thudiyar -->
+     <div *ngIf="showthudiyar"> 
+        <form class="example-form"  [formGroup]="thudiyalurForm">
+            <h2>Thudiyalur</h2>
+            <h3>Thudiyalur<span class="required-field">*</span></h3>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="thudiyalurBranch" formControlName="thudiyalurBranch">
+                            <mat-radio-button value="KTF">KTF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row">
+                        <mat-radio-group aria-label="Select an option"  name="thudiyalurBranch" formControlName="thudiyalurBranch">
+                            <mat-radio-button value="KFC">KFC</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <div class="row"> 
+                        <mat-radio-group aria-label="Select an option"  name="thudiyalurBranch" formControlName="thudiyalurBranch">
+                            <mat-radio-button value="KHPF">KHPF</mat-radio-button>
+                          </mat-radio-group>
+                    </div>
+                    <button class="btn_blue" (click)="thudiyalurBack()">Back</button>
+                    <button class="btn_blue" (click)="thudiyalurStep()">Next</button>
+                    
+            </form>
+        </div>
+
+
+    <div *ngIf="showLoanTransferDoc"> 
+        <form class="example-form"  [formGroup]="loanTransferForm" >
+            <h2>Loan Transfer Doc Upload</h2>
+                    <div class="row" >
+                        <mat-form-field  appearance="outline"  class="example-full-width" >
+                            <mat-label>Loan Account No<span class="required-field">*</span></mat-label>
+                            <input matInput type='text'  formControlName="loanAccountNo">
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field  appearance="outline"  class="example-full-width" >
+                            <mat-label>Transfer Upload<span class="required-field">*</span></mat-label>
+                            <input #file type="file" accept='image/*' />
+                        </mat-form-field>
+                    </div>
+              
+                    <button class="btn_blue" (click)="loanTransferBack()">Back</button>
+                    <button class="btn_blue" (click)="loanTransferStep()">Next</button>
+                    
+            </form>
+        </div> 
+
+
+
+
+
+
 </div>

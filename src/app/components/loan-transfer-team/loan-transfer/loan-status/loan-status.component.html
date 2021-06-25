@@ -184,15 +184,10 @@
                   <input matInput type='text'  formControlName="IFSC"  >
                   </mat-form-field>
               </div>
-                 <div class="col-4 col-sm-4">                 
-                <mat-form-field  appearance="outline"  class="example-full-width" >
-                  <mat-label>PassBook Image</mat-label>
-                  <input matInput type='text'  >
-                  </mat-form-field>
-              </div>
+
             </div> 
           <div class="row">
-              <button class="btn_blue" >Save</button>
+              <button class="btn_blue" (click)="UpdateloanStatus()">Update</button>
           </div>
       </form>
         </div>

@@ -20,8 +20,6 @@ import { untilDestroyed,UntilDestroy } from '@ngneat/until-destroy';
 })
 export class CreateReceiptComponent implements OnInit {
 
-  
-
   constructor(private router: Router,private crudService: CrudService,private dialog: MatDialog,private route: ActivatedRoute, private sanitizer:DomSanitizer,private toast: ToastrService, public datepipe: DatePipe,private sharedService: SharedService) { }
   id: any;
   getCustomerLoanDetails: any = [];
@@ -36,11 +34,19 @@ export class CreateReceiptComponent implements OnInit {
   startDate:any;
   endDate:any;
   delayDays:any;
-  // dates: any;
   loanRepayment:any;
   delayAmount:any;
   startPay:any = [];
   calAmt:any = [];
+  Topup : any;
+  printData: any;
+  arrayOfPrint: any = [];
+  topupLoanID:any;
+  topupValues:any;
+  childloanValues:any;
+  childLoanID:any;
+  handLoanID:any;
+  handloanValues:any;
 
   loanRepaymentForm = new FormGroup({
     paymentTypeId: new FormControl('', Validators.required),
@@ -57,14 +63,16 @@ export class CreateReceiptComponent implements OnInit {
       this.id = params.id;
      if(this.id !== undefined || null){
       this.getReceipt();
+      this.getCreateReceipt();
       
      }
      else{
       this.viewPopUp();
      }
     })
-    // this.getLoanId();
-    // this.getCreateReceipt();
+    
+    
+    
   }
   
   viewPopUp(){
@@ -76,6 +84,7 @@ export class CreateReceiptComponent implements OnInit {
       });     
     }
     loanID: any;
+
   getReceipt(){
     this.crudService.get(`${appModels.CUSTOMERS}/loanByLoanId/${this.id}`, {
       params: {
@@ -99,30 +108,15 @@ export class CreateReceiptComponent implements OnInit {
             this.loanID = res[0].id;
             console.log(this.loanID)
             this.getCreateReceipt();
+            // this.getTopup();
             this.sharedService.setLoaderShownProperty(false);  
           })
       })
   }
 
-  // getLoanId(){
-  //   this.crudService.get(`${appModels.CUSTOMERS}/loanByMobileNo/7585852883`, {
-  //     params: {
-  //       tenantIdentifier: 'default'
-  //     }
-  //   }).pipe(untilDestroyed(this)).subscribe(data => {
-  //     console.log(data);
-  //     for(var loanID of data){
-  //       this.loanIDbyMobile.push(loanID)
-  //       console.log(this.loanIDbyMobile[0].id);
-  //       this.loanIDMob.push(this.loanIDbyMobile[0].id)
-  //       console.log(this.loanIDMob);
-  //     }
-      
-  //   })
-  // }
 
-
-  getCreateReceipt(){
+// Parent Loan
+  async getCreateReceipt(){
     console.log(this.loanID)
     // this.manageEmployeeForm.value.dob = this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
     this.crudService.get(`${appModels.COMMON}/loans/${this.loanID}?associations=all&exclude=guarantors,futureSchedule`, {
@@ -130,16 +124,18 @@ export class CreateReceiptComponent implements OnInit {
         tenantIdentifier: 'default'
       }
     }).pipe(untilDestroyed(this)).subscribe(data => {
-      // console.log(data);
+      console.log(data);
+      // console.log(data.accountNo);
+      // if( data.isTopup == true) {
+      //   this.Topup = data.isTopup;  
+      // }
+      console.log(data.isTopup);
+      console.log(this.Topup);
       // console.log(data.loanType);
       console.log(data.repaymentSchedule.periods);
       this.sharedService.setLoaderShownProperty(false);  
 
       for(var i =1; i<data.repaymentSchedule.periods.length; i++){
-      
-        // console.log(data.repaymentSchedule.periods[i].fromDate)
-        // console.log(data.repaymentSchedule.periods[i].dueDate)
-        // console.log(this.dates.fromDate)
         this.startDate = data.repaymentSchedule.periods[i].fromDate
         this.endDate = data.repaymentSchedule.periods[i].dueDate
         
@@ -154,16 +150,7 @@ export class CreateReceiptComponent implements OnInit {
       console.log(dayDiff)
       this.delayDays = dayDiff;
       
-      
     }
-      // console.log(data.repaymentSchedule.periods.fromDate);
-      // console.log(data.repaymentSchedule.periods.dueDate);
-      // console.log(data.transactions.amount);
-      // for(var dueAmount of data.transactions){
-      //   console.log(dueAmount.amount)
-      //   this.transactions.push(dueAmount.amount)
-      // }
-      // this.transactions.push(dueAmount.amount)
       
       this.receiptData = data.repaymentSchedule.periods;
       this.loanType = data.loanType;
@@ -173,11 +160,7 @@ export class CreateReceiptComponent implements OnInit {
         console.log(dueAmount)
         this.transactions.push(dueAmount.amount)
       }
-      // for(var startAmount of data.repaymentSchedule.periods){
-      //   console.log(startAmount)
-      //   this.startPay.push(startAmount.totalDueForPeriod)
-      // }
-      // debugger
+
       var delayAmount = this.startPay[i] - this.transactions[i]
       console.log(delayAmount)
       this.calAmt.push(delayAmount)
@@ -185,7 +168,84 @@ export class CreateReceiptComponent implements OnInit {
       // this.loanRepaymentReceipt();
     })
     this.loanRepaymentReceipt();
+    // Top-up loan 
+    await this.crudService.get(`${appModels.LOAN_TRANSFER_TEAM}/getLoanApplicationStatus?loanType=topuploan&loanId=${this.loanID}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async data => {
+      console.log(data);
+      this.topupLoanID = data.loanId
+      
+      if(data.LoanStatus == true) { 
+      console.log(this.topupLoanID);
+    await this.crudService.get(`${appModels.COMMON}/loans/${this.topupLoanID}?associations=all&exclude=guarantors,futureSchedule`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      // console.log(data.accountNo);
+      this.topupValues = data.repaymentSchedule.periods;
+      })
+    }
+    })
+    // Child Loan
+    await this.crudService.get(`${appModels.LOAN_TRANSFER_TEAM}/getLoanApplicationStatus?loanType=childloan&loanId=${this.loanID}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async data => {
+      console.log(data);
+      this.childLoanID = data.loanId
+      
+      if(data.LoanStatus == true) { 
+      console.log(this.childLoanID);
+    await this.crudService.get(`${appModels.COMMON}/loans/${this.childLoanID}?associations=all&exclude=guarantors,futureSchedule`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.childloanValues = data.repaymentSchedule.periods;
+      })
+    }
+    })
+    // Hand Loan
+    await this.crudService.get(`${appModels.LOAN_TRANSFER_TEAM}/getLoanApplicationStatus?loanType=handloan&loanId=${this.loanID}`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(async data => {
+      console.log(data);
+      this.handLoanID = data.loanId
+      
+      if(data.LoanStatus == true) { 
+      console.log(this.handLoanID);
+    await this.crudService.get(`${appModels.COMMON}/loans/${this.handLoanID}?associations=all&exclude=guarantors,futureSchedule`, {
+      params: {
+        tenantIdentifier: 'default'
+      }
+    }).pipe(untilDestroyed(this)).subscribe(data => {
+      console.log(data);
+      this.handloanValues = data.repaymentSchedule.periods;
+      })
+    }
+    })
   }
+
+    // Top-up loan
+    // getTopup(){
+    //   console.log(this.loanID)
+    //   this.crudService.get(`${appModels.LOAN_TRANSFER_TEAM}/getLoanApplicationStatus?loanType=topuploan&loanId=${this.loanID}`, {
+    //     params: {
+    //       tenantIdentifier: 'default'
+    //     }
+    //   }).pipe(untilDestroyed(this)).subscribe(data => {
+    //     console.log(data);
+    //   })
+    // }
+
 
   loanRepaymentReceipt(){
     console.log(this.loanRepaymentForm.value)
@@ -197,11 +257,30 @@ export class CreateReceiptComponent implements OnInit {
       }}
     ).pipe(untilDestroyed(this)).subscribe( data => {
       console.log(data)
+      this.printData = data
+      console.log(this.printData)
       this.toast.success("Receipt Created")
       this.sharedService.setLoaderShownProperty(false);  
     })
-    
-  };
+  }
+
+  // Print the receipt
+  eventCheck(value: any, event: any){
+    if(event.checked === true){
+      this.arrayOfPrint.push(value);
+    }
+  }
+
+  openPDF() {
+    var data = document.getElementById('pdfTable');
+    const WindowPrt = window.open('', '', 'left=0,top=0,width=800,height=700,toolbar=0,scrollbars=0,location=no,status=no,titlebar=no, fontFamily=Titillium Web');
+    WindowPrt.document.write(data.innerHTML);
+    WindowPrt.document.close();
+    WindowPrt.focus();
+    WindowPrt.print();
+    WindowPrt.close();
+   this.arrayOfPrint = [];
+  }
 
   
 
@@ -219,6 +298,7 @@ export class CreateReceiptComponent implements OnInit {
 @UntilDestroy({ checkProperties: true })
 
 export class SearchReceipt {
+  customerMobileNoBaseList: any = [];
 
   constructor(public dialogRef: MatDialogRef<SearchReceipt>,private router: Router,private crudService: CrudService, @Inject(MAT_DIALOG_DATA) public response:any,private sharedService: SharedService) { }
 
@@ -227,6 +307,8 @@ export class SearchReceipt {
   customerMobileNo: any;
   customerList: any = [];
   showDropdown: Boolean = false;
+  customerMblNo: any;
+  customerMobileList: any = [];
 
   searchForms = new FormGroup({
     customerName: new FormControl(''),
@@ -260,12 +342,7 @@ export class SearchReceipt {
         }
     }
     console.log(this.customerList);
-    // await response.map((res: any) => {
-    //   if(res.customerDetails.name.toLowerCase().search(this.customername.toLowerCase()) != -1 ){
-    //   this.customerList = res;
-    //   console.log(this.customerList)
-    //   }
-    // })
+
     })
   }
   else{
@@ -273,6 +350,40 @@ export class SearchReceipt {
     this.showDropdown = false;
     this.searchForms.patchValue({
       customerMobileNo:'',
+    })
+  }
+  }
+  
+
+  /** Filter on CustomerName and Mobile Number */    
+  applyfilter(value : any , string_val: any){
+    this.showDropdown = true;
+    if(string_val == 'mobileno'){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.customerMblNo = filterValue.trim().toLowerCase();
+  }
+  if(this.customerMblNo != ''){
+  this.crudService.get(`${appModels.CUSTOMERS}/allCustomerLoanDetails`, {
+    params: {
+      tenantIdentifier: 'default'
+    }
+  }).pipe(untilDestroyed(this)).subscribe(async response => {
+    this.sharedService.setLoaderShownProperty(false);  
+
+    for(let x of response){
+        if (
+          x.customerDetails.mobileNo.toLowerCase().search(this.customerMblNo.toLowerCase()) != -1 ){
+            this.customerMobileList.push(x)
+        }
+    }
+    console.log(this.customerMobileList);
+    })
+  }
+  else{
+    this.customerMobileList = [];
+    this.showDropdown = false;
+    this.searchForms.patchValue({
+      customerName:'',
     })
   }
   }
@@ -287,8 +398,28 @@ export class SearchReceipt {
         customerName:val.value
       })
       }
+      // else{
+      //   this.searchForms.patchValue({
+      //     customerName:res.customerDetails.name,
+      //     customerMobileNo:val.value
+      //   })
+      // }
+    }
+    )
+  }
+
+  customerMobile(val: any){
+    this.showDropdown = false;
+    this.customerMobileList.map((res: any) => {
+      if(res.customerDetails.mobileNo.toLowerCase().search(val.value.toLowerCase()) != -1 ){
+      this.searchForms.patchValue({
+        customerMobileNo:val.value,
+        customerName:res.customerDetails.name
+      })
+      }
     })
   }
+
   /** Close the Dialog Model */
   close() {
     this.dialogRef.close();
@@ -311,6 +442,24 @@ export class SearchReceipt {
       }
       }
     })
+
+    this.customerMobileList.map((res: any) => {
+      console.log(res)
+    this.role = localStorage.getItem("roles");
+      if(this.role === "Cashier"){
+          if(res.customerDetails.name == this.searchForms.value.customerName){
+              this.router.navigate(['/cashier/create-receipt/' +res.id]);
+              this.dialogRef.close(res.customerDetails.name);
+          }
+      }
+      else{
+        if(res.customerDetails.name == this.searchForms.value.customerName){
+          this.router.navigate(['/branch-manager/create-receipt/' +res.id]);
+          this.dialogRef.close(res.customerDetails.name);
+      }
+      }
+    })
+
   }
 
 }
