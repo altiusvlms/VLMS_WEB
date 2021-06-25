@@ -547,10 +547,10 @@ export class EditManageEmployeeComponent implements OnInit {
         console.log(response);
         for(let documentDetails of response){
           this.documentImageForm.value.image = documentDetails;
-          this.documentImageForm.value.image.patchValue({
-              documentName:response.documentName,
-              documentNo:response.documentNo
-        })
+        //   this.documentImageForm.value.image.patchValue({
+        //       documentName:response.documentName,
+        //       documentNo:response.documentNo
+        // })
         console.log(this.documentImageForm)
 
         console.log(this.documentImageForm.value)
