@@ -1,10 +1,20 @@
-<div class="container">
+<div class="container" *ngFor="let applicant of applicantDetails">
     <div class="header_title">
         <h2>Picked!!</h2>
       </div>
+
+      
+      <div class="card" *ngIf="showLoanApprovelDetails">
+        <div class="card-body">
+        <div class="row" >
+          <p style="color:green">{{loanApprovalStatus.value}}</p>
+          </div>
+          </div>
+        </div>
+        
       
     <div class="card">
-        <div class="card-body" *ngFor="let applicant of applicantDetails">
+        <div class="card-body" >
         <div class="row" >
             <div class="col-sm-2">
               <img [src]="applicantImage" style="width: 50%;object-fit: contain;
@@ -188,6 +198,8 @@
             </div> 
           <div class="row">
               <button class="btn_blue" (click)="UpdateloanStatus()">Update</button>
+              <button class="btn_blue" (click)="saveProcess(applicant.loanDetailsData.id)">Save & Process</button>
+
           </div>
       </form>
         </div>

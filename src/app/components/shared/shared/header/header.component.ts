@@ -14,7 +14,10 @@ export class HeaderComponent implements OnInit {
   constructor( private router: Router) { }
   public iconOnlyToggled = false;
   public sidebarToggled = false;
+  userName: any;
+
   ngOnInit(): void { 
+    this.userName = localStorage.getItem("mobile_number");
   }
   logout(){
     localStorage.clear();

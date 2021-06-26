@@ -28,7 +28,9 @@ export class PickApplicantComponent implements OnInit {
   id: any;
   applicantDetails: any = [];
   applicantImage: any;
-
+  showLoanApprovelDetails:Boolean = false;
+  loanApprovalStatus: any;
+  
   applicantDetailsForm = new FormGroup({
     loanDetailsData:new FormGroup({
       loanAmount: new FormControl(''),
@@ -68,9 +70,13 @@ export class PickApplicantComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
-      console.log(this.id)
+      if(this.id !== undefined || null){
+        this.getApplicantDetails();
+        this.getLoanApprovel();
+        }
     });
-    this.getApplicantDetails();
+   
+
   }
 
   /** Get Applicant Details Based on ApplicantID */
@@ -142,12 +148,10 @@ export class PickApplicantComponent implements OnInit {
     //   }}
     // ).pipe(untilDestroyed(this)).subscribe(response => {
     // })
-
   })
   })
   }
-  showLoanApprovelDetails:Boolean = false;
-  loanApprovalStatus: any;
+ 
 
   getLoanApprovel(){
     this.crudService.get(`${appModels.APPROVEL}`, {
@@ -158,13 +162,11 @@ export class PickApplicantComponent implements OnInit {
     console.log(response)
     this.sharedService.setLoaderShownProperty(false);  
     for(let loanDetail of response.pageItems){
-      if(loanDetail.id === this.id){
-        console.log(loanDetail.status)
+      if(this.id == loanDetail.id){
         this.loanApprovalStatus = loanDetail.status;
         this.showLoanApprovelDetails = true;
       }
     }
-
   })
   }
 
@@ -210,12 +212,28 @@ export class SendToApprover {
     showProcess: Boolean = true;
     showPeelamedu:Boolean = false;
     showLoanTransferDoc: Boolean = false;
-    showgandhipuram: Boolean = false;
-    showganapathy:Boolean = false;
-    showthudiyar:Boolean = false;
+    showGandhipuram: Boolean = false;
+    showGanapathy:Boolean = false;
+    showThudiyalur:Boolean = false;
+    showVadavalli: Boolean = false;
+    showSulur: Boolean = false;
+
+    showDcTransfer:Boolean = false;
+    showChangeBankCreatorAuthoriser: Boolean = false;
+    showRemindCreator:Boolean = false;
+    showAdditionalTransferDoc:Boolean = false;
+
+    showCreatorStatus: Boolean = false;
+    showCreatorJob:Boolean = false;
+    showDelayTime: Boolean = false;
+    showCreatorError: Boolean = false;
+
+    showApprover:Boolean = false;
+    showAuthoriserStatus:Boolean = false;
+    showAuthoriser: Boolean = false;
 
     processForm = new FormGroup({
-      process: new FormControl('')
+        process: new FormControl('')
       })
 
     branchStatusForm = new FormGroup({
@@ -223,29 +241,64 @@ export class SendToApprover {
       })
       
     branchListForm = new FormGroup({
-      branchList : new FormControl('')
+        branchList : new FormControl('')
       })
 
-      peelameduForm = new FormGroup({
+    peelameduForm = new FormGroup({
         peelameduBranch :  new FormControl('')
       })
 
-      gandhipuramForm = new FormGroup({
+    gandhipuramForm = new FormGroup({
         gandhipuramBranch :  new FormControl('')
       })
 
-      ganapathyForm = new FormGroup({
+    ganapathyForm = new FormGroup({
         ganapathyBranch :  new FormControl('')
       })
 
-      thudiyalurForm = new FormGroup({
+    thudiyalurForm = new FormGroup({
         thudiyalurBranch :  new FormControl('')
       }) 
 
-      loanTransferForm = new FormGroup({
+    vadavalliForm = new FormGroup({
+        vadavalliBranch :  new FormControl('')
+      }) 
+      
+    sulurForm = new FormGroup({
+        sulurBranch :  new FormControl('')
+      }) 
+
+    loanTransferForm = new FormGroup({
         loanAccountNo :  new FormControl('')
       })
 
+    dcTransferForm = new FormGroup({
+        brokerRefNo :  new FormControl(''),
+        dcAmount :  new FormControl('')
+      })
+
+    changeBankCreatorAuthoriserForm = new FormGroup({
+        bank :  new FormControl(''),
+        creator: new FormControl(''),
+        authoriser: new FormControl('')
+      })
+
+      creatorStatusForm = new FormGroup({
+        creatorJob: new FormControl('')
+      })
+      creatorDelayTimeForm = new FormGroup({
+        creatorDelay: new FormControl('')
+      })
+      creatorErrorForm = new FormGroup({
+        creatorError: new FormControl('')
+      })
+      approverStatusForm = new FormGroup({
+        approverStatus: new FormControl('')
+      })
+      authoriserStatusForm = new FormGroup({
+        authoriserStatus: new FormControl(''),
+        transferRemark: new FormControl(''),
+      })
 
     ngOnInit(): void {
      console.log( this.applicantLoanId )
@@ -257,15 +310,25 @@ export class SendToApprover {
       if(this.processForm.value.process == "branch"){
           this.showBranchStatus = true;
           this.showProcess = false;
-      }
+      } else if(this.processForm.value.process == "creator"){
+        this.showCreatorStatus = true;
+        this.showProcess = false;
+    } else if(this.processForm.value.process == "approver"){
+        this.showApprover = true;
+        this.showProcess = false;
+    }
+    else if(this.processForm.value.process == "authoriser"){
+      this.showAuthoriserStatus = true;
+      this.showProcess = false;
+  }
     }
 
     branchStatusStep(){
       console.log(this.branchStatusForm.value)
       if(this.branchStatusForm.value.branchJob == "loanTransfer"){
-      this.showBranchList = true;
       this.showBranchStatus = false;
       this.showProcess = false;
+      this.showBranchList = true;
       this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
         params: {
           command:this.branchStatusForm.value.branchJob,
@@ -275,6 +338,85 @@ export class SendToApprover {
         console.log(response)
       })
       }
+      else if(this.branchStatusForm.value.branchJob == "dcTransfer"){
+        this.showProcess = false;
+        this.showBranchStatus = false;
+        this.showDcTransfer = true;
+        this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
+          params: {
+            command:this.branchStatusForm.value.branchJob,
+            tenantIdentifier: 'default'  
+          }
+        }).pipe(untilDestroyed(this)).subscribe(async response => {
+          console.log(response)
+        })
+        }
+        else if(this.branchStatusForm.value.branchJob == "loanTransferRequest"){
+          this.showBranchStatus = false;
+          this.showProcess = false;
+          this.showBranchList = true;
+          this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
+            params: {
+              command:this.branchStatusForm.value.branchJob,
+              tenantIdentifier: 'default'  
+            }
+          }).pipe(untilDestroyed(this)).subscribe(async response => {
+            console.log(response)
+          })
+          }
+          else if(this.branchStatusForm.value.branchJob == "dcTransferRequest"){
+            this.showProcess = false;
+            this.showBranchStatus = false;
+            this.showDcTransfer = true;
+            this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
+              params: {
+                command:this.branchStatusForm.value.branchJob,
+                tenantIdentifier: 'default'  
+              }
+            }).pipe(untilDestroyed(this)).subscribe(async response => {
+              console.log(response)
+            })
+            }
+            else if(this.branchStatusForm.value.branchJob == "changeRequest"){
+              this.showProcess = false;
+              this.showBranchStatus = false;
+              this.showChangeBankCreatorAuthoriser = true;
+              this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
+                params: {
+                  command:this.branchStatusForm.value.branchJob,
+                  tenantIdentifier: 'default'  
+                }
+              }).pipe(untilDestroyed(this)).subscribe(async response => {
+                console.log(response)
+              })
+              }
+              else if(this.branchStatusForm.value.branchJob == "reminderRequest"){
+                this.showProcess = false;
+                this.showBranchStatus = false;
+                this.showRemindCreator = true;
+                this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
+                  params: {
+                    command:this.branchStatusForm.value.branchJob,
+                    tenantIdentifier: 'default'  
+                  }
+                }).pipe(untilDestroyed(this)).subscribe(async response => {
+                  console.log(response)
+                })
+                }
+
+                else if(this.branchStatusForm.value.branchJob == "additionalDocumentRequest"){
+                  this.showProcess = false;
+                  this.showBranchStatus = false;
+                  this.showAdditionalTransferDoc = true;
+                  this.crudService.post(`${appModels.LOAN_TRANSFER_TEAM}/${this.applicantLoanId}`, {},{
+                    params: {
+                      command:this.branchStatusForm.value.branchJob,
+                      tenantIdentifier: 'default'  
+                    }
+                  }).pipe(untilDestroyed(this)).subscribe(async response => {
+                    console.log(response)
+                  })
+                  }
     }
 
     branchStatusBack(){
@@ -288,13 +430,19 @@ export class SendToApprover {
         this.showPeelamedu = true;
         this.showBranchList = false;
       }else if(this.branchListForm.value.branchList == "gandhipuram"){
-        this.showgandhipuram = true;
+        this.showGandhipuram = true;
         this.showBranchList = false;
       }else if(this.branchListForm.value.branchList == "ganapathy"){
-        this.showganapathy = true;
+        this.showGanapathy = true;
         this.showBranchList = false;
       }else if(this.branchListForm.value.branchList == "thudiyalur"){
-        this.showganapathy = true;
+        this.showThudiyalur = true;
+        this.showBranchList = false;
+      }else if(this.branchListForm.value.branchList == "vadavalli"){
+        this.showVadavalli = true;
+        this.showBranchList = false;
+      }else if(this.branchListForm.value.branchList == "sulur"){
+        this.showSulur = true;
         this.showBranchList = false;
       }
 
@@ -309,22 +457,84 @@ export class SendToApprover {
     peelameduStep(){
       this.showPeelamedu = false;
       this.showLoanTransferDoc = true;
-      this.dialogRef.close();
+      this.showChangeBankCreatorAuthoriser = false;
     }
 
     gandhipuramStep(){
-      this.showgandhipuram = false;
+      this.showGandhipuram = false;
       this.showLoanTransferDoc = true;
+      this.showChangeBankCreatorAuthoriser = false;
     }
     ganapathyStep(){
-      this.showganapathy = false;
+      this.showGanapathy = false;
       this.showLoanTransferDoc = true;
+      this.showChangeBankCreatorAuthoriser = false;
     }
     thudiyalurStep(){
-      this.showthudiyar = false;
+      this.showThudiyalur = false;
       this.showLoanTransferDoc = true;
+      this.showChangeBankCreatorAuthoriser = false;
     }
-// Backward
+    vadavalliStep(){
+      this.showVadavalli = false;
+      this.showLoanTransferDoc = true;
+      this.showChangeBankCreatorAuthoriser = false;
+    }
+    sulurStep(){
+      this.showSulur = false;
+      this.showLoanTransferDoc = true;
+      this.showChangeBankCreatorAuthoriser = false;
+    }
+    loanTransferStep(){
+      this.showChangeBankCreatorAuthoriser = true;
+      this.showLoanTransferDoc = false;
+    }
+
+    dcTransferSubmit(){
+      this.dialogRef.close();
+    }
+    changeBankCreatorAuthoriserSubmit(){
+      this.dialogRef.close();
+    }
+    reminderCreatorSubmit(){
+      this.dialogRef.close();
+    }
+    additionalTransferStep(){
+      this.showAdditionalTransferDoc = false;
+      this.showDcTransfer = true;
+    }
+    creatorStatusStep(){
+      this.showCreatorJob = true;
+      this.showCreatorStatus = false;
+      if(this.creatorStatusForm.value.creatorJob == "InformDelaytoBranch"){
+        this.showCreatorStatus = false;
+        this.showDelayTime = true;
+        this.showCreatorJob = false;
+        }else if(this.creatorStatusForm.value.creatorJob == "Error"){
+          this.showCreatorStatus = false;
+          this.showCreatorError = true;
+          this.showCreatorJob = false;
+        }
+    }
+    creatorJobSubmit(){
+      this.dialogRef.close();
+    }
+    creatorDelaySubmit(){
+      this.dialogRef.close();
+    }
+    creatorErrorSubmit(){
+      this.dialogRef.close();
+    }
+    authoriserStatusStep(){
+      this.showAuthoriser = true;
+      this.showAuthoriserStatus = false;
+    }
+    authoriserSubmit(){
+      this.dialogRef.close();
+    }
+    approverSubmit(){
+      this.dialogRef.close();
+    }
     peelameduBack(){
       this.showBranchList = true;
       this.showPeelamedu = false;
@@ -333,13 +543,32 @@ export class SendToApprover {
 
     gandhipuramBack(){
       this.showBranchList = true;
-      this.showgandhipuram = false;
+      this.showGandhipuram = false;
       this.showLoanTransferDoc = false;
     }
 
     ganapathyBack(){
       this.showBranchList = true;
-      this.showganapathy = false;
+      this.showGanapathy = false;
+      this.showLoanTransferDoc = false;
+    }
+
+
+    thudiyalurBack(){
+      this.showBranchList = true;
+      this.showThudiyalur = false;
+      this.showLoanTransferDoc = false;
+    }
+
+    vadavalliBack(){
+      this.showBranchList = true;
+      this.showVadavalli = false;
+      this.showLoanTransferDoc = false;
+    }
+
+    sulurBack(){
+      this.showBranchList = true;
+      this.showSulur = false;
       this.showLoanTransferDoc = false;
     }
 
@@ -348,10 +577,51 @@ export class SendToApprover {
       this.showLoanTransferDoc = false;
     }
 
-    loanTransferStep(){
-
+    dcTransferBack(){
+      this.showDcTransfer = false;
+      this.showBranchStatus = true;
     }
-
+    changeBankCreatorAuthoriserBack(){
+      this.showBranchStatus = true;
+      this.showChangeBankCreatorAuthoriser = false;
+    }
+    reminderCreatorBack(){
+      this.showBranchStatus = true;
+      this.showRemindCreator = false;
+    }
+    additionalTransferBack(){
+      this.showBranchStatus = true;
+      this.showAdditionalTransferDoc = false;
+    }
+    creatorStatusBack(){
+      this.showProcess = true;
+      this.showCreatorStatus = false;
+    }
+    creatorJobBack(){
+      this.showCreatorJob = false;
+      this.showCreatorStatus = true;
+    }
+    creatorDelayBack(){
+      this.showDelayTime = false;
+      this.showCreatorStatus = true;
+      this.showCreatorJob = false;
+    }
+    creatorErrorBack(){
+      this.showCreatorStatus = true;
+      this.showCreatorError = false;
+    }
+    approverBack(){
+      this.showProcess = true;
+      this.showApprover = false;
+    }
+    authoriserStatusBack(){
+      this.showProcess = true;
+      this.showAuthoriserStatus = false;
+    }
+    authoriserBack(){
+      this.showAuthoriserStatus = true;
+      this.showAuthoriser = false;
+    }
     close(){
     this.dialogRef.close();
     }

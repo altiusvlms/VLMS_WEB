@@ -14,7 +14,7 @@ import { CustomerOnlineComponent } from './customer-online/customer-online.compo
 import { LoanAmountAddedComponent } from './loan-amount-added/loan-amount-added.component';
 import { TaskManagementComponent ,CreateTask} from './task-management/task-management.component';
 import { MyTaskComponent ,EditMyTask} from './my-task/my-task.component';
-import { LoanStatusComponent } from './loan-status/loan-status.component';
+import { LoanStatusComponent,SendToApprover } from './loan-status/loan-status.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 
@@ -24,7 +24,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 /** Loan Transfer Module */
 
 @NgModule({
-  declarations: [DashboardComponent,AdvancedSearch, CustomerOnlineComponent, LoanAmountAddedComponent, TaskManagementComponent,CreateTask, MyTaskComponent,EditMyTask, LoanStatusComponent, CustomerDetailsComponent],
+  declarations: [DashboardComponent,AdvancedSearch, CustomerOnlineComponent, LoanAmountAddedComponent, TaskManagementComponent,CreateTask, MyTaskComponent,EditMyTask, LoanStatusComponent, SendToApprover,CustomerDetailsComponent],
   imports: [
     CommonModule,
     LoanTransferRoutingModule,
