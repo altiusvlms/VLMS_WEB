@@ -11,92 +11,89 @@
           <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Name</mat-label>
-              <input matInput type='text' formControlName="name" [ngClass]="{ 'is-invalid': submitted && manageEmployeeForm.controls.vehicleNumber.errors  }">
+              <input matInput type='text' formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
           </mat-form-field>
-          <div *ngIf="manageEmployeeForm.controls['name'].invalid && (manageEmployeeForm.controls['name'].dirty || manageEmployeeForm.controls['name'].touched)" class="alert alert-danger">
-              <div *ngIf="manageEmployeeForm.controls['name'].errors.required">
-                  Please enter Username!
-              </div>
-          </div>
+          <div *ngIf="submitted && f.name.errors"  class="alert alert-danger">
+            <div *ngIf="f.name.errors.required">Name is Required!</div>
+        </div>
           </div>
           <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>CalledName</mat-label>
-              <input matInput type='text' formControlName="calledName">
+              <input matInput type='text' formControlName="calledName" [ngClass]="{ 'is-invalid': submitted && f.calledName.errors }">
           </mat-form-field>
-          <div *ngIf="manageEmployeeForm.controls['calledName'].invalid && (manageEmployeeForm.controls['calledName'].dirty || manageEmployeeForm.controls['calledName'].touched)" class="alert alert-danger">
-              <div *ngIf="manageEmployeeForm.controls['calledName'].errors.required">
-                  Please enter Calledname!
-              </div>
-          </div>
+          <div *ngIf="submitted && f.calledName.errors"  class="alert alert-danger">
+            <div *ngIf="f.calledName.errors.required">Name is Required!</div>
+        </div>
           </div>
           <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>SurName</mat-label>
-              <input matInput type='text' formControlName="surName">
+              <input matInput type='text' formControlName="surName" [ngClass]="{ 'is-invalid': submitted && f.surName.errors }">
           </mat-form-field>
-          <div *ngIf="manageEmployeeForm.controls['surName'].invalid && (manageEmployeeForm.controls['surName'].dirty || manageEmployeeForm.controls['surName'].touched)" class="alert alert-danger">
-              <div *ngIf="manageEmployeeForm.controls['surName'].errors.required">
-                  Please enter Surname!
-              </div>
-          </div>
+          <div *ngIf="submitted && f.surName.errors"  class="alert alert-danger">
+            <div *ngIf="f.surName.errors.required">Name is Required!</div>
+        </div>
           </div>
 
           <div class="col-4 col-sm-4">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Mobile Number</mat-label>
-              <input matInput formControlName="mobileNumber" minlength=10 maxlength=10 pattern="[0-9]*">
+              <input matInput formControlName="mobileNumber" minlength="10" maxlength="10" pattern="[0-9]*" [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }">
           </mat-form-field>
-          <span class="required-field" *ngIf="manageEmployeeForm.get('mobileNumber').hasError('pattern')">Please enter valid Mobile No, Only Number Allowed </span>
+          <div *ngIf="submitted && f.mobileNumber.errors"  class="alert alert-danger">
+            <div *ngIf="f.mobileNumber.errors.required">Mobile No is Required!</div>
+            <div *ngIf="manageEmployeeForm.get('mobileNumber').hasError('pattern')">Please Enter 10 digit Mobile Number!</div>
+        </div>
           </div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Alternative Number</mat-label>
-            <input matInput formControlName="altNumber" minlength=10 maxlength=10>
+            <input matInput formControlName="altNumber" minlength="10" maxlength="10" pattern="[0-9]*" [ngClass]="{ 'is-invalid': submitted && f.altNumber.errors }">
         </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['altNumber'].invalid && (manageEmployeeForm.controls['altNumber'].dirty || manageEmployeeForm.controls['altNumber'].touched)" class="alert alert-danger">
-            <div *ngIf="manageEmployeeForm.controls['altNumber'].errors.required">
-                Please enter Alt Number!
-            </div>
+        <div *ngIf="submitted && f.altNumber.errors"  class="alert alert-danger">
+            <div *ngIf="f.altNumber.errors.required">Mobile No is Required!</div>
+            <div *ngIf="manageEmployeeForm.get('altNumber').hasError('pattern')">Please Enter 10 digit Mobile Number!</div>
         </div>
         </div>
         <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class=" example-full-width">
           <mat-label>Official Number</mat-label>
-          <input matInput formControlName="officialNumber" minlength=10 maxlength=10>
+          <input matInput formControlName="officialNumber" minlength="10" maxlength="10" pattern="[0-9]*" [ngClass]="{ 'is-invalid': submitted && f.altNumber.errors }">
       </mat-form-field>
-      <div *ngIf="manageEmployeeForm.controls['officialNumber'].invalid && (manageEmployeeForm.controls['officialNumber'].dirty || manageEmployeeForm.controls['officialNumber'].touched)" class="alert alert-danger">
-          <div *ngIf="manageEmployeeForm.controls['officialNumber'].errors.required">
-              Please enter Official Number!
-          </div>
-      </div></div>
+      <div *ngIf="submitted && f.officialNumber.errors"  class="alert alert-danger">
+        <div *ngIf="f.officialNumber.errors.required">Mobile No is Required!</div>
+        <div *ngIf="manageEmployeeForm.get('officialNumber').hasError('pattern')">Please Enter 10 digit Mobile Number!</div>
+    </div>
+    </div>
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
-            <input matInput [matDatepicker]="dp" placeholder="Date of Birth" formControlName="dob">
+            <input matInput [matDatepicker]="dp" placeholder="Date of Birth" formControlName="dob" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
         </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['dob'].invalid && (manageEmployeeForm.controls['dob'].dirty || manageEmployeeForm.controls['dob'].touched)" class="alert alert-danger">
-            <div *ngIf="manageEmployeeForm.controls['dob'].errors.required">
-                Please enter Date of Birth!
-            </div>
-        </div></div>
+        <div *ngIf="submitted && f.dob.errors"  class="alert alert-danger">
+          <div *ngIf="f.dob.errors.required">Please enter DOB!</div>
+      </div>
+      </div>
 
           <div class="col-4 col-sm-4"><button mat-button (click)="CalculateAge()">Calculate Age</button>
             <mat-form-field appearance="outline" class="example-full-width">
-              <input matInput placeholder="Age" value="{{age}}" formControlName="age">
+              <input matInput placeholder="Age" value="{{age}}" formControlName="age" [ngClass]="{ 'is-invalid': submitted && f.age.errors }">
           </mat-form-field>
+          <div *ngIf="submitted && f.age.errors"  class="alert alert-danger">
+            <div *ngIf="f.age.errors.required">Age is Required!</div>
+        </div>
           </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Gender</mat-label>
-            <mat-select  formControlName="gender">
+            <mat-select  formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
                 <mat-option value="male">Male</mat-option>
                 <mat-option value="female">Female</mat-option>
             </mat-select>
         </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['gender'].invalid && (manageEmployeeForm.controls['gender'].dirty || manageEmployeeForm.controls['gender'].touched)" class="alert alert-danger">
-            <div *ngIf="manageEmployeeForm.controls['gender'].errors.required">
-                Please select the Gender!
-            </div>
-        </div></div>
+        <div *ngIf="submitted && f.gender.errors"  class="alert alert-danger">
+          <div *ngIf="f.gender.errors.required">Gender is Required!</div>
+      </div>
+      </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Marital Status</mat-label>
@@ -105,74 +102,80 @@
                 <mat-option value="married">Married</mat-option>
             </mat-select>
         </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['maritalStatus'].invalid && (manageEmployeeForm.controls['maritalStatus'].dirty || manageEmployeeForm.controls['maritalStatus'].touched)" class="alert alert-danger">
+        <!-- <div *ngIf="manageEmployeeForm.controls['maritalStatus'].invalid && (manageEmployeeForm.controls['maritalStatus'].dirty || manageEmployeeForm.controls['maritalStatus'].touched)" class="alert alert-danger">
             <div *ngIf="manageEmployeeForm.controls['maritalStatus'].errors.required">
                 Please select a value!
             </div>
-        </div></div>
+        </div> -->
+      </div>
         <div class="col-4 col-sm-4" *ngIf="showSpouse">
           <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Spouse Name</mat-label>
               <input matInput formControlName="spousename">
           </mat-form-field>
-          <div *ngIf="manageEmployeeForm.controls['spousename'].invalid && (manageEmployeeForm.controls['spousename'].dirty || manageEmployeeForm.controls['spousename'].touched)" class="alert alert-danger">
+          <!-- <div *ngIf="manageEmployeeForm.controls['spousename'].invalid && (manageEmployeeForm.controls['spousename'].dirty || manageEmployeeForm.controls['spousename'].touched)" class="alert alert-danger">
               <div *ngIf="manageEmployeeForm.controls['spousename'].errors.required">
                   Please enter Spouse Name!
               </div>
-          </div>
+          </div> -->
      </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Designation</mat-label>
-            <input matInput formControlName="designation">
+            <input matInput formControlName="designation" [ngClass]="{ 'is-invalid': submitted && f.designation.errors }">
         </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['designation'].invalid && (manageEmployeeForm.controls['designation'].dirty || manageEmployeeForm.controls['designation'].touched)" class="alert alert-danger">
-            <div *ngIf="manageEmployeeForm.controls['designation'].errors.required">
-                Please enter Designation!
-            </div>
-        </div></div>
+        <div *ngIf="submitted && f.designation.errors"  class="alert alert-danger">
+          <div *ngIf="f.designation.errors.required">Designation is Required!</div>
+      </div>
+      </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Blood Group</mat-label>
             <input matInput formControlName="bloodGroup">
         </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['bloodGroup'].invalid && (manageEmployeeForm.controls['bloodGroup'].dirty || manageEmployeeForm.controls['bloodGroup'].touched)" class="alert alert-danger">
+        <!-- <div *ngIf="manageEmployeeForm.controls['bloodGroup'].invalid && (manageEmployeeForm.controls['bloodGroup'].dirty || manageEmployeeForm.controls['bloodGroup'].touched)" class="alert alert-danger">
             <div *ngIf="manageEmployeeForm.controls['bloodGroup'].errors.required">
                 Please enter Blood Group!
             </div>
-        </div></div>
+        </div> -->
+      </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Father's Name</mat-label>
-            <input matInput formControlName="fatherName">
+            <input matInput formControlName="fatherName" [ngClass]="{ 'is-invalid': submitted && f.fatherName.errors }">
         </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['fatherName'].invalid && (manageEmployeeForm.controls['fatherName'].dirty || manageEmployeeForm.controls['fatherName'].touched)" class="alert alert-danger">
-            <div *ngIf="manageEmployeeForm.controls['fatherName'].errors.required">
-                Please enter Father's Name!
-            </div>
-        </div></div>
+        <div *ngIf="submitted && f.fatherName.errors"  class="alert alert-danger">
+          <div *ngIf="f.fatherName.errors.required">Father's Name is Required!</div>
+      </div>
+      </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Vehicle Number</mat-label>
-            <input matInput formControlName="vehicleNumber" #input [value]="input.value.toUpperCase()">
+            <input matInput formControlName="vehicleNumber" #input [value]="input.value.toUpperCase()" [ngClass]="{ 'is-invalid': submitted && f.vehicleNumber.errors }">
         </mat-form-field>
-        <div *ngIf="manageEmployeeForm.controls['vehicleNumber'].invalid && (manageEmployeeForm.controls['vehicleNumber'].dirty || manageEmployeeForm.controls['vehicleNumber'].touched)" class="alert alert-danger">
-            <div *ngIf="manageEmployeeForm.controls['vehicleNumber'].errors.required">
-                Please enter Vehicle Number!
-            </div>
-        </div></div>
+        <div *ngIf="submitted && f.vehicleNumber.errors"  class="alert alert-danger">
+          <div *ngIf="f.vehicleNumber.errors.required">Vehicle Number is Required!</div>
+      </div>
+      </div>
 
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Date of Joining</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="doj">
+            <input matInput [matDatepicker]="picker" formControlName="doj" [ngClass]="{ 'is-invalid': submitted && f.doj.errors }">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field></div>
+        </mat-form-field>
+        <div *ngIf="submitted && f.doj.errors"  class="alert alert-danger">
+          <div *ngIf="f.doj.errors.required">Please enter DOJ!</div>
+      </div>
+      </div>
 
         <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
           <mat-label>AGT Number</mat-label>
-          <input matInput formControlName="agtnumber">
+          <input matInput formControlName="agtnumber"  [ngClass]="{ 'is-invalid': submitted && f.agtnumber.errors }">
       </mat-form-field>
+      <div *ngIf="submitted && f.agtnumber.errors"  class="alert alert-danger">
+        <div *ngIf="f.agtnumber.errors.required">AGT Number is Required!</div>
+    </div>
     </div>
         </div>
       </div>  
@@ -205,7 +208,7 @@
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Area</mat-label>
             <mat-select formControlName="area">
-                <mat-option value="saibaba_colony">Saibaba Colony</mat-option>
+                <mat-option value="saibabaColony">Saibaba Colony</mat-option>
                 <mat-option value="gandhipuram">Gandhipuram</mat-option>
             </mat-select>
         </mat-form-field></div>
@@ -251,7 +254,7 @@
           <div class="col-4 col-sm-4"><mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Area</mat-label>
             <mat-select formControlName="area">
-                <mat-option value="saibaba_colony">Saibaba Colony</mat-option>
+                <mat-option value="saibabaColony">Saibaba Colony</mat-option>
                 <mat-option value="gandhipuram">Gandhipuram</mat-option>
             </mat-select>
         </mat-form-field></div>

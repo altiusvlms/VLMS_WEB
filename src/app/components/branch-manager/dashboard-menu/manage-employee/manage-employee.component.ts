@@ -168,6 +168,8 @@ export class ManageEmployeeComponent implements OnInit {
   
   ngOnDestroy() { }
 
+  get f() { return this.manageEmployeeForm.controls; }
+
 /** Show Spouse Name Fields Based on Marital Status */
   onMaritalStatusChange(value : any){
     if(value === 'married'){
@@ -242,7 +244,12 @@ export class ManageEmployeeComponent implements OnInit {
   
   
   createEmployee(){
-  this.submitted = true;
+    this.submitted = true;
+    // if (this.manageEmployeeForm.invalid) {
+    //   alert("Please enter required fields")
+    //   return;
+    // }
+  // this.submitted = true;
   this.manageEmployeeForm.value.dob=this.datepipe.transform(this.manageEmployeeForm.value.dob, 'dd MMMM yyyy');
   this.manageEmployeeForm.value.doj=this.datepipe.transform(this.manageEmployeeForm.value.doj, 'dd MMMM yyyy');
 
@@ -610,13 +617,13 @@ console.log(this.image().controls.length)
       })
       this.manageEmployeeAddressForm.patchValue({
         communicationAdd:{
-        addressLine1: JSON.parse(response.communicationAdd.addressLine1),
-        addressLine2: JSON.parse(response.communicationAdd.addressLine2),
-        area : JSON.parse(response.communicationAdd.area),
-        city : JSON.parse(response.communicationAdd.city),
-        landmark : JSON.parse(response.communicationAdd.landmark),
-        postalCode : JSON.parse(response.communicationAdd.postalCode),
-        state : JSON.parse(response.communicationAdd.state)
+        addressLine1: response.communicationAdd.addressLine1,
+        addressLine2: response.communicationAdd.addressLine2,
+        area : response.communicationAdd.area,
+        city : response.communicationAdd.city,
+        landmark : response.communicationAdd.landmark,
+        postalCode : response.communicationAdd.postalCode,
+        state : response.communicationAdd.state
         },
         permanentAdd:{
           addressLine1:response.permanentAdd.addressLine1,
@@ -776,6 +783,7 @@ console.log(this.image().controls.length)
     await this.crudService.update(`${appModels.EMPLOYEE}/updateQualification`,this.manageEmployeeQualificationForm.value.postgraduateQualification,
       this.postGraduateID,
       ).pipe(untilDestroyed(this)).subscribe(response => {
+        this.toast.success("Updated Successfully");
     })
     })
     })
