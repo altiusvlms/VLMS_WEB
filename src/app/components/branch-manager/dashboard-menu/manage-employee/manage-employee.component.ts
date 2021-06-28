@@ -379,7 +379,17 @@ export class EditManageEmployeeComponent implements OnInit {
     doj: new FormControl('', Validators.required),
     dateFormat:new FormControl('dd MMMM yyyy', Validators.required),
     locale: new FormControl('en', Validators.required),
-    vehicleType:new FormControl('', Validators.required)
+    vehicleType:new FormControl('', Validators.required),
+
+    loanEligibleAmount:new FormControl('', Validators.required),
+      accountType:new FormControl('', Validators.required),
+      accountNumber:new FormControl('', Validators.required),
+      accountHolderName:new FormControl('', Validators.required),
+      IFSC:new FormControl('', Validators.required),
+      bankName:new FormControl('', Validators.required),
+      branchName:new FormControl('', Validators.required),
+      disbursalType:new FormControl('', Validators.required)
+
   })
   manageEmployeeAddressForm = new FormGroup({
   communicationAdd :  new FormGroup({
@@ -402,18 +412,18 @@ export class EditManageEmployeeComponent implements OnInit {
         }),
   })
 
-  manageEmployeeBankDetailForm = new FormGroup({
-    bankDetails:new FormGroup({
-      loanEligibleAmount:new FormControl('', Validators.required),
-      accountType:new FormControl('', Validators.required),
-      accountNumber:new FormControl('', Validators.required),
-      accountHolderName:new FormControl('', Validators.required),
-      IFSC:new FormControl('', Validators.required),
-      bankName:new FormControl('', Validators.required),
-      branchName:new FormControl('', Validators.required),
-      disbursalType:new FormControl('', Validators.required)
-      }),
-  })
+  // manageEmployeeBankDetailForm = new FormGroup({
+  //   bankDetails:new FormGroup({
+  //     loanEligibleAmount:new FormControl('', Validators.required),
+  //     accountType:new FormControl('', Validators.required),
+  //     accountNumber:new FormControl('', Validators.required),
+  //     accountHolderName:new FormControl('', Validators.required),
+  //     IFSC:new FormControl('', Validators.required),
+  //     bankName:new FormControl('', Validators.required),
+  //     branchName:new FormControl('', Validators.required),
+  //     disbursalType:new FormControl('', Validators.required)
+  //     }),
+  // })
   manageEmployeeInsuranceForm = new FormGroup({
     insuranceDetails :  new FormGroup({
       policyNumber:new FormControl('',),
@@ -467,7 +477,7 @@ export class EditManageEmployeeComponent implements OnInit {
         this.getSingleEmployeeList();
         this.manageEmployeeDetailsForm.disable();
         this.manageEmployeeAddressForm.disable();
-        this.manageEmployeeBankDetailForm.disable();
+        // this.manageEmployeeBankDetailForm.disable();
         this.manageEmployeeInsuranceForm.disable();
         this.manageEmployeeaccidentInsuranceForm.disable();
         this.manageEmployeeQualificationForm.disable();
@@ -614,6 +624,15 @@ console.log(this.image().controls.length)
         agtnumber: response.agtnumber,
         vehicleNumber: response.vehicleNumber,
         doj: this.datepipe.transform(response.dob, 'yyyy-MM-dd'),
+
+        loanEligibleAmount: response.bankDetails.loanEligibleAmount,
+          accountType: response.bankDetails.accountType,
+          accountNumber: response.bankDetails.accountNumber,
+          accountHolderName: response.bankDetails.accountHolderName,
+          IFSC: response.bankDetails.IFSC,
+          bankName: response.bankDetails.bankName,
+          branchName: response.bankDetails.branchName,
+          disbursalType: response.bankDetails.disbursalType
       })
       this.manageEmployeeAddressForm.patchValue({
         communicationAdd:{
@@ -635,18 +654,18 @@ console.log(this.image().controls.length)
           state : response.permanentAdd.state,
       }
       })
-      this.manageEmployeeBankDetailForm.patchValue({
-        bankDetails:{
-          loanEligibleAmount: response.bankDetails.loanEligibleAmount,
-          accountType: response.bankDetails.accountType,
-          accountNumber: response.bankDetails.accountNumber,
-          accountHolderName: response.bankDetails.accountHolderName,
-          IFSC: response.bankDetails.IFSC,
-          bankName: response.bankDetails.bankName,
-          branchName: response.bankDetails.branchName,
-          disbursalType: response.bankDetails.disbursalType
-          }
-      })
+      // this.manageEmployeeBankDetailForm.patchValue({
+      //   bankDetails:{
+      //     loanEligibleAmount: response.bankDetails.loanEligibleAmount,
+      //     accountType: response.bankDetails.accountType,
+      //     accountNumber: response.bankDetails.accountNumber,
+      //     accountHolderName: response.bankDetails.accountHolderName,
+      //     IFSC: response.bankDetails.IFSC,
+      //     bankName: response.bankDetails.bankName,
+      //     branchName: response.bankDetails.branchName,
+      //     disbursalType: response.bankDetails.disbursalType
+      //     }
+      // })
       this.manageEmployeeInsuranceForm.patchValue({
         insuranceDetails:{
           policyNumber: response.insuranceDetails.policyNumber,
@@ -706,7 +725,7 @@ console.log(this.image().controls.length)
   }
   editEmployeeBankDetails(){
     this.showUpdateBtn = true;
-    this.manageEmployeeBankDetailForm.enable();
+    // this.manageEmployeeBankDetailForm.enable();
   }
   editEmployeeInsurance(){
     this.showUpdateBtn = true;
@@ -745,13 +764,13 @@ console.log(this.image().controls.length)
   })
   }
 
-  updateEmployeeBankDetail(){
-    this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyBankDetails`,this.manageEmployeeBankDetailForm.value.bankDetails,
-    this.id,
-    ).pipe(untilDestroyed(this)).subscribe(response => {
-    this.toast.success("Updated Successfully");
-    })
-  }
+  // updateEmployeeBankDetail(){
+  //   this.crudService.update(`${appModels.FIELDEXECUTIVE}/modifyBankDetails`,this.manageEmployeeBankDetailForm.value.bankDetails,
+  //   this.id,
+  //   ).pipe(untilDestroyed(this)).subscribe(response => {
+  //   this.toast.success("Updated Successfully");
+  //   })
+  // }
   updateEmployeeInsurance(){
     console.log(this.insuranceID)
     this.crudService.update(`${appModels.EMPLOYEE}/updateInsurance`,this.manageEmployeeInsuranceForm.value.insuranceDetails,

@@ -65,7 +65,18 @@ export class LoginComponent implements OnInit {
 get passwordInput() { 
   return this.createLoginForms.get('password'); 
 }  
+msg = '';
 
+handleSubmit(e : any){
+  e.preventDefault();
+  // alert(this.msg);
+}
+
+handleKeyUp(e : any){
+   if(e.keyCode === 13){
+      this.handleSubmit(e);
+   }
+}
 
 
 }
