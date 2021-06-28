@@ -1,347 +1,358 @@
-
-  <!-- Branch Manager Dashboard -->  
-<div class="continer">
-  
+<!-- Branch Manager Dashboard -->
+<div class="as-container">
   <!-- Advanced Search  -->
   <!-- <form class="form-inline md-form form-sm active-cyan-2"> -->
-    <div class="header_title">
-      <h2>Dashboard</h2>
-      <div class="header_right">
-      <button type="button"  (click)="advancedSearch()" class="btn_blue">
-        Advanced Search
-       </button> 
+  <div class="header_title">
+    <h2>Dashboard</h2>
+    <div class="row">
+      <div class="as-date mr-3">
+        <!--[mdDatepickerToggle]="dp" -->
+        <mat-form-field appearance="outline" class="example-full-width">
+          <input matInput  (click)="dp.open()" placeholder="Date" formControlName="dob"> 
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="dropdown as-dropdown show  mr-3">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+  
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="#">Last 3 days</a>
+          <a class="dropdown-item" href="#">Last 1 week</a>
+          <a class="dropdown-item" href="#">Last 1 month</a>
+        </div>
+      </div>
+      <div class=" mr-3">
+        <button type="button" (click)="advancedSearch()" class="btn btn-primary">
+          Reset
+        </button>
+      </div>
+      <div class="form-group has-search as-serch-left mb-0 as-position-relative  mr-3">
+        <span class="fa fa-search form-control-feedback"></span>
+        <input type="text" class="form-control" placeholder="">
+      </div>
+      <div class=" mr-2">
+        <button type="button" (click)="advancedSearch()" class="btn btn-primary">
+          Advanced Search
+        </button>
       </div>
     </div>
+    
+  </div>
 
-   <!-- </form><br><br> -->
+  <!-- </form><br><br> -->
 
-   <div class="continer">
+  <div class="">
 
     <div class="card">
       <div class="card-body">
-      <div class="row">
-        <div (click)="loanVerification()">You Have 8 Customers Loan Verification and Approval</div> 
-    </div>
-    </div>
-   </div>
-
-  <div class="row" *ngFor="let enquiry of enquiryDashboardCount">
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-      <div (click)="customerEntrol()"> New Enrolement</div>
-      <div>({{enquiry.enquiryWalkIn}}) Nos</div>
-      <div></div>
-
-      </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-      <div (click)="enquiry()">New Enquiry</div>
-      <div>({{enquiry.enquiryWalkIn}})   Nos</div>
-
-      </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-      <div>Ins Exp.Live</div>
-      <div>({{enquiry.insuranceExpired}}) Nos</div>
-
-      </div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="card-body">
-      <div>Ins Exp.Terminated</div>
-      <div>({{enquiry.insuranceCompleted}}) Nos</div>
-
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    
-    <div class="col-sm-8">
-      
-      <div class="row">
-        <!-- loan details -->
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-        
-        <!-- <img src="assets/images/loan-details.jpg" class="img-fluid"> -->
-        <figure class="highcharts-figure">
-          <div id="newLoanvsClosedLoan"></div>
-        </figure>
-        </div>
-        </div>
-      </div>
-      <!-- Collection -->
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-        <!-- <img src="assets/images/collection.jpg" class="img-fluid"> -->
-        <figure class="highcharts-figure">
-          <div id="amountCollection"></div>
-        </figure>
-        </div>
+        <div class="row">
+          <div (click)="loanVerification()">You Have 8 Customers Loan Verification and Approval</div>
         </div>
       </div>
     </div>
-    <div class="row">
+    <!-- *ngFor="let enquiry of enquiryDashboardCount" -->
+    <div class="row" *ngFor="let enquiry of enquiryDashboardCount">
       <div class="col-sm-3">
         <div class="card">
-        <div class="card-body">
-      <div>Arrear 1%</div>
-      <div>(6000)</div>
+          <div class="card-body d-flex justify-content-between as-p-12">
+            <div>
+              <div (click)="customerEntrol()"> New Enrolement</div>
+              <div class="as-dash-count">{{enquiry.enquiryWalkIn}}</div>
+            </div>
+            <div class="as-button-1 mt-1  mx-2 as-lightblue" >
+              <div class="as-button-2 as-lightblue-top"></div>
+              <i class="as-user as-btn-icon"></i>
+            </div>
 
-      </div>
-      </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="card">
-        <div class="card-body">
-      <div> Available Vehicle in Godown</div>
-      <div>(30)</div>
-
-      </div>
-      </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="card">
-        <div class="card-body">
-      <div>Reposessed</div>
-      <div>(24)</div>
-
-      </div>
-      </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="card">
-        <div class="card-body">
-      <div>Insurance</div>
-      <div>(24)</div>
-
-      </div>
-      </div>
-      </div>
-    </div>
-    <div class="row">
-      <!-- Task Details Branch Manager -->
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-      <h3>Task Details Branch Manager</h3>
-      <!-- <img src="assets/images/task-details.jpg" class="img-fluid"> -->
-      
-      <circle-progress
-    *ngFor="let dashboards of dashboardData"
-    [percent]="dashboards.taskDetailsBMOpen"
-    [radius]="70"
-    [outerStrokeWidth]="16"
-    [innerStrokeWidth]="8"
-    [outerStrokeColor]="'#ff0000'"
-    [innerStrokeColor]="'#C7E596'"
-    [animation]="true"
-    [animationDuration]="300"
-    ></circle-progress>
-    <mat-label>Open</mat-label>
-
-    <circle-progress
-    *ngFor="let dashboards of dashboardData"
-    [percent]="dashboards.taskDetailsBMClosed"
-    [radius]="70"
-    [outerStrokeWidth]="16"
-    [innerStrokeWidth]="8"
-    [outerStrokeColor]="'#78C000'"
-    [innerStrokeColor]="'#C7E596'"
-    [animation]="true"
-    [animationDuration]="300"
-    ></circle-progress>
-    <mat-label>Closed</mat-label>
-
-    <circle-progress
-    *ngFor="let dashboards of dashboardData"
-    [percent]="dashboards.taskDetailsBMInProgress"
-    [radius]="70"
-    [outerStrokeWidth]="16"
-    [innerStrokeWidth]="8"
-    [outerStrokeColor]="'#FFFF00'"
-    [innerStrokeColor]="'#C7E596'"
-    [animation]="true"
-    [animationDuration]="300"
-    ></circle-progress>
-    <mat-label>Inprogress</mat-label>
-
-      </div>
-      </div>
-    </div>
-    <!-- Task Details Head Office -->
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-      <h3>Task Details Head Office</h3>
-      <!-- <img src="assets/images/task-details.jpg" class="img-fluid"> -->
-
-      <circle-progress
-    *ngFor="let dashboards of dashboardData"
-    [percent]="dashboards.taskDetailsHOOpen"
-    [radius]="70"
-    [outerStrokeWidth]="16"
-    [innerStrokeWidth]="8"
-    [outerStrokeColor]="'#ff0000'"
-    [innerStrokeColor]="'#C7E596'"
-    [animation]="true"
-    [animationDuration]="300"
-    ></circle-progress>
-    <mat-label>Open</mat-label>
-
-    <circle-progress
-    *ngFor="let dashboards of dashboardData"
-    [percent]="dashboards.taskDetailsHOClosed"
-    [radius]="70"
-    [outerStrokeWidth]="16"
-    [innerStrokeWidth]="8"
-    [outerStrokeColor]="'#78C000'"
-    [innerStrokeColor]="'#C7E596'"
-    [animation]="true"
-    [animationDuration]="300"
-    ></circle-progress>
-    <mat-label>Closed</mat-label>
-
-    <circle-progress
-    *ngFor="let dashboards of dashboardData"
-    [percent]="dashboards.taskDetailsHOInprogress"
-    [radius]="70"
-    [outerStrokeWidth]="16"
-    [innerStrokeWidth]="8"
-    [outerStrokeColor]="'#FFFF00'"
-    [innerStrokeColor]="'#C7E596'"
-    [animation]="true"
-    [animationDuration]="300"
-    ></circle-progress>
-    <mat-label>Inprogress</mat-label>
-
-
-      </div>
-      </div>
-    </div>
-  </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-      EMI Calculator
-      <!-- EMI  -->
-<div class="spacer">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="well">
-
-        <div class="form-group">
-          <div >
-            <span class="left-title">
-              Loan Amount
-            </span>
-            <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
-              [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" />
           </div>
-          <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()">
-          </ng5-slider>
         </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body d-flex justify-content-between as-p-12">
+           <div>
 
-        <hr />
-
-        <div class="form-group">
-          <div>
-            <span class="left-title">
-              Interest Rate
-            </span>
-            <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
-              [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" />
+            <div (click)="enquiry()">New Enquiry</div>
+            <div class="as-dash-count">{{enquiry.enquiryWalkIn}}</div>
+</div>
+            <div class="as-button-1 mt-1  mx-2 as-orange" >
+              <div class="as-button-2 as-orange-top"></div>
+              <i class="as-enquiry as-btn-icon"></i>
+            </div>
           </div>
-          <ng5-slider [(value)]="remi.value" [options]="roptions" (userChangeEnd)="update()">
-          </ng5-slider>
         </div>
-
-        <hr />
-
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-6">
-            <span class="left-title">Loan Tenure</span>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body  d-flex justify-content-between as-p-12">
+            <div>
+              <div>Ins Exp.Live</div>
+              <div class="as-dash-count">{{enquiry.insuranceExpired}}</div>
+             
+            </div>
+            <div class="as-button-1 mt-1  mx-2 as-brown" >
+              <div class="as-button-2 as-brown-top"></div>
+              <i class="as-explive as-btn-icon"></i>
+            </div>
           </div>
-          
-          <div class="col-md-6">
-              <div class="input-group">
-                <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
-              placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr" style="width:30%;float:right;">
-                <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
-              placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo">
-              <div class="input-group-append">
-                <button class="" [ngClass]="{'active':yrToggel}"
-                  (click)="yrToggel=true;update()" type="button">Yr</button>
-                <button class="" [ngClass]="{'active':!yrToggel}"
-                  (click)="yrToggel=false;update()" type="button">Mo</button>
-                </div>
-              </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body d-flex justify-content-between as-p-12">
+            <div>
+              <div>Ins Exp.Terminated</div>
+              <div class="as-dash-count">{{enquiry.insuranceCompleted}}</div>
+            </div>
+           
+            <div class="as-button-1 mt-1  mx-2 as-navy" >
+              <div class="as-button-2 as-navy-top"></div>
+              <i class="as-terminated as-btn-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-0">
+
+      <div class="col-sm-8">
+
+        <div class="row">
+          <!-- loan details -->
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <!-- <img src="assets/images/loan-details.jpg" class="img-fluid"> -->
+                <figure class="highcharts-figure">
+                  <div id="newLoanvsClosedLoan"></div>
+                </figure>
               </div>
             </div>
-         
-          <ng5-slider *ngIf="yrToggel" [(value)]="temi.value" [options]="toptions" (userChangeEnd)="update()">
-          </ng5-slider>
-          <ng5-slider *ngIf="!yrToggel" [(value)]="memi.value" [options]="moptions" (userChangeEnd)="update()">
-          </ng5-slider>
+          </div>
+          <!-- Collection -->
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <!-- <img src="assets/images/collection.jpg" class="img-fluid"> -->
+                <figure class="highcharts-figure">
+                  <div id="amountCollection"></div>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-sm-3 as-px-6">
+            <div class="card">
+              <div class="card-body as-position-relative">
+                <div>Arrear 1%</div>
+                <div class="as-dash-count">6000</div>
+<div class="as-arrear as-btn-icon as-icn-topright"> </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 as-px-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="pr-3"> Available Vehicle in Godown</div>
+                <div class="as-dash-count p-0">30</div>
+                <div class="as-availablevehicle as-btn-icon as-icn-topright"> </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 as-px-6">
+            <div class="card">
+              <div class="card-body">
+                <div>Reposessed</div>
+                <div class="as-dash-count ">24</div>
+                <div class="as-reposessed as-btn-icon as-icn-topright"> </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3  as-px-6">
+            <div class="card">
+              <div class="card-body">
+                <div>Insurance</div>
+                <div class="as-dash-count">24</div>
+                <div class="as-insurance as-btn-icon as-icn-topright"> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Task Details Branch Manager -->
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <h3>Task Details Branch Manager</h3>
+                <!-- <img src="assets/images/task-details.jpg" class="img-fluid"> -->
+<div class="d-flex">
+                <circle-progress *ngFor="let dashboards of dashboardData" [percent]="dashboards.taskDetailsBMOpen"
+                  [radius]="70" [outerStrokeWidth]="8" [innerStrokeWidth]="4" [outerStrokeColor]="'#ff0000'"
+                  [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"></circle-progress>
+                <mat-label>Open</mat-label>
+
+                <circle-progress *ngFor="let dashboards of dashboardData" [percent]="dashboards.taskDetailsBMClosed"
+                  [radius]="70" [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#78C000'"
+                  [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"></circle-progress>
+                <mat-label>Closed</mat-label>
+
+                <circle-progress *ngFor="let dashboards of dashboardData" [percent]="dashboards.taskDetailsBMInProgress"
+                  [radius]="70" [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#FFFF00'"
+                  [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"></circle-progress>
+                <mat-label>Inprogress</mat-label></div>
+                
+
+              </div>
+            </div>
+          </div>
+          <!-- Task Details Head Office -->
+          <div class="col-sm-6 d-none">
+            <div class="card">
+              <div class="card-body">
+                <h3>Task Details Head Office</h3>
+                <!-- <img src="assets/images/task-details.jpg" class="img-fluid"> -->
+
+                <circle-progress *ngFor="let dashboards of dashboardData" [percent]="dashboards.taskDetailsHOOpen"
+                  [radius]="70" [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#ff0000'"
+                  [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"></circle-progress>
+                <mat-label>Open</mat-label>
+
+                <circle-progress *ngFor="let dashboards of dashboardData" [percent]="dashboards.taskDetailsHOClosed"
+                  [radius]="70" [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#78C000'"
+                  [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"></circle-progress>
+                <mat-label>Closed</mat-label>
+
+                <circle-progress *ngFor="let dashboards of dashboardData" [percent]="dashboards.taskDetailsHOInprogress"
+                  [radius]="70" [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#FFFF00'"
+                  [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"></circle-progress>
+                <mat-label>Inprogress</mat-label>
+
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            EMI Calculator
+            <!-- EMI  -->
+            <div class="spacer">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="well">
 
-    </div>
-    <div class="col-lg-12">
-      <div class="well">
+                    <div class="form-group">
+                      <div>
+                        <span class="left-title">
+                          Loan Amount
+                        </span>
+                        <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(0)"
+                          [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue" />
+                      </div>
+                      <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()">
+                      </ng5-slider>
+                    </div>
 
-        <div class="jusify-center">
-          <h5>
-            Loan EMI
-          </h5>
-          <span class="result">
-            <!-- {{result.emi || "--"}} -->
-            {{MonthlyCorrectDue}}
-          </span>
-        </div>
+                    <hr />
 
-        <hr />
+                    <div class="form-group">
+                      <div>
+                        <span class="left-title">
+                          Interest Rate
+                        </span>
+                        <input type="text" style="width:44%;float:right;" class="form-control" (blur)="tbupdate(1)"
+                          [(ngModel)]="query.interest" placeholder="Interest Rate" name="remi.highValue" />
+                      </div>
+                      <ng5-slider [(value)]="remi.value" [options]="roptions" (userChangeEnd)="update()">
+                      </ng5-slider>
+                    </div>
 
-        <div>
-          <h5>
-            Total Interest Payable
-          </h5>
-          <span class="result">
-            <!-- {{result.interest || "--"}} -->
-            {{TotalInterest}}
-          </span>
-        </div>
+                    <hr />
 
-        <hr />
-        <div>
-          <h5>
-            Principal + Interest
-          </h5>
-          <h6>
-            <!-- (Principal + Interest) -->
-          </h6>
-          <span class="result">
-            <!-- {{result.total || "--"}} -->
-            {{TotalPayable}}
-          </span>
-        </div>
+                    <div class="form-group ">
+                      <div class="row">
+                        <div class="col-md-4 pr-0 ">
+                          <span class="left-title">Loan Tenure</span>
+                        </div>
 
-        <hr />
-        <!-- <div>
+                        <div class="col-md-4 pr-0 pl-1">
+                          <div class="input-group">
+                            <input type="text" *ngIf="yrToggel" class="form-control" (blur)="tbupdate(2)"
+                              placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr"
+                              style="width:30%;float:right;">
+                            <input type="text" *ngIf="!yrToggel" class="form-control" (blur)="tbupdate(3)"
+                              placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo">
+                            
+                          </div>
+                        </div>
+                        <div class="col-md-4 as-yrmo pr-0">
+                          <div class="d-flex">
+                            <button class="btn btn-primary" [ngClass]="{'active':yrToggel}"  (click)="yrToggel=true;update()"
+                              type="button">Yr</button>
+                            <button class="btn btn-primary ml-2" [ngClass]="{'active':!yrToggel}" (click)="yrToggel=false;update()"
+                              type="button">Mo</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <ng5-slider *ngIf="yrToggel" [(value)]="temi.value" [options]="toptions"
+                        (userChangeEnd)="update()">
+                      </ng5-slider>
+                      <ng5-slider *ngIf="!yrToggel" [(value)]="memi.value" [options]="moptions"
+                        (userChangeEnd)="update()">
+                      </ng5-slider>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-lg-12">
+                  <div class="well">
+
+                    <div class="jusify-center">
+                      <h5>
+                        Loan EMI
+                      </h5>
+                      <span class="result">
+                        <!-- {{result.emi || "--"}} -->
+                        {{MonthlyCorrectDue}}
+                      </span>
+                    </div>
+
+                    <hr />
+
+                    <div>
+                      <h5>
+                        Total Interest Payable
+                      </h5>
+                      <span class="result">
+                        <!-- {{result.interest || "--"}} -->
+                        {{TotalInterest}}
+                      </span>
+                    </div>
+
+                    <hr />
+                    <div>
+                      <h5>
+                        Principal + Interest
+                      </h5>
+                      <h6>
+                        <!-- (Principal + Interest) -->
+                      </h6>
+                      <span class="result">
+                        <!-- {{result.total || "--"}} -->
+                        {{TotalPayable}}
+                      </span>
+                    </div>
+
+                    <hr />
+                    <!-- <div>
           <h5>
             Due Difference
           </h5>
@@ -354,7 +365,7 @@
         </div>
         <hr /> -->
 
-        <!-- <div>
+                    <!-- <div>
           <h5>
             Total Payment
           </h5>
@@ -367,14 +378,14 @@
 
 
 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-      </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  
+
 </div>

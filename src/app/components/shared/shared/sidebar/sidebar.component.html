@@ -1,54 +1,60 @@
 <!-- /** Branch Manager Side Bar */ -->
-<div class="sidebar" *ngIf="role === 'BranchManager' ">
-<div class="navigation">
-   <div class="logo_sidebar"><img src="assets/images/logo.png"/></div>
+<div class="sidebar sidebar-offcanvas"  id="sidebar">
+
+<div class="navigation" >
+   <div class="logo_sidebar"></div> 
+   
     <ul>
-      <li>
-         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/dashboard']" aria-expanded="false">Dashboard</a>
+      <li [routerLinkActive]="['active']">
+         <a [routerLinkActive]="['active']"  [routerLink]="['/branch-manager/dashboard']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Dashboard</div> </a>
       </li>
-      <li>
-         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/existing-employee']" aria-expanded="false">Manage Employee</a>
+       <li [routerLinkActive]="['active']" >
+         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/existing-employee']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Manage Employee</div> </a>
       </li>
-      <li>
-         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/user-role-permission']" aria-expanded="false">Roles & Permission</a>
+       <li [routerLinkActive]="['active']">
+         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/user-role-permission']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item"> Roles & Permission</div></a>
       </li>
-      <li>
-         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/customer-management']" aria-expanded="false">Customer Management</a>
+       <li [routerLinkActive]="['active']">
+         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/customer-management']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item">Customer Management</div> </a>
       </li>
-        
-      <li class="has-sub"> <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/loandisbursal-process']" aria-expanded="false" >Loan Approval/Collection<br> Cash Management</a>
+      
+       <li [routerLinkActive]="['active']" class="has-sub"> <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/loandisbursal-process']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Loan Approval</div></a> <!-- /Collection<br> Cash Management -->
         <ul>
           <li><a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/loandisbursal-process']" aria-expanded="false" mat-menu-item >Loan Disbursal Cash Limit</a></li>
           <li><a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/loanapproval-process']" aria-expanded="false" mat-menu-item >Loan Approval Limit</a></li>
           <li><a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/cashlimit-process']" aria-expanded="false" mat-menu-item >Cash Limit -Field Executive</a></li>
         </ul>
       </li>
-      <li>
-        <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/task-management']" aria-expanded="false">Task Management</a>
+       <li [routerLinkActive]="['active']">
+        <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/task-management']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Task Management</div></a>
       </li>
-      <li >
-        <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/assign-targets']" aria-expanded="false">Assign Targets</a>
+       <li [routerLinkActive]="['active']" >
+        <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/assign-targets']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item"> Assign Targets</div></a>
       </li>
+       <!-- <li [routerLinkActive]="['active']" >
+        <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/topup-loan']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item">Topup Loan</div> </a>
+      </li> -->
       <!-- <li >
         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/topup-loan']" aria-expanded="false">Topup Loan</a>
       </li> -->
+
       <!-- <li >
         <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/dashboard']" aria-expanded="false">Report</a>
       </li> -->
-      <li >
-        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/analytics']" aria-expanded="false"> Analytics</a>
+       <li [routerLinkActive]="['active']" >
+        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/analytics']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Analytics</div> </a>
       </li>
-      <li >
-        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/create-receipt']" aria-expanded="false">Create Receipt</a> 
+       <li [routerLinkActive]="['active']" >
+        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/create-receipt']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Create Receipt</div></a> 
       </li>
-      <li >
-        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/enquiry-list']" aria-expanded="false">Create Enquiry</a> 
+       <li [routerLinkActive]="['active']" >
+        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/enquiry-list']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item">Create Enquiry</div> </a> 
       </li>
-      <li >
-        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/customer-enroll-list']" aria-expanded="false"> Enroll Customer</a>
+       <li [routerLinkActive]="['active']" >
+        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/customer-enroll-list']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Enroll Customer</div> </a>
       </li>
-      <li >
-        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/newloan-process']" aria-expanded="false">Create Loan</a>
+       <li [routerLinkActive]="['active']" >
+        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/newloan-process']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item">Create Loan</div> </a>
       </li>
     </ul>
   </div>
