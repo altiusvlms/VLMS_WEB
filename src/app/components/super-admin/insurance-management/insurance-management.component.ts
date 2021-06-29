@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mifosx-insurance-management',
+  selector: 'vlms-insurance-management',
   templateUrl: './insurance-management.component.html',
   styleUrls: ['./insurance-management.component.scss']
 })

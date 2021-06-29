@@ -33,6 +33,16 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  customerList(){
+    this.router.navigate(['super-admin/customer-loan-details']);
+  }
+  newEnquiry(){
+    this.router.navigate(['super-admin/enquiry-list']);
+  }
+  newEnrol(){
+    this.router.navigate(['super-admin/enrol-list']);
+  }
+
 }
 
 

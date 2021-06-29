@@ -31,12 +31,13 @@ import { LoanInterestComponent } from './loan-interest/loan-interest.component';
 import { AssignTargetComponent } from './assign-target/assign-target.component';
 import { IncentiveManagementComponent } from './incentive-management/incentive-management.component';
 import { LetterManagementComponent, CreateLetter } from './letter-management/letter-management.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
 
 
 /** Super Admin Module */
 
 @NgModule({
-  declarations: [DashboardComponent, AdvancedSearch, EnquiryListComponent, EnrolListComponent, CustomerLoanDetailsComponent, ManageUserPermissionComponent, VehicleManagementComponent, AreaManagementComponent, WarehouseManagementComponent, AgentDealerManagementComponent, BranchManagementComponent, CompanyManagementComponent, InsuranceManagementComponent, IdProofManagementComponent, BankManagementComponent, LoanTypeManagementComponent, LoanValueManagementComponent, CashLimitComponent, LoanEligibleComponent, LoanInterestComponent, AssignTargetComponent, IncentiveManagementComponent, LetterManagementComponent,CreateLetter],
+  declarations: [DashboardComponent, AdvancedSearch, EnquiryListComponent, EnrolListComponent, CustomerLoanDetailsComponent, ManageUserPermissionComponent, VehicleManagementComponent, AreaManagementComponent, WarehouseManagementComponent, AgentDealerManagementComponent, BranchManagementComponent, CompanyManagementComponent, InsuranceManagementComponent, IdProofManagementComponent, BankManagementComponent, LoanTypeManagementComponent, LoanValueManagementComponent, CashLimitComponent, LoanEligibleComponent, LoanInterestComponent, AssignTargetComponent, IncentiveManagementComponent, LetterManagementComponent,CreateLetter, AnalyticsComponent],
   imports: [
     CommonModule,
     SuperAdminRoutingModule,

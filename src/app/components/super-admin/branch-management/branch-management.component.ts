@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mifosx-branch-management',
+  selector: 'vlms-branch-management',
   templateUrl: './branch-management.component.html',
   styleUrls: ['./branch-management.component.scss']
 })

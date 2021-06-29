@@ -28,6 +28,7 @@ import { LoanInterestComponent } from './loan-interest/loan-interest.component';
 import { AssignTargetComponent } from './assign-target/assign-target.component';
 import { IncentiveManagementComponent } from './incentive-management/incentive-management.component';
 import { LetterManagementComponent } from './letter-management/letter-management.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
 
 
 
@@ -56,6 +57,8 @@ const routes: Routes = [
     { path: 'assign-target', component: AssignTargetComponent },
     { path: 'incentive-management', component: IncentiveManagementComponent },
     { path: 'letter-management', component: LetterManagementComponent },
+    { path: 'analytics', component: AnalyticsComponent },
+
   ])
 ];
 

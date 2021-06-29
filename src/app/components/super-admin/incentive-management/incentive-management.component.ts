@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mifosx-incentive-management',
+  selector: 'vlms-incentive-management',
   templateUrl: './incentive-management.component.html',
   styleUrls: ['./incentive-management.component.scss']
 })

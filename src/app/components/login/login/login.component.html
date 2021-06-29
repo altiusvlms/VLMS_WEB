@@ -24,9 +24,7 @@
                             <mat-label>Password</mat-label>
                             <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required [(ngModel)]="msg" (keyup)="handleKeyUp($event)">  
                             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            <!-- <mat-hint *ngIf="!passwordInput.value">Enter your password</mat-hint> -->
                         </mat-form-field>
-                        <!-- <button type="submit" (click)="loginusers()">Submit</button> -->
                         <div class="text-right"><a class="forgot-password-link" (click)="forgotPassword()">Forgot password?</a></div>
                         <div class="text-center wrap">
                             <input name="login" class="btn_hvr" type="submit" value="Sign In" (click)="loginusers()">

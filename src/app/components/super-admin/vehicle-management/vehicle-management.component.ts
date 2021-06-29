@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mifosx-vehicle-management',
+  selector: 'vlms-vehicle-management',
   templateUrl: './vehicle-management.component.html',
   styleUrls: ['./vehicle-management.component.scss']
 })

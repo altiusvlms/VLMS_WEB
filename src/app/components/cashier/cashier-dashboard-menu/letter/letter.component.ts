@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mifosx-letter',
+  selector: 'vlms-letter',
   templateUrl: './letter.component.html',
   styleUrls: ['./letter.component.scss']
 })

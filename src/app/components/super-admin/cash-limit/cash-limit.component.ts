@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mifosx-cash-limit',
+  selector: 'vlms-cash-limit',
   templateUrl: './cash-limit.component.html',
   styleUrls: ['./cash-limit.component.scss']
 })

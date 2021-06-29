@@ -18,7 +18,7 @@
          <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/customer-management']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item">Customer Management</div> </a>
       </li>
       
-       <li [routerLinkActive]="['active']" class="has-sub"> <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/loandisbursal-process']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Loan Approval</div></a> <!-- /Collection<br> Cash Management -->
+       <li [routerLinkActive]="['active']" class="has-sub"> <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/loandisbursal-process']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Loan Approval</div></a>
         <ul>
           <li><a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/loandisbursal-process']" aria-expanded="false" mat-menu-item >Loan Disbursal Cash Limit</a></li>
           <li><a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/loanapproval-process']" aria-expanded="false" mat-menu-item >Loan Approval Limit</a></li>
@@ -31,16 +31,14 @@
        <li [routerLinkActive]="['active']" >
         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/assign-targets']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item"> Assign Targets</div></a>
       </li>
-       <!-- <li [routerLinkActive]="['active']" >
+       <li [routerLinkActive]="['active']" >
         <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/topup-loan']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item">Topup Loan</div> </a>
-      </li> -->
-      <!-- <li >
-        <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/topup-loan']" aria-expanded="false">Topup Loan</a>
-      </li> -->
+      </li>
 
-      <!-- <li >
-        <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/dashboard']" aria-expanded="false">Report</a>
-      </li> -->
+      <li [routerLinkActive]="['active']" >
+        <a [routerLinkActive]="['active']" [routerLink]="['/branch-manager/dashboard']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i><div class="as-menu-item">Report</div> </a>
+      </li>
+
        <li [routerLinkActive]="['active']" >
         <a  [routerLinkActive]="['active']" [routerLink]="['/branch-manager/analytics']" aria-expanded="false"><i class="as-menu-icon as-dashboard-icon"></i> <div class="as-menu-item">Analytics</div> </a>
       </li>
@@ -62,45 +60,44 @@
 
 
 <!-- /** Cashier Side Bar */ -->
-
 <div class="sidebar" *ngIf="role === 'Cashier'">
    <div class="navigation">
       <div class="logo_sidebar"><img src="assets/images/logo.png"/></div>
        <ul>
-           <li >
+           <li>
                <a [routerLinkActive]="['active']" [routerLink]="['/cashier/dashboard']" aria-expanded="false">Dashboard</a>
            </li>
-           <li >
+           <li>
             <a [routerLinkActive]="['active']"  [routerLink]="['/cashier/customer-management']"  aria-expanded="false">Customer Management</a>
            </li>
-           <li >
+           <li>
             <a [routerLinkActive]="['active']" [routerLink]="['/cashier/task-management']" aria-expanded="false">Task Management</a>
            </li>
-           <!-- <li >
+           <li>
             <a [routerLinkActive]="['active']" [routerLink]="['/cashier/topup-loans']" aria-expanded="false" >Top-Up Loan</a>
-           </li> -->
-           <!-- <li >
+           </li>
+           <li>
             <a [routerLinkActive]="['active']"  aria-expanded="false">Report</a>
-           </li> -->
-           <li >
+           </li>
+           <li>
             <a [routerLinkActive]="['active']" [routerLink]="['/cashier/create-receipt']" aria-expanded="false" data-toggle="modal" data-target="#searchtab">Create Receipt</a>
            </li>
-           <li >
+           <li>
             <a [routerLinkActive]="['active']"  [routerLink]="['/cashier/enquiry-list']"  aria-expanded="false" >Create Enquiry</a>
            </li>
-           <li >
+           <li>
             <a [routerLinkActive]="['active']" [routerLink]="['/cashier/customer-enroll-list']" aria-expanded="false" >Enrol Customer</a>
            </li>
-           <li >
+           <li>
             <a [routerLinkActive]="['active']" [routerLink]="['/cashier/newloan-process']" aria-expanded="false" >Create New Loan</a>
            </li>
-           <li >
+           <li>
             <a [routerLinkActive]="['active']"  [routerLink]="['/cashier/my-task']" aria-expanded="false" >My Task</a>
            </li>
-           <li >
+           <li>
             <a [routerLinkActive]="['active']"  [routerLink]="['/cashier/hl-payment-list']" aria-expanded="false" >Create HL Payment</a>
            </li>
-           <li >
+           <li>
             <a [routerLinkActive]="['active']" [routerLink]="['/cashier/voucher-list']"  aria-expanded="false" >Create Voucher</a>
            </li>
            <li class="has-sub"> <a  [routerLinkActive]="['active']" [routerLink]="['/cashier/letter']" aria-expanded="false" >Letter</a>
@@ -122,25 +119,77 @@
 
        </ul>
      </div>
-   </div>
+</div>
  
 
-   <!-- /** Loan Transfer Team Side Bar */ -->
-
+<!-- /** Loan Transfer Team Side Bar */ -->
 <div class="sidebar" *ngIf="role === 'LoanTransfer'">
   <div class="navigation">
      <div class="logo_sidebar"><img src="assets/images/logo.png"/></div>
       <ul>
-          <li >
+          <li>
             <a [routerLinkActive]="['active']" [routerLink]="['/loan-transfer-team/dashboard']" aria-expanded="false">Dashboard</a>
           </li>
-          <li >
+          <li>
               <a [routerLinkActive]="['active']" [routerLink]="['/loan-transfer-team/task-management']" aria-expanded="false">Task Management</a>
           </li>
-          <li >
+          <li>
             <a [routerLinkActive]="['active']" [routerLink]="['/loan-transfer-team/my-task']" aria-expanded="false">My Task</a>
         </li>
           </ul>
   </div>
 </div>
-          
+       
+
+<!-- /** Super Admin Side Bar */ -->
+  <div class="sidebar" *ngIf="role === 'Super user'">
+    <div class="navigation">
+       <div class="logo_sidebar"><img src="assets/images/logo.png"/></div>
+        <ul>
+            <li>
+              <a [routerLinkActive]="['active']" [routerLink]="['/super-admin/dashboard']" aria-expanded="false">Dashboard</a>
+            </li>
+            <li>
+              <a [routerLinkActive]="['active']" [routerLink]="['/super-admin/manage-user-permission']" aria-expanded="false">Manage Karpagam Staff</a>
+            </li>
+            <li  class="has-sub"> <a  aria-expanded="false"> <div class="as-menu-item">Master</div></a>
+              <ul>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/vehicle-management']" aria-expanded="false" mat-menu-item >Vehicle Management</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/area-management']" aria-expanded="false" mat-menu-item >Area Management</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/warehouse-management']" aria-expanded="false" mat-menu-item >Warehouse Management</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/agent-dealer-management']" aria-expanded="false" mat-menu-item >Add Agent/Dealer Management</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/branch-management']" aria-expanded="false" mat-menu-item >Branch Management</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/company-management']" aria-expanded="false" mat-menu-item >Company Management</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/insurance-management']" aria-expanded="false" mat-menu-item >Insurance Management</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/id-proof-management']" aria-expanded="false" mat-menu-item >ID Proof Management</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/bank-management']" aria-expanded="false" mat-menu-item >Bank Management</a></li>
+              </ul>
+            </li>
+
+            <li  class="has-sub"> <a  aria-expanded="false"><div class="as-menu-item">Loan Management</div></a>
+              <ul>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/loan-value-management']" aria-expanded="false" mat-menu-item >Loan Value Management</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/cash-limit']" aria-expanded="false" mat-menu-item >Cash Limit</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/loan-eligible']" aria-expanded="false" mat-menu-item >Loan Eligible Settings</a></li>
+                <li><a [routerLinkActive]="['active']" [routerLink]="['/super-admin/loan-interest']" aria-expanded="false" mat-menu-item >Loan Interest</a></li>
+           
+              </ul>
+            </li>
+            <li>
+              <a [routerLinkActive]="['active']" [routerLink]="['/super-admin/assign-target']" aria-expanded="false">Assign Target</a>
+            </li>
+            <li>
+              <a [routerLinkActive]="['active']" [routerLink]="['/super-admin/dashboard']" aria-expanded="false">Report</a>
+            </li>
+            <li>
+              <a [routerLinkActive]="['active']" [routerLink]="['/super-admin/analytics']" aria-expanded="false">Analytics</a>
+            </li>
+            <li>
+              <a [routerLinkActive]="['active']" [routerLink]="['/super-admin/incentive-management']" aria-expanded="false">Incentive Management</a>
+            </li>
+            <li>
+              <a [routerLinkActive]="['active']" [routerLink]="['/super-admin/letter-management']" aria-expanded="false">Letter Management</a>
+            </li>
+            </ul>
+    </div>
+  </div>
