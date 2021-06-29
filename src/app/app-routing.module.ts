@@ -115,6 +115,15 @@ const routes: Routes = [
       l => l.LoanTransferModule
     )
 },
+
+/** Super Admin Routes */
+{
+  path: "super-admin",
+  loadChildren: () =>
+    import("./components/super-admin/super-admin.module").then(
+      s => s.SuperAdminModule
+    )
+},
   
 /** Shared Module */
 {

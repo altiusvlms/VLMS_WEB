@@ -40,20 +40,19 @@ export class LoginComponent implements OnInit {
         tenantIdentifier: "default"   
       }}
     ).pipe().subscribe( response => {
-      console.log(response)
         if (response.roles[0].name === "BranchManager") {
           this.router.navigate(["/branch-manager/dashboard"]);
         }else if (response.roles[0].name === "Cashier") {
           this.router.navigate(["/cashier/dashboard"]);
         }else if (response.roles[0].name === "LoanTransfer") {
           this.router.navigate(["/loan-transfer-team/dashboard"]);
-        }else if (response.roles[0].name === "super user") {
-          this.router.navigate(["/loan-transfer-team/dashboard"]);
+        }else if (response.roles[0].name === "Super user") {
+          this.router.navigate(["/super-admin/dashboard"]);
         }
       
-          localStorage.setItem('mobile_number', response.username);
-          localStorage.setItem('roles', response.roles[0].name);
-          this.toast.success("Login Successfully");
+      localStorage.setItem('mobile_number', response.username);
+      localStorage.setItem('roles', response.roles[0].name);
+      this.toast.success("Login Successfully");
     }, error => {
       this.toast.error('Something Went Wrong')
     })
@@ -71,7 +70,6 @@ msg = '';
 
 handleSubmit(e : any){
   e.preventDefault();
-  // alert(this.msg);
 }
 
 handleKeyUp(e : any){

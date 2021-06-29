@@ -2,13 +2,13 @@
 <div class="container">
   <div class="header_title">
       <h2>Advance Search</h2>
+      <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
   </div>
   <div class="card">
     <div class="card-body">
       <form [formGroup]="advanceSearchForms">
-        <button type="button" class="close" aria-label="Close" (click)="close()">
-          <span aria-hidden="true">&times;</span>
-        </button>
       <div class="row">
           <div class="col-sm-3">
               <mat-form-field appearance="outline" class="example-full-width">

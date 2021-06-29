@@ -1,0 +1,37 @@
+<!-- /** Create  Button */ -->
+<div class="container">
+    <div class="header_title">
+      <h2>Letter Management</h2>
+      <div class="header_right">
+        <button type="button"  class="btn_blue" (click)="createViewLetter(null)">
+          Create 
+        </button>
+      </div>
+    </div>
+
+ <!-- /** Letter Management Table */ -->    
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Letter Title</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td><button class="btn_blue">View</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- <ng-container>
+            <div *ngIf="taskListData.length === 0">
+                No Data Found.
+            </div>
+            </ng-container> -->
+        </div>
+    </div>
+
+</div>

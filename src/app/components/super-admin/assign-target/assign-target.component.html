@@ -1,0 +1,93 @@
+<!-- /** Assign Target */ -->    
+<div class="container">
+    <h2>Assign Target</h2>
+    <mat-tab-group #tabGroup (selectedTabChange)="ontabClick($event)">
+        <mat-tab label="Field Executive">
+            <h2>Assign Target to Field Executive</h2>
+            <div class="header_right">
+                <button type="button"  class="btn_blue" (click)="createAssignFE()">
+                  Create 
+                </button>
+            </div>
+              
+        <!-- /** Assign Target to Field Executive Table */ -->    
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Name</th>
+                            <th>Customer List</th>
+                            <th>Target Date</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span  class="material-icons" matTooltip="Edit" >edit</span>
+                                <span class="material-icons" matTooltip="Delete">delete</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- <ng-container>
+                    <div *ngIf="taskListData.length === 0">
+                        No Data Found.
+                    </div>
+                    </ng-container> -->
+                </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Branch">
+            <h2>Assign Target to Branch</h2>
+            <div class="header_right">
+                <button type="button"  class="btn_blue" (click)="createAssignBranch()">
+                  Create 
+                </button>
+            </div>
+        <!-- /** Assign Target to Branch Table */ -->    
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Branch</th>
+                                <th>New Customer</th>
+                                <th>Loan Amount</th>
+                                <th>Created Date</th>
+                                <th>Target Date</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <span  class="material-icons" matTooltip="Edit" >edit</span>
+                                    <span class="material-icons" matTooltip="Delete">delete</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- <ng-container>
+                        <div *ngIf="taskListData.length === 0">
+                            No Data Found.
+                        </div>
+                        </ng-container> -->
+                    </div>
+                </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
