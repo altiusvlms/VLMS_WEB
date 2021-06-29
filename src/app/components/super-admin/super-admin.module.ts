@@ -10,7 +10,7 @@ import { SharedModule } from './../shared/shared/shared.module';
 
 /** Custom Components */
 import { DashboardComponent,AdvancedSearch } from './dashboard/dashboard.component';
-import { EnquiryListComponent } from './enquiry-list/enquiry-list.component';
+import { EnquiryListComponent, CreateEnquiry } from './enquiry-list/enquiry-list.component';
 import { EnrolListComponent } from './enrol-list/enrol-list.component';
 import { CustomerLoanDetailsComponent } from './customer-loan-details/customer-loan-details.component';
 import { ManageUserPermissionComponent } from './manage-user-permission/manage-user-permission.component';
@@ -37,7 +37,7 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 /** Super Admin Module */
 
 @NgModule({
-  declarations: [DashboardComponent, AdvancedSearch, EnquiryListComponent, EnrolListComponent, CustomerLoanDetailsComponent, ManageUserPermissionComponent, VehicleManagementComponent, AreaManagementComponent, WarehouseManagementComponent, AgentDealerManagementComponent, BranchManagementComponent, CompanyManagementComponent, InsuranceManagementComponent, IdProofManagementComponent, BankManagementComponent, LoanTypeManagementComponent, LoanValueManagementComponent, CashLimitComponent, LoanEligibleComponent, LoanInterestComponent, AssignTargetComponent, IncentiveManagementComponent, LetterManagementComponent,CreateLetter, AnalyticsComponent],
+  declarations: [DashboardComponent, AdvancedSearch, EnquiryListComponent, CreateEnquiry, EnrolListComponent, CustomerLoanDetailsComponent, ManageUserPermissionComponent, VehicleManagementComponent, AreaManagementComponent, WarehouseManagementComponent, AgentDealerManagementComponent, BranchManagementComponent, CompanyManagementComponent, InsuranceManagementComponent, IdProofManagementComponent, BankManagementComponent, LoanTypeManagementComponent, LoanValueManagementComponent, CashLimitComponent, LoanEligibleComponent, LoanInterestComponent, AssignTargetComponent, IncentiveManagementComponent, LetterManagementComponent,CreateLetter, AnalyticsComponent],
   imports: [
     CommonModule,
     SuperAdminRoutingModule,
