@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/cashier/dashboard"]);
         }else if (response.roles[0].name === "LoanTransfer") {
           this.router.navigate(["/loan-transfer-team/dashboard"]);
-        }else if (response.roles[0].name === "super user") {
-          this.router.navigate(["/loan-transfer-team/dashboard"]);
+        }else if (response.roles[0].name === "Super user") {
+          this.router.navigate(["/super-admin/dashboard"]);
         }
       
           localStorage.setItem('mobile_number', response.username);
