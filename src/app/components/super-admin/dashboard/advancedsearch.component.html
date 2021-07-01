@@ -10,6 +10,16 @@
       <div class="card-body">
         <form [formGroup]="advanceSearchForms">
         <div class="row">
+          <div class="col-sm-3">
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Select Branch</mat-label>
+                <mat-select >
+                    <mat-option value="gandhipuram">Gandhipuram</mat-option>
+                    <mat-option value="thudiyalur">Thudiyalur</mat-option>
+                    <mat-option value="sulur">Sulur</mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div>
             <div class="col-sm-3">
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>AGT NO</mat-label>
@@ -22,12 +32,7 @@
                   <input matInput type='text' formControlName="customerName" (keyup)="applyFilter($event, 'name')" >
               </mat-form-field>
             </div>
-            <div class="col-sm-3">
-                <mat-form-field appearance="outline" class="example-full-width">
-                  <mat-label>Vehicle Model</mat-label>
-                  <input matInput type='text' formControlName="vehiclemodel" (keyup)="applyFilter($event, 'model')" >
-              </mat-form-field>
-            </div>
+         
             <div class="col-sm-3">
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Vehicle No</mat-label>
@@ -41,11 +46,18 @@
               </mat-form-field>
             </div>
             <div class="col-sm-3">
-                <mat-form-field appearance="outline" class="example-full-width">
-                  <mat-label>Chassis No</mat-label>
-                  <input matInput type='text' formControlName="chassisNo" (keyup)="applyFilter($event, 'chassisno')" >
-              </mat-form-field>
-            </div>
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Guarantor Name</mat-label>
+                <input matInput type='text' formControlName="guarantorName" (keyup)="applyFilter($event, 'guarantorname')" >
+            </mat-form-field>
+          </div>
+          <div class="col-sm-3">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Guarantor Mobile No</mat-label>
+              <input matInput type='text' formControlName="guarantorMobileNo" (keyup)="applyFilter($event, 'guarantormobileno')" >
+          </mat-form-field>
+        </div>
+
             <div class="col-sm-3">
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Loan Amount</mat-label>
@@ -67,28 +79,14 @@
             <div class="col-sm-3">
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Dealer</mat-label>
-                  <input matInput type='text' >
+                  <mat-select >
+                    <mat-option value="dealer1">Dealer1</mat-option>
+                    <mat-option value="dealer2">Dealer2</mat-option>
+                    <mat-option value="dealer3">Dealer3</mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-sm-3">
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Select Loan Status</mat-label>
-                <mat-select >
-                    <mat-option value="live">live</mat-option>
-                    <mat-option value="terminated">Terminated</mat-option>
-                    <mat-option value="closed">Closed</mat-option>
-                </mat-select>
-            </mat-form-field>
-            </div>
-            <div class="col-sm-3">
-                <mat-form-field appearance="outline" class="example-full-width">
-                    <mat-label>Select No of Due</mat-label>
-                    <mat-select >
-                        <mat-option value="1">1</mat-option>
-                        <mat-option value="2">2</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                </div>
+    
           <div class="col-12 col-sm-12">
             <button  type="button"   class="btn btn-secondary" (click)="searchdata()">Search</button>
             <button type="button" class="btn btn-primary" (click)="clearSearch()">Clear Search</button>
@@ -107,14 +105,15 @@
                   <th>Customer Image</th>
                   <th>Name</th>
                   <th>Mobile No</th>
+                  <th>Branch</th>
                   <th>Vehicle No</th>
-                  <th>Vehicle Model</th>
-                  <th>Chassis No</th>
+                  <th>Guarantor Name</th>
+                  <th>Guarantor MobileNo</th>
                   <th>AGT NO</th>
                   <th>Loan Amount</th>
-                  <th>Due Pending</th>
+                  <th>Payment Status</th>
                   <th>Due Date</th>
-                  <!-- <th>Actions</th> -->
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody *ngFor="let customerData of customerLoanDetails;let i=index">
@@ -123,17 +122,20 @@
                     object-position: center;"></td>
                   <td>{{customerData?.customerName}}</td>
                   <td>{{customerData?.customerDetails.mobileNo}}</td>
+                  <td></td>
                   <td>{{customerData?.vehicleDetails.vehicleNumber}}</td>
-                  <td>{{customerData?.vehicleDetails.model}}</td>
-                  <td>{{customerData?.vehicleDetails.chassisNumber}}</td>
+                  <td>{{customerData?.customerGuarantor.guarantorName}}</td>
+                  <td>{{customerData?.customerGuarantor.mobileNumber}}</td>
                   <td>{{customerData?.bankDetails.accountNumber}}</td>
                   <td>{{customerData?.loanDetailsData.loanAmount}}</td>
                   <td></td>
                   <td>{{customerData?.loanDetailsData.dueDate | date:'dd MMMM yyyy'}}</td>
-                  <!-- <td><span>Receipt</span>
+                  <td>
+                    <span  class="material-icons" matTooltip="Edit" (click)="editCustomer(customerData.id)">edit</span>
+                    <span>Receipt</span>
                     <span>ReLoan</span>
                     <span>CloseLoan</span>
-                  </td> -->
+                  </td>
                 </tr>
               </tbody>
         </table>

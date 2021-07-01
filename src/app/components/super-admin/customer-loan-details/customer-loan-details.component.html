@@ -1,1 +1,781 @@
-<p>customer-loan-details works!</p>
+<div class="container">
+    <mat-tab-group #tabGroup [(selectedIndex)]="selectedIndex" (selectedTabChange)="ontabClick($event)">
+<!-- /** Tab1 */ -->
+        <mat-tab label="Customer Details">
+            <div class="card">
+
+              <div class="row">
+                <div class="col-4 col-sm-4" >
+                <span>Receipt</span>
+                <span>Re-Loan</span>
+                <span>Close Loan</span>
+                </div>
+              </div>
+                <div class="card-body">
+                <div class="row">
+                   <div class="col-6 col-sm-6">
+                    <div class="col-6 col-sm-6">                 
+                        <mat-form-field  appearance="outline"  class="example-full-width" >
+                          <mat-label>Name</mat-label>
+                          <input matInput type='text' >
+                          </mat-form-field>
+                    </div>
+                    <div class="col-6 col-sm-6">                 
+                        <mat-form-field  appearance="outline"  class="example-full-width" >
+                          <mat-label>Contact Number</mat-label>
+                          <input matInput type='text' >
+                          </mat-form-field>
+                    </div>
+                    <div class="col-6 col-sm-6">        
+                        <mat-radio-group aria-label="Select an option" >
+                        <mat-label>Marital Status</mat-label>
+                        <mat-radio-button value="married">Yes</mat-radio-button>
+                        <mat-radio-button value="single">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="col-6 col-sm-6">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Spouse Name</mat-label>
+                            <input matInput >
+                        </mat-form-field>
+                   </div>
+                   <div class="col-6 col-sm-6">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <input matInput [matDatepicker]="dp" placeholder="Date of Birth" >
+                            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                            <mat-datepicker #dp></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6 col-sm-6">        
+                        <mat-radio-group aria-label="Select an option" >
+                        <mat-label>Gender</mat-label>
+                        <mat-radio-button value="male">Male</mat-radio-button>
+                        <mat-radio-button value="female">Female</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="col-6 col-sm-6">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Profession</mat-label>
+                        <mat-select >
+                            <mat-option value="own">Own</mat-option>
+                            <mat-option value="employee">Employee</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-4 col-sm-4">
+                    <h2>Add Address</h2>
+                    <div class="col-6 col-sm-6">        
+                        <mat-radio-group aria-label="Select an option" >
+                        <mat-radio-button value="own">Own</mat-radio-button>
+                        <mat-radio-button value="rent">Rent</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <mat-accordion>
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Communication Address
+                            </mat-panel-title>
+        
+                          </mat-expansion-panel-header>
+                          <div class="row" >
+                            <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line1</mat-label>
+                                <input matInput type="text"  >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line2</mat-label>
+                                <input matInput type="text"  >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Area</mat-label>
+                                <input matInput type="text"  >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>City</mat-label>
+                                <input matInput type="text">
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Landmark</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Pincode</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>State</mat-label>
+                                <input matInput type="text"  >
+                              </mat-form-field>
+                          </div>
+                        </div>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Permanent Address
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <div class="row">   
+                            <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line1</mat-label>
+                                <input matInput type="text">
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line2</mat-label>
+                                <input matInput type="text"  >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Area</mat-label>
+                                <input matInput type="text"  >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>City</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Landmark</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Pincode</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>State</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                        </div>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel >
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Office Address
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <div class="row"  >
+                            <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line1</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Address Line2</mat-label>
+                                <input matInput type="text"  >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Area</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>City</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Landmark</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Pincode</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                          <div class="col-6 col-sm-6">
+                              <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>State</mat-label>
+                                <input matInput type="text" >
+                              </mat-form-field>
+                          </div>
+                        </div>
+                        </mat-expansion-panel>
+                        
+                      </mat-accordion>
+                </div>  
+                <div class="col-2 col-sm-2">
+                    <p>KF--001</p>
+                    <div class="col-12 col-sm-12">
+                        <img class="image_size" [src]="'assets/images/empty_image.png'" >
+                    </div>
+                </div>
+                </div>
+
+                <h2>ID Proofs</h2>
+                <div class="row">
+                        <div class="col-4 col-sm-4">
+                          Aadhar
+                        </div>
+                        <div class="col-4 col-sm-4">
+                          PAN
+                        </div>
+                        <div class="col-4 col-sm-4">
+                          Driving Licence
+                        </div>
+                </div>
+                <div class="row">
+                  <div class="col-4 col-sm-4">
+                    <!-- <input *ngIf="!customerAadharImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadApplicantAadharImages($event)" />  -->
+                    <img class="image_size" [src]="'assets/images/empty_image.png'">
+                  </div>
+                  <div class="col-4 col-sm-4">
+                    <img class="image_size" [src]="'assets/images/empty_image.png'">
+                  </div>
+                  <div class="col-4 col-sm-4">
+                    <img class="image_size" [src]="'assets/images/empty_image.png'">
+                  </div>
+                </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-4 col-sm-4">
+                  <button class="btn btn-secondary">Update</button>
+                  <button class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
+                </div>
+                </div>
+            </div>
+        </mat-tab>
+<!-- /** Tab2 */ -->
+        <mat-tab label="Vehicle Details">
+          <div class="card">
+            <div class="row">
+              <div class="col-4 col-sm-4" >
+              <span>Receipt</span>
+              <span>Re-Loan</span>
+              <span>Close Loan</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <h2>Vehicle Details</h2>
+              <div class="row">
+                 <div class="col-6 col-sm-6">
+                  <div class="col-6 col-sm-6">                 
+                      <mat-form-field  appearance="outline"  class="example-full-width" >
+                        <mat-label>Vehicle Number</mat-label>
+                        <input matInput type='text' >
+                        </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">        
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Select Model</mat-label>
+                      <mat-select >
+                          <mat-option value="model1">Model1</mat-option>
+                          <mat-option value="model2">Model2</mat-option>
+                      </mat-select>
+                      </mat-form-field>
+                </div>
+                <div class="col-6 col-sm-6">   
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>MFG Year</mat-label>
+                    <mat-select>
+                        <mat-option value="2018">2018</mat-option>
+                        <mat-option value="2019">2019</mat-option>
+                    </mat-select>
+                    </mat-form-field>     
+                </div>
+                <div class="col-6 col-sm-6">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Enter Engine Number</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+                </div>
+                <div class="col-6 col-sm-6">                 
+                  <mat-form-field  appearance="outline"  class="example-full-width" >
+                    <mat-label>Enter Chassis Number</mat-label>
+                    <input matInput type='text' >
+                    </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6" style="margin-top: 50px;">                 
+                      <mat-label>Insurance Expire On</mat-label>
+                  </div>
+                  <div class="col-6 col-sm-6" style="margin-top: 50px;">                 
+                    <mat-label>Pollution Cert Expire</mat-label>
+                  </div>
+                  <div class="col-6 col-sm-6" style="margin-top: 50px;">                 
+                    <mat-label>Live KM Reading</mat-label>
+                  </div>
+                  <div class="col-6 col-sm-6" style="margin-top: 50px;">     
+                    <mat-label>RC Book</mat-label>
+                  </div>
+
+                </div>
+                <div class="col-4 col-sm-4">
+                  <div class="col-10 col-sm-10">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Select Make</mat-label>
+                    <mat-select >
+                        <mat-option value="make1">make1</mat-option>
+                        <mat-option value="make2">make2</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                </div>
+                  <div class="col-10 col-sm-10">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Select Color</mat-label>
+                    <mat-select >
+                        <mat-option value="white">White</mat-option>
+                        <mat-option value="black">Black</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-10 col-sm-10" style="margin-top: 50px;">
+                  <mat-label></mat-label>
+                </div>
+                <div class="col-10 col-sm-10">
+                  <img class="image_size" [src]="'assets/images/empty_image.png'" >
+                </div>
+                <div class="col-10 col-sm-10">
+                  <img class="image_size" [src]="'assets/images/empty_image.png'" >
+                </div>
+                <div class="col-10 col-sm-10">
+                  <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput [matDatepicker]="dp" placeholder="Insurance Expire On" >
+                      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                      <mat-datepicker #dp></mat-datepicker>
+                  </mat-form-field>
+              </div>
+              <div class="col-10 col-sm-10">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput [matDatepicker]="dp" placeholder="Pollution cert Expire" >
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-10 col-sm-10">
+              <mat-form-field appearance="outline" class="example-full-width">
+                  <input matInput placeholder="Live KM Reading">
+              </mat-form-field>
+            </div>
+            <div class="col-10 col-sm-10">
+              <img class="image_size" [src]="'assets/images/empty_image.png'" >
+            </div>
+              </div>  
+              <div class="col-2 col-sm-2">
+                  <p>KF--001</p>
+                  <div class="col-12 col-sm-12">
+                      <img class="image_size" [src]="'assets/images/empty_image.png'" >
+                  </div>
+              </div>
+              </div>
+
+              <h2>Vehicle Image</h2>
+              <div class="row">
+                      <div class="col-3 col-sm-3">
+                        Front View
+                      </div>
+                      <div class="col-3 col-sm-3">
+                        Back View
+                      </div>
+                      <div class="col-3 col-sm-3">
+                        Side View 1
+                      </div>
+                      <div class="col-3 col-sm-3">
+                        Side View 2
+                      </div>
+              </div>
+              <div class="row">
+                <div class="col-3 col-sm-3">
+                  <!-- <input *ngIf="!customerAadharImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadApplicantAadharImages($event)" />  -->
+                  <img class="image_size" [src]="'assets/images/empty_image.png'">
+                </div>
+                <div class="col-3 col-sm-3">
+                  <img class="image_size" [src]="'assets/images/empty_image.png'">
+                </div>
+                <div class="col-3 col-sm-3">
+                  <img class="image_size" [src]="'assets/images/empty_image.png'">
+                </div>
+                <div class="col-3 col-sm-3">
+                  <img class="image_size" [src]="'assets/images/empty_image.png'">
+                </div>
+              </div>
+              </div>
+     
+              <div class="row">
+                <div class="col-4 col-sm-4">
+                <button class="btn btn-secondary">Update</button>
+                <button class="btn btn-secondary" (click)="previousStep()">Previous</button>
+                <button class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
+                </div>
+              </div>
+          </div>
+        </mat-tab>
+<!-- /** Tab3 */ -->
+        <mat-tab label="Guarantor Details">
+          <div class="card">
+
+            <div class="row">
+              <div class="col-4 col-sm-4" >
+              <span>Receipt</span>
+              <span>Re-Loan</span>
+              <span>Close Loan</span>
+              </div>
+            </div>
+              <div class="card-body">
+              <div class="row">
+                 <div class="col-6 col-sm-6">
+                  <div class="col-6 col-sm-6">                 
+                      <mat-form-field  appearance="outline"  class="example-full-width" >
+                        <mat-label>Name</mat-label>
+                        <input matInput type='text' >
+                        </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">                 
+                      <mat-form-field  appearance="outline"  class="example-full-width" >
+                        <mat-label>Contact Number</mat-label>
+                        <input matInput type='text' >
+                        </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">        
+                      <mat-radio-group aria-label="Select an option" >
+                      <mat-label>Marital Status</mat-label>
+                      <mat-radio-button value="married">Yes</mat-radio-button>
+                      <mat-radio-button value="single">No</mat-radio-button>
+                      </mat-radio-group>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Spouse Name</mat-label>
+                          <input matInput >
+                      </mat-form-field>
+                 </div>
+                 <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                          <input matInput [matDatepicker]="dp" placeholder="Date of Birth" >
+                          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                          <mat-datepicker #dp></mat-datepicker>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-6 col-sm-6">        
+                      <mat-radio-group aria-label="Select an option" >
+                      <mat-label>Gender</mat-label>
+                      <mat-radio-button value="male">Male</mat-radio-button>
+                      <mat-radio-button value="female">Female</mat-radio-button>
+                      </mat-radio-group>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Profession</mat-label>
+                      <mat-select >
+                          <mat-option value="own">Own</mat-option>
+                          <mat-option value="employee">Employee</mat-option>
+                      </mat-select>
+                      </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-4 col-sm-4">
+                  <h2>Add Address</h2>
+                  <div class="col-6 col-sm-6">        
+                      <mat-radio-group aria-label="Select an option" >
+                      <mat-radio-button value="own">Own</mat-radio-button>
+                      <mat-radio-button value="rent">Rent</mat-radio-button>
+                      </mat-radio-group>
+                  </div>
+                  <mat-accordion>
+                      <mat-expansion-panel >
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            Communication Address
+                          </mat-panel-title>
+      
+                        </mat-expansion-panel-header>
+                        <div class="row" >
+                          <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Address Line1</mat-label>
+                              <input matInput type="text"  >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Address Line2</mat-label>
+                              <input matInput type="text"  >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Area</mat-label>
+                              <input matInput type="text"  >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>City</mat-label>
+                              <input matInput type="text">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Landmark</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Pincode</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>State</mat-label>
+                              <input matInput type="text"  >
+                            </mat-form-field>
+                        </div>
+                      </div>
+                      </mat-expansion-panel>
+                      <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            Permanent Address
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="row">   
+                          <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Address Line1</mat-label>
+                              <input matInput type="text">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Address Line2</mat-label>
+                              <input matInput type="text"  >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Area</mat-label>
+                              <input matInput type="text"  >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>City</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Landmark</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Pincode</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>State</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                      </div>
+                      </mat-expansion-panel>
+                      <mat-expansion-panel >
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            Office Address
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="row"  >
+                          <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Address Line1</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Address Line2</mat-label>
+                              <input matInput type="text"  >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Area</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>City</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Landmark</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>Pincode</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                              <mat-label>State</mat-label>
+                              <input matInput type="text" >
+                            </mat-form-field>
+                        </div>
+                      </div>
+                      </mat-expansion-panel>
+                      
+                    </mat-accordion>
+              </div>  
+              <div class="col-2 col-sm-2">
+                  <p>KF--001</p>
+                  <div class="col-12 col-sm-12">
+                      <img class="image_size" [src]="'assets/images/empty_image.png'" >
+                  </div>
+              </div>
+              </div>
+
+              <h2>ID Proofs</h2>
+              <div class="row">
+                      <div class="col-4 col-sm-4">
+                        Aadhar
+                      </div>
+                      <div class="col-4 col-sm-4">
+                        PAN
+                      </div>
+                      <div class="col-4 col-sm-4">
+                        Driving Licence
+                      </div>
+              </div>
+              <div class="row">
+                <div class="col-4 col-sm-4">
+                  <!-- <input *ngIf="!customerAadharImage" #file type="file" accept='image/*' placeholder="upload" (change)="uploadApplicantAadharImages($event)" />  -->
+                  <img class="image_size" [src]="'assets/images/empty_image.png'">
+                </div>
+                <div class="col-4 col-sm-4">
+                  <img class="image_size" [src]="'assets/images/empty_image.png'">
+                </div>
+                <div class="col-4 col-sm-4">
+                  <img class="image_size" [src]="'assets/images/empty_image.png'">
+                </div>
+              </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-4 col-sm-4">
+                <button class="btn btn-secondary">Update</button>
+                <button class="btn btn-secondary" (click)="previousStep()">Previous</button>
+                <button class="btn btn-primary" (click)="nextStep()">Next &raquo;</button>
+                </div>
+              </div>
+          </div>
+        </mat-tab>
+<!-- /** Tab4 */ -->
+        <mat-tab label="Loan Details">
+          <div class="card">
+            <div class="row">
+              <div class="col-4 col-sm-4" >
+              <span>Receipt</span>
+              <span>Re-Loan</span>
+              <span>Close Loan</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Loan Amount</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">   
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Loan Term</mat-label>
+                  <mat-select>
+                      <mat-option value="due">Due Months</mat-option>
+                      <mat-option value="due1">Due Months1</mat-option>
+                  </mat-select>
+                  </mat-form-field>     
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>EMI</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Interest(%)</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Interest(INR)</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput [matDatepicker]="dp" placeholder="Next Due Date" >
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp></mat-datepicker>
+                </mat-form-field>
+            </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Document Charges</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+              <div class="col-4 col-sm-4">                 
+                <mat-form-field  appearance="outline"  class="example-full-width" >
+                  <mat-label>Processing Charges</mat-label>
+                  <input matInput type='text' >
+                  </mat-form-field>
+              </div>
+            
+            
+            </div>
+            </div>
+          </div>
+        </mat-tab>        
+    </mat-tab-group>
+</div>

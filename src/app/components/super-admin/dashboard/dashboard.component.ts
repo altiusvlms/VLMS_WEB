@@ -59,16 +59,14 @@ export class AdvancedSearch {
   advanceSearchForms = new FormGroup({
     accountNo: new FormControl('', Validators.required),
     customerName: new FormControl('', Validators.required),
-    vehiclemodel: new FormControl('', Validators.required),
+    guarantorName: new FormControl('', Validators.required),
+    guarantorMobileNo: new FormControl('', Validators.required),
     vehicleNo: new FormControl('', Validators.required),
     customerMobileNo: new FormControl('', Validators.required),
     loanAmount: new FormControl('', Validators.required),
-    chassisNo: new FormControl('', Validators.required),
     idProof: new FormControl('', Validators.required),
     // area: new FormControl('', Validators.required),
     // dealer: new FormControl('', Validators.required),
-    // loanstatus: new FormControl('', Validators.required),
-    // dues: new FormControl('', Validators.required)
   })
 
   /** Advance Search Variables */
@@ -78,11 +76,11 @@ export class AdvancedSearch {
   allCustomerImage: any = [];
   searchAccountNo: String = '';
   searchName: String = '';
-  searchModel: String = '';
   searchVehicleNo: String = '';
   searchMobileNo: String = '';
-  searchChassisNo: String = '';
   searchLoanAmount: String = '';
+  searchguarantorName: String = '';
+  searchguarantorMobileNo: String = '';
 
   constructor(public dialogRef: MatDialogRef<AdvancedSearch>, private router: Router, @Inject(MAT_DIALOG_DATA) public data:any, private crudService: CrudService,private sharedService: SharedService,private sanitizer:DomSanitizer) {
 
@@ -111,7 +109,6 @@ export class AdvancedSearch {
             this.allCustomerImage.push({image:this.customerImage})
             this.sharedService.setLoaderShownProperty(false);
         },error => {
-          console.error(error);
           this.customerImage = 'assets/images/empty_image.png';
           this.allCustomerImage.push({image:this.customerImage} )
           this.sharedService.setLoaderShownProperty(false);
@@ -127,11 +124,11 @@ export class AdvancedSearch {
     this.getCustomerDetails();
     this.searchAccountNo = '';
     this.searchName = '';
-    this.searchModel = '';
     this.searchVehicleNo = '';
     this.searchMobileNo = '';
-    this.searchChassisNo = '';
     this.searchLoanAmount = '';
+    this.searchguarantorName = '';
+    this.searchguarantorMobileNo = '';
   }
 
 /** Close the Dialog Model */
@@ -149,10 +146,7 @@ export class AdvancedSearch {
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchName = filterValue.trim().toLowerCase();
     }
-   else if(string_val == 'model'){
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.searchModel = filterValue.trim().toLowerCase();
-    }
+ 
     else if(string_val == 'vehicleno'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchVehicleNo = filterValue.trim().toLowerCase();
@@ -161,13 +155,18 @@ export class AdvancedSearch {
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchMobileNo = filterValue.trim().toLowerCase();
     }
-    else if(string_val == 'chassisno'){
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.searchChassisNo = filterValue.trim().toLowerCase();
-    }
+
     else if(string_val == 'loanamount'){
       const filterValue = (event.target as HTMLInputElement).value;
       this.searchLoanAmount = filterValue.trim().toLowerCase();
+    }
+    else if(string_val == 'guarantorname'){
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.searchguarantorName = filterValue.trim().toLowerCase();
+    }
+    else if(string_val == 'guarantormobileno'){
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.searchguarantorMobileNo = filterValue.trim().toLowerCase();
     }
   }
 
@@ -178,15 +177,15 @@ export class AdvancedSearch {
       let loanAmount = selectedUser.loanDetailsData.loanAmount;
        /** LoanAmount Values convert Number to String */
       let LoanAmount = loanAmount.toString();
-      if(this.searchAccountNo !== '' || this.searchName !== '' || this.searchModel !== '' || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchChassisNo !== ''  || this.searchLoanAmount !== ''){
+      if(this.searchAccountNo !== '' || this.searchName !== ''  || this.searchVehicleNo !== '' || this.searchMobileNo !== '' || this.searchguarantorName !== '' || this.searchguarantorMobileNo !== '' ||  this.searchLoanAmount !== ''){
       if (
         selectedUser.bankDetails.accountNumber.toLowerCase().search(this.searchAccountNo.toLowerCase()) != -1  &&
         selectedUser.customerName.toLowerCase().search(this.searchName.toLowerCase()) != -1  &&
-        selectedUser.vehicleDetails.model.toLowerCase().search(this.searchModel.toLowerCase()) != -1  &&
         selectedUser.vehicleDetails.vehicleNumber.toLowerCase().search(this.searchVehicleNo.toLowerCase()) != -1 &&
         selectedUser.customerDetails.mobileNo.toLowerCase().search(this.searchMobileNo.toLowerCase()) != -1 &&
-        selectedUser.vehicleDetails.chassisNumber.toLowerCase().search(this.searchChassisNo.toLowerCase()) != -1 
-        && LoanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 
+        LoanAmount.toLowerCase().search(this.searchLoanAmount.toLowerCase()) != -1 &&
+        selectedUser.customerGuarantor.guarantorName.toLowerCase().search(this.searchguarantorName.toLowerCase()) != -1 &&
+        selectedUser.customerGuarantor.mobileNumber.toLowerCase().search(this.searchguarantorMobileNo.toLowerCase()) != -1 
       ){
           this.filterResponse.push(selectedUser)
       }
@@ -202,5 +201,11 @@ export class AdvancedSearch {
     }
   }
   
+
+  editCustomer(customerId:any){
+    console.log(customerId)
+    this.router.navigate(['super-admin/customer-loan-details/' + customerId]);
+    this.dialogRef.close();
+  }
 
 }
