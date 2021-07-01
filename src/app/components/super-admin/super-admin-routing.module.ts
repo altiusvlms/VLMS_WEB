@@ -38,7 +38,7 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'enquiry-list', component: EnquiryListComponent },
     { path: 'enrol-list', component: EnrolListComponent },
-    { path: 'customer-loan-details', component: CustomerLoanDetailsComponent },
+    { path: 'customer-loan-details/:id', component: CustomerLoanDetailsComponent },
     { path: 'manage-user-permission', component: ManageUserPermissionComponent },
     { path: 'vehicle-management', component: VehicleManagementComponent },
     { path: 'area-management', component: AreaManagementComponent },
