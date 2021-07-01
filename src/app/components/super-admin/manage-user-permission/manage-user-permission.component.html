@@ -1,1 +1,59 @@
-<p>manage-user-permission works!</p>
+<!-- /** User Role and Permission */ -->    
+<div class="container">
+    <mat-tab-group #tabGroup >
+        <mat-tab label="user">
+            <div class="header_right">
+                <button type="button"  class="btn_blue" >
+                  Create 
+                </button>
+            </div>
+              
+        <!-- /** User Table */ -->    
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Designation</th>
+                            <th>Create By</th>
+                            <th>Contect number</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span  class="material-icons" matTooltip="Edit" >edit</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- <ng-container>
+                    <div *ngIf="taskListData.length === 0">
+                        No Data Found.
+                    </div>
+                    </ng-container> -->
+                </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Permission">
+            <div class="header_right">
+                <button type="button"  class="btn_blue">
+                  Create 
+                </button>
+            </div>
+        
+        </mat-tab>
+    </mat-tab-group>
+</div>
